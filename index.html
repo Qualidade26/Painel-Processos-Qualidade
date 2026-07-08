@@ -1,1 +1,285 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Painel de Processos</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#dfeeff;
+    color:#0f1f4d;
+}
+
+.header{
+    background:linear-gradient(90deg,#0f3cc9,#1c57ff);
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 70px);
+}
+
+.menu{
+    width:260px;
+    background:#f8fbff;
+    padding:20px;
+    box-shadow:4px 0 15px rgba(0,0,0,.08);
+}
+
+.menu button{
+    width:100%;
+    margin-bottom:10px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#eef5ff;
+    color:#0f3cc9;
+    font-weight:bold;
+    cursor:pointer;
+    text-align:left;
+}
+
+.menu button.active,
+.menu button:hover{
+    background:#1d4eff;
+    color:white;
+}
+
+.content{
+    flex:1;
+    padding:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#f8fbff;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.card h3{
+    margin:0;
+    color:#5c6c96;
+}
+
+.card strong{
+    font-size:30px;
+    color:#1d4eff;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px;
+    border-bottom:1px solid #dce8ff;
+    text-align:left;
+}
+
+.info{
+    line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Labor | Painel Interativo de Processos</div>
+
+<div class="layout">
+    <div class="menu">
+        <button class="active" onclick="abrirProcesso('importacao', this)">Processo de Importação</button>
+        <button onclick="abrirProcesso('esfig', this)">Processo de Esfig</button>
+        <button onclick="abrirProcesso('descarte', this)">Processo de Descarte</button>
+        <button onclick="abrirProcesso('amostra', this)">Processo de Amostra</button>
+        <button onclick="abrirProcesso('retrabalho', this)">Processo de Retrabalho</button>
+        <button onclick="abrirProcesso('cursos', this)">Processo de Cursos</button>
+    </div>
+
+    <div class="content">
+        <div class="cards">
+            <div class="card">
+                <h3>Total em Processo</h3>
+                <strong id="kpi1">0</strong>
+            </div>
+            <div class="card">
+                <h3>Finalizados</h3>
+                <strong id="kpi2">0</strong>
+            </div>
+            <div class="card">
+                <h3>Pendentes</h3>
+                <strong id="kpi3">0</strong>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3 id="tituloGrafico">Evolução do Processo</h3>
+                <canvas id="grafico"></canvas>
+            </div>
+
+            <div class="card info">
+                <h3 id="tituloInfo">Informativo do Processo</h3>
+                <p id="textoInfo"></p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h3>Etapas do Processo</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaProcesso"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+const processos = {
+    importacao:{
+        kpis:[35,28,7],
+        info:"O processo de importação acompanha desde a chegada do produto, conferência documental, entrada fiscal, armazenagem e liberação para venda.",
+        etapas:[
+            ["Chegada da carga","Recebimento","Concluído"],
+            ["Conferência documental","Fiscal","Em andamento"],
+            ["Entrada no estoque","Logística","Pendente"]
+        ],
+        grafico:[5,10,18,25,35]
+    },
+    esfig:{
+        kpis:[120,95,25],
+        info:"O processo de Esfig acompanha o produto desde o recebimento, triagem, aferição, controle, registro e finalização. Esse painel serve para demonstrar a evolução do processo e explicar cada etapa para pessoas que não conhecem a operação.",
+        etapas:[
+            ["Recebimento do Esfig","Recebimento","Concluído"],
+            ["Triagem inicial","Qualidade","Concluído"],
+            ["Aferição","Técnico","Em andamento"],
+            ["Registro da informação","Administrativo","Em andamento"],
+            ["Finalização","Qualidade","Pendente"]
+        ],
+        grafico:[20,40,65,90,120]
+    },
+    descarte:{
+        kpis:[80,60,20],
+        info:"O processo de descarte controla produtos vencidos, avariados ou destinados pela empresa, garantindo rastreabilidade e controle dos valores descartados.",
+        etapas:[
+            ["Identificação do item","Estoque","Concluído"],
+            ["Classificação da origem","Qualidade","Concluído"],
+            ["Aprovação do descarte","Gestão","Em andamento"]
+        ],
+        grafico:[10,25,40,60,80]
+    },
+    amostra:{
+        kpis:[200,170,30],
+        info:"O processo de amostra demonstra os produtos solicitados, quantidades, principais SKUs e evolução das demandas.",
+        etapas:[
+            ["Solicitação","Comercial","Concluído"],
+            ["Separação","Estoque","Em andamento"],
+            ["Expedição","Logística","Pendente"]
+        ],
+        grafico:[30,70,110,160,200]
+    },
+    retrabalho:{
+        kpis:[45,32,13],
+        info:"O processo de retrabalho acompanha produtos que precisam de correção, ajuste, reembalagem ou nova conferência antes da liberação.",
+        etapas:[
+            ["Identificação","Qualidade","Concluído"],
+            ["Execução do retrabalho","Operação","Em andamento"],
+            ["Liberação final","Qualidade","Pendente"]
+        ],
+        grafico:[5,15,25,35,45]
+    },
+    cursos:{
+        kpis:[18,12,6],
+        info:"O painel de cursos acompanha treinamentos realizados, pendentes e evolução de capacitação da equipe.",
+        etapas:[
+            ["Cadastro do curso","RH","Concluído"],
+            ["Participação","Equipe","Em andamento"],
+            ["Conclusão","Gestão","Pendente"]
+        ],
+        grafico:[2,6,9,14,18]
+    }
+};
+
+let chart;
+
+function abrirProcesso(nome, botao){
+    document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
+    botao.classList.add('active');
+
+    const p = processos[nome];
+
+    document.getElementById("kpi1").innerText = p.kpis[0];
+    document.getElementById("kpi2").innerText = p.kpis[1];
+    document.getElementById("kpi3").innerText = p.kpis[2];
+    document.getElementById("textoInfo").innerText = p.info;
+
+    const tbody = document.getElementById("tabelaProcesso");
+    tbody.innerHTML = "";
+    p.etapas.forEach(etapa => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${etapa[0]}</td>
+                <td>${etapa[1]}</td>
+                <td>${etapa[2]}</td>
+            </tr>
+        `;
+    });
+
+    atualizarGrafico(p.grafico);
+}
+
+function atualizarGrafico(dados){
+    const ctx = document.getElementById("grafico");
+
+    if(chart){
+        chart.destroy();
+    }
+
+    chart = new Chart(ctx,{
+        type:"line",
+        data:{
+            labels:["Semana 1","Semana 2","Semana 3","Semana 4","Semana 5"],
+            datasets:[{
+                label:"Evolução",
+                data:dados,
+                borderWidth:3,
+                tension:.4
+            }]
+        }
+    });
+}
+
+abrirProcesso("importacao", document.querySelector(".menu button"));
+</script>
+
+</body>
+</html>
