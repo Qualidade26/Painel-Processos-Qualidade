@@ -97,7 +97,16 @@ body{
     padding:9px 12px;
     border-radius:10px;
     box-shadow:inset 0 0 12px rgba(255,255,255,.08);
+    min-width:116px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+    text-align:center;
 }
+.data-pill{min-width:132px;}
+.time-pill{min-width:116px;}
 .online-dot{color:#27ff6f;margin-right:4px;}
 
 .main-wrap{
@@ -106,6 +115,11 @@ body{
     grid-template-columns:172px 1fr;
     gap:10px;
     padding:10px;
+    transition:grid-template-columns .25s ease;
+}
+
+.main-wrap.menu-collapsed{
+    grid-template-columns:68px 1fr;
 }
 
 .menu{
@@ -115,6 +129,43 @@ body{
     padding:10px;
     box-shadow:0 4px 12px rgba(0,0,0,.06);
     overflow:auto;
+    transition:.25s ease;
+}
+
+.toggle-menu{
+    width:100%;
+    height:34px;
+    border:none;
+    background:linear-gradient(90deg,var(--top1),var(--top2));
+    color:#fff;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:900;
+    cursor:pointer;
+    margin-bottom:10px;
+}
+
+.main-wrap.menu-collapsed .menu{
+    padding:8px;
+}
+
+.main-wrap.menu-collapsed .toggle-menu{
+    height:38px;
+    margin-bottom:8px;
+}
+
+.main-wrap.menu-collapsed .menu button{
+    min-height:50px;
+    padding:8px 4px;
+}
+
+.main-wrap.menu-collapsed .menu button .label{
+    display:none;
+}
+
+.main-wrap.menu-collapsed .menu button .ico{
+    margin-bottom:0;
+    font-size:22px;
 }
 
 .menu button{
@@ -133,7 +184,8 @@ body{
     line-height:1.2;
 }
 
-.menu button span{font-size:18px;display:block;margin-bottom:3px;}
+.menu button .ico{font-size:18px;display:block;margin-bottom:3px;}
+.menu button .label{display:block;}
 .menu button:hover,.menu button.active{
     background:linear-gradient(90deg,var(--top1),var(--top2));
     color:white;
@@ -392,7 +444,7 @@ select{padding:10px;border:1px solid var(--line);border-radius:10px;font-weight:
     .topbar{grid-template-columns:1fr; height:auto; gap:8px; padding:10px; text-align:center;}
     .logo-labor{border-right:none;align-items:center;}
     .top-status{justify-content:center;flex-wrap:wrap;}
-    .main-wrap{grid-template-columns:1fr;height:auto;}
+    .main-wrap,.main-wrap.menu-collapsed{grid-template-columns:1fr;height:auto;}
     .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
     .menu button{margin-bottom:0;}
     .grid-2,.grid-3-2{grid-template-columns:1fr;}
@@ -410,21 +462,22 @@ select{padding:10px;border:1px solid var(--line);border-radius:10px;font-weight:
         <p>Indicadores operacionais em tempo real</p>
     </div>
     <div class="top-status">
-        <span class="pill" id="dataAtual">--/--/----</span>
-        <span class="pill" id="horaAtual">--:--:--</span>
+        <span class="pill data-pill" id="dataAtual">-- --- ----</span>
+        <span class="pill time-pill" id="horaAtual">--:--:--</span>
         <span class="pill"><span class="online-dot">●</span>Online</span>
     </div>
 </header>
 
-<div class="main-wrap">
-    <aside class="menu">
-        <button class="active" onclick="abrirAba('importacao', this)"><span>📦</span>Inspeção<br>Importação</button>
-        <button onclick="abrirAba('esfig', this)"><span>⏱</span>Esfigmomanômetro</button>
-        <button onclick="abrirAba('descarte', this)"><span>🗑</span>Descarte</button>
-        <button onclick="abrirAba('amostra', this)"><span>📦</span>Amostra</button>
-        <button onclick="abrirAba('retrabalho', this)"><span>🔄</span>Retrabalho</button>
-        <button onclick="abrirAba('equipamentos', this)"><span>🛠</span>Equipamentos</button>
-        <button onclick="abrirAba('informativo', this)"><span>ℹ️</span>Informativo</button>
+<div class="main-wrap" id="mainWrap">
+    <aside class="menu" id="menuLateral">
+        <button type="button" class="toggle-menu" id="btnToggleMenu" onclick="toggleMenu()" title="Esconder menu">◀</button>
+        <button class="active" onclick="abrirAba('importacao', this)"><span class="ico">📦</span><span class="label">Inspeção<br>Importação</span></button>
+        <button onclick="abrirAba('esfig', this)"><span class="ico">⏱</span><span class="label">Esfigmomanômetro</span></button>
+        <button onclick="abrirAba('descarte', this)"><span class="ico">🗑</span><span class="label">Descarte</span></button>
+        <button onclick="abrirAba('amostra', this)"><span class="ico">📦</span><span class="label">Amostra</span></button>
+        <button onclick="abrirAba('retrabalho', this)"><span class="ico">🔄</span><span class="label">Retrabalho</span></button>
+        <button onclick="abrirAba('equipamentos', this)"><span class="ico">🛠</span><span class="label">Equipamentos</span></button>
+        <button onclick="abrirAba('informativo', this)"><span class="ico">ℹ️</span><span class="label">Informativo</span></button>
     </aside>
     <main class="content" id="conteudo"></main>
 </div>
@@ -501,10 +554,23 @@ function moedaCurta(v){ return moeda(v); }
 
 function atualizarRelogio(){
     const agora = new Date();
-    document.getElementById("dataAtual").innerText = agora.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
+    const dia = String(agora.getDate()).padStart(2,"0");
+    const mes = agora.toLocaleDateString("pt-BR",{month:"long"}).toUpperCase();
+    const ano = agora.getFullYear();
+    document.getElementById("dataAtual").innerText = `${dia} ${mes} ${ano}`;
     document.getElementById("horaAtual").innerText = agora.toLocaleTimeString("pt-BR");
 }
 setInterval(atualizarRelogio,1000); atualizarRelogio();
+
+function toggleMenu(){
+    const wrap = document.getElementById("mainWrap");
+    const btn = document.getElementById("btnToggleMenu");
+    wrap.classList.toggle("menu-collapsed");
+
+    const recolhido = wrap.classList.contains("menu-collapsed");
+    btn.innerText = recolhido ? "▶" : "◀";
+    btn.title = recolhido ? "Mostrar menu" : "Esconder menu";
+}
 
 function renderImportacao(){
     const imp = dados.importacao || {processosAno:0,totalSku:0,totalLotes:0,laudosEmitidos:0,totalHoras:0,mensal:[],fluxo:[]};
