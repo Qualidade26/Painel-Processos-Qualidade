@@ -1,25 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Painel de Processos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Processos SGQ</title>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+:root{
+    --bg:#dfeeff;
+    --top1:#0f3cc9;
+    --top2:#1c57ff;
+    --card:#f8fbff;
+    --card2:#eef5ff;
+    --primary:#1d4eff;
+    --secondary:#6b7cff;
+    --green:#22c55e;
+    --red:#ef4444;
+    --orange:#f97316;
+    --purple:#8b5cf6;
+    --text:#0f1f4d;
+    --muted:#5c6c96;
+    --line:#dce8ff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#dfeeff;
-    color:#0f1f4d;
+    background:var(--bg);
+    color:var(--text);
 }
 
 .header{
-    background:linear-gradient(90deg,#0f3cc9,#1c57ff);
-    color:white;
-    padding:20px;
-    font-size:26px;
-    font-weight:bold;
+    height:70px;
+    background:linear-gradient(90deg,var(--top1),var(--top2));
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:.5px;
 }
 
 .layout{
@@ -28,249 +54,629 @@ body{
 }
 
 .menu{
-    width:260px;
+    width:210px;
     background:#f8fbff;
-    padding:20px;
-    box-shadow:4px 0 15px rgba(0,0,0,.08);
+    padding:14px;
+    border-right:1px solid var(--line);
 }
 
 .menu button{
     width:100%;
-    margin-bottom:10px;
-    padding:14px;
     border:none;
-    border-radius:12px;
-    background:#eef5ff;
-    color:#0f3cc9;
-    font-weight:bold;
+    background:var(--card2);
+    color:var(--text);
+    padding:12px 10px;
+    margin-bottom:9px;
+    border-radius:14px;
+    font-size:14px;
+    font-weight:900;
     cursor:pointer;
-    text-align:left;
+    text-align:center;
+    transition:.2s;
 }
 
-.menu button.active,
-.menu button:hover{
-    background:#1d4eff;
+.menu button:hover,
+.menu button.active{
+    background:var(--primary);
     color:white;
+    transform:scale(1.02);
 }
 
 .content{
     flex:1;
-    padding:25px;
+    padding:18px;
+}
+
+.page-title{
+    text-align:center;
+    font-size:25px;
+    font-weight:900;
+    color:var(--top1);
+    margin-bottom:16px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-bottom:20px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+    margin-bottom:16px;
 }
 
 .card{
-    background:#f8fbff;
+    background:var(--card);
     border-radius:18px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    padding:16px;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    border:1px solid var(--line);
+    text-align:center;
 }
 
 .card h3{
-    margin:0;
-    color:#5c6c96;
+    margin:0 0 8px 0;
+    font-size:15px;
+    color:var(--muted);
+    font-weight:900;
 }
 
 .card strong{
-    font-size:30px;
-    color:#1d4eff;
+    font-size:26px;
+    color:var(--primary);
+    font-weight:900;
 }
 
-.grid{
+.grid-2{
     display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:20px;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+.table-card{
+    background:var(--card);
+    border-radius:18px;
+    padding:16px;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    border:1px solid var(--line);
+}
+
+.table-card h3{
+    text-align:center;
+    margin-top:0;
+    color:var(--top1);
 }
 
 table{
     width:100%;
     border-collapse:collapse;
+    font-size:13px;
 }
 
-th,td{
-    padding:12px;
-    border-bottom:1px solid #dce8ff;
-    text-align:left;
+th{
+    background:var(--primary);
+    color:white;
+    padding:10px;
+    text-align:center;
 }
 
-.info{
-    line-height:1.6;
+td{
+    padding:9px;
+    border-bottom:1px solid var(--line);
+    text-align:center;
+    font-weight:700;
+}
+
+.status-ok{
+    color:var(--green);
+    font-weight:900;
+}
+
+.status-nok{
+    color:var(--red);
+    font-weight:900;
+}
+
+.fluxo{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.fluxo-item{
+    background:var(--card2);
+    border-radius:16px;
+    padding:16px;
+    text-align:center;
+    font-weight:900;
+    color:var(--primary);
+    border:1px solid var(--line);
+}
+
+.progress-box{
+    width:100%;
+    height:24px;
+    background:#dce8ff;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,var(--top1),var(--top2));
+    color:white;
+    text-align:center;
+    font-size:13px;
+    font-weight:900;
+    line-height:24px;
+}
+
+.scroll-box{
+    max-height:250px;
+    overflow:hidden;
+    position:relative;
+}
+
+.scroll-content{
+    animation:scrollVertical 22s linear infinite;
+}
+
+.scroll-box:hover .scroll-content{
+    animation-play-state:paused;
+}
+
+@keyframes scrollVertical{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-50%);}
+}
+
+.senha-box{
+    max-width:420px;
+    margin:60px auto;
+    background:var(--card);
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+
+.senha-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin:15px 0;
+    text-align:center;
+    font-size:18px;
+}
+
+.senha-box button,
+.info-menu button{
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.info-menu{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:16px;
+}
+
+.info-text{
+    font-size:17px;
+    line-height:1.7;
+    text-align:center;
+    max-width:900px;
+    margin:auto;
+}
+
+select{
+    padding:10px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+@media(max-width:900px){
+    .layout{
+        flex-direction:column;
+    }
+
+    .menu{
+        width:100%;
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .menu button{
+        margin-bottom:0;
+    }
+
+    .grid-2{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">Labor | Painel Interativo de Processos</div>
+<header class="header">
+    Painel de Processos SGQ
+</header>
 
 <div class="layout">
-    <div class="menu">
-        <button class="active" onclick="abrirProcesso('importacao', this)">Processo de Inspeção Importação</button>
-        <button onclick="abrirProcesso('esfig', this)">Processo de Esfig</button>
-        <button onclick="abrirProcesso('descarte', this)">Processo de Descarte</button>
-        <button onclick="abrirProcesso('amostra', this)">Processo de Amostra</button>
-        <button onclick="abrirProcesso('retrabalho', this)">Processo de Retrabalho</button>
-        <button onclick="abrirProcesso('cursos', this)">Equipamentos para Eventos</button>
-    </div>
 
-    <div class="content">
-        <div class="cards">
-            <div class="card">
-                <h3>Total em Processo</h3>
-                <strong id="kpi1">0</strong>
-            </div>
-            <div class="card">
-                <h3>Finalizados</h3>
-                <strong id="kpi2">0</strong>
-            </div>
-            <div class="card">
-                <h3>Pendentes</h3>
-                <strong id="kpi3">0</strong>
-            </div>
-        </div>
+    <aside class="menu">
+        <button class="active" onclick="abrirAba('importacao', this)">📦<br>Inspeção de Importação</button>
+        <button onclick="abrirAba('esfig', this)">⏱<br>Esfigmomanômetro</button>
+        <button onclick="abrirAba('descarte', this)">🗑<br>Descarte</button>
+        <button onclick="abrirAba('amostra', this)">📦<br>Amostra</button>
+        <button onclick="abrirAba('retrabalho', this)">🔄<br>Retrabalho</button>
+        <button onclick="abrirAba('equipamentos', this)">🛠<br>Equipamentos</button>
+        <button onclick="abrirAba('informativo', this)">ℹ️<br>Informativo do Processo</button>
+    </aside>
 
-        <div class="grid">
-            <div class="card">
-                <h3 id="tituloGrafico">Evolução do Processo</h3>
-                <canvas id="grafico"></canvas>
-            </div>
+    <main class="content" id="conteudo"></main>
 
-            <div class="card info">
-                <h3 id="tituloInfo">Informativo do Processo</h3>
-                <p id="textoInfo"></p>
-            </div>
-        </div>
-
-        <div class="card" style="margin-top:20px;">
-            <h3>Etapas do Processo</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Etapa</th>
-                        <th>Responsável</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaProcesso"></tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 <script>
-const processos = {
-    importacao:{
-        kpis:[35,28,7],
-        info:"O processo de importação acompanha desde a chegada do produto, conferência documental, entrada fiscal, armazenagem e liberação para venda.",
-        etapas:[
-            ["Chegada da carga","Recebimento","Concluído"],
-            ["Conferência documental","Fiscal","Em andamento"],
-            ["Entrada no estoque","Logística","Pendente"]
-        ],
-        grafico:[5,10,18,25,35]
-    },
-    esfig:{
-        kpis:[120,95,25],
-        info:"O processo de Esfig acompanha o produto desde o recebimento, triagem, aferição, controle, registro e finalização. Esse painel serve para demonstrar a evolução do processo e explicar cada etapa para pessoas que não conhecem a operação.",
-        etapas:[
-            ["Recebimento do Esfig","Recebimento","Concluído"],
-            ["Triagem inicial","Qualidade","Concluído"],
-            ["Aferição","Técnico","Em andamento"],
-            ["Registro da informação","Administrativo","Em andamento"],
-            ["Finalização","Qualidade","Pendente"]
-        ],
-        grafico:[20,40,65,90,120]
-    },
-    descarte:{
-        kpis:[80,60,20],
-        info:"O processo de descarte controla produtos vencidos, avariados ou destinados pela empresa, garantindo rastreabilidade e controle dos valores descartados.",
-        etapas:[
-            ["Identificação do item","Estoque","Concluído"],
-            ["Classificação da origem","Qualidade","Concluído"],
-            ["Aprovação do descarte","Gestão","Em andamento"]
-        ],
-        grafico:[10,25,40,60,80]
-    },
-    amostra:{
-        kpis:[200,170,30],
-        info:"O processo de amostra demonstra os produtos solicitados, quantidades, principais SKUs e evolução das demandas.",
-        etapas:[
-            ["Solicitação","Comercial","Concluído"],
-            ["Separação","Estoque","Em andamento"],
-            ["Expedição","Logística","Pendente"]
-        ],
-        grafico:[30,70,110,160,200]
-    },
-    retrabalho:{
-        kpis:[45,32,13],
-        info:"O processo de retrabalho acompanha produtos que precisam de correção, ajuste, reembalagem ou nova conferência antes da liberação.",
-        etapas:[
-            ["Identificação","Qualidade","Concluído"],
-            ["Execução do retrabalho","Operação","Em andamento"],
-            ["Liberação final","Qualidade","Pendente"]
-        ],
-        grafico:[5,15,25,35,45]
-    },
-    cursos:{
-        kpis:[18,12,6],
-        info:"O painel de cursos acompanha treinamentos realizados, pendentes e evolução de capacitação da equipe.",
-        etapas:[
-            ["Cadastro do curso","RH","Concluído"],
-            ["Participação","Equipe","Em andamento"],
-            ["Conclusão","Gestão","Pendente"]
-        ],
-        grafico:[2,6,9,14,18]
+let dados = {};
+let graficoAtual = null;
+let senhaDescarteLiberada = false;
+
+fetch("data.json")
+.then(response => response.json())
+.then(json => {
+    dados = json;
+    renderImportacao();
+})
+.catch(() => {
+    dados = {};
+    renderImportacao();
+});
+
+function abrirAba(aba, botao){
+    document.querySelectorAll(".menu button").forEach(btn => btn.classList.remove("active"));
+    botao.classList.add("active");
+
+    if(graficoAtual){
+        graficoAtual.destroy();
+        graficoAtual = null;
     }
-};
 
-let chart;
-
-function abrirProcesso(nome, botao){
-    document.querySelectorAll('.menu button').forEach(btn => btn.classList.remove('active'));
-    botao.classList.add('active');
-
-    const p = processos[nome];
-
-    document.getElementById("kpi1").innerText = p.kpis[0];
-    document.getElementById("kpi2").innerText = p.kpis[1];
-    document.getElementById("kpi3").innerText = p.kpis[2];
-    document.getElementById("textoInfo").innerText = p.info;
-
-    const tbody = document.getElementById("tabelaProcesso");
-    tbody.innerHTML = "";
-    p.etapas.forEach(etapa => {
-        tbody.innerHTML += `
-            <tr>
-                <td>${etapa[0]}</td>
-                <td>${etapa[1]}</td>
-                <td>${etapa[2]}</td>
-            </tr>
-        `;
-    });
-
-    atualizarGrafico(p.grafico);
+    if(aba === "importacao") renderImportacao();
+    if(aba === "esfig") renderEsfig();
+    if(aba === "descarte") renderDescarte();
+    if(aba === "amostra") renderAmostra();
+    if(aba === "retrabalho") renderRetrabalho();
+    if(aba === "equipamentos") renderEquipamentos();
+    if(aba === "informativo") renderInformativo();
 }
 
-function atualizarGrafico(dados){
-    const ctx = document.getElementById("grafico");
+function moeda(valor){
+    return Number(valor || 0).toLocaleString("pt-BR", {
+        style:"currency",
+        currency:"BRL"
+    });
+}
 
-    if(chart){
-        chart.destroy();
-    }
+function numero(valor){
+    return Number(valor || 0).toLocaleString("pt-BR");
+}
 
-    chart = new Chart(ctx,{
+function renderImportacao(){
+    const imp = dados.importacao || {
+        processosAno:0,
+        totalSku:0,
+        totalLotes:0,
+        laudosEmitidos:0,
+        totalHoras:0,
+        mensal:[],
+        fluxo:[]
+    };
+
+    conteudo.innerHTML = `
+        <div class="page-title">📦 Inspeção de Importação</div>
+
+        <section class="cards">
+            <div class="card"><h3>Processos por Ano</h3><strong>${numero(imp.processosAno)}</strong></div>
+            <div class="card"><h3>Total de SKU</h3><strong>${numero(imp.totalSku)}</strong></div>
+            <div class="card"><h3>Total de Lotes</h3><strong>${numero(imp.totalLotes)}</strong></div>
+            <div class="card"><h3>Laudos Emitidos</h3><strong>${numero(imp.laudosEmitidos)}</strong></div>
+            <div class="card"><h3>Total de Horas</h3><strong>${numero(imp.totalHoras)}</strong></div>
+        </section>
+
+        <section class="table-card">
+            <h3>Evolução Mensal da Inspeção de Importação</h3>
+            <canvas id="grafico"></canvas>
+        </section>
+
+        <section class="table-card">
+            <h3>Fluxo Inspeção de Importação</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>PO</th>
+                        <th>Descrição do Produto</th>
+                        <th>Status</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${montarTabelaImportacao(imp.fluxo)}
+                </tbody>
+            </table>
+        </section>
+    `;
+
+    graficoAtual = new Chart(document.getElementById("grafico"), {
         type:"line",
         data:{
-            labels:["Semana 1","Semana 2","Semana 3","Semana 4","Semana 5"],
+            labels:(imp.mensal || []).map(i => i.mes),
+            datasets:[
+                {label:"Processos", data:(imp.mensal || []).map(i => i.processos || 0), borderWidth:3},
+                {label:"SKU", data:(imp.mensal || []).map(i => i.sku || 0), borderWidth:3},
+                {label:"Lotes", data:(imp.mensal || []).map(i => i.lotes || 0), borderWidth:3},
+                {label:"Laudos", data:(imp.mensal || []).map(i => i.laudos || 0), borderWidth:3},
+                {label:"Horas", data:(imp.mensal || []).map(i => i.horas || 0), borderWidth:3}
+            ]
+        }
+    });
+}
+
+function montarTabelaImportacao(lista){
+    if(!lista || lista.length === 0){
+        return `<tr><td colspan="4">Sem dados cadastrados</td></tr>`;
+    }
+
+    return lista.map(item => `
+        <tr>
+            <td>${item.po || "-"}</td>
+            <td>${item.descricao || "-"}</td>
+            <td class="${item.status === "Aprovado" ? "status-ok" : "status-nok"}">${item.status || "-"}</td>
+            <td>${item.observacao || "-"}</td>
+        </tr>
+    `).join("");
+}
+
+function renderEsfig(){
+    const esfig = dados.esfig || {};
+    const produtos = esfig.produtos || [];
+    const totalAguardando = produtos.reduce((s,i) => s + Number(i.aguardando || 0),0);
+    const totalDesmontado = produtos.reduce((s,i) => s + Number(i.desmontado || 0),0);
+    const totalAferidos = produtos.reduce((s,i) => s + Number(i.aferidos || 0),0);
+    const totalGeral = totalAguardando + totalDesmontado + totalAferidos;
+    const conclusao = totalGeral > 0 ? ((totalAferidos / totalGeral) * 100).toFixed(1) : 0;
+
+    conteudo.innerHTML = `
+        <div class="page-title">⏱ Esfigmomanômetro</div>
+
+        <section class="cards">
+            <div class="card"><h3>Total Gasto por GRU</h3><strong>${moeda(esfig.totalGru)}</strong></div>
+            <div class="card"><h3>Última Aferição</h3><strong>${esfig.ultimaAfericao || "-"}</strong></div>
+            <div class="card"><h3>Próxima Aferição</h3><strong>${esfig.proximaAfericao || "-"}</strong></div>
+            <div class="card"><h3>Total de Horas</h3><strong>${numero(esfig.totalHoras)}</strong></div>
+        </section>
+
+        <section class="grid-2">
+            <div class="table-card">
+                <h3>Fluxo Operacional</h3>
+                <div class="fluxo">
+                    <div class="fluxo-item">Aguardando<br>${numero(totalAguardando)}</div>
+                    <div class="fluxo-item">Desmontado<br>${numero(totalDesmontado)}</div>
+                    <div class="fluxo-item">Aferido / Montagem<br>${numero(totalAferidos)}</div>
+                </div>
+                <div class="progress-box">
+                    <div class="progress-bar" style="width:${conclusao}%">${conclusao}% Concluído</div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <h3>Total Anual por SKU</h3>
+                <canvas id="grafico"></canvas>
+            </div>
+        </section>
+
+        <section class="table-card">
+            <h3>Produtos Esfigmomanômetro</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Descrição</th>
+                        <th>Aguardando</th>
+                        <th>Desmontado</th>
+                        <th>Aferidos</th>
+                        <th>Última Aferição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${produtos.map(i => `
+                        <tr>
+                            <td>${i.sku}</td>
+                            <td>${i.descricao}</td>
+                            <td>${numero(i.aguardando)}</td>
+                            <td>${numero(i.desmontado)}</td>
+                            <td>${numero(i.aferidos)}</td>
+                            <td>${i.ultimaAfericao || "-"}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </section>
+    `;
+
+    graficoAtual = new Chart(document.getElementById("grafico"), {
+        type:"bar",
+        data:{
+            labels:produtos.map(i => `${i.sku}`),
             datasets:[{
-                label:"Evolução",
-                data:dados,
+                label:"Total Anual",
+                data:produtos.map(i => Number(i.aguardando || 0) + Number(i.desmontado || 0) + Number(i.aferidos || 0)),
+                borderWidth:2
+            }]
+        },
+        options:{
+            plugins:{legend:{display:false}}
+        }
+    });
+}
+
+function renderDescarte(){
+    if(!senhaDescarteLiberada){
+        conteudo.innerHTML = `
+            <div class="senha-box">
+                <h2>🔒 Área Restrita - Descarte</h2>
+                <p>Digite a senha para acessar os dados de descarte.</p>
+                <input type="password" id="senhaDescarte" placeholder="Digite a senha">
+                <button onclick="validarSenhaDescarte()">Acessar</button>
+                <p id="erroSenha" style="color:red;font-weight:900;"></p>
+            </div>
+        `;
+        return;
+    }
+
+    const d = dados.descarte || {origens:[], top10:[]};
+
+    conteudo.innerHTML = `
+        <div class="page-title">🗑 Descarte</div>
+
+        <section class="cards">
+            <div class="card"><h3>Valor Atual</h3><strong>${moeda(d.total)}</strong></div>
+            <div class="card"><h3>Último Descarte</h3><strong>${moeda(d.ultimoDescarte)}</strong></div>
+        </section>
+
+        <section class="grid-2">
+            <div class="table-card">
+                <h3>Valores por Origem</h3>
+                <canvas id="grafico"></canvas>
+            </div>
+
+            <div class="table-card">
+                <h3>Top 10 Descarte</h3>
+                <div class="scroll-box">
+                    <div class="scroll-content">
+                        ${montarTopDescarte(d.top10)}
+                        ${montarTopDescarte(d.top10)}
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+
+    graficoAtual = new Chart(document.getElementById("grafico"), {
+        type:"bar",
+        data:{
+            labels:d.origens.map(i => i.nome),
+            datasets:[{
+                label:"Valor",
+                data:d.origens.map(i => i.valor),
+                borderWidth:2
+            }]
+        },
+        options:{
+            indexAxis:"y"
+        }
+    });
+}
+
+function validarSenhaDescarte(){
+    const senha = document.getElementById("senhaDescarte").value;
+
+    if(senha === "SGQ2026"){
+        senhaDescarteLiberada = true;
+        renderDescarte();
+    }else{
+        document.getElementById("erroSenha").innerText = "Senha incorreta.";
+    }
+}
+
+function montarTopDescarte(lista){
+    if(!lista || lista.length === 0){
+        return `<p style="text-align:center;font-weight:900;">Sem dados cadastrados</p>`;
+    }
+
+    return `
+        <table>
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${lista.map(i => `
+                    <tr>
+                        <td>${i.sku}</td>
+                        <td>${i.descricao}</td>
+                        <td>${moeda(i.valor)}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
+}
+
+function renderAmostra(){
+    const a = dados.amostras || {mensal:[], top10:[], totalHoras:0};
+    const totalAno = (a.mensal || []).reduce((s,i) => s + Number(i.valor || 0),0);
+
+    conteudo.innerHTML = `
+        <div class="page-title">📦 Amostra</div>
+
+        <section class="cards">
+            <div class="card"><h3>Amostras Solicitadas no Ano</h3><strong>${numero(totalAno)}</strong></div>
+            <div class="card"><h3>Total de Horas</h3><strong>${numero(a.totalHoras)}</strong></div>
+        </section>
+
+        <section class="grid-2">
+            <div class="table-card">
+                <h3>Evolução Mensal de Amostras</h3>
+                <canvas id="grafico"></canvas>
+            </div>
+
+            <div class="table-card">
+                <h3>Top 10 Amostras Mais Solicitadas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Descrição</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(a.top10 || []).map(i => `
+                            <tr>
+                                <td>${i.sku}</td>
+                                <td>${i.descricao}</td>
+                                <td>${numero(i.quantidade)}</td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    `;
+
+    graficoAtual = new Chart(document.getElementById("grafico"), {
+        type:"line",
+        data:{
+            labels:a.mensal.map(i => i.mes),
+            datasets:[{
+                label:"Amostras",
+                data:a.mensal.map(i => i.valor),
                 borderWidth:3,
                 tension:.4
             }]
@@ -278,7 +684,177 @@ function atualizarGrafico(dados){
     });
 }
 
-abrirProcesso("importacao", document.querySelector(".menu button"));
+function renderRetrabalho(){
+    const r = dados.retrabalho || {totalAno:0,totalHoras:0,fornecedores:[], tabela:[]};
+
+    conteudo.innerHTML = `
+        <div class="page-title">🔄 Retrabalho</div>
+
+        <section class="cards">
+            <div class="card"><h3>Total de Retrabalho no Ano</h3><strong>${numero(r.totalAno)}</strong></div>
+            <div class="card"><h3>Total de Horas</h3><strong>${numero(r.totalHoras)}</strong></div>
+        </section>
+
+        <section class="grid-2">
+            <div class="table-card">
+                <h3>Fornecedor</h3>
+                <select id="filtroFornecedor" onchange="atualizarGraficoRetrabalho()">
+                    ${(r.fornecedores || []).map(f => `<option value="${f.nome}">${f.nome}</option>`).join("")}
+                </select>
+                <canvas id="grafico"></canvas>
+            </div>
+
+            <div class="table-card">
+                <h3>Tabela de Retrabalho</h3>
+                <div class="scroll-box">
+                    <div class="scroll-content">
+                        ${montarTabelaRetrabalho(r.tabela)}
+                        ${montarTabelaRetrabalho(r.tabela)}
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+
+    atualizarGraficoRetrabalho();
+}
+
+function atualizarGraficoRetrabalho(){
+    const r = dados.retrabalho || {fornecedores:[]};
+    const nome = document.getElementById("filtroFornecedor")?.value;
+    const fornecedor = (r.fornecedores || []).find(f => f.nome === nome) || {mensal:[]};
+
+    if(graficoAtual){
+        graficoAtual.destroy();
+    }
+
+    graficoAtual = new Chart(document.getElementById("grafico"), {
+        type:"bar",
+        data:{
+            labels:(fornecedor.mensal || []).map(i => i.mes),
+            datasets:[{
+                label:"Retrabalho Mensal",
+                data:(fornecedor.mensal || []).map(i => i.quantidade || 0),
+                borderWidth:2
+            }]
+        }
+    });
+}
+
+function montarTabelaRetrabalho(lista){
+    if(!lista || lista.length === 0){
+        return `<p style="text-align:center;font-weight:900;">Sem dados cadastrados</p>`;
+    }
+
+    return `
+        <table>
+            <thead>
+                <tr>
+                    <th>Motivo</th>
+                    <th>Fabricante</th>
+                    <th>Quantidade</th>
+                    <th>Horas</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${lista.map(i => `
+                    <tr>
+                        <td>${i.motivo}</td>
+                        <td>${i.fabricante}</td>
+                        <td>${numero(i.quantidade)}</td>
+                        <td>${numero(i.horas)}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    `;
+}
+
+function renderEquipamentos(){
+    const lista = dados.equipamentos || [];
+
+    conteudo.innerHTML = `
+        <div class="page-title">🛠 Equipamentos</div>
+
+        <section class="table-card">
+            <h3>Controle de Equipamentos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${lista.length ? lista.map(i => `
+                        <tr>
+                            <td>${i.produto}</td>
+                            <td>${i.descricao}</td>
+                            <td>${numero(i.quantidade)}</td>
+                            <td>${i.observacao}</td>
+                        </tr>
+                    `).join("") : `<tr><td colspan="4">Sem dados cadastrados</td></tr>`}
+                </tbody>
+            </table>
+        </section>
+    `;
+}
+
+function renderInformativo(){
+    conteudo.innerHTML = `
+        <div class="page-title">ℹ️ Informativo do Processo</div>
+
+        <div class="info-menu">
+            <button onclick="mostrarInfo('importacao')">📦 Importação</button>
+            <button onclick="mostrarInfo('esfig')">⏱ Esfig</button>
+            <button onclick="mostrarInfo('descarte')">🗑 Descarte</button>
+            <button onclick="mostrarInfo('amostra')">📦 Amostra</button>
+            <button onclick="mostrarInfo('retrabalho')">🔄 Retrabalho</button>
+            <button onclick="mostrarInfo('equipamentos')">🛠 Equipamentos</button>
+        </div>
+
+        <section class="table-card">
+            <h3 id="infoTitulo">Selecione um processo</h3>
+            <p class="info-text" id="infoTexto">
+                Clique em uma das opções acima para visualizar o informativo do processo.
+            </p>
+        </section>
+    `;
+}
+
+function mostrarInfo(tipo){
+    const textos = {
+        importacao:{
+            titulo:"Processo de Inspeção de Importação",
+            texto:"O processo de inspeção de importação acompanha a chegada dos produtos importados, a conferência dos documentos, a verificação dos lotes, a emissão dos laudos e a definição da situação do produto como aprovado ou reprovado. Esse controle garante rastreabilidade, segurança e conformidade antes da disponibilização do produto."
+        },
+        esfig:{
+            titulo:"Processo de Esfigmomanômetro",
+            texto:"O produto chega pela importação. Em seguida, solicitamos a GRU ao Inmetro. Após isso, realizamos a desmontagem, retirando a embalagem de venda e o plástico bolha. Os itens são colocados em bandejas e adicionados ao painel de Esfig para aferição do Inmetro. Depois da aferição, colamos o selo, colocamos novamente no plástico bolha, acondicionamos na embalagem de venda e disponibilizamos o produto para venda."
+        },
+        descarte:{
+            titulo:"Processo de Descarte",
+            texto:"O processo de descarte controla produtos vencidos, avariados, reprovados ou destinados pela empresa. O objetivo é garantir registro, rastreabilidade, justificativa da origem do descarte e controle dos valores envolvidos."
+        },
+        amostra:{
+            titulo:"Processo de Amostra",
+            texto:"O processo de amostra acompanha as solicitações de produtos para envio, análise, apresentação ou validação. O painel permite visualizar a evolução mensal, os produtos mais solicitados e a quantidade total movimentada no ano."
+        },
+        retrabalho:{
+            titulo:"Processo de Retrabalho",
+            texto:"O processo de retrabalho acompanha itens que precisam de correção, reembalagem, ajuste, revisão, identificação ou nova conferência antes da liberação. O controle permite identificar fornecedor, motivo, quantidade retrabalhada e horas gastas."
+        },
+        equipamentos:{
+            titulo:"Processo de Equipamentos",
+            texto:"O controle de equipamentos apresenta os produtos disponíveis, em manutenção, em uso ou em estoque. Esse acompanhamento auxilia na organização dos recursos e na visibilidade da situação atual de cada item."
+        }
+    };
+
+    document.getElementById("infoTitulo").innerText = textos[tipo].titulo;
+    document.getElementById("infoTexto").innerText = textos[tipo].texto;
+}
 </script>
 
 </body>
