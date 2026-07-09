@@ -316,7 +316,9 @@ body{
 }
 
 .table-scroll.infinite{
-    overflow:hidden;
+    overflow-y:auto;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
 }
 
 .scroll-content{
@@ -325,6 +327,10 @@ body{
 
 .table-scroll.infinite:hover .scroll-content{
     animation-play-state:paused;
+}
+
+.table-scroll.infinite:hover{
+    cursor:ns-resize;
 }
 
 @keyframes scrollVertical{
@@ -648,8 +654,16 @@ function renderEsfig(){
     `;
     graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"bar",
-        data:{ labels:produtos.map(i => i.sku), datasets:[{label:"Total", data:produtos.map(i => Number(i.aguardando||0)+Number(i.desmontado||0)+Number(i.aferidos||0)), backgroundColor:"#1d4eff", borderWidth:0}] },
-        options:{...baseOptions(), layout:{padding:{top:34,right:24,left:8,bottom:4}}, plugins:{legend:{display:false}}}
+        data:{
+            labels:produtos.map(i => `${i.sku} - ${i.descricao || ""}`),
+            datasets:[{
+                label:"Total Anual",
+                data:produtos.map(i => Number(i.aguardando||0)+Number(i.desmontado||0)+Number(i.aferidos||0)),
+                backgroundColor:["#1d4eff","#0f3cc9","#6b7cff","#f04dd8","#22c55e","#38bdf8","#8b5cf6"],
+                borderWidth:0
+            }]
+        },
+        options:{...baseOptions(), indexAxis:"y", layout:{padding:{top:20,right:42,left:8,bottom:4}}, plugins:{legend:{display:false}}}
     });
 }
 
@@ -667,8 +681,8 @@ function renderDescarte(){
             ${card("📋","Último Descarte",moeda(d.ultimoDescarte),"Última operação registrada")}
         </section>
         <section class="grid-2">
-            <div class="panel"><h3>📊 Descarte por Origem</h3><div class="chart-box tall"><canvas id="grafico"></canvas></div></div>
-            <div class="panel"><h3>Top 10 Descarte</h3>${rankTop3(top)}${tabelaFixa(["SKU","Descrição","Valor"], montarLinhasTopDescarte(top), true)}</div>
+            <div class="panel"><h3>📊 Descarte por Origem</h3><div class="chart-box tall"><canvas id="grafico"></canvas></div><h3 style="margin-top:10px;">Top 3 Origens de Destino</h3>${rankTop3Origem(d.origens || [])}</div>
+            <div class="panel"><h3>Top 10 Descarte</h3>${tabelaFixa(["SKU","Descrição","Valor"], montarLinhasTopDescarte(top), true)}</div>
         </section>
     `;
     graficoAtual = new Chart(document.getElementById("grafico"),{
@@ -779,6 +793,11 @@ function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; retu
 function montarLinhasRetrabalho(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td class="desc">${i.motivo}</td><td>${i.fabricante}</td><td>${numero(i.quantidade)}</td><td>${numero(i.horas)}</td></tr>`).join(""); }
 function montarLinhasEquipamentos(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.produto}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td><td>${i.observacao}</td></tr>`).join(""); }
 function rankTop3(lista){ const top = (lista||[]).slice(0,3); if(!top.length) return ""; return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.descricao}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`; }
+function rankTop3Origem(lista){
+    const top = [...(lista || [])].sort((a,b)=>Number(b.valor||0)-Number(a.valor||0)).slice(0,3);
+    if(!top.length) return "";
+    return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.nome || "-"}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`;
+}
 </script>
 </body>
 </html>
