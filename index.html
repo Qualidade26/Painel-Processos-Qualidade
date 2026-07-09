@@ -4,223 +4,273 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Painel de Processos SGQ</title>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
 :root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
-    --top2:#1c57ff;
+    --top2:#1d4eff;
     --card:#f8fbff;
     --card2:#eef5ff;
     --primary:#1d4eff;
-    --secondary:#6b7cff;
-    --green:#22c55e;
-    --red:#ef4444;
-    --orange:#f97316;
-    --purple:#8b5cf6;
+    --primary-dark:#0f3cc9;
+    --line:#b8d1ff;
+    --line2:#dce8ff;
     --text:#0f1f4d;
     --muted:#5c6c96;
-    --line:#dce8ff;
+    --green:#22c55e;
+    --pink:#f04dd8;
+    --purple:#8b5cf6;
+    --red:#ef4444;
+    --orange:#f97316;
+    --cyan:#38bdf8;
 }
 
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background:var(--bg);
     color:var(--text);
+    overflow-x:hidden;
 }
 
-.header{
-    height:70px;
+.topbar{
+    height:72px;
     background:linear-gradient(90deg,var(--top1),var(--top2));
     color:#fff;
-    display:flex;
+    display:grid;
+    grid-template-columns:260px 1fr 310px;
     align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:900;
-    letter-spacing:.5px;
+    padding:0 18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
 }
 
-.layout{
+.logo-labor{
+    border-right:1px solid rgba(255,255,255,.35);
+    height:55px;
     display:flex;
-    min-height:calc(100vh - 70px);
+    flex-direction:column;
+    justify-content:center;
+    line-height:1;
+}
+
+.logo-main{
+    font-size:34px;
+    font-weight:900;
+    letter-spacing:5px;
+}
+
+.logo-sub{
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:5px;
+    margin-top:6px;
+}
+
+.top-title{text-align:center;}
+.top-title h1{
+    margin:0;
+    font-size:27px;
+    letter-spacing:.5px;
+    font-weight:900;
+}
+.top-title p{
+    margin:6px 0 0;
+    font-size:12px;
+    font-weight:900;
+}
+
+.top-status{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    font-weight:900;
+}
+
+.pill{
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25);
+    padding:9px 12px;
+    border-radius:10px;
+    box-shadow:inset 0 0 12px rgba(255,255,255,.08);
+}
+.online-dot{color:#27ff6f;margin-right:4px;}
+
+.main-wrap{
+    height:calc(100vh - 72px);
+    display:grid;
+    grid-template-columns:172px 1fr;
+    gap:10px;
+    padding:10px;
 }
 
 .menu{
-    width:210px;
-    background:#f8fbff;
-    padding:14px;
-    border-right:1px solid var(--line);
+    background:rgba(248,251,255,.92);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    overflow:auto;
 }
 
 .menu button{
     width:100%;
-    border:none;
-    background:var(--card2);
+    min-height:58px;
+    border:1px solid var(--line2);
+    background:linear-gradient(180deg,#fff,var(--card2));
     color:var(--text);
-    padding:12px 10px;
-    margin-bottom:9px;
-    border-radius:14px;
-    font-size:14px;
+    margin-bottom:8px;
+    border-radius:11px;
+    font-size:12px;
     font-weight:900;
     cursor:pointer;
     text-align:center;
-    transition:.2s;
+    transition:.2s ease;
+    line-height:1.2;
 }
 
-.menu button:hover,
-.menu button.active{
-    background:var(--primary);
+.menu button span{font-size:18px;display:block;margin-bottom:3px;}
+.menu button:hover,.menu button.active{
+    background:linear-gradient(90deg,var(--top1),var(--top2));
     color:white;
-    transform:scale(1.02);
+    transform:translateY(-1px);
+    box-shadow:0 6px 12px rgba(29,78,255,.25);
 }
 
 .content{
-    flex:1;
-    padding:18px;
+    overflow:auto;
+    padding-right:2px;
 }
 
 .page-title{
+    background:var(--card);
+    color:var(--primary);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:9px;
     text-align:center;
-    font-size:25px;
     font-weight:900;
-    color:var(--top1);
-    margin-bottom:16px;
+    font-size:17px;
+    margin-bottom:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
 }
 
 .cards{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:14px;
-    margin-bottom:16px;
+    gap:8px;
+    margin-bottom:8px;
 }
 
-.card{
-    background:var(--card);
-    border-radius:18px;
-    padding:16px;
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
+.kpi-card{
+    background:linear-gradient(180deg,#fff,var(--card2));
     border:1px solid var(--line);
-    text-align:center;
+    border-radius:12px;
+    padding:12px 14px;
+    min-height:72px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+    display:grid;
+    grid-template-columns:34px 1fr;
+    align-items:center;
+    gap:10px;
 }
 
-.card h3{
-    margin:0 0 8px 0;
-    font-size:15px;
-    color:var(--muted);
-    font-weight:900;
+.kpi-icon{
+    width:30px;height:30px;border-radius:8px;
+    background:#e8f0ff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+    border:1px solid var(--line2);
 }
 
-.card strong{
-    font-size:26px;
+.kpi-card h3{
+    margin:0;
     color:var(--primary);
+    font-size:11px;
     font-weight:900;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+}
+
+.kpi-card strong{
+    display:block;
+    color:var(--text);
+    font-size:22px;
+    margin-top:2px;
+    font-weight:900;
+}
+
+.kpi-card small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    margin-top:2px;
 }
 
 .grid-2{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-bottom:16px;
+    gap:8px;
+    margin-bottom:8px;
 }
 
-.table-card{
-    background:var(--card);
-    border-radius:18px;
-    padding:16px;
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
-    border:1px solid var(--line);
-}
-
-.table-card h3{
-    text-align:center;
-    margin-top:0;
-    color:var(--top1);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13px;
-}
-
-th{
-    background:var(--primary);
-    color:white;
-    padding:10px;
-    text-align:center;
-}
-
-td{
-    padding:9px;
-    border-bottom:1px solid var(--line);
-    text-align:center;
-    font-weight:700;
-}
-
-.status-ok{
-    color:var(--green);
-    font-weight:900;
-}
-
-.status-nok{
-    color:var(--red);
-    font-weight:900;
-}
-
-.fluxo{
+.grid-3-2{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+    grid-template-columns:1.35fr .9fr;
+    gap:8px;
+    margin-bottom:8px;
 }
 
-.fluxo-item{
-    background:var(--card2);
-    border-radius:16px;
-    padding:16px;
-    text-align:center;
-    font-weight:900;
-    color:var(--primary);
+.panel{
+    background:rgba(248,251,255,.95);
     border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+    min-height:120px;
 }
 
-.progress-box{
-    width:100%;
-    height:24px;
-    background:#dce8ff;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:12px;
-}
-
-.progress-bar{
-    height:100%;
-    background:linear-gradient(90deg,var(--top1),var(--top2));
-    color:white;
+.panel h3{
+    margin:0 0 8px;
     text-align:center;
-    font-size:13px;
+    color:var(--primary);
+    font-size:14px;
     font-weight:900;
-    line-height:24px;
+    text-transform:uppercase;
 }
 
-.scroll-box{
-    max-height:250px;
+.chart-box{height:300px;position:relative;}
+.chart-box.small{height:230px;}
+.chart-box.tall{height:360px;}
+
+.table-wrap{
+    border:1px solid var(--line2);
+    border-radius:10px;
     overflow:hidden;
-    position:relative;
+    background:white;
+}
+
+.table-scroll{
+    max-height:260px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    scrollbar-width:thin;
+}
+
+.table-scroll.infinite{
+    overflow:hidden;
 }
 
 .scroll-content{
     animation:scrollVertical 22s linear infinite;
 }
 
-.scroll-box:hover .scroll-content{
+.table-scroll.infinite:hover .scroll-content{
     animation-play-state:paused;
 }
 
@@ -229,104 +279,154 @@ td{
     100%{transform:translateY(-50%);}
 }
 
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    font-size:11px;
+}
+
+thead th{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:#e8f0ff;
+    color:var(--primary);
+    padding:8px 6px;
+    text-align:center;
+    font-weight:900;
+    border-bottom:1px solid var(--line);
+}
+
+td{
+    padding:7px 6px;
+    border-bottom:1px solid var(--line2);
+    text-align:center;
+    font-weight:900;
+    color:var(--text);
+    word-wrap:break-word;
+}
+
+td.desc{text-align:left;}
+
+.status-ok{color:var(--green);font-weight:900;}
+.status-nok{color:var(--red);font-weight:900;}
+
+.rank-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:8px;
+}
+.rank-card{
+    background:#e8f0ff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:8px;
+    font-size:11px;
+    font-weight:900;
+    position:relative;
+}
+.rank-num{
+    position:absolute;left:8px;top:8px;
+    width:20px;height:20px;border-radius:6px;
+    background:var(--primary);color:white;
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid #8fb0ff;
+}
+.rank-card div{padding-left:28px;text-align:left;}
+.rank-card strong{display:block;color:var(--text);font-size:13px;margin-top:4px;}
+
+.fluxo{
+    display:grid;
+    grid-template-columns:1fr 28px 1fr 28px 1fr;
+    gap:4px;
+    align-items:center;
+    margin-bottom:12px;
+}
+.fluxo-item{
+    border-radius:12px;
+    padding:14px 8px;
+    min-height:78px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    font-weight:900;
+    background:#eef5ff;
+    border:1px solid var(--line2);
+}
+.fluxo-item strong{font-size:26px;color:var(--primary);}
+.fluxo-item.pink strong{color:var(--pink);}
+.fluxo-item.green strong{color:var(--green);}
+.fluxo-arrow{text-align:center;font-size:20px;font-weight:900;color:var(--text);}
+.progress-title{font-size:11px;font-weight:900;margin:4px 0;color:var(--text);}
+.progress-box{width:100%;height:18px;background:#dce8ff;border-radius:20px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--top1),#4d8aff);color:white;text-align:center;font-size:10px;font-weight:900;line-height:18px;}
+
 .senha-box{
-    max-width:420px;
-    margin:60px auto;
+    max-width:430px;
+    margin:80px auto;
     background:var(--card);
-    border-radius:20px;
-    padding:25px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
     text-align:center;
     box-shadow:0 8px 22px rgba(0,0,0,.08);
 }
-
-.senha-box input{
-    width:100%;
-    padding:14px;
-    border:1px solid var(--line);
-    border-radius:12px;
-    margin:15px 0;
-    text-align:center;
-    font-size:18px;
+.senha-box h2{color:var(--primary);margin-top:0;}
+.senha-box input{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;text-align:center;font-size:17px;font-weight:900;}
+.btn{
+    border:none;background:var(--primary);color:white;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer;margin-top:10px;
 }
+.info-menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px;}
+.info-menu button{border:none;background:var(--primary);color:white;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;}
+.info-text{text-align:center;font-size:16px;line-height:1.7;font-weight:700;max-width:1050px;margin:auto;}
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:10px;}
+.step{background:#e8f0ff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-weight:900;}
+.step span{display:inline-flex;width:25px;height:25px;border-radius:50%;background:var(--primary);color:white;align-items:center;justify-content:center;margin-bottom:6px;}
+select{padding:10px;border:1px solid var(--line);border-radius:10px;font-weight:900;color:var(--text);background:white;margin-bottom:8px;width:100%;}
+.footer-note{font-size:10px;font-weight:900;text-align:center;color:var(--primary);padding:5px;background:#eef5ff;border:1px solid var(--line);border-radius:10px;margin-top:8px;}
 
-.senha-box button,
-.info-menu button{
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:12px 18px;
-    border-radius:12px;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.info-menu{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    margin-bottom:16px;
-}
-
-.info-text{
-    font-size:17px;
-    line-height:1.7;
-    text-align:center;
-    max-width:900px;
-    margin:auto;
-}
-
-select{
-    padding:10px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    font-weight:900;
-    margin-bottom:10px;
-}
-
-@media(max-width:900px){
-    .layout{
-        flex-direction:column;
-    }
-
-    .menu{
-        width:100%;
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
-
-    .menu button{
-        margin-bottom:0;
-    }
-
-    .grid-2{
-        grid-template-columns:1fr;
-    }
+@media(max-width:1050px){
+    .topbar{grid-template-columns:1fr; height:auto; gap:8px; padding:10px; text-align:center;}
+    .logo-labor{border-right:none;align-items:center;}
+    .top-status{justify-content:center;flex-wrap:wrap;}
+    .main-wrap{grid-template-columns:1fr;height:auto;}
+    .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+    .menu button{margin-bottom:0;}
+    .grid-2,.grid-3-2{grid-template-columns:1fr;}
 }
 </style>
 </head>
-
 <body>
-
-<header class="header">
-    Painel de Processos SGQ
+<header class="topbar">
+    <div class="logo-labor">
+        <div class="logo-main">LABOR</div>
+        <div class="logo-sub">HEALTH SUPPLY</div>
+    </div>
+    <div class="top-title">
+        <h1>PAINEL DE PROCESSOS SGQ</h1>
+        <p>Indicadores operacionais em tempo real</p>
+    </div>
+    <div class="top-status">
+        <span class="pill" id="dataAtual">--/--/----</span>
+        <span class="pill" id="horaAtual">--:--:--</span>
+        <span class="pill"><span class="online-dot">●</span>Online</span>
+    </div>
 </header>
 
-<div class="layout">
-
+<div class="main-wrap">
     <aside class="menu">
-        <button class="active" onclick="abrirAba('importacao', this)">📦<br>Inspeção de Importação</button>
-        <button onclick="abrirAba('esfig', this)">⏱<br>Esfigmomanômetro</button>
-        <button onclick="abrirAba('descarte', this)">🗑<br>Descarte</button>
-        <button onclick="abrirAba('amostra', this)">📦<br>Amostra</button>
-        <button onclick="abrirAba('retrabalho', this)">🔄<br>Retrabalho</button>
-        <button onclick="abrirAba('equipamentos', this)">🛠<br>Equipamentos</button>
-        <button onclick="abrirAba('informativo', this)">ℹ️<br>Informativo do Processo</button>
+        <button class="active" onclick="abrirAba('importacao', this)"><span>📦</span>Inspeção<br>Importação</button>
+        <button onclick="abrirAba('esfig', this)"><span>⏱</span>Esfigmomanômetro</button>
+        <button onclick="abrirAba('descarte', this)"><span>🗑</span>Descarte</button>
+        <button onclick="abrirAba('amostra', this)"><span>📦</span>Amostra</button>
+        <button onclick="abrirAba('retrabalho', this)"><span>🔄</span>Retrabalho</button>
+        <button onclick="abrirAba('equipamentos', this)"><span>🛠</span>Equipamentos</button>
+        <button onclick="abrirAba('informativo', this)"><span>ℹ️</span>Informativo</button>
     </aside>
-
     <main class="content" id="conteudo"></main>
-
 </div>
 
 <script>
@@ -334,26 +434,57 @@ let dados = {};
 let graficoAtual = null;
 let senhaDescarteLiberada = false;
 
+const valorFlutuantePlugin = {
+    id:"valorFlutuante",
+    afterDatasetsDraw(chart){
+        const {ctx} = chart;
+        ctx.save();
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+            const meta = chart.getDatasetMeta(datasetIndex);
+            if(meta.hidden) return;
+            meta.data.forEach((element, index) => {
+                const valor = dataset.data[index];
+                if(valor === null || valor === undefined) return;
+                ctx.font = "900 11px Arial";
+                ctx.fillStyle = "#0f1f4d";
+                const texto = dataset._moeda ? moedaCurta(valor) : numero(valor);
+                if(chart.options.indexAxis === "y"){
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText(texto, element.x + 8, element.y);
+                }else{
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "bottom";
+                    const y = element.y - 6;
+                    ctx.fillText(texto, element.x, y);
+                }
+            });
+        });
+        ctx.restore();
+    }
+};
+Chart.register(valorFlutuantePlugin);
+
 fetch("data.json")
-.then(response => response.json())
-.then(json => {
-    dados = json;
-    renderImportacao();
-})
-.catch(() => {
-    dados = {};
-    renderImportacao();
-});
+.then(r => r.json())
+.then(json => { dados = normalizarDados(json); renderImportacao(); })
+.catch(() => { dados = normalizarDados({}); renderImportacao(); });
+
+function normalizarDados(json){
+    if(Array.isArray(json.esfig)){
+        json.esfig = {
+            ultimaAfericao:json.ultimaAfericao || "",
+            proximaAfericao:json.proximaAfericao || "",
+            produtos:json.esfig
+        };
+    }
+    return json;
+}
 
 function abrirAba(aba, botao){
-    document.querySelectorAll(".menu button").forEach(btn => btn.classList.remove("active"));
-    botao.classList.add("active");
-
-    if(graficoAtual){
-        graficoAtual.destroy();
-        graficoAtual = null;
-    }
-
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+    if(botao) botao.classList.add("active");
+    destruirGrafico();
     if(aba === "importacao") renderImportacao();
     if(aba === "esfig") renderEsfig();
     if(aba === "descarte") renderDescarte();
@@ -363,359 +494,153 @@ function abrirAba(aba, botao){
     if(aba === "informativo") renderInformativo();
 }
 
-function moeda(valor){
-    return Number(valor || 0).toLocaleString("pt-BR", {
-        style:"currency",
-        currency:"BRL"
-    });
-}
+function destruirGrafico(){ if(graficoAtual){ graficoAtual.destroy(); graficoAtual = null; } }
+function numero(v){ return Number(v || 0).toLocaleString("pt-BR"); }
+function moeda(v){ return Number(v || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+function moedaCurta(v){ return moeda(v); }
 
-function numero(valor){
-    return Number(valor || 0).toLocaleString("pt-BR");
+function atualizarRelogio(){
+    const agora = new Date();
+    document.getElementById("dataAtual").innerText = agora.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"});
+    document.getElementById("horaAtual").innerText = agora.toLocaleTimeString("pt-BR");
 }
+setInterval(atualizarRelogio,1000); atualizarRelogio();
 
 function renderImportacao(){
-    const imp = dados.importacao || {
-        processosAno:0,
-        totalSku:0,
-        totalLotes:0,
-        laudosEmitidos:0,
-        totalHoras:0,
-        mensal:[],
-        fluxo:[]
-    };
-
+    const imp = dados.importacao || {processosAno:0,totalSku:0,totalLotes:0,laudosEmitidos:0,totalHoras:0,mensal:[],fluxo:[]};
     conteudo.innerHTML = `
-        <div class="page-title">📦 Inspeção de Importação</div>
-
+        <div class="page-title">📦 INSPEÇÃO DE IMPORTAÇÃO</div>
         <section class="cards">
-            <div class="card"><h3>Processos por Ano</h3><strong>${numero(imp.processosAno)}</strong></div>
-            <div class="card"><h3>Total de SKU</h3><strong>${numero(imp.totalSku)}</strong></div>
-            <div class="card"><h3>Total de Lotes</h3><strong>${numero(imp.totalLotes)}</strong></div>
-            <div class="card"><h3>Laudos Emitidos</h3><strong>${numero(imp.laudosEmitidos)}</strong></div>
-            <div class="card"><h3>Total de Horas</h3><strong>${numero(imp.totalHoras)}</strong></div>
+            ${card("📦","Processos por Ano",numero(imp.processosAno),"Quantidade de processos")}
+            ${card("🏷️","Total de SKU",numero(imp.totalSku),"SKUs inspecionados")}
+            ${card("📑","Total de Lotes",numero(imp.totalLotes),"Lotes controlados")}
+            ${card("🧾","Laudos Emitidos",numero(imp.laudosEmitidos),"Registros emitidos")}
+            ${card("⏱","Total de Horas",numero(imp.totalHoras),"Horas da atividade")}
         </section>
-
-        <section class="table-card">
-            <h3>Evolução Mensal da Inspeção de Importação</h3>
-            <canvas id="grafico"></canvas>
-        </section>
-
-        <section class="table-card">
-            <h3>Fluxo Inspeção de Importação</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>PO</th>
-                        <th>Descrição do Produto</th>
-                        <th>Status</th>
-                        <th>Observação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${montarTabelaImportacao(imp.fluxo)}
-                </tbody>
-            </table>
-        </section>
+        <section class="panel"><h3>📊 Evolução Mensal da Inspeção de Importação</h3><div class="chart-box"><canvas id="grafico"></canvas></div></section>
+        <section class="panel"><h3>Fluxo Inspeção de Importação</h3>${tabelaFixa(["PO","Descrição do Produto","Status","Observação"], montarLinhasImportacao(imp.fluxo), false)}</section>
     `;
-
-    graficoAtual = new Chart(document.getElementById("grafico"), {
+    graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"line",
         data:{
             labels:(imp.mensal || []).map(i => i.mes),
             datasets:[
-                {label:"Processos", data:(imp.mensal || []).map(i => i.processos || 0), borderWidth:3},
-                {label:"SKU", data:(imp.mensal || []).map(i => i.sku || 0), borderWidth:3},
-                {label:"Lotes", data:(imp.mensal || []).map(i => i.lotes || 0), borderWidth:3},
-                {label:"Laudos", data:(imp.mensal || []).map(i => i.laudos || 0), borderWidth:3},
-                {label:"Horas", data:(imp.mensal || []).map(i => i.horas || 0), borderWidth:3}
+                dsLine("Processos",(imp.mensal || []).map(i => i.processos || 0),"#1d4eff"),
+                dsLine("SKU",(imp.mensal || []).map(i => i.sku || 0),"#f04dd8"),
+                dsLine("Lotes",(imp.mensal || []).map(i => i.lotes || 0),"#22c55e"),
+                dsLine("Laudos",(imp.mensal || []).map(i => i.laudos || 0),"#8b5cf6"),
+                dsLine("Horas",(imp.mensal || []).map(i => i.horas || 0),"#f97316")
             ]
-        }
+        },
+        options:baseOptions()
     });
-}
-
-function montarTabelaImportacao(lista){
-    if(!lista || lista.length === 0){
-        return `<tr><td colspan="4">Sem dados cadastrados</td></tr>`;
-    }
-
-    return lista.map(item => `
-        <tr>
-            <td>${item.po || "-"}</td>
-            <td>${item.descricao || "-"}</td>
-            <td class="${item.status === "Aprovado" ? "status-ok" : "status-nok"}">${item.status || "-"}</td>
-            <td>${item.observacao || "-"}</td>
-        </tr>
-    `).join("");
 }
 
 function renderEsfig(){
     const esfig = dados.esfig || {};
     const produtos = esfig.produtos || [];
-    const totalAguardando = produtos.reduce((s,i) => s + Number(i.aguardando || 0),0);
-    const totalDesmontado = produtos.reduce((s,i) => s + Number(i.desmontado || 0),0);
-    const totalAferidos = produtos.reduce((s,i) => s + Number(i.aferidos || 0),0);
+    const totalAguardando = produtos.reduce((s,i)=>s+Number(i.aguardando||0),0);
+    const totalDesmontado = produtos.reduce((s,i)=>s+Number(i.desmontado||0),0);
+    const totalAferidos = produtos.reduce((s,i)=>s+Number(i.aferidos||0),0);
     const totalGeral = totalAguardando + totalDesmontado + totalAferidos;
-    const conclusao = totalGeral > 0 ? ((totalAferidos / totalGeral) * 100).toFixed(1) : 0;
-
+    const conclusao = totalGeral ? ((totalAferidos / totalGeral) * 100).toFixed(1) : 0;
     conteudo.innerHTML = `
-        <div class="page-title">⏱ Esfigmomanômetro</div>
-
+        <div class="page-title">⏱ ESFIGMOMANÔMETRO</div>
         <section class="cards">
-            <div class="card"><h3>Total Gasto por GRU</h3><strong>${moeda(esfig.totalGru)}</strong></div>
-            <div class="card"><h3>Última Aferição</h3><strong>${esfig.ultimaAfericao || "-"}</strong></div>
-            <div class="card"><h3>Próxima Aferição</h3><strong>${esfig.proximaAfericao || "-"}</strong></div>
-            <div class="card"><h3>Total de Horas</h3><strong>${numero(esfig.totalHoras)}</strong></div>
+            ${card("💰","Total Gasto por GRU",moeda(esfig.totalGru),"Valor investido")}
+            ${card("📅","Última Aferição",esfig.ultimaAfericao || "-","Data registrada")}
+            ${card("📆","Próxima Aferição",esfig.proximaAfericao || "-","Previsão")}
+            ${card("⏱","Total de Horas",numero(esfig.totalHoras),"Horas da atividade")}
         </section>
-
-        <section class="grid-2">
-            <div class="table-card">
-                <h3>Fluxo Operacional</h3>
+        <section class="grid-3-2">
+            <div class="panel">
+                <h3>⏱ Esfigmomanômetro - Fluxo Operacional</h3>
                 <div class="fluxo">
-                    <div class="fluxo-item">Aguardando<br>${numero(totalAguardando)}</div>
-                    <div class="fluxo-item">Desmontado<br>${numero(totalDesmontado)}</div>
-                    <div class="fluxo-item">Aferido / Montagem<br>${numero(totalAferidos)}</div>
+                    <div class="fluxo-item"><strong>${numero(totalAguardando)}</strong><small>Aguardando Desmontagem</small></div>
+                    <div class="fluxo-arrow">→</div>
+                    <div class="fluxo-item pink"><strong>${numero(totalDesmontado)}</strong><small>Desmontado</small></div>
+                    <div class="fluxo-arrow">→</div>
+                    <div class="fluxo-item green"><strong>${numero(totalAferidos)}</strong><small>Aferidos / Montagem</small></div>
                 </div>
-                <div class="progress-box">
-                    <div class="progress-bar" style="width:${conclusao}%">${conclusao}% Concluído</div>
-                </div>
+                <div class="progress-title">Progresso geral</div>
+                <div class="progress-box"><div class="progress-bar" style="width:${conclusao}%">${conclusao}% concluído</div></div>
+                ${tabelaFixa(["SKU","Descrição","Aguard.","Desm.","Afer.","Status"], montarLinhasEsfig(produtos), false)}
             </div>
-
-            <div class="table-card">
-                <h3>Total Anual por SKU</h3>
-                <canvas id="grafico"></canvas>
-            </div>
-        </section>
-
-        <section class="table-card">
-            <h3>Produtos Esfigmomanômetro</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>SKU</th>
-                        <th>Descrição</th>
-                        <th>Aguardando</th>
-                        <th>Desmontado</th>
-                        <th>Aferidos</th>
-                        <th>Última Aferição</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${produtos.map(i => `
-                        <tr>
-                            <td>${i.sku}</td>
-                            <td>${i.descricao}</td>
-                            <td>${numero(i.aguardando)}</td>
-                            <td>${numero(i.desmontado)}</td>
-                            <td>${numero(i.aferidos)}</td>
-                            <td>${i.ultimaAfericao || "-"}</td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
+            <div class="panel"><h3>Total Anual por SKU</h3><div class="chart-box small"><canvas id="grafico"></canvas></div></div>
         </section>
     `;
-
-    graficoAtual = new Chart(document.getElementById("grafico"), {
+    graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"bar",
-        data:{
-            labels:produtos.map(i => `${i.sku}`),
-            datasets:[{
-                label:"Total Anual",
-                data:produtos.map(i => Number(i.aguardando || 0) + Number(i.desmontado || 0) + Number(i.aferidos || 0)),
-                borderWidth:2
-            }]
-        },
-        options:{
-            plugins:{legend:{display:false}}
-        }
+        data:{ labels:produtos.map(i => i.sku), datasets:[{label:"Total", data:produtos.map(i => Number(i.aguardando||0)+Number(i.desmontado||0)+Number(i.aferidos||0)), backgroundColor:"#1d4eff", borderWidth:0}] },
+        options:{...baseOptions(), plugins:{legend:{display:false}}}
     });
 }
 
 function renderDescarte(){
     if(!senhaDescarteLiberada){
-        conteudo.innerHTML = `
-            <div class="senha-box">
-                <h2>🔒 Área Restrita - Descarte</h2>
-                <p>Digite a senha para acessar os dados de descarte.</p>
-                <input type="password" id="senhaDescarte" placeholder="Digite a senha">
-                <button onclick="validarSenhaDescarte()">Acessar</button>
-                <p id="erroSenha" style="color:red;font-weight:900;"></p>
-            </div>
-        `;
+        conteudo.innerHTML = `<div class="senha-box"><h2>🔒 Área Restrita - Descarte</h2><p>Digite a senha para acessar as informações.</p><input type="password" id="senhaDescarte" placeholder="Digite a senha"><button class="btn" onclick="validarSenhaDescarte()">Acessar</button><p id="erroSenha" style="color:#ef4444;font-weight:900;"></p></div>`;
         return;
     }
-
-    const d = dados.descarte || {origens:[], top10:[]};
-
+    const d = dados.descarte || {origens:[],top10:[]};
+    const top = [...(d.top10 || [])].sort((a,b)=>Number(b.valor||0)-Number(a.valor||0));
     conteudo.innerHTML = `
-        <div class="page-title">🗑 Descarte</div>
-
+        <div class="page-title">🗑 DESCARTE</div>
         <section class="cards">
-            <div class="card"><h3>Valor Atual</h3><strong>${moeda(d.total)}</strong></div>
-            <div class="card"><h3>Último Descarte</h3><strong>${moeda(d.ultimoDescarte)}</strong></div>
+            ${card("🗑","Valor Atual",moeda(d.total),"Financeiro impactado")}
+            ${card("📋","Último Descarte",moeda(d.ultimoDescarte),"Última operação registrada")}
         </section>
-
         <section class="grid-2">
-            <div class="table-card">
-                <h3>Valores por Origem</h3>
-                <canvas id="grafico"></canvas>
-            </div>
-
-            <div class="table-card">
-                <h3>Top 10 Descarte</h3>
-                <div class="scroll-box">
-                    <div class="scroll-content">
-                        ${montarTopDescarte(d.top10)}
-                        ${montarTopDescarte(d.top10)}
-                    </div>
-                </div>
-            </div>
+            <div class="panel"><h3>📊 Descarte por Origem</h3><div class="chart-box tall"><canvas id="grafico"></canvas></div></div>
+            <div class="panel"><h3>Top 10 Descarte</h3>${rankTop3(top)}${tabelaFixa(["SKU","Descrição","Valor"], montarLinhasTopDescarte(top), true)}</div>
         </section>
     `;
-
-    graficoAtual = new Chart(document.getElementById("grafico"), {
+    graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"bar",
-        data:{
-            labels:d.origens.map(i => i.nome),
-            datasets:[{
-                label:"Valor",
-                data:d.origens.map(i => i.valor),
-                borderWidth:2
-            }]
-        },
-        options:{
-            indexAxis:"y"
-        }
+        data:{ labels:(d.origens || []).map(i=>i.nome), datasets:[{label:"Valor", data:(d.origens || []).map(i=>i.valor), backgroundColor:["#1d4eff","#0f3cc9","#6b7cff","#f04dd8","#22c55e","#38bdf8","#8b5cf6"], borderWidth:0, _moeda:true}] },
+        options:{...baseOptions(), indexAxis:"y", plugins:{legend:{display:false}}}
     });
 }
 
 function validarSenhaDescarte(){
     const senha = document.getElementById("senhaDescarte").value;
-
-    if(senha === "SGQ2026"){
-        senhaDescarteLiberada = true;
-        renderDescarte();
-    }else{
-        document.getElementById("erroSenha").innerText = "Senha incorreta.";
-    }
-}
-
-function montarTopDescarte(lista){
-    if(!lista || lista.length === 0){
-        return `<p style="text-align:center;font-weight:900;">Sem dados cadastrados</p>`;
-    }
-
-    return `
-        <table>
-            <thead>
-                <tr>
-                    <th>SKU</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${lista.map(i => `
-                    <tr>
-                        <td>${i.sku}</td>
-                        <td>${i.descricao}</td>
-                        <td>${moeda(i.valor)}</td>
-                    </tr>
-                `).join("")}
-            </tbody>
-        </table>
-    `;
+    if(senha === "SGQ2026"){ senhaDescarteLiberada = true; renderDescarte(); }
+    else document.getElementById("erroSenha").innerText = "Senha incorreta.";
 }
 
 function renderAmostra(){
-    const a = dados.amostras || {mensal:[], top10:[], totalHoras:0};
-    const totalAno = (a.mensal || []).reduce((s,i) => s + Number(i.valor || 0),0);
-
+    const a = dados.amostras || {mensal:[],top10:[],totalHoras:0};
+    const totalAno = (a.mensal || []).reduce((s,i)=>s+Number(i.valor||0),0);
     conteudo.innerHTML = `
-        <div class="page-title">📦 Amostra</div>
-
+        <div class="page-title">📦 AMOSTRA</div>
         <section class="cards">
-            <div class="card"><h3>Amostras Solicitadas no Ano</h3><strong>${numero(totalAno)}</strong></div>
-            <div class="card"><h3>Total de Horas</h3><strong>${numero(a.totalHoras)}</strong></div>
+            ${card("📦","Amostras Solicitadas no Ano",numero(totalAno),"Total acumulado")}
+            ${card("⏱","Total de Horas",numero(a.totalHoras),"Horas destinadas")}
         </section>
-
         <section class="grid-2">
-            <div class="table-card">
-                <h3>Evolução Mensal de Amostras</h3>
-                <canvas id="grafico"></canvas>
-            </div>
-
-            <div class="table-card">
-                <h3>Top 10 Amostras Mais Solicitadas</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>SKU</th>
-                            <th>Descrição</th>
-                            <th>Quantidade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${(a.top10 || []).map(i => `
-                            <tr>
-                                <td>${i.sku}</td>
-                                <td>${i.descricao}</td>
-                                <td>${numero(i.quantidade)}</td>
-                            </tr>
-                        `).join("")}
-                    </tbody>
-                </table>
-            </div>
+            <div class="panel"><h3>📈 Evolução Mensal de Amostras</h3><div class="chart-box"><canvas id="grafico"></canvas></div></div>
+            <div class="panel"><h3>Amostras Mais Solicitadas</h3>${tabelaFixa(["SKU","Descrição","Qtd."], montarLinhasAmostra(a.top10 || []), true)}</div>
         </section>
     `;
-
-    graficoAtual = new Chart(document.getElementById("grafico"), {
+    graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"line",
-        data:{
-            labels:a.mensal.map(i => i.mes),
-            datasets:[{
-                label:"Amostras",
-                data:a.mensal.map(i => i.valor),
-                borderWidth:3,
-                tension:.4
-            }]
-        }
+        data:{ labels:(a.mensal || []).map(i=>i.mes), datasets:[dsLine("Amostras",(a.mensal || []).map(i=>i.valor),"#1d4eff")] },
+        options:baseOptions()
     });
 }
 
 function renderRetrabalho(){
-    const r = dados.retrabalho || {totalAno:0,totalHoras:0,fornecedores:[], tabela:[]};
-
+    const r = dados.retrabalho || {totalAno:0,totalHoras:0,fornecedores:[],tabela:[]};
     conteudo.innerHTML = `
-        <div class="page-title">🔄 Retrabalho</div>
-
+        <div class="page-title">🔄 RETRABALHO</div>
         <section class="cards">
-            <div class="card"><h3>Total de Retrabalho no Ano</h3><strong>${numero(r.totalAno)}</strong></div>
-            <div class="card"><h3>Total de Horas</h3><strong>${numero(r.totalHoras)}</strong></div>
+            ${card("🔄","Total de Retrabalho no Ano",numero(r.totalAno),"Total acumulado")}
+            ${card("⏱","Total de Horas",numero(r.totalHoras),"Horas gastas")}
         </section>
-
         <section class="grid-2">
-            <div class="table-card">
-                <h3>Fornecedor</h3>
-                <select id="filtroFornecedor" onchange="atualizarGraficoRetrabalho()">
-                    ${(r.fornecedores || []).map(f => `<option value="${f.nome}">${f.nome}</option>`).join("")}
-                </select>
-                <canvas id="grafico"></canvas>
-            </div>
-
-            <div class="table-card">
-                <h3>Tabela de Retrabalho</h3>
-                <div class="scroll-box">
-                    <div class="scroll-content">
-                        ${montarTabelaRetrabalho(r.tabela)}
-                        ${montarTabelaRetrabalho(r.tabela)}
-                    </div>
-                </div>
-            </div>
+            <div class="panel"><h3>🏭 Fornecedores</h3><select id="filtroFornecedor" onchange="atualizarGraficoRetrabalho()">${(r.fornecedores || []).map(f=>`<option value="${f.nome}">${f.nome}</option>`).join("")}</select><div class="chart-box"><canvas id="grafico"></canvas></div></div>
+            <div class="panel"><h3>Tabela de Retrabalho</h3>${tabelaFixa(["Motivo","Fabricante","Qtd.","Horas"], montarLinhasRetrabalho(r.tabela || []), true)}</div>
         </section>
     `;
-
     atualizarGraficoRetrabalho();
 }
 
@@ -723,139 +648,60 @@ function atualizarGraficoRetrabalho(){
     const r = dados.retrabalho || {fornecedores:[]};
     const nome = document.getElementById("filtroFornecedor")?.value;
     const fornecedor = (r.fornecedores || []).find(f => f.nome === nome) || {mensal:[]};
-
-    if(graficoAtual){
-        graficoAtual.destroy();
-    }
-
-    graficoAtual = new Chart(document.getElementById("grafico"), {
+    destruirGrafico();
+    graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"bar",
-        data:{
-            labels:(fornecedor.mensal || []).map(i => i.mes),
-            datasets:[{
-                label:"Retrabalho Mensal",
-                data:(fornecedor.mensal || []).map(i => i.quantidade || 0),
-                borderWidth:2
-            }]
-        }
+        data:{ labels:(fornecedor.mensal || []).map(i=>i.mes), datasets:[{label:"Retrabalho", data:(fornecedor.mensal || []).map(i=>i.quantidade || 0), backgroundColor:"#1d4eff", borderWidth:0}] },
+        options:baseOptions()
     });
-}
-
-function montarTabelaRetrabalho(lista){
-    if(!lista || lista.length === 0){
-        return `<p style="text-align:center;font-weight:900;">Sem dados cadastrados</p>`;
-    }
-
-    return `
-        <table>
-            <thead>
-                <tr>
-                    <th>Motivo</th>
-                    <th>Fabricante</th>
-                    <th>Quantidade</th>
-                    <th>Horas</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${lista.map(i => `
-                    <tr>
-                        <td>${i.motivo}</td>
-                        <td>${i.fabricante}</td>
-                        <td>${numero(i.quantidade)}</td>
-                        <td>${numero(i.horas)}</td>
-                    </tr>
-                `).join("")}
-            </tbody>
-        </table>
-    `;
 }
 
 function renderEquipamentos(){
     const lista = dados.equipamentos || [];
-
-    conteudo.innerHTML = `
-        <div class="page-title">🛠 Equipamentos</div>
-
-        <section class="table-card">
-            <h3>Controle de Equipamentos</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Descrição</th>
-                        <th>Quantidade</th>
-                        <th>Observação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${lista.length ? lista.map(i => `
-                        <tr>
-                            <td>${i.produto}</td>
-                            <td>${i.descricao}</td>
-                            <td>${numero(i.quantidade)}</td>
-                            <td>${i.observacao}</td>
-                        </tr>
-                    `).join("") : `<tr><td colspan="4">Sem dados cadastrados</td></tr>`}
-                </tbody>
-            </table>
-        </section>
-    `;
+    conteudo.innerHTML = `<div class="page-title">🛠 EQUIPAMENTOS</div><section class="panel"><h3>Controle de Equipamentos</h3>${tabelaFixa(["Produto","Descrição","Quantidade","Observação"], montarLinhasEquipamentos(lista), false)}</section>`;
 }
 
 function renderInformativo(){
     conteudo.innerHTML = `
-        <div class="page-title">ℹ️ Informativo do Processo</div>
-
+        <div class="page-title">ℹ️ INFORMATIVO DO PROCESSO</div>
         <div class="info-menu">
-            <button onclick="mostrarInfo('importacao')">📦 Importação</button>
-            <button onclick="mostrarInfo('esfig')">⏱ Esfig</button>
-            <button onclick="mostrarInfo('descarte')">🗑 Descarte</button>
-            <button onclick="mostrarInfo('amostra')">📦 Amostra</button>
-            <button onclick="mostrarInfo('retrabalho')">🔄 Retrabalho</button>
-            <button onclick="mostrarInfo('equipamentos')">🛠 Equipamentos</button>
+            <button onclick="mostrarInfo('importacao')">📦 Importação</button><button onclick="mostrarInfo('esfig')">⏱ Esfig</button><button onclick="mostrarInfo('descarte')">🗑 Descarte</button><button onclick="mostrarInfo('amostra')">📦 Amostra</button><button onclick="mostrarInfo('retrabalho')">🔄 Retrabalho</button><button onclick="mostrarInfo('equipamentos')">🛠 Equipamentos</button>
         </div>
-
-        <section class="table-card">
-            <h3 id="infoTitulo">Selecione um processo</h3>
-            <p class="info-text" id="infoTexto">
-                Clique em uma das opções acima para visualizar o informativo do processo.
-            </p>
-        </section>
+        <section class="panel"><h3 id="infoTitulo">Selecione um processo</h3><p class="info-text" id="infoTexto">Clique em uma das opções acima para visualizar o informativo do processo.</p><div class="process-steps" id="infoSteps"></div></section>
     `;
 }
 
 function mostrarInfo(tipo){
     const textos = {
-        importacao:{
-            titulo:"Processo de Inspeção de Importação",
-            texto:"O processo de inspeção de importação acompanha a chegada dos produtos importados, a conferência dos documentos, a verificação dos lotes, a emissão dos laudos e a definição da situação do produto como aprovado ou reprovado. Esse controle garante rastreabilidade, segurança e conformidade antes da disponibilização do produto."
-        },
-        esfig:{
-            titulo:"Processo de Esfigmomanômetro",
-            texto:"O produto chega pela importação. Em seguida, solicitamos a GRU ao Inmetro. Após isso, realizamos a desmontagem, retirando a embalagem de venda e o plástico bolha. Os itens são colocados em bandejas e adicionados ao painel de Esfig para aferição do Inmetro. Depois da aferição, colamos o selo, colocamos novamente no plástico bolha, acondicionamos na embalagem de venda e disponibilizamos o produto para venda."
-        },
-        descarte:{
-            titulo:"Processo de Descarte",
-            texto:"O processo de descarte controla produtos vencidos, avariados, reprovados ou destinados pela empresa. O objetivo é garantir registro, rastreabilidade, justificativa da origem do descarte e controle dos valores envolvidos."
-        },
-        amostra:{
-            titulo:"Processo de Amostra",
-            texto:"O processo de amostra acompanha as solicitações de produtos para envio, análise, apresentação ou validação. O painel permite visualizar a evolução mensal, os produtos mais solicitados e a quantidade total movimentada no ano."
-        },
-        retrabalho:{
-            titulo:"Processo de Retrabalho",
-            texto:"O processo de retrabalho acompanha itens que precisam de correção, reembalagem, ajuste, revisão, identificação ou nova conferência antes da liberação. O controle permite identificar fornecedor, motivo, quantidade retrabalhada e horas gastas."
-        },
-        equipamentos:{
-            titulo:"Processo de Equipamentos",
-            texto:"O controle de equipamentos apresenta os produtos disponíveis, em manutenção, em uso ou em estoque. Esse acompanhamento auxilia na organização dos recursos e na visibilidade da situação atual de cada item."
-        }
+        importacao:{titulo:"Processo de Inspeção de Importação",texto:"O processo acompanha a chegada dos produtos importados, conferência documental, verificação dos lotes, emissão de laudos e definição da situação do produto como aprovado ou reprovado.",steps:["Chegada","Conferência","Inspeção","Laudo","Liberação"]},
+        esfig:{titulo:"Processo de Esfigmomanômetro",texto:"O produto chega pela importação. Solicitamos a GRU ao Inmetro, realizamos a desmontagem, retiramos a embalagem de venda e o plástico bolha, colocamos os itens em bandejas, disponibilizamos ao Inmetro para aferição, colamos o selo, retornamos ao plástico bolha, acondicionamos na embalagem de venda e liberamos para venda.",steps:["Importação","GRU Inmetro","Desmontagem","Bandeja","Aferição","Selo","Montagem","Venda"]},
+        descarte:{titulo:"Processo de Descarte",texto:"Controla produtos vencidos, avariados, reprovados ou destinados pela empresa, garantindo rastreabilidade, justificativa da origem e controle dos valores envolvidos.",steps:["Identificação","Classificação","Aprovação","Registro","Destinação"]},
+        amostra:{titulo:"Processo de Amostra",texto:"Acompanha solicitações de amostras, evolução mensal, produtos mais solicitados, quantidade movimentada e horas aplicadas na atividade.",steps:["Solicitação","Separação","Conferência","Registro","Envio"]},
+        retrabalho:{titulo:"Processo de Retrabalho",texto:"Acompanha itens que precisam de correção, reembalagem, ajuste, revisão, identificação ou nova conferência antes da liberação.",steps:["Identificação","Motivo","Execução","Validação","Liberação"]},
+        equipamentos:{titulo:"Processo de Equipamentos",texto:"Apresenta a situação dos equipamentos disponíveis, em manutenção, em curso ou em estoque, apoiando a gestão dos recursos.",steps:["Cadastro","Controle","Manutenção","Uso","Estoque"]}
     };
-
-    document.getElementById("infoTitulo").innerText = textos[tipo].titulo;
-    document.getElementById("infoTexto").innerText = textos[tipo].texto;
+    const t = textos[tipo];
+    document.getElementById("infoTitulo").innerText = t.titulo;
+    document.getElementById("infoTexto").innerText = t.texto;
+    document.getElementById("infoSteps").innerHTML = t.steps.map((s,i)=>`<div class="step"><span>${i+1}</span><br>${s}</div>`).join("");
 }
-</script>
 
+function card(icon,titulo,valor,sub){ return `<div class="kpi-card"><div class="kpi-icon">${icon}</div><div><h3>${titulo}</h3><strong>${valor}</strong><small>${sub}</small></div></div>`; }
+function dsLine(label,data,color){ return {label,data,borderColor:color,backgroundColor:color + "30",pointBackgroundColor:color,pointRadius:4,borderWidth:3,tension:.35,fill:false}; }
+function baseOptions(){ return {responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,right:34,left:8,bottom:4}},plugins:{legend:{labels:{color:"#0f1f4d",font:{weight:"900"}}}},scales:{x:{ticks:{color:"#0f1f4d",font:{weight:"900",size:10}},grid:{color:"#dce8ff"}},y:{beginAtZero:true,ticks:{color:"#0f1f4d",font:{weight:"900",size:10}},grid:{color:"#dce8ff"}}}}; }
+
+function tabelaFixa(headers, rows, infinito){
+    const body = rows || `<tr><td colspan="${headers.length}">Sem dados cadastrados</td></tr>`;
+    const duplicated = infinito ? body + body : body;
+    return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead></table><div class="table-scroll ${infinito ? "infinite" : ""}"><div class="${infinito ? "scroll-content" : ""}"><table><tbody>${duplicated}</tbody></table></div></div></div>`;
+}
+function montarLinhasImportacao(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.po||"-"}</td><td class="desc">${i.descricao||"-"}</td><td class="${i.status==="Aprovado"?"status-ok":"status-nok"}">${i.status||"-"}</td><td>${i.observacao||"-"}</td></tr>`).join(""); }
+function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku||"-"}</td><td class="desc">${i.descricao||"-"}</td><td>${numero(i.aguardando)}</td><td>${numero(i.desmontado)}</td><td>${numero(i.aferidos)}</td><td class="${Number(i.aferidos||0)>0?"status-ok":""}">${Number(i.aferidos||0)>0?"Aferido":"-"}</td></tr>`).join(""); }
+function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
+function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
+function montarLinhasRetrabalho(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td class="desc">${i.motivo}</td><td>${i.fabricante}</td><td>${numero(i.quantidade)}</td><td>${numero(i.horas)}</td></tr>`).join(""); }
+function montarLinhasEquipamentos(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.produto}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td><td>${i.observacao}</td></tr>`).join(""); }
+function rankTop3(lista){ const top = (lista||[]).slice(0,3); if(!top.length) return ""; return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.descricao}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`; }
+</script>
 </body>
 </html>
