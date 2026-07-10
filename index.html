@@ -507,7 +507,7 @@ const valorFlutuantePlugin = {
             if(meta.hidden) return;
             meta.data.forEach((element, index) => {
                 const valor = dataset.data[index];
-                if(valor === null || valor === undefined) return;
+                if(valor === null || valor === undefined || (dataset._ocultarZero && Number(valor) === 0)) return;
                 ctx.font = "900 11px Arial";
                 ctx.fillStyle = "#0f1f4d";
                 const texto = dataset._moeda
@@ -712,7 +712,7 @@ function renderAmostra(){
             ${card("⏱","Total de Horas",numero(a.totalHoras),"Horas destinadas")}
         </section>
         <section class="grid-2">
-            <div class="panel"><h3>📈 Evolução Mensal de Amostras</h3><div class="chart-box"><canvas id="grafico"></canvas></div></div>
+            <div class="panel"><h3>📈 Evolução Mensal de Amostras e Horas</h3><div class="chart-box tall"><canvas id="grafico"></canvas></div></div>
             <div class="panel"><h3>Amostras Mais Solicitadas</h3>${tabelaFixa(["SKU","Descrição","Qtd."], montarLinhasAmostra(a.top10 || []), true)}</div>
         </section>
     `;
@@ -731,7 +731,7 @@ function renderAmostra(){
             position:"right",
             title:{display:true,text:"Horas",color:"#f04dd8",font:{weight:"bold"}},
             grid:{drawOnChartArea:false},
-            ticks:{color:"#f04dd8"}
+            ticks:{color:"#f04dd8",precision:0}
         },
         x:{
             grid:{display:false},
@@ -742,11 +742,20 @@ function renderAmostra(){
     const datasetAmostras = dsLine("Amostras",(a.mensal || []).map(i=>Number(i.valor || 0)),"#1d4eff");
     datasetAmostras.yAxisID = "y";
 
-    const datasetHoras = dsLine("Horas",(a.mensal || []).map(i=>Number(i.horas || 0)),"#f04dd8");
-    datasetHoras.yAxisID = "y1";
-    datasetHoras._horas = true;
-    datasetHoras.borderDash = [7,4];
-    datasetHoras.pointStyle = "rectRot";
+    const datasetHoras = {
+        type:"bar",
+        label:"Horas",
+        data:(a.mensal || []).map(i=>Number(i.horas || 0)),
+        yAxisID:"y1",
+        backgroundColor:"rgba(240,77,216,.28)",
+        borderColor:"#f04dd8",
+        borderWidth:2,
+        borderRadius:7,
+        maxBarThickness:30,
+        _horas:true,
+        _ocultarZero:true
+    };
+    datasetAmostras._ocultarZero = true;
 
     graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"line",
