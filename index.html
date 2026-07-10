@@ -510,7 +510,11 @@ const valorFlutuantePlugin = {
                 if(valor === null || valor === undefined) return;
                 ctx.font = "900 11px Arial";
                 ctx.fillStyle = "#0f1f4d";
-                const texto = dataset._moeda ? moedaCurta(valor) : numero(valor);
+                const texto = dataset._moeda
+                    ? moedaCurta(valor)
+                    : dataset._horas
+                        ? `${Number(valor || 0).toLocaleString("pt-BR", {minimumFractionDigits:0, maximumFractionDigits:2})} h`
+                        : numero(valor);
                 if(chart.options.indexAxis === "y"){
                     ctx.textAlign = "left";
                     ctx.textBaseline = "middle";
@@ -712,10 +716,45 @@ function renderAmostra(){
             <div class="panel"><h3>Amostras Mais Solicitadas</h3>${tabelaFixa(["SKU","Descrição","Qtd."], montarLinhasAmostra(a.top10 || []), true)}</div>
         </section>
     `;
+    const opcoesAmostra = baseOptions();
+    opcoesAmostra.interaction = {mode:"index", intersect:false};
+    opcoesAmostra.scales = {
+        y:{
+            beginAtZero:true,
+            position:"left",
+            title:{display:true,text:"Quantidade de amostras",color:"#0f1f4d",font:{weight:"bold"}},
+            grid:{color:"rgba(15,31,77,.08)"},
+            ticks:{color:"#5c6c96"}
+        },
+        y1:{
+            beginAtZero:true,
+            position:"right",
+            title:{display:true,text:"Horas",color:"#f04dd8",font:{weight:"bold"}},
+            grid:{drawOnChartArea:false},
+            ticks:{color:"#f04dd8"}
+        },
+        x:{
+            grid:{display:false},
+            ticks:{color:"#5c6c96"}
+        }
+    };
+
+    const datasetAmostras = dsLine("Amostras",(a.mensal || []).map(i=>Number(i.valor || 0)),"#1d4eff");
+    datasetAmostras.yAxisID = "y";
+
+    const datasetHoras = dsLine("Horas",(a.mensal || []).map(i=>Number(i.horas || 0)),"#f04dd8");
+    datasetHoras.yAxisID = "y1";
+    datasetHoras._horas = true;
+    datasetHoras.borderDash = [7,4];
+    datasetHoras.pointStyle = "rectRot";
+
     graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"line",
-        data:{ labels:(a.mensal || []).map(i=>i.mes), datasets:[dsLine("Amostras",(a.mensal || []).map(i=>i.valor),"#1d4eff")] },
-        options:baseOptions()
+        data:{
+            labels:(a.mensal || []).map(i=>i.mes),
+            datasets:[datasetAmostras,datasetHoras]
+        },
+        options:opcoesAmostra
     });
 }
 
