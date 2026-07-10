@@ -658,7 +658,7 @@ function renderEsfig(){
             labels:produtos.map(i => `${i.sku} - ${i.descricao || ""}`),
             datasets:[{
                 label:"Total Anual",
-               data: produtos.map(produto => Number(produto.totalAnualSku || 0))
+                data:produtos.map(i => Number(i.aguardando||0)+Number(i.desmontado||0)+Number(i.aferidos||0)),
                 backgroundColor:["#1d4eff","#0f3cc9","#6b7cff","#f04dd8","#22c55e","#38bdf8","#8b5cf6"],
                 borderWidth:0
             }]
