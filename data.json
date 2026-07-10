@@ -1,1 +1,89 @@
+{
+  "descarte": {
+    "total":662803.52,
+    "ultimoDescarte":614772.08,
+    "origens": [
+      {"nome": "Avaria de Importação", "valor": 11899.70},
+      {"nome": "Avaria estoque", "valor": 2819.62},
+      {"nome": "Devolução avaria", "valor": 3445.67},
+      {"nome": "Desvio de Qualidade", "valor": 146716.68},
+      {"nome": "Vencido", "valor": 67408.00},
+      {"nome": "Avaria Nacional", "valor": 50.77},
+      {"nome": "Destinado pela Empresa", "valor": 407080.35}
 
+
+],
+
+
+    "top10": [
+
+      {"sku": "518", "descricao": "PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24", "valor": 147881.75},
+      {"sku": "516", "descricao": "PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24", "valor": 127851.84},
+      {"sku": "5390", "descricao": "PT-FIO AGULHADO SINTETIC ABS(PGA)-2040 C/24", "valor": 90047.17},
+      {"sku": "5388", "descricao": "PT-SCALP VACUO SEG C/ADAP 25G 3/4X7 C/100", "valor": 35599.85},
+      {"sku": "725", "descricao": "PT-SCALP VACUO SEG C/ADAP 21G 3/4X7 C/100", "valor": 34953.89},
+      {"sku": "5389", "descricao": "PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR", "valor": 31659.06},
+      {"sku": "519", "descricao": "PT-SCALP VACUO SEG C/ADAP 23G 3/4X7 C/100", "valor": 28494.24},
+      {"sku": "727", "descricao": "PT-FIO AGULHADO SINTETIC ABS.(PGA)-035 C/24", "valor": 25606.69},
+      {"sku": "726", "descricao": "PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR", "valor": 23562.84},
+      {"sku": "Outros", "descricao": "Outros", "valor": 93383.57}
+
+    ]
+  },
+
+"ultimaAfericao":"08/07/2026",
+"proximaAfericao": "Aguardando",
+
+
+"esfig": [
+
+  {"sku":"267",  "descricao": "ESFIGM VELCRO",   "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" },
+  {"sku":"268",  "descricao": "ESFIGM METAL",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" },
+  {"sku":"558",  "descricao": "ESFIGM KIT VELCRO",  "aguardando":0,   "desmontado": 100,    "aferidos": 3500,       "ultimaAfericao": "02/07/2026" },
+  {"sku":"560",  "descricao": "ESFIGM KIT METAL ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" },
+  {"sku":"308",  "descricao": "ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 1000,       "ultimaAfericao": "02/07/2026" },
+  {"sku":"721",  "descricao": "ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 0,    "aferidos": 10,       "ultimaAfericao": "" },
+  {"sku":"722",  "descricao": "ESFIG PRETO METAL",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" },
+  {"sku":"719",  "descricao": "ESFIG RED VELCRO ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" },
+  {"sku":"720",  "descricao": "ESFIG RED METAL ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "" }
+
+
+  ],
+
+  "amostras": {
+    "mensal": [
+
+      {"mes": "Janeiro", "valor": 26},
+      {"mes": "Fevereiro", "valor": 25},
+      {"mes": "Março", "valor": 33},
+      {"mes": "Abril", "valor": 30},
+      {"mes": "Maio", "valor": 30},
+      {"mes": "Junho", "valor": 22},
+      {"mes": "Julho", "valor": 9},
+      {"mes": "Agosto", "valor": 0},
+      {"mes": "Setembro", "valor": 0},
+      {"mes": "Outubro", "valor": 0},
+      {"mes": "Novembro", "valor": 0},
+      {"mes": "Dezembro", "valor": 0}
+
+    ],
+
+    "top10": [
+
+
+      {"sku": "AM3942",  "descricao": "CATETER INTRA PUR SEG 24G (PM) ", "quantidade":128  }, 
+      {"sku": "AM5468",  "descricao": "ELETRODO (ECG) SOLIDOR - 50 UN ", "quantidade":124  }, 
+      {"sku": "AM4259",  "descricao": "SCALP INFUSAO SEG 25G PGC (ML) ", "quantidade":116  }, 
+      {"sku": "AM3932",  "descricao": "LAMINULA 24X50 0 (YA) ", "quantidade":100  }, 
+      {"sku": "AM3931",  "descricao": "LAMINULA 24X32 0 (YA) ", "quantidade":100  }, 
+      {"sku": "AM3936",  "descricao": "LAMINULA 24X40 0 (YA) ", "quantidade":100  }, 
+      {"sku": "AM3938",  "descricao": "CATETER INTRA PUR SEG 16G (PM) ", "quantidade":89  }, 
+      {"sku": "AM3941",  "descricao": "CATETER INTRA PUR SEG 22G (PM) ", "quantidade":88  }, 
+      {"sku": "AM50039",  "descricao": "AGULHA A VACUO 25X8 (SW) ", "quantidade":83  }, 
+      {"sku": "AM4258",  "descricao": "SCALP INFUSAO SEG 23G (ML) ", "quantidade":80  }
+
+
+
+    ]
+  }
+}
