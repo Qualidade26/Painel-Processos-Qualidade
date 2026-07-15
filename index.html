@@ -159,8 +159,8 @@ body{
     padding:8px 4px;
 }
 
-.main-wrap.menu-collapsed .menu button .label{
-    display:none;
+.main-wrap.menu-collapsed .menu button{
+    min-height:45px;
 }
 
 .main-wrap.menu-collapsed .menu button .ico{
@@ -242,7 +242,7 @@ body{
 .kpi-card h3{
     margin:0;
     color:var(--primary);
-    font-size:11px;
+    font-size:13px;
     font-weight:900;
     letter-spacing:.3px;
     text-transform:uppercase;
@@ -251,7 +251,7 @@ body{
 .kpi-card strong{
     display:block;
     color:var(--text);
-    font-size:22px;
+    font-size:28px;
     margin-top:2px;
     font-weight:900;
 }
@@ -298,7 +298,7 @@ body{
 
 .chart-box{height:300px;position:relative;}
 .chart-box.small{height:230px;}
-.chart-box.esfig-large{height:430px;}
+.chart-box.esfig-large{height:520px;}
 .chart-box.tall{height:360px;}
 
 .table-wrap{
@@ -342,7 +342,7 @@ table{
     width:100%;
     border-collapse:collapse;
     table-layout:fixed;
-    font-size:11px;
+    font-size:14px;
 }
 
 thead th{
@@ -351,7 +351,7 @@ thead th{
     z-index:5;
     background:#e8f0ff;
     color:var(--primary);
-    padding:8px 6px;
+    padding:10px 8px;
     text-align:center;
     font-weight:900;
     border-bottom:1px solid var(--line);
@@ -539,6 +539,19 @@ fetch("data.json")
 .then(r => r.json())
 .then(json => { dados = normalizarDados(json); renderImportacao(); })
 .catch(() => { dados = normalizarDados({}); renderImportacao(); });
+  setInterval(()=>{
+    fetch("data.json")
+    .then(r=>r.json())
+    .then(json=>{
+        dados = normalizarDados(json);
+
+        const abaAtiva = document.querySelector(".menu button.active");
+
+        if(abaAtiva){
+            abaAtiva.click();
+        }
+    });
+},120000);
 
 function normalizarDados(json){
     if(Array.isArray(json.esfig)){
@@ -637,7 +650,7 @@ function renderEsfig(){
     conteudo.innerHTML = `
         <div class="page-title">⏱ ESFIGMOMANÔMETRO</div>
         <section class="cards">
-            ${card("💰","Total Gasto por GRU",moeda(esfig.totalGru),"Valor investido")}
+            ${card("💰","Total Gasto por GRU",moeda(esfig.totalGruInmetro),"Valor pago ao Inmetro")}
             ${card("📅","Última Aferição",esfig.ultimaAfericao || "-","Data registrada")}
             ${card("📆","Próxima Aferição",esfig.proximaAfericao || "-","Previsão")}
             ${card("⏱","Total de Horas",numero(esfig.totalHoras),"Horas da atividade")}
@@ -662,8 +675,8 @@ function renderEsfig(){
     graficoAtual = new Chart(document.getElementById("grafico"),{
         type:"bar",
         data:{
-            labels:produtos.map(i => `${i.sku} - ${i.descricao || ""}`),
-            datasets:[{
+    labels:produtos.map(i => `${i.sku}`),
+    datasets:[{
                 label:"Total Anual",
                 data:produtos.map(i => Number(i.totalAnualSku || 0)),
                 backgroundColor:["#1d4eff","#0f3cc9","#6b7cff","#f04dd8","#22c55e","#38bdf8","#8b5cf6"],
@@ -767,32 +780,188 @@ function renderAmostra(){
 }
 
 function renderRetrabalho(){
-    const r = dados.retrabalho || {totalAno:0,totalHoras:0,fornecedores:[],tabela:[]};
+
+    const r = dados.retrabalho || {
+        fabricantes:[]
+    };
+
+
+    const fabricantes = (r.fabricantes || [])
+    .filter(f => Number(f["Quantidade Retrabalhada"] || 0) > 0);
+
+
     conteudo.innerHTML = `
-        <div class="page-title">🔄 RETRABALHO</div>
-        <section class="cards">
-            ${card("🔄","Total de Retrabalho no Ano",numero(r.totalAno),"Total acumulado")}
-            ${card("⏱","Total de Horas",numero(r.totalHoras),"Horas gastas")}
-        </section>
-        <section class="grid-2">
-            <div class="panel"><h3>🏭 Fornecedores</h3><select id="filtroFornecedor" onchange="atualizarGraficoRetrabalho()">${(r.fornecedores || []).map(f=>`<option value="${f.nome}">${f.nome}</option>`).join("")}</select><div class="chart-box"><canvas id="grafico"></canvas></div></div>
-            <div class="panel"><h3>Tabela de Retrabalho</h3>${tabelaFixa(["Motivo","Fabricante","Qtd.","Horas"], montarLinhasRetrabalho(r.tabela || []), true)}</div>
-        </section>
+
+    <div class="page-title">🔄 RETRABALHO</div>
+
+
+    <section class="cards">
+
+        ${card(
+        "🔄",
+        "Total Retrabalhado",
+        numero(r.quantidadeRetrabalhada),
+        "Quantidade de produtos"
+        )}
+
+        ${card(
+        "⏱",
+        "Total de Horas",
+        numero(r.totaldeHoras),
+        "Horas aplicadas"
+        )}
+
+       ${card(
+"📋",
+"Processos",
+numero(r.totaldeRetrabalhoNoAno),
+"Ocorrências registradas"
+)}
+
+    </section>
+
+
+    <section class="grid-2">
+
+
+    <div class="panel">
+
+    <h3>🏭 Retrabalho por Fabricante</h3>
+
+
+    <input 
+    id="buscaFabricante"
+    type="text"
+    placeholder="🔎 Pesquisar fabricante..."
+    onkeyup="filtrarFabricante()"
+    style="
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #b8d1ff;
+    font-weight:900;
+    margin-bottom:8px;
+    ">
+
+
+    <select 
+    id="filtroFabricante"
+  onchange="atualizarGraficoRetrabalho()"
+oninput="atualizarGraficoRetrabalho()"
+
+    ${
+    fabricantes.map(f=>
+
+    `<option value="${f.Fabricante}">
+    ${f.Fabricante}
+    </option>`
+
+    ).join("")
+    }
+
+    </select>
+
+
+    <div class="chart-box">
+    <canvas id="grafico"></canvas>
+    </div>
+
+
+    </div>
+
+
+
+    <div class="panel">
+
+    <h3>📋 Detalhamento Retrabalho</h3>
+
+    ${
+    tabelaFixa(
+    [
+    "Fabricante",
+    "Quantidade",
+    "Horas",
+    "Motivo"
+    ],
+
+    montarLinhasRetrabalho(
+    fabricantes
+    ),
+
+    true
+    )
+
+    }
+
+    </div>
+
+
+    </section>
+
     `;
+
+
     atualizarGraficoRetrabalho();
+
+}
+function atualizarGraficoRetrabalho(){
+
+    const r = dados.retrabalho || {fabricantes:[]};
+
+    const select = document.getElementById("filtroFabricante");
+
+    if(!select) return;
+
+    const nome = select.value;
+
+    const fabricante = (r.fabricantes || [])
+    .find(
+        f => String(f.Fabricante).trim() === String(nome).trim()
+    );
+
+    if(!fabricante) return;
+
+    const canvas = document.getElementById("grafico");
+
+    if(!canvas) return;
+
+    destruirGrafico();
+
+    graficoAtual = new Chart(
+        canvas,
+        {
+            type:"bar",
+            data:{
+                labels:[
+                    "Quantidade Retrabalhada",
+                    "Horas"
+                ],
+                datasets:[{
+                    label:fabricante.Fabricante,
+                    data:[
+                        Number(fabricante["Quantidade Retrabalhada"] || 0),
+                        Number(fabricante["Horas"] || 0)
+                    ],
+                    backgroundColor:[
+                        "#1d4eff",
+                        "#f04dd8"
+                    ],
+                    borderWidth:0
+                }]
+            },
+            options:{
+                ...baseOptions(),
+                plugins:{
+                    legend:{
+                        display:true
+                    }
+                }
+            }
+        }
+    );
+
 }
 
-function atualizarGraficoRetrabalho(){
-    const r = dados.retrabalho || {fornecedores:[]};
-    const nome = document.getElementById("filtroFornecedor")?.value;
-    const fornecedor = (r.fornecedores || []).find(f => f.nome === nome) || {mensal:[]};
-    destruirGrafico();
-    graficoAtual = new Chart(document.getElementById("grafico"),{
-        type:"bar",
-        data:{ labels:(fornecedor.mensal || []).map(i=>i.mes), datasets:[{label:"Retrabalho", data:(fornecedor.mensal || []).map(i=>i.quantidade || 0), backgroundColor:"#1d4eff", borderWidth:0}] },
-        options:baseOptions()
-    });
-}
 
 function renderEquipamentos(){
     const lista = dados.equipamentos || [];
@@ -837,7 +1006,68 @@ function montarLinhasImportacao(lista){ if(!lista || !lista.length) return ""; r
 function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku||"-"}</td><td class="desc">${i.descricao||"-"}</td><td>${numero(i.aguardando)}</td><td>${numero(i.desmontado)}</td><td>${numero(i.aferidos)}</td><td class="${Number(i.aferidos||0)>0?"status-ok":""}">${Number(i.aferidos||0)>0?"Aferido":"-"}</td></tr>`).join(""); }
 function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
 function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
-function montarLinhasRetrabalho(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td class="desc">${i.motivo}</td><td>${i.fabricante}</td><td>${numero(i.quantidade)}</td><td>${numero(i.horas)}</td></tr>`).join(""); }
+
+    function montarLinhasRetrabalho(lista){
+
+if(!lista || !lista.length) return "";
+
+
+return lista.map(i=>`
+
+<tr>
+
+<td>${i.Fabricante}</td>
+
+<td>
+${numero(i["Quantidade Retrabalhada"])}
+</td>
+
+<td>
+${numero(i.Horas)}
+</td>
+
+<td class="desc">
+${i.Motivo || "-"}
+</td>
+
+
+</tr>
+
+`).join("");
+
+}
+function filtrarFabricante(){
+
+const texto =
+document
+.getElementById("buscaFabricante")
+.value
+.toLowerCase();
+
+const select =
+document.getElementById("filtroFabricante");
+
+let primeiro = null;
+
+Array.from(select.options)
+.forEach(op=>{
+
+const visivel = op.text.toLowerCase().includes(texto);
+
+op.style.display = visivel ? "block" : "none";
+
+if(visivel && !primeiro){
+    primeiro = op;
+}
+
+});
+
+if(primeiro){
+    select.value = primeiro.value;
+    atualizarGraficoRetrabalho();
+}
+
+}
 function montarLinhasEquipamentos(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.produto}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td><td>${i.observacao}</td></tr>`).join(""); }
 function rankTop3(lista){ const top = (lista||[]).slice(0,3); if(!top.length) return ""; return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.descricao}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`; }
 function rankTop3Origem(lista){
