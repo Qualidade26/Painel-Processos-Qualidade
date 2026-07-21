@@ -32,7 +32,7 @@
   },
 "esfig": {
 "totalHoras":818,
-"totalGru":146951.87,
+"totalGruInmetro":146951.87,
 "ultimaAfericao":"08/07/2026",
 "proximaAfericao":"Aguardando",
 "produtos": [
@@ -88,25 +88,25 @@
 },
 
 "importacao": {
-"processosAno"103,
+"processosAno":103,
 "totalSku":311,
 "totalLotes":807,
 "laudosEmitidos":586,
 "totalHoras"368,
 
 "mensal": [
-      {"mes": "Janeiro","processos":13,"lotes":95,"Laudos":95,"Total de Horas":54.00  }, 
-      {"mes": "Fevereiro","processos":15,"lotes":99,"Laudos":104,"Total de Horas":86.00  }, 
-      {"mes": "Março","processos":15,"lotes":124,"Laudos":132,"Total de Horas":70.00  }, 
-      {"mes": "Abril","processos":20,"lotes":180,"Laudos":180,"Total de Horas":91.00  }, 
-      {"mes": "Maio","processos":20,"lotes":140,"Laudos":55,"Total de Horas":57.00  }, 
-      {"mes": "Junho","processos":9,"lotes":48,"Laudos":9,"Total de Horas":5.17  }, 
-      {"mes": "Julho","processos":11,"lotes":121,"Laudos":11,"Total de Horas":4.83  }, 
-      {"mes": "Agosto","processos":0,"lotes":0,"Laudos":0,"Total de Horas":0.00  }, 
-      {"mes": "Setembro","processos":0,"lotes":0,"Laudos":0,"Total de Horas":0.00  }, 
-      {"mes": "Outubro","processos":0,"lotes":0,"Laudos":0,"Total de Horas":0.00  }, 
-      {"mes": "Novembro","processos":0,"lotes":0,"Laudos":0,"Total de Horas":0.00  }, 
-      {"mes": "Dezembro","processos":0,"lotes":0,"Laudos":0,"Total de Horas":0.00  }
+      {"mes": "Janeiro","processos":13,"lotes":95,"laudos":95,"totalHoras":54.00  }, 
+      {"mes": "Fevereiro","processos":15,"lotes":99,"laudos":104,"totalHoras":86.00  }, 
+      {"mes": "Março","processos":15,"lotes":124,"laudos":132,"totalHoras":70.00  }, 
+      {"mes": "Abril","processos":20,"lotes":180,"laudos":180,"totalHoras":91.00  }, 
+      {"mes": "Maio","processos":20,"lotes":140,"laudos":55,"totalHoras":57.00  }, 
+      {"mes": "Junho","processos":9,"lotes":48,"laudos":9,"totalHoras":5.17  }, 
+      {"mes": "Julho","processos":11,"lotes":121,"laudos":11,"totalHoras":4.83  }, 
+      {"mes": "Agosto","processos":0,"lotes":0,"laudos":0,"totalHoras":0.00  }, 
+      {"mes": "Setembro","processos":0,"lotes":0,"laudos":0,"totalHoras":0.00  }, 
+      {"mes": "Outubro","processos":0,"lotes":0,"laudos":0,"totalHoras":0.00  }, 
+      {"mes": "Novembro","processos":0,"lotes":0,"laudos":0,"totalHoras":0.00  }, 
+      {"mes": "Dezembro","processos":0,"lotes":0,"laudos":0,"totalHoras":0.00  }
 
 ]
 },
