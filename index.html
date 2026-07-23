@@ -968,11 +968,11 @@ function atualizarGraficoRetrabalho(){
         canvas,
         {
             type:"bar",
-            data:{
-                labels:[
-                    "Quantidade Retrabalhada",
-                    "Horas"
-                ],
+      data:[
+    quantidade,
+    horas
+],
+backgroundColor:[
                 datasets:[{
                     label:fabricante.fabricante,
       data:[
@@ -986,7 +986,7 @@ function atualizarGraficoRetrabalho(){
         fabricante["fabricante.horas"] ??
         0
     )
-]
+],
                     backgroundColor:[
                         "#1d4eff",
                         "#f04dd8"
