@@ -92,7 +92,7 @@
 "totalSku":318,
 "totalLotes":870,
 "laudosEmitidos":588,
-"totalHoras"391.40,
+"totalHoras":391.40,
 
 "mensal": [
       {"mes": "Janeiro","processos":13,"lotes":95,"laudos":95,"totalHoras":54.00  }, 
@@ -166,3 +166,4 @@
 
       ]
   }
+}
