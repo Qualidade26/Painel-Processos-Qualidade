@@ -653,6 +653,7 @@ function renderImportacao(){
             labels:(imp.mensal || []).map(i => i.mes),
             datasets:[
                 dsLine("Processos",(imp.mensal || []).map(i => i.processos || 0),"#1d4eff"),
+                dsLine("SKU",(imp.mensal || []).map(i => i.sku || 0),"#f04dd8"),
                 dsLine("Lotes",(imp.mensal || []).map(i => i.lotes || 0),"#22c55e"),
                 dsLine("Laudos",(imp.mensal || []).map(i => i.laudos || 0),"#8b5cf6"),
                 dsLine("Horas",(imp.mensal || []).map(i => i.horas || 0),"#f97316")
@@ -967,34 +968,31 @@ function atualizarGraficoRetrabalho(){
         canvas,
         {
             type:"bar",
+            data:{
+                labels:[
+                    "Quantidade Retrabalhada",
+                    "Horas"
+                ],
+                datasets:[{
+                    label:fabricante.fabricante,
       data:[
-    quantidade,
-    horas
-],
-backgroundColor:[
-    datasets:[{
-    label:fabricante.fabricante,
-
-    data:[
-        Number(
-            fabricante.quantidade ??
-            fabricante["fabricante.quantidade"] ??
-            0
-        ),
-        Number(
-            fabricante.horas ??
-            fabricante["fabricante.horas"] ??
-            0
-        )
-    ],
-
-    backgroundColor:[
-        "#1d4eff",
-        "#f04dd8"
-    ],
-
-    borderWidth:0
-}]
+    Number(
+        fabricante.quantidade ??
+        fabricante["fabricante.quantidade"] ??
+        0
+    ),
+    Number(
+        fabricante.horas ??
+        fabricante["fabricante.horas"] ??
+        0
+    )
+]
+                    backgroundColor:[
+                        "#1d4eff",
+                        "#f04dd8"
+                    ],
+                    borderWidth:0
+                }]
             },
             options:{
                 ...baseOptions(),
