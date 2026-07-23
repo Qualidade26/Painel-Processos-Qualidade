@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Painel de Processos SGQ</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3" defer></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-
 :root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
@@ -31,569 +26,667 @@
     --cyan:#38bdf8;
 }
 
-
-*{
-    box-sizing:border-box;
-}
-
+*{box-sizing:border-box;}
 
 body{
-
     margin:0;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+    font-family:Arial, Helvetica, sans-serif;
     background:var(--bg);
-
     color:var(--text);
-
     overflow-x:hidden;
-
 }
-
-
-/* ===========================
-   TOPO DO PAINEL
-=========================== */
-
 
 .topbar{
-
     height:72px;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--top1),
-        var(--top2)
-    );
-
+    background:linear-gradient(90deg,var(--top1),var(--top2));
     color:#fff;
-
     display:grid;
-
-    grid-template-columns:
-    260px
-    1fr
-    310px;
-
+    grid-template-columns:260px 1fr 310px;
     align-items:center;
-
     padding:0 18px;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.18);
-
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
 }
-
-
 
 .logo-labor{
-
-    border-right:
-    1px solid rgba(255,255,255,.35);
-
+    border-right:1px solid rgba(255,255,255,.35);
     height:55px;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
-
     line-height:1;
-
 }
-
-
 
 .logo-main{
-
     font-size:34px;
-
     font-weight:900;
-
     letter-spacing:5px;
-
 }
-
-
 
 .logo-sub{
-
     font-size:10px;
-
     font-weight:900;
-
     letter-spacing:5px;
-
     margin-top:6px;
-
 }
 
-
-
-.top-title{
-
-    text-align:center;
-
-}
-
-
-
+.top-title{text-align:center;}
 .top-title h1{
-
     margin:0;
-
     font-size:27px;
-
     letter-spacing:.5px;
-
     font-weight:900;
-
 }
-
-
-
 .top-title p{
-
     margin:6px 0 0;
-
     font-size:12px;
-
     font-weight:900;
-
 }
-
-
 
 .top-status{
-
     display:flex;
-
     justify-content:flex-end;
-
     align-items:center;
-
     gap:8px;
-
     font-size:11px;
-
     font-weight:900;
-
 }
-
 
 .pill{
-
-    background:
-    rgba(255,255,255,.16);
-
-    border:
-    1px solid rgba(255,255,255,.25);
-
-    padding:
-    9px 12px;
-
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25);
+    padding:9px 12px;
     border-radius:10px;
-
+    box-shadow:inset 0 0 12px rgba(255,255,255,.08);
     min-width:116px;
-
     height:36px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     white-space:nowrap;
-
+    text-align:center;
 }
-
-
-
-.data-pill{
-    min-width:132px;
-}
-
-
-.time-pill{
-    min-width:116px;
-}
-
-
-.online-dot{
-
-    color:#27ff6f;
-
-    margin-right:4px;
-
-}
-
-
-
-/* ===========================
-   ÁREA PRINCIPAL
-=========================== */
-
+.data-pill{min-width:132px;}
+.time-pill{min-width:116px;}
+.online-dot{color:#27ff6f;margin-right:4px;}
 
 .main-wrap{
-
-    height:
-    calc(100vh - 72px);
-
+    height:calc(100vh - 72px);
     display:grid;
-
-    grid-template-columns:
-    172px
-    1fr;
-
+    grid-template-columns:172px 1fr;
     gap:10px;
-
     padding:10px;
-
-    transition:
-    grid-template-columns .25s ease;
-
+    transition:grid-template-columns .25s ease;
 }
-
-
 
 .main-wrap.menu-collapsed{
-
-    grid-template-columns:
-    68px
-    1fr;
-
+    grid-template-columns:68px 1fr;
 }
-
-
-
-/* ===========================
-   MENU
-=========================== */
-
 
 .menu{
-
-    background:
-    rgba(248,251,255,.92);
-
-    border:
-    1px solid var(--line);
-
+    background:rgba(248,251,255,.92);
+    border:1px solid var(--line);
     border-radius:12px;
-
     padding:10px;
-
-    box-shadow:
-    0 4px 12px rgba(0,0,0,.06);
-
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
     overflow:auto;
-
+    transition:.25s ease;
 }
-
-
 
 .toggle-menu{
-
     width:100%;
-
     height:34px;
-
     border:none;
-
-    background:
-    linear-gradient(
-        90deg,
-        var(--top1),
-        var(--top2)
-    );
-
+    background:linear-gradient(90deg,var(--top1),var(--top2));
     color:#fff;
-
     border-radius:10px;
-
     font-size:18px;
-
     font-weight:900;
-
     cursor:pointer;
-
     margin-bottom:10px;
-
 }
 
+.main-wrap.menu-collapsed .menu{
+    padding:8px;
+}
 
-/* Mantido restante do CSS original sem alteração */
+.main-wrap.menu-collapsed .toggle-menu{
+    height:38px;
+    margin-bottom:8px;
+}
+
+.main-wrap.menu-collapsed .menu button{
+    min-height:50px;
+    padding:8px 4px;
+}
+
+.main-wrap.menu-collapsed .menu button{
+    min-height:45px;
+}
+
+.main-wrap.menu-collapsed .menu button .ico{
+    margin-bottom:0;
+    font-size:22px;
+}
+
+.menu button{
+    width:100%;
+    min-height:58px;
+    border:1px solid var(--line2);
+    background:linear-gradient(180deg,#fff,var(--card2));
+    color:var(--text);
+    margin-bottom:8px;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    text-align:center;
+    transition:.2s ease;
+    line-height:1.2;
+}
+
+.menu button .ico{font-size:25px;display:block;margin-bottom:4px;}
+.menu button .label{display:block;}
+.menu button:hover,.menu button.active{
+    background:linear-gradient(90deg,var(--top1),var(--top2));
+    color:white;
+    transform:translateY(-1px);
+    box-shadow:0 6px 12px rgba(29,78,255,.25);
+}
+
+.content{
+    overflow:auto;
+    padding-right:2px;
+}
+
+.page-title{
+    background:var(--card);
+    color:var(--primary);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:9px;
+    text-align:center;
+    font-weight:900;
+    font-size:17px;
+    margin-bottom:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.kpi-card{
+    background:linear-gradient(180deg,#fff,var(--card2));
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    min-height:72px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+    display:grid;
+    grid-template-columns:48px 1fr;
+    align-items:center;
+    gap:10px;
+}
+
+.kpi-icon{
+    width:42px;height:42px;border-radius:12px;
+    background:#e8f0ff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;
+    border:1px solid var(--line2);
+}
+
+.kpi-card h3{
+    margin:0;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.3px;
+    text-transform:uppercase;
+}
+
+.kpi-card strong{
+    display:block;
+    color:var(--text);
+    font-size:28px;
+    margin-top:2px;
+    font-weight:900;
+}
+
+.kpi-card small{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    margin-top:2px;
+}
+
+.grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.grid-3-2{
+    display:grid;
+    grid-template-columns:1.35fr .9fr;
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.panel{
+    background:rgba(248,251,255,.95);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+    min-height:120px;
+}
+
+.panel h3{
+    margin:0 0 8px;
+    text-align:center;
+    color:var(--primary);
+    font-size:14px;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+.chart-box{height:300px;position:relative;}
+.chart-box.small{height:230px;}
+.chart-box.esfig-large{height:520px;}
+.chart-box.tall{height:360px;}
+
+.table-wrap{
+    border:1px solid var(--line2);
+    border-radius:10px;
+    overflow:hidden;
+    background:white;
+}
+
+.table-scroll{
+    max-height:260px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    scrollbar-width:thin;
+}
+
+.table-scroll.infinite{
+    overflow-y:auto;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
+
+.scroll-content{
+    animation:scrollVertical 22s linear infinite;
+}
+
+.table-scroll.infinite:hover .scroll-content{
+    animation-play-state:paused;
+}
+
+.table-scroll.infinite:hover{
+    cursor:ns-resize;
+}
+
+@keyframes scrollVertical{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-50%);}
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    font-size:14px;
+}
+
+thead th{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:#e8f0ff;
+    color:var(--primary);
+    padding:10px 8px;
+    text-align:center;
+    font-weight:900;
+    border-bottom:1px solid var(--line);
+}
+
+td{
+    padding:7px 6px;
+    border-bottom:1px solid var(--line2);
+    text-align:center;
+    font-weight:900;
+    color:var(--text);
+    word-wrap:break-word;
+}
+
+td.desc{text-align:left;}
+
+.status-ok{color:var(--green);font-weight:900;}
+.status-nok{color:var(--red);font-weight:900;}
+
+.rank-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:8px;
+}
+.rank-card{
+    background:#e8f0ff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:8px;
+    font-size:11px;
+    font-weight:900;
+    position:relative;
+}
+.rank-num{
+    position:absolute;left:8px;top:8px;
+    width:20px;height:20px;border-radius:6px;
+    background:var(--primary);color:white;
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid #8fb0ff;
+}
+.rank-card div{padding-left:28px;text-align:left;}
+.rank-card strong{display:block;color:var(--text);font-size:13px;margin-top:4px;}
+
+.fluxo{
+    display:grid;
+    grid-template-columns:1fr 28px 1fr 28px 1fr;
+    gap:4px;
+    align-items:center;
+    margin-bottom:12px;
+}
+.fluxo-item{
+    border-radius:12px;
+    padding:14px 8px;
+    min-height:78px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    font-weight:900;
+    background:#eef5ff;
+    border:1px solid var(--line2);
+}
+.fluxo-item strong{font-size:26px;color:var(--primary);}
+.fluxo-item.pink strong{color:var(--pink);}
+.fluxo-item.green strong{color:var(--green);}
+.fluxo-arrow{text-align:center;font-size:20px;font-weight:900;color:var(--text);}
+.progress-title{font-size:12px;font-weight:900;margin:8px 0 5px;color:var(--text);text-align:center;text-transform:uppercase;}
+.progress-box{width:100%;height:22px;background:#dce8ff;border-radius:20px;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);color:white;text-align:center;font-size:12px;font-weight:900;line-height:22px;}
+.esfig-flow .table-scroll{max-height:300px;}
+.esfig-chart{display:flex;flex-direction:column;}
+.esfig-chart .chart-box{flex:1;min-height:430px;}
+
+.senha-box{
+    max-width:430px;
+    margin:80px auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    text-align:center;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+.senha-box h2{color:var(--primary);margin-top:0;}
+.senha-box input{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;text-align:center;font-size:17px;font-weight:900;}
+.btn{
+    border:none;background:var(--primary);color:white;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer;margin-top:10px;
+}
+.info-menu{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px;}
+.info-menu button{border:none;background:var(--primary);color:white;padding:10px 14px;border-radius:10px;font-weight:900;cursor:pointer;}
+.info-text{text-align:center;font-size:16px;line-height:1.7;font-weight:700;max-width:1050px;margin:auto;}
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:10px;}
+.step{background:#e8f0ff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;font-weight:900;}
+.step span{display:inline-flex;width:25px;height:25px;border-radius:50%;background:var(--primary);color:white;align-items:center;justify-content:center;margin-bottom:6px;}
+select{padding:10px;border:1px solid var(--line);border-radius:10px;font-weight:900;color:var(--text);background:white;margin-bottom:8px;width:100%;}
+.footer-note{font-size:10px;font-weight:900;text-align:center;color:var(--primary);padding:5px;background:#eef5ff;border:1px solid var(--line);border-radius:10px;margin-top:8px;}
+
+@media(max-width:1050px){
+    .topbar{grid-template-columns:1fr; height:auto; gap:8px; padding:10px; text-align:center;}
+    .logo-labor{border-right:none;align-items:center;}
+    .top-status{justify-content:center;flex-wrap:wrap;}
+    .main-wrap,.main-wrap.menu-collapsed{grid-template-columns:1fr;height:auto;}
+    .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+    .menu button{margin-bottom:0;}
+    .grid-2,.grid-3-2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+    <div class="logo-labor">
+        <div class="logo-main">LABOR</div>
+        <div class="logo-sub">HEALTH SUPPLY</div>
+    </div>
+    <div class="top-title">
+        <h1>PAINEL DE PROCESSOS SGQ</h1>
+        <p>Indicadores operacionais em tempo real</p>
+    </div>
+    <div class="top-status">
+        <span class="pill data-pill" id="dataAtual">-- --- ----</span>
+        <span class="pill time-pill" id="horaAtual">--:--:--</span>
+        <span class="pill"><span class="online-dot">●</span>Online</span>
+    </div>
+</header>
+
+<div class="main-wrap" id="mainWrap">
+    <aside class="menu" id="menuLateral">
+        <button type="button" class="toggle-menu" id="btnToggleMenu" onclick="toggleMenu()" title="Esconder menu">◀</button>
+        <button class="active" onclick="abrirAba('importacao', this)"><span class="ico">📦</span><span class="label">Inspeção<br>Importação</span></button>
+        <button onclick="abrirAba('esfig', this)"><span class="ico">⏱</span><span class="label">Esfigmomanômetro</span></button>
+        <button onclick="abrirAba('descarte', this)"><span class="ico">🗑</span><span class="label">Descarte</span></button>
+        <button onclick="abrirAba('amostra', this)"><span class="ico">📦</span><span class="label">Amostra</span></button>
+        <button onclick="abrirAba('retrabalho', this)"><span class="ico">🔄</span><span class="label">Retrabalho</span></button>
+        <button onclick="abrirAba('equipamentos', this)"><span class="ico">🛠</span><span class="label">Equipamentos</span></button>
+        <button onclick="abrirAba('informativo', this)"><span class="ico">ℹ️</span><span class="label">Informativo</span></button>
+    </aside>
+    <main class="content" id="conteudo"></main>
+</div>
+
+<script>
+let dados = {};
+let graficoAtual = null;
+let senhaDescarteLiberada = false;
 
 const valorFlutuantePlugin = {
-
     id:"valorFlutuante",
-
     afterDatasetsDraw(chart){
-
-        const {ctx}=chart;
-
+        const {ctx} = chart;
         ctx.save();
-
-        chart.data.datasets.forEach((dataset,datasetIndex)=>{
-
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
             const meta = chart.getDatasetMeta(datasetIndex);
-
             if(meta.hidden) return;
-
-
-            meta.data.forEach((element,index)=>{
-
+            meta.data.forEach((element, index) => {
                 const valor = dataset.data[index];
-
-                if(
-                    valor===null ||
-                    valor===undefined ||
-                    (dataset._ocultarZero && Number(valor)===0)
-                ) return;
-
-
-                ctx.font = dataset._horas
-                    ? "800 10px Arial"
-                    : "900 11px Arial";
-
-
-                ctx.fillStyle = dataset._horas
-                    ? "#c026d3"
-                    : "#0f1f4d";
-
-
-                const texto =
-                    dataset._moeda
+                if(valor === null || valor === undefined || (dataset._ocultarZero && Number(valor) === 0)) return;
+                ctx.font = dataset._horas ? "800 10px Arial" : "900 11px Arial";
+                ctx.fillStyle = dataset._horas ? "#c026d3" : "#0f1f4d";
+                const texto = dataset._moeda
                     ? moedaCurta(valor)
-                    :
-                    dataset._horas
-                    ? `${Number(valor||0).toLocaleString("pt-BR")} h`
-                    :
-                    numero(valor);
-
-
-                if(chart.options.indexAxis==="y"){
-
-                    ctx.textAlign="left";
-                    ctx.textBaseline="middle";
-
-                    ctx.fillText(
-                        texto,
-                        element.x+8,
-                        element.y
-                    );
-
+                    : dataset._horas
+                        ? `${Number(valor || 0).toLocaleString("pt-BR", {minimumFractionDigits:0, maximumFractionDigits:2})} h`
+                        : numero(valor);
+                if(chart.options.indexAxis === "y"){
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText(texto, element.x + 8, element.y);
+                }else if(dataset._horas){
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "top";
+                    ctx.fillText(texto, element.x, element.y + 11);
                 }else{
-
-                    ctx.textAlign="center";
-                    ctx.textBaseline="bottom";
-
-                    ctx.fillText(
-                        texto,
-                        element.x,
-                        element.y-7
-                    );
-
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "bottom";
+                    ctx.fillText(texto, element.x, element.y - 7);
                 }
-
             });
-
         });
-
         ctx.restore();
-
     }
-
 };
-
-
 Chart.register(valorFlutuantePlugin);
 
-
-
 fetch("data.json")
+.then(r => r.json())
+.then(json => { dados = normalizarDados(json); renderImportacao(); })
+.catch(() => { dados = normalizarDados({}); renderImportacao(); });
+  setInterval(()=>{
+    fetch("data.json")
+    .then(r=>r.json())
+    .then(json=>{
+        dados = normalizarDados(json);
 
-.then(r=>r.json())
+        const abaAtiva = document.querySelector(".menu button.active");
 
-.then(json=>{
-
-    dados = normalizarDados(json);
-
-    renderImportacao();
-
-})
-
-.catch(()=>{
-
-    dados = normalizarDados({});
-
-    renderImportacao();
-
-});
-
-
-
-setInterval(()=>{
-
-fetch("data.json")
-
-.then(r=>r.json())
-
-.then(json=>{
-
-    dados = normalizarDados(json);
-
-    const aba =
-    document.querySelector(".menu button.active");
-
-
-    if(aba){
-        aba.click();
-    }
-
-});
-
-
+        if(abaAtiva){
+            abaAtiva.click();
+        }
+    });
 },120000);
 
-
-
 function normalizarDados(json){
-
-    json = json || {};
-
-
     if(Array.isArray(json.esfig)){
-
-        json.esfig={
-
-            ultimaAfericao:
-            json.ultimaAfericao || "",
-
-            proximaAfericao:
-            json.proximaAfericao || "",
-
-            produtos:
-            json.esfig
-
+        json.esfig = {
+            ultimaAfericao:json.ultimaAfericao || "",
+            proximaAfericao:json.proximaAfericao || "",
+            produtos:json.esfig
         };
-
     }
-
-
     return json;
-
 }
 
-
-
-function abrirAba(aba,botao){
-
-document
-.querySelectorAll(".menu button")
-.forEach(b=>b.classList.remove("active"));
-
-
-if(botao)
-botao.classList.add("active");
-
-
-destruirGrafico();
-
-
-switch(aba){
-
-case "importacao":
-renderImportacao();
-break;
-
-
-case "esfig":
-renderEsfig();
-break;
-
-
-case "descarte":
-renderDescarte();
-break;
-
-
-case "amostra":
-renderAmostra();
-break;
-
-
-case "retrabalho":
-renderRetrabalho();
-break;
-
-
-case "equipamentos":
-renderEquipamentos();
-break;
-
-
-case "informativo":
-renderInformativo();
-break;
-
+function abrirAba(aba, botao){
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+    if(botao) botao.classList.add("active");
+    destruirGrafico();
+    if(aba === "importacao") renderImportacao();
+    if(aba === "esfig") renderEsfig();
+    if(aba === "descarte") renderDescarte();
+    if(aba === "amostra") renderAmostra();
+    if(aba === "retrabalho") renderRetrabalho();
+    if(aba === "equipamentos") renderEquipamentos();
+    if(aba === "informativo") renderInformativo();
 }
 
+function destruirGrafico(){ if(graficoAtual){ graficoAtual.destroy(); graficoAtual = null; } }
+function numero(v){ return Number(v || 0).toLocaleString("pt-BR"); }
+function moeda(v){ return Number(v || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+function moedaCurta(v){ return moeda(v); }
 
+function atualizarRelogio(){
+    const agora = new Date();
+    const dia = String(agora.getDate()).padStart(2,"0");
+    const mes = agora.toLocaleDateString("pt-BR",{month:"long"}).toUpperCase();
+    const ano = agora.getFullYear();
+    document.getElementById("dataAtual").innerText = `${dia} ${mes} ${ano}`;
+    document.getElementById("horaAtual").innerText = agora.toLocaleTimeString("pt-BR");
+}
+setInterval(atualizarRelogio,1000); atualizarRelogio();
+
+function toggleMenu(){
+    const wrap = document.getElementById("mainWrap");
+    const btn = document.getElementById("btnToggleMenu");
+    wrap.classList.toggle("menu-collapsed");
+
+    const recolhido = wrap.classList.contains("menu-collapsed");
+    btn.innerText = recolhido ? "▶" : "◀";
+    btn.title = recolhido ? "Mostrar menu" : "Esconder menu";
 }
 
-
-
-function destruirGrafico(){
-
-if(graficoAtual){
-
-graficoAtual.destroy();
-
-graficoAtual=null;
-
+function renderImportacao(){
+    const imp = dados.importacao || {processosAno:0,totalSku:0,totalLotes:0,laudosEmitidos:0,totalHoras:0,mensal:[],fluxo:[]};
+    conteudo.innerHTML = `
+        <div class="page-title">📦 INSPEÇÃO DE IMPORTAÇÃO</div>
+        <section class="cards">
+            ${card("📦","Processos por Ano",numero(imp.processosAno),"Quantidade de processos")}
+            ${card("🏷️","Total de SKU",numero(imp.totalSku),"SKUs inspecionados")}
+            ${card("📑","Total de Lotes",numero(imp.totalLotes),"Lotes controlados")}
+            ${card("🧾","Laudos Emitidos",numero(imp.laudosEmitidos),"Registros emitidos")}
+            ${card("⏱","Total de Horas",numero(imp.totalHoras),"Horas da atividade")}
+        </section>
+        <section class="panel"><h3>📊 Evolução Mensal da Inspeção de Importação</h3><div class="chart-box"><canvas id="grafico"></canvas></div></section>
+        <section class="panel"><h3>Fluxo Inspeção de Importação</h3>${tabelaFixa(["PO","Descrição do Produto","Status","Observação"], montarLinhasImportacao(imp.fluxo), false)}</section>
+    `;
+    graficoAtual = new Chart(document.getElementById("grafico"),{
+        type:"line",
+        data:{
+            labels:(imp.mensal || []).map(i => i.mes),
+            datasets:[
+                dsLine("Processos",(imp.mensal || []).map(i => i.processos || 0),"#1d4eff"),
+                dsLine("SKU",(imp.mensal || []).map(i => i.sku || 0),"#f04dd8"),
+                dsLine("Lotes",(imp.mensal || []).map(i => i.lotes || 0),"#22c55e"),
+                dsLine("Laudos",(imp.mensal || []).map(i => i.laudos || 0),"#8b5cf6"),
+                dsLine("Horas",(imp.mensal || []).map(i => i.horas || 0),"#f97316")
+            ]
+        },
+        options:baseOptions()
+    });
 }
 
+function renderEsfig(){
+    const esfig = dados.esfig || {};
+    const produtos = [...(esfig.produtos || [])].sort((a,b) => {
+        const na = parseInt(a.sku,10);
+        const nb = parseInt(b.sku,10);
+        if(Number.isNaN(na) && Number.isNaN(nb)) return String(a.sku).localeCompare(String(b.sku));
+        if(Number.isNaN(na)) return 1;
+        if(Number.isNaN(nb)) return -1;
+        return na - nb;
+    });
+    const totalAguardando = produtos.reduce((s,i)=>s+Number(i.aguardando||0),0);
+    const totalDesmontado = produtos.reduce((s,i)=>s+Number(i.desmontado||0),0);
+    const totalAferidos = produtos.reduce((s,i)=>s+Number(i.aferidos||0),0);
+    const totalGeral = totalAguardando + totalDesmontado + totalAferidos;
+    const conclusao = totalGeral ? ((totalAferidos / totalGeral) * 100).toFixed(1) : 0;
+    conteudo.innerHTML = `
+        <div class="page-title">⏱ ESFIGMOMANÔMETRO</div>
+        <section class="cards">
+            ${card("💰","Total Gasto por GRU",moeda(esfig.totalGruInmetro),"Valor pago ao Inmetro")}
+            ${card("📅","Última Aferição",esfig.ultimaAfericao || "-","Data registrada")}
+            ${card("📆","Próxima Aferição",esfig.proximaAfericao || "-","Previsão")}
+            ${card("⏱","Total de Horas",numero(esfig.totalHoras),"Horas da atividade")}
+        </section>
+        <section class="grid-3-2">
+            <div class="panel esfig-flow">
+                <h3>⏱ Esfigmomanômetro - Fluxo Operacional</h3>
+                <div class="fluxo">
+                    <div class="fluxo-item"><strong>${numero(totalAguardando)}</strong><small>Aguardando Desmontagem</small></div>
+                    <div class="fluxo-arrow">→</div>
+                    <div class="fluxo-item pink"><strong>${numero(totalDesmontado)}</strong><small>Desmontado</small></div>
+                    <div class="fluxo-arrow">→</div>
+                    <div class="fluxo-item green"><strong>${numero(totalAferidos)}</strong><small>Aferidos / Montagem</small></div>
+                </div>
+                <div class="progress-title">Processamento geral</div>
+                <div class="progress-box"><div class="progress-bar" style="width:${conclusao}%">${conclusao}% concluído</div></div>
+                ${tabelaFixa(["SKU","Descrição","Aguard.","Desm.","Afer.","Status"], montarLinhasEsfig(produtos), true)}
+            </div>
+            <div class="panel esfig-chart"><h3>Total Anual por SKU</h3><div class="chart-box esfig-large"><canvas id="grafico"></canvas></div></div>
+        </section>
+    `;
+    graficoAtual = new Chart(document.getElementById("grafico"),{
+        type:"bar",
+        data:{
+    labels:produtos.map(i => `${i.sku}`),
+    datasets:[{
+                label:"Total Anual",
+                data:produtos.map(i => Number(i.totalAnualSku || 0)),
+                backgroundColor:["#1d4eff","#0f3cc9","#6b7cff","#f04dd8","#22c55e","#38bdf8","#8b5cf6"],
+                borderWidth:0
+            }]
+        },
+        options:{...baseOptions(), indexAxis:"y", layout:{padding:{top:20,right:42,left:8,bottom:4}}, plugins:{legend:{display:false}}}
+    });
 }
 
-
-
-function numero(v){
-
-return Number(v||0)
-.toLocaleString("pt-BR");
-
-}
-
-
-
-function moeda(v){
-
-return Number(v||0)
-.toLocaleString(
-"pt-BR",
-{
-style:"currency",
-currency:"BRL"
-}
-);
-
-}
-
-
-
-function moedaCurta(v){
-
-return moeda(v);
-
-}
 function renderDescarte(){
     if(!senhaDescarteLiberada){
         conteudo.innerHTML = `<div class="senha-box"><h2>🔒 Área Restrita - Descarte</h2><p>Digite a senha para acessar as informações.</p><input type="password" id="senhaDescarte" placeholder="Digite a senha"><button class="btn" onclick="validarSenhaDescarte()">Acessar</button><p id="erroSenha" style="color:#ef4444;font-weight:900;"></p></div>`;
@@ -707,7 +800,7 @@ function renderRetrabalho(){
         ${card(
         "🔄",
         "Total Retrabalhado",
-        r.totalQuantidadeRetrabalhada
+        numero(r.quantidadeRetrabalhada),
         "Quantidade de produtos"
         )}
 
@@ -899,185 +992,42 @@ function mostrarInfo(tipo){
     document.getElementById("infoTexto").innerText = t.texto;
     document.getElementById("infoSteps").innerHTML = t.steps.map((s,i)=>`<div class="step"><span>${i+1}</span><br>${s}</div>`).join("");
 }
-function dsLine(label,data,color){
 
-return {
+function card(icon,titulo,valor,sub){ return `<div class="kpi-card"><div class="kpi-icon">${icon}</div><div><h3>${titulo}</h3><strong>${valor}</strong><small>${sub}</small></div></div>`; }
+function dsLine(label,data,color){ return {label,data,borderColor:color,backgroundColor:color + "30",pointBackgroundColor:color,pointRadius:4,borderWidth:3,tension:.35,fill:false}; }
+function baseOptions(){ return {responsive:true,maintainAspectRatio:false,layout:{padding:{top:22,right:34,left:8,bottom:4}},plugins:{legend:{labels:{color:"#0f1f4d",font:{weight:"900"}}}},scales:{x:{ticks:{color:"#0f1f4d",font:{weight:"900",size:10}},grid:{color:"#dce8ff"}},y:{beginAtZero:true,ticks:{color:"#0f1f4d",font:{weight:"900",size:10}},grid:{color:"#dce8ff"}}}}; }
 
-label,
-
-data:data || [],
-
-borderColor:color,
-
-backgroundColor:
-color ? color+"30" : "#cccccc",
-
-pointBackgroundColor:color,
-
-pointRadius:4,
-
-borderWidth:3,
-
-tension:.35,
-
-fill:false
-
-};
-
+function tabelaFixa(headers, rows, infinito){
+    const body = rows || `<tr><td colspan="${headers.length}">Sem dados cadastrados</td></tr>`;
+    const duplicated = infinito ? body + body : body;
+    return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead></table><div class="table-scroll ${infinito ? "infinite" : ""}"><div class="${infinito ? "scroll-content" : ""}"><table><tbody>${duplicated}</tbody></table></div></div></div>`;
 }
+function montarLinhasImportacao(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.po||"-"}</td><td class="desc">${i.descricao||"-"}</td><td class="${i.status==="Aprovado"?"status-ok":"status-nok"}">${i.status||"-"}</td><td>${i.observacao||"-"}</td></tr>`).join(""); }
+function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku||"-"}</td><td class="desc">${i.descricao||"-"}</td><td>${numero(i.aguardando)}</td><td>${numero(i.desmontado)}</td><td>${numero(i.aferidos)}</td><td class="${Number(i.aferidos||0)>0?"status-ok":""}">${Number(i.aferidos||0)>0?"Aferido":"-"}</td></tr>`).join(""); }
+function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
+function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
 
+    function montarLinhasRetrabalho(lista){
 
-
-function tabelaFixa(headers,rows,infinito){
-
-const vazio =
-!rows ||
-rows.length===0;
-
-
-const body =
-vazio
-?
-`<tr><td colspan="${headers.length}">
-Sem dados cadastrados
-</td></tr>`
-:
-rows;
-
-
-const duplicated =
-infinito
-?
-body+body
-:
-body;
-
-
-return `
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-${headers.map(h=>`<th>${h}</th>`).join("")}
-
-</tr>
-
-</thead>
-
-</table>
-
-
-<div class="table-scroll ${infinito?"infinite":""}">
-
-<div class="${infinito?"scroll-content":""}">
-
-<table>
-
-<tbody>
-
-${duplicated}
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-
-function montarLinhasImportacao(lista){
-
-if(!lista || !lista.length)
-return "";
+if(!lista || !lista.length) return "";
 
 
 return lista.map(i=>`
 
 <tr>
 
-<td>${i.po || i.PO || "-"}</td>
+<td>${i.Fabricante}</td>
 
-<td class="desc">
-${i.descricao || i.produto || "-"}
-</td>
-
-<td class="${
-(i.status || "")
-==="Aprovado"
-?
-"status-ok"
-:
-"status-nok"
-}">
-
-${i.status || "-"}
-
+<td>
+${numero(i["Quantidade Retrabalhada"])}
 </td>
 
 <td>
-${i.observacao || "-"}
+${numero(i.Horas)}
 </td>
-
-</tr>
-
-`).join("");
-
-}
-
-
-
-function montarLinhasEsfig(lista){
-
-if(!lista || !lista.length)
-return "";
-
-
-return lista.map(i=>`
-
-<tr>
-
-<td>${i.sku || "-"}</td>
 
 <td class="desc">
-${i.descricao || i.produto || "-"}
-</td>
-
-<td>${numero(i.aguardando)}</td>
-
-<td>${numero(i.desmontado)}</td>
-
-<td>${numero(i.aferidos)}</td>
-
-
-<td class="${
-Number(i.aferidos||0)>0
-?
-"status-ok"
-:
-""
-}">
-
-${
-Number(i.aferidos||0)>0
-?
-"Aferido"
-:
-"-"
-}
-
+${i.Motivo || "-"}
 </td>
 
 
@@ -1086,113 +1036,45 @@ Number(i.aferidos||0)>0
 `).join("");
 
 }
+function filtrarFabricante(){
 
+const texto =
+document
+.getElementById("buscaFabricante")
+.value
+.toLowerCase();
 
+const select =
+document.getElementById("filtroFabricante");
 
-function montarLinhasTopDescarte(lista){
+let primeiro = null;
 
-if(!lista || !lista.length)
-return "";
+Array.from(select.options)
+.forEach(op=>{
 
+const visivel = op.text.toLowerCase().includes(texto);
 
-return lista.map(i=>`
+op.style.display = visivel ? "block" : "none";
 
-<tr>
-
-<td>${i.sku || "-"}</td>
-
-<td class="desc">
-${i.descricao || i.produto || "-"}
-</td>
-
-<td>
-${moeda(i.valor || i.total)}
-</td>
-
-</tr>
-
-`).join("");
-
+if(visivel && !primeiro){
+    primeiro = op;
 }
 
+});
 
-
-function montarLinhasAmostra(lista){
-
-if(!lista || !lista.length)
-return "";
-
-
-return lista.map(i=>`
-
-<tr>
-
-<td>${i.sku || "-"}</td>
-
-<td class="desc">
-${i.descricao || i.produto || "-"}
-</td>
-
-
-<td>
-${numero(
-i.quantidade ??
-i.valor ??
-i.total ??
-0
-)}
-
-</td>
-
-
-</tr>
-
-`).join("");
-
+if(primeiro){
+    select.value = primeiro.value;
+    atualizarGraficoRetrabalho();
 }
 
-
-
-function montarLinhasRetrabalho(lista){
-
-if(!lista || !lista.length)
-return "";
-
-
-return lista.map(i=>`
-
-<tr>
-
-<td>
-${i.fabricante || i.Fabricante || "-"}
-</td>
-
-
-<td>
-${numero(
-i.quantidade ??
-i["Quantidade Retrabalhada"] ??
-0
-)}
-</td>
-
-
-<td>
-${numero(
-i.horas ??
-i.Horas ??
-0
-)}
-</td>
-
-
-<td class="desc">
-${i.motivo || i.Motivo || "-"}
-</td>
-
-
-</tr>
-
-`).join("");
-
 }
+function montarLinhasEquipamentos(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.produto}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td><td>${i.observacao}</td></tr>`).join(""); }
+function rankTop3(lista){ const top = (lista||[]).slice(0,3); if(!top.length) return ""; return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.descricao}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`; }
+function rankTop3Origem(lista){
+    const top = [...(lista || [])].sort((a,b)=>Number(b.valor||0)-Number(a.valor||0)).slice(0,3);
+    if(!top.length) return "";
+    return `<div class="rank-grid">${top.map((i,idx)=>`<div class="rank-card"><span class="rank-num">${idx+1}</span><div>${i.nome || "-"}<strong>${moeda(i.valor)}</strong></div></div>`).join("")}</div>`;
+}
+</script>
+</body>
+</html>
