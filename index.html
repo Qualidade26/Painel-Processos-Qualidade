@@ -557,10 +557,16 @@ fetch("data.json")
     renderImportacao();
 
 });
-  setInterval(()=>{
+
+
+setInterval(()=>{
+
     fetch("data.json")
     .then(r=>r.json())
     .then(json=>{
+
+        console.log("ATUALIZAÇÃO AUTOMÁTICA JSON:", json);
+
         dados = normalizarDados(json);
 
         const abaAtiva = document.querySelector(".menu button.active");
@@ -568,7 +574,14 @@ fetch("data.json")
         if(abaAtiva){
             abaAtiva.click();
         }
+
+    })
+    .catch(erro=>{
+
+        console.error("ERRO NA ATUALIZAÇÃO DO JSON:", erro);
+
     });
+
 },120000);
 
 function normalizarDados(json){
