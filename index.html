@@ -537,36 +537,12 @@ Chart.register(valorFlutuantePlugin);
 
 fetch("data.json")
 .then(r => r.json())
-.then(json => {
-
-    console.log("JSON CARREGADO:", json);
-
-    dados = normalizarDados(json);
-
-    console.log("DADOS NORMALIZADOS:", dados);
-
-    renderImportacao();
-
-})
-.catch(erro => {
-
-    console.error("ERRO AO LER JSON:", erro);
-
-    dados = normalizarDados({});
-
-    renderImportacao();
-
-});
-
-
-setInterval(()=>{
-
+.then(json => { dados = normalizarDados(json); renderImportacao(); })
+.catch(() => { dados = normalizarDados({}); renderImportacao(); });
+  setInterval(()=>{
     fetch("data.json")
     .then(r=>r.json())
     .then(json=>{
-
-        console.log("ATUALIZAÇÃO AUTOMÁTICA JSON:", json);
-
         dados = normalizarDados(json);
 
         const abaAtiva = document.querySelector(".menu button.active");
@@ -574,14 +550,7 @@ setInterval(()=>{
         if(abaAtiva){
             abaAtiva.click();
         }
-
-    })
-    .catch(erro=>{
-
-        console.error("ERRO NA ATUALIZAÇÃO DO JSON:", erro);
-
     });
-
 },120000);
 
 function normalizarDados(json){
@@ -818,13 +787,7 @@ function renderRetrabalho(){
 
 
     const fabricantes = (r.fabricantes || [])
-.filter(f => 
-    Number(
-        f.quantidade ??
-        f["fabricante.quantidade"] ??
-        0
-    ) > 0
-);
+    .filter(f => Number(f["Quantidade Retrabalhada"] || 0) > 0);
 
 
     conteudo.innerHTML = `
@@ -837,21 +800,21 @@ function renderRetrabalho(){
         ${card(
         "🔄",
         "Total Retrabalhado",
-        numero(r.totalUnidades),
+        numero(r.quantidadeRetrabalhada),
         "Quantidade de produtos"
         )}
 
         ${card(
         "⏱",
         "Total de Horas",
-       numero(r.totalHoras),
+        numero(r.totaldeHoras),
         "Horas aplicadas"
         )}
 
        ${card(
 "📋",
 "Processos",
-numero(r.processos),
+numero(r.totaldeRetrabalhoNoAno),
 "Ocorrências registradas"
 )}
 
@@ -889,8 +852,8 @@ oninput="atualizarGraficoRetrabalho()"
     ${
     fabricantes.map(f=>
 
-    `<option value="${f.fabricante}">
-    ${f.fabricante}
+    `<option value="${f.Fabricante}">
+    ${f.Fabricante}
     </option>`
 
     ).join("")
@@ -953,7 +916,7 @@ function atualizarGraficoRetrabalho(){
 
     const fabricante = (r.fabricantes || [])
     .find(
-        f => String(f.fabricante).trim() === String(nome).trim()
+        f => String(f.Fabricante).trim() === String(nome).trim()
     );
 
     if(!fabricante) return;
@@ -974,19 +937,11 @@ function atualizarGraficoRetrabalho(){
                     "Horas"
                 ],
                 datasets:[{
-                    label:fabricante.fabricante,
-      data:[
-    Number(
-        fabricante.quantidade ??
-        fabricante["fabricante.quantidade"] ??
-        0
-    ),
-    Number(
-        fabricante.horas ??
-        fabricante["fabricante.horas"] ??
-        0
-    )
-]
+                    label:fabricante.Fabricante,
+                    data:[
+                        Number(fabricante["Quantidade Retrabalhada"] || 0),
+                        Number(fabricante["Horas"] || 0)
+                    ],
                     backgroundColor:[
                         "#1d4eff",
                         "#f04dd8"
@@ -1051,41 +1006,36 @@ function montarLinhasImportacao(lista){ if(!lista || !lista.length) return ""; r
 function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku||"-"}</td><td class="desc">${i.descricao||"-"}</td><td>${numero(i.aguardando)}</td><td>${numero(i.desmontado)}</td><td>${numero(i.aferidos)}</td><td class="${Number(i.aferidos||0)>0?"status-ok":""}">${Number(i.aferidos||0)>0?"Aferido":"-"}</td></tr>`).join(""); }
 function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
 function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
-function montarLinhasRetrabalho(lista){
+
+    function montarLinhasRetrabalho(lista){
 
 if(!lista || !lista.length) return "";
+
 
 return lista.map(i=>`
 
 <tr>
 
-<td>${i.fabricante}</td>
+<td>${i.Fabricante}</td>
 
 <td>
-${numero(
-    i.quantidade ??
-    i["fabricante.quantidade"] ??
-    0
-)}
+${numero(i["Quantidade Retrabalhada"])}
 </td>
 
 <td>
-${numero(
-    i.horas ??
-    i["fabricante.horas"] ??
-    0
-)}
+${numero(i.Horas)}
+</td>
 
 <td class="desc">
-${i.motivo || "-"}
+${i.Motivo || "-"}
 </td>
+
 
 </tr>
 
 `).join("");
 
 }
-  
 function filtrarFabricante(){
 
 const texto =
