@@ -537,8 +537,26 @@ Chart.register(valorFlutuantePlugin);
 
 fetch("data.json")
 .then(r => r.json())
-.then(json => { dados = normalizarDados(json); renderImportacao(); })
-.catch(() => { dados = normalizarDados({}); renderImportacao(); });
+.then(json => {
+
+    console.log("JSON CARREGADO:", json);
+
+    dados = normalizarDados(json);
+
+    console.log("DADOS NORMALIZADOS:", dados);
+
+    renderImportacao();
+
+})
+.catch(erro => {
+
+    console.error("ERRO AO LER JSON:", erro);
+
+    dados = normalizarDados({});
+
+    renderImportacao();
+
+});
   setInterval(()=>{
     fetch("data.json")
     .then(r=>r.json())
