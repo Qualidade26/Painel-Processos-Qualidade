@@ -1,78 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Painel de Processos SGQ</title>
 
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 :root{
+    --bg:#dfeeff;
+    --top1:#0f3cc9;
+    --top2:#1d4eff;
+    --card:#f8fbff;
+    --card2:#eef5ff;
+    --primary:#1d4eff;
+    --primary-dark:#0f3cc9;
+    --line:#b8d1ff;
+    --line2:#dce8ff;
+    --text:#0f1f4d;
+    --muted:#5c6c96;
 
---bg:#dfeeff;
-
---top1:#0f3cc9;
-
---top2:#1d4eff;
-
---card:#f8fbff;
-
---card2:#eef5ff;
-
---primary:#1d4eff;
-
---primary-dark:#0f3cc9;
-
---line:#b8d1ff;
-
---line2:#dce8ff;
-
---text:#0f1f4d;
-
---muted:#5c6c96;
-
---green:#22c55e;
-
---pink:#f04dd8;
-
---purple:#8b5cf6;
-
---red:#ef4444;
-
---orange:#f97316;
-
---cyan:#38bdf8;
-
+    --green:#22c55e;
+    --pink:#f04dd8;
+    --purple:#8b5cf6;
+    --red:#ef4444;
+    --orange:#f97316;
+    --cyan:#38bdf8;
 }
 
 
 *{
-
-box-sizing:border-box;
-
+    box-sizing:border-box;
 }
-
 
 
 body{
 
-margin:0;
+    margin:0;
 
-font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 
-background:var(--bg);
+    background:var(--bg);
 
-color:var(--text);
+    color:var(--text);
 
-overflow:hidden;
+    overflow-x:hidden;
 
 }
 
@@ -80,21 +55,21 @@ overflow:hidden;
 
 .topbar{
 
-height:72px;
+    height:72px;
 
-background:linear-gradient(90deg,var(--top1),var(--top2));
+    background:linear-gradient(90deg,var(--top1),var(--top2));
 
-display:grid;
+    color:#fff;
 
-grid-template-columns:260px 1fr 310px;
+    display:grid;
 
-align-items:center;
+    grid-template-columns:260px 1fr 310px;
 
-padding:0 18px;
+    align-items:center;
 
-color:white;
+    padding:0 18px;
 
-box-shadow:0 4px 12px rgba(0,0,0,.2);
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
 
 }
 
@@ -102,15 +77,17 @@ box-shadow:0 4px 12px rgba(0,0,0,.2);
 
 .logo-labor{
 
-height:55px;
+    border-right:1px solid rgba(255,255,255,.35);
 
-border-right:1px solid rgba(255,255,255,.35);
+    height:55px;
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    flex-direction:column;
 
-justify-content:center;
+    justify-content:center;
+
+    line-height:1;
 
 }
 
@@ -118,55 +95,55 @@ justify-content:center;
 
 .logo-main{
 
-font-size:34px;
+    font-size:34px;
 
-font-weight:900;
+    font-weight:900;
 
-letter-spacing:5px;
+    letter-spacing:5px;
 
 }
-
 
 
 .logo-sub{
 
-font-size:10px;
+    font-size:10px;
 
-font-weight:900;
+    font-weight:900;
 
-letter-spacing:5px;
+    letter-spacing:5px;
+
+    margin-top:6px;
 
 }
-
 
 
 .top-title{
 
-text-align:center;
+    text-align:center;
 
 }
-
 
 
 .top-title h1{
 
-margin:0;
+    margin:0;
 
-font-size:27px;
+    font-size:27px;
 
-font-weight:900;
+    letter-spacing:.5px;
+
+    font-weight:900;
 
 }
 
 
-
 .top-title p{
 
-margin:5px 0 0;
+    margin:6px 0 0;
 
-font-size:12px;
+    font-size:12px;
 
-font-weight:900;
+    font-weight:900;
 
 }
 
@@ -174,45 +151,67 @@ font-weight:900;
 
 .top-status{
 
-display:flex;
+    display:flex;
 
-justify-content:flex-end;
+    justify-content:flex-end;
 
-gap:8px;
+    align-items:center;
+
+    gap:8px;
+
+    font-size:11px;
+
+    font-weight:900;
 
 }
-
 
 
 .pill{
 
-height:36px;
+    background:rgba(255,255,255,.16);
 
-padding:8px 12px;
+    border:1px solid rgba(255,255,255,.25);
 
-border-radius:10px;
+    padding:9px 12px;
 
-background:rgba(255,255,255,.16);
+    border-radius:10px;
 
-border:1px solid rgba(255,255,255,.3);
+    box-shadow:inset 0 0 12px rgba(255,255,255,.08);
 
-font-weight:900;
+    min-width:116px;
 
-font-size:11px;
+    height:36px;
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    align-items:center;
+
+    justify-content:center;
+
+    white-space:nowrap;
 
 }
 
 
+.data-pill{
+
+    min-width:132px;
+
+}
+
+
+.time-pill{
+
+    min-width:116px;
+
+}
+
 
 .online-dot{
 
-color:#2cff70;
+    color:#27ff6f;
 
-margin-right:5px;
+    margin-right:4px;
 
 }
 
@@ -221,15 +220,25 @@ margin-right:5px;
 
 .main-wrap{
 
-height:calc(100vh - 72px);
+    height:calc(100vh - 72px);
 
-display:grid;
+    display:grid;
 
-grid-template-columns:172px 1fr;
+    grid-template-columns:172px 1fr;
 
-gap:10px;
+    gap:10px;
 
-padding:10px;
+    padding:10px;
+
+    transition:grid-template-columns .25s ease;
+
+}
+
+
+
+.main-wrap.menu-collapsed{
+
+    grid-template-columns:68px 1fr;
 
 }
 
@@ -237,15 +246,17 @@ padding:10px;
 
 .menu{
 
-background:#f8fbff;
+    background:rgba(248,251,255,.92);
 
-border:1px solid var(--line);
+    border:1px solid var(--line);
 
-border-radius:12px;
+    border-radius:12px;
 
-padding:10px;
+    padding:10px;
 
-overflow:auto;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+
+    overflow:auto;
 
 }
 
@@ -253,25 +264,25 @@ overflow:auto;
 
 .toggle-menu{
 
-width:100%;
+    width:100%;
 
-height:36px;
+    height:34px;
 
-border:none;
+    border:none;
 
-border-radius:10px;
+    background:linear-gradient(90deg,var(--top1),var(--top2));
 
-background:linear-gradient(90deg,var(--top1),var(--top2));
+    color:#fff;
 
-color:white;
+    border-radius:10px;
 
-font-size:18px;
+    font-size:18px;
 
-font-weight:900;
+    font-weight:900;
 
-cursor:pointer;
+    cursor:pointer;
 
-margin-bottom:10px;
+    margin-bottom:10px;
 
 }
 
@@ -279,23 +290,37 @@ margin-bottom:10px;
 
 .menu button{
 
-width:100%;
+    width:100%;
 
-min-height:58px;
+    min-height:58px;
 
-margin-bottom:8px;
+    border:1px solid var(--line2);
 
-border-radius:10px;
+    background:linear-gradient(180deg,#fff,var(--card2));
 
-border:1px solid var(--line2);
+    color:var(--text);
 
-background:linear-gradient(#fff,var(--card2));
+    margin-bottom:8px;
 
-font-weight:900;
+    border-radius:11px;
 
-cursor:pointer;
+    font-size:12px;
 
-color:var(--text);
+    font-weight:900;
+
+    cursor:pointer;
+
+    text-align:center;
+
+}
+
+
+
+.menu button .ico{
+
+    font-size:25px;
+
+    display:block;
 
 }
 
@@ -305,27 +330,9 @@ color:var(--text);
 
 .menu button.active{
 
-background:linear-gradient(90deg,var(--top1),var(--top2));
+    background:linear-gradient(90deg,var(--top1),var(--top2));
 
-color:white;
-
-}
-
-
-
-.ico{
-
-font-size:24px;
-
-display:block;
-
-}
-
-
-
-.label{
-
-font-size:12px;
+    color:white;
 
 }
 
@@ -333,9 +340,9 @@ font-size:12px;
 
 .content{
 
-overflow:auto;
+    overflow:auto;
 
-padding-right:3px;
+    padding-right:2px;
 
 }
 
@@ -343,23 +350,23 @@ padding-right:3px;
 
 .page-title{
 
-background:white;
+    background:var(--card);
 
-border:1px solid var(--line);
+    color:var(--primary);
 
-border-radius:12px;
+    border:1px solid var(--line);
 
-padding:10px;
+    border-radius:12px;
 
-text-align:center;
+    padding:9px;
 
-font-size:17px;
+    text-align:center;
 
-font-weight:900;
+    font-weight:900;
 
-color:var(--primary);
+    font-size:17px;
 
-margin-bottom:8px;
+    margin-bottom:8px;
 
 }
 
@@ -367,13 +374,13 @@ margin-bottom:8px;
 
 .cards{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 
-gap:8px;
+    gap:8px;
 
-margin-bottom:8px;
+    margin-bottom:8px;
 
 }
 
@@ -381,81 +388,64 @@ margin-bottom:8px;
 
 .kpi-card{
 
-background:linear-gradient(#fff,var(--card2));
+    background:linear-gradient(180deg,#fff,var(--card2));
 
-border:1px solid var(--line);
+    border:1px solid var(--line);
 
-border-radius:12px;
+    border-radius:12px;
 
-padding:12px;
+    padding:12px;
 
-display:flex;
+    min-height:72px;
 
-align-items:center;
+    display:grid;
 
-gap:10px;
+    grid-template-columns:48px 1fr;
+
+    align-items:center;
 
 }
-
 
 
 .kpi-icon{
 
-font-size:28px;
+    width:42px;
 
-background:#e8f0ff;
+    height:42px;
 
-padding:8px;
+    border-radius:12px;
 
-border-radius:10px;
+    background:#e8f0ff;
 
-}
+    display:flex;
 
+    align-items:center;
 
+    justify-content:center;
 
-.kpi-card h3{
-
-margin:0;
-
-font-size:12px;
-
-color:var(--primary);
+    font-size:28px;
 
 }
-
 
 
 .kpi-card strong{
 
-display:block;
+    font-size:28px;
 
-font-size:26px;
-
-}
-
-
-
-.kpi-card small{
-
-color:var(--muted);
-
-font-weight:900;
+    font-weight:900;
 
 }
-
 
 
 .panel{
 
-background:#f8fbff;
+    background:rgba(248,251,255,.95);
 
-border:1px solid var(--line);
+    border:1px solid var(--line);
 
-border-radius:12px;
+    border-radius:12px;
 
-padding:10px;
-
-margin-bottom:8px;
+    padding:10px;
 
 }
 
@@ -463,15 +453,15 @@ margin-bottom:8px;
 
 .panel h3{
 
-text-align:center;
+    margin:0 0 8px;
 
-margin:0 0 8px;
+    text-align:center;
 
-color:var(--primary);
+    color:var(--primary);
 
-font-size:14px;
+    font-size:14px;
 
-font-weight:900;
+    font-weight:900;
 
 }
 
@@ -479,9 +469,9 @@ font-weight:900;
 
 .chart-box{
 
-height:320px;
+    height:300px;
 
-position:relative;
+    position:relative;
 
 }
 
@@ -489,40 +479,63 @@ position:relative;
 
 .chart-box.tall{
 
-height:420px;
+    height:360px;
 
 }
-<style>
 
+
+.grid-2{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+}
+
+
+.grid-3-2{
+
+    display:grid;
+
+    grid-template-columns:1.35fr .9fr;
+
+    gap:8px;
+
+}
 .table-wrap{
 
-border:1px solid var(--line2);
+    border:1px solid var(--line2);
 
-border-radius:10px;
+    border-radius:10px;
 
-overflow:hidden;
+    overflow:hidden;
 
-background:white;
+    background:white;
 
 }
 
 
 .table-scroll{
 
-max-height:400px;
+    max-height:400px;
 
-overflow:auto;
+    overflow-y:auto;
 
 }
 
 
+
 table{
 
-width:100%;
+    width:100%;
 
-border-collapse:collapse;
+    border-collapse:collapse;
 
-font-size:13px;
+    table-layout:fixed;
+
+    font-size:14px;
 
 }
 
@@ -530,17 +543,17 @@ font-size:13px;
 
 thead th{
 
-background:#e8f0ff;
+    position:sticky;
 
-color:var(--primary);
+    top:0;
 
-padding:10px;
+    background:#e8f0ff;
 
-font-weight:900;
+    color:var(--primary);
 
-position:sticky;
+    padding:10px;
 
-top:0;
+    font-weight:900;
 
 }
 
@@ -548,13 +561,13 @@ top:0;
 
 td{
 
-padding:8px;
+    padding:7px;
 
-border-bottom:1px solid var(--line2);
+    border-bottom:1px solid var(--line2);
 
-text-align:center;
+    text-align:center;
 
-font-weight:800;
+    font-weight:900;
 
 }
 
@@ -562,215 +575,21 @@ font-weight:800;
 
 td.desc{
 
-text-align:left;
+    text-align:left;
 
 }
-
 
 
 .status-ok{
 
-color:var(--green);
+    color:var(--green);
 
 }
-
 
 
 .status-nok{
 
-color:var(--red);
-
-}
-
-
-
-.grid-2{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:8px;
-
-}
-
-
-
-.grid-3-2{
-
-display:grid;
-
-grid-template-columns:1.35fr .9fr;
-
-gap:8px;
-
-}
-
-
-
-.fluxo{
-
-display:grid;
-
-grid-template-columns:1fr 30px 1fr 30px 1fr;
-
-align-items:center;
-
-gap:5px;
-
-margin-bottom:10px;
-
-}
-
-
-
-.fluxo-item{
-
-background:#eef5ff;
-
-border:1px solid var(--line);
-
-border-radius:12px;
-
-padding:12px;
-
-text-align:center;
-
-font-weight:900;
-
-}
-
-
-
-.fluxo-item strong{
-
-display:block;
-
-font-size:25px;
-
-color:var(--primary);
-
-}
-
-
-
-.fluxo-item.pink strong{
-
-color:var(--pink);
-
-}
-
-
-
-.fluxo-item.green strong{
-
-color:var(--green);
-
-}
-
-
-
-.fluxo-arrow{
-
-font-size:22px;
-
-font-weight:900;
-
-text-align:center;
-
-}
-
-
-
-.progress-box{
-
-height:22px;
-
-background:#dce8ff;
-
-border-radius:20px;
-
-overflow:hidden;
-
-}
-
-
-
-.progress-bar{
-
-height:100%;
-
-background:#22c55e;
-
-color:white;
-
-text-align:center;
-
-font-size:12px;
-
-font-weight:900;
-
-line-height:22px;
-
-}
-
-
-
-.senha-box{
-
-max-width:420px;
-
-margin:80px auto;
-
-background:white;
-
-padding:25px;
-
-border-radius:15px;
-
-border:1px solid var(--line);
-
-text-align:center;
-
-}
-
-
-
-.senha-box input{
-
-width:100%;
-
-padding:12px;
-
-border-radius:10px;
-
-border:1px solid var(--line);
-
-text-align:center;
-
-font-size:18px;
-
-}
-
-
-
-.btn{
-
-background:var(--primary);
-
-color:white;
-
-border:none;
-
-padding:12px 20px;
-
-border-radius:10px;
-
-font-weight:900;
-
-cursor:pointer;
-
-margin-top:10px;
+    color:var(--red);
 
 }
 
@@ -778,11 +597,11 @@ margin-top:10px;
 
 .rank-grid{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
 
-gap:8px;
+    gap:8px;
 
 }
 
@@ -790,25 +609,233 @@ gap:8px;
 
 .rank-card{
 
-background:#e8f0ff;
+    background:#e8f0ff;
 
-border:1px solid var(--line);
+    border:1px solid var(--line);
 
-border-radius:10px;
+    border-radius:10px;
 
-padding:10px;
+    padding:8px;
 
-font-weight:900;
+    font-weight:900;
 
 }
 
 
 
-.rank-card strong{
+.fluxo{
 
-display:block;
+    display:grid;
 
-font-size:15px;
+    grid-template-columns:1fr 30px 1fr 30px 1fr;
+
+    gap:5px;
+
+    align-items:center;
+
+}
+
+
+
+.fluxo-item{
+
+    background:#eef5ff;
+
+    border:1px solid var(--line2);
+
+    border-radius:12px;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-weight:900;
+
+}
+
+
+
+.fluxo-item strong{
+
+    font-size:26px;
+
+    color:var(--primary);
+
+}
+
+
+
+.fluxo-item.pink strong{
+
+    color:var(--pink);
+
+}
+
+
+
+.fluxo-item.green strong{
+
+    color:var(--green);
+
+}
+
+
+
+.fluxo-arrow{
+
+    text-align:center;
+
+    font-size:22px;
+
+}
+
+
+
+.progress-box{
+
+    width:100%;
+
+    height:22px;
+
+    background:#dce8ff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+.progress-bar{
+
+    height:100%;
+
+    background:linear-gradient(90deg,#16a34a,#22c55e);
+
+    color:white;
+
+    text-align:center;
+
+    font-weight:900;
+
+    line-height:22px;
+
+}
+
+
+
+.senha-box{
+
+    max-width:430px;
+
+    margin:80px auto;
+
+    background:white;
+
+    border:1px solid var(--line);
+
+    border-radius:14px;
+
+    padding:24px;
+
+    text-align:center;
+
+}
+
+
+
+.btn{
+
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:11px 16px;
+
+    border-radius:10px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+
+
+.info-menu{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:8px;
+
+}
+
+
+
+.info-menu button{
+
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:10px 14px;
+
+    border-radius:10px;
+
+    font-weight:900;
+
+}
+
+
+
+.info-text{
+
+    text-align:center;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    font-weight:700;
+
+}
+
+
+
+.process-steps{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:8px;
+
+}
+
+
+
+.step{
+
+    background:#e8f0ff;
+
+    border:1px solid var(--line);
+
+    border-radius:12px;
+
+    padding:12px;
+
+    text-align:center;
+
+    font-weight:900;
 
 }
 
@@ -816,19 +843,15 @@ font-size:15px;
 
 .footer-note{
 
-text-align:center;
+    font-size:10px;
 
-font-size:11px;
-
-font-weight:900;
-
-color:var(--primary);
+    text-align:center;
 
 }
 
 
 
-@media(max-width:1100px){
+@media(max-width:1050px){
 
 .topbar{
 
@@ -838,18 +861,16 @@ height:auto;
 
 gap:8px;
 
-padding:10px;
-
 }
-
 
 
 .main-wrap{
 
 grid-template-columns:1fr;
 
-}
+height:auto;
 
+}
 
 
 .grid-2,
@@ -862,8 +883,9 @@ grid-template-columns:1fr;
 
 }
 
-</style>
 
+
+</style>
 
 </head>
 
@@ -871,19 +893,14 @@ grid-template-columns:1fr;
 <body>
 
 
-
 <header class="topbar">
 
 
 <div class="logo-labor">
 
-<div class="logo-main">
-LABOR
-</div>
+<div class="logo-main">LABOR</div>
 
-<div class="logo-sub">
-HEALTH SUPPLY
-</div>
+<div class="logo-sub">HEALTH SUPPLY</div>
 
 </div>
 
@@ -891,13 +908,9 @@ HEALTH SUPPLY
 
 <div class="top-title">
 
-<h1>
-PAINEL DE PROCESSOS SGQ
-</h1>
+<h1>PAINEL DE PROCESSOS SGQ</h1>
 
-<p>
-Indicadores operacionais em tempo real
-</p>
+<p>Indicadores operacionais em tempo real</p>
 
 </div>
 
@@ -905,19 +918,14 @@ Indicadores operacionais em tempo real
 
 <div class="top-status">
 
-<span class="pill" id="dataAtual">
---/--/----
-</span>
+<span class="pill data-pill" id="dataAtual">-- --- ----</span>
 
-
-<span class="pill" id="horaAtual">
---:--:--
-</span>
-
+<span class="pill time-pill" id="horaAtual">--:--:--</span>
 
 <span class="pill">
-<span class="online-dot">●</span>
-Online
+
+<span class="online-dot">●</span>Online
+
 </span>
 
 
@@ -925,8 +933,6 @@ Online
 
 
 </header>
-
-
 
 
 
@@ -938,59 +944,80 @@ Online
 
 <button 
 class="toggle-menu"
-onclick="toggleMenu()"
-id="btnToggleMenu">
+id="btnToggleMenu"
+onclick="toggleMenu()">
+
 ◀
+
 </button>
 
 
 
-<button class="active"
-onclick="abrirAba('importacao',this)">
+<button class="active" onclick="abrirAba('importacao',this)">
+
 <span class="ico">📦</span>
-Importação
-</button>
 
+Inspeção Importação
+
+</button>
 
 
 <button onclick="abrirAba('esfig',this)">
+
 <span class="ico">⏱</span>
-Esfig
+
+Esfigmomanômetro
+
 </button>
 
 
 
 <button onclick="abrirAba('descarte',this)">
+
 <span class="ico">🗑</span>
+
 Descarte
+
 </button>
 
 
 
 <button onclick="abrirAba('amostra',this)">
+
 <span class="ico">📦</span>
+
 Amostra
+
 </button>
 
 
 
 <button onclick="abrirAba('retrabalho',this)">
+
 <span class="ico">🔄</span>
+
 Retrabalho
+
 </button>
 
 
 
 <button onclick="abrirAba('equipamentos',this)">
+
 <span class="ico">🛠</span>
+
 Equipamentos
+
 </button>
 
 
 
 <button onclick="abrirAba('informativo',this)">
+
 <span class="ico">ℹ️</span>
+
 Informativo
+
 </button>
 
 
@@ -1002,10 +1029,7 @@ Informativo
 <main class="content" id="conteudo"></main>
 
 
-
 </div>
-
-
 
 
 
@@ -1020,54 +1044,73 @@ let senhaDescarteLiberada=false;
 
 
 
-Chart.register({
+const valorFlutuantePlugin={
 
 id:"valorFlutuante",
 
+
 afterDatasetsDraw(chart){
 
+
 const {ctx}=chart;
+
 
 ctx.save();
 
 
-chart.data.datasets.forEach((ds,index)=>{
+
+chart.data.datasets.forEach((dataset,datasetIndex)=>{
 
 
-const meta=chart.getDatasetMeta(index);
+const meta=chart.getDatasetMeta(datasetIndex);
 
 
-if(!meta.hidden){
+if(meta.hidden)return;
 
 
-meta.data.forEach((p,i)=>{
+
+meta.data.forEach((element,index)=>{
 
 
-let valor=ds.data[i];
+const valor=dataset.data[index];
 
 
-if(valor===undefined) return;
+
+if(valor===null || valor===undefined)return;
 
 
 
 ctx.font="900 11px Arial";
 
+
 ctx.fillStyle="#0f1f4d";
+
+
+
+let texto=Number(valor).toLocaleString("pt-BR");
+
 
 
 ctx.textAlign="center";
 
+
+ctx.textBaseline="bottom";
+
+
+
 ctx.fillText(
-Number(valor).toLocaleString("pt-BR"),
-p.x,
-p.y-8
+
+texto,
+
+element.x,
+
+element.y-8
+
 );
 
 
 
 });
-
-}
 
 
 });
@@ -1075,9 +1118,14 @@ p.y-8
 
 ctx.restore();
 
+
 }
 
-});
+};
+
+
+
+Chart.register(valorFlutuantePlugin);
 
 
 
@@ -1087,7 +1135,7 @@ fetch("data.json")
 
 .then(json=>{
 
-dados=json;
+dados=normalizarDados(json);
 
 renderImportacao();
 
@@ -1095,7 +1143,7 @@ renderImportacao();
 
 .catch(()=>{
 
-dados={};
+dados=normalizarDados({});
 
 renderImportacao();
 
@@ -1105,19 +1153,23 @@ renderImportacao();
 
 setInterval(()=>{
 
-
 fetch("data.json")
 
 .then(r=>r.json())
 
 .then(json=>{
 
-dados=json;
+dados=normalizarDados(json);
 
-const ativo=document.querySelector(".menu button.active");
 
-if(ativo)
-ativo.click();
+const aba=document.querySelector(".menu button.active");
+
+
+if(aba){
+
+aba.click();
+
+}
 
 
 });
@@ -1127,15 +1179,73 @@ ativo.click();
 
 
 
-function destruirGrafico(){
+function normalizarDados(json){
 
-if(graficoAtual){
 
-graficoAtual.destroy();
+if(Array.isArray(json.esfig)){
 
-graficoAtual=null;
+
+json.esfig={
+
+produtos:json.esfig
+
+};
+
 
 }
+
+
+return json;
+
+
+}
+function abrirAba(aba,botao){
+
+    document.querySelectorAll(".menu button")
+    .forEach(b=>b.classList.remove("active"));
+
+
+    if(botao)
+        botao.classList.add("active");
+
+
+    destruirGrafico();
+
+
+    if(aba==="importacao")
+        renderImportacao();
+
+    if(aba==="esfig")
+        renderEsfig();
+
+    if(aba==="descarte")
+        renderDescarte();
+
+    if(aba==="amostra")
+        renderAmostra();
+
+    if(aba==="retrabalho")
+        renderRetrabalho();
+
+    if(aba==="equipamentos")
+        renderEquipamentos();
+
+    if(aba==="informativo")
+        renderInformativo();
+
+}
+
+
+
+function destruirGrafico(){
+
+    if(graficoAtual){
+
+        graficoAtual.destroy();
+
+        graficoAtual=null;
+
+    }
 
 }
 
@@ -1143,8 +1253,8 @@ graficoAtual=null;
 
 function numero(v){
 
-return Number(v||0)
-.toLocaleString("pt-BR");
+    return Number(v||0)
+    .toLocaleString("pt-BR");
 
 }
 
@@ -1153,8 +1263,7 @@ return Number(v||0)
 function moeda(v){
 
 return Number(v||0)
-.toLocaleString("pt-BR",
-{
+.toLocaleString("pt-BR",{
 style:"currency",
 currency:"BRL"
 });
@@ -1165,16 +1274,16 @@ currency:"BRL"
 
 function atualizarRelogio(){
 
-
-let d=new Date();
-
-
-document.getElementById("dataAtual").innerText=
-d.toLocaleDateString("pt-BR");
+const agora=new Date();
 
 
-document.getElementById("horaAtual").innerText=
-d.toLocaleTimeString("pt-BR");
+document.getElementById("dataAtual").innerText =
+agora.toLocaleDateString("pt-BR");
+
+
+document.getElementById("horaAtual").innerText =
+agora.toLocaleTimeString("pt-BR");
+
 
 }
 
@@ -1186,188 +1295,22 @@ atualizarRelogio();
 
 
 
+
 function toggleMenu(){
 
-document
-.getElementById("mainWrap")
-.classList.toggle("menu-collapsed");
+const wrap=document.getElementById("mainWrap");
 
-
-}
-function abrirAba(aba,botao){
-
-document.querySelectorAll(".menu button")
-.forEach(b=>b.classList.remove("active"));
-
-
-if(botao)
-botao.classList.add("active");
-
-
-destruirGrafico();
-
-
-switch(aba){
-
-case "importacao":
-renderImportacao();
-break;
-
-
-case "esfig":
-renderEsfig();
-break;
-
-
-case "descarte":
-renderDescarte();
-break;
-
-
-case "amostra":
-renderAmostra();
-break;
-
-
-case "retrabalho":
-renderRetrabalho();
-break;
-
-
-case "equipamentos":
-renderEquipamentos();
-break;
-
-
-case "informativo":
-renderInformativo();
-break;
-
-}
+wrap.classList.toggle("menu-collapsed");
 
 }
 
 
 
 
-function baseOptions(){
-
-return {
-
-
-responsive:true,
-
-maintainAspectRatio:false,
-
-
-plugins:{
-
-
-legend:{
-
-
-labels:{
-
-
-color:"#0f1f4d",
-
-font:{
-weight:"900"
-}
-
-}
-
-
-}
-
-
-},
-
-
-scales:{
-
-
-x:{
-
-ticks:{
-color:"#0f1f4d"
-},
-
-grid:{
-display:false
-}
-
-
-},
-
-
-y:{
-
-beginAtZero:true,
-
-ticks:{
-color:"#0f1f4d"
-}
-
-
-}
-
-
-}
-
-
-};
-
-
-}
-
-
-
-
-
-function card(icon,titulo,valor,sub){
-
-
-return `
-
-<div class="kpi-card">
-
-<div class="kpi-icon">
-${icon}
-</div>
-
-
-<div>
-
-<h3>
-${titulo}
-</h3>
-
-
-<strong>
-${valor}
-</strong>
-
-
-<small>
-${sub}
-</small>
-
-
-</div>
-
-
-</div>
-
-
-`;
-
-}
-
-
-
-
-
+/* =====================================================
+   GRÁFICO IMPORTAÇÃO AJUSTADO
+   4 BARRAS AGRUPADAS + LINHA DE HORAS
+===================================================== */
 
 
 function renderImportacao(){
@@ -1397,7 +1340,9 @@ conteudo.innerHTML=`
 
 
 <div class="page-title">
+
 📦 INSPEÇÃO DE IMPORTAÇÃO
+
 </div>
 
 
@@ -1405,19 +1350,48 @@ conteudo.innerHTML=`
 <section class="cards">
 
 
-${card("📦","Processos Ano",numero(imp.processosAno),"Quantidade")}
+${card(
+"📦",
+"Processos por Ano",
+numero(imp.processosAno),
+"Quantidade de processos"
+)}
 
 
-${card("🏷️","SKU",numero(imp.totalSku),"Produtos")}
+
+${card(
+"🏷️",
+"Total de SKU",
+numero(imp.totalSku),
+"SKUs inspecionados"
+)}
 
 
-${card("📑","Lotes",numero(imp.totalLotes),"Controlados")}
+
+${card(
+"📑",
+"Total de Lotes",
+numero(imp.totalLotes),
+"Lotes controlados"
+)}
 
 
-${card("🧾","Laudos",numero(imp.laudosEmitidos),"Emitidos")}
+
+${card(
+"🧾",
+"Laudos Emitidos",
+numero(imp.laudosEmitidos),
+"Registros emitidos"
+)}
 
 
-${card("⏱","Horas",numero(imp.totalHoras),"Atividade")}
+
+${card(
+"⏱",
+"Total de Horas",
+numero(imp.totalHoras),
+"Horas atividade"
+)}
 
 
 
@@ -1425,12 +1399,15 @@ ${card("⏱","Horas",numero(imp.totalHoras),"Atividade")}
 
 
 
-
 <section class="panel">
 
+
 <h3>
-📊 Evolução Mensal Importação
+
+📊 Evolução Mensal Inspeção de Importação
+
 </h3>
+
 
 
 <div class="chart-box">
@@ -1447,16 +1424,22 @@ ${card("⏱","Horas",numero(imp.totalHoras),"Atividade")}
 
 <section class="panel">
 
+
 <h3>
-📋 Fluxo Importação
+
+📋 Fluxo Inspeção de Importação
+
 </h3>
 
 
-${tabelaFixa(
+
+${
+
+tabelaFixa(
 
 [
 "PO",
-"Produto",
+"Descrição do Produto",
 "Status",
 "Observação"
 ],
@@ -1465,8 +1448,9 @@ montarLinhasImportacao(imp.fluxo),
 
 false
 
-)}
+)
 
+}
 
 
 </section>
@@ -1478,13 +1462,13 @@ false
 
 
 
-const meses=
-(imp.mensal||[])
-.map(x=>x.mes);
+
+const mensal=imp.mensal || [];
 
 
 
 graficoAtual=new Chart(
+
 document.getElementById("grafico"),
 
 {
@@ -1496,7 +1480,7 @@ type:"bar",
 data:{
 
 
-labels:meses,
+labels:mensal.map(i=>i.mes),
 
 
 datasets:[
@@ -1507,9 +1491,15 @@ datasets:[
 
 label:"Processos",
 
-data:imp.mensal.map(x=>x.processos||0),
+data:mensal.map(i=>Number(i.processos||0)),
 
-backgroundColor:"#1d4eff"
+backgroundColor:"#1d4eff",
+
+borderRadius:6,
+
+barPercentage:.8,
+
+categoryPercentage:.7
 
 },
 
@@ -1519,9 +1509,15 @@ backgroundColor:"#1d4eff"
 
 label:"SKU",
 
-data:imp.mensal.map(x=>x.sku||0),
+data:mensal.map(i=>Number(i.sku||0)),
 
-backgroundColor:"#f04dd8"
+backgroundColor:"#f04dd8",
+
+borderRadius:6,
+
+barPercentage:.8,
+
+categoryPercentage:.7
 
 },
 
@@ -1531,9 +1527,15 @@ backgroundColor:"#f04dd8"
 
 label:"Lotes",
 
-data:imp.mensal.map(x=>x.lotes||0),
+data:mensal.map(i=>Number(i.lotes||0)),
 
-backgroundColor:"#22c55e"
+backgroundColor:"#22c55e",
+
+borderRadius:6,
+
+barPercentage:.8,
+
+categoryPercentage:.7
 
 },
 
@@ -1543,9 +1545,15 @@ backgroundColor:"#22c55e"
 
 label:"Laudos",
 
-data:imp.mensal.map(x=>x.laudos||0),
+data:mensal.map(i=>Number(i.laudos||0)),
 
-backgroundColor:"#8b5cf6"
+backgroundColor:"#8b5cf6",
+
+borderRadius:6,
+
+barPercentage:.8,
+
+categoryPercentage:.7
 
 },
 
@@ -1557,19 +1565,34 @@ label:"Horas",
 
 type:"line",
 
-data:imp.mensal.map(x=>x.horas||0),
+data:mensal.map(i=>Number(i.horas||0)),
+
 
 borderColor:"#f97316",
 
 backgroundColor:"#f97316",
 
-yAxisID:"y1",
 
-tension:.3,
+borderWidth:3,
 
-borderWidth:3
+
+tension:.35,
+
+
+pointRadius:5,
+
+
+pointHoverRadius:7,
+
+
+yAxisID:"horas",
+
+
+order:0
+
 
 }
+
 
 
 ]
@@ -1579,44 +1602,171 @@ borderWidth:3
 
 
 
+
 options:{
 
 
-...baseOptions(),
+responsive:true,
+
+
+maintainAspectRatio:false,
+
 
 
 interaction:{
+
 
 mode:"index",
 
 intersect:false
 
+
 },
+
+
+
+layout:{
+
+
+padding:{
+
+
+top:25,
+
+right:35,
+
+left:10,
+
+bottom:10
+
+
+}
+
+
+},
+
 
 
 scales:{
 
 
+
 y:{
 
-beginAtZero:true
+
+beginAtZero:true,
+
+
+title:{
+
+
+display:true,
+
+text:"Quantidade"
+
+
+}
+
+
 
 },
 
 
 
-y1:{
 
+horas:{
 
-position:"right",
 
 beginAtZero:true,
 
 
+position:"right",
+
+
+title:{
+
+
+display:true,
+
+text:"Horas"
+
+
+},
+
+
 grid:{
+
 
 drawOnChartArea:false
 
+
+},
+
+
+ticks:{
+
+
+color:"#f97316"
+
+
+}
+
+
+},
+
+
+
+x:{
+
+
+grid:{
+
+
+display:false
+
+
+}
+
+
+}
+
+
+
+},
+
+
+
+plugins:{
+
+
+legend:{
+
+
+labels:{
+
+
+font:{
+
+
+weight:"900"
+
+
+}
+
+
+}
+
+
+},
+
+
+
+tooltip:{
+
+
+enabled:true
+
+
 }
 
 
@@ -1627,45 +1777,66 @@ drawOnChartArea:false
 }
 
 
-}
-
-
-
-});
-
 
 
 }
 
 
 
+);
 
 
 
-
-
-
+}
 function renderEsfig(){
 
+const esfig=dados.esfig || {};
 
-const e=dados.esfig || {
-
-produtos:[]
-
-};
-
-
-
-const lista=e.produtos||[];
-
+const produtos=esfig.produtos || [];
 
 
 conteudo.innerHTML=`
 
 
 <div class="page-title">
+
 ⏱ ESFIGMOMANÔMETRO
+
 </div>
+
+
+
+<section class="cards">
+
+
+${card(
+"💰",
+"Total Gasto GRU",
+moeda(esfig.totalGruInmetro),
+"Valor pago ao Inmetro"
+)}
+
+
+
+${card(
+"📅",
+"Última Aferição",
+esfig.ultimaAfericao || "-",
+"Data registrada"
+)}
+
+
+
+${card(
+"📆",
+"Próxima Aferição",
+esfig.proximaAfericao || "-",
+"Previsão"
+)}
+
+
+</section>
+
 
 
 
@@ -1674,9 +1845,8 @@ conteudo.innerHTML=`
 
 <div class="panel">
 
-
 <h3>
-Fluxo Operacional
+⏱ Fluxo Operacional
 </h3>
 
 
@@ -1685,17 +1855,16 @@ ${tabelaFixa(
 [
 "SKU",
 "Descrição",
-"Aguard.",
-"Desm.",
-"Afer."
+"Aguardando",
+"Desmontado",
+"Aferido"
 ],
 
-montarLinhasEsfig(lista),
+montarLinhasEsfig(produtos),
 
 true
 
 )}
-
 
 
 </div>
@@ -1704,13 +1873,12 @@ true
 
 <div class="panel">
 
-
 <h3>
 Total por SKU
 </h3>
 
 
-<div class="chart-box tall">
+<div class="chart-box">
 
 <canvas id="grafico"></canvas>
 
@@ -1727,33 +1895,27 @@ Total por SKU
 
 
 
-
 graficoAtual=new Chart(
 
 document.getElementById("grafico"),
 
 {
 
-
 type:"bar",
-
 
 data:{
 
 
-labels:
-lista.map(x=>x.sku),
+labels:produtos.map(i=>i.sku),
 
 
 datasets:[{
 
-label:"Quantidade",
+label:"Total",
 
-data:
-lista.map(x=>Number(x.totalAnualSku||0)),
+data:produtos.map(i=>Number(i.totalAnualSku||0)),
 
 backgroundColor:"#1d4eff"
-
 
 }]
 
@@ -1763,26 +1925,17 @@ backgroundColor:"#1d4eff"
 
 options:{
 
+responsive:true,
 
-...baseOptions(),
+maintainAspectRatio:false,
 
-indexAxis:"y",
-
-plugins:{
-
-legend:{
-display:false
-}
-
-}
+indexAxis:"y"
 
 
 }
 
 
 }
-
-
 
 );
 
@@ -1805,21 +1958,20 @@ conteudo.innerHTML=`
 
 <div class="senha-box">
 
-
 <h2>
-🔒 Descarte Restrito
+🔒 Área Restrita
 </h2>
 
-
-<input id="senhaDescarte"
+<input 
 type="password"
+id="senhaDescarte"
 placeholder="Senha">
 
 
 <button class="btn"
 onclick="validarSenhaDescarte()">
 
-Entrar
+Acessar
 
 </button>
 
@@ -1829,9 +1981,7 @@ Entrar
 
 </div>
 
-
 `;
-
 
 return;
 
@@ -1839,34 +1989,71 @@ return;
 
 
 
-const d=dados.descarte||{
-
-origens:[]
-
-};
+const d=dados.descarte || {};
 
 
 
 conteudo.innerHTML=`
 
+
 <div class="page-title">
+
 🗑 DESCARTE
+
 </div>
 
 
-<section class="panel">
+
+<section class="grid-2">
+
+
+<div class="panel">
 
 
 <h3>
+
 Descarte por Origem
+
 </h3>
 
 
-<div class="chart-box tall">
+<div class="chart-box">
 
 <canvas id="grafico"></canvas>
 
 </div>
+
+
+</div>
+
+
+
+<div class="panel">
+
+<h3>
+
+Top Descarte
+
+</h3>
+
+
+${tabelaFixa(
+
+[
+"SKU",
+"Descrição",
+"Valor"
+],
+
+montarLinhasTopDescarte(d.top10),
+
+true
+
+)}
+
+
+</div>
+
 
 
 </section>
@@ -1882,43 +2069,37 @@ document.getElementById("grafico"),
 
 {
 
-
 type:"bar",
-
 
 data:{
 
-
-labels:d.origens.map(x=>x.nome),
-
+labels:(d.origens||[]).map(i=>i.nome),
 
 datasets:[{
 
 label:"Valor",
 
-data:d.origens.map(x=>x.valor),
+data:(d.origens||[]).map(i=>i.valor),
 
-backgroundColor:"#ef4444"
-
+backgroundColor:"#1d4eff"
 
 }]
-
 
 },
 
 
 options:{
 
-...baseOptions(),
+responsive:true,
+
+maintainAspectRatio:false,
 
 indexAxis:"y"
 
 }
 
 
-
 }
-
 
 );
 
@@ -1928,46 +2109,50 @@ indexAxis:"y"
 
 
 
+
+
 function validarSenhaDescarte(){
 
 
-if(
-document.getElementById("senhaDescarte").value
-==="SGQ2026"
+const senha=document.getElementById("senhaDescarte").value;
 
-){
+
+if(senha==="SGQ2026"){
 
 senhaDescarteLiberada=true;
 
 renderDescarte();
 
+}
 
-}else{
+else{
 
-
-document.getElementById("erroSenha").innerText=
-"Senha incorreta";
-
+document.getElementById("erroSenha").innerText="Senha incorreta";
 
 }
 
 
 }
+
+
+
+
+
+
 function renderAmostra(){
 
 
-const a=dados.amostra || dados.amostras || {
-
-mensal:[]
-
-};
+const a=dados.amostras || {};
 
 
 
 conteudo.innerHTML=`
 
+
 <div class="page-title">
+
 📦 AMOSTRA
+
 </div>
 
 
@@ -1975,7 +2160,9 @@ conteudo.innerHTML=`
 
 
 <h3>
-📈 Evolução Mensal de Amostras
+
+Evolução Mensal
+
 </h3>
 
 
@@ -1989,7 +2176,6 @@ conteudo.innerHTML=`
 </section>
 
 
-
 `;
 
 
@@ -2000,73 +2186,36 @@ document.getElementById("grafico"),
 
 {
 
-
 type:"line",
-
 
 data:{
 
 
-labels:(a.mensal||[]).map(x=>x.mes),
+labels:(a.mensal||[]).map(i=>i.mes),
 
 
-datasets:[
+datasets:[{
 
-{
 
 label:"Quantidade",
 
-data:(a.mensal||[]).map(x=>x.valor||0),
+data:(a.mensal||[]).map(i=>i.valor),
 
 borderColor:"#1d4eff",
 
-backgroundColor:"#1d4eff",
+backgroundColor:"#1d4eff"
 
-borderWidth:3,
-
-tension:.3
-
-},
-
-
-{
-
-label:"Horas",
-
-data:(a.mensal||[]).map(x=>x.horas||0),
-
-borderColor:"#f04dd8",
-
-backgroundColor:"#f04dd8",
-
-borderWidth:3,
-
-borderDash:[6,5],
-
-tension:.3
-
-}
-
-
-]
-
-
-},
-
-
-options:baseOptions()
+}]
 
 
 }
 
+}
 
 );
 
 
-
 }
-
-
 
 
 
@@ -2075,189 +2224,42 @@ options:baseOptions()
 function renderRetrabalho(){
 
 
-
-const r=dados.retrabalho || {
-
-fabricantes:[]
-
-};
+const r=dados.retrabalho || {fabricantes:[]};
 
 
 
 conteudo.innerHTML=`
 
+
 <div class="page-title">
+
 🔄 RETRABALHO
+
 </div>
 
 
-
-<section class="cards">
-
-
-${card(
-"🔄",
-"Total Retrabalhado",
-numero(r.totalUnidades),
-"Produtos"
-)}
-
-
-
-${card(
-"⏱",
-"Horas",
-numero(r.totalHoras),
-"Aplicadas"
-)}
-
-
-
-${card(
-"📋",
-"Processos",
-numero(r.processos),
-"Ocorrências"
-)}
-
-
-
-</section>
-
-
-
-
-<section class="grid-2">
-
-
-<div class="panel">
+<section class="panel">
 
 
 <h3>
+
 🏭 Retrabalho por Fabricante
+
 </h3>
 
 
-<input
-id="buscaFabricante"
-placeholder="Pesquisar fabricante..."
-onkeyup="atualizarGraficoRetrabalho()"
-style="
-width:100%;
-padding:10px;
-border-radius:10px;
-border:1px solid #b8d1ff;
-margin-bottom:10px;
-font-weight:900;
-">
 
-
-<div class="chart-box tall">
+<div class="chart-box">
 
 <canvas id="grafico"></canvas>
 
 </div>
 
 
-</div>
-
-
-
-
-<div class="panel">
-
-
-<h3>
-📋 Detalhamento
-</h3>
-
-
-<div id="tabelaRetrabalho">
-
-
-${tabelaFixa(
-
-[
-"Fabricante",
-"Quantidade",
-"Horas",
-"Motivo"
-],
-
-montarLinhasRetrabalho(r.fabricantes),
-
-false
-
-)}
-
-
-</div>
-
-
-</div>
-
-
-
 </section>
 
 
-
 `;
-
-
-
-atualizarGraficoRetrabalho();
-
-
-
-}
-
-
-
-
-
-function atualizarGraficoRetrabalho(){
-
-
-const r=dados.retrabalho||{
-
-fabricantes:[]
-
-};
-
-
-
-const busca=
-(
-document.getElementById("buscaFabricante")?.value
-||
-""
-)
-.toLowerCase();
-
-
-
-const lista=
-(r.fabricantes||[])
-
-.filter(x=>
-
-String(x.fabricante)
-.toLowerCase()
-.includes(busca)
-
-)
-
-.sort(
-(a,b)=>
-Number(b.quantidade||0)
--
-Number(a.quantidade||0)
-);
-
-
-
-destruirGrafico();
 
 
 
@@ -2267,23 +2269,20 @@ document.getElementById("grafico"),
 
 {
 
-
 type:"bar",
-
 
 data:{
 
 
-labels:
-lista.map(x=>x.fabricante),
+labels:r.fabricantes.map(i=>i.fabricante),
 
 
 datasets:[{
 
+
 label:"Quantidade",
 
-data:
-lista.map(x=>x.quantidade||0),
+data:r.fabricantes.map(i=>i.quantidade),
 
 backgroundColor:"#1d4eff"
 
@@ -2293,33 +2292,24 @@ backgroundColor:"#1d4eff"
 },
 
 
-
 options:{
 
-...baseOptions(),
+responsive:true,
 
-indexAxis:"y",
+maintainAspectRatio:false,
 
-plugins:{
-
-legend:{
-display:false
-}
-
-}
+indexAxis:"y"
 
 }
 
 
 }
-
-
 
 );
 
 
-
 }
+
 
 
 
@@ -2328,21 +2318,26 @@ display:false
 function renderEquipamentos(){
 
 
-const e=dados.equipamentos||[];
+const lista=dados.equipamentos||[];
 
 
 
 conteudo.innerHTML=`
 
+
 <div class="page-title">
+
 🛠 EQUIPAMENTOS
+
 </div>
 
 
 <section class="panel">
 
 
-${tabelaFixa(
+${
+
+tabelaFixa(
 
 [
 "Produto",
@@ -2351,12 +2346,13 @@ ${tabelaFixa(
 "Observação"
 ],
 
-montarLinhasEquipamentos(e),
+montarLinhasEquipamentos(lista),
 
 false
 
-)}
+)
 
+}
 
 
 </section>
@@ -2367,6 +2363,7 @@ false
 
 
 }
+
 
 
 
@@ -2378,31 +2375,18 @@ function renderInformativo(){
 conteudo.innerHTML=`
 
 <div class="page-title">
-ℹ️ INFORMATIVO
-</div>
 
+ℹ️ INFORMATIVO
+
+</div>
 
 
 <section class="panel">
 
 
-<h3>
-Processos SGQ
-</h3>
+<p class="info-text">
 
-
-<p style="
-text-align:center;
-font-weight:800;
-font-size:16px;
-line-height:1.8;
-">
-
-
-Este painel apresenta indicadores dos processos de qualidade,
-controle operacional, inspeções, retrabalho, descarte,
-amostras e equipamentos.
-
+Painel de acompanhamento dos processos SGQ.
 
 </p>
 
@@ -2421,7 +2405,62 @@ amostras e equipamentos.
 
 
 
-function tabelaFixa(headers,rows){
+
+function card(icon,titulo,valor,sub){
+
+
+return `
+
+
+<div class="kpi-card">
+
+
+<div class="kpi-icon">
+
+${icon}
+
+</div>
+
+
+<div>
+
+
+<h3>
+
+${titulo}
+
+</h3>
+
+
+<strong>
+
+${valor}
+
+</strong>
+
+
+<small>
+
+${sub}
+
+</small>
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+}
+
+
+
+
+
+function tabelaFixa(headers,rows,infinito){
 
 
 return `
@@ -2435,13 +2474,12 @@ return `
 
 <thead>
 
+
 <tr>
 
-${headers.map(h=>
 
-`<th>${h}</th>`
+${headers.map(h=>`<th>${h}</th>`).join("")}
 
-).join("")}
 
 </tr>
 
@@ -2449,21 +2487,10 @@ ${headers.map(h=>
 </thead>
 
 
-
 <tbody>
 
 
-${rows || `
-
-<tr>
-
-<td colspan="${headers.length}">
-Sem dados
-</td>
-
-</tr>
-
-`}
+${rows || ""}
 
 
 </tbody>
@@ -2475,13 +2502,9 @@ Sem dados
 </div>
 
 
-
 `;
 
-
-
 }
-
 
 
 
@@ -2491,28 +2514,43 @@ function montarLinhasImportacao(lista){
 
 
 if(!lista || !lista.length)
+
 return "";
+
 
 
 return lista.map(i=>`
 
+
 <tr>
+
 
 <td>${i.po||"-"}</td>
 
+
 <td class="desc">
+
 ${i.descricao||"-"}
+
 </td>
 
+
 <td>
+
 ${i.status||"-"}
+
 </td>
 
+
 <td>
+
 ${i.observacao||"-"}
+
 </td>
+
 
 </tr>
+
 
 `).join("");
 
@@ -2529,25 +2567,19 @@ function montarLinhasEsfig(lista){
 
 return (lista||[]).map(i=>`
 
+
 <tr>
 
-<td>${i.sku||"-"}</td>
 
-<td class="desc">
-${i.descricao||"-"}
-</td>
+<td>${i.sku}</td>
 
-<td>
-${numero(i.aguardando)}
-</td>
+<td>${i.descricao}</td>
 
-<td>
-${numero(i.desmontado)}
-</td>
+<td>${numero(i.aguardando)}</td>
 
-<td>
-${numero(i.aferidos)}
-</td>
+<td>${numero(i.desmontado)}</td>
+
+<td>${numero(i.aferidos)}</td>
 
 
 </tr>
@@ -2563,32 +2595,19 @@ ${numero(i.aferidos)}
 
 
 
-function montarLinhasRetrabalho(lista){
+function montarLinhasTopDescarte(lista){
 
 
 return (lista||[]).map(i=>`
 
+
 <tr>
 
-<td>
-${i.fabricante||"-"}
-</td>
+<td>${i.sku}</td>
 
+<td>${i.descricao}</td>
 
-<td>
-${numero(i.quantidade)}
-</td>
-
-
-<td>
-${numero(i.horas)}
-</td>
-
-
-<td class="desc">
-${i.motivo||"-"}
-</td>
-
+<td>${moeda(i.valor)}</td>
 
 </tr>
 
@@ -2607,27 +2626,16 @@ function montarLinhasEquipamentos(lista){
 
 return (lista||[]).map(i=>`
 
+
 <tr>
 
+<td>${i.produto}</td>
 
-<td>
-${i.produto||"-"}
-</td>
+<td>${i.descricao}</td>
 
+<td>${numero(i.quantidade)}</td>
 
-<td class="desc">
-${i.descricao||"-"}
-</td>
-
-
-<td>
-${numero(i.quantidade)}
-</td>
-
-
-<td>
-${i.observacao||"-"}
-</td>
+<td>${i.observacao||"-"}</td>
 
 
 </tr>
@@ -2640,14 +2648,14 @@ ${i.observacao||"-"}
 
 
 
-</script>
 
+// inicia painel
+
+renderImportacao();
+
+
+</script>
 
 </body>
 
-
 </html>
-
-
-
-
