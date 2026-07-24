@@ -674,121 +674,45 @@ function renderImportacao(){
     },
 
 
-    options:{
+          options:{
 
-        responsive:true,
-        maintainAspectRatio:false,
+            responsive:true,
+            maintainAspectRatio:false,
 
-        interaction:{
-            mode:"index",
-            intersect:false
-        },
-
-
-        scales:{
-
-            y:{
-                beginAtZero:true,
-                position:"left",
-                title:{
-                    display:true,
-                    text:"Quantidade"
-                }
+            interaction:{
+                mode:"index",
+                intersect:false
             },
 
+            scales:{
 
-            y1:{
-                beginAtZero:true,
-                position:"right",
-
-                title:{
-                    display:true,
-                    text:"Horas"
+                y:{
+                    beginAtZero:true,
+                    position:"left",
+                    title:{
+                        display:true,
+                        text:"Quantidade"
+                    }
                 },
 
-                grid:{
-                    drawOnChartArea:false
+                y1:{
+                    beginAtZero:true,
+                    position:"right",
+
+                    title:{
+                        display:true,
+                        text:"Horas"
+                    },
+
+                    grid:{
+                        drawOnChartArea:false
+                    }
                 }
+
             }
 
         }
 
-    }
-
-});
-    
-    options:{
-
-        responsive:true,
-        maintainAspectRatio:false,
-
-        interaction:{
-            mode:"index",
-            intersect:false
-        },
-
-
-        scales:{
-
-            y:{
-                beginAtZero:true,
-                position:"left",
-                title:{
-                    display:true,
-                    text:"Quantidade"
-                }
-            },
-
-
-            y1:{
-                beginAtZero:true,
-                position:"right",
-
-                title:{
-                    display:true,
-                    text:"Horas"
-                },
-
-                grid:{
-                    drawOnChartArea:false
-                }
-            }
-
-        }
-
-    }
-
-});
-options:{
-    responsive:true,
-    maintainAspectRatio:false,
-    interaction:{
-        mode:"index",
-        intersect:false
-    },
-    scales:{
-        y:{
-            beginAtZero:true,
-            position:"left",
-            title:{
-                display:true,
-                text:"Quantidade"
-            }
-        },
-        y1:{
-            beginAtZero:true,
-            position:"right",
-            title:{
-                display:true,
-                text:"Horas"
-            },
-            grid:{
-                drawOnChartArea:false
-            }
-        }
-    }
-}
-        }
     });
 
 }
