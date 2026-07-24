@@ -863,154 +863,177 @@ function renderAmostra(){
         options:opcoesAmostra
     });
 }
+let chartRetrabalho = null;
 
-        <div style="
-            height:650px;
-            margin-top:20px;
-        ">
+function renderRetrabalho(){
 
-            <canvas id="graficoRetrabalho"></canvas>
+    const lista = dados.retrabalho || [];
 
+    conteudo.innerHTML = `
+        <div class="page-title">
+            🔄 RETRABALHO
         </div>
 
-    </section>
+        <section class="cards">
 
+            ${card(
+                "🔄",
+                "Total Retrabalhado",
+                numero(lista.reduce((s,x)=>s+Number(x.quantidade||0),0)),
+                "Itens retrabalhados"
+            )}
 
-    <section class="tabela-container">
+            ${card(
+                "🏭",
+                "Fabricantes",
+                numero(lista.length),
+                "Com retrabalho"
+            )}
 
-        <div class="titulo-grafico">
-            📋 Detalhamento do Retrabalho
-        </div>
+            ${card(
+                "⏱",
+                "Horas Totais",
+                numero(lista.reduce((s,x)=>s+Number(x.horas||0),0)),
+                "Horas gastas"
+            )}
 
-        <div class="table-wrapper">
+        </section>
 
-            <table id="tabelaRetrabalho">
+        <section class="panel">
 
-                <thead>
+            <h3>Quantidade Retrabalhada por Fabricante</h3>
 
-                    <tr>
-                        <th>Fabricante</th>
-                        <th>Quantidade Retrabalhada</th>
-                        <th>Horas</th>
-                    </tr>
+            <input
+                id="pesquisaRetrabalho"
+                class="barra-pesquisa"
+                placeholder="🔎 Pesquisar fabricante..."
+                onkeyup="filtrarRetrabalho()"
+            >
 
-                </thead>
+            <div class="chart-box esfig-large">
+                <canvas id="graficoRetrabalho"></canvas>
+            </div>
 
-                <tbody></tbody>
+        </section>
 
-            </table>
+        <section class="panel">
 
-        </div>
+            <h3>Detalhamento do Retrabalho</h3>
 
-    </section>
+            <div id="tabelaRetrabalho"></div>
 
+        </section>
     `;
 
     atualizarRetrabalho(lista);
 
 }
 
-
-
 function atualizarRetrabalho(lista){
 
     criarGraficoRetrabalho(lista);
-    criarTabelaRetrabalho(lista);
+
+    document.getElementById("tabelaRetrabalho").innerHTML =
+        tabelaFixa(
+            ["Fabricante","Quantidade","Horas","Motivo"],
+            montarLinhasRetrabalho(lista),
+            true
+        );
 
 }
 
+function filtrarRetrabalho(){
 
+    const texto =
+        document
+        .getElementById("pesquisaRetrabalho")
+        .value
+        .toLowerCase();
+
+    const lista =
+        (dados.retrabalho || []).filter(i =>
+            String(i.fabricante)
+            .toLowerCase()
+            .includes(texto)
+        );
+
+    atualizarRetrabalho(lista);
+
+}
 
 function criarGraficoRetrabalho(lista){
 
-    const ordenado = [...lista].sort(
-        (a,b)=>Number(b.quantidade)-Number(a.quantidade)
-    );
-
-    const labels = ordenado.map(x=>x.fabricante);
-    const valores = ordenado.map(x=>Number(x.quantidade||0));
+    const ordenado =
+        [...lista].sort(
+            (a,b)=>
+            Number(b.quantidade)-Number(a.quantidade)
+        );
 
     if(chartRetrabalho){
+
         chartRetrabalho.destroy();
+
     }
 
-    chartRetrabalho = new Chart(
-        document.getElementById("graficoRetrabalho"),
-        {
+    chartRetrabalho =
+        new Chart(
 
-            type:"bar",
+            document.getElementById("graficoRetrabalho"),
 
-            data:{
-                labels:labels,
+            {
 
-                datasets:[{
+                type:"bar",
 
-                    label:"Quantidade Retrabalhada",
+                data:{
 
-                    data:valores,
+                    labels:
+                        ordenado.map(i=>i.fabricante),
 
-                    backgroundColor:"#1d4eff",
+                    datasets:[{
 
-                    borderRadius:8,
+                        label:"Quantidade",
 
-                    borderSkipped:false,
+                        data:
+                            ordenado.map(i=>Number(i.quantidade||0)),
 
-                    barThickness:22
+                        backgroundColor:"#1d4eff",
 
-                }]
-            },
+                        borderRadius:8,
 
-            options:{
+                        borderSkipped:false,
 
-                indexAxis:"y",
+                        barThickness:22
 
-                responsive:true,
-
-                maintainAspectRatio:false,
-
-                plugins:{
-
-                    legend:{
-                        display:false
-                    },
-
-                    tooltip:{
-                        callbacks:{
-                            label:function(ctx){
-                                return "Quantidade: " + numero(ctx.raw);
-                            }
-                        }
-                    }
+                    }]
 
                 },
 
-                scales:{
+                options:{
 
-                    x:{
-                        beginAtZero:true,
+                    ...baseOptions(),
 
-                        grid:{
-                            color:"#d9e6ff"
-                        },
+                    indexAxis:"y",
 
-                        ticks:{
-                            font:{
-                                size:14
-                            }
+                    plugins:{
+
+                        legend:{
+                            display:false
                         }
 
                     },
 
-                    y:{
+                    scales:{
 
-                        grid:{
-                            display:false
+                        x:{
+                            beginAtZero:true
                         },
 
-                        ticks:{
-                            font:{
-                                size:15,
-                                weight:"bold"
+                        y:{
+                            ticks:{
+                                font:{
+                                    size:13,
+                                    weight:"bold"
+                                }
                             }
                         }
 
@@ -1020,11 +1043,43 @@ function criarGraficoRetrabalho(lista){
 
             }
 
-        }
-    );
+        );
 
 }
-    
+
+function montarLinhasRetrabalho(lista){
+
+    if(!lista || !lista.length){
+
+        return `
+        <tr>
+            <td colspan="4">
+                Nenhum fabricante encontrado
+            </td>
+        </tr>
+        `;
+
+    }
+
+    return [...lista]
+    .sort((a,b)=>Number(b.quantidade)-Number(a.quantidade))
+    .map(i=>`
+
+        <tr>
+
+            <td class="desc">${i.fabricante}</td>
+
+            <td>${numero(i.quantidade)}</td>
+
+            <td>${numero(i.horas)}</td>
+
+            <td class="desc">${i.motivo || "-"}</td>
+
+        </tr>
+
+    `).join("");
+
+}
 
 function renderEquipamentos(){
     const lista = dados.equipamentos || [];
@@ -1099,8 +1154,6 @@ document
 .value
 .toLowerCase();
 
-const select =
-document.getElementById("filtroFabricante");
 
 let primeiro = null;
 
