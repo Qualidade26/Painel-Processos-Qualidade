@@ -603,246 +603,117 @@ function toggleMenu(){
 }
 
 function renderImportacao(){
-
-    const imp = dados.importacao || {
-        processosAno:0,
-        totalSku:0,
-        totalLotes:0,
-        laudosEmitidos:0,
-        totalHoras:0,
-        mensal:[],
-        fluxo:[],
-        skuAno:[]
-    };
-
+    const imp = dados.importacao || {processosAno:0,totalSku:0,totalLotes:0,laudosEmitidos:0,totalHoras:0,mensal:[],fluxo:[]};
     conteudo.innerHTML = `
-
-        <div class="page-title">
-            📦 INSPEÇÃO DE IMPORTAÇÃO
-        </div>
-
+        <div class="page-title">📦 INSPEÇÃO DE IMPORTAÇÃO</div>
         <section class="cards">
-
             ${card("📦","Processos por Ano",numero(imp.processosAno),"Quantidade de processos")}
-
             ${card("🏷️","Total de SKU",numero(imp.totalSku),"SKUs inspecionados")}
-
             ${card("📑","Total de Lotes",numero(imp.totalLotes),"Lotes controlados")}
-
             ${card("🧾","Laudos Emitidos",numero(imp.laudosEmitidos),"Registros emitidos")}
-
             ${card("⏱","Total de Horas",numero(imp.totalHoras),"Horas da atividade")}
-
         </section>
-
-
-        <section class="panel">
-
-            <h3>EVOLUÇÃO MENSAL DA INSPEÇÃO DE IMPORTAÇÃO</h3>
-
-            <div class="chart-box">
-
-                <canvas id="grafico"></canvas>
-
-            </div>
-
-        </section>
-
-
-        <section class="grid-2">
-
-            <div class="panel">
-
-                <h3>SKUS INSPECIONADOS (ANO)</h3>
-
-                <div class="chart-box small">
-
-                    <canvas id="graficoSku"></canvas>
-
-                </div>
-
-            </div>
-
-            <div class="panel">
-
-                <h3>FLUXO INSPEÇÃO DE IMPORTAÇÃO</h3>
-
-                ${
-                    tabelaFixa(
-                        ["PO","SKU","Descrição","Lote","Status","Observação"],
-                        montarLinhasImportacao(imp.fluxo),
-                        false
-                    )
-                }
-
-            </div>
-
-        </section>
-
+        <section class="panel"><h3>📊 Evolução Mensal da Inspeção de Importação</h3><div class="chart-box"><canvas id="grafico"></canvas></div></section>
+        <section class="panel"><h3>Fluxo Inspeção de Importação</h3>${tabelaFixa(["PO","Descrição do Produto","Status","Observação"], montarLinhasImportacao(imp.fluxo), false)}</section>
     `;
-
-graficoAtual = new Chart(document.getElementById("grafico"),{
+    graficoAtual = new Chart(document.getElementById("grafico"),{
+    type:"line",
 
     data:{
-
-        labels:(imp.mensal || []).map(i=>i.mes),
+        labels:(imp.mensal || []).map(i => i.mes),
 
         datasets:[
 
             {
-                type:"bar",
-                label:"Processos",
-                data:(imp.mensal || []).map(i=>Number(i.processos || 0)),
-                backgroundColor:"#1d4eff",
-                borderRadius:4,
-                barThickness:18
+                ...dsLine(
+                    "Processos",
+                    (imp.mensal || []).map(i => i.processos || 0),
+                    "#1d4eff"
+                ),
+                yAxisID:"y"
             },
 
             {
-                type:"bar",
-                label:"SKU",
-                data:(imp.mensal || []).map(i=>Number(i.sku || 0)),
-                backgroundColor:"#f04dd8",
-                borderRadius:4,
-                barThickness:18
+                ...dsLine(
+                    "SKU",
+                    (imp.mensal || []).map(i => i.sku || 0),
+                    "#f04dd8"
+                ),
+                yAxisID:"y"
             },
 
             {
-                type:"bar",
-                label:"Lotes",
-                data:(imp.mensal || []).map(i=>Number(i.lotes || 0)),
-                backgroundColor:"#22c55e",
-                borderRadius:4,
-                barThickness:18
+                ...dsLine(
+                    "Lotes",
+                    (imp.mensal || []).map(i => i.lotes || 0),
+                    "#22c55e"
+                ),
+                yAxisID:"y"
             },
 
             {
-                type:"bar",
-                label:"Laudos",
-                data:(imp.mensal || []).map(i=>Number(i.laudos || 0)),
-                backgroundColor:"#8b5cf6",
-                borderRadius:4,
-                barThickness:18
+                ...dsLine(
+                    "Laudos",
+                    (imp.mensal || []).map(i => i.laudos || 0),
+                    "#8b5cf6"
+                ),
+                yAxisID:"y"
             },
 
             {
-                type:"line",
-                label:"Horas",
-
-                data:(imp.mensal || []).map(i=>Number(i.horas || 0)),
-
-                borderColor:"#f97316",
-
-                backgroundColor:"#f97316",
-
-                pointBackgroundColor:"#f97316",
-
-                pointRadius:5,
-
-                pointHoverRadius:6,
-
-                borderWidth:2,
-
-                tension:.35,
-
-                fill:false,
-
-                yAxisID:"y1"
+                ...dsLine(
+                    "Horas",
+                    (imp.mensal || []).map(i => i.horas || 0),
+                    "#f97316"
+                ),
+                yAxisID:"y1",
+                borderDash:[8,5]
             }
 
         ]
-
     },
 
-    options:{
 
-        responsive:true,
+          options:{
 
-        maintainAspectRatio:false,
+            responsive:true,
+            maintainAspectRatio:false,
 
-        interaction:{
-            mode:"index",
-            intersect:false
-        },
-
-        plugins:{
-
-            legend:{
-                position:"top",
-
-                labels:{
-                    usePointStyle:false,
-                    boxWidth:30,
-                    color:"#0f1f4d",
-                    font:{
-                        weight:"bold"
-                    }
-                }
-            }
-
-        },
-
-        scales:{
-
-            x:{
-
-                stacked:false,
-
-                grid:{
-                    display:false
-                },
-
-                ticks:{
-                    color:"#0f1f4d",
-                    font:{
-                        weight:"bold"
-                    }
-                }
-
+            interaction:{
+                mode:"index",
+                intersect:false
             },
 
-            y:{
+            scales:{
 
-                beginAtZero:true,
-
-                title:{
-                    display:true,
-                    text:"Quantidade"
+                y:{
+                    beginAtZero:true,
+                    position:"left",
+                    title:{
+                        display:true,
+                        text:"Quantidade"
+                    }
                 },
 
-                ticks:{
-                    color:"#0f1f4d"
-                }
+                y1:{
+                    beginAtZero:true,
+                    position:"right",
 
-            },
+                    title:{
+                        display:true,
+                        text:"Horas"
+                    },
 
-            y1:{
-
-                beginAtZero:true,
-
-                position:"right",
-
-                title:{
-                    display:true,
-                    text:"Horas"
-                },
-
-                grid:{
-                    drawOnChartArea:false
-                },
-
-                ticks:{
-                    color:"#f97316"
+                    grid:{
+                        drawOnChartArea:false
+                    }
                 }
 
             }
 
         }
 
-    }
-
-});
-   
+    });
 
 }
 
@@ -1193,37 +1064,10 @@ function tabelaFixa(headers, rows, infinito){
     const duplicated = infinito ? body + body : body;
     return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead></table><div class="table-scroll ${infinito ? "infinite" : ""}"><div class="${infinito ? "scroll-content" : ""}"><table><tbody>${duplicated}</tbody></table></div></div></div>`;
 }
-function montarLinhasImportacao(lista){
-
-    if(!lista || !lista.length) return "";
-
-    return lista.map(i=>`
-
-        <tr>
-
-            <td>${i.po || "-"}</td>
-
-            <td>${i.sku || "-"}</td>
-
-            <td class="desc">${i.descricao || "-"}</td>
-
-            <td>${i.lote || "-"}</td>
-
-            <td class="${
-                i.status === "Encerrado" || i.status === "Aprovado"
-                    ? "status-ok"
-                    : "status-nok"
-            }">
-                ${i.status || "-"}
-            </td>
-
-            <td>${i.observacao || "-"}</td>
-
-        </tr>
-
-    `).join("");
-
-}
+function montarLinhasImportacao(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.po||"-"}</td><td class="desc">${i.descricao||"-"}</td><td class="${i.status==="Aprovado"?"status-ok":"status-nok"}">${i.status||"-"}</td><td>${i.observacao||"-"}</td></tr>`).join(""); }
+function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku||"-"}</td><td class="desc">${i.descricao||"-"}</td><td>${numero(i.aguardando)}</td><td>${numero(i.desmontado)}</td><td>${numero(i.aferidos)}</td><td class="${Number(i.aferidos||0)>0?"status-ok":""}">${Number(i.aferidos||0)>0?"Aferido":"-"}</td></tr>`).join(""); }
+function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
+function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
 
    function montarLinhasRetrabalho(lista){
 
