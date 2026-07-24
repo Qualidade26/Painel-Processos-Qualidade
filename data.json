@@ -10,8 +10,6 @@
       {"nome": "Vencido", "valor": 390080.67},
       {"nome": "Avaria Nacional", "valor": 186.78},
       {"nome": "Destinado pela Empresa", "valor": 405596.38}
-
-
 ],
 
 
@@ -96,18 +94,18 @@
 
 "mensal": [
 
-      {"mes": "Janeiro","processos":13,"sku":64,"lotes":95,"laudos":95,"horas":54.00  }, 
-      {"mes": "Fevereiro","processos":15,"sku":66,"lotes":99,"laudos":104,"horas":86.00  }, 
-      {"mes": "Março","processos":15,"sku":116,"lotes":124,"laudos":132,"horas":70.00  }, 
-      {"mes": "Abril","processos":20,"sku":180,"lotes":180,"laudos":180,"horas":91.00  }, 
-      {"mes": "Maio","processos":19,"sku":82,"lotes":141,"laudos":54,"horas":68.40  }, 
-      {"mes": "Junho","processos":9,"sku":21,"lotes":48,"laudos":8,"horas":6.42  }, 
-      {"mes": "Julho","processos":15,"sku":64,"lotes":183,"laudos":15,"horas":15.58  }, 
-      {"mes": "Agosto","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Setembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }
+      {"mes": "Janeiro","processos":13,"sku":64,"lotes":95,"laudos":95,"horas":54.00 }, 
+      {"mes": "Fevereiro","processos":15,"sku":66,"lotes":99,"laudos":104,"horas":86.00 }, 
+      {"mes": "Março","processos":15,"sku":116,"lotes":124,"laudos":132,"horas":70.00 }, 
+      {"mes": "Abril","processos":20,"sku":180,"lotes":180,"laudos":180,"horas":91.00 }, 
+      {"mes": "Maio","processos":19,"sku":82,"lotes":141,"laudos":54,"horas":68.40 }, 
+      {"mes": "Junho","processos":9,"sku":21,"lotes":48,"laudos":8,"horas":6.42 }, 
+      {"mes": "Julho","processos":15,"sku":64,"lotes":183,"laudos":15,"horas":15.58 }, 
+      {"mes": "Agosto","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Setembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }
 ]
 },
 
@@ -118,16 +116,16 @@
 "totalHoras":69,
 "fabricantes": [
 
-{"fabricante":"Bonrre Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"AB Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"All Lab Comercial","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"SteriLance Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Biomed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Accumax","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade":625,"horas":4,"motivo":"Nome da Responsável Tecnica antiga" }, 
-{"fabricante":"Shandong Aosaite","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shandong Aosaite","quantidade":625,"horas":4,"motivo":"Nome da Responsável Tecnica antiga" }, 
 {"fabricante":"Shangai Kindly","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Shanghai SA Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Ayset Plastik","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Medico Electroude","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Anhui Easyway Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Huaian Tianda Medical","quantidade":0,"horas":0,"motivo":"" }, 
@@ -139,9 +137,9 @@
 {"fabricante":"Yangzhou Medline Industry","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Jiangsu Webest Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Honsun (Nantong)","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Shandong Weigao","quantidade":2460,"horas":11,"motivo":"Nome da Responsável Tecnica antiga" }, 
-{"fabricante":"Nanjing Jiangnan Novel","quantidade":843,"horas":54,"motivo":"Nome da Responsável Tecnica antiga" }, 
-{"fabricante":"Vitromed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shandong Weigao","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Nanjing Jiangnan Novel","quantidade":2460,"horas":11,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Vitromed Healthcare","quantidade":843,"horas":54,"motivo":"Nome da Responsável Tecnica antiga" }, 
 {"fabricante":"Jiangsu Kangjian","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Garware Bestretch","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Xiantao Xingrong","quantidade":0,"horas":0,"motivo":"" }, 
@@ -159,7 +157,7 @@
 {"fabricante":"Hangzhou Rollmed","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Dalian GoodWood","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Anhui hongyu","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }
+{"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"SR Produtos para la salud S.A","quantidade":0,"horas":0,"motivo":"" }
       ]
   }
