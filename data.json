@@ -1,3 +1,4 @@
+
 {
   "descarte": {
     "total":978352.17,
@@ -54,18 +55,18 @@
 "totalHoras":60.33,
     "mensal": [
 
-      {"mes":"Janeiro", "valor": 26},
-      {"mes":"Fevereiro", "valor": 25},
-      {"mes":"Março", "valor": 33},
-      {"mes":"Abril", "valor": 30},
-      {"mes":"Maio", "valor": 30},
-      {"mes":"Junho", "valor": 22},
-      {"mes":"Julho", "valor": 31},
-      {"mes":"Agosto", "valor": 0},
-      {"mes":"Setembro", "valor": 0},
-      {"mes":"Outubro", "valor": 0},
-      {"mes":"Novembro", "valor": 0},
-      {"mes":"Dezembro", "valor": 0}
+      {"mes":"Janeiro", "valor": 26,"horas":7.92},
+      {"mes":"Fevereiro", "valor": 25,"horas":8.67},
+      {"mes":"Março", "valor": 33,"horas":12.33},
+      {"mes":"Abril", "valor": 30,"horas":8.67},
+      {"mes":"Maio", "valor": 30,"horas":8.08},
+      {"mes":"Junho", "valor": 22,"horas":6.67},
+      {"mes":"Julho", "valor": 31,"horas":8.00},
+      {"mes":"Agosto", "valor": 0,"horas":0.00},
+      {"mes":"Setembro", "valor": 0,"horas":0.00},
+      {"mes":"Outubro", "valor": 0,"horas":0.00},
+      {"mes":"Novembro", "valor": 0,"horas":0.00},
+      {"mes":"Dezembro", "valor": 0,"horas":0.00}
 
     ],
 
@@ -95,19 +96,19 @@
 "totalHoras":391.40,
 
 "mensal": [
-      {"mes": "Janeiro","sku":64","processos":13,"lotes":95,"laudos":95,"horas":54.00  }, 
-      {"mes": "Fevereiro","sku":66","processos":15,"lotes":99,"laudos":104,"horas":86.00  }, 
-      {"mes": "Março","sku":116","processos":15,"lotes":124,"laudos":132,"horas":70.00  }, 
-      {"mes": "Abril","sku":180","processos":20,"lotes":180,"laudos":180,"horas":91.00  }, 
-      {"mes": "Maio","sku":82","processos":19,"lotes":141,"laudos":54,"horas":68.40  }, 
-      {"mes": "Junho","sku":21","processos":9,"lotes":48,"laudos":8,"horas":6.42  }, 
-      {"mes": "Julho","sku":64","processos":15,"lotes":183,"laudos":15,"horas":15.58  }, 
-      {"mes": "Agosto","sku":0","processos":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Setembro","sku":0","processos":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Outubro","sku":0","processos":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Novembro","sku":0","processos":0,"lotes":0,"laudos":0,"horas":0.00  }, 
-      {"mes": "Dezembro","sku":0","processos":0,"lotes":0,"laudos":0,"horas":0.00  }
 
+      {"mes": "Janeiro","processos":13,"sku":64,"lotes":95,"laudos":95,"horas":54.00  }, 
+      {"mes": "Fevereiro","processos":15,"sku":66,"lotes":99,"laudos":104,"horas":86.00  }, 
+      {"mes": "Março","processos":15,"sku":116,"lotes":124,"laudos":132,"horas":70.00  }, 
+      {"mes": "Abril","processos":20,"sku":180,"lotes":180,"laudos":180,"horas":91.00  }, 
+      {"mes": "Maio","processos":19,"sku":82,"lotes":141,"laudos":54,"horas":68.40  }, 
+      {"mes": "Junho","processos":9,"sku":21,"lotes":48,"laudos":8,"horas":6.42  }, 
+      {"mes": "Julho","processos":15,"sku":64,"lotes":183,"laudos":15,"horas":15.58  }, 
+      {"mes": "Agosto","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
+      {"mes": "Setembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
+      {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
+      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }, 
+      {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00  }
 ]
 },
 
@@ -159,9 +160,8 @@
 {"fabricante":"Hangzhou Rollmed","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Dalian GoodWood","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Anhui hongyu","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Anhui Easyway Medical","quantidade":0,"horas":0,"motivo":"" }
-
+{"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }
+{"fabricante":"SR Produtos para la salud S.A","quantidade":0,"horas":0,"motivo":"" }
       ]
   }
 }
