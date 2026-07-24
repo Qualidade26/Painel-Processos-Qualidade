@@ -797,27 +797,26 @@ function renderRetrabalho(){
 
     <section class="cards">
 
-        ${card(
-        "🔄",
-        "Total Retrabalhado",
-        numero(r.quantidadeRetrabalhada),
-        "Quantidade de produtos"
-        )}
-
-        ${card(
-        "⏱",
-        "Total de Horas",
-        numero(r.totaldeHoras),
-        "Horas aplicadas"
-        )}
-
        ${card(
-"📋",
-"Processos",
-numero(r.totaldeRetrabalhoNoAno),
-"Ocorrências registradas"
+"🔄",
+"Total Retrabalhado",
+numero(r.totalUnidades),
+"Quantidade de produtos"
 )}
 
+${card(
+"⏱",
+"Total de Horas",
+numero(r.totalHoras),
+"Horas aplicadas"
+)}
+
+${card(
+"📋",
+"Processos",
+numero(r.processos),
+"Ocorrências registradas"
+)}
     </section>
 
 
