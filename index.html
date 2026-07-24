@@ -617,17 +617,148 @@ function renderImportacao(){
         <section class="panel"><h3>Fluxo Inspeção de Importação</h3>${tabelaFixa(["PO","Descrição do Produto","Status","Observação"], montarLinhasImportacao(imp.fluxo), false)}</section>
     `;
     graficoAtual = new Chart(document.getElementById("grafico"),{
-        type:"line",
-        data:{
-            labels:(imp.mensal || []).map(i => i.mes),
-            datasets:[
-                dsLine("Processos",(imp.mensal || []).map(i => i.processos || 0),"#1d4eff"),
-                dsLine("SKU",(imp.mensal || []).map(i => i.sku || 0),"#f04dd8"),
-                dsLine("Lotes",(imp.mensal || []).map(i => i.lotes || 0),"#22c55e"),
-                dsLine("Laudos",(imp.mensal || []).map(i => i.laudos || 0),"#8b5cf6"),
-                dsLine("Horas",(imp.mensal || []).map(i => i.horas || 0),"#f97316")
-            ]
+    type:"line",
+
+    data:{
+        labels:(imp.mensal || []).map(i => i.mes),
+
+        datasets:[
+
+            {
+                ...dsLine(
+                    "Processos",
+                    (imp.mensal || []).map(i => i.processos || 0),
+                    "#1d4eff"
+                ),
+                yAxisID:"y"
+            },
+
+            {
+                ...dsLine(
+                    "SKU",
+                    (imp.mensal || []).map(i => i.sku || 0),
+                    "#f04dd8"
+                ),
+                yAxisID:"y"
+            },
+
+            {
+                ...dsLine(
+                    "Lotes",
+                    (imp.mensal || []).map(i => i.lotes || 0),
+                    "#22c55e"
+                ),
+                yAxisID:"y"
+            },
+
+            {
+                ...dsLine(
+                    "Laudos",
+                    (imp.mensal || []).map(i => i.laudos || 0),
+                    "#8b5cf6"
+                ),
+                yAxisID:"y"
+            },
+
+            {
+                ...dsLine(
+                    "Horas",
+                    (imp.mensal || []).map(i => i.horas || 0),
+                    "#f97316"
+                ),
+                yAxisID:"y1",
+                borderDash:[8,5]
+            }
+
+        ]
+    },
+
+
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false,
+
+        interaction:{
+            mode:"index",
+            intersect:false
         },
+
+
+        scales:{
+
+            y:{
+                beginAtZero:true,
+                position:"left",
+                title:{
+                    display:true,
+                    text:"Quantidade"
+                }
+            },
+
+
+            y1:{
+                beginAtZero:true,
+                position:"right",
+
+                title:{
+                    display:true,
+                    text:"Horas"
+                },
+
+                grid:{
+                    drawOnChartArea:false
+                }
+            }
+
+        }
+
+    }
+
+});
+    
+    options:{
+
+        responsive:true,
+        maintainAspectRatio:false,
+
+        interaction:{
+            mode:"index",
+            intersect:false
+        },
+
+
+        scales:{
+
+            y:{
+                beginAtZero:true,
+                position:"left",
+                title:{
+                    display:true,
+                    text:"Quantidade"
+                }
+            },
+
+
+            y1:{
+                beginAtZero:true,
+                position:"right",
+
+                title:{
+                    display:true,
+                    text:"Horas"
+                },
+
+                grid:{
+                    drawOnChartArea:false
+                }
+            }
+
+        }
+
+    }
+
+});
 options:{
     responsive:true,
     maintainAspectRatio:false,
@@ -657,6 +788,12 @@ options:{
         }
     }
 }
+        }
+    });
+
+}
+
+function renderEsfig(){
 
 function renderEsfig(){
     const esfig = dados.esfig || {};
