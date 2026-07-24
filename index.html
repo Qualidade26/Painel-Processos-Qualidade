@@ -866,183 +866,161 @@ function renderAmostra(){
 
 function renderRetrabalho(){
 
-    const r = dados.retrabalho || {
-        fabricantes:[]
-    };
-
-
-    const fabricantes = (r.fabricantes || [])
-.filter(f => Number(f.quantidade || 0) > 0);
-
+    const r = dados.retrabalho || { fabricantes:[] };
 
     conteudo.innerHTML = `
+        <div class="page-title">🔄 RETRABALHO</div>
 
-    <div class="page-title">🔄 RETRABALHO</div>
+        <section class="cards">
+            ${card("🔄","Total Retrabalhado",numero(r.totalUnidades),"Quantidade de produtos")}
+            ${card("⏱","Total de Horas",numero(r.totalHoras),"Horas aplicadas")}
+            ${card("📋","Processos",numero(r.processos),"Ocorrências registradas")}
+        </section>
 
+        <section class="grid-2">
 
-    <section class="cards">
+            <div class="panel">
 
-       ${card(
-"🔄",
-"Total Retrabalhado",
-numero(r.totalUnidades),
-"Quantidade de produtos"
-)}
+                <h3>🏭 RETRABALHO POR FABRICANTE</h3>
 
-${card(
-"⏱",
-"Total de Horas",
-numero(r.totalHoras),
-"Horas aplicadas"
-)}
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:8px;
+                    margin-bottom:10px;
+                ">
 
-${card(
-"📋",
-"Processos",
-numero(r.processos),
-"Ocorrências registradas"
-)}
-    </section>
+                    <span style="
+                        font-size:22px;
+                        color:#1d4eff;
+                    ">🔍</span>
 
+                    <input
+                        id="buscaFabricante"
+                        type="search"
+                        placeholder="Pesquisar fabricante..."
+                        onkeyup="atualizarGraficoRetrabalho()"
+                        style="
+                            flex:1;
+                            padding:10px 14px;
+                            border-radius:12px;
+                            border:1px solid #b8d1ff;
+                            font-size:14px;
+                            font-weight:700;
+                            outline:none;
+                        ">
 
-    <section class="grid-2">
+                </div>
 
+                <div class="chart-box tall">
+                    <canvas id="grafico"></canvas>
+                </div>
 
-    <div class="panel">
+            </div>
 
-    <h3>🏭 Retrabalho por Fabricante</h3>
+            <div class="panel">
 
+                <h3>📋 DETALHAMENTO RETRABALHO</h3>
 
-    <input 
-    id="buscaFabricante"
-    type="text"
-    placeholder="🔎 Pesquisar fabricante..."
-    onkeyup="filtrarFabricante()"
-    style="
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid #b8d1ff;
-    font-weight:900;
-    margin-bottom:8px;
-    ">
+                ${
+                    tabelaFixa(
+                        ["Fabricante","Quantidade","Horas","Motivo"],
+                        montarLinhasRetrabalho(r.fabricantes),
+                        true
+                    )
+                }
 
+            </div>
 
-    <select 
-    id="filtroFabricante"
-  onchange="atualizarGraficoRetrabalho()"
-oninput="atualizarGraficoRetrabalho()"
-
-    ${
-    fabricantes.map(f=>
-
-    `<option value="${f.fabricante}">
-    ${f.fabricante}
-    </option>`
-
-    ).join("")
-    }
-
-    </select>
-
-
-    <div class="chart-box">
-    <canvas id="grafico"></canvas>
-    </div>
-
-
-    </div>
-
-
-
-    <div class="panel">
-
-    <h3>📋 Detalhamento Retrabalho</h3>
-
-    ${
-    tabelaFixa(
-    [
-    "Fabricante",
-    "Quantidade",
-    "Horas",
-    "Motivo"
-    ],
-
-    montarLinhasRetrabalho(
-    fabricantes
-    ),
-
-    true
-    )
-
-    }
-
-    </div>
-
-
-    </section>
-
+        </section>
     `;
 
-
     atualizarGraficoRetrabalho();
-
 }
+
 function atualizarGraficoRetrabalho(){
-
-    const r = dados.retrabalho || {fabricantes:[]};
-
-    const select = document.getElementById("filtroFabricante");
-
-    if(!select) return;
-
-    const nome = select.value;
-
-    const fabricante = (r.fabricantes || [])
-    .find(
-        f => String(f.fabricante).trim() === String(nome).trim()
-    );
-
-    if(!fabricante) return;
-
-    const canvas = document.getElementById("grafico");
-
-    if(!canvas) return;
 
     destruirGrafico();
 
-    graficoAtual = new Chart(
-        canvas,
-        {
-            type:"bar",
-            data:{
-                labels:[
-                    "Quantidade Retrabalhada",
-                    "Horas"
-                ],
-                datasets:[{
-                    label:fabricante.fabricante,
-                    data:[
-                        Number(fabricante["quantidade"] || 0),
-                        Number(fabricante["horas"] || 0)
-                    ],
-                    backgroundColor:[
-                        "#1d4eff",
-                        "#f04dd8"
-                    ],
-                    borderWidth:0
-                }]
-            },
-            options:{
-                ...baseOptions(),
-                plugins:{
-                    legend:{
-                        display:true
-                    }
+    const r = dados.retrabalho || { fabricantes:[] };
+
+    const pesquisa = (
+        document.getElementById("buscaFabricante")?.value || ""
+    ).toLowerCase();
+
+    const fabricantes = (r.fabricantes || [])
+        .filter(f => Number(f.quantidade || 0) > 0)
+        .filter(f => String(f.fabricante).toLowerCase().includes(pesquisa))
+        .sort((a,b)=>Number(b.quantidade)-Number(a.quantidade));
+
+    graficoAtual = new Chart(document.getElementById("grafico"),{
+
+        type:"bar",
+
+        data:{
+
+            labels: fabricantes.map(f => f.fabricante),
+
+            datasets:[{
+
+                label:"Quantidade Retrabalhada",
+
+                data: fabricantes.map(f => Number(f.quantidade || 0)),
+
+              backgroundColor: fabricantes.map((_, i) => [
+    "#1d4eff",
+    "#0f3cc9",
+    "#6b7cff",
+    "#4f7cff",
+    "#2d62ff",
+    "#5b88ff"
+][i % 6]),
+
+                borderWidth:0,
+
+                _ocultarZero:true
+
+            }]
+
+        },
+
+        options:{
+
+            ...baseOptions(),
+
+            indexAxis:"y",
+
+            layout:{
+                padding:{
+                    top:20,
+                    right:45,
+                    left:8,
+                    bottom:4
                 }
+            },
+
+            plugins:{
+                legend:{
+                    display:false
+                }
+            },
+
+            onClick:(evt,elements)=>{
+
+                if(!elements.length) return;
+
+                const indice = elements[0].index;
+
+                const fabricante = fabricantes[indice];
+
+                document.querySelector(".table-wrap tbody").innerHTML =
+                    montarLinhasRetrabalho([fabricante]);
+
             }
+
         }
-    );
+
+    });
 
 }
 
