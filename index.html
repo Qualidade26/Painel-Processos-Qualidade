@@ -787,7 +787,7 @@ function renderRetrabalho(){
 
 
     const fabricantes = (r.fabricantes || [])
-    .filter(f => Number(f["Quantidade Retrabalhada"] || 0) > 0);
+.filter(f => Number(f.quantidade || 0) > 0);
 
 
     conteudo.innerHTML = `
@@ -851,8 +851,8 @@ oninput="atualizarGraficoRetrabalho()"
     ${
     fabricantes.map(f=>
 
-    `<option value="${f.Fabricante}">
-    ${f.Fabricante}
+    `<option value="${f.fabricante}">
+    ${f.fabricante}
     </option>`
 
     ).join("")
@@ -915,7 +915,7 @@ function atualizarGraficoRetrabalho(){
 
     const fabricante = (r.fabricantes || [])
     .find(
-        f => String(f.Fabricante).trim() === String(nome).trim()
+        f => String(f.fabricante).trim() === String(nome).trim()
     );
 
     if(!fabricante) return;
@@ -936,10 +936,10 @@ function atualizarGraficoRetrabalho(){
                     "Horas"
                 ],
                 datasets:[{
-                    label:fabricante.Fabricante,
+                    label:fabricante.fabricante,
                     data:[
-                        Number(fabricante["Quantidade Retrabalhada"] || 0),
-                        Number(fabricante["Horas"] || 0)
+                        Number(fabricante["quantidade"] || 0),
+                        Number(fabricante["horas"] || 0)
                     ],
                     backgroundColor:[
                         "#1d4eff",
@@ -1006,33 +1006,25 @@ function montarLinhasEsfig(lista){ if(!lista || !lista.length) return ""; return
 function montarLinhasTopDescarte(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${moeda(i.valor)}</td></tr>`).join(""); }
 function montarLinhasAmostra(lista){ if(!lista || !lista.length) return ""; return lista.map(i=>`<tr><td>${i.sku}</td><td class="desc">${i.descricao}</td><td>${numero(i.quantidade)}</td></tr>`).join(""); }
 
-    function montarLinhasRetrabalho(lista){
+   function montarLinhasRetrabalho(lista){
 
-if(!lista || !lista.length) return "";
+    if(!lista || !lista.length) return "";
 
+    return lista.map(i => `
 
-return lista.map(i=>`
+    <tr>
 
-<tr>
+        <td>${i.fabricante}</td>
 
-<td>${i.Fabricante}</td>
+        <td>${numero(i.quantidade)}</td>
 
-<td>
-${numero(i["Quantidade Retrabalhada"])}
-</td>
+        <td>${numero(i.horas)}</td>
 
-<td>
-${numero(i.Horas)}
-</td>
+        <td class="desc">${i.motivo || "-"}</td>
 
-<td class="desc">
-${i.Motivo || "-"}
-</td>
+    </tr>
 
-
-</tr>
-
-`).join("");
+    `).join("");
 
 }
 function filtrarFabricante(){
