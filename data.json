@@ -115,14 +115,14 @@
 "totalUnidades":3928,
 "totalHoras":69,
 "fabricantes": [
-
+{"fabricante":"Bonrre Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"AB Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"All Lab Comercial","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"SteriLance Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Biomed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Accumax","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Shandong Aosaite","quantidade":625,"horas":4,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade":625,"horas":4,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Shandong Aosaite","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Shangai Kindly","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Shanghai SA Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Ayset Plastik","quantidade":0,"horas":0,"motivo":"" }, 
@@ -137,9 +137,9 @@
 {"fabricante":"Yangzhou Medline Industry","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Jiangsu Webest Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Honsun (Nantong)","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Shandong Weigao","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Nanjing Jiangnan Novel","quantidade":2460,"horas":11,"motivo":"Nome da Responsável Tecnica antiga" }, 
-{"fabricante":"Vitromed Healthcare","quantidade":843,"horas":54,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Shandong Weigao","quantidade":2460,"horas":11,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Nanjing Jiangnan Novel","quantidade":843,"horas":54,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Vitromed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Jiangsu Kangjian","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Garware Bestretch","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Xiantao Xingrong","quantidade":0,"horas":0,"motivo":"" }, 
@@ -159,6 +159,7 @@
 {"fabricante":"Anhui hongyu","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"SR Produtos para la salud S.A","quantidade":0,"horas":0,"motivo":"" }
+
       ]
   }
 }
