@@ -112,8 +112,8 @@
 
 "retrabalho": {
 "processos":7,
-"totalUnidades":3928,
-"totalHoras":69,
+"totalUnidades":5524,
+"totalHoras":79,
 "fabricantes": [
 {"fabricante":"Bonrre Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"AB Medical","quantidade":0,"horas":0,"motivo":"" }, 
@@ -150,7 +150,7 @@
 {"fabricante":"Dailymag Magnetic","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Yancheng Tiandi","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Dfi","quantidade":0,"horas":0,"motivo":"" }, 
-{"fabricante":"Pharmaplast AS","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Pharmaplast AS ","quantidade":1596,"horas":10,"motivo":"Nome da Responsável Tecnica antiga" }, 
 {"fabricante":"Blue","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Jiangsu Huida Medical","quantidade":0,"horas":0,"motivo":"" }, 
 {"fabricante":"Guangzhou Improve Medical","quantidade":0,"horas":0,"motivo":"" }, 
