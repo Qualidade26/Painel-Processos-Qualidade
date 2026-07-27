@@ -1,1 +1,480 @@
+/* =====================================================
+   PAINEL SGQ LABOR
+   STYLE.CSS
+   ===================================================== */
 
+
+:root{
+
+    --bg:#dfeeff;
+
+    --top1:#0f3cc9;
+    --top2:#1d4eff;
+
+    --card:#ffffff;
+
+    --text:#1b1f3b;
+
+    --shadow:
+    0 8px 20px rgba(0,0,0,.12);
+
+    --radius:18px;
+
+}
+
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #dfeeff,
+        #f7fbff
+    );
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+
+
+/* =====================================================
+   TOPO
+   ===================================================== */
+
+
+.topo{
+
+    height:85px;
+
+    background:
+    linear-gradient(
+        90deg,
+        var(--top1),
+        var(--top2)
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 35px;
+
+    color:white;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.25);
+
+}
+
+
+
+.logo{
+
+    font-size:34px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+}
+
+
+
+.titulo{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    text-align:center;
+
+}
+
+
+
+/* =====================================================
+   LAYOUT PRINCIPAL
+   ===================================================== */
+
+
+.layout{
+
+    display:flex;
+
+    min-height:
+    calc(100vh - 85px);
+
+}
+
+
+
+/* =====================================================
+   MENU LATERAL
+   ===================================================== */
+
+
+.menu{
+
+    width:260px;
+
+    background:white;
+
+    padding:25px 15px;
+
+    box-shadow:
+    5px 0 15px rgba(0,0,0,.10);
+
+}
+
+
+
+.menu button{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:12px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#edf4ff;
+
+    color:#123;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    transition:.3s;
+
+}
+
+
+
+.menu button:hover{
+
+    background:#1d4eff;
+
+    color:white;
+
+    transform:
+    translateX(5px);
+
+}
+
+
+
+
+/* =====================================================
+   ÁREA PRINCIPAL
+   ===================================================== */
+
+
+#conteudo{
+
+    flex:1;
+
+    padding:30px;
+
+    overflow:auto;
+
+}
+
+
+
+/* =====================================================
+   TITULOS DAS ABAS
+   ===================================================== */
+
+
+.page-title{
+
+    font-size:32px;
+
+    font-weight:900;
+
+    margin-bottom:25px;
+
+    color:#0f3cc9;
+
+}
+
+
+
+
+/* =====================================================
+   CARDS KPI
+   ===================================================== */
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(230px,1fr)
+    );
+
+    gap:22px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+}
+
+
+
+.card h3{
+
+    font-size:18px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.card .valor{
+
+    font-size:38px;
+
+    font-weight:900;
+
+    color:#0f3cc9;
+
+}
+
+
+
+/* =====================================================
+   GRAFICOS
+   ===================================================== */
+
+
+.grafico-box{
+
+    background:white;
+
+    border-radius:var(--radius);
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+.grafico-box canvas{
+
+    max-height:420px;
+
+}
+
+
+
+/* =====================================================
+   TABELAS
+   ===================================================== */
+
+
+.tabela-box{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:auto;
+
+}
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:17px;
+
+}
+
+
+
+thead{
+
+    background:#0f3cc9;
+
+    color:white;
+
+}
+
+
+
+th{
+
+    padding:14px;
+
+}
+
+
+
+td{
+
+    padding:12px;
+
+    border-bottom:
+    1px solid #ddd;
+
+}
+
+
+
+tr:hover{
+
+    background:#edf4ff;
+
+}
+
+
+
+
+/* =====================================================
+   BARRA DE PROGRESSO ESFIG
+   ===================================================== */
+
+
+.progress{
+
+    height:28px;
+
+    background:#e6e6e6;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+.progress-bar{
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #0f3cc9,
+        #1d4eff
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+
+@media(max-width:900px){
+
+
+.menu{
+
+    width:80px;
+
+}
+
+
+.menu button{
+
+    font-size:0;
+
+}
+
+
+#conteudo{
+
+    padding:15px;
+
+}
+
+
+.titulo{
+
+    font-size:18px;
+
+}
+
+
+
+}
