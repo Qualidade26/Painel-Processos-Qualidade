@@ -224,10 +224,16 @@ function montarLinhasEsfig(lista){
             <td>${numero(i.desmontado || 0)}</td>
             <td>${numero(i.aferidos || 0)}</td>
             <td>${
-                Number(i.aferidos || 0) > 0
-                    ? "Concluído"
-                    : "Pendente"
-            }</td>
+               <td>${
+    Number(i.aferidos || 0) > 0
+        ? "Concluído"
+        : (
+            Number(i.desmontado || 0) > 0 ||
+            Number(i.aguardando || 0) > 0
+        )
+            ? "Pendente"
+            : "-"
+}</td>
         </tr>
     `).join("");
 }
