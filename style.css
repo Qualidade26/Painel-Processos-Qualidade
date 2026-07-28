@@ -1321,3 +1321,459 @@ select{
         position:static;
     }
 }
+/* ==========================================================
+   AJUSTE AUTOMÁTICO PARA CELULAR, COMPUTADOR E TV
+   Cole no FINAL do style.css
+   ========================================================== */
+
+html{
+    width:100%;
+    min-height:100%;
+    font-size:clamp(13px, 0.75vw, 17px);
+}
+
+body{
+    width:100%;
+    min-height:100vh;
+    min-height:100dvh;
+    margin:0;
+    overflow-x:hidden;
+}
+
+/* Limita o crescimento excessivo em televisores */
+.topbar,
+.main-wrap{
+    width:100%;
+    max-width:1920px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* ==========================================================
+   CABEÇALHO RESPONSIVO
+   ========================================================== */
+
+.topbar{
+    min-height:clamp(60px, 8vh, 82px);
+    height:auto;
+    grid-template-columns:
+        minmax(180px, 260px)
+        minmax(300px, 1fr)
+        minmax(250px, 320px);
+
+    padding:clamp(8px, 1vw, 18px);
+    gap:clamp(6px, 1vw, 16px);
+}
+
+.logo-labor{
+    height:auto;
+    min-height:50px;
+}
+
+.logo-main{
+    font-size:clamp(24px, 2vw, 36px);
+}
+
+.logo-sub{
+    font-size:clamp(8px, 0.7vw, 11px);
+}
+
+.top-title h1{
+    font-size:clamp(18px, 1.7vw, 28px);
+}
+
+.top-title p{
+    font-size:clamp(9px, 0.75vw, 13px);
+}
+
+.top-status{
+    flex-wrap:wrap;
+}
+
+.pill{
+    min-width:auto;
+    width:auto;
+    height:auto;
+    min-height:34px;
+    padding:8px 10px;
+    font-size:clamp(9px, 0.7vw, 12px);
+}
+
+/* ==========================================================
+   ESTRUTURA PRINCIPAL RESPONSIVA
+   ========================================================== */
+
+.main-wrap{
+    min-height:calc(100dvh - 82px);
+    height:auto;
+
+    grid-template-columns:
+        clamp(150px, 11vw, 190px)
+        minmax(0, 1fr);
+
+    gap:clamp(6px, 0.7vw, 12px);
+    padding:clamp(6px, 0.7vw, 12px);
+}
+
+.main-wrap.menu-collapsed{
+    grid-template-columns:clamp(58px, 5vw, 72px) minmax(0,1fr);
+}
+
+.content{
+    width:100%;
+    min-width:0;
+    overflow-x:hidden;
+    overflow-y:visible;
+}
+
+/* ==========================================================
+   MENU RESPONSIVO
+   ========================================================== */
+
+.menu{
+    width:100%;
+    min-width:0;
+    padding:clamp(6px, 0.7vw, 10px);
+}
+
+.menu button{
+    min-height:clamp(48px, 6vh, 60px);
+    font-size:clamp(10px, 0.7vw, 13px);
+}
+
+.menu button .ico{
+    font-size:clamp(20px, 1.5vw, 27px);
+}
+
+/* ==========================================================
+   TÍTULOS E CARDS RESPONSIVOS
+   ========================================================== */
+
+.page-title{
+    font-size:clamp(14px, 1.1vw, 18px);
+    padding:clamp(7px, 0.7vw, 11px);
+}
+
+.cards{
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(min(100%, 170px), 1fr)
+    );
+
+    gap:clamp(6px, 0.7vw, 10px);
+}
+
+.kpi-card{
+    min-height:clamp(65px, 8vh, 82px);
+    padding:clamp(8px, 0.8vw, 14px);
+    grid-template-columns:clamp(38px, 3vw, 48px) minmax(0,1fr);
+}
+
+.kpi-icon{
+    width:clamp(36px, 3vw, 44px);
+    height:clamp(36px, 3vw, 44px);
+    font-size:clamp(21px, 1.8vw, 29px);
+}
+
+.kpi-card h3{
+    font-size:clamp(10px, 0.75vw, 13px);
+}
+
+.kpi-card strong{
+    font-size:clamp(21px, 1.8vw, 30px);
+}
+
+/* ==========================================================
+   PAINÉIS E GRADES
+   ========================================================== */
+
+.grid-2{
+    grid-template-columns:repeat(
+        2,
+        minmax(0, 1fr)
+    );
+}
+
+.grid-3-2{
+    grid-template-columns:minmax(0,1.35fr) minmax(0,.9fr);
+}
+
+.panel,
+.esfig-pareto-destaque,
+.esfig-flow-destaque,
+.esfig-tabela{
+    width:100%;
+    min-width:0;
+    padding:clamp(7px, 0.7vw, 11px);
+}
+
+.panel h3,
+.esfig-pareto-destaque h3,
+.esfig-flow-destaque h3,
+.esfig-tabela h3{
+    font-size:clamp(11px, 0.85vw, 15px);
+}
+
+/* ==========================================================
+   GRÁFICOS RESPONSIVOS
+   ========================================================== */
+
+.chart-box{
+    width:100%;
+    height:clamp(210px, 30vh, 340px);
+    min-height:0;
+}
+
+.chart-box.small{
+    height:clamp(190px, 25vh, 270px);
+}
+
+.chart-box.tall{
+    height:clamp(260px, 38vh, 410px);
+}
+
+.chart-box.esfig-large{
+    height:clamp(300px, 48vh, 520px);
+}
+
+.chart-box-importacao{
+    height:clamp(220px, 29vh, 310px);
+}
+
+.chart-box-pareto{
+    height:clamp(220px, 28vh, 300px);
+}
+
+.esfig-pareto-grande{
+    width:100%;
+    height:clamp(220px, 32vh, 340px);
+    min-height:0;
+}
+
+.chart-box canvas,
+.esfig-pareto-grande canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+/* ==========================================================
+   TABELAS RESPONSIVAS
+   ========================================================== */
+
+.table-wrap{
+    width:100%;
+    overflow:hidden;
+}
+
+.table-scroll{
+    width:100%;
+    max-height:clamp(260px, 45vh, 520px);
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    font-size:clamp(10px, 0.75vw, 14px);
+}
+
+thead th,
+td{
+    padding:clamp(5px, 0.55vw, 10px);
+}
+
+/* ==========================================================
+   NOTEBOOKS E TELAS MÉDIAS
+   ========================================================== */
+
+@media(max-width:1100px){
+
+    .topbar{
+        grid-template-columns:190px minmax(0,1fr);
+    }
+
+    .top-status{
+        grid-column:1 / -1;
+        justify-content:center;
+    }
+
+    .main-wrap{
+        grid-template-columns:145px minmax(0,1fr);
+    }
+
+    .grid-3-2,
+    .importacao-bottom-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ==========================================================
+   TABLETS E CELULARES
+   ========================================================== */
+
+@media(max-width:800px){
+
+    .topbar{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        gap:7px;
+        padding:10px;
+    }
+
+    .logo-labor{
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid rgba(255,255,255,.35);
+        padding-bottom:8px;
+        align-items:center;
+    }
+
+    .top-status{
+        width:100%;
+        justify-content:center;
+    }
+
+    .main-wrap,
+    .main-wrap.menu-collapsed{
+        display:block;
+        width:100%;
+        min-height:auto;
+        padding:7px;
+    }
+
+    .menu,
+    .main-wrap.menu-collapsed .menu{
+        display:grid;
+        grid-template-columns:repeat(3, minmax(0,1fr));
+        gap:6px;
+        margin-bottom:8px;
+    }
+
+    .toggle-menu{
+        grid-column:1 / -1;
+    }
+
+    .menu button,
+    .main-wrap.menu-collapsed .menu button{
+        min-height:48px;
+        margin:0;
+    }
+
+    .grid-2,
+    .grid-3-2,
+    .importacao-bottom-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .fluxo,
+    .esfig-fluxo-horizontal{
+        grid-template-columns:1fr;
+    }
+
+    .fluxo-arrow,
+    .esfig-fluxo-horizontal .fluxo-arrow{
+        transform:rotate(90deg);
+    }
+
+    table{
+        min-width:680px;
+    }
+}
+
+/* ==========================================================
+   CELULARES PEQUENOS
+   ========================================================== */
+
+@media(max-width:520px){
+
+    html{
+        font-size:13px;
+    }
+
+    .top-title h1{
+        font-size:17px;
+    }
+
+    .top-title p{
+        font-size:9px;
+    }
+
+    .top-status{
+        gap:5px;
+    }
+
+    .pill{
+        min-height:30px;
+        padding:6px 8px;
+        font-size:9px;
+    }
+
+    .menu,
+    .main-wrap.menu-collapsed .menu{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .kpi-card{
+        min-height:62px;
+    }
+
+    .chart-box{
+        height:220px;
+    }
+
+    .chart-box.small{
+        height:190px;
+    }
+
+    .chart-box.tall{
+        height:260px;
+    }
+
+    .chart-box.esfig-large{
+        height:280px;
+    }
+
+    .esfig-pareto-grande{
+        height:215px;
+    }
+
+    .panel{
+        padding:7px;
+    }
+
+    table{
+        min-width:620px;
+    }
+}
+
+/* ==========================================================
+   TELEVISORES E MONITORES GRANDES
+   ========================================================== */
+
+@media(min-width:1921px){
+
+    body{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .topbar,
+    .main-wrap{
+        max-width:1920px;
+        width:100%;
+    }
+
+    .main-wrap{
+        flex:1;
+    }
+}
