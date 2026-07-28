@@ -86,30 +86,112 @@
 },
 
 "importacao": {
-"processosAno":106,
-"totalSku":318,
-"totalLotes":870,
-"laudosEmitidos":588,
-"totalHoras":391.40,
+    "processosAno": 106,
+    "totalSku": 318,
+    "totalLotes": 870,
+    "laudosEmitidos": 588,
+    "totalHoras": 391.40,
 
-"mensal": [
-
-      {"mes": "Janeiro","processos":13,"sku":64,"lotes":95,"laudos":95,"horas":54.00 }, 
-      {"mes": "Fevereiro","processos":15,"sku":66,"lotes":99,"laudos":104,"horas":86.00 }, 
-      {"mes": "Março","processos":15,"sku":116,"lotes":124,"laudos":132,"horas":70.00 }, 
-      {"mes": "Abril","processos":20,"sku":180,"lotes":180,"laudos":180,"horas":91.00 }, 
-      {"mes": "Maio","processos":19,"sku":82,"lotes":141,"laudos":54,"horas":68.40 }, 
-      {"mes": "Junho","processos":9,"sku":21,"lotes":48,"laudos":8,"horas":6.42 }, 
-      {"mes": "Julho","processos":15,"sku":64,"lotes":183,"laudos":15,"horas":15.58 }, 
-      {"mes": "Agosto","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
-      {"mes": "Setembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
-      {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
-      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
-      {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }
-
-  }
+    "mensal": [
+        {
+            "mes": "Janeiro",
+            "processos": 13,
+            "sku": 64,
+            "lotes": 95,
+            "laudos": 95,
+            "horas": 54.00
+        },
+        {
+            "mes": "Fevereiro",
+            "processos": 15,
+            "sku": 66,
+            "lotes": 99,
+            "laudos": 104,
+            "horas": 86.00
+        },
+        {
+            "mes": "Março",
+            "processos": 15,
+            "sku": 116,
+            "lotes": 124,
+            "laudos": 132,
+            "horas": 70.00
+        },
+        {
+            "mes": "Abril",
+            "processos": 20,
+            "sku": 180,
+            "lotes": 180,
+            "laudos": 180,
+            "horas": 91.00
+        },
+        {
+            "mes": "Maio",
+            "processos": 19,
+            "sku": 82,
+            "lotes": 141,
+            "laudos": 54,
+            "horas": 68.40
+        },
+        {
+            "mes": "Junho",
+            "processos": 9,
+            "sku": 21,
+            "lotes": 48,
+            "laudos": 8,
+            "horas": 6.42
+        },
+        {
+            "mes": "Julho",
+            "processos": 15,
+            "sku": 64,
+            "lotes": 183,
+            "laudos": 15,
+            "horas": 15.58
+        },
+        {
+            "mes": "Agosto",
+            "processos": 0,
+            "sku": 0,
+            "lotes": 0,
+            "laudos": 0,
+            "horas": 0.00
+        },
+        {
+            "mes": "Setembro",
+            "processos": 0,
+            "sku": 0,
+            "lotes": 0,
+            "laudos": 0,
+            "horas": 0.00
+        },
+        {
+            "mes": "Outubro",
+            "processos": 0,
+            "sku": 0,
+            "lotes": 0,
+            "laudos": 0,
+            "horas": 0.00
+        },
+        {
+            "mes": "Novembro",
+            "processos": 0,
+            "sku": 0,
+            "lotes": 0,
+            "laudos": 0,
+            "horas": 0.00
+        },
+        {
+            "mes": "Dezembro",
+            "processos": 0,
+            "sku": 0,
+            "lotes": 0,
+            "laudos": 0,
+            "horas": 0.00
+        }
     ],
-  "fluxo": [
+
+    "fluxo": [
         {
             "po": "PO-001",
             "sku": "SKU-4587",
