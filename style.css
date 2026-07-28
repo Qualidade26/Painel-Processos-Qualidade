@@ -729,3 +729,192 @@ select{
         grid-template-columns: 1fr;
     }
 }
+/* ==========================================================
+   ESFIGMOMANÔMETRO — NOVO LAYOUT
+   Pareto em cima, fluxo abaixo e tabela no final
+   ========================================================== */
+
+.esfig-pareto-destaque,
+.esfig-flow-destaque,
+.esfig-tabela{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:10px;
+}
+
+
+/* TÍTULOS */
+
+.esfig-pareto-destaque h3,
+.esfig-flow-destaque h3,
+.esfig-tabela h3{
+    margin:0 0 10px;
+    text-align:center;
+    color:var(--primary);
+    font-size:14px;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+
+/* ==========================================================
+   PARETO
+   ========================================================== */
+
+.esfig-pareto-destaque{
+    padding:12px;
+}
+
+.esfig-pareto-grande{
+    position:relative;
+    width:100%;
+    height:390px;
+    min-height:390px;
+}
+
+.esfig-pareto-grande canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+
+/* RESUMO DO PARETO */
+
+.esfig-pareto-resumo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:10px;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(90deg,#edf4ff,#f8fbff);
+    color:var(--text);
+}
+
+.esfig-pareto-resumo-icone{
+    flex:0 0 30px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--primary);
+    color:#fff;
+    font-size:18px;
+    font-weight:900;
+}
+
+.esfig-pareto-resumo strong{
+    display:block;
+    margin-bottom:2px;
+    color:var(--primary-dark);
+}
+
+.esfig-pareto-resumo p{
+    margin:0;
+    font-size:12px;
+    line-height:1.45;
+}
+
+
+/* ==========================================================
+   FLUXO OPERACIONAL
+   ========================================================== */
+
+.esfig-flow-destaque{
+    padding:12px;
+}
+
+.esfig-fluxo-horizontal{
+    display:grid;
+    grid-template-columns:1fr 40px 1fr 40px 1fr;
+    gap:8px;
+    align-items:center;
+    width:100%;
+}
+
+.esfig-fluxo-horizontal .fluxo-item{
+    min-height:82px;
+}
+
+.esfig-fluxo-horizontal .fluxo-arrow{
+    font-size:22px;
+}
+
+.esfig-flow-destaque .progress-title{
+    margin-top:14px;
+}
+
+.esfig-flow-destaque .progress-box{
+    width:100%;
+}
+
+
+/* ==========================================================
+   TABELA
+   ========================================================== */
+
+.esfig-tabela{
+    padding:12px;
+}
+
+.esfig-tabela .table-wrap{
+    width:100%;
+}
+
+.esfig-tabela .table-scroll{
+    max-height:340px;
+    overflow-y:auto;
+    overflow-x:auto;
+}
+
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+@media(max-width:1050px){
+
+    .esfig-pareto-grande{
+        height:350px;
+        min-height:350px;
+    }
+}
+
+
+@media(max-width:800px){
+
+    .esfig-pareto-grande{
+        height:320px;
+        min-height:320px;
+    }
+
+    .esfig-fluxo-horizontal{
+        grid-template-columns:1fr;
+    }
+
+    .esfig-fluxo-horizontal .fluxo-arrow{
+        transform:rotate(90deg);
+    }
+
+    .esfig-pareto-resumo{
+        align-items:flex-start;
+    }
+}
+
+
+@media(max-width:520px){
+
+    .esfig-pareto-destaque,
+    .esfig-flow-destaque,
+    .esfig-tabela{
+        padding:8px;
+    }
+
+    .esfig-pareto-grande{
+        height:290px;
+        min-height:290px;
+    }
+}
