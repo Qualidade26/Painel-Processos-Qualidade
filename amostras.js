@@ -1,601 +1,166 @@
-/* =====================================================
-   PAINEL SGQ LABOR
+function renderAmostra(){
 
-   AMOSTRAS.JS
+    const a = dados.amostras || {
+        mensal:[],
+        top10:[],
+        totalHoras:0
+    };
 
-   Aba:
-   📋 AMOSTRAS
+    const totalAno =
+        (a.mensal || [])
+        .reduce((s,i)=>s+Number(i.valor||0),0);
 
-   ===================================================== */
+    conteudo.innerHTML = `
+        <div class="page-title">📦 AMOSTRA</div>
 
+        <section class="cards">
 
+            ${card(
+                "📦",
+                "Amostras Solicitadas no Ano",
+                numero(totalAno),
+                "Total acumulado"
+            )}
 
-function renderAmostras(){
+            ${card(
+                "⏱",
+                "Total de Horas",
+                numero(a.totalHoras),
+                "Horas destinadas"
+            )}
+
+        </section>
 
-
-
-const amostras = dados.amostras || {
-
-
-    mensal:[],
-
-    top10:[],
-
-    total:0,
-
-    totalSku:0
-
-
-};
-
-
-
-
-
-
-const area =
-
-document.getElementById(
-"conteudo"
-);
-
-
-
-
-
-
-
-
-area.innerHTML = `
-
-
-
-<div class="page-title">
-
-📋 CONTROLE DE AMOSTRAS
-
-</div>
-
-
-
-
-
-
-
-<section class="cards">
-
-
-
-
-
-${card(
-
-"📋",
-
-"Total Amostras",
-
-numero(
-amostras.total ||
-calcularTotalAmostras(amostras.mensal)
-)
-
-)}
-
-
-
-
-
-${card(
-
-"🏷️",
-
-"Total SKU",
-
-numero(
-amostras.totalSku ||
-amostras.top10.length
-)
-
-)}
-
-
-
-
-
-
-
-${card(
-
-"📊",
-
-"Média Mensal",
-
-numero(
-calcularMediaMensal(amostras.mensal)
-)
-
-)}
-
-
-
-
-
-
-${card(
-
-"📅",
-
-"Último Mês",
-
-ultimoMesAmostra(amostras.mensal)
-
-)}
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<div class="grafico-box">
-
-
-<h2>
-
-Solicitações de Amostra por Mês
-
-</h2>
-
-
-
-<canvas id="graficoAmostras"></canvas>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="grafico-box">
-
-
-<h2>
-
-Top 10 amostra mais solicitada
-
-</h2>
-
-
-
-<canvas id="graficoTopAmostras"></canvas>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="tabela-box">
-
-
-<h2>
-
-Detalhamento por SKU
-
-</h2>
-
-
-
-
-
-<table>
-
-
-<thead>
-
-
-<tr>
-
-<th>SKU</th>
-
-<th>Produto</th>
-
-<th>Quantidade</th>
-
-</tr>
-
-
-</thead>
-
-
-
-<tbody>
-
-
-
-${
-
-amostras.top10.map(item=>`
-
-
-<tr>
-
-
-<td>
-
-${item.sku || ""}
-
-</td>
-
-
-
-<td>
-
-${item.nome || item.produto || ""}
-
-</td>
-
-
-
-<td>
-
-${numero(
-item.quantidade ||
-item.qtd ||
-0
-)}
-
-</td>
-
-
-
-</tr>
-
-
-
-`).join("")
-
-}
-
-
-
-</tbody>
-
-
-</table>
-
-
-
-</div>
-
-
-
-`;
-
-
-
-
-
-
-
-// ==========================================
-// GRÁFICO MENSAL
-// ==========================================
-
-
-setTimeout(()=>{
-
-
-
-criarGrafico(
-
-"graficoAmostras",
-
-"line",
-
-amostras.mensal.map(
-m=>m.mes
-),
-
-amostras.mensal.map(
-m=>
-
-Number(
-m.quantidade ||
-m.total ||
-0
-)
-
-),
-
-"Quantidade de Amostras por Mês"
-
-);
-
-
-
-
-// ==========================================
-// TOP 10
-// ==========================================
-
-
-
-destruirGrafico();
-
-
-
-const canvas =
-
-document.getElementById(
-"graficoTopAmostras"
-);
-
-
-
-
-if(!canvas){
-
-return;
-
-}
-
-
-
-
-graficoAtual =
-
-new Chart(
-
-canvas,
-
-{
-
-
-type:"bar",
-
-
-data:{
-
-
-
-labels:
-
-amostras.top10.map(
-
-item=>
-
-item.sku ||
-item.nome
-
-),
-
-
-
-datasets:[{
-
-
-label:
-
-"Solicitações",
-
-
-
-data:
-
-amostras.top10.map(
-
-item=>
-
-Number(
-item.quantidade ||
-item.qtd ||
-0
-)
-
-),
-
-
-
-borderWidth:1
-
-
-
-}]
-
-
-
-},
-
-
-
-options:{
-
-
-
-indexAxis:"y",
-
-
-
-responsive:true,
-
-
-
-maintainAspectRatio:false,
-
-
-
-plugins:{
-
-
-
-legend:{
-
-
-display:false
-
-
-},
-
-
-
-title:{
-
-
-display:true,
-
-
-text:
-
-"Top 10 amostra mais solicitada"
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-);
-
-
-
-},100);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// =====================================================
-// FUNÇÕES AUXILIARES
-// =====================================================
-
-
-
-function calcularTotalAmostras(lista){
-
-
-
-return lista.reduce(
-
-(total,item)=>
-
-total +
-
-Number(
-item.quantidade ||
-item.total ||
-0
-),
-
-0
-
-);
-
-
-
-}
-
-
-
-
-
-
-function calcularMediaMensal(lista){
-
-
-
-if(!lista.length){
-
-return 0;
-
-}
-
-
-
-return Math.round(
-
-calcularTotalAmostras(lista)
-/
-lista.length
-
-);
-
-
-
-}
-
-
-
-
-
-
-
-function ultimoMesAmostra(lista){
-
-
-
-if(!lista.length){
-
-return "-";
-
-}
-
-
-
-return lista
-.filter(
-m=>
-Number(
-m.quantidade ||
-m.total ||
-0
-)>0
-)
-.slice(-1)
-.map(
-m=>m.mes
-)
-[0] || "-";
-
+        <section class="grid-2">
+
+            <div class="panel">
+
+                <h3>📈 Evolução Mensal de Amostras</h3>
+
+                <div class="chart-box">
+                    <canvas id="grafico"></canvas>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <h3>Amostras Mais Solicitadas</h3>
+
+                ${
+                    tabelaFixa(
+                        ["SKU","Descrição","Qtd."],
+                        montarLinhasAmostra(a.top10 || []),
+                        true
+                    )
+                }
+
+            </div>
+
+        </section>
+    `;
+
+    const opcoesAmostra = baseOptions();
+
+    opcoesAmostra.interaction = {
+        mode:"index",
+        intersect:false
+    };
+
+    opcoesAmostra.scales = {
+
+        y:{
+            beginAtZero:true,
+            position:"left",
+
+            title:{
+                display:true,
+                text:"Quantidade de amostras",
+                color:"#0f1f4d",
+                font:{weight:"bold"}
+            },
+
+            grid:{
+                color:"rgba(15,31,77,.08)"
+            },
+
+            ticks:{
+                color:"#5c6c96"
+            }
+        },
+
+        y1:{
+            beginAtZero:true,
+            position:"right",
+
+            title:{
+                display:true,
+                text:"Horas",
+                color:"#c026d3",
+                font:{weight:"bold"}
+            },
+
+            grid:{
+                drawOnChartArea:false
+            },
+
+            ticks:{
+                color:"#c026d3"
+            }
+        },
+
+        x:{
+            grid:{
+                display:false
+            },
+
+            ticks:{
+                color:"#5c6c96"
+            }
+        }
+    };
+
+    const datasetAmostras = dsLine(
+        "Amostras",
+        (a.mensal || []).map(i => Number(i.valor || 0)),
+        "#1d4eff"
+    );
+
+    datasetAmostras.yAxisID = "y";
+    datasetAmostras._ocultarZero = true;
+
+    const datasetHoras = dsLine(
+        "Horas",
+        (a.mensal || []).map(i => Number(i.horas || 0)),
+        "#c026d3"
+    );
+
+    datasetHoras.yAxisID = "y1";
+    datasetHoras._horas = true;
+    datasetHoras._ocultarZero = true;
+    datasetHoras.borderWidth = 2;
+    datasetHoras.borderDash = [7,5];
+    datasetHoras.pointStyle = "rectRot";
+    datasetHoras.pointRadius = 5;
+    datasetHoras.pointHoverRadius = 7;
+
+    graficoAtual = new Chart(
+        document.getElementById("grafico"),
+        {
+
+            type:"line",
+
+            data:{
+                labels:(a.mensal || []).map(i => i.mes),
+
+                datasets:[
+                    datasetAmostras,
+                    datasetHoras
+                ]
+            },
+
+            options:opcoesAmostra
+
+        }
+    );
 }
