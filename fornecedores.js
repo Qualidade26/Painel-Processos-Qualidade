@@ -1,408 +1,148 @@
-/* =====================================================
-   PAINEL SGQ LABOR
+function abrirAnaliseFornecedor(){
+
+    const f =
+        dados.fornecedores?.selecionado || {};
+
+    conteudo.innerHTML = `
+
+        <div class="page-title">
+            📊 ANÁLISE DETALHADA DO FORNECEDOR
+        </div>
+
+        <section class="cards">
+
+            ${card(
+                "🏭",
+                "Fornecedor",
+                f.nome || "-",
+                "Fornecedor selecionado"
+            )}
 
-   FORNECEDORES.JS
+            ${card(
+                "⭐",
+                "Índice",
+                (f.indice || 0) + "%",
+                "Avaliação geral"
+            )}
 
-   Aba:
-   🏭 FORNECEDORES
+            ${card(
+                "📄",
+                "Processos",
+                numero(f.processos || 0),
+                "Total de processos"
+            )}
 
-   ===================================================== */
+            ${card(
+                "⚠",
+                "NC",
+                numero(f.naoConformidades || 0),
+                "Não conformidades"
+            )}
 
+        </section>
 
+        <section class="grid-2">
 
-function renderFornecedores(){
+            <div class="panel">
 
+                <h3>
+                    Evolução Mensal
+                </h3>
 
+                <div class="chart-box">
+                    <canvas id="graficoFornecedor"></canvas>
+                </div>
 
-const fornecedores = dados.fornecedores || [];
+            </div>
 
+            <div class="panel">
 
+                <h3>
+                    Indicadores
+                </h3>
 
+                <div class="rank-grid">
 
-const area =
+                    <div class="rank-card">
+                        <div>
+                            Retrabalhos
+                            <strong>
+                                ${numero(f.retrabalhos || 0)}
+                            </strong>
+                        </div>
+                    </div>
 
-document.getElementById(
-"conteudo"
-);
+                    <div class="rank-card">
+                        <div>
+                            Reclamações
+                            <strong>
+                                ${numero(f.reclamacoes || 0)}
+                            </strong>
+                        </div>
+                    </div>
 
+                    <div class="rank-card">
+                        <div>
+                            SKUs
+                            <strong>
+                                ${numero(f.skus || 0)}
+                            </strong>
+                        </div>
+                    </div>
 
+                </div>
 
+            </div>
 
+        </section>
 
+        <div style="margin-top:10px;text-align:center;">
 
-area.innerHTML = `
+            <button
+                class="btn"
+                onclick="renderFornecedores()"
+            >
+                ← Voltar
+            </button>
 
+        </div>
+    `;
 
+    const historico =
+        f.historico || [];
 
-<div class="page-title">
+    graficoAtual = new Chart(
+        document.getElementById("graficoFornecedor"),
+        {
 
-🏭 GESTÃO DE FORNECEDORES
+            type:"line",
 
-</div>
+            data:{
 
+                labels:
+                    historico.map(i => i.mes),
 
+                datasets:[{
 
+                    label:"Índice",
 
+                    data:
+                        historico.map(i => i.indice),
 
+                    borderColor:"#1d4eff",
 
+                    backgroundColor:"#1d4eff",
 
-<section class="cards">
+                    borderWidth:3,
 
+                    tension:.35
 
+                }]
 
+            },
 
+            options:baseOptions()
 
-${card(
-
-"🏭",
-
-"Total Fornecedores",
-
-numero(
-fornecedores.length
-)
-
-)}
-
-
-
-
-
-
-
-${card(
-
-"⭐",
-
-"Avaliados",
-
-numero(
-contarAvaliados(fornecedores)
-)
-
-)}
-
-
-
-
-
-
-
-${card(
-
-"✅",
-
-"Aprovados",
-
-numero(
-contarStatus(
-fornecedores,
-"Aprovado"
-)
-
-)
-
-)}
-
-
-
-
-
-
-
-${card(
-
-"⏳",
-
-"Pendentes",
-
-numero(
-contarStatus(
-fornecedores,
-"Pendente"
-)
-
-)
-
-)}
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<div class="grafico-box">
-
-
-<h2>
-
-Avaliação de Fornecedores
-
-</h2>
-
-
-
-<canvas id="graficoFornecedores"></canvas>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="tabela-box">
-
-
-<h2>
-
-Controle de Fornecedores
-
-</h2>
-
-
-
-
-
-<table>
-
-
-<thead>
-
-
-<tr>
-
-
-<th>Fornecedor</th>
-
-<th>Status</th>
-
-<th>Nota</th>
-
-<th>Última Avaliação</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-
-<tbody>
-
-
-
-${
-
-fornecedores.map(f=>`
-
-
-<tr>
-
-
-
-<td>
-
-${f.nome || f.fornecedor || ""}
-
-</td>
-
-
-
-
-<td>
-
-${f.status || "-"}
-
-</td>
-
-
-
-
-<td>
-
-${numero(
-f.nota || 0
-)}
-
-</td>
-
-
-
-
-<td>
-
-${f.data || f.ultimaAvaliacao || "-"}
-
-</td>
-
-
-
-</tr>
-
-
-`).join("")
-
-}
-
-
-
-</tbody>
-
-
-
-</table>
-
-
-</div>
-
-
-
-`;
-
-
-
-
-
-
-
-
-// ==========================================
-// GRÁFICO
-// ==========================================
-
-
-setTimeout(()=>{
-
-
-
-const labels =
-
-fornecedores.map(
-
-f=>
-
-f.nome ||
-f.fornecedor
-
-);
-
-
-
-
-
-const valores =
-
-fornecedores.map(
-
-f=>
-
-Number(
-f.nota || 0
-)
-
-);
-
-
-
-
-
-criarGrafico(
-
-"graficoFornecedores",
-
-"bar",
-
-labels,
-
-valores,
-
-"Nota dos Fornecedores"
-
-);
-
-
-
-},100);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// =====================================================
-// FUNÇÕES AUXILIARES
-// =====================================================
-
-
-
-
-function contarAvaliados(lista){
-
-
-return lista.filter(
-
-f=>
-
-f.nota ||
-f.status
-
-).length;
-
-
-}
-
-
-
-
-
-
-
-function contarStatus(lista,status){
-
-
-return lista.filter(
-
-f=>
-
-String(
-f.status
-)
-.toLowerCase()
-
-===
-
-String(
-status
-)
-.toLowerCase()
-
-).length;
-
-
+        }
+    );
 }
