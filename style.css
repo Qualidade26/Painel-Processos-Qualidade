@@ -1,4 +1,4 @@
-:root{
+css = r''':root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
     --top2:#1d4eff;
@@ -18,7 +18,9 @@
     --cyan:#38bdf8;
 }
 
-*{box-sizing:border-box;}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -27,6 +29,10 @@ body{
     color:var(--text);
     overflow-x:hidden;
 }
+
+/* ==========================================================
+   TOPO
+   ========================================================== */
 
 .topbar{
     height:72px;
@@ -61,7 +67,9 @@ body{
     margin-top:6px;
 }
 
-.top-title{text-align:center;}
+.top-title{
+    text-align:center;
+}
 
 .top-title h1{
     margin:0;
@@ -100,25 +108,34 @@ body{
     text-align:center;
 }
 
-.data-pill{min-width:132px;}
-.time-pill{min-width:116px;}
+.data-pill{
+    min-width:132px;
+}
+
+.time-pill{
+    min-width:116px;
+}
 
 .online-dot{
     color:#27ff6f;
     margin-right:4px;
 }
 
+/* ==========================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================== */
+
 .main-wrap{
     height:calc(100vh - 72px);
     display:grid;
-    grid-template-columns:172px 1fr;
+    grid-template-columns:172px minmax(0,1fr);
     gap:10px;
     padding:10px;
     transition:grid-template-columns .25s ease;
 }
 
 .main-wrap.menu-collapsed{
-    grid-template-columns:68px 1fr;
+    grid-template-columns:68px minmax(0,1fr);
 }
 
 .menu{
@@ -154,12 +171,8 @@ body{
 }
 
 .main-wrap.menu-collapsed .menu button{
-    min-height:50px;
-    padding:8px 4px;
-}
-
-.main-wrap.menu-collapsed .menu button{
     min-height:45px;
+    padding:8px 4px;
 }
 
 .main-wrap.menu-collapsed .menu button .ico{
@@ -196,15 +209,21 @@ body{
 .menu button:hover,
 .menu button.active{
     background:linear-gradient(90deg,var(--top1),var(--top2));
-    color:white;
+    color:#fff;
     transform:translateY(-1px);
     box-shadow:0 6px 12px rgba(29,78,255,.25);
 }
 
 .content{
+    min-width:0;
     overflow:auto;
     padding-right:2px;
 }
+
+/* ==========================================================
+   TÍTULO E CARDS
+   ========================================================== */
+
 .page-title{
     background:var(--card);
     color:var(--primary);
@@ -233,7 +252,7 @@ body{
     min-height:72px;
     box-shadow:0 4px 10px rgba(0,0,0,.05);
     display:grid;
-    grid-template-columns:48px 1fr;
+    grid-template-columns:48px minmax(0,1fr);
     align-items:center;
     gap:10px;
 }
@@ -275,6 +294,10 @@ body{
     margin-top:2px;
 }
 
+/* ==========================================================
+   GRADES E PAINÉIS
+   ========================================================== */
+
 .grid-2{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -290,6 +313,8 @@ body{
 }
 
 .panel{
+    width:100%;
+    min-width:0;
     background:rgba(248,251,255,.95);
     border:1px solid var(--line);
     border-radius:12px;
@@ -307,9 +332,19 @@ body{
     text-transform:uppercase;
 }
 
+/* ==========================================================
+   GRÁFICOS
+   ========================================================== */
+
 .chart-box{
     height:300px;
     position:relative;
+    width:100%;
+    min-width:0;
+}
+
+.chart-box canvas{
+    max-width:100%;
 }
 
 .chart-box.small{
@@ -317,30 +352,35 @@ body{
 }
 
 .chart-box.esfig-large{
-    height:520px;
+    height:390px;
 }
 
 .chart-box.tall{
     height:360px;
 }
 
+/* ==========================================================
+   TABELAS
+   ========================================================== */
+
 .table-wrap{
     border:1px solid var(--line2);
     border-radius:10px;
     overflow:hidden;
-    background:white;
+    background:#fff;
+    width:100%;
 }
 
 .table-scroll{
     max-height:400px;
     overflow-y:auto;
-    overflow-x:hidden;
+    overflow-x:auto;
     scrollbar-width:thin;
 }
 
 .table-scroll.infinite{
     overflow-y:auto;
-    overflow-x:hidden;
+    overflow-x:auto;
     scroll-behavior:smooth;
 }
 
@@ -360,6 +400,7 @@ body{
     0%{
         transform:translateY(0);
     }
+
     100%{
         transform:translateY(-50%);
     }
@@ -407,6 +448,10 @@ td.desc{
     font-weight:900;
 }
 
+/* ==========================================================
+   RANKING
+   ========================================================== */
+
 .rank-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -432,7 +477,7 @@ td.desc{
     height:20px;
     border-radius:6px;
     background:var(--primary);
-    color:white;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -450,6 +495,11 @@ td.desc{
     font-size:13px;
     margin-top:4px;
 }
+
+/* ==========================================================
+   FLUXO OPERACIONAL
+   ========================================================== */
+
 .fluxo{
     display:grid;
     grid-template-columns:1fr 28px 1fr 28px 1fr;
@@ -511,224 +561,14 @@ td.desc{
 .progress-bar{
     height:100%;
     background:linear-gradient(90deg,#16a34a,#22c55e);
-    color:white;
+    color:#fff;
     text-align:center;
     font-size:12px;
     font-weight:900;
     line-height:22px;
+    min-width:0;
 }
 
-.esfig-flow .table-scroll{
-    max-height:300px;
-}
-
-.esfig-chart{
-    display:flex;
-    flex-direction:column;
-}
-
-.esfig-chart .chart-box{
-    flex:1;
-    min-height:430px;
-}
-
-.senha-box{
-    max-width:430px;
-    margin:80px auto;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:24px;
-    text-align:center;
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
-}
-
-.senha-box h2{
-    color:var(--primary);
-    margin-top:0;
-}
-
-.senha-box input{
-    width:100%;
-    padding:13px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    text-align:center;
-    font-size:17px;
-    font-weight:900;
-}
-
-.btn{
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:11px 16px;
-    border-radius:10px;
-    font-weight:900;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.info-menu{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    justify-content:center;
-    margin-bottom:8px;
-}
-
-.info-menu button{
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:10px 14px;
-    border-radius:10px;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.info-text{
-    text-align:center;
-    font-size:16px;
-    line-height:1.7;
-    font-weight:700;
-    max-width:1050px;
-    margin:auto;
-}
-
-.process-steps{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:8px;
-    margin-top:10px;
-}
-
-.step{
-    background:#e8f0ff;
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:12px;
-    text-align:center;
-    font-weight:900;
-}
-
-.step span{
-    display:inline-flex;
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    background:var(--primary);
-    color:white;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:6px;
-}
-
-select{
-    padding:10px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    font-weight:900;
-    color:var(--text);
-    background:white;
-    margin-bottom:8px;
-    width:100%;
-}
-
-.footer-note{
-    font-size:10px;
-    font-weight:900;
-    text-align:center;
-    color:var(--primary);
-    padding:5px;
-    background:#eef5ff;
-    border:1px solid var(--line);
-    border-radius:10px;
-    margin-top:8px;
-}
-
-@media(max-width:1050px){
-
-    .topbar{
-        grid-template-columns:1fr;
-        height:auto;
-        gap:8px;
-        padding:10px;
-        text-align:center;
-    }
-
-    .logo-labor{
-        border-right:none;
-        align-items:center;
-    }
-
-    .top-status{
-        justify-content:center;
-        flex-wrap:wrap;
-    }
-
-    .main-wrap,
-    .main-wrap.menu-collapsed{
-        grid-template-columns:1fr;
-        height:auto;
-    }
-
-    .menu{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
-
-    .menu button{
-        margin-bottom:0;
-    }
-
-    .grid-2,
-    .grid-3-2{
-        grid-template-columns:1fr;
-    }
-}
-.importacao-bottom-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 10px;
-}
-
-.chart-box-importacao {
-    height: 285px;
-}
-
-.chart-box-pareto {
-    height: 275px;
-}
-
-.table-footer {
-    display: flex;
-    justify-content: center;
-    padding-top: 12px;
-}
-
-.btn-ver-todos {
-    min-width: 200px;
-    padding: 8px 20px;
-    border: 1px solid #1d4eff;
-    border-radius: 8px;
-    background: #ffffff;
-    color: #1546d8;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.btn-ver-todos:hover {
-    background: #1546d8;
-    color: #ffffff;
-}
-
-@media (max-width: 1050px) {
-    .importacao-bottom-grid {
-        grid-template-columns: 1fr;
-    }
-}
 /* ==========================================================
    ESFIGMOMANÔMETRO — NOVO LAYOUT
    Pareto em cima, fluxo abaixo e tabela no final
@@ -738,28 +578,9 @@ select{
 .esfig-flow-destaque,
 .esfig-tabela{
     width:100%;
-    box-sizing:border-box;
-    margin-bottom:10px;
+    min-width:0;
+    margin-bottom:8px;
 }
-
-
-/* TÍTULOS */
-
-.esfig-pareto-destaque h3,
-.esfig-flow-destaque h3,
-.esfig-tabela h3{
-    margin:0 0 10px;
-    text-align:center;
-    color:var(--primary);
-    font-size:14px;
-    font-weight:900;
-    text-transform:uppercase;
-}
-
-
-/* ==========================================================
-   PARETO
-   ========================================================== */
 
 .esfig-pareto-destaque{
     padding:12px;
@@ -776,9 +597,6 @@ select{
     width:100% !important;
     height:100% !important;
 }
-
-
-/* RESUMO DO PARETO */
 
 .esfig-pareto-resumo{
     display:flex;
@@ -818,11 +636,6 @@ select{
     line-height:1.45;
 }
 
-
-/* ==========================================================
-   FLUXO OPERACIONAL
-   ========================================================== */
-
 .esfig-flow-destaque{
     padding:12px;
 }
@@ -851,11 +664,6 @@ select{
     width:100%;
 }
 
-
-/* ==========================================================
-   TABELA
-   ========================================================== */
-
 .esfig-tabela{
     padding:12px;
 }
@@ -870,12 +678,214 @@ select{
     overflow-x:auto;
 }
 
+/* ==========================================================
+   LOGIN E BOTÕES
+   ========================================================== */
+
+.senha-box{
+    max-width:430px;
+    margin:80px auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    text-align:center;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+
+.senha-box h2{
+    color:var(--primary);
+    margin-top:0;
+}
+
+.senha-box input{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    text-align:center;
+    font-size:17px;
+    font-weight:900;
+}
+
+.btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:11px 16px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:10px;
+}
 
 /* ==========================================================
-   RESPONSIVO
+   INFORMAÇÕES E PROCESSOS
+   ========================================================== */
+
+.info-menu{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-bottom:8px;
+}
+
+.info-menu button{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.info-text{
+    text-align:center;
+    font-size:16px;
+    line-height:1.7;
+    font-weight:700;
+    max-width:1050px;
+    margin:auto;
+}
+
+.process-steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:8px;
+    margin-top:10px;
+}
+
+.step{
+    background:#e8f0ff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+    text-align:center;
+    font-weight:900;
+}
+
+.step span{
+    display:inline-flex;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:6px;
+}
+
+select{
+    padding:10px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-weight:900;
+    color:var(--text);
+    background:#fff;
+    margin-bottom:8px;
+    width:100%;
+}
+
+.footer-note{
+    font-size:10px;
+    font-weight:900;
+    text-align:center;
+    color:var(--primary);
+    padding:5px;
+    background:#eef5ff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-top:8px;
+}
+
+/* ==========================================================
+   IMPORTAÇÃO
+   ========================================================== */
+
+.importacao-bottom-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:10px;
+}
+
+.chart-box-importacao{
+    height:285px;
+}
+
+.chart-box-pareto{
+    height:275px;
+}
+
+.table-footer{
+    display:flex;
+    justify-content:center;
+    padding-top:12px;
+}
+
+.btn-ver-todos{
+    min-width:200px;
+    padding:8px 20px;
+    border:1px solid #1d4eff;
+    border-radius:8px;
+    background:#fff;
+    color:#1546d8;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-ver-todos:hover{
+    background:#1546d8;
+    color:#fff;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
    ========================================================== */
 
 @media(max-width:1050px){
+
+    .topbar{
+        grid-template-columns:1fr;
+        height:auto;
+        gap:8px;
+        padding:10px;
+        text-align:center;
+    }
+
+    .logo-labor{
+        border-right:none;
+        align-items:center;
+    }
+
+    .top-status{
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .main-wrap,
+    .main-wrap.menu-collapsed{
+        grid-template-columns:1fr;
+        height:auto;
+    }
+
+    .menu{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .menu button{
+        margin-bottom:0;
+    }
+
+    .grid-2,
+    .grid-3-2,
+    .importacao-bottom-grid{
+        grid-template-columns:1fr;
+    }
 
     .esfig-pareto-grande{
         height:350px;
@@ -883,8 +893,11 @@ select{
     }
 }
 
-
 @media(max-width:800px){
+
+    .cards{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
 
     .esfig-pareto-grande{
         height:320px;
@@ -902,10 +915,21 @@ select{
     .esfig-pareto-resumo{
         align-items:flex-start;
     }
+
+    .rank-grid{
+        grid-template-columns:1fr;
+    }
 }
 
-
 @media(max-width:520px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .menu{
+        grid-template-columns:1fr;
+    }
 
     .esfig-pareto-destaque,
     .esfig-flow-destaque,
@@ -917,4 +941,19 @@ select{
         height:290px;
         min-height:290px;
     }
+
+    .kpi-card strong{
+        font-size:24px;
+    }
+
+    table{
+        min-width:680px;
+    }
 }
+'''
+
+path = "/mnt/data/style.css"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(css)
+
+print(f"Arquivo criado: {path}")
