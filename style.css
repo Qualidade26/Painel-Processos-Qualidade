@@ -688,3 +688,44 @@ select{
         grid-template-columns:1fr;
     }
 }
+.importacao-bottom-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+}
+
+.chart-box-importacao {
+    height: 285px;
+}
+
+.chart-box-pareto {
+    height: 275px;
+}
+
+.table-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+}
+
+.btn-ver-todos {
+    min-width: 200px;
+    padding: 8px 20px;
+    border: 1px solid #1d4eff;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1546d8;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-ver-todos:hover {
+    background: #1546d8;
+    color: #ffffff;
+}
+
+@media (max-width: 1050px) {
+    .importacao-bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
