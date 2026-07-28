@@ -106,8 +106,28 @@
       {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
       {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
       {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }
-]
-},
+
+  }
+    ],
+  "fluxo": [
+        {
+            "po": "PO-001",
+            "sku": "SKU-4587",
+            "descricao": "Parafuso M8",
+            "lote": "L240701",
+            "status": "OK",
+            "observacao": "Inspecionado"
+        },
+        {
+            "po": "PO-002",
+            "sku": "SKU-9632",
+            "descricao": "Rolamento 6204",
+            "lote": "L240702",
+            "status": "NOK",
+            "observacao": "Dimensão fora da especificação"
+        }
+    ]
+}
 
 
 "retrabalho": {
