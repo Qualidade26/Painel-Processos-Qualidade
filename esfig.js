@@ -284,6 +284,7 @@ function renderEsfig(){
                 numero(esfig.totalHoras),
                 "Horas da atividade"
             )}
+</section>
 
         <!-- GRÁFICO PRINCIPAL -->
 
@@ -330,6 +331,7 @@ function renderEsfig(){
 <!-- PARTE INFERIOR IGUAL À IMPORTAÇÃO -->
 
 <section class="esfig-bottom-grid">
+
 
     <!-- FLUXO OPERACIONAL -->
 
@@ -430,7 +432,11 @@ function renderEsfig(){
 
     </div>
 
+
 </section>
+
+`;
+
 
 
     /*
