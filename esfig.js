@@ -1,745 +1,235 @@
-function renderEsfig(){
+/* ==========================================================
+   ESFIGMOMANÔMETRO — NOVO LAYOUT
+   Pareto acima, fluxo abaixo e tabela no final
+   ========================================================== */
 
-    const esfig = dados.esfig || {};
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PRODUTOS DA TABELA
-    |--------------------------------------------------------------------------
-    | A tabela permanece ordenada pelo número do SKU.
-    */
-    const produtos = [...(esfig.produtos || [])]
-        .sort((a,b) => {
-
-            const na = parseInt(a.sku,10);
-            const nb = parseInt(b.sku,10);
-
-            if(
-                Number.isNaN(na) &&
-                Number.isNaN(nb)
-            ){
-                return String(a.sku || "")
-                    .localeCompare(String(b.sku || ""));
-            }
-
-            if(Number.isNaN(na)){
-                return 1;
-            }
-
-            if(Number.isNaN(nb)){
-                return -1;
-            }
-
-            return na - nb;
-        });
+.esfig-pareto-destaque,
+.esfig-flow-destaque,
+.esfig-tabela{
+    width:100%;
+    box-sizing:border-box;
+    margin-top:8px;
+}
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | TOTAIS DO FLUXO OPERACIONAL
-    |--------------------------------------------------------------------------
-    */
-    const totalAguardando =
-        produtos.reduce(
-            (soma,item) =>
-                soma + Number(item.aguardando || 0),
-            0
+/* TÍTULOS DOS PAINÉIS */
+
+.esfig-pareto-destaque h3,
+.esfig-flow-destaque h3,
+.esfig-tabela h3{
+    margin:0 0 10px;
+    text-align:center;
+    color:#0646ff;
+    font-size:14px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.2px;
+}
+
+
+/* ==========================================================
+   PARETO
+   ========================================================== */
+
+.esfig-pareto-destaque{
+    margin-bottom:10px;
+    padding:14px 16px 12px;
+}
+
+.esfig-pareto-grande{
+    position:relative;
+    width:100%;
+    height:390px;
+    min-height:390px;
+}
+
+.esfig-pareto-grande canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+
+/* RESUMO DO PARETO */
+
+.esfig-pareto-resumo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-top:10px;
+    padding:10px 14px;
+
+    border:1px solid #bdd2ff;
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #edf4ff,
+            #f8fbff
         );
 
-    const totalDesmontado =
-        produtos.reduce(
-            (soma,item) =>
-                soma + Number(item.desmontado || 0),
-            0
-        );
-
-    const totalAferidos =
-        produtos.reduce(
-            (soma,item) =>
-                soma + Number(item.aferidos || 0),
-            0
-        );
-
-    const totalGeral =
-        totalAguardando +
-        totalDesmontado +
-        totalAferidos;
-
-
-    const conclusao =
-        totalGeral > 0
-            ? Number(
-                (
-                    (totalAferidos / totalGeral) *
-                    100
-                ).toFixed(1)
-            )
-            : 0;
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | DADOS DO PARETO
-    |--------------------------------------------------------------------------
-    | Remove valores zerados e ordena do maior para o menor.
-    */
-    const dadosPareto = produtos
-        .map(item => ({
-
-            sku:
-                item.sku ||
-                "Sem SKU",
-
-            quantidade:
-                Number(item.totalAnualSku || 0)
-
-        }))
-        .filter(item =>
-
-            Number.isFinite(item.quantidade) &&
-            item.quantidade > 0
-
-        )
-        .sort(
-            (a,b) =>
-                b.quantidade -
-                a.quantidade
-        );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | ARRAYS DO GRÁFICO
-    |--------------------------------------------------------------------------
-    */
-    const labelsPareto =
-        dadosPareto.map(item =>
-            String(item.sku)
-        );
-
-    const quantidadesPareto =
-        dadosPareto.map(item =>
-            item.quantidade
-        );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | TOTAL DO PARETO
-    |--------------------------------------------------------------------------
-    */
-    const totalPareto =
-        quantidadesPareto.reduce(
-            (soma,valor) =>
-                soma + valor,
-            0
-        );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PERCENTUAL ACUMULADO
-    |--------------------------------------------------------------------------
-    | Exemplo:
-    |
-    | 1º SKU: 40%
-    | 2º SKU: 65%
-    | 3º SKU: 82%
-    | Último SKU: 100%
-    */
-    let acumuladoPareto = 0;
+    color:#132657;
+}
+
+.esfig-pareto-resumo-icone{
+    flex:0 0 30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:30px;
+    height:30px;
 
-    const percentualAcumulado =
-        quantidadesPareto.map(valor => {
+    border-radius:50%;
 
-            acumuladoPareto += valor;
+    background:#0754ef;
+    color:#ffffff;
 
-            if(totalPareto <= 0){
-                return null;
-            }
+    font-size:18px;
+    font-weight:900;
+}
+
+.esfig-pareto-resumo strong{
+    display:block;
+    margin-bottom:2px;
+    color:#073eae;
+}
 
-            return Number(
-                (
-                    (
-                        acumuladoPareto /
-                        totalPareto
-                    ) *
-                    100
-                ).toFixed(1)
-            );
-        });
+.esfig-pareto-resumo p{
+    margin:0;
+    font-size:12px;
+    line-height:1.45;
+}
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CONTEÚDO DA PÁGINA
-    |--------------------------------------------------------------------------
-    */
-    conteudo.innerHTML = `
+/* ==========================================================
+   FLUXO OPERACIONAL
+   ========================================================== */
 
-        <div class="page-title">
-            ⏱ ESFIGMOMANÔMETRO
-        </div>
+.esfig-flow-destaque{
+    margin-bottom:10px;
+    padding:14px 16px;
+}
 
+.esfig-fluxo-horizontal{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        <section class="cards">
+    width:100%;
+    gap:16px;
+}
 
-            ${card(
-                "💰",
-                "Total Gasto por GRU",
-                moeda(esfig.totalGruInmetro),
-                "Valor pago ao Inmetro"
-            )}
+.esfig-fluxo-horizontal .fluxo-item{
+    flex:1;
+    max-width:320px;
+    min-height:76px;
 
-            ${card(
-                "📅",
-                "Última Aferição",
-                esfig.ultimaAfericao || "-",
-                "Data registrada"
-            )}
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
 
-            ${card(
-                "📆",
-                "Próxima Aferição",
-                esfig.proximaAfericao || "-",
-                "Previsão"
-            )}
+.esfig-fluxo-horizontal .fluxo-item strong{
+    line-height:1;
+}
 
-            ${card(
-                "⏱",
-                "Total de Horas",
-                numero(esfig.totalHoras),
-                "Horas da atividade"
-            )}
+.esfig-fluxo-horizontal .fluxo-arrow{
+    flex:0 0 auto;
+    font-size:22px;
+}
 
-        </section>
+.esfig-flow-destaque .progress-title{
+    margin-top:12px;
+    text-align:center;
+}
 
+.esfig-flow-destaque .progress-box{
+    width:100%;
+    margin-top:6px;
+}
 
-        <section class="grid-3-2">
 
-            <div class="panel esfig-flow">
+/* ==========================================================
+   TABELA
+   ========================================================== */
 
-                <h3>
-                    ⏱ Esfigmomanômetro — Fluxo Operacional
-                </h3>
+.esfig-tabela{
+    padding:14px 10px 10px;
+}
 
+.esfig-tabela .table-wrap,
+.esfig-tabela .table-container,
+.esfig-tabela .table-box{
+    width:100%;
+    max-height:340px;
+    overflow:auto;
+}
 
-                <div class="fluxo">
 
-                    <div class="fluxo-item">
+/* CABEÇALHO FIXO DA TABELA */
 
-                        <strong>
-                            ${numero(totalAguardando)}
-                        </strong>
+.esfig-tabela table thead th{
+    position:sticky;
+    top:0;
+    z-index:2;
+}
 
-                        <small>
-                            Aguardando Desmontagem
-                        </small>
 
-                    </div>
+/* ==========================================================
+   TELAS MENORES
+   ========================================================== */
 
+@media(max-width:1100px){
 
-                    <div class="fluxo-arrow">
-                        →
-                    </div>
+    .esfig-pareto-grande{
+        height:350px;
+        min-height:350px;
+    }
+}
 
 
-                    <div class="fluxo-item pink">
+@media(max-width:800px){
 
-                        <strong>
-                            ${numero(totalDesmontado)}
-                        </strong>
-
-                        <small>
-                            Desmontado
-                        </small>
-
-                    </div>
-
-
-                    <div class="fluxo-arrow">
-                        →
-                    </div>
-
-
-                    <div class="fluxo-item green">
-
-                        <strong>
-                            ${numero(totalAferidos)}
-                        </strong>
-
-                        <small>
-                            Aferidos / Montagem
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="progress-title">
-                    Processamento geral
-                </div>
-
-
-                <div class="progress-box">
-
-                    <div
-                        class="progress-bar"
-                        style="width:${Math.min(conclusao,100)}%"
-                    >
-                        ${conclusao}% concluído
-                    </div>
-
-                </div>
-
-
-                ${
-                    tabelaFixa(
-                        [
-                            "SKU",
-                            "Descrição",
-                            "Aguard.",
-                            "Desm.",
-                            "Afer.",
-                            "Status"
-                        ],
-                        montarLinhasEsfig(produtos),
-                        true
-                    )
-                }
-
-            </div>
-
-
-            <div class="panel esfig-chart">
-
-                <h3>
-                    Total Anual por SKU — Pareto
-                </h3>
-
-                <div class="chart-box esfig-large">
-                    <canvas id="grafico"></canvas>
-                </div>
-
-            </div>
-
-        </section>
-    `;
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | DESTRÓI O GRÁFICO ANTERIOR
-    |--------------------------------------------------------------------------
-    */
-    if(
-        typeof graficoAtual !== "undefined" &&
-        graficoAtual
-    ){
-        graficoAtual.destroy();
-        graficoAtual = null;
+    .esfig-pareto-grande{
+        height:330px;
+        min-height:330px;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | LOCALIZA O CANVAS
-    |--------------------------------------------------------------------------
-    */
-    const canvas =
-        document.getElementById("grafico");
-
-    if(!canvas){
-
-        console.error(
-            "Canvas do gráfico Esfig não encontrado."
-        );
-
-        return;
+    .esfig-fluxo-horizontal{
+        flex-direction:column;
+        gap:9px;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | SEM DADOS PARA O PARETO
-    |--------------------------------------------------------------------------
-    */
-    if(!dadosPareto.length){
-
-        const contexto =
-            canvas.getContext("2d");
-
-        contexto.clearRect(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        contexto.textAlign = "center";
-        contexto.textBaseline = "middle";
-        contexto.font = "16px Arial";
-
-        contexto.fillText(
-            "Não há dados disponíveis para o Pareto.",
-            canvas.width / 2,
-            canvas.height / 2
-        );
-
-        return;
+    .esfig-fluxo-horizontal .fluxo-item{
+        width:100%;
+        max-width:none;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | GRÁFICO PARETO
-    |--------------------------------------------------------------------------
-    */
-    graficoAtual = new Chart(
-        canvas,
-        {
-
-            type:"bar",
-
-
-            data:{
-
-                labels:labelsPareto,
-
-                datasets:[
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | BARRAS
-                    |--------------------------------------------------------------------------
-                    */
-                    {
-                        type:"bar",
-
-                        label:"Total de Aferições",
-
-                        data:quantidadesPareto,
-
-                        backgroundColor:"#1d4eff",
-                        borderColor:"#1d4eff",
-
-                        borderWidth:1,
-                        borderRadius:3,
-
-                        maxBarThickness:60,
-
-                        yAxisID:"y",
-
-                        order:2
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LINHA ACUMULADA
-                    |--------------------------------------------------------------------------
-                    */
-                    {
-                        type:"line",
-
-                        label:"% Acumulado",
-
-                        data:percentualAcumulado,
-
-                        borderColor:"#f04dd8",
-                        backgroundColor:"#f04dd8",
-
-                        pointBackgroundColor:"#f04dd8",
-                        pointBorderColor:"#ffffff",
-                        pointBorderWidth:1,
-
-                        pointRadius:4,
-                        pointHoverRadius:6,
-                        pointHitRadius:12,
-
-                        borderWidth:2,
-
-                        tension:0.20,
-
-                        fill:false,
-                        spanGaps:false,
-
-                        yAxisID:"y1",
-
-                        order:1
-                    }
-
-                ]
-            },
-
-
-            options:{
-
-                responsive:true,
-                maintainAspectRatio:false,
-
-                layout:{
-
-                    padding:{
-                        top:20,
-                        right:15,
-                        bottom:10,
-                        left:5
-                    }
-                },
-
-
-                interaction:{
-                    mode:"index",
-                    intersect:false
-                },
-
-
-                plugins:{
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LEGENDA
-                    |--------------------------------------------------------------------------
-                    */
-                    legend:{
-
-                        display:true,
-                        position:"top",
-
-                        labels:{
-                            boxWidth:24,
-                            padding:16
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | TOOLTIP
-                    |--------------------------------------------------------------------------
-                    */
-                    tooltip:{
-
-                        enabled:true,
-
-                        filter:function(context){
-
-                            return (
-                                context.raw !== null &&
-                                context.raw !== undefined &&
-                                Number(context.raw) !== 0
-                            );
-                        },
-
-                        callbacks:{
-
-                            label:function(context){
-
-                                if(
-                                    context.dataset.label ===
-                                    "% Acumulado"
-                                ){
-                                    return (
-                                        "% acumulado: " +
-                                        context.raw +
-                                        "%"
-                                    );
-                                }
-
-                                return (
-                                    "Total de aferições: " +
-                                    numero(context.raw)
-                                );
-                            }
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | RÓTULOS
-                    |--------------------------------------------------------------------------
-                    | Funciona caso o ChartDataLabels esteja carregado.
-                    |--------------------------------------------------------------------------
-                    */
-                    datalabels:{
-
-                        display:function(context){
-
-                            const valor =
-                                context.dataset.data[
-                                    context.dataIndex
-                                ];
-
-                            return (
-                                valor !== null &&
-                                valor !== undefined &&
-                                Number(valor) !== 0
-                            );
-                        },
-
-
-                        formatter:function(valor,context){
-
-                            if(
-                                context.dataset.label ===
-                                "% Acumulado"
-                            ){
-                                return `${valor}%`;
-                            }
-
-                            return numero(valor);
-                        },
-
-
-                        color:function(context){
-
-                            if(
-                                context.dataset.label ===
-                                "% Acumulado"
-                            ){
-                                return "#b51ca8";
-                            }
-
-                            return "#1f2937";
-                        },
-
-
-                        anchor:function(context){
-
-                            return (
-                                context.dataset.type === "bar"
-                                    ? "end"
-                                    : "center"
-                            );
-                        },
-
-
-                        align:function(context){
-
-                            return (
-                                context.dataset.type === "bar"
-                                    ? "top"
-                                    : "top"
-                            );
-                        },
-
-
-                        offset:function(context){
-
-                            return (
-                                context.dataset.type === "bar"
-                                    ? 2
-                                    : 6
-                            );
-                        },
-
-
-                        font:{
-
-                            size:11,
-                            weight:"bold"
-                        }
-                    }
-                },
-
-
-                scales:{
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DOS SKUs
-                    |--------------------------------------------------------------------------
-                    */
-                    x:{
-
-                        grid:{
-                            display:false
-                        },
-
-                        title:{
-                            display:true,
-                            text:"SKU"
-                        },
-
-                        ticks:{
-
-                            autoSkip:false,
-
-                            maxRotation:45,
-                            minRotation:0
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DAS QUANTIDADES
-                    |--------------------------------------------------------------------------
-                    */
-                    y:{
-
-                        beginAtZero:true,
-
-                        position:"left",
-
-                        grid:{
-                            color:"rgba(15,31,77,0.08)"
-                        },
-
-                        title:{
-                            display:true,
-                            text:"Total de aferições"
-                        },
-
-                        ticks:{
-
-                            precision:0,
-
-                            callback:function(valor){
-                                return numero(valor);
-                            }
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DO PERCENTUAL
-                    |--------------------------------------------------------------------------
-                    */
-                    y1:{
-
-                        beginAtZero:true,
-
-                        min:0,
-                        max:100,
-
-                        position:"right",
-
-                        grid:{
-                            drawOnChartArea:false
-                        },
-
-                        title:{
-                            display:true,
-                            text:"% Acumulado"
-                        },
-
-                        ticks:{
-
-                            stepSize:20,
-
-                            callback:function(valor){
-                                return `${valor}%`;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    );
+    .esfig-fluxo-horizontal .fluxo-arrow{
+        transform:rotate(90deg);
+    }
+
+    .esfig-pareto-resumo{
+        align-items:flex-start;
+    }
+}
+
+
+@media(max-width:520px){
+
+    .esfig-pareto-destaque,
+    .esfig-flow-destaque,
+    .esfig-tabela{
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    .esfig-pareto-grande{
+        height:300px;
+        min-height:300px;
+    }
 }
