@@ -2,41 +2,61 @@ function renderEsfig(){
 
     const esfig = dados.esfig || {};
 
-    const produtos = [...(esfig.produtos || [])].sort((a,b) => {
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUTOS DA TABELA
+    |--------------------------------------------------------------------------
+    | Mantém a tabela organizada pelo número do SKU.
+    */
+    const produtos = [...(esfig.produtos || [])]
+        .sort((a,b) => {
 
-        const na = parseInt(a.sku,10);
-        const nb = parseInt(b.sku,10);
+            const na = parseInt(a.sku,10);
+            const nb = parseInt(b.sku,10);
 
-        if(Number.isNaN(na) && Number.isNaN(nb))
-            return String(a.sku).localeCompare(String(b.sku));
+            if(
+                Number.isNaN(na) &&
+                Number.isNaN(nb)
+            ){
+                return String(a.sku)
+                    .localeCompare(String(b.sku));
+            }
 
-        if(Number.isNaN(na))
-            return 1;
+            if(Number.isNaN(na)){
+                return 1;
+            }
 
-        if(Number.isNaN(nb))
-            return -1;
+            if(Number.isNaN(nb)){
+                return -1;
+            }
 
-        return na - nb;
-    });
+            return na - nb;
+        });
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | TOTAIS DO FLUXO OPERACIONAL
+    |--------------------------------------------------------------------------
+    */
     const totalAguardando =
         produtos.reduce(
-            (s,i) =>
-                s + Number(i.aguardando || 0),
+            (soma,item) =>
+                soma + Number(item.aguardando || 0),
             0
         );
 
     const totalDesmontado =
         produtos.reduce(
-            (s,i) =>
-                s + Number(i.desmontado || 0),
+            (soma,item) =>
+                soma + Number(item.desmontado || 0),
             0
         );
 
     const totalAferidos =
         produtos.reduce(
-            (s,i) =>
-                s + Number(i.aferidos || 0),
+            (soma,item) =>
+                soma + Number(item.aferidos || 0),
             0
         );
 
@@ -45,28 +65,35 @@ function renderEsfig(){
         totalDesmontado +
         totalAferidos;
 
+
     const conclusao =
-        totalGeral
-            ? (
-                (totalAferidos / totalGeral) *
-                100
-            ).toFixed(1)
+        totalGeral > 0
+            ? Number(
+                (
+                    (totalAferidos / totalGeral) *
+                    100
+                ).toFixed(1)
+            )
             : 0;
 
 
     /*
     |--------------------------------------------------------------------------
-    | DADOS DO PARETO
+    | DADOS DO GRÁFICO PARETO
     |--------------------------------------------------------------------------
-    | Remove SKUs sem valor e ordena do maior para o menor.
+    | Remove valores zerados e ordena do maior para o menor.
     */
     const dadosPareto = produtos
         .map(item => ({
-            sku: item.sku || "-",
+            sku:
+                item.sku ||
+                "Sem identificação",
+
             quantidade:
                 Number(item.totalAnualSku || 0)
         }))
         .filter(item =>
+            Number.isFinite(item.quantidade) &&
             item.quantidade > 0
         )
         .sort(
@@ -80,6 +107,7 @@ function renderEsfig(){
         dadosPareto.map(item =>
             String(item.sku)
         );
+
 
     const quantidadesPareto =
         dadosPareto.map(item =>
@@ -100,36 +128,53 @@ function renderEsfig(){
         );
 
 
-   /*
-|--------------------------------------------------------------------------
-| LINHA DO PARETO
-|--------------------------------------------------------------------------
-| Calcula o percentual acumulado e inverte somente a apresentação
-| da linha para que ela suba da esquerda para a direita.
-*/
-let acumulado = 0;
+    /*
+    |--------------------------------------------------------------------------
+    | PERCENTUAL ACUMULADO CORRETO
+    |--------------------------------------------------------------------------
+    | Este array contém os percentuais matematicamente corretos:
+    |
+    | Primeiro SKU: participação acumulada inicial
+    | Último SKU: 100%
+    */
+    let acumulado = 0;
 
-const percentualCalculado =
-    quantidadesPareto.map(valor => {
+    const percentualAcumuladoCorreto =
+        quantidadesPareto.map(valor => {
 
-        acumulado += valor;
+            acumulado += valor;
 
-        if(totalPareto === 0){
-            return null;
-        }
+            if(totalPareto <= 0){
+                return null;
+            }
 
-        return Number(
-            (
-                (acumulado / totalPareto) *
-                100
-            ).toFixed(1)
-        );
-    });
-
-const percentualAcumulado =
-    [...percentualCalculado].reverse();
+            return Number(
+                (
+                    (acumulado / totalPareto) *
+                    100
+                ).toFixed(1)
+            );
+        });
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | POSIÇÃO VISUAL DA LINHA
+    |--------------------------------------------------------------------------
+    | Como o gráfico horizontal mostra o maior SKU na parte superior,
+    | o array é invertido somente para desenhar a linha subindo da
+    | parte inferior esquerda para a parte superior direita.
+    */
+    const percentualLinhaPareto =
+        [...percentualAcumuladoCorreto]
+            .reverse();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CONTEÚDO DA PÁGINA
+    |--------------------------------------------------------------------------
+    */
     conteudo.innerHTML = `
         <div class="page-title">
             ⏱ ESFIGMOMANÔMETRO
@@ -274,7 +319,7 @@ const percentualAcumulado =
 
     /*
     |--------------------------------------------------------------------------
-    | EVITA GRÁFICO DUPLICADO
+    | DESTRÓI O GRÁFICO ANTERIOR
     |--------------------------------------------------------------------------
     */
     if(
@@ -313,60 +358,92 @@ const percentualAcumulado =
 
                 datasets:[
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | BARRAS
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type:"bar",
+
                         label:"Total de Aferições",
 
                         data:quantidadesPareto,
 
                         backgroundColor:"#1d4eff",
                         borderColor:"#1d4eff",
+
                         borderWidth:1,
                         borderRadius:3,
+
+                        barPercentage:0.75,
+                        categoryPercentage:0.80,
 
                         xAxisID:"x",
                         order:2
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LINHA ROSA
+                    |--------------------------------------------------------------------------
+                    */
                     {
-    type: "line",
-    label: "% Acumulado",
+                        type:"line",
 
-    data: percentualAcumulado,
+                        label:"% Acumulado",
 
-    borderColor: "#f04dd8",
-    backgroundColor: "#f04dd8",
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Usa os percentuais invertidos somente para o desenho.
+                        |--------------------------------------------------------------------------
+                        */
+                        data:percentualLinhaPareto,
 
-    pointBackgroundColor: "#f04dd8",
-    pointBorderColor: "#ffffff",
-    pointBorderWidth: 1,
+                        borderColor:"#f04dd8",
+                        backgroundColor:"#f04dd8",
 
-    pointRadius: 4,
-    pointHoverRadius: 6,
+                        pointBackgroundColor:"#f04dd8",
+                        pointBorderColor:"#ffffff",
+                        pointBorderWidth:1,
 
-    borderWidth: 2,
-    tension: 0.25,
-    spanGaps: false,
+                        pointRadius:4,
+                        pointHoverRadius:6,
+                        pointHitRadius:10,
 
-    xAxisID: "x1",
-    order: 1
-}
+                        borderWidth:2,
+                        tension:0.25,
+
+                        fill:false,
+                        spanGaps:false,
+
+                        xAxisID:"x1",
+                        order:1
+                    }
 
                 ]
             },
+
 
             options:{
 
                 responsive:true,
                 maintainAspectRatio:false,
+
+                /*
+                |--------------------------------------------------------------------------
+                | TRANSFORMA O GRÁFICO EM HORIZONTAL
+                |--------------------------------------------------------------------------
+                */
                 indexAxis:"y",
 
                 layout:{
                     padding:{
-                        top:20,
+                        top:15,
                         right:30,
-                        left:8,
-                        bottom:8
+                        bottom:8,
+                        left:8
                     }
                 },
 
@@ -375,19 +452,31 @@ const percentualAcumulado =
                     intersect:false
                 },
 
+
                 plugins:{
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LEGENDA
+                    |--------------------------------------------------------------------------
+                    */
                     legend:{
                         display:true,
                         position:"top",
 
                         labels:{
                             usePointStyle:false,
-                            boxWidth:25,
-                            padding:15
+                            boxWidth:22,
+                            padding:16
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | TOOLTIP
+                    |--------------------------------------------------------------------------
+                    */
                     tooltip:{
                         enabled:true,
 
@@ -408,9 +497,20 @@ const percentualAcumulado =
                                     context.dataset.label ===
                                     "% Acumulado"
                                 ){
+
+                                    /*
+                                    |--------------------------------------------------------------------------
+                                    | Mostra o percentual correto correspondente ao SKU.
+                                    |--------------------------------------------------------------------------
+                                    */
+                                    const percentualCorreto =
+                                        percentualAcumuladoCorreto[
+                                            context.dataIndex
+                                        ];
+
                                     return (
                                         `% acumulado: ` +
-                                        `${context.raw}%`
+                                        `${percentualCorreto}%`
                                     );
                                 }
 
@@ -422,6 +522,13 @@ const percentualAcumulado =
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | RÓTULOS SOBRE O GRÁFICO
+                    |--------------------------------------------------------------------------
+                    | Funciona caso ChartDataLabels esteja instalado.
+                    */
                     datalabels:{
 
                         display:function(context){
@@ -444,16 +551,48 @@ const percentualAcumulado =
                                 context.dataset.label ===
                                 "% Acumulado"
                             ){
-                                return `${valor}%`;
+
+                                const percentualCorreto =
+                                    percentualAcumuladoCorreto[
+                                        context.dataIndex
+                                    ];
+
+                                return `${percentualCorreto}%`;
                             }
 
                             return numero(valor);
-                        }
+                        },
+
+                        anchor:function(context){
+
+                            return (
+                                context.dataset.type === "bar"
+                                    ? "end"
+                                    : "center"
+                            );
+                        },
+
+                        align:function(context){
+
+                            return (
+                                context.dataset.type === "bar"
+                                    ? "right"
+                                    : "top"
+                            );
+                        },
+
+                        offset:4
                     }
                 },
 
+
                 scales:{
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DOS SKUs
+                    |--------------------------------------------------------------------------
+                    */
                     y:{
 
                         grid:{
@@ -463,13 +602,27 @@ const percentualAcumulado =
                         title:{
                             display:true,
                             text:"SKU"
+                        },
+
+                        ticks:{
+                            autoSkip:false
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DAS QUANTIDADES
+                    |--------------------------------------------------------------------------
+                    */
                     x:{
 
                         beginAtZero:true,
                         position:"bottom",
+
+                        grid:{
+                            color:"rgba(15,31,77,.08)"
+                        },
 
                         title:{
                             display:true,
@@ -486,10 +639,18 @@ const percentualAcumulado =
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DO PERCENTUAL
+                    |--------------------------------------------------------------------------
+                    */
                     x1:{
 
                         beginAtZero:true,
+                        min:0,
                         max:100,
+
                         position:"top",
 
                         grid:{
