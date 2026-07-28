@@ -1,148 +1,162 @@
-function abrirAnaliseFornecedor(){
+function renderFornecedores(){
 
-    const f =
-        dados.fornecedores?.selecionado || {};
+    const f = dados.fornecedores || {
+
+        totalFornecedores:0,
+        processosAno:0,
+        naoConformidades:0,
+        reclamacoes:0,
+        retrabalhos:0,
+        indiceMedio:0,
+
+        selecionado:{
+            nome:"Nenhum fornecedor",
+            indice:0,
+            processos:0,
+            naoConformidades:0,
+            retrabalhos:0,
+            reclamacoes:0,
+            skus:0,
+            horas:0,
+            produtos:0
+        }
+
+    };
 
     conteudo.innerHTML = `
 
-        <div class="page-title">
-            📊 ANÁLISE DETALHADA DO FORNECEDOR
+    <div class="page-title">
+        🏭 FORNECEDORES
+    </div>
+
+    <section class="cards">
+
+        ${card("🏭","Fornecedores",numero(f.totalFornecedores),"Cadastrados")}
+
+        ${card("📦","Processos",numero(f.processosAno),"Processos no ano")}
+
+        ${card("⚠","Não Conformidades",numero(f.naoConformidades),"Total registrado")}
+
+        ${card("💬","Reclamações",numero(f.reclamacoes),"Ocorrências")}
+
+        ${card("🔄","Retrabalhos",numero(f.retrabalhos),"Total registrado")}
+
+        ${card("⭐","Índice Médio",(f.indiceMedio||0)+"%","Avaliação geral")}
+
+    </section>
+
+    <section class="grid-3-2">
+
+        <div class="panel">
+
+            <h3>📊 Top 10 Fornecedores</h3>
+
+            <div class="chart-box">
+                <canvas id="graficoFornecedorTop"></canvas>
+            </div>
+
         </div>
 
-        <section class="cards">
+        <div class="panel">
 
-            ${card(
-                "🏭",
-                "Fornecedor",
-                f.nome || "-",
-                "Fornecedor selecionado"
-            )}
+            <h3>Fornecedor Selecionado</h3>
 
-            ${card(
-                "⭐",
-                "Índice",
-                (f.indice || 0) + "%",
-                "Avaliação geral"
-            )}
+            <div class="info-text">
 
-            ${card(
-                "📄",
-                "Processos",
-                numero(f.processos || 0),
-                "Total de processos"
-            )}
+                <p><strong>${f.selecionado.nome}</strong></p>
 
-            ${card(
-                "⚠",
-                "NC",
-                numero(f.naoConformidades || 0),
-                "Não conformidades"
-            )}
+                <p>⭐ Índice: ${f.selecionado.indice}%</p>
 
-        </section>
+                <p>📦 Processos: ${numero(f.selecionado.processos)}</p>
 
-        <section class="grid-2">
+                <p>⚠ NC: ${numero(f.selecionado.naoConformidades)}</p>
 
-            <div class="panel">
+                <p>🔄 Retrabalhos: ${numero(f.selecionado.retrabalhos)}</p>
 
-                <h3>
-                    Evolução Mensal
-                </h3>
+                <p>💬 Reclamações: ${numero(f.selecionado.reclamacoes)}</p>
 
-                <div class="chart-box">
-                    <canvas id="graficoFornecedor"></canvas>
-                </div>
+                <p>🏷 SKUs: ${numero(f.selecionado.skus)}</p>
+
+                <p>⏱ Horas: ${numero(f.selecionado.horas)}</p>
+
+                <button
+                    class="btn"
+                    onclick="abrirAnaliseFornecedor()">
+                    VER ANÁLISE DETALHADA
+                </button>
 
             </div>
 
-            <div class="panel">
-
-                <h3>
-                    Indicadores
-                </h3>
-
-                <div class="rank-grid">
-
-                    <div class="rank-card">
-                        <div>
-                            Retrabalhos
-                            <strong>
-                                ${numero(f.retrabalhos || 0)}
-                            </strong>
-                        </div>
-                    </div>
-
-                    <div class="rank-card">
-                        <div>
-                            Reclamações
-                            <strong>
-                                ${numero(f.reclamacoes || 0)}
-                            </strong>
-                        </div>
-                    </div>
-
-                    <div class="rank-card">
-                        <div>
-                            SKUs
-                            <strong>
-                                ${numero(f.skus || 0)}
-                            </strong>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <div style="margin-top:10px;text-align:center;">
-
-            <button
-                class="btn"
-                onclick="renderFornecedores()"
-            >
-                ← Voltar
-            </button>
-
         </div>
+
+    </section>
+
+    <section class="panel">
+
+        <h3>Resumo Geral</h3>
+
+        ${tabelaFixa(
+
+            ["Fornecedor","Processos","NC","Retrabalhos","Índice"],
+
+            `
+            <tr>
+
+                <td>${f.selecionado.nome}</td>
+
+                <td>${numero(f.selecionado.processos)}</td>
+
+                <td>${numero(f.selecionado.naoConformidades)}</td>
+
+                <td>${numero(f.selecionado.retrabalhos)}</td>
+
+                <td>${f.selecionado.indice}%</td>
+
+            </tr>
+            `,
+
+            false
+
+        )}
+
+    </section>
+
     `;
 
-    const historico =
-        f.historico || [];
-
     graficoAtual = new Chart(
-        document.getElementById("graficoFornecedor"),
+
+        document.getElementById("graficoFornecedorTop"),
+
         {
 
-            type:"line",
+            type:"bar",
 
             data:{
 
-                labels:
-                    historico.map(i => i.mes),
+                labels:["Fornecedor"],
 
                 datasets:[{
 
-                    label:"Índice",
+                    label:"NC",
 
-                    data:
-                        historico.map(i => i.indice),
+                    data:[f.selecionado.naoConformidades],
 
-                    borderColor:"#1d4eff",
-
-                    backgroundColor:"#1d4eff",
-
-                    borderWidth:3,
-
-                    tension:.35
+                    backgroundColor:"#1d4eff"
 
                 }]
 
             },
 
-            options:baseOptions()
+            options:{
+
+                ...baseOptions(),
+
+                indexAxis:"y"
+
+            }
 
         }
+
     );
+
 }
