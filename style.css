@@ -31,7 +31,7 @@ body{
 }
 
 /* ==========================================================
-   TOPO
+   CABEÇALHO
    ========================================================== */
 
 .topbar{
@@ -138,6 +138,10 @@ body{
     grid-template-columns:68px minmax(0,1fr);
 }
 
+/* ==========================================================
+   MENU LATERAL
+   ========================================================== */
+
 .menu{
     background:rgba(248,251,255,.92);
     border:1px solid var(--line);
@@ -214,6 +218,10 @@ body{
     box-shadow:0 6px 12px rgba(29,78,255,.25);
 }
 
+/* ==========================================================
+   ÁREA DE CONTEÚDO
+   ========================================================== */
+
 .content{
     min-width:0;
     overflow:auto;
@@ -221,7 +229,7 @@ body{
 }
 
 /* ==========================================================
-   TÍTULO E CARDS
+   TÍTULO DAS PÁGINAS
    ========================================================== */
 
 .page-title{
@@ -236,6 +244,10 @@ body{
     margin-bottom:8px;
     box-shadow:0 4px 10px rgba(0,0,0,.05);
 }
+
+/* ==========================================================
+   CARDS DOS INDICADORES
+   ========================================================== */
 
 .cards{
     display:grid;
@@ -295,7 +307,7 @@ body{
 }
 
 /* ==========================================================
-   GRADES E PAINÉIS
+   GRADES
    ========================================================== */
 
 .grid-2{
@@ -311,6 +323,10 @@ body{
     gap:8px;
     margin-bottom:8px;
 }
+
+/* ==========================================================
+   PAINÉIS
+   ========================================================== */
 
 .panel{
     width:100%;
@@ -352,13 +368,12 @@ body{
 }
 
 .chart-box.esfig-large{
-    height:300px;
+    height:520px;
 }
 
 .chart-box.tall{
     height:360px;
 }
-
 /* ==========================================================
    TABELAS
    ========================================================== */
@@ -570,115 +585,7 @@ td.desc{
 }
 
 /* ==========================================================
-   ESFIGMOMANÔMETRO — NOVO LAYOUT
-   Pareto em cima, fluxo abaixo e tabela no final
-   ========================================================== */
-
-.esfig-pareto-destaque,
-.esfig-flow-destaque,
-.esfig-tabela{
-    width:100%;
-    min-width:0;
-    margin-bottom:8px;
-}
-
-.esfig-pareto-destaque{
-    padding:12px;
-}
-
-.esfig-pareto-grande{
-    position:relative;
-    width:100%;
-    height:300px;
-    min-height:300px;
-}
-.esfig-pareto-grande canvas{
-    width:100% !important;
-    height:100% !important;
-}
-
-.esfig-pareto-resumo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-top:10px;
-    padding:10px 14px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:linear-gradient(90deg,#edf4ff,#f8fbff);
-    color:var(--text);
-}
-
-.esfig-pareto-resumo-icone{
-    flex:0 0 30px;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--primary);
-    color:#fff;
-    font-size:18px;
-    font-weight:900;
-}
-
-.esfig-pareto-resumo strong{
-    display:block;
-    margin-bottom:2px;
-    color:var(--primary-dark);
-}
-
-.esfig-pareto-resumo p{
-    margin:0;
-    font-size:12px;
-    line-height:1.45;
-}
-
-.esfig-flow-destaque{
-    padding:12px;
-}
-
-.esfig-fluxo-horizontal{
-    display:grid;
-    grid-template-columns:1fr 40px 1fr 40px 1fr;
-    gap:8px;
-    align-items:center;
-    width:100%;
-}
-
-.esfig-fluxo-horizontal .fluxo-item{
-    min-height:82px;
-}
-
-.esfig-fluxo-horizontal .fluxo-arrow{
-    font-size:22px;
-}
-
-.esfig-flow-destaque .progress-title{
-    margin-top:14px;
-}
-
-.esfig-flow-destaque .progress-box{
-    width:100%;
-}
-
-.esfig-tabela{
-    padding:12px;
-}
-
-.esfig-tabela .table-wrap{
-    width:100%;
-}
-
-.esfig-tabela .table-scroll{
-    max-height:340px;
-    overflow-y:auto;
-    overflow-x:auto;
-}
-
-/* ==========================================================
-   LOGIN E BOTÕES
+   ÁREA RESTRITA E BOTÕES
    ========================================================== */
 
 .senha-box{
@@ -719,7 +626,7 @@ td.desc{
 }
 
 /* ==========================================================
-   INFORMAÇÕES E PROCESSOS
+   INFORMATIVO
    ========================================================== */
 
 .info-menu{
@@ -827,57 +734,234 @@ select{
 .btn-ver-todos{
     min-width:200px;
     padding:8px 20px;
-    border:1px solid #1d4eff;
+    border:1px solid var(--primary);
     border-radius:8px;
     background:#fff;
-    color:#1546d8;
+    color:var(--primary-dark);
     font-weight:700;
     cursor:pointer;
 }
 
 .btn-ver-todos:hover{
-    background:#1546d8;
+    background:var(--primary-dark);
     color:#fff;
 }
 
 /* ==========================================================
-   RESPONSIVIDADE
+   ESFIGMOMANÔMETRO
+   Compatibilidade com o layout atual
    ========================================================== */
+
+.esfig-pareto-destaque,
+.esfig-flow-destaque,
+.esfig-tabela{
+    width:100%;
+    min-width:0;
+    margin-bottom:8px;
+    background:rgba(248,251,255,.95);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.esfig-pareto-destaque h3,
+.esfig-flow-destaque h3,
+.esfig-tabela h3{
+    margin:0 0 8px;
+    text-align:center;
+    color:var(--primary);
+    font-size:14px;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+.esfig-pareto-grande{
+    position:relative;
+    width:100%;
+    height:300px;
+    min-height:300px;
+}
+
+.esfig-pareto-grande canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+.esfig-pareto-resumo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:8px;
+    padding:8px 12px;
+    border:1px solid var(--line2);
+    border-radius:10px;
+    background:#eef5ff;
+    color:var(--text);
+}
+
+.esfig-pareto-resumo-icone{
+    width:30px;
+    height:30px;
+    min-width:30px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+}
+
+.esfig-pareto-resumo strong{
+    color:var(--primary);
+}
+
+.esfig-pareto-resumo p{
+    margin:2px 0 0;
+    font-size:12px;
+    line-height:1.4;
+}
+
+.esfig-fluxo-horizontal{
+    display:grid;
+    grid-template-columns:1fr 28px 1fr 28px 1fr;
+    gap:4px;
+    align-items:center;
+}
+
+.esfig-tabela .table-scroll{
+    max-height:400px;
+    overflow-y:auto;
+    overflow-x:auto;
+}
+/* ==========================================================
+   AJUSTES DE ROLAGEM
+   ========================================================== */
+
+::-webkit-scrollbar{
+    width:9px;
+    height:9px;
+}
+
+::-webkit-scrollbar-track{
+    background:#dce8ff;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#8fb0ff;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:var(--primary);
+}
+
+/* ==========================================================
+   CLASSES AUXILIARES
+   ========================================================== */
+
+.text-center{
+    text-align:center;
+}
+
+.text-left{
+    text-align:left;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.text-primary{
+    color:var(--primary);
+}
+
+.text-green{
+    color:var(--green);
+}
+
+.text-red{
+    color:var(--red);
+}
+
+.text-orange{
+    color:var(--orange);
+}
+
+.text-muted{
+    color:var(--muted);
+}
+
+.font-bold{
+    font-weight:900;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.w-100{
+    width:100%;
+}
+
+.mb-0{
+    margin-bottom:0;
+}
+
+.mb-8{
+    margin-bottom:8px;
+}
+
+.mt-8{
+    margin-top:8px;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE — TELAS MÉDIAS
+   ========================================================== */
+
+@media(max-width:1200px){
+
+    .topbar{
+        grid-template-columns:220px 1fr 270px;
+    }
+
+    .logo-main{
+        font-size:30px;
+    }
+
+    .top-title h1{
+        font-size:23px;
+    }
+
+    .chart-box.esfig-large{
+        height:450px;
+    }
+
+    .rank-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 
 @media(max-width:1050px){
 
     .topbar{
-        grid-template-columns:1fr;
         height:auto;
+        min-height:72px;
+        grid-template-columns:190px 1fr;
         gap:8px;
-        padding:10px;
-        text-align:center;
-    }
-
-    .logo-labor{
-        border-right:none;
-        align-items:center;
+        padding:10px 14px;
     }
 
     .top-status{
+        grid-column:1 / -1;
         justify-content:center;
-        flex-wrap:wrap;
     }
 
-    .main-wrap,
-    .main-wrap.menu-collapsed{
-        grid-template-columns:1fr;
-        height:auto;
-    }
-
-    .menu{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
-
-    .menu button{
-        margin-bottom:0;
+    .main-wrap{
+        height:calc(100vh - 112px);
     }
 
     .grid-2,
@@ -886,73 +970,354 @@ select{
         grid-template-columns:1fr;
     }
 
-  .esfig-pareto-grande{
-    height:270px;
-    min-height:270px;
+    .chart-box{
+        height:280px;
+    }
+
+    .chart-box.small{
+        height:220px;
+    }
+
+    .chart-box.esfig-large{
+        height:400px;
+    }
+
+    .esfig-pareto-grande{
+        height:280px;
+        min-height:280px;
+    }
 }
-}
+
+/* ==========================================================
+   RESPONSIVIDADE — TABLETS
+   ========================================================== */
 
 @media(max-width:800px){
 
-    .cards{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .topbar{
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+        padding:12px;
     }
 
- .esfig-pareto-grande{
-    height:250px;
-    min-height:250px;
-}
+    .logo-labor{
+        border-right:none;
+        border-bottom:1px solid rgba(255,255,255,.35);
+        height:auto;
+        padding-bottom:10px;
+        margin-bottom:6px;
+        align-items:center;
+    }
 
-    .esfig-fluxo-horizontal{
+    .top-title h1{
+        font-size:21px;
+    }
+
+    .top-status{
+        flex-wrap:wrap;
+    }
+
+    .main-wrap{
+        height:auto;
+        min-height:calc(100vh - 170px);
+        grid-template-columns:1fr;
+        padding:8px;
+    }
+
+    .main-wrap.menu-collapsed{
         grid-template-columns:1fr;
     }
 
-    .esfig-fluxo-horizontal .fluxo-arrow{
-        transform:rotate(90deg);
+    .menu{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:6px;
+        overflow:visible;
     }
 
-    .esfig-pareto-resumo{
-        align-items:flex-start;
+    .toggle-menu{
+        grid-column:1 / -1;
+        margin-bottom:0;
+    }
+
+    .menu button{
+        margin-bottom:0;
+        min-height:55px;
+        padding:6px;
+    }
+
+    .main-wrap.menu-collapsed .menu{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .main-wrap.menu-collapsed .menu button{
+        min-height:45px;
+    }
+
+    .content{
+        overflow:visible;
+        padding-right:0;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .rank-grid{
         grid-template-columns:1fr;
     }
+
+    .fluxo,
+    .esfig-fluxo-horizontal{
+        grid-template-columns:1fr;
+    }
+
+    .fluxo-arrow,
+    .esfig-fluxo-horizontal .fluxo-arrow{
+        transform:rotate(90deg);
+    }
+
+    .chart-box{
+        height:260px;
+    }
+
+    .chart-box.small{
+        height:210px;
+    }
+
+    .chart-box.esfig-large{
+        height:350px;
+    }
+
+    .chart-box.tall{
+        height:320px;
+    }
+
+    .esfig-pareto-grande{
+        height:250px;
+        min-height:250px;
+    }
+
+    .table-scroll{
+        max-height:340px;
+    }
+
+    table{
+        font-size:12px;
+        min-width:720px;
+    }
+
+    thead th,
+    td{
+        padding:7px 5px;
+    }
 }
 
+/* ==========================================================
+   RESPONSIVIDADE — CELULARES
+   ========================================================== */
+
 @media(max-width:520px){
+
+    body{
+        font-size:14px;
+    }
+
+    .topbar{
+        padding:10px 8px;
+    }
+
+    .logo-main{
+        font-size:27px;
+        letter-spacing:3px;
+    }
+
+    .logo-sub{
+        letter-spacing:3px;
+    }
+
+    .top-title h1{
+        font-size:18px;
+    }
+
+    .top-title p{
+        font-size:10px;
+    }
+
+    .pill{
+        min-width:105px;
+        padding:7px 9px;
+        height:32px;
+        font-size:10px;
+    }
+
+    .menu{
+        grid-template-columns:repeat(2,1fr);
+        padding:7px;
+    }
+
+    .main-wrap.menu-collapsed .menu{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .menu button{
+        min-height:52px;
+        font-size:10px;
+    }
+
+    .menu button .ico{
+        font-size:21px;
+    }
+
+    .page-title{
+        font-size:15px;
+        padding:8px 6px;
+    }
 
     .cards{
         grid-template-columns:1fr;
     }
 
-    .menu{
-        grid-template-columns:1fr;
+    .kpi-card{
+        min-height:66px;
+        padding:10px;
     }
-
-    .esfig-pareto-destaque,
-    .esfig-flow-destaque,
-    .esfig-tabela{
-        padding:8px;
-    }
-
-  .esfig-pareto-grande{
-    height:220px;
-    min-height:220px;
-}
 
     .kpi-card strong{
         font-size:24px;
     }
 
+    .panel{
+        padding:8px;
+    }
+
+    .panel h3{
+        font-size:12px;
+    }
+
+    .chart-box{
+        height:230px;
+    }
+
+    .chart-box.small{
+        height:190px;
+    }
+
+    .chart-box.esfig-large{
+        height:290px;
+    }
+
+    .chart-box.tall{
+        height:280px;
+    }
+
+    .chart-box-importacao{
+        height:240px;
+    }
+
+    .chart-box-pareto{
+        height:230px;
+    }
+
+    .esfig-pareto-grande{
+        height:220px;
+        min-height:220px;
+    }
+
+    .esfig-pareto-resumo{
+        align-items:flex-start;
+        padding:8px;
+    }
+
+    .esfig-pareto-resumo p{
+        font-size:11px;
+    }
+
+    .info-menu{
+        flex-direction:column;
+    }
+
+    .info-menu button{
+        width:100%;
+    }
+
+    .info-text{
+        font-size:14px;
+        line-height:1.55;
+    }
+
+    .process-steps{
+        grid-template-columns:1fr;
+    }
+
+    .senha-box{
+        margin:30px auto;
+        padding:18px;
+    }
+
+    .btn-ver-todos{
+        width:100%;
+        min-width:0;
+    }
+
     table{
+        font-size:11px;
         min-width:680px;
     }
 }
-'''
 
-path = "/mnt/data/style.css"
-with open(path, "w", encoding="utf-8") as f:
-    f.write(css)
+/* ==========================================================
+   IMPRESSÃO
+   ========================================================== */
 
-print(f"Arquivo criado: {path}")
+@media print{
+
+    body{
+        background:#fff;
+        color:#000;
+        overflow:visible;
+    }
+
+    .topbar,
+    .menu,
+    .toggle-menu,
+    .btn,
+    .btn-ver-todos,
+    .info-menu{
+        display:none !important;
+    }
+
+    .main-wrap,
+    .main-wrap.menu-collapsed{
+        display:block;
+        height:auto;
+        padding:0;
+    }
+
+    .content{
+        overflow:visible;
+    }
+
+    .panel,
+    .kpi-card,
+    .page-title,
+    .esfig-pareto-destaque,
+    .esfig-flow-destaque,
+    .esfig-tabela{
+        box-shadow:none;
+        border:1px solid #999;
+        break-inside:avoid;
+    }
+
+    .table-scroll{
+        max-height:none;
+        overflow:visible;
+    }
+
+    thead th{
+        position:static;
+    }
+}
