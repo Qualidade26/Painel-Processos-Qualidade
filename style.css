@@ -352,7 +352,7 @@ body{
 }
 
 .chart-box.esfig-large{
-    height:390px;
+    height:300px;
 }
 
 .chart-box.tall{
@@ -589,10 +589,9 @@ td.desc{
 .esfig-pareto-grande{
     position:relative;
     width:100%;
-    height:390px;
-    min-height:390px;
+    height:300px;
+    min-height:300px;
 }
-
 .esfig-pareto-grande canvas{
     width:100% !important;
     height:100% !important;
@@ -887,10 +886,10 @@ select{
         grid-template-columns:1fr;
     }
 
-    .esfig-pareto-grande{
-        height:350px;
-        min-height:350px;
-    }
+  .esfig-pareto-grande{
+    height:270px;
+    min-height:270px;
+}
 }
 
 @media(max-width:800px){
@@ -899,10 +898,10 @@ select{
         grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
-    .esfig-pareto-grande{
-        height:320px;
-        min-height:320px;
-    }
+ .esfig-pareto-grande{
+    height:250px;
+    min-height:250px;
+}
 
     .esfig-fluxo-horizontal{
         grid-template-columns:1fr;
@@ -937,10 +936,10 @@ select{
         padding:8px;
     }
 
-    .esfig-pareto-grande{
-        height:290px;
-        min-height:290px;
-    }
+  .esfig-pareto-grande{
+    height:220px;
+    min-height:220px;
+}
 
     .kpi-card strong{
         font-size:24px;
