@@ -217,27 +217,52 @@ function montarLinhasEsfig(lista){
         return "";
 
     return lista.map(i => `
-       return lista.map(i => `
- <tr>
-    <td>${i.sku || "-"}</td>
-    <td class="desc">${i.descricao || "-"}</td>
+        <tr>
+            <td>${i.sku || "-"}</td>
 
-    <td>${numero(i.aguardando || 0)}</td>
-    <td>${numero(i.desmontado || 0)}</td>
-    <td>${numero(i.aferidos || 0)}</td>
+            <td class="desc">
+                ${i.descricao || "-"}
+            </td>
 
-    <td>${
-        Number(i.aferidos || 0) > 0
-            ? "Concluído"
-            : (
-                Number(i.aguardando || 0) > 0 ||
-                Number(i.desmontado || 0) > 0
-            )
-                ? "Pendente"
-                : "-"
-    }</td>
-</tr>
+            <td>
+                ${
+                    Number(i.aguardando || 0) > 0
+                        ? numero(i.aguardando)
+                        : "-"
+                }
+            </td>
 
+            <td>
+                ${
+                    Number(i.desmontado || 0) > 0
+                        ? numero(i.desmontado)
+                        : "-"
+                }
+            </td>
+
+            <td>
+                ${
+                    Number(i.aferidos || 0) > 0
+                        ? numero(i.aferidos)
+                        : "-"
+                }
+            </td>
+
+            <td>
+                ${
+                    Number(i.aferidos || 0) > 0
+                        ? "Concluído"
+                        : (
+                            Number(i.aguardando || 0) > 0 ||
+                            Number(i.desmontado || 0) > 0
+                        )
+                            ? "Pendente"
+                            : "-"
+                }
+            </td>
+        </tr>
+    `).join("");
+}
 function montarLinhasTopDescarte(lista){
 
     if(!lista || !lista.length)
