@@ -100,28 +100,34 @@ function renderEsfig(){
         );
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | PERCENTUAL ACUMULADO
-    |--------------------------------------------------------------------------
-    */
-    let acumulado = 0;
+   /*
+|--------------------------------------------------------------------------
+| LINHA DO PARETO
+|--------------------------------------------------------------------------
+| Calcula o percentual acumulado e inverte somente a apresentação
+| da linha para que ela suba da esquerda para a direita.
+*/
+let acumulado = 0;
 
-    const percentualAcumulado =
-        quantidadesPareto.map(valor => {
+const percentualCalculado =
+    quantidadesPareto.map(valor => {
 
-            acumulado += valor;
+        acumulado += valor;
 
-            if(totalPareto === 0)
-                return null;
+        if(totalPareto === 0){
+            return null;
+        }
 
-            return Number(
-                (
-                    (acumulado / totalPareto) *
-                    100
-                ).toFixed(1)
-            );
-        });
+        return Number(
+            (
+                (acumulado / totalPareto) *
+                100
+            ).toFixed(1)
+        );
+    });
+
+const percentualAcumulado =
+    [...percentualCalculado].reverse();
 
 
     conteudo.innerHTML = `
