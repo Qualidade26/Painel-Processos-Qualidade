@@ -177,18 +177,36 @@ function montarLinhasImportacao(lista){
 
     return lista.map(i => `
         <tr>
-            <td>${i.po || "-"}</td>
-            <td class="desc">${i.descricao || "-"}</td>
+
+            <td>
+                ${i.po || "-"}
+            </td>
+
+            <td>
+                ${i.sku || "-"}
+            </td>
+
+            <td class="desc">
+                ${i.descricao || "-"}
+            </td>
+
+            <td>
+                ${i.lote || "-"}
+            </td>
+
             <td class="${
-                String(i.status).toUpperCase() === "OK"
+                String(i.status || "")
+                    .toUpperCase() === "OK"
                     ? "status-ok"
                     : "status-nok"
             }">
                 ${i.status || "-"}
             </td>
+
             <td class="desc">
                 ${i.observacao || "-"}
             </td>
+
         </tr>
     `).join("");
 }
