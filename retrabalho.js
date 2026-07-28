@@ -1,631 +1,223 @@
-/* =====================================================
-   PAINEL SGQ LABOR
-
-   RETRABALHO.JS
-
-   Aba:
-   🔧 RETRABALHO
-
-   ===================================================== */
-
-
-
-let listaRetrabalho = [];
-
-
-
-
-
 function renderRetrabalho(){
 
-
-
-const retrabalho = dados.retrabalho || [];
-
-
-
-listaRetrabalho = retrabalho;
-
-
-
-
-
-const area =
-document.getElementById(
-"conteudo"
-);
-
-
-
-
-
-
-
-area.innerHTML = `
-
-
-
-<div class="page-title">
-
-🔧 CONTROLE DE RETRABALHO
-
-</div>
-
-
-
-
-
-
-
-
-<section class="cards">
-
-
-
-${card(
-
-"🔧",
-
-"Total Retrabalho",
-
-numero(
-somarRetrabalho(retrabalho)
-)
-
-)}
-
-
-
-
-
-
-${card(
-
-"⏱️",
-
-"Total Horas",
-
-numero(
-somarHorasRetrabalho(retrabalho)
-)
-
-)}
-
-
-
-
-
-
-${card(
-
-"🏭",
-
-"Fornecedores",
-
-numero(
-retrabalho.length
-)
-
-)}
-
-
-
-
-
-${card(
-
-"📦",
-
-"Quantidade Registros",
-
-numero(
-retrabalho.length
-)
-
-)}
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<div class="grafico-box">
-
-
-<h2>
-
-RETRABALHO POR FORNECEDOR
-
-</h2>
-
-
-
-<input 
-id="pesquisaRetrabalho"
-type="text"
-placeholder="Pesquisar fornecedor..."
-onkeyup="filtrarRetrabalho()"
-style="
-width:100%;
-padding:14px;
-font-size:18px;
-margin-bottom:20px;
-border-radius:10px;
-border:1px solid #ccc;
-">
-
-
-
-
-
-<canvas id="graficoRetrabalho"></canvas>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="tabela-box">
-
-
-<h2>
-
-Detalhamento Retrabalho
-
-</h2>
-
-
-
-
-
-<table>
-
-
-<thead>
-
-
-<tr>
-
-
-<th>Fornecedor</th>
-
-<th>Quantidade</th>
-
-<th>Horas</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-<tbody id="tabelaRetrabalho">
-
-
-${montarTabelaRetrabalho(retrabalho)}
-
-
-</tbody>
-
-
-
-</table>
-
-
-
-</div>
-
-
-
-`;
-
-
-
-
-montarGraficoRetrabalho(retrabalho);
-
-
-
+    const r = dados.retrabalho || {
+        fabricantes:[]
+    };
+
+    conteudo.innerHTML = `
+        <div class="page-title">🔄 RETRABALHO</div>
+
+        <section class="cards">
+            ${card("🔄","Total Retrabalhado",numero(r.totalUnidades),"Quantidade de produtos")}
+            ${card("⏱","Total de Horas",numero(r.totalHoras),"Horas aplicadas")}
+            ${card("📋","Processos",numero(r.processos),"Ocorrências registradas")}
+        </section>
+
+        <section class="grid-2">
+
+            <div class="panel">
+
+                <h3>🏭 RETRABALHO POR FABRICANTE</h3>
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:8px;
+                    margin-bottom:10px;
+                ">
+
+                    <span style="
+                        font-size:22px;
+                        color:#1d4eff;
+                    ">🔍</span>
+
+                    <input
+                        id="buscaFabricante"
+                        type="search"
+                        placeholder="Pesquisar fabricante..."
+                        onkeyup="atualizarGraficoRetrabalho()"
+                        style="
+                            flex:1;
+                            padding:10px 14px;
+                            border-radius:12px;
+                            border:1px solid #b8d1ff;
+                            font-size:14px;
+                            font-weight:700;
+                            outline:none;
+                        ">
+
+                </div>
+
+                <div class="chart-box tall">
+                    <canvas id="grafico"></canvas>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <h3>📋 DETALHAMENTO RETRABALHO</h3>
+
+                ${
+                    tabelaFixa(
+                        ["Fabricante","Quantidade","Horas","Motivo"],
+                        montarLinhasRetrabalho(r.fabricantes),
+                        true
+                    )
+                }
+
+            </div>
+
+        </section>
+    `;
+
+    atualizarGraficoRetrabalho();
 }
 
+function atualizarGraficoRetrabalho(){
 
+    destruirGrafico();
 
+    const r = dados.retrabalho || {
+        fabricantes:[]
+    };
 
+    const pesquisa = (
+        document.getElementById("buscaFabricante")?.value || ""
+    ).toLowerCase();
 
+    const fabricantes = (r.fabricantes || [])
+        .filter(f => Number(f.quantidade || 0) > 0)
+        .filter(f =>
+            String(f.fabricante)
+            .toLowerCase()
+            .includes(pesquisa)
+        )
+        .sort((a,b)=>
+            Number(b.quantidade) -
+            Number(a.quantidade)
+        );
 
+    graficoAtual = new Chart(
+        document.getElementById("grafico"),
+        {
 
+            type:"bar",
 
+            data:{
 
-// =====================================================
-// MONTA TABELA
-// =====================================================
+                labels:
+                    fabricantes.map(f => f.fabricante),
 
+                datasets:[{
 
+                    label:"Quantidade Retrabalhada",
 
-function montarTabelaRetrabalho(lista){
+                    data:
+                        fabricantes.map(
+                            f => Number(f.quantidade || 0)
+                        ),
 
+                    backgroundColor:
+                        fabricantes.map((_, i) => [
+                            "#1d4eff",
+                            "#0f3cc9",
+                            "#6b7cff",
+                            "#4f7cff",
+                            "#2d62ff",
+                            "#5b88ff"
+                        ][i % 6]),
 
+                    borderWidth:0,
 
-return lista.map(item=>`
+                    _ocultarZero:true
 
+                }]
 
-<tr>
+            },
 
+            options:{
 
-<td>
+                ...baseOptions(),
 
-${item.fornecedor || item.nome || ""}
+                indexAxis:"y",
 
-</td>
+                layout:{
+                    padding:{
+                        top:20,
+                        right:45,
+                        left:8,
+                        bottom:4
+                    }
+                },
 
+                plugins:{
+                    legend:{
+                        display:false
+                    }
+                },
 
+                onClick:(evt,elements)=>{
 
-<td>
+                    if(!elements.length)
+                        return;
 
-${numero(
-item.quantidade || item.qtd || 0
-)}
+                    const indice =
+                        elements[0].index;
 
-</td>
+                    const fabricante =
+                        fabricantes[indice];
 
+                    document.querySelector(
+                        ".table-wrap tbody"
+                    ).innerHTML =
+                        montarLinhasRetrabalho(
+                            [fabricante]
+                        );
+                }
 
+            }
 
-<td>
-
-${numero(
-item.horas || 0
-)}
-
-</td>
-
-
-
-</tr>
-
-
-`).join("");
-
-
-
+        }
+    );
 }
 
+function filtrarFabricante(){
 
+    const texto =
+        document
+        .getElementById("buscaFabricante")
+        .value
+        .toLowerCase();
 
+    const select =
+        document.getElementById("filtroFabricante");
 
+    let primeiro = null;
 
+    Array.from(select.options)
+    .forEach(op=>{
 
+        const visivel =
+            op.text
+            .toLowerCase()
+            .includes(texto);
 
+        op.style.display =
+            visivel
+                ? "block"
+                : "none";
 
+        if(visivel && !primeiro){
+            primeiro = op;
+        }
 
-// =====================================================
-// SOMATÓRIOS
-// =====================================================
+    });
 
+    if(primeiro){
 
+        select.value = primeiro.value;
 
-function somarRetrabalho(lista){
-
-
-
-return lista.reduce(
-
-(total,item)=>
-
-total +
-
-Number(
-item.quantidade ||
-item.qtd ||
-0
-),
-
-0
-
-);
-
-
-
-}
-
-
-
-
-
-function somarHorasRetrabalho(lista){
-
-
-
-return lista.reduce(
-
-(total,item)=>
-
-total +
-
-Number(
-item.horas ||
-0
-),
-
-0
-
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// =====================================================
-// FILTRO FORNECEDOR
-// =====================================================
-
-
-
-function filtrarRetrabalho(){
-
-
-
-const texto =
-
-document
-.getElementById(
-"pesquisaRetrabalho"
-)
-.value
-.toLowerCase();
-
-
-
-
-
-const filtrado =
-
-listaRetrabalho.filter(item=>{
-
-
-const nome =
-
-(
-item.fornecedor ||
-item.nome ||
-""
-)
-.toLowerCase();
-
-
-
-return nome.includes(texto);
-
-
-
-});
-
-
-
-
-
-document.getElementById(
-"tabelaRetrabalho"
-)
-.innerHTML =
-
-montarTabelaRetrabalho(
-filtrado
-);
-
-
-
-
-
-montarGraficoRetrabalho(
-filtrado
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// =====================================================
-// GRÁFICO HORIZONTAL
-// =====================================================
-
-
-
-function montarGraficoRetrabalho(lista){
-
-
-
-setTimeout(()=>{
-
-
-
-destruirGrafico();
-
-
-
-
-const canvas =
-
-document.getElementById(
-"graficoRetrabalho"
-);
-
-
-
-
-if(!canvas){
-
-return;
-
-}
-
-
-
-
-
-graficoAtual =
-
-new Chart(
-
-canvas,
-
-{
-
-
-type:"bar",
-
-
-
-data:{
-
-
-
-labels:
-
-lista.map(
-item=>
-
-item.fornecedor ||
-item.nome
-),
-
-
-
-
-
-datasets:[{
-
-
-label:
-
-"Quantidade Retrabalhada",
-
-
-
-data:
-
-lista.map(
-
-item=>
-
-Number(
-item.quantidade ||
-item.qtd ||
-0
-)
-
-),
-
-
-
-borderWidth:1
-
-
-
-}]
-
-
-
-},
-
-
-
-options:{
-
-
-
-indexAxis:"y",
-
-
-
-responsive:true,
-
-
-
-maintainAspectRatio:false,
-
-
-
-plugins:{
-
-
-
-legend:{
-
-
-display:false
-
-
-},
-
-
-
-title:{
-
-
-display:true,
-
-
-text:
-
-"Retrabalho por Fornecedor"
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-);
-
-
-
-},100);
-
-
-
+        atualizarGraficoRetrabalho();
+    }
 }
