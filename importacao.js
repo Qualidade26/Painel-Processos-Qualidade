@@ -1,271 +1,146 @@
-/* =====================================================
-   PAINEL SGQ LABOR
-   IMPORTACAO.JS
-
-   Aba:
-   📦 Inspeção de Importação
-
-   ===================================================== */
-
-
-
 function renderImportacao(){
 
+    const imp = dados.importacao || {
+        processosAno:0,
+        totalSku:0,
+        totalLotes:0,
+        laudosEmitidos:0,
+        totalHoras:0,
+        mensal:[],
+        fluxo:[]
+    };
+
+    conteudo.innerHTML = `
+        <div class="page-title">📦 INSPEÇÃO DE IMPORTAÇÃO</div>
+
+        <section class="cards">
+            ${card("📦","Processos por Ano",numero(imp.processosAno),"Quantidade de processos")}
+            ${card("🏷️","Total de SKU",numero(imp.totalSku),"SKUs inspecionados")}
+            ${card("📑","Total de Lotes",numero(imp.totalLotes),"Lotes controlados")}
+            ${card("🧾","Laudos Emitidos",numero(imp.laudosEmitidos),"Registros emitidos")}
+            ${card("⏱","Total de Horas",numero(imp.totalHoras),"Horas da atividade")}
+        </section>
+
+        <section class="panel">
+            <h3>📊 Evolução Mensal da Inspeção de Importação</h3>
+            <div class="chart-box">
+                <canvas id="grafico"></canvas>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h3>Fluxo Inspeção de Importação</h3>
+            ${
+                tabelaFixa(
+                    ["PO","Descrição do Produto","Status","Observação"],
+                    montarLinhasImportacao(imp.fluxo),
+                    false
+                )
+            }
+        </section>
+    `;
+
+    graficoAtual = new Chart(
+        document.getElementById("grafico"),
+        {
+
+            type:"line",
+
+            data:{
+
+                labels:(imp.mensal || []).map(i => i.mes),
+
+                datasets:[
+
+                    {
+                        ...dsLine(
+                            "Processos",
+                            (imp.mensal || []).map(i => i.processos || 0),
+                            "#1d4eff"
+                        ),
+                        yAxisID:"y"
+                    },
+
+                    {
+                        ...dsLine(
+                            "SKU",
+                            (imp.mensal || []).map(i => i.sku || 0),
+                            "#f04dd8"
+                        ),
+                        yAxisID:"y"
+                    },
+
+                    {
+                        ...dsLine(
+                            "Lotes",
+                            (imp.mensal || []).map(i => i.lotes || 0),
+                            "#22c55e"
+                        ),
+                        yAxisID:"y"
+                    },
+
+                    {
+                        ...dsLine(
+                            "Laudos",
+                            (imp.mensal || []).map(i => i.laudos || 0),
+                            "#8b5cf6"
+                        ),
+                        yAxisID:"y"
+                    },
+
+                    {
+                        ...dsLine(
+                            "Horas",
+                            (imp.mensal || []).map(i => i.horas || 0),
+                            "#f97316"
+                        ),
+                        yAxisID:"y1",
+                        borderDash:[8,5]
+                    }
+
+                ]
+            },
+
+            options:{
 
-const imp = dados.importacao || {
+                responsive:true,
+                maintainAspectRatio:false,
 
-    processosAno:0,
+                interaction:{
+                    mode:"index",
+                    intersect:false
+                },
 
-    totalSku:0,
+                scales:{
 
-    totalLotes:0,
+                    y:{
+                        beginAtZero:true,
+                        position:"left",
+                        title:{
+                            display:true,
+                            text:"Quantidade"
+                        }
+                    },
 
-    laudosEmitidos:0,
+                    y1:{
+                        beginAtZero:true,
+                        position:"right",
 
-    totalHoras:0,
+                        title:{
+                            display:true,
+                            text:"Horas"
+                        },
 
-    mensal:[],
+                        grid:{
+                            drawOnChartArea:false
+                        }
+                    }
 
-    fluxo:[]
+                }
 
-};
+            }
 
-
-
-const area =
-document.getElementById(
-    "conteudo"
-);
-
-
-
-area.innerHTML = `
-
-
-
-<div class="page-title">
-
-📦 INSPEÇÃO DE IMPORTAÇÃO
-
-</div>
-
-
-
-
-
-<section class="cards">
-
-
-
-${card(
-"📄",
-"Processos no Ano",
-numero(
-imp.processosAno
-)
-)}
-
-
-
-${card(
-"🏷️",
-"Total SKU",
-numero(
-imp.totalSku
-)
-)}
-
-
-
-
-${card(
-"📦",
-"Total Lotes",
-numero(
-imp.totalLotes
-)
-)}
-
-
-
-
-${card(
-"📑",
-"Laudos Emitidos",
-numero(
-imp.laudosEmitidos
-)
-)}
-
-
-
-
-${card(
-"⏱️",
-"Total Horas",
-numero(
-imp.totalHoras
-)
-)}
-
-
-
-</section>
-
-
-
-
-
-
-<div class="grafico-box">
-
-
-<canvas id="graficoImportacao"></canvas>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="tabela-box">
-
-
-<h2>
-
-Fluxo de Inspeção
-
-</h2>
-
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>Mês</th>
-
-<th>PO</th>
-
-<th>Total Lote</th>
-
-<th>Laudos</th>
-
-<th>Horas</th>
-
-</tr>
-
-
-</thead>
-
-
-
-<tbody>
-
-
-${
-
-imp.mensal.map(m=>`
-
-
-<tr>
-
-<td>
-${m.mes || ""}
-</td>
-
-
-<td>
-${numero(m.po)}
-</td>
-
-
-<td>
-${numero(m.totalLote)}
-</td>
-
-
-<td>
-${numero(m.laudosEmitidos)}
-</td>
-
-
-<td>
-${numero(m.horas)}
-</td>
-
-
-</tr>
-
-
-`).join("")
-
-
-}
-
-
-
-</tbody>
-
-
-</table>
-
-
-</div>
-
-
-`;
-
-
-
-
-
-// ================================
-// GRÁFICO MENSAL
-// ================================
-
-
-setTimeout(()=>{
-
-
-const meses =
-imp.mensal.map(
-m=>m.mes
-);
-
-
-
-const horas =
-imp.mensal.map(
-m=>m.horas
-);
-
-
-
-criarGrafico(
-
-"graficoImportacao",
-
-"bar",
-
-meses,
-
-horas,
-
-"Total de Horas - Inspeção Importação"
-
-);
-
-
-
-},100);
-
-
+        }
+    );
 
 }
