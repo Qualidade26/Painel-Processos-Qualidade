@@ -2,92 +2,103 @@
 <html lang="pt-br">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Processos SGQ</title>
 
-<title>Painel de Processos SGQ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<header class="topo">
-
-    <div class="logo">
-        LABOR
+<header class="topbar">
+    <div class="logo-labor">
+        <div class="logo-main">LABOR</div>
+        <div class="logo-sub">HEALTH SUPPLY</div>
     </div>
 
-    <div class="titulo">
-        PAINEL DE GESTÃO DA QUALIDADE
+    <div class="top-title">
+        <h1>PAINEL DE PROCESSOS SGQ</h1>
+        <p>Indicadores operacionais em tempo real</p>
     </div>
 
+    <div class="top-status">
+        <span class="pill data-pill" id="dataAtual">-- --- ----</span>
+        <span class="pill time-pill" id="horaAtual">--:--:--</span>
+        <span class="pill">
+            <span class="online-dot">●</span>Online
+        </span>
+    </div>
 </header>
 
+<div class="main-wrap" id="mainWrap">
 
-<div class="layout">
+    <aside class="menu" id="menuLateral">
 
+        <button
+            type="button"
+            class="toggle-menu"
+            id="btnToggleMenu"
+            onclick="toggleMenu()"
+            title="Esconder menu">
+            ◀
+        </button>
 
-<nav class="menu">
+        <button class="active" onclick="abrirAba('importacao', this)">
+            <span class="ico">📦</span>
+            <span class="label">Inspeção<br>Importação</span>
+        </button>
 
-<button onclick="abrirAba('inicio')">
-🏠 Início
-</button>
+        <button onclick="abrirAba('esfig', this)">
+            <span class="ico">⏱</span>
+            <span class="label">Esfigmomanômetro</span>
+        </button>
 
-<button onclick="abrirAba('importacao')">
-📦 Inspeção Importação
-</button>
+        <button onclick="abrirAba('descarte', this)">
+            <span class="ico">🗑</span>
+            <span class="label">Descarte</span>
+        </button>
 
-<button onclick="abrirAba('esfig')">
-⚙️ Aferição ESFIG
-</button>
+        <button onclick="abrirAba('amostra', this)">
+            <span class="ico">📦</span>
+            <span class="label">Amostra</span>
+        </button>
 
-<button onclick="abrirAba('descarte')">
-🗑️ Descarte
-</button>
+        <button onclick="abrirAba('retrabalho', this)">
+            <span class="ico">🔄</span>
+            <span class="label">Retrabalho</span>
+        </button>
 
-<button onclick="abrirAba('retrabalho')">
-🔧 Retrabalho
-</button>
+        <button onclick="abrirAba('equipamentos', this)">
+            <span class="ico">🛠</span>
+            <span class="label">Equipamentos</span>
+        </button>
 
-<button onclick="abrirAba('amostras')">
-📋 Amostras
-</button>
+        <button onclick="abrirAba('informativo', this)">
+            <span class="ico">ℹ️</span>
+            <span class="label">Informativo</span>
+        </button>
 
-<button onclick="abrirAba('fornecedores')">
-🏭 Fornecedores
-</button>
+    </aside>
 
-
-</nav>
-
-
-
-<main id="conteudo">
-
-</main>
-
+    <main class="content" id="conteudo"></main>
 
 </div>
 
-
-
 <script src="utils.js"></script>
-<script src="script.js"></script>
 
 <script src="importacao.js"></script>
 <script src="esfig.js"></script>
 <script src="descarte.js"></script>
-<script src="retrabalho.js"></script>
 <script src="amostras.js"></script>
+<script src="retrabalho.js"></script>
+
 <script src="fornecedores.js"></script>
 
+<script src="script.js"></script>
 
 </body>
-
 </html>
