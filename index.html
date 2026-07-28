@@ -1,104 +1,295 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Painel de Processos SGQ</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>
+        Painel de Processos SGQ
+    </title>
 
-    <link rel="stylesheet" href="style.css">
+    <!--
+    |--------------------------------------------------------------------------
+    | CHART.JS
+    |--------------------------------------------------------------------------
+    -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+    <!--
+    |--------------------------------------------------------------------------
+    | ESTILOS
+    |--------------------------------------------------------------------------
+    -->
+    <link
+        rel="stylesheet"
+        href="style.css?v=6"
+    >
+
 </head>
 
 <body>
 
-<header class="topbar">
-    <div class="logo-labor">
-        <div class="logo-main">LABOR</div>
-        <div class="logo-sub">HEALTH SUPPLY</div>
+    <!--
+    |--------------------------------------------------------------------------
+    | CABEÇALHO
+    |--------------------------------------------------------------------------
+    -->
+    <header class="topbar">
+
+        <div class="logo-labor">
+
+            <div class="logo-main">
+                LABOR
+            </div>
+
+            <div class="logo-sub">
+                HEALTH SUPPLY
+            </div>
+
+        </div>
+
+
+        <div class="top-title">
+
+            <h1>
+                PAINEL DE PROCESSOS SGQ
+            </h1>
+
+            <p>
+                Indicadores operacionais em tempo real
+            </p>
+
+        </div>
+
+
+        <div class="top-status">
+
+            <span
+                class="pill data-pill"
+                id="dataAtual"
+            >
+                -- --- ----
+            </span>
+
+            <span
+                class="pill time-pill"
+                id="horaAtual"
+            >
+                --:--:--
+            </span>
+
+            <span class="pill">
+
+                <span class="online-dot">
+                    ●
+                </span>
+
+                Online
+
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!--
+    |--------------------------------------------------------------------------
+    | CONTEÚDO PRINCIPAL
+    |--------------------------------------------------------------------------
+    -->
+    <div
+        class="main-wrap"
+        id="mainWrap"
+    >
+
+        <!--
+        |--------------------------------------------------------------------------
+        | MENU LATERAL
+        |--------------------------------------------------------------------------
+        -->
+        <aside
+            class="menu"
+            id="menuLateral"
+        >
+
+            <button
+                type="button"
+                class="toggle-menu"
+                id="btnToggleMenu"
+                onclick="toggleMenu()"
+                title="Esconder menu"
+            >
+                ◀
+            </button>
+
+
+            <button
+                type="button"
+                class="active"
+                onclick="abrirAba('importacao', this)"
+            >
+
+                <span class="ico">
+                    📦
+                </span>
+
+                <span class="label">
+                    Inspeção
+                    <br>
+                    Importação
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('esfig', this)"
+            >
+
+                <span class="ico">
+                    ⏱
+                </span>
+
+                <span class="label">
+                    Esfigmomanômetro
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('descarte', this)"
+            >
+
+                <span class="ico">
+                    🗑
+                </span>
+
+                <span class="label">
+                    Descarte
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('amostra', this)"
+            >
+
+                <span class="ico">
+                    📦
+                </span>
+
+                <span class="label">
+                    Amostra
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('retrabalho', this)"
+            >
+
+                <span class="ico">
+                    🔄
+                </span>
+
+                <span class="label">
+                    Retrabalho
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('fornecedores', this)"
+            >
+
+                <span class="ico">
+                    🏭
+                </span>
+
+                <span class="label">
+                    Fornecedores
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="abrirAba('informativo', this)"
+            >
+
+                <span class="ico">
+                    ℹ️
+                </span>
+
+                <span class="label">
+                    Informativo
+                </span>
+
+            </button>
+
+        </aside>
+
+
+        <!--
+        |--------------------------------------------------------------------------
+        | ÁREA DINÂMICA DAS ABAS
+        |--------------------------------------------------------------------------
+        -->
+        <main
+            class="content"
+            id="conteudo"
+        ></main>
+
     </div>
 
-    <div class="top-title">
-        <h1>PAINEL DE PROCESSOS SGQ</h1>
-        <p>Indicadores operacionais em tempo real</p>
-    </div>
 
-    <div class="top-status">
-        <span class="pill data-pill" id="dataAtual">-- --- ----</span>
-        <span class="pill time-pill" id="horaAtual">--:--:--</span>
-        <span class="pill">
-            <span class="online-dot">●</span>Online
-        </span>
-    </div>
-</header>
+    <!--
+    |--------------------------------------------------------------------------
+    | ARQUIVOS JAVASCRIPT
+    |--------------------------------------------------------------------------
+    | A ordem é importante:
+    |
+    | 1. utils.js
+    | 2. arquivos de cada aba
+    | 3. script.js
+    |--------------------------------------------------------------------------
+    -->
 
-<div class="main-wrap" id="mainWrap">
+    <script src="utils.js?v=6"></script>
 
-    <aside class="menu" id="menuLateral">
+    <script src="importacao.js?v=6"></script>
 
-        <button
-            type="button"
-            class="toggle-menu"
-            id="btnToggleMenu"
-            onclick="toggleMenu()"
-            title="Esconder menu">
-            ◀
-        </button>
+    <script src="esfig.js?v=6"></script>
 
-        <button class="active" onclick="abrirAba('importacao', this)">
-            <span class="ico">📦</span>
-            <span class="label">Inspeção<br>Importação</span>
-        </button>
+    <script src="descarte.js?v=6"></script>
 
-        <button onclick="abrirAba('esfig', this)">
-            <span class="ico">⏱</span>
-            <span class="label">Esfigmomanômetro</span>
-        </button>
+    <script src="amostras.js?v=6"></script>
 
-        <button onclick="abrirAba('descarte', this)">
-            <span class="ico">🗑</span>
-            <span class="label">Descarte</span>
-        </button>
+    <script src="retrabalho.js?v=6"></script>
 
-        <button onclick="abrirAba('amostra', this)">
-            <span class="ico">📦</span>
-            <span class="label">Amostra</span>
-        </button>
+    <script src="fornecedores.js?v=6"></script>
 
-        <button onclick="abrirAba('retrabalho', this)">
-            <span class="ico">🔄</span>
-            <span class="label">Retrabalho</span>
-        </button>
-
- <button onclick="abrirAba('fornecedores', this)">
-    <span class="ico">🏭</span>
-    <span class="label">Fornecedores</span>
-</button>
-
-        <button onclick="abrirAba('informativo', this)">
-            <span class="ico">ℹ️</span>
-            <span class="label">Informativo</span>
-        </button>
-
-    </aside>
-
-    <main class="content" id="conteudo"></main>
-
-</div>
-
-<script src="utils.js"></script>
-
-<script src="importacao.js?v=5"></script>
-<script src="esfig.js?v=2"></script>
-<script src="descarte.js"></script>
-<script src="amostras.js"></script>
-<script src="retrabalho.js"></script>
-
-<script src="fornecedores.js"></script>
-
-<script src="script.js"></script>
+    <script src="script.js?v=6"></script>
 
 </body>
+
 </html>
