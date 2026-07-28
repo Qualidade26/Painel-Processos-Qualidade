@@ -217,26 +217,26 @@ function montarLinhasEsfig(lista){
         return "";
 
     return lista.map(i => `
-        <tr>
-            <td>${i.sku || "-"}</td>
-            <td class="desc">${i.descricao || "-"}</td>
-            <td>${numero(i.aguardando || 0)}</td>
-            <td>${numero(i.desmontado || 0)}</td>
-            <td>${numero(i.aferidos || 0)}</td>
-            <td>${
-               <td>${
-    Number(i.aferidos || 0) > 0
-        ? "Concluído"
-        : (
-            Number(i.desmontado || 0) > 0 ||
-            Number(i.aguardando || 0) > 0
-        )
-            ? "Pendente"
-            : "-"
-}</td>
-        </tr>
-    `).join("");
-}
+       return lista.map(i => `
+ <tr>
+    <td>${i.sku || "-"}</td>
+    <td class="desc">${i.descricao || "-"}</td>
+
+    <td>${numero(i.aguardando || 0)}</td>
+    <td>${numero(i.desmontado || 0)}</td>
+    <td>${numero(i.aferidos || 0)}</td>
+
+    <td>${
+        Number(i.aferidos || 0) > 0
+            ? "Concluído"
+            : (
+                Number(i.aguardando || 0) > 0 ||
+                Number(i.desmontado || 0) > 0
+            )
+                ? "Pendente"
+                : "-"
+    }</td>
+</tr>
 
 function montarLinhasTopDescarte(lista){
 
