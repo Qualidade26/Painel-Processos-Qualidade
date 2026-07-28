@@ -184,20 +184,20 @@ function renderImportacao() {
                     📋 Fluxo da Inspeção de Importação
                 </h3>
 
-                ${
-                    tabelaFixa(
-                        [
-                            "PO",
-                            "Descrição do Produto",
-                            "Status",
-                            "Observação"
-                        ],
-                        montarLinhasImportacao(
-                            imp.fluxo || []
-                        ),
-                        false
-                    )
-                }
+               ${tabelaFixa(
+    [
+        "PO",
+        "SKU",
+        "Descrição do Produto",
+        "Lote",
+        "Status",
+        "Observação"
+    ],
+    montarLinhasImportacao(
+        imp.fluxo || []
+    ),
+    false
+)}
 
                 <div class="table-footer">
 
