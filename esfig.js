@@ -285,159 +285,152 @@ function renderEsfig(){
                 "Horas da atividade"
             )}
 
-        </section>
+        <!-- GRÁFICO PRINCIPAL -->
 
+<section class="panel">
 
-        <!-- PARETO EM DESTAQUE -->
+    <h3>
+        📊 Total Anual por SKU — Pareto
+    </h3>
 
-        <section class="panel esfig-pareto-destaque">
+    <div class="chart-box chart-box-esfig">
+        <canvas id="grafico"></canvas>
+    </div>
 
-            <h3>
-                📊 Total Anual por SKU — Pareto
-            </h3>
+    ${
+        dadosPareto.length
+            ? `
+                <div class="esfig-pareto-resumo">
 
-            <div class="chart-box esfig-pareto-grande">
-                <canvas id="grafico"></canvas>
-            </div>
+                    <div class="esfig-pareto-resumo-icone">
+                        ℹ
+                    </div>
 
-            ${
-                dadosPareto.length
-                    ? `
-                        <div class="esfig-pareto-resumo">
+                    <div>
+                        <strong>
+                            Análise de Pareto
+                        </strong>
 
-                            <div class="esfig-pareto-resumo-icone">
-                                ℹ
-                            </div>
-
-                            <div>
-                                <strong>
-                                    Análise de Pareto
-                                </strong>
-
-                                <p>
-                                    Aproximadamente
-                                    <b>${percentualLimite80}%</b>
-                                    das aferições estão concentradas
-                                    nos primeiros
-                                    <b>${quantidadeSkus80} SKU(s)</b>.
-                                    Esses itens representam a maior
-                                    prioridade de análise.
-                                </p>
-                            </div>
-
-                        </div>
-                    `
-                    : ""
-            }
-
-        </section>
-
-
-        <!-- FLUXO OPERACIONAL -->
-
-        <section class="panel esfig-flow esfig-flow-destaque">
-
-            <h3>
-                ⏱ Esfigmomanômetro — Fluxo Operacional
-            </h3>
-
-            <div class="fluxo esfig-fluxo-horizontal">
-
-                <div class="fluxo-item">
-
-                    <strong>
-                        ${numero(totalAguardando)}
-                    </strong>
-
-                    <small>
-                        Aguardando Desmontagem
-                    </small>
+                        <p>
+                            Aproximadamente
+                            <b>${percentualLimite80}%</b>
+                            das aferições estão concentradas nos primeiros
+                            <b>${quantidadeSkus80} SKU(s)</b>.
+                        </p>
+                    </div>
 
                 </div>
+            `
+            : ""
+    }
+
+</section>
 
 
-                <div class="fluxo-arrow">
-                    →
-                </div>
+<!-- PARTE INFERIOR IGUAL À IMPORTAÇÃO -->
 
+<section class="esfig-bottom-grid">
 
-                <div class="fluxo-item pink">
+    <!-- FLUXO OPERACIONAL -->
 
-                    <strong>
-                        ${numero(totalDesmontado)}
-                    </strong>
+    <div class="panel">
 
-                    <small>
-                        Desmontado
-                    </small>
+        <h3>
+            ⏱ Fluxo Operacional
+        </h3>
 
-                </div>
+        <div class="fluxo esfig-fluxo-horizontal">
 
+            <div class="fluxo-item">
 
-                <div class="fluxo-arrow">
-                    →
-                </div>
+                <strong>
+                    ${numero(totalAguardando)}
+                </strong>
 
-
-                <div class="fluxo-item green">
-
-                    <strong>
-                        ${numero(totalAferidos)}
-                    </strong>
-
-                    <small>
-                        Aferidos / Montagem
-                    </small>
-
-                </div>
+                <small>
+                    Aguardando Desmontagem
+                </small>
 
             </div>
 
-
-            <div class="progress-title">
-                Processamento geral
+            <div class="fluxo-arrow">
+                →
             </div>
 
+            <div class="fluxo-item pink">
 
-            <div class="progress-box">
+                <strong>
+                    ${numero(totalDesmontado)}
+                </strong>
 
-                <div
-                    class="progress-bar"
-                    style="width:${larguraConclusao}%"
-                >
-                    ${conclusao}% concluído
-                </div>
+                <small>
+                    Desmontado
+                </small>
 
             </div>
 
-        </section>
+            <div class="fluxo-arrow">
+                →
+            </div>
+
+            <div class="fluxo-item green">
+
+                <strong>
+                    ${numero(totalAferidos)}
+                </strong>
+
+                <small>
+                    Aferidos / Montagem
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="progress-title">
+            Processamento geral
+        </div>
+
+        <div class="progress-box">
+
+            <div
+                class="progress-bar"
+                style="width:${conclusao}%"
+            >
+                ${conclusao}% concluído
+            </div>
+
+        </div>
+
+    </div>
 
 
-        <!-- TABELA -->
+    <!-- TABELA -->
 
-        <section class="panel esfig-tabela">
+    <div class="panel">
 
-            <h3>
-                📋 Controle Operacional por SKU
-            </h3>
+        <h3>
+            📋 Controle de Produtos
+        </h3>
 
-            ${
-                tabelaFixa(
-                    [
-                        "SKU",
-                        "Descrição",
-                        "Aguard.",
-                        "Desm.",
-                        "Afer.",
-                        "Status"
-                    ],
-                    montarLinhasEsfig(produtos),
-                    true
-                )
-            }
+        ${
+            tabelaFixa(
+                [
+                    "SKU",
+                    "Descrição",
+                    "Aguard.",
+                    "Desm.",
+                    "Afer.",
+                    "Status"
+                ],
+                montarLinhasEsfig(produtos),
+                true
+            )
+        }
 
-        </section>
-    `;
+    </div>
+
+</section>
 
 
     /*
