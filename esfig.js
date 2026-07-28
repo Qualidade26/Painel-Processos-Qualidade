@@ -329,27 +329,28 @@ const percentualAcumulado =
                     },
 
                     {
-                        type:"line",
-                        label:"% Acumulado",
+    type: "line",
+    label: "% Acumulado",
 
-                        data:percentualAcumulado,
+    data: percentualAcumulado,
 
-                        borderColor:"#f04dd8",
-                        backgroundColor:"#f04dd8",
-                        pointBackgroundColor:"#f04dd8",
-                        pointBorderColor:"#ffffff",
-                        pointBorderWidth:1,
+    borderColor: "#f04dd8",
+    backgroundColor: "#f04dd8",
 
-                        pointRadius:4,
-                        pointHoverRadius:6,
+    pointBackgroundColor: "#f04dd8",
+    pointBorderColor: "#ffffff",
+    pointBorderWidth: 1,
 
-                        borderWidth:2,
-                        tension:0.25,
-                        spanGaps:false,
+    pointRadius: 4,
+    pointHoverRadius: 6,
 
-                        xAxisID:"x1",
-                        order:1
-                    }
+    borderWidth: 2,
+    tension: 0.25,
+    spanGaps: false,
+
+    xAxisID: "x1",
+    order: 1
+}
 
                 ]
             },
