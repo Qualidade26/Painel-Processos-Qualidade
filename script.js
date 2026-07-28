@@ -165,8 +165,8 @@ function abrirAba(aba, botao){
     if(aba === "retrabalho")
         renderRetrabalho();
 
-    if(aba === "equipamentos")
-        renderEquipamentos();
+    if(aba === "fornecedores")
+    renderFornecedores();
 
     if(aba === "informativo")
         renderInformativo();
