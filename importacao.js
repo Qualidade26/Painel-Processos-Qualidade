@@ -3,13 +3,18 @@ let graficoParetoImportacao = null;
 
 /*
 |--------------------------------------------------------------------------
-| TRATAMENTO DOS VALORES ZERADOS
+| TRATAMENTO DOS VALORES DO GRÁFICO
 |--------------------------------------------------------------------------
-| Mantém todos os meses no eixo do gráfico, mas transforma valores 0,
-| vazios, nulos ou inválidos em null. Assim, o Chart.js não desenha
-| barras, pontos ou linhas nesses valores.
+| Converte valores zerados, vazios ou inválidos em null.
+| Dessa forma:
+|
+| - o mês continua aparecendo no eixo horizontal;
+| - nenhuma barra é desenhada;
+| - nenhum ponto é desenhado;
+| - a linha de horas não desce até zero;
+| - o tooltip não mostra valores zerados.
 */
-function ocultarZero(valor) {
+function valorGrafico(valor) {
 
     if (
         valor === null ||
@@ -19,7 +24,22 @@ function ocultarZero(valor) {
         return null;
     }
 
-    const valorNumerico = Number(valor);
+    /*
+    |--------------------------------------------------------------------------
+    | Aceita números com vírgula ou ponto.
+    |--------------------------------------------------------------------------
+    | Exemplos:
+    |
+    | "10,5" vira 10.5
+    | "10.5" continua 10.5
+    | "0" vira null
+    | "0,00" vira null
+    */
+    const valorNormalizado = String(valor)
+        .trim()
+        .replace(",", ".");
+
+    const valorNumerico = Number(valorNormalizado);
 
     if (
         !Number.isFinite(valorNumerico) ||
@@ -29,6 +49,22 @@ function ocultarZero(valor) {
     }
 
     return valorNumerico;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| VERIFICA SE O VALOR DO GRÁFICO É VÁLIDO
+|--------------------------------------------------------------------------
+*/
+function possuiValorGrafico(valor) {
+
+    return (
+        valor !== null &&
+        valor !== undefined &&
+        valor !== "" &&
+        Number(valor) !== 0
+    );
 }
 
 
@@ -50,10 +86,13 @@ function renderImportacao() {
         fluxo: []
     };
 
+
     /*
-    |----------------------------------------------------------------------
-    | Evita gráficos duplicados quando o usuário troca de aba e volta.
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | DESTRÓI OS GRÁFICOS ANTERIORES
+    |--------------------------------------------------------------------------
+    | Evita gráficos duplicados quando o usuário sai da página
+    | e entra novamente.
     */
     if (
         typeof graficoAtual !== "undefined" &&
@@ -67,6 +106,7 @@ function renderImportacao() {
         graficoParetoImportacao.destroy();
         graficoParetoImportacao = null;
     }
+
 
     conteudo.innerHTML = `
         <div class="page-title">
@@ -152,7 +192,9 @@ function renderImportacao() {
                             "Status",
                             "Observação"
                         ],
-                        montarLinhasImportacao(imp.fluxo || []),
+                        montarLinhasImportacao(
+                            imp.fluxo || []
+                        ),
                         false
                     )
                 }
@@ -173,6 +215,7 @@ function renderImportacao() {
 
         </section>
     `;
+
 
     criarGraficoMensalImportacao(imp);
     criarGraficoParetoImportacao(imp);
@@ -201,45 +244,79 @@ function criarGraficoMensalImportacao(imp) {
         return;
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | PREPARAÇÃO DOS DADOS
+    |--------------------------------------------------------------------------
+    | Os 12 meses continuam no gráfico.
+    | Somente os valores zerados são transformados em null.
+    */
+    const meses = mensal.map(item =>
+        item.mes || ""
+    );
+
+    const processos = mensal.map(item =>
+        valorGrafico(item.processos)
+    );
+
+    const sku = mensal.map(item =>
+        valorGrafico(item.sku)
+    );
+
+    const lotes = mensal.map(item =>
+        valorGrafico(item.lotes)
+    );
+
+    const laudos = mensal.map(item =>
+        valorGrafico(item.laudos)
+    );
+
+    const horas = mensal.map(item =>
+        valorGrafico(item.horas)
+    );
+
+
     graficoAtual = new Chart(
         canvas,
         {
             data: {
 
-                /*
-                |----------------------------------------------------------
-                | Todos os meses continuam aparecendo no eixo horizontal.
-                |----------------------------------------------------------
-                */
-                labels: mensal.map(item =>
-                    item.mes || ""
-                ),
+                labels: meses,
 
                 datasets: [
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | PROCESSOS
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "bar",
                         label: "Processos",
-
-                        data: mensal.map(item =>
-                            ocultarZero(item.processos)
-                        ),
+                        data: processos,
 
                         backgroundColor: "#1d4eff",
                         borderColor: "#1d4eff",
                         borderWidth: 1,
                         borderRadius: 3,
+
                         yAxisID: "y",
-                        order: 2
+                        order: 2,
+
+                        skipNull: true
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | SKU
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "bar",
                         label: "SKU",
-
-                        data: mensal.map(item =>
-                            ocultarZero(item.sku)
-                        ),
+                        data: sku,
 
                         backgroundColor:
                             "rgba(240, 77, 216, 0.65)",
@@ -247,17 +324,23 @@ function criarGraficoMensalImportacao(imp) {
                         borderColor: "#f04dd8",
                         borderWidth: 2,
                         borderRadius: 3,
+
                         yAxisID: "y",
-                        order: 2
+                        order: 2,
+
+                        skipNull: true
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LOTES
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "bar",
                         label: "Lotes",
-
-                        data: mensal.map(item =>
-                            ocultarZero(item.lotes)
-                        ),
+                        data: lotes,
 
                         backgroundColor:
                             "rgba(34, 197, 94, 0.55)",
@@ -265,17 +348,23 @@ function criarGraficoMensalImportacao(imp) {
                         borderColor: "#22c55e",
                         borderWidth: 2,
                         borderRadius: 3,
+
                         yAxisID: "y",
-                        order: 2
+                        order: 2,
+
+                        skipNull: true
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LAUDOS
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "bar",
                         label: "Laudos",
-
-                        data: mensal.map(item =>
-                            ocultarZero(item.laudos)
-                        ),
+                        data: laudos,
 
                         backgroundColor:
                             "rgba(139, 92, 246, 0.55)",
@@ -283,34 +372,80 @@ function criarGraficoMensalImportacao(imp) {
                         borderColor: "#6d28d9",
                         borderWidth: 2,
                         borderRadius: 3,
+
                         yAxisID: "y",
-                        order: 2
+                        order: 2,
+
+                        skipNull: true
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | HORAS
+                    |--------------------------------------------------------------------------
+                    | A linha não será desenhada nos valores null.
+                    */
                     {
                         type: "line",
                         label: "Horas",
-
-                        data: mensal.map(item =>
-                            ocultarZero(item.horas)
-                        ),
+                        data: horas,
 
                         borderColor: "#f97316",
                         backgroundColor: "#f97316",
+
                         pointBackgroundColor: "#f97316",
                         pointBorderColor: "#ffffff",
                         pointBorderWidth: 1,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | ESCONDE O PONTO QUANDO O VALOR FOR NULL OU ZERO
+                        |--------------------------------------------------------------------------
+                        */
+                        pointRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 4
+                                : 0;
+                        },
+
+                        pointHoverRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 6
+                                : 0;
+                        },
+
+                        pointHitRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 10
+                                : 0;
+                        },
+
                         borderWidth: 2,
                         tension: 0.35,
 
                         /*
-                        |--------------------------------------------------
-                        | Não liga a linha através dos meses sem dados.
-                        |--------------------------------------------------
+                        |--------------------------------------------------------------------------
+                        | NÃO UNE A LINHA ATRAVÉS DE MESES SEM DADOS
+                        |--------------------------------------------------------------------------
                         */
                         spanGaps: false,
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Não desenha pontos nulos.
+                        |--------------------------------------------------------------------------
+                        */
+                        skipNull: true,
 
                         yAxisID: "y1",
                         order: 1
@@ -319,7 +454,9 @@ function criarGraficoMensalImportacao(imp) {
                 ]
             },
 
+
             options: {
+
                 responsive: true,
                 maintainAspectRatio: false,
 
@@ -328,8 +465,14 @@ function criarGraficoMensalImportacao(imp) {
                     intersect: false
                 },
 
+
                 plugins: {
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LEGENDA
+                    |--------------------------------------------------------------------------
+                    */
                     legend: {
                         position: "top",
 
@@ -340,20 +483,20 @@ function criarGraficoMensalImportacao(imp) {
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | TOOLTIP
+                    |--------------------------------------------------------------------------
+                    | Não apresenta valores null ou zero.
+                    */
                     tooltip: {
                         enabled: true,
 
-                        /*
-                        |--------------------------------------------------
-                        | Não mostra no tooltip os valores nulos ou zerados.
-                        |--------------------------------------------------
-                        */
                         filter: function(context) {
 
-                            return (
-                                context.raw !== null &&
-                                context.raw !== undefined &&
-                                Number(context.raw) !== 0
+                            return possuiValorGrafico(
+                                context.raw
                             );
                         },
 
@@ -362,8 +505,9 @@ function criarGraficoMensalImportacao(imp) {
                             label: function(context) {
 
                                 if (
-                                    context.raw === null ||
-                                    context.raw === undefined
+                                    !possuiValorGrafico(
+                                        context.raw
+                                    )
                                 ) {
                                     return "";
                                 }
@@ -371,15 +515,55 @@ function criarGraficoMensalImportacao(imp) {
                                 const nome =
                                     context.dataset.label || "";
 
-                                return `${nome}: ${context.raw}`;
+                                return (
+                                    `${nome}: ` +
+                                    `${context.formattedValue}`
+                                );
                             }
+                        }
+                    },
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | CHARTJS-PLUGIN-DATALABELS
+                    |--------------------------------------------------------------------------
+                    | Caso o projeto esteja usando o plugin DataLabels,
+                    | impede que o número zero apareça sobre o gráfico.
+                    */
+                    datalabels: {
+
+                        display: function(context) {
+
+                            const valor =
+                                context.dataset.data[
+                                    context.dataIndex
+                                ];
+
+                            return possuiValorGrafico(
+                                valor
+                            );
+                        },
+
+                        formatter: function(valor) {
+
+                            return possuiValorGrafico(valor)
+                                ? valor
+                                : "";
                         }
                     }
                 },
 
+
                 scales: {
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DOS MESES
+                    |--------------------------------------------------------------------------
+                    */
                     x: {
+
                         grid: {
                             display: false
                         },
@@ -391,6 +575,12 @@ function criarGraficoMensalImportacao(imp) {
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DE QUANTIDADE
+                    |--------------------------------------------------------------------------
+                    */
                     y: {
                         beginAtZero: true,
                         position: "left",
@@ -405,6 +595,12 @@ function criarGraficoMensalImportacao(imp) {
                         }
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DE HORAS
+                    |--------------------------------------------------------------------------
+                    */
                     y1: {
                         beginAtZero: true,
                         position: "right",
@@ -432,25 +628,44 @@ function criarGraficoMensalImportacao(imp) {
 */
 function criarGraficoParetoImportacao(imp) {
 
-    const paretoOriginal = Array.isArray(imp.paretoSku)
+    const paretoOriginal = Array.isArray(
+        imp.paretoSku
+    )
         ? imp.paretoSku
         : [];
 
+
     /*
-    |----------------------------------------------------------------------
-    | Remove registros vazios ou com quantidade zero somente do Pareto.
-    |----------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | REMOVE REGISTROS ZERADOS DO PARETO
+    |--------------------------------------------------------------------------
     */
     const pareto = paretoOriginal
-        .map(item => ({
-            sku: item.sku || "Sem identificação",
-            quantidade: Number(item.quantidade) || 0
-        }))
-        .filter(item => item.quantidade > 0)
+        .map(item => {
+
+            const quantidade =
+                valorGrafico(item.quantidade);
+
+            return {
+                sku:
+                    item.sku ||
+                    "Sem identificação",
+
+                quantidade:
+                    quantidade === null
+                        ? 0
+                        : quantidade
+            };
+        })
+        .filter(item =>
+            item.quantidade > 0
+        )
         .sort(
             (a, b) =>
-                b.quantidade - a.quantidade
+                b.quantidade -
+                a.quantidade
         );
+
 
     const canvas = document.getElementById(
         "graficoParetoImportacao"
@@ -463,6 +678,7 @@ function criarGraficoParetoImportacao(imp) {
         return;
     }
 
+
     const labels = pareto.map(item =>
         item.sku
     );
@@ -471,12 +687,16 @@ function criarGraficoParetoImportacao(imp) {
         item.quantidade
     );
 
+
     const total = quantidades.reduce(
-        (soma, valor) => soma + valor,
+        (soma, valor) =>
+            soma + valor,
         0
     );
 
+
     let acumulado = 0;
+
 
     const percentuaisAcumulados =
         quantidades.map(valor => {
@@ -489,24 +709,30 @@ function criarGraficoParetoImportacao(imp) {
 
             return Number(
                 (
-                    (acumulado / total) * 100
+                    (acumulado / total) *
+                    100
                 ).toFixed(1)
             );
         });
+
 
     graficoParetoImportacao = new Chart(
         canvas,
         {
             data: {
 
-                labels,
+                labels: labels,
 
                 datasets: [
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | QUANTIDADE
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "bar",
                         label: "Quantidade",
-
                         data: quantidades,
 
                         backgroundColor: "#1455d9",
@@ -515,24 +741,50 @@ function criarGraficoParetoImportacao(imp) {
                         borderRadius: 3,
 
                         xAxisID: "x",
-                        order: 2
+                        order: 2,
+
+                        skipNull: true
                     },
 
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | PERCENTUAL ACUMULADO
+                    |--------------------------------------------------------------------------
+                    */
                     {
                         type: "line",
                         label: "% Acumulado",
-
                         data: percentuaisAcumulados,
 
                         borderColor: "#f97316",
                         backgroundColor: "#f97316",
+
                         pointBackgroundColor: "#f97316",
                         pointBorderColor: "#ffffff",
                         pointBorderWidth: 1,
-                        pointRadius: 3,
-                        pointHoverRadius: 5,
+
+                        pointRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 3
+                                : 0;
+                        },
+
+                        pointHoverRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 5
+                                : 0;
+                        },
+
                         borderWidth: 2,
                         tension: 0.2,
+                        spanGaps: false,
 
                         xAxisID: "x1",
                         order: 1
@@ -541,7 +793,9 @@ function criarGraficoParetoImportacao(imp) {
                 ]
             },
 
+
             options: {
+
                 responsive: true,
                 maintainAspectRatio: false,
                 indexAxis: "y",
@@ -550,6 +804,7 @@ function criarGraficoParetoImportacao(imp) {
                     mode: "index",
                     intersect: false
                 },
+
 
                 plugins: {
 
@@ -562,20 +817,28 @@ function criarGraficoParetoImportacao(imp) {
                         }
                     },
 
+
                     tooltip: {
                         enabled: true,
 
                         filter: function(context) {
-                            return (
-                                context.raw !== null &&
-                                context.raw !== undefined &&
-                                Number(context.raw) !== 0
+
+                            return possuiValorGrafico(
+                                context.raw
                             );
                         },
 
                         callbacks: {
 
                             label: function(context) {
+
+                                if (
+                                    !possuiValorGrafico(
+                                        context.raw
+                                    )
+                                ) {
+                                    return "";
+                                }
 
                                 if (
                                     context.dataset.label ===
@@ -593,12 +856,37 @@ function criarGraficoParetoImportacao(imp) {
                                 );
                             }
                         }
+                    },
+
+
+                    datalabels: {
+
+                        display: function(context) {
+
+                            const valor =
+                                context.dataset.data[
+                                    context.dataIndex
+                                ];
+
+                            return possuiValorGrafico(
+                                valor
+                            );
+                        },
+
+                        formatter: function(valor) {
+
+                            return possuiValorGrafico(valor)
+                                ? valor
+                                : "";
+                        }
                     }
                 },
+
 
                 scales: {
 
                     y: {
+
                         grid: {
                             display: false
                         },
@@ -608,6 +896,7 @@ function criarGraficoParetoImportacao(imp) {
                             text: "SKU"
                         }
                     },
+
 
                     x: {
                         beginAtZero: true,
@@ -623,6 +912,7 @@ function criarGraficoParetoImportacao(imp) {
                         }
                     },
 
+
                     x1: {
                         beginAtZero: true,
                         max: 100,
@@ -633,6 +923,7 @@ function criarGraficoParetoImportacao(imp) {
                         },
 
                         ticks: {
+
                             callback: function(valor) {
                                 return `${valor}%`;
                             }
@@ -662,7 +953,9 @@ function verTodosImportacao() {
     );
 
     /*
+    |--------------------------------------------------------------------------
     | Aqui poderá ser adicionada futuramente:
+    |--------------------------------------------------------------------------
     |
     | - abertura de um modal;
     | - exibição de uma tabela completa;
