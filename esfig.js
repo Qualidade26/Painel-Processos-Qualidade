@@ -2,11 +2,12 @@ function renderEsfig(){
 
     const esfig = dados.esfig || {};
 
+
     /*
     |--------------------------------------------------------------------------
     | PRODUTOS DA TABELA
     |--------------------------------------------------------------------------
-    | Mantém a tabela organizada pelo número do SKU.
+    | A tabela permanece ordenada pelo número do SKU.
     */
     const produtos = [...(esfig.produtos || [])]
         .sort((a,b) => {
@@ -18,8 +19,8 @@ function renderEsfig(){
                 Number.isNaN(na) &&
                 Number.isNaN(nb)
             ){
-                return String(a.sku)
-                    .localeCompare(String(b.sku));
+                return String(a.sku || "")
+                    .localeCompare(String(b.sku || ""));
             }
 
             if(Number.isNaN(na)){
@@ -79,22 +80,26 @@ function renderEsfig(){
 
     /*
     |--------------------------------------------------------------------------
-    | DADOS DO GRÁFICO PARETO
+    | DADOS DO PARETO
     |--------------------------------------------------------------------------
     | Remove valores zerados e ordena do maior para o menor.
     */
     const dadosPareto = produtos
         .map(item => ({
+
             sku:
                 item.sku ||
-                "Sem identificação",
+                "Sem SKU",
 
             quantidade:
                 Number(item.totalAnualSku || 0)
+
         }))
         .filter(item =>
+
             Number.isFinite(item.quantidade) &&
             item.quantidade > 0
+
         )
         .sort(
             (a,b) =>
@@ -103,11 +108,15 @@ function renderEsfig(){
         );
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | ARRAYS DO GRÁFICO
+    |--------------------------------------------------------------------------
+    */
     const labelsPareto =
         dadosPareto.map(item =>
             String(item.sku)
         );
-
 
     const quantidadesPareto =
         dadosPareto.map(item =>
@@ -117,7 +126,7 @@ function renderEsfig(){
 
     /*
     |--------------------------------------------------------------------------
-    | TOTAL GERAL DO PARETO
+    | TOTAL DO PARETO
     |--------------------------------------------------------------------------
     */
     const totalPareto =
@@ -130,19 +139,21 @@ function renderEsfig(){
 
     /*
     |--------------------------------------------------------------------------
-    | PERCENTUAL ACUMULADO CORRETO
+    | PERCENTUAL ACUMULADO
     |--------------------------------------------------------------------------
-    | Este array contém os percentuais matematicamente corretos:
+    | Exemplo:
     |
-    | Primeiro SKU: participação acumulada inicial
+    | 1º SKU: 40%
+    | 2º SKU: 65%
+    | 3º SKU: 82%
     | Último SKU: 100%
     */
-    let acumulado = 0;
+    let acumuladoPareto = 0;
 
-    const percentualAcumuladoCorreto =
+    const percentualAcumulado =
         quantidadesPareto.map(valor => {
 
-            acumulado += valor;
+            acumuladoPareto += valor;
 
             if(totalPareto <= 0){
                 return null;
@@ -150,7 +161,10 @@ function renderEsfig(){
 
             return Number(
                 (
-                    (acumulado / totalPareto) *
+                    (
+                        acumuladoPareto /
+                        totalPareto
+                    ) *
                     100
                 ).toFixed(1)
             );
@@ -159,26 +173,15 @@ function renderEsfig(){
 
     /*
     |--------------------------------------------------------------------------
-    | POSIÇÃO VISUAL DA LINHA
-    |--------------------------------------------------------------------------
-    | Como o gráfico horizontal mostra o maior SKU na parte superior,
-    | o array é invertido somente para desenhar a linha subindo da
-    | parte inferior esquerda para a parte superior direita.
-    */
-    const percentualLinhaPareto =
-        [...percentualAcumuladoCorreto]
-            .reverse();
-
-
-    /*
-    |--------------------------------------------------------------------------
     | CONTEÚDO DA PÁGINA
     |--------------------------------------------------------------------------
     */
     conteudo.innerHTML = `
+
         <div class="page-title">
             ⏱ ESFIGMOMANÔMETRO
         </div>
+
 
         <section class="cards">
 
@@ -212,13 +215,15 @@ function renderEsfig(){
 
         </section>
 
+
         <section class="grid-3-2">
 
             <div class="panel esfig-flow">
 
                 <h3>
-                    ⏱ Esfigmomanômetro - Fluxo Operacional
+                    ⏱ Esfigmomanômetro — Fluxo Operacional
                 </h3>
+
 
                 <div class="fluxo">
 
@@ -234,9 +239,11 @@ function renderEsfig(){
 
                     </div>
 
+
                     <div class="fluxo-arrow">
                         →
                     </div>
+
 
                     <div class="fluxo-item pink">
 
@@ -250,9 +257,11 @@ function renderEsfig(){
 
                     </div>
 
+
                     <div class="fluxo-arrow">
                         →
                     </div>
+
 
                     <div class="fluxo-item green">
 
@@ -268,20 +277,23 @@ function renderEsfig(){
 
                 </div>
 
+
                 <div class="progress-title">
                     Processamento geral
                 </div>
+
 
                 <div class="progress-box">
 
                     <div
                         class="progress-bar"
-                        style="width:${conclusao}%"
+                        style="width:${Math.min(conclusao,100)}%"
                     >
                         ${conclusao}% concluído
                     </div>
 
                 </div>
+
 
                 ${
                     tabelaFixa(
@@ -331,6 +343,11 @@ function renderEsfig(){
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | LOCALIZA O CANVAS
+    |--------------------------------------------------------------------------
+    */
     const canvas =
         document.getElementById("grafico");
 
@@ -346,12 +363,47 @@ function renderEsfig(){
 
     /*
     |--------------------------------------------------------------------------
-    | CRIAÇÃO DO GRÁFICO PARETO
+    | SEM DADOS PARA O PARETO
+    |--------------------------------------------------------------------------
+    */
+    if(!dadosPareto.length){
+
+        const contexto =
+            canvas.getContext("2d");
+
+        contexto.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        contexto.textAlign = "center";
+        contexto.textBaseline = "middle";
+        contexto.font = "16px Arial";
+
+        contexto.fillText(
+            "Não há dados disponíveis para o Pareto.",
+            canvas.width / 2,
+            canvas.height / 2
+        );
+
+        return;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | GRÁFICO PARETO
     |--------------------------------------------------------------------------
     */
     graficoAtual = new Chart(
         canvas,
         {
+
+            type:"bar",
+
+
             data:{
 
                 labels:labelsPareto,
@@ -376,17 +428,17 @@ function renderEsfig(){
                         borderWidth:1,
                         borderRadius:3,
 
-                        barPercentage:0.75,
-                        categoryPercentage:0.80,
+                        maxBarThickness:60,
 
-                        xAxisID:"x",
+                        yAxisID:"y",
+
                         order:2
                     },
 
 
                     /*
                     |--------------------------------------------------------------------------
-                    | LINHA ROSA
+                    | LINHA ACUMULADA
                     |--------------------------------------------------------------------------
                     */
                     {
@@ -394,12 +446,7 @@ function renderEsfig(){
 
                         label:"% Acumulado",
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Usa os percentuais invertidos somente para o desenho.
-                        |--------------------------------------------------------------------------
-                        */
-                        data:percentualLinhaPareto,
+                        data:percentualAcumulado,
 
                         borderColor:"#f04dd8",
                         backgroundColor:"#f04dd8",
@@ -410,15 +457,17 @@ function renderEsfig(){
 
                         pointRadius:4,
                         pointHoverRadius:6,
-                        pointHitRadius:10,
+                        pointHitRadius:12,
 
                         borderWidth:2,
-                        tension:0.25,
+
+                        tension:0.20,
 
                         fill:false,
                         spanGaps:false,
 
-                        xAxisID:"x1",
+                        yAxisID:"y1",
+
                         order:1
                     }
 
@@ -431,21 +480,16 @@ function renderEsfig(){
                 responsive:true,
                 maintainAspectRatio:false,
 
-                /*
-                |--------------------------------------------------------------------------
-                | TRANSFORMA O GRÁFICO EM HORIZONTAL
-                |--------------------------------------------------------------------------
-                */
-                indexAxis:"y",
-
                 layout:{
+
                     padding:{
-                        top:15,
-                        right:30,
-                        bottom:8,
-                        left:8
+                        top:20,
+                        right:15,
+                        bottom:10,
+                        left:5
                     }
                 },
+
 
                 interaction:{
                     mode:"index",
@@ -461,12 +505,12 @@ function renderEsfig(){
                     |--------------------------------------------------------------------------
                     */
                     legend:{
+
                         display:true,
                         position:"top",
 
                         labels:{
-                            usePointStyle:false,
-                            boxWidth:22,
+                            boxWidth:24,
                             padding:16
                         }
                     },
@@ -478,6 +522,7 @@ function renderEsfig(){
                     |--------------------------------------------------------------------------
                     */
                     tooltip:{
+
                         enabled:true,
 
                         filter:function(context){
@@ -497,26 +542,16 @@ function renderEsfig(){
                                     context.dataset.label ===
                                     "% Acumulado"
                                 ){
-
-                                    /*
-                                    |--------------------------------------------------------------------------
-                                    | Mostra o percentual correto correspondente ao SKU.
-                                    |--------------------------------------------------------------------------
-                                    */
-                                    const percentualCorreto =
-                                        percentualAcumuladoCorreto[
-                                            context.dataIndex
-                                        ];
-
                                     return (
-                                        `% acumulado: ` +
-                                        `${percentualCorreto}%`
+                                        "% acumulado: " +
+                                        context.raw +
+                                        "%"
                                     );
                                 }
 
                                 return (
-                                    `Total de aferições: ` +
-                                    `${numero(context.raw)}`
+                                    "Total de aferições: " +
+                                    numero(context.raw)
                                 );
                             }
                         }
@@ -525,9 +560,10 @@ function renderEsfig(){
 
                     /*
                     |--------------------------------------------------------------------------
-                    | RÓTULOS SOBRE O GRÁFICO
+                    | RÓTULOS
                     |--------------------------------------------------------------------------
-                    | Funciona caso ChartDataLabels esteja instalado.
+                    | Funciona caso o ChartDataLabels esteja carregado.
+                    |--------------------------------------------------------------------------
                     */
                     datalabels:{
 
@@ -545,23 +581,32 @@ function renderEsfig(){
                             );
                         },
 
+
                         formatter:function(valor,context){
 
                             if(
                                 context.dataset.label ===
                                 "% Acumulado"
                             ){
-
-                                const percentualCorreto =
-                                    percentualAcumuladoCorreto[
-                                        context.dataIndex
-                                    ];
-
-                                return `${percentualCorreto}%`;
+                                return `${valor}%`;
                             }
 
                             return numero(valor);
                         },
+
+
+                        color:function(context){
+
+                            if(
+                                context.dataset.label ===
+                                "% Acumulado"
+                            ){
+                                return "#b51ca8";
+                            }
+
+                            return "#1f2937";
+                        },
+
 
                         anchor:function(context){
 
@@ -572,16 +617,32 @@ function renderEsfig(){
                             );
                         },
 
+
                         align:function(context){
 
                             return (
                                 context.dataset.type === "bar"
-                                    ? "right"
+                                    ? "top"
                                     : "top"
                             );
                         },
 
-                        offset:4
+
+                        offset:function(context){
+
+                            return (
+                                context.dataset.type === "bar"
+                                    ? 2
+                                    : 6
+                            );
+                        },
+
+
+                        font:{
+
+                            size:11,
+                            weight:"bold"
+                        }
                     }
                 },
 
@@ -593,7 +654,7 @@ function renderEsfig(){
                     | EIXO DOS SKUs
                     |--------------------------------------------------------------------------
                     */
-                    y:{
+                    x:{
 
                         grid:{
                             display:false
@@ -605,7 +666,11 @@ function renderEsfig(){
                         },
 
                         ticks:{
-                            autoSkip:false
+
+                            autoSkip:false,
+
+                            maxRotation:45,
+                            minRotation:0
                         }
                     },
 
@@ -615,13 +680,14 @@ function renderEsfig(){
                     | EIXO DAS QUANTIDADES
                     |--------------------------------------------------------------------------
                     */
-                    x:{
+                    y:{
 
                         beginAtZero:true,
-                        position:"bottom",
+
+                        position:"left",
 
                         grid:{
-                            color:"rgba(15,31,77,.08)"
+                            color:"rgba(15,31,77,0.08)"
                         },
 
                         title:{
@@ -645,13 +711,14 @@ function renderEsfig(){
                     | EIXO DO PERCENTUAL
                     |--------------------------------------------------------------------------
                     */
-                    x1:{
+                    y1:{
 
                         beginAtZero:true,
+
                         min:0,
                         max:100,
 
-                        position:"top",
+                        position:"right",
 
                         grid:{
                             drawOnChartArea:false
