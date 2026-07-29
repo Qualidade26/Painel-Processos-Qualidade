@@ -1,1 +1,469 @@
+/* =========================================================
+   COMPONENTES GERAIS
+========================================================= */
 
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card,
+.panel,
+.kpi-card,
+.rank-card{
+    min-width:0;
+
+    background:var(--cor-card);
+    border:1px solid var(--cor-borda);
+    border-radius:var(--raio-card);
+
+    box-shadow:var(--sombra-card);
+}
+
+.card,
+.panel{
+    padding:var(--padding-card);
+}
+
+
+/* =========================================================
+   CARDS DE INDICADORES
+========================================================= */
+
+.kpi-card{
+    width:100%;
+    min-height:118px;
+
+    padding:14px;
+
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr);
+    align-items:center;
+    gap:12px;
+
+    overflow:hidden;
+}
+
+.kpi-icon{
+    width:52px;
+    height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#eef3ff;
+    color:var(--cor-primaria);
+
+    font-size:1.45rem;
+}
+
+.kpi-card h3{
+    margin:0 0 6px;
+
+    font-size:.82rem;
+    line-height:1.2;
+    font-weight:800;
+
+    color:var(--cor-texto-secundario);
+}
+
+.kpi-card strong{
+    display:block;
+
+    font-size:1.35rem;
+    line-height:1.1;
+
+    color:var(--cor-texto);
+}
+
+.kpi-card small{
+    display:block;
+
+    margin-top:6px;
+
+    font-size:.76rem;
+    line-height:1.25;
+
+    color:var(--cor-texto-secundario);
+}
+
+
+/* =========================================================
+   PAINÉIS
+========================================================= */
+
+.panel{
+    width:100%;
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+.panel-header{
+    min-width:0;
+
+    margin-bottom:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.panel-title{
+    margin:0;
+
+    font-size:.95rem;
+    font-weight:800;
+
+    color:var(--cor-texto);
+}
+
+.panel-subtitle{
+    margin:3px 0 0;
+
+    font-size:.78rem;
+
+    color:var(--cor-texto-secundario);
+}
+
+.panel-body{
+    width:100%;
+    min-width:0;
+    flex:1;
+}
+
+
+/* =========================================================
+   GRÁFICOS
+========================================================= */
+
+.chart-wrap{
+    width:100%;
+    min-width:0;
+    height:280px;
+
+    position:relative;
+}
+
+.chart-wrap canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+
+/* =========================================================
+   TABELAS
+========================================================= */
+
+.table-wrap{
+    width:100%;
+    min-width:0;
+
+    border:1px solid var(--cor-borda);
+    border-radius:var(--raio-card);
+
+    background:var(--cor-card);
+
+    overflow:hidden;
+}
+
+.table-scroll{
+    width:100%;
+    min-width:0;
+
+    overflow:auto;
+}
+
+.table-scroll table{
+    width:100%;
+    min-width:720px;
+
+    border-collapse:collapse;
+}
+
+.table-scroll th,
+.table-scroll td{
+    padding:10px 12px;
+
+    border-bottom:1px solid #e7ecf8;
+
+    font-size:.78rem;
+    line-height:1.3;
+
+    text-align:left;
+    vertical-align:middle;
+}
+
+.table-scroll th{
+    position:sticky;
+    top:0;
+    z-index:2;
+
+    background:#eef3ff;
+    color:var(--cor-texto);
+
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.table-scroll td{
+    color:var(--cor-texto);
+}
+
+.table-scroll tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.table-scroll tbody tr:hover{
+    background:#f8faff;
+}
+
+.table-scroll td.desc{
+    min-width:210px;
+    white-space:normal;
+}
+
+.table-scroll td:not(.desc){
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-ok,
+.status-nok,
+.status-pendente,
+.status-alerta{
+    font-weight:800;
+}
+
+.status-ok{
+    color:#0f8a45;
+}
+
+.status-nok{
+    color:#d92828;
+}
+
+.status-pendente{
+    color:#d98b00;
+}
+
+.status-alerta{
+    color:#d98b00;
+}
+
+
+/* =========================================================
+   PÍLULAS
+========================================================= */
+
+.pill{
+    min-height:32px;
+
+    padding:6px 10px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:999px;
+
+    background:#ffffff;
+    color:var(--cor-texto);
+
+    font-size:.76rem;
+    font-weight:700;
+    line-height:1;
+    white-space:nowrap;
+}
+
+.data-pill,
+.time-pill{
+    color:var(--cor-primaria);
+}
+
+.online-dot{
+    color:#19a85b;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn{
+    min-height:38px;
+
+    padding:8px 14px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:var(--raio-botao);
+
+    background:#ffffff;
+    color:var(--cor-texto);
+
+    font-size:.8rem;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    border-color:var(--cor-primaria);
+    background:var(--cor-primaria);
+    color:#ffffff;
+}
+
+.btn-primary:hover{
+    background:var(--cor-primaria-escura);
+}
+
+.btn-secondary{
+    background:#eef3ff;
+    color:var(--cor-primaria);
+}
+
+.btn-danger{
+    border-color:#efb6b6;
+    background:#fff0f0;
+    color:#c92222;
+}
+
+
+/* =========================================================
+   RANKING
+========================================================= */
+
+.rank-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.rank-card{
+    padding:12px;
+
+    display:grid;
+    grid-template-columns:36px minmax(0,1fr);
+    align-items:center;
+    gap:10px;
+}
+
+.rank-num{
+    width:36px;
+    height:36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:var(--cor-primaria);
+    color:#ffffff;
+
+    font-size:.88rem;
+    font-weight:900;
+}
+
+.rank-card > div:last-child{
+    min-width:0;
+
+    font-size:.78rem;
+    line-height:1.3;
+
+    color:var(--cor-texto-secundario);
+}
+
+.rank-card strong{
+    display:block;
+
+    margin-top:4px;
+
+    font-size:.92rem;
+
+    color:var(--cor-texto);
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+input,
+select,
+textarea{
+    width:100%;
+    min-height:38px;
+
+    padding:8px 10px;
+
+    border:1px solid var(--cor-borda);
+    border-radius:var(--raio-botao);
+
+    background:#ffffff;
+    color:var(--cor-texto);
+
+    font:inherit;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline:2px solid rgba(18,73,232,.18);
+    border-color:var(--cor-primaria);
+}
+
+
+/* =========================================================
+   TEXTOS AUXILIARES
+========================================================= */
+
+.text-muted{
+    color:var(--cor-texto-secundario);
+}
+
+.text-center{
+    text-align:center;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.valor-destaque{
+    font-size:1.25rem;
+    font-weight:900;
+    color:var(--cor-primaria);
+}
