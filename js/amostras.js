@@ -767,20 +767,20 @@ barPercentage: 0.82,
                         backgroundColor:
                             "#c026d3",
 
-                        borderWidth: 2,
+                        borderWidth: 3,
 
                         borderDash: [
                             6,
                             4
                         ],
 
-                        tension: 0.22,
+                       tension: 0.35,
 
                         fill: false,
 
-                        pointRadius: 4,
+                        pointRadius: 6,
 
-                        pointHoverRadius: 6,
+                        pointHoverRadius: 8,
 
                         pointBackgroundColor:
                             "#ffffff",
@@ -788,7 +788,7 @@ barPercentage: 0.82,
                         pointBorderColor:
                             "#c026d3",
 
-                        pointBorderWidth: 2,
+                        pointBorderWidth: 3,
 
                         yAxisID: "y1",
 
@@ -934,13 +934,11 @@ devicePixelRatio: 2,
 
     color: "#44516f",
 
-    font: {
-
-        size: 10,
-
-        weight: "600"
-
-    }
+ font:{
+    family:"Segoe UI",
+    size:12,
+    weight:"700"
+}
 
 }
                     },
@@ -982,29 +980,29 @@ devicePixelRatio: 2,
                             }
 
                         },
+                    ticks: {
+                        precision: 0,
 
-                        ticks: {
+                        color: "#243b6b",
 
-                            precision: 0,
+                        font: {
+                            family: "Segoe UI",
+                            size: 11,
+                            weight: "700"
+                        },
 
-                            color:
-                                "#5c6c96",
-
-                            callback(valor) {
-
-                                return (
-                                    Number(valor) === 0
-                                        ? ""
-                                        : amostraFormatarNumero(
-                                            valor
-                                        )
-                                );
-
-                            }
-
+                        callback(valor) {
+                            return (
+                                Number(valor) === 0
+                                    ? ""
+                                    : amostraFormatarNumero(valor)
+                            );
                         }
+                    }
 
-                    },
+                },
+
+                y1: {
 
 
                     y1: {
@@ -1127,7 +1125,7 @@ meta.data.forEach((barra, indice) => {
     const texto =
         amostraFormatarNumero(valor);
 
- ctx.font = "700 12px 'Segoe UI', Arial, sans-serif";
+ ctx.font = "700 13px 'Segoe UI', Arial, sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#172653";
@@ -1196,11 +1194,11 @@ ctx.restore();
 
                         borderRadius: 3,
 
-                       maxBarThickness: 22,
+                  maxBarThickness: 46,
 
-categoryPercentage: 0.80,
+categoryPercentage: 0.92,
 
-barPercentage: 0.90,
+barPercentage: 0.95,
                         datalabels: {
                             display: false
                         }
@@ -1347,12 +1345,10 @@ barPercentage: 0.90,
                                 "#172653",
 
                             font: {
-
-                                size: 9,
-
-                                weight: "bold"
-
-                            }
+    family: "Segoe UI",
+    size: 12,
+    weight: "700"
+}
 
                         }
 
@@ -1398,27 +1394,25 @@ barPercentage: 0.90,
                             }
 
                         },
+ticks: {
+    precision: 0,
 
-                        ticks: {
+    color: "#243b6b",
 
-                            precision: 0,
+    font: {
+        family: "Segoe UI",
+        size: 11,
+        weight: "700"
+    },
 
-                            color:
-                                "#5c6c96",
-
-                            callback(valor) {
-
-                                return (
-                                    Number(valor) === 0
-                                        ? ""
-                                        : amostraFormatarNumero(
-                                            valor
-                                        )
-                                );
-
-                            }
-
-                        }
+    callback(valor) {
+        return (
+            Number(valor) === 0
+                ? ""
+                : amostraFormatarNumero(valor)
+        );
+    }
+}
 
                     }
 
@@ -1426,9 +1420,9 @@ barPercentage: 0.90,
 
             },
 
+            plugins: [
+                pluginRotulos
+            ]
 
-           plugins: [
-    pluginRotulos
-]
         });
 }
