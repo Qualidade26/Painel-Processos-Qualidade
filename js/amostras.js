@@ -923,25 +923,20 @@ devicePixelRatio: 2,
                             display: false
 
                         },
-
-                       ticks: {
-
+ticks: {
     autoSkip: false,
-
     maxRotation: 0,
-
     minRotation: 0,
-
     color: "#44516f",
 
- font:{
-    family:"Segoe UI",
-    size:12,
-    weight:"700"
+    font: {
+        family: "Segoe UI",
+        size: 12,
+        weight: "700"
+    }
 }
 
-}
-                    },
+},
 
 
                     y: {
@@ -1001,8 +996,6 @@ devicePixelRatio: 2,
                     }
 
                 },
-
-                y1: {
 
 
                     y1: {
@@ -1323,37 +1316,35 @@ barPercentage: 0.95,
 
                 scales: {
 
-                    y: {
+                   y: {
 
-                        grid: {
+    grid: {
+        display: false
+    },
 
-                            display: false
+    border: {
+        display: false
+    },
 
-                        },
+    ticks: {
 
-                        border: {
+        autoSkip: false,
 
-                            display: false
+        maxRotation: 0,
 
-                        },
+        minRotation: 0,
 
-                        ticks: {
+        color: "#44516f",
 
-                            autoSkip: false,
+        font: {
+            family: "Segoe UI",
+            size: 12,
+            weight: "700"
+        }
 
-                            color:
-                                "#172653",
+    }
 
-                            font: {
-    family: "Segoe UI",
-    size: 12,
-    weight: "700"
-}
-
-                        }
-
-                    },
-
+},
 
                     x: {
 
