@@ -1,53 +1,134 @@
-function renderAmostra() {
+function renderAmostra(){
 
     const a = dados.amostras || {
-        mensal: [],
-        top10: [],
-        totalHoras: 0
+        mensal:[],
+        top10:[],
+        totalHoras:0
     };
 
-    const mensal = Array.isArray(a.mensal) ? a.mensal : [];
-    const top10 = Array.isArray(a.top10) ? a.top10 : [];
+    const mensal = Array.isArray(a.mensal)
+        ? a.mensal
+        : [];
 
-    // =====================================================
-    // DADOS GERAIS
-    // =====================================================
+    const top10 = Array.isArray(a.top10)
+        ? a.top10
+        : [];
 
-    const totalAno = mensal.reduce(
-        (soma, item) => soma + Number(item.valor || 0),
+    /* =====================================================
+       CONVERSÃO SEGURA DE NÚMEROS
+
+       Converte corretamente:
+       10
+       "10"
+       "10,50"
+       "1.250,75"
+       ===================================================== */
+
+    function numeroSeguro(valor){
+
+        if(
+            valor === null ||
+            valor === undefined ||
+            valor === ""
+        ){
+            return 0;
+        }
+
+        if(typeof valor === "number"){
+            return Number.isFinite(valor)
+                ? valor
+                : 0;
+        }
+
+        let texto = String(valor)
+            .trim()
+            .replace(/\s/g,"");
+
+        if(
+            texto.includes(".") &&
+            texto.includes(",")
+        ){
+            texto = texto
+                .replace(/\./g,"")
+                .replace(",",".");
+        }
+        else if(texto.includes(",")){
+            texto = texto.replace(",",".");
+        }
+
+        const resultado = Number(texto);
+
+        return Number.isFinite(resultado)
+            ? resultado
+            : 0;
+    }
+
+    const valoresAmostras = mensal.map(item =>
+        numeroSeguro(item.valor)
+    );
+
+    const valoresHoras = mensal.map(item =>
+        numeroSeguro(item.horas)
+    );
+
+    const totalAno = valoresAmostras.reduce(
+        (soma,valor) => soma + valor,
         0
     );
 
-    const totalHoras = Number(a.totalHoras || 0);
+    const totalHorasInformado =
+        numeroSeguro(a.totalHoras);
 
-    const mesesComMovimento = mensal.filter(
-        item => Number(item.valor || 0) > 0
-    );
+    const totalHorasMensais =
+        valoresHoras.reduce(
+            (soma,valor) => soma + valor,
+            0
+        );
 
-    const mediaMensal = mesesComMovimento.length
-        ? totalAno / mesesComMovimento.length
-        : 0;
+    /*
+       Caso totalHoras não esteja preenchido,
+       utiliza a soma das horas mensais.
+    */
 
-    const melhorMes = mensal.reduce(
-        (melhor, atual) => {
-            return Number(atual.valor || 0) >
-                Number(melhor.valor || 0)
-                ? atual
-                : melhor;
-        },
-        {
-            mes: "-",
-            valor: 0
+    const totalHoras =
+        totalHorasInformado > 0
+            ? totalHorasInformado
+            : totalHorasMensais;
+
+    const mesesComAmostras =
+        valoresAmostras.filter(valor => valor > 0);
+
+    const mediaMensal =
+        mesesComAmostras.length > 0
+            ? totalAno / mesesComAmostras.length
+            : 0;
+
+    let melhorMes = {
+        mes:"-",
+        valor:0
+    };
+
+    mensal.forEach((item,index) => {
+
+        const valor =
+            valoresAmostras[index];
+
+        if(valor > melhorMes.valor){
+
+            melhorMes = {
+                mes:item.mes || "-",
+                valor:valor
+            };
         }
-    );
+    });
 
-    // =====================================================
-    // NORMALIZAÇÃO DO TOP 10
-    // Compatível com nomes diferentes de propriedades
-    // =====================================================
+    /* =====================================================
+       SKU MAIS SOLICITADO
+       ===================================================== */
 
-    const pareto = top10
+    const rankingSku = top10
         .map(item => ({
+
             sku:
                 item.sku ||
                 item.SKU ||
@@ -55,43 +136,24 @@ function renderAmostra() {
                 item.nome ||
                 "-",
 
-            descricao:
-                item.descricao ||
-                item.descrição ||
-                "",
-
-            quantidade: Number(
+            quantidade:numeroSeguro(
                 item.quantidade ??
                 item.qtd ??
                 item.valor ??
-                item.total ??
-                0
+                item.total
             )
         }))
         .filter(item => item.quantidade > 0)
-        .sort((a, b) => b.quantidade - a.quantidade)
-        .slice(0, 10);
+        .sort(
+            (a,b) =>
+                b.quantidade - a.quantidade
+        );
 
-    const totalPareto = pareto.reduce(
-        (soma, item) => soma + item.quantidade,
-        0
-    );
-
-    let acumulado = 0;
-
-    const percentualAcumulado = pareto.map(item => {
-
-        acumulado += item.quantidade;
-
-        return totalPareto > 0
-            ? Number(((acumulado / totalPareto) * 100).toFixed(1))
-            : 0;
-    });
-
-    const skuMaisSolicitado = pareto[0] || {
-        sku: "-",
-        quantidade: 0
-    };
+    const skuMaisSolicitado =
+        rankingSku[0] || {
+            sku:"-",
+            quantidade:0
+        };
 
     const tempoMedioHoras =
         totalAno > 0
@@ -101,11 +163,12 @@ function renderAmostra() {
     const tempoMedioMinutos =
         tempoMedioHoras * 60;
 
-    // =====================================================
-    // HTML
-    // =====================================================
+    /* =====================================================
+       HTML
+       ===================================================== */
 
     conteudo.innerHTML = `
+
         <div class="page-title">
             📦 AMOSTRA
         </div>
@@ -122,30 +185,32 @@ function renderAmostra() {
             ${card(
                 "⏱",
                 "Total de Horas",
-                `${tempoBR(totalHoras)} h`,
+                totalHoras.toLocaleString(
+                    "pt-BR",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                ),
                 "Horas destinadas"
             )}
 
         </section>
 
-        <section class="grid-2 amostra-graficos-principais">
+        <section class="amostra-grafico-unico">
 
-            <div class="panel amostra-panel-principal">
+            <div class="panel amostra-panel-grafico-unico">
 
-                <h3>EVOLUÇÃO MENSAL DE AMOSTRAS</h3>
+                <h3>
+                    📈 EVOLUÇÃO MENSAL DE AMOSTRAS
+                </h3>
 
-                <div class="chart-box amostra-chart-principal">
-                    <canvas id="graficoAmostrasMensal"></canvas>
-                </div>
+                <div class="amostra-chart-unico">
 
-            </div>
+                    <canvas
+                        id="graficoAmostrasMensal">
+                    </canvas>
 
-            <div class="panel amostra-panel-principal">
-
-                <h3>PARETO DAS AMOSTRAS MAIS SOLICITADAS (ANO)</h3>
-
-                <div class="chart-box amostra-chart-pareto">
-                    <canvas id="graficoParetoAmostras"></canvas>
                 </div>
 
             </div>
@@ -163,26 +228,36 @@ function renderAmostra() {
                     </div>
 
                     <div>
+
                         <span class="amostra-indicador-titulo">
                             Média de Amostras/Mês
                         </span>
 
                         <strong class="amostra-indicador-valor">
-                            ${mediaMensal.toLocaleString("pt-BR", {
-                                minimumFractionDigits: 1,
-                                maximumFractionDigits: 1
-                            })}
+
+                            ${mediaMensal.toLocaleString(
+                                "pt-BR",
+                                {
+                                    minimumFractionDigits:1,
+                                    maximumFractionDigits:1
+                                }
+                            )}
+
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
                             Amostras por mês
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniMediaAmostras"></canvas>
+
+                    <canvas id="miniMediaAmostras">
+                    </canvas>
+
                 </div>
 
             </div>
@@ -196,23 +271,30 @@ function renderAmostra() {
                     </div>
 
                     <div>
+
                         <span class="amostra-indicador-titulo">
                             Melhor Mês
                         </span>
 
                         <strong class="amostra-indicador-valor">
+
                             ${numero(melhorMes.valor)}
+
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
-                            ${melhorMes.mes || "-"}
+                            ${melhorMes.mes}
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniMelhorMes"></canvas>
+
+                    <canvas id="miniMelhorMes">
+                    </canvas>
+
                 </div>
 
             </div>
@@ -226,23 +308,35 @@ function renderAmostra() {
                     </div>
 
                     <div>
+
                         <span class="amostra-indicador-titulo">
                             SKU Mais Solicitado
                         </span>
 
-                        <strong class="amostra-indicador-valor amostra-sku">
+                        <strong
+                            class="amostra-indicador-valor amostra-sku">
+
                             ${skuMaisSolicitado.sku}
+
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
-                            ${numero(skuMaisSolicitado.quantidade)} amostras
+
+                            ${numero(
+                                skuMaisSolicitado.quantidade
+                            )} amostras
+
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniSku"></canvas>
+
+                    <canvas id="miniSku">
+                    </canvas>
+
                 </div>
 
             </div>
@@ -256,29 +350,44 @@ function renderAmostra() {
                     </div>
 
                     <div>
+
                         <span class="amostra-indicador-titulo">
                             Tempo Médio por Amostra
                         </span>
 
                         <strong class="amostra-indicador-valor">
-                            ${tempoMedioHoras.toLocaleString("pt-BR", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2
-                            })} h
+
+                            ${tempoMedioHoras.toLocaleString(
+                                "pt-BR",
+                                {
+                                    minimumFractionDigits:2,
+                                    maximumFractionDigits:2
+                                }
+                            )} h
+
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
-                            ${tempoMedioMinutos.toLocaleString("pt-BR", {
-                                minimumFractionDigits: 1,
-                                maximumFractionDigits: 1
-                            })} min por amostra
+
+                            ${tempoMedioMinutos.toLocaleString(
+                                "pt-BR",
+                                {
+                                    minimumFractionDigits:1,
+                                    maximumFractionDigits:1
+                                }
+                            )} min por amostra
+
                         </span>
+
                     </div>
 
                 </div>
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniTempoAmostra"></canvas>
+
+                    <canvas id="miniTempoAmostra">
+                    </canvas>
+
                 </div>
 
             </div>
@@ -286,679 +395,669 @@ function renderAmostra() {
         </section>
     `;
 
-    // =====================================================
-    // DESTRUIÇÃO DOS GRÁFICOS ANTERIORES
-    // =====================================================
+    /* =====================================================
+       DESTRUIR GRÁFICOS ANTERIORES
+       ===================================================== */
 
-    if (window.graficoAmostrasMensalAtual) {
-        window.graficoAmostrasMensalAtual.destroy();
+    if(window.graficoAmostrasMensalAtual){
+
+        window.graficoAmostrasMensalAtual
+            .destroy();
     }
 
-    if (window.graficoParetoAmostrasAtual) {
-        window.graficoParetoAmostrasAtual.destroy();
+    if(window.graficoParetoAmostrasAtual){
+
+        window.graficoParetoAmostrasAtual
+            .destroy();
+
+        window.graficoParetoAmostrasAtual =
+            null;
     }
 
-    if (Array.isArray(window.miniGraficosAmostra)) {
-        window.miniGraficosAmostra.forEach(grafico => {
-            if (grafico) grafico.destroy();
-        });
+    if(
+        Array.isArray(
+            window.miniGraficosAmostra
+        )
+    ){
+
+        window.miniGraficosAmostra
+            .forEach(grafico => {
+
+                if(grafico){
+                    grafico.destroy();
+                }
+            });
     }
 
     window.miniGraficosAmostra = [];
 
-    // =====================================================
-    // GRÁFICO MENSAL
-    // Barras para quantidade + linha para horas
-    // =====================================================
+    /* =====================================================
+       ESCALA AUTOMÁTICA
 
-    const opcoesMensal = baseOptions();
+       Cria espaço acima dos maiores valores para os
+       números não serem cortados.
+       ===================================================== */
 
-    opcoesMensal.maintainAspectRatio = false;
+    const maiorAmostra = Math.max(
+        1,
+        ...valoresAmostras
+    );
 
-    opcoesMensal.interaction = {
-        mode: "index",
-        intersect: false
-    };
+    const maiorHora = Math.max(
+        1,
+        ...valoresHoras
+    );
 
-    opcoesMensal.plugins = {
-        ...opcoesMensal.plugins,
+    const limiteAmostras =
+        Math.ceil(maiorAmostra * 1.35);
 
-        legend: {
-            display: true,
-            position: "top",
-            align: "center",
+    const limiteHoras =
+        maiorHora * 1.40;
 
-            labels: {
-                usePointStyle: true,
-                boxWidth: 18,
-                padding: 18,
-                color: "#1b2b5c",
-                font: {
-                    size: 11,
-                    weight: "600"
-                }
-            }
-        },
+    /* =====================================================
+       PLUGIN DE RÓTULOS
 
-        tooltip: {
-            callbacks: {
-                label(context) {
+       Amostras ficam acima das barras.
+       Horas ficam acima ou abaixo da linha.
+       Zero não aparece.
+       ===================================================== */
 
-                    const valor = Number(context.raw || 0);
+    const rotulosEvolucaoAmostra = {
 
-                    if (context.dataset.yAxisID === "y1") {
-                        return ` Horas: ${valor.toLocaleString("pt-BR", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        })} h`;
+        id:"rotulosEvolucaoAmostra",
+
+        afterDatasetsDraw(chart){
+
+            const ctx = chart.ctx;
+
+            const metaBarras =
+                chart.getDatasetMeta(0);
+
+            const metaLinha =
+                chart.getDatasetMeta(1);
+
+            ctx.save();
+
+            valoresAmostras.forEach(
+                (valor,index) => {
+
+                    if(valor <= 0){
+                        return;
                     }
 
-                    return ` Amostras: ${numero(valor)}`;
+                    const barra =
+                        metaBarras.data[index];
+
+                    if(!barra){
+                        return;
+                    }
+
+                    ctx.font =
+                        "bold 11px Arial";
+
+                    ctx.textAlign =
+                        "center";
+
+                    ctx.textBaseline =
+                        "bottom";
+
+                    ctx.fillStyle =
+                        "#12347c";
+
+                    ctx.fillText(
+                        numero(valor),
+                        barra.x,
+                        barra.y - 8
+                    );
                 }
-            }
+            );
+
+            valoresHoras.forEach(
+                (valor,index) => {
+
+                    if(valor <= 0){
+                        return;
+                    }
+
+                    const ponto =
+                        metaLinha.data[index];
+
+                    const barra =
+                        metaBarras.data[index];
+
+                    if(!ponto){
+                        return;
+                    }
+
+                    /*
+                       Se o ponto da linha estiver muito
+                       próximo do topo da barra, o valor
+                       das horas será colocado abaixo.
+                    */
+
+                    const distanciaDaBarra =
+                        barra
+                            ? Math.abs(
+                                ponto.y - barra.y
+                            )
+                            : 100;
+
+                    const colocarAbaixo =
+                        distanciaDaBarra < 25 ||
+                        ponto.y < chart.chartArea.top + 25;
+
+                    ctx.font =
+                        "bold 11px Arial";
+
+                    ctx.textAlign =
+                        "center";
+
+                    ctx.fillStyle =
+                        "#a21caf";
+
+                    if(colocarAbaixo){
+
+                        ctx.textBaseline =
+                            "top";
+
+                        ctx.fillText(
+                            valor.toLocaleString(
+                                "pt-BR",
+                                {
+                                    minimumFractionDigits:1,
+                                    maximumFractionDigits:2
+                                }
+                            ),
+                            ponto.x,
+                            ponto.y + 11
+                        );
+                    }
+                    else{
+
+                        ctx.textBaseline =
+                            "bottom";
+
+                        ctx.fillText(
+                            valor.toLocaleString(
+                                "pt-BR",
+                                {
+                                    minimumFractionDigits:1,
+                                    maximumFractionDigits:2
+                                }
+                            ),
+                            ponto.x,
+                            ponto.y - 11
+                        );
+                    }
+                }
+            );
+
+            ctx.restore();
         }
     };
 
-    opcoesMensal.scales = {
+    /* =====================================================
+       GRÁFICO PRINCIPAL
+       ===================================================== */
 
-        y: {
-            beginAtZero: true,
-            position: "left",
+    window.graficoAmostrasMensalAtual =
+        new Chart(
+            document.getElementById(
+                "graficoAmostrasMensal"
+            ),
+            {
 
-            suggestedMax: Math.max(
-                10,
-                ...mensal.map(item => Number(item.valor || 0))
-            ) * 1.25,
+                type:"bar",
 
-            title: {
-                display: true,
-                text: "Quantidade de amostras",
-                color: "#0f1f4d",
-                font: {
-                    weight: "bold"
-                }
-            },
+                data:{
 
-            grid: {
-                color: "rgba(15,31,77,.08)"
-            },
+                    labels:mensal.map(
+                        item => item.mes
+                    ),
 
-            ticks: {
-                precision: 0,
-                color: "#5c6c96"
-            }
-        },
+                    datasets:[
 
-        y1: {
-            beginAtZero: true,
-            position: "right",
+                        {
+                            type:"bar",
 
-            suggestedMax: Math.max(
-                4,
-                ...mensal.map(item => Number(item.horas || 0))
-            ) * 1.25,
+                            label:"Amostras",
 
-            title: {
-                display: true,
-                text: "Horas (h)",
-                color: "#6d28d9",
-                font: {
-                    weight: "bold"
-                }
-            },
+                            data:valoresAmostras,
 
-            grid: {
-                drawOnChartArea: false
-            },
+                            backgroundColor:
+                                "#1d4ed8",
 
-            ticks: {
-                color: "#6d28d9",
+                            borderColor:
+                                "#1d4ed8",
 
-                callback(valor) {
-                    return Number(valor).toLocaleString("pt-BR");
-                }
-            }
-        },
+                            borderWidth:1,
 
-        x: {
-            offset: true,
+                            borderRadius:4,
 
-            grid: {
-                display: false
-            },
+                            maxBarThickness:34,
 
-            ticks: {
-                color: "#5c6c96",
-                maxRotation: 0,
-                minRotation: 0
-            }
-        }
-    };
+                            categoryPercentage:.68,
 
-    window.graficoAmostrasMensalAtual = new Chart(
-        document.getElementById("graficoAmostrasMensal"),
-        {
-            type: "bar",
+                            barPercentage:.72,
 
-            data: {
-                labels: mensal.map(item => item.mes),
+                            yAxisID:"y",
 
-                datasets: [
-                    {
-                        type: "bar",
-                        label: "Amostras",
-                        data: mensal.map(
-                            item => Number(item.valor || 0)
-                        ),
+                            order:2
+                        },
 
-                        backgroundColor: "#1d4ed8",
-                        borderColor: "#1d4ed8",
-                        borderWidth: 1,
-                        borderRadius: 2,
-                        maxBarThickness: 32,
-                        categoryPercentage: 0.72,
-                        barPercentage: 0.78,
-                        yAxisID: "y"
+                        {
+                            type:"line",
+
+                            label:"Horas",
+
+                            data:valoresHoras,
+
+                            borderColor:
+                                "#c026d3",
+
+                            backgroundColor:
+                                "#c026d3",
+
+                            pointBackgroundColor:
+                                "#ffffff",
+
+                            pointBorderColor:
+                                "#c026d3",
+
+                            pointBorderWidth:2,
+
+                            pointRadius:5,
+
+                            pointHoverRadius:7,
+
+                            borderWidth:2,
+
+                            borderDash:[7,5],
+
+                            tension:.20,
+
+                            fill:false,
+
+                            spanGaps:false,
+
+                            yAxisID:"y1",
+
+                            order:1
+                        }
+                    ]
+                },
+
+                options:{
+
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+                    interaction:{
+                        mode:"index",
+                        intersect:false
                     },
 
-                    {
-                        type: "line",
-                        label: "Horas (h)",
-                        data: mensal.map(
-                            item => Number(item.horas || 0)
-                        ),
+                    layout:{
+                        padding:{
+                            top:28,
+                            right:10,
+                            bottom:4,
+                            left:4
+                        }
+                    },
 
-                        borderColor: "#6d28d9",
-                        backgroundColor: "#6d28d9",
-                        pointBackgroundColor: "#ffffff",
-                        pointBorderColor: "#6d28d9",
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        borderWidth: 2,
-                        borderDash: [6, 4],
-                        tension: 0.25,
-                        fill: false,
-                        yAxisID: "y1"
-                    }
-                ]
-            },
+                    plugins:{
 
-            options: opcoesMensal,
+                        legend:{
 
-            plugins: [
-                {
-                    id: "rotulosGraficoAmostras",
+                            display:true,
 
-                    afterDatasetsDraw(chart) {
+                            position:"top",
 
-                        const ctx = chart.ctx;
+                            align:"center",
 
-                        chart.data.datasets.forEach(
-                            (dataset, datasetIndex) => {
+                            labels:{
 
-                                const meta =
-                                    chart.getDatasetMeta(datasetIndex);
+                                usePointStyle:true,
 
-                                meta.data.forEach((elemento, index) => {
+                                boxWidth:14,
+
+                                padding:18,
+
+                                color:"#1b2b5c",
+
+                                font:{
+                                    size:11,
+                                    weight:"bold"
+                                }
+                            }
+                        },
+
+                        /*
+                           Desativa ChartDataLabels global,
+                           caso esteja registrado no painel.
+                        */
+
+                        datalabels:{
+                            display:false
+                        },
+
+                        tooltip:{
+
+                            callbacks:{
+
+                                label(context){
 
                                     const valor =
-                                        Number(dataset.data[index] || 0);
+                                        numeroSeguro(
+                                            context.raw
+                                        );
 
-                                    if (valor <= 0) return;
+                                    if(
+                                        context.dataset
+                                            .yAxisID === "y1"
+                                    ){
 
-                                    ctx.save();
-
-                                    ctx.textAlign = "center";
-                                    ctx.textBaseline = "bottom";
-                                    ctx.font =
-                                        "600 10px Arial";
-
-                                    ctx.fillStyle =
-                                        dataset.yAxisID === "y1"
-                                            ? "#6d28d9"
-                                            : "#12245c";
-
-                                    const texto =
-                                        dataset.yAxisID === "y1"
-                                            ? valor.toLocaleString(
+                                        return ` Horas: ${
+                                            valor.toLocaleString(
                                                 "pt-BR",
                                                 {
-                                                    minimumFractionDigits: 2,
-                                                    maximumFractionDigits: 2
+                                                    minimumFractionDigits:1,
+                                                    maximumFractionDigits:2
                                                 }
                                             )
-                                            : numero(valor);
+                                        } h`;
+                                    }
 
-                                    ctx.fillText(
-                                        texto,
-                                        elemento.x,
-                                        elemento.y - 7
-                                    );
-
-                                    ctx.restore();
-                                });
-                            }
-                        );
-                    }
-                }
-            ]
-        }
-    );
-
-    // =====================================================
-    // GRÁFICO DE PARETO
-    // Barras horizontais + percentual acumulado
-    // =====================================================
-
-    const maiorQuantidade = Math.max(
-        1,
-        ...pareto.map(item => item.quantidade)
-    );
-
-    const limiteQuantidade =
-        Math.ceil((maiorQuantidade * 1.25) / 10) * 10;
-
-    window.graficoParetoAmostrasAtual = new Chart(
-        document.getElementById("graficoParetoAmostras"),
-        {
-            type: "bar",
-
-            data: {
-                labels: pareto.map(item => item.sku),
-
-                datasets: [
-                    {
-                        type: "bar",
-                        label: "Quantidade",
-                        data: pareto.map(
-                            item => item.quantidade
-                        ),
-
-                        backgroundColor: "#1647c9",
-                        borderColor: "#1647c9",
-                        borderWidth: 1,
-                        borderRadius: 1,
-                        maxBarThickness: 18,
-categoryPercentage: 0.72,
-barPercentage: 0.82,
-                        xAxisID: "x",
-                        yAxisID: "y",
-                        order: 2
-                    },
-
-                    {
-                        type: "line",
-                        label: "% Acumulado",
-                        data: percentualAcumulado,
-
-                        borderColor: "#6d28d9",
-                        backgroundColor: "#6d28d9",
-                        pointBackgroundColor: "#6d28d9",
-                        pointBorderColor: "#ffffff",
-                        pointBorderWidth: 1,
-                        pointRadius: 4,
-                        pointHoverRadius: 6,
-                        borderWidth: 2,
-                        tension: 0,
-                        fill: false,
-                        xAxisID: "xPercentual",
-                        yAxisID: "y",
-                        order: 1
-                    }
-                ]
-            },
-
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: "y",
-
-               layout: {
-    padding: {
-        top: 0,
-        right: 48,
-        bottom: 0,
-        left: 0
-    }
-},
-
-                interaction: {
-                    mode: "nearest",
-                    intersect: false
-                },
-
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: "top",
-                        align: "center",
-
-                        labels: {
-                            usePointStyle: true,
-                            boxWidth: 18,
-                            padding: 18,
-                            color: "#1b2b5c",
-                            font: {
-                                size: 11,
-                                weight: "600"
+                                    return ` Amostras: ${
+                                        numero(valor)
+                                    }`;
+                                }
                             }
                         }
                     },
 
-                    tooltip: {
-                        callbacks: {
-                            title(context) {
+                    scales:{
 
-                                const indice =
-                                    context[0].dataIndex;
+                        y:{
 
-                                const item =
-                                    pareto[indice];
+                            beginAtZero:true,
 
-                                return item.descricao
-                                    ? `${item.sku} - ${item.descricao}`
-                                    : item.sku;
+                            suggestedMax:
+                                limiteAmostras,
+
+                            position:"left",
+
+                            title:{
+
+                                display:true,
+
+                                text:
+                                    "Quantidade de amostras",
+
+                                color:"#0f1f4d",
+
+                                font:{
+                                    weight:"bold"
+                                }
                             },
 
-                            label(context) {
+                            grid:{
+                                color:
+                                    "rgba(15,31,77,.08)"
+                            },
 
-                                if (
-                                    context.dataset.xAxisID ===
-                                    "xPercentual"
-                                ) {
-                                    return ` Acumulado: ${Number(
-                                        context.raw
-                                    ).toLocaleString("pt-BR", {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    })}%`;
+                            ticks:{
+
+                                precision:0,
+
+                                color:"#5c6c96",
+
+                                callback(valor){
+
+                                    /*
+                                       Não escreve zero
+                                       na escala.
+                                    */
+
+                                    return Number(valor) === 0
+                                        ? ""
+                                        : numero(valor);
                                 }
+                            }
+                        },
 
-                                return ` Quantidade: ${numero(
-                                    context.raw
-                                )}`;
+                        y1:{
+
+                            beginAtZero:true,
+
+                            suggestedMax:
+                                limiteHoras,
+
+                            position:"right",
+
+                            title:{
+
+                                display:true,
+
+                                text:"Horas",
+
+                                color:"#c026d3",
+
+                                font:{
+                                    weight:"bold"
+                                }
+                            },
+
+                            grid:{
+                                drawOnChartArea:false
+                            },
+
+                            ticks:{
+
+                                color:"#c026d3",
+
+                                callback(valor){
+
+                                    return Number(valor) === 0
+                                        ? ""
+                                        : Number(valor)
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:1
+                                                }
+                                            );
+                                }
+                            }
+                        },
+
+                        x:{
+
+                            offset:true,
+
+                            grid:{
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#5c6c96",
+
+                                autoSkip:false,
+
+                                maxRotation:0,
+
+                                minRotation:0,
+
+                                font:{
+                                    size:11,
+                                    weight:"bold"
+                                }
                             }
                         }
                     }
                 },
 
-                scales: {
-                    y: {
-                        stacked: false,
+                plugins:[
+                    rotulosEvolucaoAmostra
+                ]
+            }
+        );
 
-                        grid: {
-                            display: false
-                        },
-
-                        border: {
-                            display: false
-                        },
-
-                        ticks: {
-                            autoSkip: false,
-                            color: "#172653",
-                            padding: 8,
-
-                            font: {
-                                size: 11,
-                                weight: "600"
-                            }
-                        },
-
-                        title: {
-                            display: true,
-                            text: "SKU",
-                            color: "#172653",
-                            align: "start",
-
-                            font: {
-                                size: 11,
-                                weight: "bold"
-                            }
-                        }
-                    },
-
-                    x: {
-                        beginAtZero: true,
-                        position: "bottom",
-                        min: 0,
-                        max: limiteQuantidade,
-
-                        grid: {
-                            color: "rgba(15,31,77,.08)"
-                        },
-
-                        border: {
-                            display: false
-                        },
-
-                        ticks: {
-                            color: "#5c6c96",
-                            precision: 0
-                        },
-
-                        title: {
-                            display: true,
-                            text: "Quantidade de amostras",
-                            color: "#172653",
-
-                            font: {
-                                size: 11,
-                                weight: "600"
-                            }
-                        }
-                    },
-
-                    xPercentual: {
-                        beginAtZero: true,
-                        position: "top",
-                        min: 0,
-                        max: 100,
-
-                        grid: {
-                            drawOnChartArea: false
-                        },
-
-                        border: {
-                            display: false
-                        },
-
-                        ticks: {
-                            display: false
-                        }
-                    }
-                }
-            },
-
-            plugins: [
-                {
-                    id: "rotulosParetoAmostras",
-
-                    afterDatasetsDraw(chart) {
-
-                        const ctx = chart.ctx;
-
-                        const barras =
-                            chart.getDatasetMeta(0);
-
-                        const linha =
-                            chart.getDatasetMeta(1);
-
-                        ctx.save();
-
-                        barras.data.forEach(
-                            (barra, index) => {
-
-                                const quantidade =
-                                    pareto[index].quantidade;
-
-                                const percentual =
-                                    percentualAcumulado[index];
-
-                                // Quantidade no final da barra
-                                ctx.textAlign = "left";
-                                ctx.textBaseline = "middle";
-                                ctx.fillStyle = "#172653";
-                                ctx.font =
-                                    "600 10px Arial";
-
-                                ctx.fillText(
-                                    numero(quantidade),
-                                    barra.x + 7,
-                                    barra.y
-                                );
-
-                                // Percentual alinhado à direita
-                                ctx.textAlign = "right";
-                                ctx.fillStyle = "#6d28d9";
-
-                                ctx.fillText(
-                                    `${percentual.toLocaleString(
-                                        "pt-BR",
-                                        {
-                                            minimumFractionDigits: 1,
-                                            maximumFractionDigits: 1
-                                        }
-                                    )}%`,
-                                    chart.chartArea.right + 52,
-                                    linha.data[index].y
-                                );
-                            }
-                        );
-
-                        ctx.restore();
-                    }
-                }
-            ]
-        }
-    );
-
-    // =====================================================
-    // MINI GRÁFICOS DOS INDICADORES
-    // =====================================================
-
-    const valoresMensais = mensal.map(
-        item => Number(item.valor || 0)
-    );
-
-    const valoresHoras = mensal.map(
-        item => Number(item.horas || 0)
-    );
-
-    const valoresPareto = pareto.map(
-        item => item.quantidade
-    );
+    /* =====================================================
+       MINI GRÁFICOS SEM NÚMEROS
+       ===================================================== */
 
     function criarMiniGrafico(
         id,
         tipo,
         valores,
         cor,
-        destaqueMaior = false
-    ) {
+        destacarMaior = false
+    ){
 
-        const canvas = document.getElementById(id);
+        const canvas =
+            document.getElementById(id);
 
-        if (!canvas) return;
+        if(!canvas){
+            return;
+        }
 
-        const cores = valores.map(valor => {
+        const maiorValor =
+            valores.length
+                ? Math.max(...valores)
+                : 0;
 
-            if (
-                destaqueMaior &&
-                valor === Math.max(...valores)
-            ) {
-                return "#16a34a";
+        const cores = valores.map(
+            valor => {
+
+                if(
+                    destacarMaior &&
+                    valor === maiorValor &&
+                    valor > 0
+                ){
+                    return "#22c55e";
+                }
+
+                return cor;
             }
+        );
 
-            return cor;
-        });
+        const grafico =
+            new Chart(canvas,{
 
-        const grafico = new Chart(canvas, {
-            type: tipo,
+                type:tipo,
 
-            data: {
-                labels: valores.map((_, index) => index + 1),
+                data:{
 
-                datasets: [{
-                    data: valores,
+                    labels:valores.map(
+                        (_,index) => index + 1
+                    ),
 
-                    backgroundColor:
-                        tipo === "bar"
-                            ? cores
-                            : cor,
+                    datasets:[{
 
-                    borderColor: cor,
-                    borderWidth:
-                        tipo === "line"
-                            ? 2
-                            : 0,
+                        data:valores,
 
-                    pointRadius:
-                        tipo === "line"
-                            ? 2
-                            : 0,
+                        backgroundColor:
+                            tipo === "bar"
+                                ? cores
+                                : "transparent",
 
-                    pointHoverRadius: 3,
-                    borderRadius: 1,
-                    tension: 0.25,
-                    fill: false
-                }]
-            },
+                        borderColor:cor,
 
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                        borderWidth:
+                            tipo === "line"
+                                ? 2
+                                : 0,
 
-                animation: {
-                    duration: 500
+                        pointRadius:0,
+
+                        pointHoverRadius:0,
+
+                        borderRadius:2,
+
+                        maxBarThickness:10,
+
+                        tension:.25,
+
+                        fill:false
+                    }]
                 },
 
-                plugins: {
-                    legend: {
-                        display: false
+                options:{
+
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+                    events:[],
+
+                    animation:{
+                        duration:400
                     },
 
-                    tooltip: {
-                        enabled: false
-                    }
-                },
+                    plugins:{
 
-                scales: {
-                    x: {
-                        display: false
+                        legend:{
+                            display:false
+                        },
+
+                        tooltip:{
+                            enabled:false
+                        },
+
+                        /*
+                           Remove números das barras,
+                           mesmo se ChartDataLabels estiver
+                           ativo globalmente.
+                        */
+
+                        datalabels:{
+                            display:false
+                        }
                     },
 
-                    y: {
-                        display: false,
-                        beginAtZero: true
+                    scales:{
+
+                        x:{
+                            display:false
+                        },
+
+                        y:{
+                            display:false,
+                            beginAtZero:true
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        window.miniGraficosAmostra.push(grafico);
+        window.miniGraficosAmostra
+            .push(grafico);
     }
 
     criarMiniGrafico(
         "miniMediaAmostras",
         "bar",
-        valoresMensais,
+        valoresAmostras,
         "#3b82f6"
     );
 
     criarMiniGrafico(
         "miniMelhorMes",
         "bar",
-        valoresMensais,
-        "#22c55e",
+        valoresAmostras,
+        "#3b82f6",
         true
     );
 
     criarMiniGrafico(
         "miniSku",
         "bar",
-        valoresPareto,
+        rankingSku.map(
+            item => item.quantidade
+        ),
         "#3b82f6"
     );
 
@@ -968,11 +1067,4 @@ barPercentage: 0.82,
         valoresHoras,
         "#2563eb"
     );
-}
-function tempoBR(valor) {
-
-    return Number(valor || 0).toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
 }
