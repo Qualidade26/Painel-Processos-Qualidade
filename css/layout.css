@@ -1,1 +1,299 @@
+/* =========================================================
+   ESTRUTURA GERAL
+========================================================= */
 
+.main-wrap{
+    width:100%;
+    min-height:calc(100vh - 92px);
+
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+
+    transition:grid-template-columns .25s ease;
+}
+
+.main-wrap.menu-fechado{
+    grid-template-columns:72px minmax(0,1fr);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.topbar{
+    width:100%;
+    min-height:92px;
+
+    padding:14px 18px;
+
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr) auto;
+    align-items:center;
+    gap:18px;
+
+    background:#ffffff;
+    border-bottom:1px solid var(--cor-borda);
+
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo-labor{
+    min-width:0;
+}
+
+.logo-main{
+    font-size:1.45rem;
+    font-weight:900;
+    letter-spacing:.08em;
+    color:var(--cor-primaria);
+}
+
+.logo-sub{
+    margin-top:2px;
+
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.12em;
+
+    color:var(--cor-texto-secundario);
+}
+
+.top-title{
+    min-width:0;
+}
+
+.top-title h1{
+    margin:0;
+
+    font-size:1.35rem;
+    line-height:1.2;
+
+    color:var(--cor-texto);
+}
+
+.top-title p{
+    margin:4px 0 0;
+
+    font-size:.88rem;
+
+    color:var(--cor-texto-secundario);
+}
+
+.top-status{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+========================================================= */
+
+.menu{
+    min-width:0;
+
+    padding:12px 10px;
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+    background:#ffffff;
+    border-right:1px solid var(--cor-borda);
+
+    position:sticky;
+    top:92px;
+
+    height:calc(100vh - 92px);
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.menu .toggle-menu{
+    width:100%;
+    min-height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid var(--cor-borda);
+    border-radius:var(--raio-botao);
+
+    background:#ffffff;
+    color:var(--cor-texto);
+
+    cursor:pointer;
+}
+
+.menu > button:not(.toggle-menu){
+    width:100%;
+    min-height:58px;
+
+    padding:10px;
+
+    display:grid;
+    grid-template-columns:34px minmax(0,1fr);
+    align-items:center;
+    gap:10px;
+
+    border:1px solid transparent;
+    border-radius:var(--raio-botao);
+
+    background:transparent;
+    color:var(--cor-texto);
+
+    text-align:left;
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.menu > button:not(.toggle-menu):hover{
+    background:#eef3ff;
+    border-color:var(--cor-borda);
+}
+
+.menu > button.active{
+    background:var(--cor-primaria);
+    border-color:var(--cor-primaria);
+    color:#ffffff;
+}
+
+.menu .ico{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:1.25rem;
+}
+
+.menu .label{
+    min-width:0;
+
+    font-size:.84rem;
+    font-weight:700;
+    line-height:1.25;
+
+    white-space:normal;
+}
+
+.main-wrap.menu-fechado .menu{
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.main-wrap.menu-fechado .menu > button:not(.toggle-menu){
+    grid-template-columns:1fr;
+    justify-items:center;
+    padding-left:6px;
+    padding-right:6px;
+}
+
+.main-wrap.menu-fechado .menu .label{
+    display:none;
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
+
+.content{
+    width:100%;
+    min-width:0;
+
+    padding:10px;
+
+    overflow:hidden;
+}
+
+.content > *{
+    min-width:0;
+}
+
+
+/* =========================================================
+   ESTRUTURAS DE GRID REUTILIZÁVEIS
+========================================================= */
+
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:10px;
+}
+
+.grid-auto{
+    display:grid;
+    grid-template-columns:repeat(
+        auto-fit,
+        minmax(220px,1fr)
+    );
+    gap:10px;
+}
+
+
+/* =========================================================
+   BLOCOS E SEÇÕES
+========================================================= */
+
+.section{
+    width:100%;
+    min-width:0;
+    margin-bottom:10px;
+}
+
+.section:last-child{
+    margin-bottom:0;
+}
+
+.section-header{
+    width:100%;
+    min-width:0;
+
+    margin-bottom:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.section-title{
+    margin:0;
+
+    font-size:1rem;
+    font-weight:800;
+
+    color:var(--cor-texto);
+}
+
+.section-subtitle{
+    margin:3px 0 0;
+
+    font-size:.82rem;
+
+    color:var(--cor-texto-secundario);
+}
