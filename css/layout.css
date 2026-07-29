@@ -1,299 +1,276 @@
-/* =========================================================
-   ESTRUTURA GERAL
-========================================================= */
-
-.main-wrap{
-    width:100%;
-    min-height:calc(100vh - 92px);
-
-    display:grid;
-    grid-template-columns:220px minmax(0,1fr);
-
-    transition:grid-template-columns .25s ease;
-}
-
-.main-wrap.menu-fechado{
-    grid-template-columns:72px minmax(0,1fr);
-}
-
-
-/* =========================================================
+/* ==========================================================
    CABEÇALHO
-========================================================= */
+========================================================== */
 
 .topbar{
     width:100%;
-    min-height:92px;
+    max-width:1920px;
 
-    padding:14px 18px;
+    min-height:clamp(60px, 8vh, 82px);
+    height:auto;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    padding:clamp(8px, 1vw, 18px);
 
     display:grid;
-    grid-template-columns:220px minmax(0,1fr) auto;
+    grid-template-columns:
+        minmax(180px,260px)
+        minmax(300px,1fr)
+        minmax(250px,320px);
+
     align-items:center;
-    gap:18px;
+    gap:clamp(6px, 1vw, 16px);
 
-    background:#ffffff;
-    border-bottom:1px solid var(--cor-borda);
+    background:linear-gradient(
+        90deg,
+        var(--top1),
+        var(--top2)
+    );
 
-    position:sticky;
-    top:0;
-    z-index:100;
+    color:#fff;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
 }
 
 .logo-labor{
-    min-width:0;
+    min-height:50px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    border-right:1px solid rgba(255,255,255,.35);
+
+    line-height:1;
 }
 
 .logo-main{
-    font-size:1.45rem;
+    font-size:clamp(24px, 2vw, 36px);
     font-weight:900;
-    letter-spacing:.08em;
-    color:var(--cor-primaria);
+    letter-spacing:5px;
 }
 
 .logo-sub{
-    margin-top:2px;
+    margin-top:6px;
 
-    font-size:.72rem;
-    font-weight:700;
-    letter-spacing:.12em;
-
-    color:var(--cor-texto-secundario);
+    font-size:clamp(8px, .7vw, 11px);
+    font-weight:900;
+    letter-spacing:5px;
 }
 
 .top-title{
     min-width:0;
+    text-align:center;
 }
 
 .top-title h1{
     margin:0;
 
-    font-size:1.35rem;
-    line-height:1.2;
-
-    color:var(--cor-texto);
+    font-size:clamp(18px, 1.7vw, 28px);
+    font-weight:900;
+    letter-spacing:.5px;
 }
 
 .top-title p{
-    margin:4px 0 0;
+    margin:6px 0 0;
 
-    font-size:.88rem;
-
-    color:var(--cor-texto-secundario);
+    font-size:clamp(9px, .75vw, 13px);
+    font-weight:900;
 }
 
 .top-status{
+    min-width:0;
+
     display:flex;
     align-items:center;
     justify-content:flex-end;
     flex-wrap:wrap;
     gap:8px;
+
+    font-size:11px;
+    font-weight:900;
 }
 
 
-/* =========================================================
+/* ==========================================================
+   ESTRUTURA PRINCIPAL
+========================================================== */
+
+.main-wrap{
+    width:100%;
+    max-width:1920px;
+
+    min-height:calc(100dvh - 82px);
+    height:auto;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    padding:clamp(6px, .7vw, 12px);
+
+    display:grid;
+    grid-template-columns:
+        clamp(150px, 11vw, 190px)
+        minmax(0,1fr);
+
+    gap:clamp(6px, .7vw, 12px);
+
+    transition:grid-template-columns .25s ease;
+}
+
+.main-wrap.menu-collapsed{
+    grid-template-columns:
+        clamp(58px, 5vw, 72px)
+        minmax(0,1fr);
+}
+
+
+/* ==========================================================
    MENU LATERAL
-========================================================= */
+========================================================== */
 
 .menu{
+    width:100%;
     min-width:0;
 
-    padding:12px 10px;
+    padding:clamp(6px, .7vw, 10px);
 
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+    background:rgba(248,251,255,.92);
 
-    background:#ffffff;
-    border-right:1px solid var(--cor-borda);
+    border:1px solid var(--line);
+    border-radius:12px;
 
-    position:sticky;
-    top:92px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
 
-    height:calc(100vh - 92px);
-    overflow-y:auto;
-    overflow-x:hidden;
+    overflow:auto;
+
+    transition:.25s ease;
 }
 
-.menu .toggle-menu{
+.toggle-menu{
     width:100%;
-    min-height:38px;
+    height:34px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    margin-bottom:10px;
 
-    border:1px solid var(--cor-borda);
-    border-radius:var(--raio-botao);
+    border:none;
+    border-radius:10px;
 
-    background:#ffffff;
-    color:var(--cor-texto);
+    background:linear-gradient(
+        90deg,
+        var(--top1),
+        var(--top2)
+    );
+
+    color:#fff;
+
+    font-size:18px;
+    font-weight:900;
 
     cursor:pointer;
 }
 
-.menu > button:not(.toggle-menu){
+.menu button{
     width:100%;
-    min-height:58px;
+    min-height:clamp(48px, 6vh, 60px);
 
-    padding:10px;
+    margin-bottom:8px;
+    padding:8px 6px;
 
-    display:grid;
-    grid-template-columns:34px minmax(0,1fr);
-    align-items:center;
-    gap:10px;
+    border:1px solid var(--line2);
+    border-radius:11px;
 
-    border:1px solid transparent;
-    border-radius:var(--raio-botao);
+    background:linear-gradient(
+        180deg,
+        #fff,
+        var(--card2)
+    );
 
-    background:transparent;
-    color:var(--cor-texto);
+    color:var(--text);
 
-    text-align:left;
+    font-size:clamp(10px, .7vw, 13px);
+    font-weight:900;
+    line-height:1.2;
+
+    text-align:center;
+
     cursor:pointer;
 
     transition:
         background .2s ease,
-        border-color .2s ease,
         color .2s ease,
-        transform .2s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
-.menu > button:not(.toggle-menu):hover{
-    background:#eef3ff;
-    border-color:var(--cor-borda);
+.menu button .ico{
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:clamp(20px, 1.5vw, 27px);
 }
 
-.menu > button.active{
-    background:var(--cor-primaria);
-    border-color:var(--cor-primaria);
-    color:#ffffff;
+.menu button .label{
+    display:block;
 }
 
-.menu .ico{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.menu button:hover,
+.menu button.active{
+    background:linear-gradient(
+        90deg,
+        var(--top1),
+        var(--top2)
+    );
 
-    font-size:1.25rem;
+    color:#fff;
+
+    transform:translateY(-1px);
+
+    box-shadow:0 6px 12px rgba(29,78,255,.25);
 }
 
-.menu .label{
-    min-width:0;
 
-    font-size:.84rem;
-    font-weight:700;
-    line-height:1.25;
+/* ==========================================================
+   MENU RECOLHIDO
+========================================================== */
 
-    white-space:normal;
+.main-wrap.menu-collapsed .menu{
+    padding:8px;
 }
 
-.main-wrap.menu-fechado .menu{
-    padding-left:8px;
-    padding-right:8px;
+.main-wrap.menu-collapsed .toggle-menu{
+    height:38px;
+    margin-bottom:8px;
 }
 
-.main-wrap.menu-fechado .menu > button:not(.toggle-menu){
-    grid-template-columns:1fr;
-    justify-items:center;
-    padding-left:6px;
-    padding-right:6px;
+.main-wrap.menu-collapsed .menu button{
+    min-height:45px;
+    padding:8px 4px;
 }
 
-.main-wrap.menu-fechado .menu .label{
+.main-wrap.menu-collapsed .menu button .ico{
+    margin-bottom:0;
+    font-size:22px;
+}
+
+.main-wrap.menu-collapsed .menu button .label{
     display:none;
 }
 
 
-/* =========================================================
-   CONTEÚDO PRINCIPAL
-========================================================= */
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
 
 .content{
     width:100%;
     min-width:0;
 
-    padding:10px;
+    padding-right:2px;
 
-    overflow:hidden;
-}
-
-.content > *{
-    min-width:0;
-}
-
-
-/* =========================================================
-   ESTRUTURAS DE GRID REUTILIZÁVEIS
-========================================================= */
-
-.grid-2{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-}
-
-.grid-3{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:10px;
-}
-
-.grid-4{
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:10px;
-}
-
-.grid-auto{
-    display:grid;
-    grid-template-columns:repeat(
-        auto-fit,
-        minmax(220px,1fr)
-    );
-    gap:10px;
-}
-
-
-/* =========================================================
-   BLOCOS E SEÇÕES
-========================================================= */
-
-.section{
-    width:100%;
-    min-width:0;
-    margin-bottom:10px;
-}
-
-.section:last-child{
-    margin-bottom:0;
-}
-
-.section-header{
-    width:100%;
-    min-width:0;
-
-    margin-bottom:8px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.section-title{
-    margin:0;
-
-    font-size:1rem;
-    font-weight:800;
-
-    color:var(--cor-texto);
-}
-
-.section-subtitle{
-    margin:3px 0 0;
-
-    font-size:.82rem;
-
-    color:var(--cor-texto-secundario);
+    overflow-x:hidden;
+    overflow-y:visible;
 }
