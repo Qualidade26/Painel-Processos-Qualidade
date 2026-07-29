@@ -1882,3 +1882,174 @@ td{
         font-size:10px;
     }
 }
+/* ==========================================================
+   ABA AMOSTRA
+   ========================================================== */
+
+.amostra-cards-topo{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.amostra-graficos-principais{
+    align-items:stretch;
+}
+
+.amostra-panel-principal{
+    min-width:0;
+    height:420px;
+    display:flex;
+    flex-direction:column;
+}
+
+.amostra-panel-principal h3{
+    flex:0 0 auto;
+    text-align:center;
+    margin:0 0 10px;
+}
+
+.amostra-chart-principal,
+.amostra-chart-pareto{
+    position:relative;
+    flex:1;
+    min-height:0;
+    width:100%;
+}
+
+.amostra-chart-principal canvas,
+.amostra-chart-pareto canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+/* INDICADORES INFERIORES */
+
+.amostra-indicadores{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:10px;
+    margin-top:10px;
+    margin-bottom:8px;
+}
+
+.amostra-indicador-card{
+    min-width:0;
+    min-height:176px;
+    padding:15px 16px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+}
+
+.amostra-indicador-conteudo{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+    min-width:0;
+}
+
+.amostra-indicador-conteudo > div:last-child{
+    min-width:0;
+    flex:1;
+}
+
+.amostra-indicador-icone{
+    width:54px;
+    height:54px;
+    flex:0 0 54px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.08),
+        rgba(37,99,235,.18)
+    );
+    color:#1454df;
+    font-size:30px;
+    font-weight:700;
+}
+
+.amostra-indicador-titulo{
+    display:block;
+    color:#1454df;
+    font-size:11px;
+    font-weight:900;
+    text-transform:uppercase;
+    line-height:1.25;
+    margin-bottom:5px;
+}
+
+.amostra-indicador-valor{
+    display:block;
+    color:#102052;
+    font-size:clamp(24px,2vw,32px);
+    font-weight:900;
+    line-height:1.05;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.amostra-indicador-valor.amostra-sku{
+    font-size:clamp(21px,1.8vw,29px);
+}
+
+.amostra-indicador-subtitulo{
+    display:block;
+    color:#33457b;
+    font-size:12px;
+    font-weight:700;
+    margin-top:5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.amostra-mini-chart{
+    position:relative;
+    width:100%;
+    height:53px;
+    margin-top:8px;
+}
+
+.amostra-mini-chart canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+/* RESPONSIVIDADE DA ABA AMOSTRA */
+
+@media(max-width:1200px){
+
+    .amostra-indicadores{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:900px){
+
+    .amostra-cards-topo{
+        grid-template-columns:1fr;
+    }
+
+    .amostra-graficos-principais{
+        grid-template-columns:1fr;
+    }
+
+    .amostra-panel-principal{
+        height:410px;
+    }
+}
+
+@media(max-width:600px){
+
+    .amostra-indicadores{
+        grid-template-columns:1fr;
+    }
+
+    .amostra-panel-principal{
+        height:380px;
+    }
+}
