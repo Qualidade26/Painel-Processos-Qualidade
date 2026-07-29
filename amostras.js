@@ -133,11 +133,6 @@ function amostraDestruirGraficos() {
 }
 
 
-function amostraPluginsExtras() {
-    return typeof ChartDataLabels !== "undefined"
-        ? [ChartDataLabels]
-        : [];
-}
 
 
 /* ==========================================================
@@ -205,7 +200,7 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
             }]
         },
 
-        options: {
+         options: {
             responsive: true,
             maintainAspectRatio: false,
 
@@ -235,17 +230,29 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
 
             scales: {
                 x: {
-                    display: false
+                    display: false,
+                    grid: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
                 },
 
                 y: {
                     display: false,
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    border: {
+                        display: false
+                    }
                 }
             }
         },
 
-        plugins: amostraPluginsExtras()
+        plugins: []
     });
 
     miniGraficosAmostra.push(grafico);
@@ -668,136 +675,36 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
         );
 
 
-    const pluginRotulos = {
-        id: "rotulosGraficoMensalAmostra",
+   const pluginRotulos = {
+    id: "rotulosGraficoMensalAmostra",
 
-        afterDatasetsDraw(chart) {
-            const ctx =
-                chart.ctx;
+    afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const metaBarras = chart.getDatasetMeta(0);
 
-            const metaBarras =
-                chart.getDatasetMeta(0);
+        ctx.save();
 
-            const metaLinha =
-                chart.getDatasetMeta(1);
+        amostras.forEach((valor, indice) => {
+            if (valor <= 0) return;
 
+            const barra = metaBarras.data[indice];
+            if (!barra) return;
 
-            ctx.save();
+            ctx.font = "bold 10px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillStyle = "#102052";
 
-
-            amostras.forEach(
-                (valor, indice) => {
-
-                    if (valor <= 0) return;
-
-
-                    const barra =
-                        metaBarras.data[indice];
-
-                    if (!barra) return;
-
-
-                    ctx.font =
-                        "bold 10px Arial";
-
-                    ctx.textAlign =
-                        "center";
-
-                    ctx.textBaseline =
-                        "bottom";
-
-                    ctx.fillStyle =
-                        "#102052";
-
-
-                    ctx.fillText(
-                        amostraFormatarNumero(valor),
-                        barra.x,
-                        barra.y - 7
-                    );
-                }
+            ctx.fillText(
+                amostraFormatarNumero(valor),
+                barra.x,
+                barra.y - 8
             );
+        });
 
-
-            horas.forEach(
-                (valor, indice) => {
-
-                    if (valor <= 0) return;
-
-
-                    const ponto =
-                        metaLinha.data[indice];
-
-                    const barra =
-                        metaBarras.data[indice];
-
-
-                    if (!ponto) return;
-
-
-                    const distancia =
-                        barra
-                            ? Math.abs(
-                                ponto.y - barra.y
-                            )
-                            : 100;
-
-
-                    const pertoDoTopo =
-                        ponto.y <
-                        chart.chartArea.top + 24;
-
-
-                    const colocarAbaixo =
-                        distancia < 28 ||
-                        pertoDoTopo;
-
-
-                    ctx.font =
-                        "bold 9px Arial";
-
-                    ctx.textAlign =
-                        "center";
-
-                    ctx.fillStyle =
-                        "#c026d3";
-
-
-                    if (colocarAbaixo) {
-
-                        ctx.textBaseline =
-                            "top";
-
-                        ctx.fillText(
-                            amostraFormatarNumero(
-                                valor,
-                                2
-                            ),
-                            ponto.x,
-                            ponto.y + 9
-                        );
-
-                    } else {
-
-                        ctx.textBaseline =
-                            "bottom";
-
-                        ctx.fillText(
-                            amostraFormatarNumero(
-                                valor,
-                                2
-                            ),
-                            ponto.x,
-                            ponto.y - 8
-                        );
-                    }
-                }
-            );
-
-
-            ctx.restore();
-        }
-    };
+        ctx.restore();
+    }
+};
 
 
     graficoAmostrasMensal =
@@ -930,7 +837,7 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
 
                     legend: {
 
-                        display: true,
+                          display: false,
 
                         position: "top",
 
@@ -1164,14 +1071,9 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
             },
 
 
-            plugins: [
-
-                ...amostraPluginsExtras(),
-
-                pluginRotulos
-
-            ]
-
+        plugins: [
+    pluginRotulos
+]
         });
 }
 /* ==========================================================
@@ -1216,50 +1118,53 @@ function amostraCriarGraficoHorizontal(ranking) {
             const ctx =
                 chart.ctx;
 
-            const meta =
-                chart.getDatasetMeta(0);
+          const meta = chart.getDatasetMeta(0);
 
+ctx.save();
 
-            ctx.save();
+meta.data.forEach((barra, indice) => {
+    const valor =
+        dadosRanking[indice]?.quantidade || 0;
 
+    if (valor <= 0) return;
 
-            meta.data.forEach(
-                (barra, indice) => {
+    const texto =
+        amostraFormatarNumero(valor);
 
-                    const valor =
-                        dadosRanking[indice]
-                            ?.quantidade || 0;
+    ctx.font = "bold 10px Arial";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#172653";
 
+    const limiteDireito =
+        chart.chartArea.right - 4;
 
-                    if (valor <= 0) return;
+    const larguraTexto =
+        ctx.measureText(texto).width;
 
+    let posicaoX =
+        barra.x + 6;
 
-                    ctx.font =
-                        "bold 10px Arial";
+    if (
+        posicaoX + larguraTexto >
+        limiteDireito
+    ) {
+        posicaoX =
+            barra.x - larguraTexto - 6;
 
-                    ctx.textAlign =
-                        "left";
+        ctx.fillStyle = "#ffffff";
+    }
 
-                    ctx.textBaseline =
-                        "middle";
+    ctx.fillText(
+        texto,
+        posicaoX,
+        barra.y
+    );
+});
 
-                    ctx.fillStyle =
-                        "#172653";
-
-
-                    ctx.fillText(
-                        amostraFormatarNumero(valor),
-                        barra.x + 6,
-                        barra.y
-                    );
-                }
-            );
-
-
-            ctx.restore();
+ctx.restore();
         }
     };
-
 
     graficoAmostrasHorizontal =
         new Chart(canvas, {
@@ -1336,7 +1241,7 @@ function amostraCriarGraficoHorizontal(ranking) {
 
                         top: 4,
 
-                        right: 38,
+                        right: 50,
 
                         bottom: 0,
 
@@ -1351,7 +1256,7 @@ function amostraCriarGraficoHorizontal(ranking) {
 
                     legend: {
 
-                        display: true,
+                         display: false,
 
                         position: "top",
 
@@ -1527,13 +1432,8 @@ function amostraCriarGraficoHorizontal(ranking) {
             },
 
 
-            plugins: [
-
-                ...amostraPluginsExtras(),
-
-                pluginRotulos
-
-            ]
-
+           plugins: [
+    pluginRotulos
+]
         });
 }
