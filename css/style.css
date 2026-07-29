@@ -1,3 +1,6 @@
+@import url("./base.css");
+@import url("./layout.css");
+
 :root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
