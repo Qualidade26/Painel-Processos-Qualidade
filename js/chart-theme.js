@@ -15,16 +15,7 @@
     /* ======================================================
        QUALIDADE E RESPONSIVIDADE
     ====================================================== */
-
-    const proporcaoTela =
-        window.devicePixelRatio || 1;
-
-    /*
-       Limite máximo de 3 para evitar canvas excessivamente
-       pesado em telas com resolução muito alta.
-    */
-    Chart.defaults.devicePixelRatio =
-        Math.min(proporcaoTela * 1.5, 3);
+Chart.defaults.devicePixelRatio = 2;
 
     Chart.defaults.responsive = true;
     Chart.defaults.maintainAspectRatio = false;
