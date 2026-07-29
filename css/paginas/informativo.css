@@ -1,1 +1,435 @@
+/* ==========================================================
+   PÁGINA — INFORMATIVO
+========================================================== */
 
+
+/* ==========================================================
+   CABEÇALHO DA PÁGINA
+========================================================== */
+
+.informativo-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+
+    margin-bottom:10px;
+}
+
+.informativo-header-texto{
+    min-width:0;
+}
+
+.informativo-header-texto h2{
+    margin:0;
+
+    color:var(--text);
+
+    font-size:18px;
+    font-weight:900;
+}
+
+.informativo-header-texto p{
+    margin:3px 0 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+    line-height:1.4;
+}
+
+
+/* ==========================================================
+   CARDS INFORMATIVOS
+========================================================== */
+
+.informativo-cards{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+
+    margin-bottom:8px;
+}
+
+.informativo-card{
+    width:100%;
+    min-width:0;
+
+    padding:14px;
+
+    border:1px solid var(--line);
+    border-radius:12px;
+
+    background:var(--card);
+
+    box-shadow:0 4px 10px rgba(15,31,77,.05);
+}
+
+.informativo-card-cabecalho{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:10px;
+}
+
+.informativo-card-icone{
+    width:42px;
+    height:42px;
+    min-width:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:var(--card2);
+    color:var(--primary);
+
+    font-size:20px;
+    font-weight:900;
+}
+
+.informativo-card-titulo{
+    margin:0;
+
+    color:var(--text);
+
+    font-size:13px;
+    font-weight:900;
+    line-height:1.25;
+}
+
+.informativo-card-texto{
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:11px;
+    line-height:1.5;
+}
+
+
+/* ==========================================================
+   CONTEÚDO PRINCIPAL
+========================================================== */
+
+.informativo-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);
+    gap:8px;
+
+    margin-bottom:8px;
+    align-items:start;
+}
+
+.informativo-grid > .panel{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   LISTA DE INFORMAÇÕES
+========================================================== */
+
+.informativo-lista{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.informativo-lista-item{
+    display:grid;
+    grid-template-columns:34px minmax(0,1fr);
+    gap:10px;
+    align-items:flex-start;
+
+    padding:10px;
+
+    border:1px solid var(--line2);
+    border-radius:9px;
+
+    background:var(--card2);
+}
+
+.informativo-lista-icone{
+    width:34px;
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:#fff;
+    color:var(--primary);
+
+    font-size:15px;
+    font-weight:900;
+}
+
+.informativo-lista-conteudo{
+    min-width:0;
+}
+
+.informativo-lista-titulo{
+    margin:0 0 3px;
+
+    color:var(--text);
+
+    font-size:11px;
+    font-weight:900;
+}
+
+.informativo-lista-texto{
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:10px;
+    line-height:1.45;
+}
+
+
+/* ==========================================================
+   DESTAQUES
+========================================================== */
+
+.informativo-destaque{
+    padding:12px;
+
+    border:1px solid var(--line);
+    border-radius:10px;
+
+    background:linear-gradient(
+        135deg,
+        var(--card2),
+        #ffffff
+    );
+}
+
+.informativo-destaque + .informativo-destaque{
+    margin-top:8px;
+}
+
+.informativo-destaque-titulo{
+    margin:0 0 5px;
+
+    color:var(--primary-dark);
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.informativo-destaque-texto{
+    margin:0;
+
+    color:var(--muted);
+
+    font-size:10px;
+    line-height:1.45;
+}
+
+
+/* ==========================================================
+   AVISOS
+========================================================== */
+
+.informativo-aviso{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+
+    padding:10px;
+
+    border:1px solid var(--line2);
+    border-radius:9px;
+
+    background:#fff;
+}
+
+.informativo-aviso + .informativo-aviso{
+    margin-top:7px;
+}
+
+.informativo-aviso-icone{
+    flex:0 0 auto;
+
+    color:var(--primary);
+
+    font-size:18px;
+    line-height:1;
+}
+
+.informativo-aviso-conteudo{
+    min-width:0;
+}
+
+.informativo-aviso-conteudo strong{
+    display:block;
+
+    margin-bottom:2px;
+
+    color:var(--text);
+
+    font-size:11px;
+}
+
+.informativo-aviso-conteudo span{
+    color:var(--muted);
+
+    font-size:10px;
+    line-height:1.4;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.informativo-tabela{
+    width:100%;
+    min-width:0;
+}
+
+.informativo-tabela .table-wrap{
+    width:100%;
+}
+
+.informativo-tabela .table-scroll{
+    width:100%;
+    max-height:340px;
+
+    overflow:auto;
+}
+
+.informativo-tabela table{
+    width:100%;
+    min-width:620px;
+}
+
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
+
+.informativo-acoes{
+    display:flex;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:6px;
+
+    margin-top:10px;
+}
+
+.informativo-botao{
+    min-height:36px;
+
+    padding:8px 14px;
+
+    border:1px solid var(--primary);
+    border-radius:8px;
+
+    background:var(--primary);
+    color:#fff;
+
+    font-size:11px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.informativo-botao:hover{
+    background:var(--primary-dark);
+    border-color:var(--primary-dark);
+}
+
+.informativo-botao-secundario{
+    background:#fff;
+    color:var(--primary-dark);
+}
+
+.informativo-botao-secundario:hover{
+    background:var(--card2);
+    color:var(--primary-dark);
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1050px){
+
+    .informativo-grid{
+        grid-template-columns:1fr;
+    }
+
+    .informativo-cards{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .informativo-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .informativo-cards{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .informativo-cards{
+        grid-template-columns:1fr;
+    }
+
+    .informativo-card{
+        padding:12px;
+    }
+
+    .informativo-lista-item{
+        grid-template-columns:30px minmax(0,1fr);
+        padding:8px;
+    }
+
+    .informativo-lista-icone{
+        width:30px;
+        height:30px;
+    }
+
+    .informativo-acoes{
+        align-items:stretch;
+        flex-direction:column;
+    }
+
+    .informativo-botao{
+        width:100%;
+    }
+
+    .informativo-tabela .table-scroll{
+        max-height:290px;
+    }
+}
