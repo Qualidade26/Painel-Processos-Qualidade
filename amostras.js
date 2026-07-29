@@ -19,7 +19,6 @@ function amostraNumero(valor) {
     if (typeof valor === "number") return Number.isFinite(valor) ? valor : 0;
 
     let texto = String(valor).trim().replace(/\s/g, "");
-
     if (texto.includes(".") && texto.includes(",")) {
         texto = texto.replace(/\./g, "").replace(",", ".");
     } else if (texto.includes(",")) {
