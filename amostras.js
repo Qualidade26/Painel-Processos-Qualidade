@@ -204,9 +204,11 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
             responsive: true,
             maintainAspectRatio: false,
 
-            animation: {
-                duration: 350
-            },
+           animation: {
+    duration: 700,
+    easing: "easeOutQuart"
+},
+         
 
             events: [],
 
@@ -690,7 +692,7 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
             const barra = metaBarras.data[indice];
             if (!barra) return;
 
-            ctx.font = "bold 10px Arial";
+            ctx.font = "600 11px Segoe UI";
             ctx.textAlign = "center";
             ctx.textBaseline = "bottom";
             ctx.fillStyle = "#102052";
@@ -734,12 +736,11 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
                         borderWidth: 1,
 
                         borderRadius: 4,
+maxBarThickness: 36,
 
-                        maxBarThickness: 30,
+categoryPercentage: 0.80,
 
-                        categoryPercentage: 0.72,
-
-                        barPercentage: 0.72,
+barPercentage: 0.82,
 
                         yAxisID: "y",
 
@@ -816,21 +817,14 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
                 },
 
 
-                layout: {
-
-                    padding: {
-
-                        top: 26,
-
-                        right: 6,
-
-                        bottom: 0,
-
-                        left: 0
-
-                    }
-
-                },
+             layout: {
+    padding: {
+        top: 18,
+        right: 12,
+        bottom: 6,
+        left: 6
+    }
+},
 
 
                 plugins: {
@@ -928,26 +922,25 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
 
                         },
 
-                        ticks: {
+                       ticks: {
 
-                            autoSkip: false,
+    autoSkip: false,
 
-                            maxRotation: 0,
+    maxRotation: 0,
 
-                            minRotation: 0,
+    minRotation: 0,
 
-                            color: "#5c6c96",
+    color: "#44516f",
 
-                            font: {
+    font: {
 
-                                size: 9,
+        size: 10,
 
-                                weight: "bold"
+        weight: "600"
 
-                            }
+    }
 
-                        }
-
+}
                     },
 
 
@@ -962,12 +955,13 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
 
                         position: "left",
 
-                        grid: {
+                       grid: {
 
-                            color:
-                                "rgba(15,31,77,.08)"
+    color: "rgba(15,31,77,.05)",
+    lineWidth: 1,
+    drawBorder: false
 
-                        },
+},
 
                         title: {
 
@@ -1200,14 +1194,11 @@ ctx.restore();
 
                         borderRadius: 3,
 
-                        maxBarThickness: 18,
+                       maxBarThickness: 22,
 
-                        categoryPercentage:
-                            0.72,
+categoryPercentage: 0.80,
 
-                        barPercentage:
-                            0.82,
-
+barPercentage: 0.90,
                         datalabels: {
                             display: false
                         }
