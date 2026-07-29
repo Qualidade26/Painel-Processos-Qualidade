@@ -1,1 +1,114 @@
+/* ==========================================================
+   PÁGINA — DESCARTE
+========================================================== */
 
+/* ==========================================================
+   GRÁFICOS PRINCIPAIS
+========================================================== */
+
+.descarte-graficos{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.descarte-graficos > .panel{
+    width:100%;
+    min-width:0;
+}
+
+.chart-box-descarte{
+    position:relative;
+    width:100%;
+    min-width:0;
+    height:300px;
+}
+
+.chart-box-descarte canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   INDICADORES
+========================================================== */
+
+.descarte-indicadores{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:8px;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.descarte-tabela{
+    width:100%;
+}
+
+.descarte-tabela .table-scroll{
+    max-height:340px;
+    overflow:auto;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1050px){
+
+    .descarte-graficos{
+        grid-template-columns:1fr;
+    }
+
+    .descarte-indicadores{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .chart-box-descarte{
+        height:280px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .chart-box-descarte{
+        height:250px;
+    }
+
+    .descarte-indicadores{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .chart-box-descarte{
+        height:220px;
+    }
+
+    .descarte-indicadores{
+        grid-template-columns:1fr;
+    }
+
+    .descarte-tabela .table-scroll{
+        max-height:300px;
+    }
+}
