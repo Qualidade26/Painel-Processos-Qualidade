@@ -1,159 +1,494 @@
-function renderAmostra(){
+/* ==========================================================
+   ABA AMOSTRA
+   Arquivo completo: amostras.js
+   ========================================================== */
 
-    const a = dados.amostras || {
-        mensal:[],
-        top10:[],
-        totalHoras:0
-    };
+let graficoAmostrasMensalAtual = null;
+let graficoBarrasAmostrasAtual = null;
+let miniGraficosAmostra = [];
 
-    const mensal = Array.isArray(a.mensal)
-        ? a.mensal
-        : [];
 
-    const top10 = Array.isArray(a.top10)
-        ? a.top10
-        : [];
+/* ==========================================================
+   CONVERSÃO SEGURA DE NÚMEROS
 
-    /* =====================================================
-       CONVERSÃO SEGURA DE NÚMEROS
+   Aceita:
+   10
+   "10"
+   "10,50"
+   "1.250,75"
+   ========================================================== */
 
-       Converte corretamente:
-       10
-       "10"
-       "10,50"
-       "1.250,75"
-       ===================================================== */
+function numeroAmostraSeguro(valor){
 
-    function numeroSeguro(valor){
+    if(
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ){
+        return 0;
+    }
 
-        if(
-            valor === null ||
-            valor === undefined ||
-            valor === ""
-        ){
-            return 0;
-        }
+    if(typeof valor === "number"){
 
-        if(typeof valor === "number"){
-            return Number.isFinite(valor)
-                ? valor
-                : 0;
-        }
-
-        let texto = String(valor)
-            .trim()
-            .replace(/\s/g,"");
-
-        if(
-            texto.includes(".") &&
-            texto.includes(",")
-        ){
-            texto = texto
-                .replace(/\./g,"")
-                .replace(",",".");
-        }
-        else if(texto.includes(",")){
-            texto = texto.replace(",",".");
-        }
-
-        const resultado = Number(texto);
-
-        return Number.isFinite(resultado)
-            ? resultado
+        return Number.isFinite(valor)
+            ? valor
             : 0;
     }
 
-    const valoresAmostras = mensal.map(item =>
-        numeroSeguro(item.valor)
-    );
+    let texto = String(valor)
+        .trim()
+        .replace(/\s/g, "");
 
-    const valoresHoras = mensal.map(item =>
-        numeroSeguro(item.horas)
-    );
+    /*
+       Formato brasileiro:
+       1.250,75
+    */
 
-    const totalAno = valoresAmostras.reduce(
-        (soma,valor) => soma + valor,
+    if(
+        texto.includes(".") &&
+        texto.includes(",")
+    ){
+        texto = texto
+            .replace(/\./g, "")
+            .replace(",", ".");
+    }
+    else if(texto.includes(",")){
+
+        texto = texto.replace(",", ".");
+    }
+
+    const resultado = Number(texto);
+
+    return Number.isFinite(resultado)
+        ? resultado
+        : 0;
+}
+
+
+/* ==========================================================
+   FORMATAÇÃO DE HORAS
+   ========================================================== */
+
+function formatarHorasAmostra(valor){
+
+    return numeroAmostraSeguro(valor)
+        .toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+}
+
+
+/* ==========================================================
+   IDENTIFICAÇÃO DO SKU
+   ========================================================== */
+
+function obterSkuAmostra(item){
+
+    return (
+        item?.sku ||
+        item?.SKU ||
+        item?.codigo ||
+        item?.código ||
+        item?.nome ||
+        "-"
+    );
+}
+
+
+/* ==========================================================
+   QUANTIDADE DO SKU
+   ========================================================== */
+
+function obterQuantidadeAmostra(item){
+
+    return numeroAmostraSeguro(
+        item?.quantidade ??
+        item?.qtd ??
+        item?.valor ??
+        item?.total ??
         0
     );
+}
 
-    const totalHorasInformado =
-        numeroSeguro(a.totalHoras);
 
-    const totalHorasMensais =
-        valoresHoras.reduce(
-            (soma,valor) => soma + valor,
+/* ==========================================================
+   DESTRUIÇÃO SEGURA DOS GRÁFICOS
+   ========================================================== */
+
+function destruirGraficosAmostra(){
+
+    if(graficoAmostrasMensalAtual){
+
+        graficoAmostrasMensalAtual.destroy();
+        graficoAmostrasMensalAtual = null;
+    }
+
+    if(graficoBarrasAmostrasAtual){
+
+        graficoBarrasAmostrasAtual.destroy();
+        graficoBarrasAmostrasAtual = null;
+    }
+
+    if(Array.isArray(miniGraficosAmostra)){
+
+        miniGraficosAmostra.forEach(grafico => {
+
+            if(grafico){
+                grafico.destroy();
+            }
+        });
+    }
+
+    miniGraficosAmostra = [];
+}
+
+
+/* ==========================================================
+   CRIAÇÃO DOS MINI GRÁFICOS
+
+   Não apresenta:
+   - números sobre as barras;
+   - eixos;
+   - legendas;
+   - tooltip.
+   ========================================================== */
+
+function criarMiniGraficoAmostra(
+    idCanvas,
+    tipo,
+    valores,
+    cor,
+    destacarMaior = false
+){
+
+    const canvas =
+        document.getElementById(idCanvas);
+
+    if(!canvas){
+        return;
+    }
+
+    const dadosValidos =
+        Array.isArray(valores)
+            ? valores.map(numeroAmostraSeguro)
+            : [];
+
+    const maiorValor =
+        dadosValidos.length > 0
+            ? Math.max(...dadosValidos)
+            : 0;
+
+    const coresBarras =
+        dadosValidos.map(valor => {
+
+            if(
+                destacarMaior &&
+                valor === maiorValor &&
+                valor > 0
+            ){
+                return "#22c55e";
+            }
+
+            return cor;
+        });
+
+    const dataset = {
+
+        data: dadosValidos,
+
+        backgroundColor:
+            tipo === "bar"
+                ? coresBarras
+                : "transparent",
+
+        borderColor: cor,
+
+        borderWidth:
+            tipo === "line"
+                ? 2
+                : 0,
+
+        pointRadius: 0,
+        pointHoverRadius: 0,
+
+        borderRadius: 2,
+
+        maxBarThickness: 10,
+
+        tension: 0.25,
+
+        fill: false,
+
+        /*
+           Impede que o ChartDataLabels global
+           escreva números sobre as barras.
+        */
+
+        datalabels: {
+            display: false
+        }
+    };
+
+    const grafico = new Chart(
+        canvas,
+        {
+            type: tipo,
+
+            data: {
+
+                labels: dadosValidos.map(
+                    (_, indice) => indice + 1
+                ),
+
+                datasets: [dataset]
+            },
+
+            options: {
+
+                responsive: true,
+                maintainAspectRatio: false,
+
+                events: [],
+
+                animation: {
+                    duration: 400
+                },
+
+                layout: {
+                    padding: 0
+                },
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    },
+
+                    tooltip: {
+                        enabled: false
+                    },
+
+                    datalabels: {
+                        display: false
+                    }
+                },
+
+                scales: {
+
+                    x: {
+                        display: false
+                    },
+
+                    y: {
+                        display: false,
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    );
+
+    miniGraficosAmostra.push(grafico);
+}
+
+
+/* ==========================================================
+   FUNÇÃO PRINCIPAL
+   ========================================================== */
+
+function renderAmostra(){
+
+    destruirGraficosAmostra();
+
+    const a = dados.amostras || {
+        mensal: [],
+        top10: [],
+        totalHoras: 0
+    };
+
+    const mensalCompleto =
+        Array.isArray(a.mensal)
+            ? a.mensal
+            : [];
+
+    const top10 =
+        Array.isArray(a.top10)
+            ? a.top10
+            : [];
+
+
+    /* ======================================================
+       VALORES MENSAIS COMPLETOS
+       ====================================================== */
+
+    const valoresAmostrasCompletos =
+        mensalCompleto.map(item =>
+            numeroAmostraSeguro(item.valor)
+        );
+
+    const valoresHorasCompletos =
+        mensalCompleto.map(item =>
+            numeroAmostraSeguro(item.horas)
+        );
+
+
+    /* ======================================================
+       ÚLTIMO MÊS COM DADOS
+
+       Remove apenas os meses zerados que estão depois
+       do último mês que possui alguma informação.
+
+       Exemplo:
+       Janeiro até julho têm dados.
+       Agosto até dezembro estão zerados.
+       O gráfico mostrará somente janeiro até julho.
+       ====================================================== */
+
+    let ultimoIndiceComDados = -1;
+
+    mensalCompleto.forEach((item, indice) => {
+
+        const quantidade =
+            numeroAmostraSeguro(item.valor);
+
+        const horas =
+            numeroAmostraSeguro(item.horas);
+
+        if(quantidade > 0 || horas > 0){
+
+            ultimoIndiceComDados = indice;
+        }
+    });
+
+    const mensalGrafico =
+        ultimoIndiceComDados >= 0
+            ? mensalCompleto.slice(
+                0,
+                ultimoIndiceComDados + 1
+            )
+            : mensalCompleto.slice(0, 1);
+
+    const valoresAmostrasGrafico =
+        mensalGrafico.map(item =>
+            numeroAmostraSeguro(item.valor)
+        );
+
+    const valoresHorasGrafico =
+        mensalGrafico.map(item =>
+            numeroAmostraSeguro(item.horas)
+        );
+
+
+    /* ======================================================
+       TOTAL DE AMOSTRAS
+       ====================================================== */
+
+    const totalAno =
+        valoresAmostrasCompletos.reduce(
+            (soma, valor) => soma + valor,
             0
         );
 
-    /*
-       Caso totalHoras não esteja preenchido,
-       utiliza a soma das horas mensais.
-    */
+
+    /* ======================================================
+       TOTAL DE HORAS
+       ====================================================== */
+
+    const totalHorasInformado =
+        numeroAmostraSeguro(a.totalHoras);
+
+    const totalHorasCalculado =
+        valoresHorasCompletos.reduce(
+            (soma, valor) => soma + valor,
+            0
+        );
 
     const totalHoras =
         totalHorasInformado > 0
             ? totalHorasInformado
-            : totalHorasMensais;
+            : totalHorasCalculado;
+
+
+    /* ======================================================
+       MÉDIA MENSAL
+
+       Calcula a média somente entre os meses que já
+       possuem amostras.
+       ====================================================== */
 
     const mesesComAmostras =
-        valoresAmostras.filter(valor => valor > 0);
+        valoresAmostrasCompletos.filter(
+            valor => valor > 0
+        );
 
     const mediaMensal =
         mesesComAmostras.length > 0
             ? totalAno / mesesComAmostras.length
             : 0;
 
+
+    /* ======================================================
+       MELHOR MÊS
+       ====================================================== */
+
     let melhorMes = {
-        mes:"-",
-        valor:0
+        mes: "-",
+        valor: 0
     };
 
-    mensal.forEach((item,index) => {
+    mensalCompleto.forEach((item, indice) => {
 
         const valor =
-            valoresAmostras[index];
+            valoresAmostrasCompletos[indice] || 0;
 
         if(valor > melhorMes.valor){
 
             melhorMes = {
-                mes:item.mes || "-",
-                valor:valor
+                mes: item.mes || "-",
+                valor: valor
             };
         }
     });
 
-    /* =====================================================
-       SKU MAIS SOLICITADO
-       ===================================================== */
 
-    const rankingSku = top10
-        .map(item => ({
+    /* ======================================================
+       RANKING DOS SKUs
+       ====================================================== */
 
-            sku:
-                item.sku ||
-                item.SKU ||
-                item.codigo ||
-                item.nome ||
-                "-",
+    const rankingSku =
+        top10
+            .map(item => ({
 
-            quantidade:numeroSeguro(
-                item.quantidade ??
-                item.qtd ??
-                item.valor ??
-                item.total
+                sku: obterSkuAmostra(item),
+
+                descricao:
+                    item?.descricao ||
+                    item?.descrição ||
+                    "",
+
+                quantidade:
+                    obterQuantidadeAmostra(item)
+            }))
+            .filter(item =>
+                item.quantidade > 0
             )
-        }))
-        .filter(item => item.quantidade > 0)
-        .sort(
-            (a,b) =>
-                b.quantidade - a.quantidade
-        );
+            .sort(
+                (a, b) =>
+                    b.quantidade - a.quantidade
+            )
+            .slice(0, 10);
 
     const skuMaisSolicitado =
         rankingSku[0] || {
-            sku:"-",
-            quantidade:0
+            sku: "-",
+            quantidade: 0
         };
+
+
+    /* ======================================================
+       TEMPO MÉDIO POR AMOSTRA
+       ====================================================== */
 
     const tempoMedioHoras =
         totalAno > 0
@@ -163,9 +498,10 @@ function renderAmostra(){
     const tempoMedioMinutos =
         tempoMedioHoras * 60;
 
-    /* =====================================================
-       HTML
-       ===================================================== */
+
+    /* ======================================================
+       HTML DA PÁGINA
+       ====================================================== */
 
     conteudo.innerHTML = `
 
@@ -185,30 +521,40 @@ function renderAmostra(){
             ${card(
                 "⏱",
                 "Total de Horas",
-                totalHoras.toLocaleString(
-                    "pt-BR",
-                    {
-                        minimumFractionDigits:2,
-                        maximumFractionDigits:2
-                    }
-                ),
+                formatarHorasAmostra(totalHoras),
                 "Horas destinadas"
             )}
 
         </section>
 
-        <section class="amostra-grafico-unico">
+        <section class="grid-2 amostra-graficos-principais">
 
-            <div class="panel amostra-panel-grafico-unico">
+            <div class="panel amostra-panel-principal">
 
                 <h3>
-                    📈 EVOLUÇÃO MENSAL DE AMOSTRAS
+                    📈 Evolução Mensal de Amostras
                 </h3>
 
-                <div class="amostra-chart-unico">
+                <div class="amostra-chart-principal">
 
                     <canvas
                         id="graficoAmostrasMensal">
+                    </canvas>
+
+                </div>
+
+            </div>
+
+            <div class="panel amostra-panel-principal">
+
+                <h3>
+                    Amostras Mais Solicitadas
+                </h3>
+
+                <div class="amostra-chart-horizontal">
+
+                    <canvas
+                        id="graficoBarrasAmostras">
                     </canvas>
 
                 </div>
@@ -238,8 +584,8 @@ function renderAmostra(){
                             ${mediaMensal.toLocaleString(
                                 "pt-BR",
                                 {
-                                    minimumFractionDigits:1,
-                                    maximumFractionDigits:1
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
                                 }
                             )}
 
@@ -255,7 +601,8 @@ function renderAmostra(){
 
                 <div class="amostra-mini-chart">
 
-                    <canvas id="miniMediaAmostras">
+                    <canvas
+                        id="miniMediaAmostras">
                     </canvas>
 
                 </div>
@@ -292,7 +639,8 @@ function renderAmostra(){
 
                 <div class="amostra-mini-chart">
 
-                    <canvas id="miniMelhorMes">
+                    <canvas
+                        id="miniMelhorMes">
                     </canvas>
 
                 </div>
@@ -314,7 +662,11 @@ function renderAmostra(){
                         </span>
 
                         <strong
-                            class="amostra-indicador-valor amostra-sku">
+                            class="
+                                amostra-indicador-valor
+                                amostra-sku
+                            "
+                        >
 
                             ${skuMaisSolicitado.sku}
 
@@ -334,7 +686,8 @@ function renderAmostra(){
 
                 <div class="amostra-mini-chart">
 
-                    <canvas id="miniSku">
+                    <canvas
+                        id="miniSku">
                     </canvas>
 
                 </div>
@@ -360,8 +713,8 @@ function renderAmostra(){
                             ${tempoMedioHoras.toLocaleString(
                                 "pt-BR",
                                 {
-                                    minimumFractionDigits:2,
-                                    maximumFractionDigits:2
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
                                 }
                             )} h
 
@@ -372,8 +725,8 @@ function renderAmostra(){
                             ${tempoMedioMinutos.toLocaleString(
                                 "pt-BR",
                                 {
-                                    minimumFractionDigits:1,
-                                    maximumFractionDigits:1
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
                                 }
                             )} min por amostra
 
@@ -385,7 +738,8 @@ function renderAmostra(){
 
                 <div class="amostra-mini-chart">
 
-                    <canvas id="miniTempoAmostra">
+                    <canvas
+                        id="miniTempoAmostra">
                     </canvas>
 
                 </div>
@@ -395,58 +749,22 @@ function renderAmostra(){
         </section>
     `;
 
-    /* =====================================================
-       DESTRUIR GRÁFICOS ANTERIORES
-       ===================================================== */
 
-    if(window.graficoAmostrasMensalAtual){
+    /* ======================================================
+       ESCALAS AUTOMÁTICAS DO GRÁFICO MENSAL
+       ====================================================== */
 
-        window.graficoAmostrasMensalAtual
-            .destroy();
-    }
+    const maiorAmostra =
+        Math.max(
+            1,
+            ...valoresAmostrasGrafico
+        );
 
-    if(window.graficoParetoAmostrasAtual){
-
-        window.graficoParetoAmostrasAtual
-            .destroy();
-
-        window.graficoParetoAmostrasAtual =
-            null;
-    }
-
-    if(
-        Array.isArray(
-            window.miniGraficosAmostra
-        )
-    ){
-
-        window.miniGraficosAmostra
-            .forEach(grafico => {
-
-                if(grafico){
-                    grafico.destroy();
-                }
-            });
-    }
-
-    window.miniGraficosAmostra = [];
-
-    /* =====================================================
-       ESCALA AUTOMÁTICA
-
-       Cria espaço acima dos maiores valores para os
-       números não serem cortados.
-       ===================================================== */
-
-    const maiorAmostra = Math.max(
-        1,
-        ...valoresAmostras
-    );
-
-    const maiorHora = Math.max(
-        1,
-        ...valoresHoras
-    );
+    const maiorHora =
+        Math.max(
+            1,
+            ...valoresHorasGrafico
+        );
 
     const limiteAmostras =
         Math.ceil(maiorAmostra * 1.35);
@@ -454,17 +772,19 @@ function renderAmostra(){
     const limiteHoras =
         maiorHora * 1.40;
 
-    /* =====================================================
-       PLUGIN DE RÓTULOS
 
-       Amostras ficam acima das barras.
-       Horas ficam acima ou abaixo da linha.
-       Zero não aparece.
-       ===================================================== */
+    /* ======================================================
+       RÓTULOS DO GRÁFICO MENSAL
 
-    const rotulosEvolucaoAmostra = {
+       - não mostra zero;
+       - amostra acima da barra;
+       - horas mudam de posição quando houver risco
+         de sobreposição.
+       ====================================================== */
 
-        id:"rotulosEvolucaoAmostra",
+    const pluginRotulosMensais = {
+
+        id: "pluginRotulosMensaisAmostra",
 
         afterDatasetsDraw(chart){
 
@@ -478,15 +798,18 @@ function renderAmostra(){
 
             ctx.save();
 
-            valoresAmostras.forEach(
-                (valor,index) => {
+
+            /* NÚMEROS DAS AMOSTRAS */
+
+            valoresAmostrasGrafico.forEach(
+                (valor, indice) => {
 
                     if(valor <= 0){
                         return;
                     }
 
                     const barra =
-                        metaBarras.data[index];
+                        metaBarras.data[indice];
 
                     if(!barra){
                         return;
@@ -502,58 +825,71 @@ function renderAmostra(){
                         "bottom";
 
                     ctx.fillStyle =
-                        "#12347c";
+                        "#102052";
 
                     ctx.fillText(
                         numero(valor),
                         barra.x,
-                        barra.y - 8
+                        barra.y - 7
                     );
                 }
             );
 
-            valoresHoras.forEach(
-                (valor,index) => {
+
+            /* NÚMEROS DAS HORAS */
+
+            valoresHorasGrafico.forEach(
+                (valor, indice) => {
 
                     if(valor <= 0){
                         return;
                     }
 
                     const ponto =
-                        metaLinha.data[index];
+                        metaLinha.data[indice];
 
                     const barra =
-                        metaBarras.data[index];
+                        metaBarras.data[indice];
 
                     if(!ponto){
                         return;
                     }
 
-                    /*
-                       Se o ponto da linha estiver muito
-                       próximo do topo da barra, o valor
-                       das horas será colocado abaixo.
-                    */
-
-                    const distanciaDaBarra =
+                    const distanciaVertical =
                         barra
                             ? Math.abs(
                                 ponto.y - barra.y
                             )
                             : 100;
 
+                    /*
+                       Quando a linha estiver perto do topo
+                       da barra, o valor das horas será
+                       colocado abaixo do ponto.
+                    */
+
                     const colocarAbaixo =
-                        distanciaDaBarra < 25 ||
-                        ponto.y < chart.chartArea.top + 25;
+                        distanciaVertical < 28 ||
+                        ponto.y <
+                            chart.chartArea.top + 22;
+
+                    const texto =
+                        valor.toLocaleString(
+                            "pt-BR",
+                            {
+                                minimumFractionDigits: 1,
+                                maximumFractionDigits: 2
+                            }
+                        );
 
                     ctx.font =
-                        "bold 11px Arial";
+                        "bold 10px Arial";
 
                     ctx.textAlign =
                         "center";
 
                     ctx.fillStyle =
-                        "#a21caf";
+                        "#c026d3";
 
                     if(colocarAbaixo){
 
@@ -561,15 +897,9 @@ function renderAmostra(){
                             "top";
 
                         ctx.fillText(
-                            valor.toLocaleString(
-                                "pt-BR",
-                                {
-                                    minimumFractionDigits:1,
-                                    maximumFractionDigits:2
-                                }
-                            ),
+                            texto,
                             ponto.x,
-                            ponto.y + 11
+                            ponto.y + 10
                         );
                     }
                     else{
@@ -578,15 +908,9 @@ function renderAmostra(){
                             "bottom";
 
                         ctx.fillText(
-                            valor.toLocaleString(
-                                "pt-BR",
-                                {
-                                    minimumFractionDigits:1,
-                                    maximumFractionDigits:2
-                                }
-                            ),
+                            texto,
                             ponto.x,
-                            ponto.y - 11
+                            ponto.y - 9
                         );
                     }
                 }
@@ -596,33 +920,35 @@ function renderAmostra(){
         }
     };
 
-    /* =====================================================
-       GRÁFICO PRINCIPAL
-       ===================================================== */
 
-    window.graficoAmostrasMensalAtual =
+    /* ======================================================
+       GRÁFICO DE EVOLUÇÃO MENSAL
+       ====================================================== */
+
+    graficoAmostrasMensalAtual =
         new Chart(
             document.getElementById(
                 "graficoAmostrasMensal"
             ),
             {
+                type: "bar",
 
-                type:"bar",
+                data: {
 
-                data:{
+                    labels:
+                        mensalGrafico.map(
+                            item => item.mes
+                        ),
 
-                    labels:mensal.map(
-                        item => item.mes
-                    ),
-
-                    datasets:[
+                    datasets: [
 
                         {
-                            type:"bar",
+                            type: "bar",
 
-                            label:"Amostras",
+                            label: "Amostras",
 
-                            data:valoresAmostras,
+                            data:
+                                valoresAmostrasGrafico,
 
                             backgroundColor:
                                 "#1d4ed8",
@@ -630,27 +956,32 @@ function renderAmostra(){
                             borderColor:
                                 "#1d4ed8",
 
-                            borderWidth:1,
+                            borderWidth: 1,
 
-                            borderRadius:4,
+                            borderRadius: 4,
 
-                            maxBarThickness:34,
+                            maxBarThickness: 32,
 
-                            categoryPercentage:.68,
+                            categoryPercentage: 0.68,
 
-                            barPercentage:.72,
+                            barPercentage: 0.72,
 
-                            yAxisID:"y",
+                            yAxisID: "y",
 
-                            order:2
+                            order: 2,
+
+                            datalabels: {
+                                display: false
+                            }
                         },
 
                         {
-                            type:"line",
+                            type: "line",
 
-                            label:"Horas",
+                            label: "Horas",
 
-                            data:valoresHoras,
+                            data:
+                                valoresHorasGrafico,
 
                             borderColor:
                                 "#c026d3",
@@ -664,93 +995,92 @@ function renderAmostra(){
                             pointBorderColor:
                                 "#c026d3",
 
-                            pointBorderWidth:2,
+                            pointBorderWidth: 2,
 
-                            pointRadius:5,
+                            pointRadius: 5,
 
-                            pointHoverRadius:7,
+                            pointHoverRadius: 7,
 
-                            borderWidth:2,
+                            borderWidth: 2,
 
-                            borderDash:[7,5],
+                            borderDash: [7, 5],
 
-                            tension:.20,
+                            tension: 0.20,
 
-                            fill:false,
+                            fill: false,
 
-                            spanGaps:false,
+                            spanGaps: false,
 
-                            yAxisID:"y1",
+                            yAxisID: "y1",
 
-                            order:1
+                            order: 1,
+
+                            datalabels: {
+                                display: false
+                            }
                         }
                     ]
                 },
 
-                options:{
+                options: {
 
-                    responsive:true,
+                    responsive: true,
 
-                    maintainAspectRatio:false,
+                    maintainAspectRatio: false,
 
-                    interaction:{
-                        mode:"index",
-                        intersect:false
+                    interaction: {
+                        mode: "index",
+                        intersect: false
                     },
 
-                    layout:{
-                        padding:{
-                            top:28,
-                            right:10,
-                            bottom:4,
-                            left:4
+                    layout: {
+                        padding: {
+                            top: 26,
+                            right: 8,
+                            bottom: 3,
+                            left: 3
                         }
                     },
 
-                    plugins:{
+                    plugins: {
 
-                        legend:{
+                        legend: {
 
-                            display:true,
+                            display: true,
 
-                            position:"top",
+                            position: "top",
 
-                            align:"center",
+                            align: "center",
 
-                            labels:{
+                            labels: {
 
-                                usePointStyle:true,
+                                usePointStyle: true,
 
-                                boxWidth:14,
+                                boxWidth: 12,
 
-                                padding:18,
+                                padding: 14,
 
-                                color:"#1b2b5c",
+                                color: "#1b2b5c",
 
-                                font:{
-                                    size:11,
-                                    weight:"bold"
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
                                 }
                             }
                         },
 
-                        /*
-                           Desativa ChartDataLabels global,
-                           caso esteja registrado no painel.
-                        */
-
-                        datalabels:{
-                            display:false
+                        datalabels: {
+                            display: false
                         },
 
-                        tooltip:{
+                        tooltip: {
 
-                            callbacks:{
+                            callbacks: {
 
                                 label(context){
 
                                     const valor =
-                                        numeroSeguro(
+                                        numeroAmostraSeguro(
                                             context.raw
                                         );
 
@@ -759,66 +1089,69 @@ function renderAmostra(){
                                             .yAxisID === "y1"
                                     ){
 
-                                        return ` Horas: ${
+                                        return (
+                                            " Horas: " +
                                             valor.toLocaleString(
                                                 "pt-BR",
                                                 {
-                                                    minimumFractionDigits:1,
-                                                    maximumFractionDigits:2
+                                                    minimumFractionDigits: 1,
+                                                    maximumFractionDigits: 2
                                                 }
-                                            )
-                                        } h`;
+                                            ) +
+                                            " h"
+                                        );
                                     }
 
-                                    return ` Amostras: ${
+                                    return (
+                                        " Amostras: " +
                                         numero(valor)
-                                    }`;
+                                    );
                                 }
                             }
                         }
                     },
 
-                    scales:{
+                    scales: {
 
-                        y:{
+                        y: {
 
-                            beginAtZero:true,
+                            beginAtZero: true,
 
                             suggestedMax:
                                 limiteAmostras,
 
-                            position:"left",
+                            position: "left",
 
-                            title:{
+                            title: {
 
-                                display:true,
+                                display: true,
 
                                 text:
                                     "Quantidade de amostras",
 
-                                color:"#0f1f4d",
+                                color: "#0f1f4d",
 
-                                font:{
-                                    weight:"bold"
+                                font: {
+                                    weight: "bold"
                                 }
                             },
 
-                            grid:{
+                            grid: {
                                 color:
                                     "rgba(15,31,77,.08)"
                             },
 
-                            ticks:{
+                            ticks: {
 
-                                precision:0,
+                                precision: 0,
 
-                                color:"#5c6c96",
+                                color: "#5c6c96",
 
                                 callback(valor){
 
                                     /*
-                                       Não escreve zero
-                                       na escala.
+                                       Não apresenta o zero
+                                       escrito no eixo.
                                     */
 
                                     return Number(valor) === 0
@@ -828,35 +1161,35 @@ function renderAmostra(){
                             }
                         },
 
-                        y1:{
+                        y1: {
 
-                            beginAtZero:true,
+                            beginAtZero: true,
 
                             suggestedMax:
                                 limiteHoras,
 
-                            position:"right",
+                            position: "right",
 
-                            title:{
+                            title: {
 
-                                display:true,
+                                display: true,
 
-                                text:"Horas",
+                                text: "Horas",
 
-                                color:"#c026d3",
+                                color: "#c026d3",
 
-                                font:{
-                                    weight:"bold"
+                                font: {
+                                    weight: "bold"
                                 }
                             },
 
-                            grid:{
-                                drawOnChartArea:false
+                            grid: {
+                                drawOnChartArea: false
                             },
 
-                            ticks:{
+                            ticks: {
 
-                                color:"#c026d3",
+                                color: "#c026d3",
 
                                 callback(valor){
 
@@ -866,193 +1199,377 @@ function renderAmostra(){
                                             .toLocaleString(
                                                 "pt-BR",
                                                 {
-                                                    maximumFractionDigits:1
+                                                    maximumFractionDigits: 1
                                                 }
                                             );
                                 }
                             }
                         },
 
-                        x:{
+                        x: {
 
-                            offset:true,
+                            offset: true,
 
-                            grid:{
-                                display:false
+                            grid: {
+                                display: false
                             },
 
-                            ticks:{
+                            ticks: {
 
-                                color:"#5c6c96",
+                                color: "#5c6c96",
 
-                                autoSkip:false,
+                                autoSkip: false,
 
-                                maxRotation:0,
+                                maxRotation: 0,
 
-                                minRotation:0,
+                                minRotation: 0,
 
-                                font:{
-                                    size:11,
-                                    weight:"bold"
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
                                 }
                             }
                         }
                     }
                 },
 
-                plugins:[
-                    rotulosEvolucaoAmostra
+                plugins: [
+                    pluginRotulosMensais
                 ]
             }
         );
 
-    /* =====================================================
-       MINI GRÁFICOS SEM NÚMEROS
-       ===================================================== */
 
-    function criarMiniGrafico(
-        id,
-        tipo,
-        valores,
-        cor,
-        destacarMaior = false
-    ){
+    /* ======================================================
+       GRÁFICO HORIZONTAL DOS SKUs
 
-        const canvas =
-            document.getElementById(id);
+       Não possui:
+       - linha de Pareto;
+       - percentual acumulado;
+       - segundo eixo.
+       ====================================================== */
 
-        if(!canvas){
-            return;
-        }
+    const maiorQuantidadeSku =
+        Math.max(
+            1,
+            ...rankingSku.map(
+                item => item.quantidade
+            )
+        );
 
-        const maiorValor =
-            valores.length
-                ? Math.max(...valores)
-                : 0;
+    const limiteSku =
+        Math.ceil(
+            maiorQuantidadeSku * 1.20
+        );
 
-        const cores = valores.map(
-            valor => {
+    const pluginRotulosSku = {
 
-                if(
-                    destacarMaior &&
-                    valor === maiorValor &&
-                    valor > 0
-                ){
-                    return "#22c55e";
+        id: "pluginRotulosSkuAmostra",
+
+        afterDatasetsDraw(chart){
+
+            const ctx = chart.ctx;
+
+            const meta =
+                chart.getDatasetMeta(0);
+
+            ctx.save();
+
+            meta.data.forEach(
+                (barra, indice) => {
+
+                    const item =
+                        rankingSku[indice];
+
+                    if(
+                        !item ||
+                        item.quantidade <= 0
+                    ){
+                        return;
+                    }
+
+                    ctx.font =
+                        "bold 10px Arial";
+
+                    ctx.textAlign =
+                        "left";
+
+                    ctx.textBaseline =
+                        "middle";
+
+                    ctx.fillStyle =
+                        "#172653";
+
+                    ctx.fillText(
+                        numero(item.quantidade),
+                        barra.x + 6,
+                        barra.y
+                    );
                 }
+            );
 
-                return cor;
+            ctx.restore();
+        }
+    };
+
+    graficoBarrasAmostrasAtual =
+        new Chart(
+            document.getElementById(
+                "graficoBarrasAmostras"
+            ),
+            {
+                type: "bar",
+
+                data: {
+
+                    labels:
+                        rankingSku.map(
+                            item => item.sku
+                        ),
+
+                    datasets: [
+
+                        {
+                            label: "Quantidade",
+
+                            data:
+                                rankingSku.map(
+                                    item =>
+                                        item.quantidade
+                                ),
+
+                            backgroundColor:
+                                "#1d4ed8",
+
+                            borderColor:
+                                "#1d4ed8",
+
+                            borderWidth: 1,
+
+                            borderRadius: 3,
+
+                            maxBarThickness: 18,
+
+                            categoryPercentage: 0.72,
+
+                            barPercentage: 0.82,
+
+                            datalabels: {
+                                display: false
+                            }
+                        }
+                    ]
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    indexAxis: "y",
+
+                    interaction: {
+                        mode: "nearest",
+                        intersect: false
+                    },
+
+                    layout: {
+                        padding: {
+                            top: 3,
+                            right: 35,
+                            bottom: 0,
+                            left: 3
+                        }
+                    },
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true,
+
+                            position: "top",
+
+                            align: "center",
+
+                            labels: {
+
+                                usePointStyle: true,
+
+                                boxWidth: 12,
+
+                                padding: 12,
+
+                                color: "#172653",
+
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
+                                }
+                            }
+                        },
+
+                        datalabels: {
+                            display: false
+                        },
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                title(context){
+
+                                    const indice =
+                                        context[0]
+                                            .dataIndex;
+
+                                    const item =
+                                        rankingSku[indice];
+
+                                    if(!item){
+                                        return "";
+                                    }
+
+                                    return item.descricao
+                                        ? (
+                                            item.sku +
+                                            " - " +
+                                            item.descricao
+                                        )
+                                        : item.sku;
+                                },
+
+                                label(context){
+
+                                    return (
+                                        " Quantidade: " +
+                                        numero(context.raw)
+                                    );
+                                }
+                            }
+                        }
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            grid: {
+                                display: false
+                            },
+
+                            border: {
+                                display: false
+                            },
+
+                            ticks: {
+
+                                autoSkip: false,
+
+                                color: "#172653",
+
+                                padding: 5,
+
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
+                                }
+                            },
+
+                            title: {
+
+                                display: true,
+
+                                text: "SKU",
+
+                                color: "#172653",
+
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
+                                }
+                            }
+                        },
+
+                        x: {
+
+                            beginAtZero: true,
+
+                            suggestedMax:
+                                limiteSku,
+
+                            grid: {
+                                color:
+                                    "rgba(15,31,77,.08)"
+                            },
+
+                            border: {
+                                display: false
+                            },
+
+                            ticks: {
+
+                                precision: 0,
+
+                                color: "#5c6c96",
+
+                                callback(valor){
+
+                                    return Number(valor) === 0
+                                        ? ""
+                                        : numero(valor);
+                                }
+                            },
+
+                            title: {
+
+                                display: true,
+
+                                text:
+                                    "Quantidade de amostras",
+
+                                color: "#172653",
+
+                                font: {
+                                    size: 10,
+                                    weight: "bold"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                plugins: [
+                    pluginRotulosSku
+                ]
             }
         );
 
-        const grafico =
-            new Chart(canvas,{
 
-                type:tipo,
+    /* ======================================================
+       MINI GRÁFICOS INFERIORES
 
-                data:{
+       Somente barras e linha.
+       Sem números sobre os gráficos.
+       ====================================================== */
 
-                    labels:valores.map(
-                        (_,index) => index + 1
-                    ),
-
-                    datasets:[{
-
-                        data:valores,
-
-                        backgroundColor:
-                            tipo === "bar"
-                                ? cores
-                                : "transparent",
-
-                        borderColor:cor,
-
-                        borderWidth:
-                            tipo === "line"
-                                ? 2
-                                : 0,
-
-                        pointRadius:0,
-
-                        pointHoverRadius:0,
-
-                        borderRadius:2,
-
-                        maxBarThickness:10,
-
-                        tension:.25,
-
-                        fill:false
-                    }]
-                },
-
-                options:{
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    events:[],
-
-                    animation:{
-                        duration:400
-                    },
-
-                    plugins:{
-
-                        legend:{
-                            display:false
-                        },
-
-                        tooltip:{
-                            enabled:false
-                        },
-
-                        /*
-                           Remove números das barras,
-                           mesmo se ChartDataLabels estiver
-                           ativo globalmente.
-                        */
-
-                        datalabels:{
-                            display:false
-                        }
-                    },
-
-                    scales:{
-
-                        x:{
-                            display:false
-                        },
-
-                        y:{
-                            display:false,
-                            beginAtZero:true
-                        }
-                    }
-                }
-            });
-
-        window.miniGraficosAmostra
-            .push(grafico);
-    }
-
-    criarMiniGrafico(
+    criarMiniGraficoAmostra(
         "miniMediaAmostras",
         "bar",
-        valoresAmostras,
+        valoresAmostrasGrafico,
         "#3b82f6"
     );
 
-    criarMiniGrafico(
+    criarMiniGraficoAmostra(
         "miniMelhorMes",
         "bar",
-        valoresAmostras,
+        valoresAmostrasGrafico,
         "#3b82f6",
         true
     );
 
-    criarMiniGrafico(
+    criarMiniGraficoAmostra(
         "miniSku",
         "bar",
         rankingSku.map(
@@ -1061,10 +1578,10 @@ function renderAmostra(){
         "#3b82f6"
     );
 
-    criarMiniGrafico(
+    criarMiniGraficoAmostra(
         "miniTempoAmostra",
         "line",
-        valoresHoras,
+        valoresHorasGrafico,
         "#2563eb"
     );
 }
