@@ -1,0 +1,313 @@
+/* =========================================================
+   RESPONSIVIDADE GERAL
+========================================================= */
+
+@media (max-width:1200px){
+
+    .topbar{
+        grid-template-columns:180px minmax(0,1fr) auto;
+        gap:12px;
+    }
+
+    .main-wrap{
+        grid-template-columns:190px minmax(0,1fr);
+    }
+
+    .grid-4{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .rank-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (max-width:900px){
+
+    .topbar{
+        min-height:auto;
+
+        padding:12px;
+
+        grid-template-columns:1fr auto;
+        grid-template-areas:
+            "logo status"
+            "title title";
+    }
+
+    .logo-labor{
+        grid-area:logo;
+    }
+
+    .top-title{
+        grid-area:title;
+    }
+
+    .top-status{
+        grid-area:status;
+    }
+
+    .main-wrap{
+        min-height:calc(100vh - 120px);
+        grid-template-columns:76px minmax(0,1fr);
+    }
+
+    .menu{
+        top:120px;
+        height:calc(100vh - 120px);
+
+        padding-left:8px;
+        padding-right:8px;
+    }
+
+    .menu > button:not(.toggle-menu){
+        grid-template-columns:1fr;
+        justify-items:center;
+
+        padding-left:6px;
+        padding-right:6px;
+    }
+
+    .menu .label{
+        display:none;
+    }
+
+    .main-wrap.menu-fechado{
+        grid-template-columns:0 minmax(0,1fr);
+    }
+
+    .main-wrap.menu-fechado .menu{
+        padding:0;
+        border:0;
+        overflow:hidden;
+    }
+
+    .content{
+        padding:8px;
+    }
+
+    .grid-3,
+    .grid-4{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .chart-wrap{
+        height:250px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES
+========================================================= */
+
+@media (max-width:640px){
+
+    html{
+        font-size:14px;
+    }
+
+    .topbar{
+        position:relative;
+
+        grid-template-columns:1fr;
+        grid-template-areas:
+            "logo"
+            "title"
+            "status";
+
+        gap:8px;
+    }
+
+    .logo-labor,
+    .top-title{
+        text-align:center;
+    }
+
+    .top-status{
+        justify-content:center;
+    }
+
+    .main-wrap,
+    .main-wrap.menu-fechado{
+        min-height:auto;
+        display:block;
+    }
+
+    .menu{
+        width:100%;
+        height:auto;
+
+        padding:8px;
+
+        display:grid;
+        grid-template-columns:repeat(4,minmax(58px,1fr));
+        gap:6px;
+
+        position:relative;
+        top:auto;
+
+        border-right:0;
+        border-bottom:1px solid var(--cor-borda);
+
+        overflow-x:auto;
+        overflow-y:hidden;
+    }
+
+    .menu .toggle-menu{
+        display:none;
+    }
+
+    .menu > button:not(.toggle-menu),
+    .main-wrap.menu-fechado .menu > button:not(.toggle-menu){
+        min-height:54px;
+
+        padding:6px;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:3px;
+    }
+
+    .menu .label,
+    .main-wrap.menu-fechado .menu .label{
+        display:block;
+
+        font-size:.65rem;
+        line-height:1.1;
+        text-align:center;
+    }
+
+    .menu .ico{
+        font-size:1.1rem;
+    }
+
+    .content{
+        padding:7px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .grid-auto,
+    .rank-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-header,
+    .panel-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .kpi-card{
+        min-height:100px;
+
+        grid-template-columns:46px minmax(0,1fr);
+
+        padding:11px;
+    }
+
+    .kpi-icon{
+        width:46px;
+        height:46px;
+    }
+
+    .chart-wrap{
+        height:230px;
+    }
+
+    .table-scroll th,
+    .table-scroll td{
+        padding:8px 9px;
+        font-size:.72rem;
+    }
+
+    .pill{
+        min-height:28px;
+        padding:5px 8px;
+        font-size:.68rem;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width:420px){
+
+    .top-title h1{
+        font-size:1.05rem;
+    }
+
+    .top-title p{
+        font-size:.76rem;
+    }
+
+    .top-status{
+        gap:5px;
+    }
+
+    .menu{
+        grid-template-columns:repeat(3,minmax(70px,1fr));
+    }
+
+    .kpi-card{
+        grid-template-columns:42px minmax(0,1fr);
+        gap:9px;
+    }
+
+    .kpi-icon{
+        width:42px;
+        height:42px;
+        font-size:1.15rem;
+    }
+
+    .kpi-card strong{
+        font-size:1.15rem;
+    }
+
+    .chart-wrap{
+        height:210px;
+    }
+
+}
+
+
+/* =========================================================
+   TELAS BAIXAS
+========================================================= */
+
+@media (max-height:700px) and (min-width:641px){
+
+    .topbar{
+        min-height:76px;
+        padding-top:8px;
+        padding-bottom:8px;
+    }
+
+    .main-wrap{
+        min-height:calc(100vh - 76px);
+    }
+
+    .menu{
+        top:76px;
+        height:calc(100vh - 76px);
+    }
+
+    .menu > button:not(.toggle-menu){
+        min-height:48px;
+    }
+
+}
