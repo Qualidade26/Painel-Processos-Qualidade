@@ -1,7 +1,7 @@
 @import url("./base.css");
 @import url("./layout.css");
 @import url("./componentes.css");
-
+@import url("./responsivo.css");
 :root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
