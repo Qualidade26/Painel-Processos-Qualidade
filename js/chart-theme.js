@@ -1,6 +1,6 @@
+```javascript
 /* ==========================================================
    TEMA GLOBAL DOS GRÁFICOS — CHART.JS
-   Melhora nitidez, fontes, linhas, barras e tooltips
 ========================================================== */
 
 (function configurarTemaDosGraficos() {
@@ -12,11 +12,12 @@
         return;
     }
 
+
     /* ======================================================
        QUALIDADE E RESPONSIVIDADE
     ====================================================== */
-Chart.defaults.devicePixelRatio = 2;
 
+    Chart.defaults.devicePixelRatio = 2;
     Chart.defaults.responsive = true;
     Chart.defaults.maintainAspectRatio = false;
 
@@ -36,12 +37,11 @@ Chart.defaults.devicePixelRatio = 2;
 
     /* ======================================================
        ANIMAÇÃO
+       Não substituir o objeto inteiro
     ====================================================== */
 
-    Chart.defaults.animation = {
-        duration: 700,
-        easing: "easeOutQuart"
-    };
+    Chart.defaults.animation.duration = 700;
+    Chart.defaults.animation.easing = "easeOutQuart";
 
 
     /* ======================================================
@@ -68,24 +68,23 @@ Chart.defaults.devicePixelRatio = 2;
 
     /* ======================================================
        LEGENDA
+       Alterar propriedade por propriedade
     ====================================================== */
 
     Chart.defaults.plugins.legend.display = true;
     Chart.defaults.plugins.legend.position = "top";
 
-    Chart.defaults.plugins.legend.labels = {
-        color: "#172653",
-        usePointStyle: true,
-        pointStyle: "circle",
-        boxWidth: 9,
-        boxHeight: 9,
-        padding: 14,
+    Chart.defaults.plugins.legend.labels.color = "#172653";
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.pointStyle = "circle";
+    Chart.defaults.plugins.legend.labels.boxWidth = 9;
+    Chart.defaults.plugins.legend.labels.boxHeight = 9;
+    Chart.defaults.plugins.legend.labels.padding = 14;
 
-        font: {
-            family: "'Segoe UI', Arial, sans-serif",
-            size: 11,
-            weight: "700"
-        }
+    Chart.defaults.plugins.legend.labels.font = {
+        family: "'Segoe UI', Arial, sans-serif",
+        size: 11,
+        weight: "700"
     };
 
 
@@ -94,6 +93,7 @@ Chart.defaults.devicePixelRatio = 2;
     ====================================================== */
 
     Chart.defaults.plugins.tooltip.enabled = true;
+
     Chart.defaults.plugins.tooltip.backgroundColor =
         "rgba(255,255,255,.98)";
 
@@ -157,12 +157,10 @@ Chart.defaults.devicePixelRatio = 2;
        LAYOUT INTERNO
     ====================================================== */
 
-    Chart.defaults.layout.padding = {
-        top: 8,
-        right: 8,
-        bottom: 5,
-        left: 5
-    };
+    Chart.defaults.layout.padding.top = 8;
+    Chart.defaults.layout.padding.right = 8;
+    Chart.defaults.layout.padding.bottom = 5;
+    Chart.defaults.layout.padding.left = 5;
 
 
     console.log(
@@ -170,3 +168,4 @@ Chart.defaults.devicePixelRatio = 2;
     );
 
 })();
+```
