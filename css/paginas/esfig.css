@@ -1,1 +1,180 @@
+/* ==========================================================
+   PÁGINA — ESFIGMOMANÔMETRO
+========================================================== */
 
+/* Layout inferior */
+
+.esfig-bottom-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+
+    margin-top:8px;
+    margin-bottom:8px;
+}
+
+.esfig-bottom-grid > .panel{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   GRÁFICO PARETO
+========================================================== */
+
+.esfig-pareto-grande,
+.chart-box-esfig{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+    height:300px;
+}
+
+.esfig-pareto-grande canvas,
+.chart-box-esfig canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   RESUMO DO PARETO
+========================================================== */
+
+.esfig-pareto-resumo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-top:8px;
+    padding:8px 12px;
+
+    border:1px solid var(--line2);
+    border-radius:10px;
+
+    background:#eef5ff;
+    color:var(--text);
+}
+
+.esfig-pareto-resumo-icone{
+    width:30px;
+    height:30px;
+    min-width:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:var(--primary);
+    color:#fff;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+.esfig-pareto-resumo strong{
+    display:block;
+
+    color:var(--primary);
+    font-size:12px;
+}
+
+.esfig-pareto-resumo p{
+    margin:2px 0 0;
+
+    font-size:11px;
+    line-height:1.35;
+}
+
+
+/* ==========================================================
+   FLUXO
+========================================================== */
+
+.esfig-fluxo-horizontal{
+    display:grid;
+    grid-template-columns:1fr 28px 1fr 28px 1fr;
+
+    gap:4px;
+    align-items:center;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.esfig-tabela .table-wrap{
+    width:100%;
+}
+
+.esfig-tabela .table-scroll,
+.esfig-bottom-grid .table-scroll{
+    max-height:300px;
+    overflow:auto;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1050px){
+
+    .esfig-pareto-grande,
+    .chart-box-esfig{
+        height:280px;
+    }
+
+    .esfig-bottom-grid .table-scroll{
+        max-height:320px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .esfig-pareto-grande,
+    .chart-box-esfig{
+        height:250px;
+    }
+
+    .esfig-fluxo-horizontal{
+        grid-template-columns:1fr;
+    }
+
+    .esfig-fluxo-horizontal .fluxo-arrow{
+        transform:rotate(90deg);
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .esfig-pareto-grande,
+    .chart-box-esfig{
+        height:220px;
+    }
+
+    .esfig-pareto-resumo{
+        align-items:flex-start;
+        padding:8px;
+    }
+
+    .esfig-pareto-resumo p{
+        font-size:10px;
+    }
+}
