@@ -1,39 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Painel de Processos SGQ
-    </title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Painel de Processos SGQ</title>
+
+
+    <!-- =====================================================
+         ESTILOS PRINCIPAIS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="importacao.css?v=8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="esfig.css?v=8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="descarte.css?v=8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="amostras.css?v=8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="retrabalho.css?v=8"
+    >
 
     <!--
-    |--------------------------------------------------------------------------
-    | CHART.JS
-    |--------------------------------------------------------------------------
-    -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/chart.js"
-    ></script>
+    Ative esta linha somente quando o arquivo fornecedores.css existir.
 
-    <!--
-    |--------------------------------------------------------------------------
-    | ESTILOS
-    |--------------------------------------------------------------------------
+    <link
+        rel="stylesheet"
+        href="fornecedores.css?v=8"
+    >
     -->
-<link rel="stylesheet" href="fornecedores.css?v=2">
 
 </head>
 
+
 <body>
 
-    <!--
-    |--------------------------------------------------------------------------
-    | CABEÇALHO
-    |--------------------------------------------------------------------------
-    -->
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
     <header class="topbar">
 
         <div class="logo-labor">
@@ -93,21 +124,19 @@
     </header>
 
 
-    <!--
-    |--------------------------------------------------------------------------
-    | CONTEÚDO PRINCIPAL
-    |--------------------------------------------------------------------------
-    -->
+    <!-- =====================================================
+         ESTRUTURA PRINCIPAL
+    ====================================================== -->
+
     <div
         class="main-wrap"
         id="mainWrap"
     >
 
-        <!--
-        |--------------------------------------------------------------------------
-        | MENU LATERAL
-        |--------------------------------------------------------------------------
-        -->
+        <!-- =================================================
+             MENU LATERAL
+        ================================================== -->
+
         <aside
             class="menu"
             id="menuLateral"
@@ -241,46 +270,69 @@
         </aside>
 
 
-        <!--
-        |--------------------------------------------------------------------------
-        | ÁREA DINÂMICA DAS ABAS
-        |--------------------------------------------------------------------------
-        -->
+        <!-- =================================================
+             CONTEÚDO DAS ABAS
+        ================================================== -->
+
         <main
             class="content"
             id="conteudo"
-        ></main>
+        >
+        </main>
 
     </div>
 
 
-    <!--
-    |--------------------------------------------------------------------------
-    | ARQUIVOS JAVASCRIPT
-    |--------------------------------------------------------------------------
-    | A ordem é importante:
-    |
-    | 1. utils.js
-    | 2. arquivos de cada aba
-    | 3. script.js
-    |--------------------------------------------------------------------------
-    -->
+    <!-- =====================================================
+         BIBLIOTECAS DE GRÁFICOS
+    ====================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"
+    ></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"
+    ></script>
 
-<script src="chart-theme.js?v=3"></script>
 
-<script src="utils.js?v=6"></script>
-<script src="importacao.js?v=6"></script>
-<script src="esfig.js?v=3"></script>
-<script src="descarte.js?v=6"></script>
-<script src="amostras.js?v=12"></script>
-<script src="retrabalho.js?v=6"></script>
-<script src="fornecedores.js?v=6"></script>
-<script src="script.js?v=6"></script>
-    
+    <!-- =====================================================
+         TEMA GLOBAL DOS GRÁFICOS
+    ====================================================== -->
+
+    <script src="chart-theme.js?v=4"></script>
+
+
+    <!-- =====================================================
+         FUNÇÕES AUXILIARES
+    ====================================================== -->
+
+    <script src="utils.js?v=7"></script>
+
+
+    <!-- =====================================================
+         ARQUIVOS DAS ABAS
+    ====================================================== -->
+
+    <script src="importacao.js?v=7"></script>
+
+    <script src="esfig.js?v=4"></script>
+
+    <script src="descarte.js?v=7"></script>
+
+    <script src="amostras.js?v=13"></script>
+
+    <script src="retrabalho.js?v=7"></script>
+
+    <script src="fornecedores.js?v=7"></script>
+
+
+    <!-- =====================================================
+         CONTROLE PRINCIPAL DO PAINEL
+    ====================================================== -->
+
+    <script src="script.js?v=7"></script>
+
 </body>
 
 </html>
