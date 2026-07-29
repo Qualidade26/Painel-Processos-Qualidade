@@ -205,7 +205,7 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
          options: {
             responsive: true,
             maintainAspectRatio: false,
-
+devicePixelRatio: 2,
            animation: {
     duration: 700,
     easing: "easeOutQuart"
@@ -694,7 +694,7 @@ function amostraCriarGraficoMensal(labels, amostras, horas) {
             const barra = metaBarras.data[indice];
             if (!barra) return;
 
-            ctx.font = "600 11px Segoe UI";
+          ctx.font = "700 13px 'Segoe UI', Arial, sans-serif";
             ctx.textAlign = "center";
             ctx.textBaseline = "bottom";
             ctx.fillStyle = "#102052";
@@ -808,7 +808,7 @@ barPercentage: 0.82,
                 responsive: true,
 
                 maintainAspectRatio: false,
-
+devicePixelRatio: 2,
 
                 interaction: {
 
@@ -1127,7 +1127,7 @@ meta.data.forEach((barra, indice) => {
     const texto =
         amostraFormatarNumero(valor);
 
-    ctx.font = "bold 10px Arial";
+ ctx.font = "700 12px 'Segoe UI', Arial, sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#172653";
@@ -1215,6 +1215,8 @@ barPercentage: 0.90,
                 responsive: true,
 
                 maintainAspectRatio: false,
+
+               devicePixelRatio: 2,
 
                 indexAxis: "y",
 
