@@ -1,6 +1,4 @@
-from pathlib import Path
-
-js = r'''/* ==========================================================
+/* ==========================================================
    AMOSTRA — ARQUIVO COMPLETO
    Substitua todo o conteúdo atual de amostras.js por este.
    ========================================================== */
@@ -19,6 +17,7 @@ function amostraNumero(valor) {
     if (typeof valor === "number") return Number.isFinite(valor) ? valor : 0;
 
     let texto = String(valor).trim().replace(/\s/g, "");
+
     if (texto.includes(".") && texto.includes(",")) {
         texto = texto.replace(/\./g, "").replace(",", ".");
     } else if (texto.includes(",")) {
@@ -179,13 +178,16 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
         if (destacarMaior && valor === maior && valor > 0) {
             return "#22c55e";
         }
+
         return "#3b82f6";
     });
 
     const grafico = new Chart(canvas, {
         type: tipo,
+
         data: {
             labels: dadosMini.map((_, indice) => indice + 1),
+
             datasets: [{
                 data: dadosMini,
                 backgroundColor: tipo === "bar" ? cores : "transparent",
@@ -197,25 +199,52 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
                 fill: false,
                 borderRadius: 2,
                 maxBarThickness: 10,
-                datalabels: { display: false }
+                datalabels: {
+                    display: false
+                }
             }]
         },
+
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            animation: { duration: 350 },
-            events: [],
-            layout: { padding: 0 },
-            plugins: {
-                legend: { display: false },
-                tooltip: { enabled: false },
-                datalabels: { display: false }
+
+            animation: {
+                duration: 350
             },
+
+            events: [],
+
+            layout: {
+                padding: 0
+            },
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+
+                tooltip: {
+                    enabled: false
+                },
+
+                datalabels: {
+                    display: false
+                }
+            },
+
             scales: {
-                x: { display: false },
-                y: { display: false, beginAtZero: true }
+                x: {
+                    display: false
+                },
+
+                y: {
+                    display: false,
+                    beginAtZero: true
+                }
             }
         },
+
         plugins: amostraPluginsExtras()
     });
 
@@ -230,22 +259,31 @@ function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false)
 function renderAmostra() {
     amostraDestruirGraficos();
 
-    const raizDados = typeof dados !== "undefined" ? dados : {};
-    const origem = raizDados.amostras || raizDados.amostra || {};
+    const raizDados =
+        typeof dados !== "undefined"
+            ? dados
+            : {};
 
-    const mensalOriginal = Array.isArray(origem.mensal)
-        ? origem.mensal
-        : Array.isArray(origem.meses)
-            ? origem.meses
-            : [];
+    const origem =
+        raizDados.amostras ||
+        raizDados.amostra ||
+        {};
 
-    const rankingOriginal = Array.isArray(origem.top10)
-        ? origem.top10
-        : Array.isArray(origem.ranking)
-            ? origem.ranking
-            : Array.isArray(origem.skus)
-                ? origem.skus
+    const mensalOriginal =
+        Array.isArray(origem.mensal)
+            ? origem.mensal
+            : Array.isArray(origem.meses)
+                ? origem.meses
                 : [];
+
+    const rankingOriginal =
+        Array.isArray(origem.top10)
+            ? origem.top10
+            : Array.isArray(origem.ranking)
+                ? origem.ranking
+                : Array.isArray(origem.skus)
+                    ? origem.skus
+                    : [];
 
     const mensalCompleto = mensalOriginal.map((item, indice) => ({
         mes: amostraTextoMes(item, indice),
@@ -261,13 +299,19 @@ function renderAmostra() {
         }
     });
 
-    const mensalVisivel = ultimoMesComDados >= 0
-        ? mensalCompleto.slice(0, ultimoMesComDados + 1)
-        : mensalCompleto.slice(0, 1);
+    const mensalVisivel =
+        ultimoMesComDados >= 0
+            ? mensalCompleto.slice(0, ultimoMesComDados + 1)
+            : mensalCompleto.slice(0, 1);
 
-    const labelsMeses = mensalVisivel.map(item => item.mes);
-    const valoresAmostras = mensalVisivel.map(item => item.amostras);
-    const valoresHoras = mensalVisivel.map(item => item.horas);
+    const labelsMeses =
+        mensalVisivel.map(item => item.mes);
+
+    const valoresAmostras =
+        mensalVisivel.map(item => item.amostras);
+
+    const valoresHoras =
+        mensalVisivel.map(item => item.horas);
 
     const totalAmostras = mensalCompleto.reduce(
         (soma, item) => soma + item.amostras,
@@ -285,18 +329,29 @@ function renderAmostra() {
         origem.horas
     );
 
-    const totalHoras = totalHorasInformado > 0
-        ? totalHorasInformado
-        : totalHorasCalculado;
+    const totalHoras =
+        totalHorasInformado > 0
+            ? totalHorasInformado
+            : totalHorasCalculado;
 
-    const mesesComDados = mensalCompleto.filter(item => item.amostras > 0);
-    const mediaMensal = mesesComDados.length
-        ? totalAmostras / mesesComDados.length
-        : 0;
+    const mesesComDados =
+        mensalCompleto.filter(item => item.amostras > 0);
+
+    const mediaMensal =
+        mesesComDados.length
+            ? totalAmostras / mesesComDados.length
+            : 0;
 
     const melhorMes = mensalCompleto.reduce(
-        (melhor, item) => item.amostras > melhor.amostras ? item : melhor,
-        { mes: "-", amostras: 0, horas: 0 }
+        (melhor, item) =>
+            item.amostras > melhor.amostras
+                ? item
+                : melhor,
+        {
+            mes: "-",
+            amostras: 0,
+            horas: 0
+        }
     );
 
     const rankingSku = rankingOriginal
@@ -309,16 +364,19 @@ function renderAmostra() {
         .sort((a, b) => b.quantidade - a.quantidade)
         .slice(0, 10);
 
-    const skuMaisSolicitado = rankingSku[0] || {
-        sku: "-",
-        quantidade: 0
-    };
+    const skuMaisSolicitado =
+        rankingSku[0] || {
+            sku: "-",
+            quantidade: 0
+        };
 
-    const tempoMedioHoras = totalAmostras > 0
-        ? totalHoras / totalAmostras
-        : 0;
+    const tempoMedioHoras =
+        totalAmostras > 0
+            ? totalHoras / totalAmostras
+            : 0;
 
-    const tempoMedioMinutos = tempoMedioHoras * 60;
+    const tempoMedioMinutos =
+        tempoMedioHoras * 60;
 
     const elementoConteudo =
         typeof conteudo !== "undefined"
@@ -326,14 +384,20 @@ function renderAmostra() {
             : document.getElementById("conteudo");
 
     if (!elementoConteudo) {
-        console.error("Amostra: elemento #conteudo não encontrado.");
+        console.error(
+            "Amostra: elemento #conteudo não encontrado."
+        );
+
         return;
     }
 
     elementoConteudo.innerHTML = `
-        <div class="page-title">📦 AMOSTRA</div>
+        <div class="page-title">
+            📦 AMOSTRA
+        </div>
 
         <section class="cards amostra-cards-topo">
+
             ${amostraCardTopo(
                 "📦",
                 "Amostras solicitadas no ano",
@@ -347,32 +411,56 @@ function renderAmostra() {
                 amostraFormatarNumero(totalHoras, 2),
                 "Horas destinadas"
             )}
+
         </section>
+
 
         <section class="amostra-graficos-principais">
+
             <div class="panel amostra-panel-principal">
-                <h3>📈 EVOLUÇÃO MENSAL DE AMOSTRAS</h3>
+
+                <h3>
+                    📈 EVOLUÇÃO MENSAL DE AMOSTRAS
+                </h3>
 
                 <div class="amostra-chart-principal">
-                    <canvas id="graficoAmostrasMensal"></canvas>
+                    <canvas
+                        id="graficoAmostrasMensal"
+                    ></canvas>
                 </div>
+
             </div>
+
 
             <div class="panel amostra-panel-principal">
-                <h3>📊 AMOSTRAS MAIS SOLICITADAS</h3>
+
+                <h3>
+                    📊 AMOSTRAS MAIS SOLICITADAS
+                </h3>
 
                 <div class="amostra-chart-horizontal">
-                    <canvas id="graficoAmostrasHorizontal"></canvas>
+                    <canvas
+                        id="graficoAmostrasHorizontal"
+                    ></canvas>
                 </div>
+
             </div>
+
         </section>
 
+
         <section class="amostra-indicadores">
+
             <div class="panel amostra-indicador-card">
+
                 <div class="amostra-indicador-cabecalho">
-                    <span class="amostra-indicador-icone">▦</span>
+
+                    <span class="amostra-indicador-icone">
+                        ▦
+                    </span>
 
                     <div class="amostra-indicador-texto">
+
                         <span class="amostra-indicador-titulo">
                             Média de Amostras/Mês
                         </span>
@@ -384,19 +472,31 @@ function renderAmostra() {
                         <span class="amostra-indicador-subtitulo">
                             Amostras por mês
                         </span>
+
                     </div>
+
                 </div>
+
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniMediaAmostras"></canvas>
+                    <canvas
+                        id="miniMediaAmostras"
+                    ></canvas>
                 </div>
+
             </div>
 
+
             <div class="panel amostra-indicador-card">
+
                 <div class="amostra-indicador-cabecalho">
-                    <span class="amostra-indicador-icone">🏆</span>
+
+                    <span class="amostra-indicador-icone">
+                        🏆
+                    </span>
 
                     <div class="amostra-indicador-texto">
+
                         <span class="amostra-indicador-titulo">
                             Melhor mês
                         </span>
@@ -408,19 +508,31 @@ function renderAmostra() {
                         <span class="amostra-indicador-subtitulo">
                             ${melhorMes.mes}
                         </span>
+
                     </div>
+
                 </div>
+
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniMelhorMes"></canvas>
+                    <canvas
+                        id="miniMelhorMes"
+                    ></canvas>
                 </div>
+
             </div>
 
+
             <div class="panel amostra-indicador-card">
+
                 <div class="amostra-indicador-cabecalho">
-                    <span class="amostra-indicador-icone">☆</span>
+
+                    <span class="amostra-indicador-icone">
+                        ☆
+                    </span>
 
                     <div class="amostra-indicador-texto">
+
                         <span class="amostra-indicador-titulo">
                             SKU mais solicitado
                         </span>
@@ -430,44 +542,78 @@ function renderAmostra() {
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
-                            ${amostraFormatarNumero(skuMaisSolicitado.quantidade)} amostras
+                            ${amostraFormatarNumero(
+                                skuMaisSolicitado.quantidade
+                            )} amostras
                         </span>
+
                     </div>
+
                 </div>
+
 
                 <div class="amostra-mini-chart">
-                    <canvas id="miniSkuAmostra"></canvas>
+                    <canvas
+                        id="miniSkuAmostra"
+                    ></canvas>
                 </div>
+
             </div>
 
+
             <div class="panel amostra-indicador-card">
+
                 <div class="amostra-indicador-cabecalho">
-                    <span class="amostra-indicador-icone">◷</span>
+
+                    <span class="amostra-indicador-icone">
+                        ◷
+                    </span>
 
                     <div class="amostra-indicador-texto">
+
                         <span class="amostra-indicador-titulo">
                             Tempo médio por amostra
                         </span>
 
                         <strong class="amostra-indicador-valor">
-                            ${amostraFormatarNumero(tempoMedioHoras, 2)} h
+                            ${amostraFormatarNumero(
+                                tempoMedioHoras,
+                                2
+                            )} h
                         </strong>
 
                         <span class="amostra-indicador-subtitulo">
-                            ${amostraFormatarNumero(tempoMedioMinutos, 1)} min por amostra
+                            ${amostraFormatarNumero(
+                                tempoMedioMinutos,
+                                1
+                            )} min por amostra
                         </span>
+
                     </div>
+
                 </div>
 
+
                 <div class="amostra-mini-chart">
-                    <canvas id="miniTempoAmostra"></canvas>
+                    <canvas
+                        id="miniTempoAmostra"
+                    ></canvas>
                 </div>
+
             </div>
+
         </section>
     `;
 
-    amostraCriarGraficoMensal(labelsMeses, valoresAmostras, valoresHoras);
-    amostraCriarGraficoHorizontal(rankingSku);
+    amostraCriarGraficoMensal(
+        labelsMeses,
+        valoresAmostras,
+        valoresHoras
+    );
+
+    amostraCriarGraficoHorizontal(
+        rankingSku
+    );
 
     amostraCriarMiniGrafico(
         "miniMediaAmostras",
@@ -485,7 +631,9 @@ function renderAmostra() {
     amostraCriarMiniGrafico(
         "miniSkuAmostra",
         "bar",
-        rankingSku.map(item => item.quantidade)
+        rankingSku.map(
+            item => item.quantidade
+        )
     );
 
     amostraCriarMiniGrafico(
@@ -494,404 +642,898 @@ function renderAmostra() {
         valoresHoras
     );
 }
-
-
 /* ==========================================================
    GRÁFICO MENSAL
    ========================================================== */
 
 function amostraCriarGraficoMensal(labels, amostras, horas) {
-    const canvas = document.getElementById("graficoAmostrasMensal");
+    const canvas =
+        document.getElementById(
+            "graficoAmostrasMensal"
+        );
+
     if (!canvas) return;
 
-    const maiorAmostra = Math.max(1, ...amostras);
-    const maiorHora = Math.max(1, ...horas);
+
+    const maiorAmostra =
+        Math.max(
+            1,
+            ...amostras
+        );
+
+    const maiorHora =
+        Math.max(
+            1,
+            ...horas
+        );
+
 
     const pluginRotulos = {
         id: "rotulosGraficoMensalAmostra",
 
         afterDatasetsDraw(chart) {
-            const ctx = chart.ctx;
-            const metaBarras = chart.getDatasetMeta(0);
-            const metaLinha = chart.getDatasetMeta(1);
+            const ctx =
+                chart.ctx;
+
+            const metaBarras =
+                chart.getDatasetMeta(0);
+
+            const metaLinha =
+                chart.getDatasetMeta(1);
+
 
             ctx.save();
 
-            amostras.forEach((valor, indice) => {
-                if (valor <= 0) return;
 
-                const barra = metaBarras.data[indice];
-                if (!barra) return;
+            amostras.forEach(
+                (valor, indice) => {
 
-                ctx.font = "bold 10px Arial";
-                ctx.textAlign = "center";
-                ctx.textBaseline = "bottom";
-                ctx.fillStyle = "#102052";
+                    if (valor <= 0) return;
 
-                ctx.fillText(
-                    amostraFormatarNumero(valor),
-                    barra.x,
-                    barra.y - 7
-                );
-            });
 
-            horas.forEach((valor, indice) => {
-                if (valor <= 0) return;
+                    const barra =
+                        metaBarras.data[indice];
 
-                const ponto = metaLinha.data[indice];
-                const barra = metaBarras.data[indice];
+                    if (!barra) return;
 
-                if (!ponto) return;
 
-                const distancia = barra
-                    ? Math.abs(ponto.y - barra.y)
-                    : 100;
+                    ctx.font =
+                        "bold 10px Arial";
 
-                const pertoDoTopo =
-                    ponto.y < chart.chartArea.top + 24;
+                    ctx.textAlign =
+                        "center";
 
-                const colocarAbaixo =
-                    distancia < 28 || pertoDoTopo;
+                    ctx.textBaseline =
+                        "bottom";
 
-                ctx.font = "bold 9px Arial";
-                ctx.textAlign = "center";
-                ctx.fillStyle = "#c026d3";
+                    ctx.fillStyle =
+                        "#102052";
 
-                if (colocarAbaixo) {
-                    ctx.textBaseline = "top";
+
                     ctx.fillText(
-                        amostraFormatarNumero(valor, 2),
-                        ponto.x,
-                        ponto.y + 9
-                    );
-                } else {
-                    ctx.textBaseline = "bottom";
-                    ctx.fillText(
-                        amostraFormatarNumero(valor, 2),
-                        ponto.x,
-                        ponto.y - 8
+                        amostraFormatarNumero(valor),
+                        barra.x,
+                        barra.y - 7
                     );
                 }
-            });
+            );
+
+
+            horas.forEach(
+                (valor, indice) => {
+
+                    if (valor <= 0) return;
+
+
+                    const ponto =
+                        metaLinha.data[indice];
+
+                    const barra =
+                        metaBarras.data[indice];
+
+
+                    if (!ponto) return;
+
+
+                    const distancia =
+                        barra
+                            ? Math.abs(
+                                ponto.y - barra.y
+                            )
+                            : 100;
+
+
+                    const pertoDoTopo =
+                        ponto.y <
+                        chart.chartArea.top + 24;
+
+
+                    const colocarAbaixo =
+                        distancia < 28 ||
+                        pertoDoTopo;
+
+
+                    ctx.font =
+                        "bold 9px Arial";
+
+                    ctx.textAlign =
+                        "center";
+
+                    ctx.fillStyle =
+                        "#c026d3";
+
+
+                    if (colocarAbaixo) {
+
+                        ctx.textBaseline =
+                            "top";
+
+                        ctx.fillText(
+                            amostraFormatarNumero(
+                                valor,
+                                2
+                            ),
+                            ponto.x,
+                            ponto.y + 9
+                        );
+
+                    } else {
+
+                        ctx.textBaseline =
+                            "bottom";
+
+                        ctx.fillText(
+                            amostraFormatarNumero(
+                                valor,
+                                2
+                            ),
+                            ponto.x,
+                            ponto.y - 8
+                        );
+                    }
+                }
+            );
+
 
             ctx.restore();
         }
     };
 
-    graficoAmostrasMensal = new Chart(canvas, {
-        type: "bar",
-        data: {
-            labels,
-            datasets: [
-                {
-                    type: "bar",
-                    label: "Amostras",
-                    data: amostras,
-                    backgroundColor: "#1d4ed8",
-                    borderColor: "#1d4ed8",
-                    borderWidth: 1,
-                    borderRadius: 4,
-                    maxBarThickness: 30,
-                    categoryPercentage: 0.72,
-                    barPercentage: 0.72,
-                    yAxisID: "y",
-                    order: 2,
-                    datalabels: { display: false }
-                },
-                {
-                    type: "line",
-                    label: "Horas",
-                    data: horas,
-                    borderColor: "#c026d3",
-                    backgroundColor: "#c026d3",
-                    borderWidth: 2,
-                    borderDash: [6, 4],
-                    tension: 0.22,
-                    fill: false,
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    pointBackgroundColor: "#ffffff",
-                    pointBorderColor: "#c026d3",
-                    pointBorderWidth: 2,
-                    yAxisID: "y1",
-                    order: 1,
-                    datalabels: { display: false }
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                mode: "index",
-                intersect: false
-            },
-            layout: {
-                padding: {
-                    top: 26,
-                    right: 6,
-                    bottom: 0,
-                    left: 0
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "top",
-                    labels: {
-                        usePointStyle: true,
-                        boxWidth: 10,
-                        padding: 12,
-                        color: "#172653",
-                        font: {
-                            size: 10,
-                            weight: "bold"
+
+    graficoAmostrasMensal =
+        new Chart(canvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels,
+
+                datasets: [
+
+                    {
+                        type: "bar",
+
+                        label: "Amostras",
+
+                        data: amostras,
+
+                        backgroundColor:
+                            "#1d4ed8",
+
+                        borderColor:
+                            "#1d4ed8",
+
+                        borderWidth: 1,
+
+                        borderRadius: 4,
+
+                        maxBarThickness: 30,
+
+                        categoryPercentage: 0.72,
+
+                        barPercentage: 0.72,
+
+                        yAxisID: "y",
+
+                        order: 2,
+
+                        datalabels: {
+                            display: false
+                        }
+                    },
+
+
+                    {
+                        type: "line",
+
+                        label: "Horas",
+
+                        data: horas,
+
+                        borderColor:
+                            "#c026d3",
+
+                        backgroundColor:
+                            "#c026d3",
+
+                        borderWidth: 2,
+
+                        borderDash: [
+                            6,
+                            4
+                        ],
+
+                        tension: 0.22,
+
+                        fill: false,
+
+                        pointRadius: 4,
+
+                        pointHoverRadius: 6,
+
+                        pointBackgroundColor:
+                            "#ffffff",
+
+                        pointBorderColor:
+                            "#c026d3",
+
+                        pointBorderWidth: 2,
+
+                        yAxisID: "y1",
+
+                        order: 1,
+
+                        datalabels: {
+                            display: false
                         }
                     }
-                },
-                tooltip: {
-                    callbacks: {
-                        label(context) {
-                            const valor = amostraNumero(context.raw);
 
-                            if (context.dataset.yAxisID === "y1") {
-                                return ` Horas: ${amostraFormatarNumero(valor, 2)} h`;
+                ]
+            },
+
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+
+                interaction: {
+
+                    mode: "index",
+
+                    intersect: false
+
+                },
+
+
+                layout: {
+
+                    padding: {
+
+                        top: 26,
+
+                        right: 6,
+
+                        bottom: 0,
+
+                        left: 0
+
+                    }
+
+                },
+
+
+                plugins: {
+
+                    legend: {
+
+                        display: true,
+
+                        position: "top",
+
+                        labels: {
+
+                            usePointStyle: true,
+
+                            boxWidth: 10,
+
+                            padding: 12,
+
+                            color: "#172653",
+
+                            font: {
+
+                                size: 10,
+
+                                weight: "bold"
+
                             }
 
-                            return ` Amostras: ${amostraFormatarNumero(valor)}`;
                         }
+
+                    },
+
+
+                    tooltip: {
+
+                        callbacks: {
+
+                            label(context) {
+
+                                const valor =
+                                    amostraNumero(
+                                        context.raw
+                                    );
+
+
+                                if (
+                                    context.dataset.yAxisID ===
+                                    "y1"
+                                ) {
+
+                                    return (
+                                        ` Horas: ${
+                                            amostraFormatarNumero(
+                                                valor,
+                                                2
+                                            )
+                                        } h`
+                                    );
+
+                                }
+
+
+                                return (
+                                    ` Amostras: ${
+                                        amostraFormatarNumero(
+                                            valor
+                                        )
+                                    }`
+                                );
+                            }
+
+                        }
+
+                    },
+
+
+                    datalabels: {
+
+                        display: false
+
                     }
+
                 },
-                datalabels: { display: false }
-            },
-            scales: {
-                x: {
-                    offset: true,
-                    grid: { display: false },
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 0,
-                        minRotation: 0,
-                        color: "#5c6c96",
-                        font: {
-                            size: 9,
-                            weight: "bold"
+
+
+                scales: {
+
+                    x: {
+
+                        offset: true,
+
+                        grid: {
+
+                            display: false
+
+                        },
+
+                        ticks: {
+
+                            autoSkip: false,
+
+                            maxRotation: 0,
+
+                            minRotation: 0,
+
+                            color: "#5c6c96",
+
+                            font: {
+
+                                size: 9,
+
+                                weight: "bold"
+
+                            }
+
                         }
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    suggestedMax: Math.ceil(maiorAmostra * 1.35),
-                    position: "left",
-                    grid: {
-                        color: "rgba(15,31,77,.08)"
+
                     },
-                    title: {
-                        display: true,
-                        text: "Quantidade de amostras",
-                        color: "#172653",
-                        font: { weight: "bold" }
-                    },
-                    ticks: {
-                        precision: 0,
-                        color: "#5c6c96",
-                        callback(valor) {
-                            return Number(valor) === 0
-                                ? ""
-                                : amostraFormatarNumero(valor);
+
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        suggestedMax:
+                            Math.ceil(
+                                maiorAmostra * 1.35
+                            ),
+
+                        position: "left",
+
+                        grid: {
+
+                            color:
+                                "rgba(15,31,77,.08)"
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text:
+                                "Quantidade de amostras",
+
+                            color:
+                                "#172653",
+
+                            font: {
+
+                                weight: "bold"
+
+                            }
+
+                        },
+
+                        ticks: {
+
+                            precision: 0,
+
+                            color:
+                                "#5c6c96",
+
+                            callback(valor) {
+
+                                return (
+                                    Number(valor) === 0
+                                        ? ""
+                                        : amostraFormatarNumero(
+                                            valor
+                                        )
+                                );
+
+                            }
+
                         }
-                    }
-                },
-                y1: {
-                    beginAtZero: true,
-                    suggestedMax: maiorHora * 1.4,
-                    position: "right",
-                    grid: {
-                        drawOnChartArea: false
+
                     },
-                    title: {
-                        display: true,
-                        text: "Horas",
-                        color: "#c026d3",
-                        font: { weight: "bold" }
-                    },
-                    ticks: {
-                        color: "#c026d3",
-                        callback(valor) {
-                            return Number(valor) === 0
-                                ? ""
-                                : amostraFormatarNumero(valor, 1);
+
+
+                    y1: {
+
+                        beginAtZero: true,
+
+                        suggestedMax:
+                            maiorHora * 1.4,
+
+                        position: "right",
+
+                        grid: {
+
+                            drawOnChartArea:
+                                false
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text: "Horas",
+
+                            color:
+                                "#c026d3",
+
+                            font: {
+
+                                weight: "bold"
+
+                            }
+
+                        },
+
+                        ticks: {
+
+                            color:
+                                "#c026d3",
+
+                            callback(valor) {
+
+                                return (
+                                    Number(valor) === 0
+                                        ? ""
+                                        : amostraFormatarNumero(
+                                            valor,
+                                            1
+                                        )
+                                );
+
+                            }
+
                         }
+
                     }
+
                 }
-            }
-        },
-        plugins: [
-            ...amostraPluginsExtras(),
-            pluginRotulos
-        ]
-    });
+
+            },
+
+
+            plugins: [
+
+                ...amostraPluginsExtras(),
+
+                pluginRotulos
+
+            ]
+
+        });
 }
-
-
 /* ==========================================================
    GRÁFICO HORIZONTAL
    Apenas barras — sem linha de Pareto.
    ========================================================== */
 
 function amostraCriarGraficoHorizontal(ranking) {
-    const canvas = document.getElementById("graficoAmostrasHorizontal");
+    const canvas =
+        document.getElementById(
+            "graficoAmostrasHorizontal"
+        );
+
     if (!canvas) return;
 
-    const dadosRanking = ranking.length
-        ? ranking
-        : [{ sku: "Sem dados", descricao: "", quantidade: 0 }];
 
-    const maiorQuantidade = Math.max(
-        1,
-        ...dadosRanking.map(item => item.quantidade)
-    );
+    const dadosRanking =
+        ranking.length
+            ? ranking
+            : [
+                {
+                    sku: "Sem dados",
+                    descricao: "",
+                    quantidade: 0
+                }
+            ];
+
+
+    const maiorQuantidade =
+        Math.max(
+            1,
+            ...dadosRanking.map(
+                item => item.quantidade
+            )
+        );
+
 
     const pluginRotulos = {
         id: "rotulosGraficoHorizontalAmostra",
 
         afterDatasetsDraw(chart) {
-            const ctx = chart.ctx;
-            const meta = chart.getDatasetMeta(0);
+            const ctx =
+                chart.ctx;
+
+            const meta =
+                chart.getDatasetMeta(0);
+
 
             ctx.save();
 
-            meta.data.forEach((barra, indice) => {
-                const valor = dadosRanking[indice]?.quantidade || 0;
-                if (valor <= 0) return;
 
-                ctx.font = "bold 10px Arial";
-                ctx.textAlign = "left";
-                ctx.textBaseline = "middle";
-                ctx.fillStyle = "#172653";
+            meta.data.forEach(
+                (barra, indice) => {
 
-                ctx.fillText(
-                    amostraFormatarNumero(valor),
-                    barra.x + 6,
-                    barra.y
-                );
-            });
+                    const valor =
+                        dadosRanking[indice]
+                            ?.quantidade || 0;
+
+
+                    if (valor <= 0) return;
+
+
+                    ctx.font =
+                        "bold 10px Arial";
+
+                    ctx.textAlign =
+                        "left";
+
+                    ctx.textBaseline =
+                        "middle";
+
+                    ctx.fillStyle =
+                        "#172653";
+
+
+                    ctx.fillText(
+                        amostraFormatarNumero(valor),
+                        barra.x + 6,
+                        barra.y
+                    );
+                }
+            );
+
 
             ctx.restore();
         }
     };
 
-    graficoAmostrasHorizontal = new Chart(canvas, {
-        type: "bar",
-        data: {
-            labels: dadosRanking.map(item => item.sku),
-            datasets: [{
-                label: "Quantidade",
-                data: dadosRanking.map(item => item.quantidade),
-                backgroundColor: "#1d4ed8",
-                borderColor: "#1d4ed8",
-                borderWidth: 1,
-                borderRadius: 3,
-                maxBarThickness: 18,
-                categoryPercentage: 0.72,
-                barPercentage: 0.82,
-                datalabels: { display: false }
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            indexAxis: "y",
-            interaction: {
-                mode: "nearest",
-                intersect: false
-            },
-            layout: {
-                padding: {
-                    top: 4,
-                    right: 38,
-                    bottom: 0,
-                    left: 2
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "top",
-                    labels: {
-                        usePointStyle: true,
-                        boxWidth: 10,
-                        padding: 12,
-                        color: "#172653",
-                        font: {
-                            size: 10,
-                            weight: "bold"
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title(context) {
-                            const item = dadosRanking[context[0].dataIndex];
 
-                            return item.descricao
-                                ? `${item.sku} — ${item.descricao}`
-                                : item.sku;
-                        },
-                        label(context) {
-                            return ` Quantidade: ${amostraFormatarNumero(context.raw)}`;
+    graficoAmostrasHorizontal =
+        new Chart(canvas, {
+
+            type: "bar",
+
+
+            data: {
+
+                labels:
+                    dadosRanking.map(
+                        item => item.sku
+                    ),
+
+
+                datasets: [
+
+                    {
+                        label: "Quantidade",
+
+                        data:
+                            dadosRanking.map(
+                                item => item.quantidade
+                            ),
+
+                        backgroundColor:
+                            "#1d4ed8",
+
+                        borderColor:
+                            "#1d4ed8",
+
+                        borderWidth: 1,
+
+                        borderRadius: 3,
+
+                        maxBarThickness: 18,
+
+                        categoryPercentage:
+                            0.72,
+
+                        barPercentage:
+                            0.82,
+
+                        datalabels: {
+                            display: false
                         }
                     }
-                },
-                datalabels: { display: false }
+
+                ]
             },
-            scales: {
-                y: {
-                    grid: { display: false },
-                    border: { display: false },
-                    ticks: {
-                        autoSkip: false,
-                        color: "#172653",
-                        font: {
-                            size: 9,
-                            weight: "bold"
-                        }
-                    }
+
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                indexAxis: "y",
+
+
+                interaction: {
+
+                    mode: "nearest",
+
+                    intersect: false
+
                 },
-                x: {
-                    beginAtZero: true,
-                    suggestedMax: Math.ceil(maiorQuantidade * 1.2),
-                    grid: {
-                        color: "rgba(15,31,77,.08)"
-                    },
-                    border: { display: false },
-                    title: {
+
+
+                layout: {
+
+                    padding: {
+
+                        top: 4,
+
+                        right: 38,
+
+                        bottom: 0,
+
+                        left: 2
+
+                    }
+
+                },
+
+
+                plugins: {
+
+                    legend: {
+
                         display: true,
-                        text: "Quantidade de amostras",
-                        color: "#172653",
-                        font: { weight: "bold" }
-                    },
-                    ticks: {
-                        precision: 0,
-                        color: "#5c6c96",
-                        callback(valor) {
-                            return Number(valor) === 0
-                                ? ""
-                                : amostraFormatarNumero(valor);
-                        }
-                    }
-                }
-            }
-        },
-        plugins: [
-            ...amostraPluginsExtras(),
-            pluginRotulos
-        ]
-    });
-}
-'''
 
-path = Path("/mnt/data/amostras.js")
-path.write_text(js, encoding="utf-8")
-print(f"Arquivo criado: {path}")
-print(f"Linhas: {len(js.splitlines())}")
+                        position: "top",
+
+                        labels: {
+
+                            usePointStyle: true,
+
+                            boxWidth: 10,
+
+                            padding: 12,
+
+                            color:
+                                "#172653",
+
+                            font: {
+
+                                size: 10,
+
+                                weight: "bold"
+
+                            }
+
+                        }
+
+                    },
+
+
+                    tooltip: {
+
+                        callbacks: {
+
+                            title(context) {
+
+                                const item =
+                                    dadosRanking[
+                                        context[0].dataIndex
+                                    ];
+
+
+                                return item.descricao
+                                    ? `${item.sku} — ${item.descricao}`
+                                    : item.sku;
+                            },
+
+
+                            label(context) {
+
+                                return (
+                                    ` Quantidade: ${
+                                        amostraFormatarNumero(
+                                            context.raw
+                                        )
+                                    }`
+                                );
+
+                            }
+
+                        }
+
+                    },
+
+
+                    datalabels: {
+
+                        display: false
+
+                    }
+
+                },
+
+
+                scales: {
+
+                    y: {
+
+                        grid: {
+
+                            display: false
+
+                        },
+
+                        border: {
+
+                            display: false
+
+                        },
+
+                        ticks: {
+
+                            autoSkip: false,
+
+                            color:
+                                "#172653",
+
+                            font: {
+
+                                size: 9,
+
+                                weight: "bold"
+
+                            }
+
+                        }
+
+                    },
+
+
+                    x: {
+
+                        beginAtZero: true,
+
+                        suggestedMax:
+                            Math.ceil(
+                                maiorQuantidade * 1.2
+                            ),
+
+                        grid: {
+
+                            color:
+                                "rgba(15,31,77,.08)"
+
+                        },
+
+                        border: {
+
+                            display: false
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text:
+                                "Quantidade de amostras",
+
+                            color:
+                                "#172653",
+
+                            font: {
+
+                                weight: "bold"
+
+                            }
+
+                        },
+
+                        ticks: {
+
+                            precision: 0,
+
+                            color:
+                                "#5c6c96",
+
+                            callback(valor) {
+
+                                return (
+                                    Number(valor) === 0
+                                        ? ""
+                                        : amostraFormatarNumero(
+                                            valor
+                                        )
+                                );
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            },
+
+
+            plugins: [
+
+                ...amostraPluginsExtras(),
+
+                pluginRotulos
+
+            ]
+
+        });
+}
