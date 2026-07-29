@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -19,16 +20,20 @@
 
 
     <!-- =====================================================
-         ARQUIVOS CSS
-         A ordem de carregamento é importante
+         CSS PRINCIPAL
+
+         O arquivo style.css já importa:
+         - base.css
+         - layout.css
+         - componentes.css
+         - responsivo.css
+         - todos os CSS das páginas
     ====================================================== -->
 
- <link rel="stylesheet" href="css/paginas/importacao.css?v=10">
-<link rel="stylesheet" href="css/paginas/esfig.css?v=10">
-<link rel="stylesheet" href="css/paginas/descarte.css?v=10">
-<link rel="stylesheet" href="css/paginas/amostra.css?v=12">
-<link rel="stylesheet" href="css/paginas/retrabalho.css?v=10">
-<link rel="stylesheet" href="css/paginas/fornecedores.css?v=10">
+    <link
+        rel="stylesheet"
+        href="css/style.css?v=13"
+    >
 
 </head>
 
@@ -185,7 +190,7 @@
             </button>
 
 
-            <!-- AMOSTRAS -->
+            <!-- AMOSTRA -->
 
             <button
                 type="button"
@@ -288,7 +293,7 @@
          BIBLIOTECAS EXTERNAS
     ====================================================== -->
 
-    <!-- Chart.js carregado somente uma vez -->
+    <!-- Chart.js -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"
@@ -306,42 +311,44 @@
          TEMA GLOBAL DOS GRÁFICOS
     ====================================================== -->
 
-    <script src="js/chart-theme.js?v=9"></script>
+    <script src="js/chart-theme.js?v=10"></script>
 
 
     <!-- =====================================================
          FUNÇÕES AUXILIARES
     ====================================================== -->
 
-    <script src="js/utils.js?v=9"></script>
+    <script src="js/utils.js?v=10"></script>
 
 
     <!-- =====================================================
          ARQUIVOS DAS ABAS
     ====================================================== -->
 
-    <script src="js/importacao.js?v=9"></script>
+    <script src="js/importacao.js?v=10"></script>
 
-    <script src="js/esfig.js?v=9"></script>
+    <script src="js/esfig.js?v=10"></script>
 
-    <script src="js/descarte.js?v=9"></script>
+    <script src="js/descarte.js?v=10"></script>
 
-    <script src="js/amostras.js?v=15"></script>
+    <script src="js/amostras.js?v=16"></script>
 
-    <script src="js/retrabalho.js?v=9"></script>
+    <script src="js/retrabalho.js?v=10"></script>
 
-    <script src="js/fornecedores.js?v=9"></script>
+    <script src="js/fornecedores.js?v=10"></script>
 
-    <script src="js/informativo.js?v=9"></script>
+    <script src="js/informativo.js?v=10"></script>
 
 
     <!-- =====================================================
          CONTROLE PRINCIPAL
-         Deve ser o último arquivo carregado
+
+         Deve permanecer como o último arquivo JavaScript
     ====================================================== -->
 
-    <script src="js/script.js?v=9"></script>
+    <script src="js/script.js?v=10"></script>
 
 </body>
 
 </html>
+```
