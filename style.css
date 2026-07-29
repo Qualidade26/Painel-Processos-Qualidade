@@ -1883,58 +1883,90 @@ td{
     }
 }
 /* ==========================================================
-   ABA AMOSTRA
+   ABA AMOSTRA — LAYOUT COMPACTO E ALINHADO
    ========================================================== */
 
+/* Cards superiores */
+
 .amostra-cards-topo{
+    display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:8px;
 }
 
+.amostra-cards-topo .kpi-card{
+    min-height:76px;
+}
+
+/* Área dos dois gráficos principais */
+
 .amostra-graficos-principais{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:8px;
     align-items:stretch;
+    margin-bottom:8px;
 }
 
 .amostra-panel-principal{
+    width:100%;
     min-width:0;
-    height:420px;
+    height:355px;
+    padding:9px;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
 }
 
 .amostra-panel-principal h3{
     flex:0 0 auto;
+    min-height:22px;
+    margin:0 0 4px;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    line-height:1.2;
     text-align:center;
-    margin:0 0 10px;
 }
+
+/* Caixas dos gráficos */
 
 .amostra-chart-principal,
 .amostra-chart-pareto{
     position:relative;
-    flex:1;
-    min-height:0;
+    flex:1 1 auto;
     width:100%;
+    min-width:0;
+    min-height:0;
+    height:auto;
 }
 
 .amostra-chart-principal canvas,
 .amostra-chart-pareto canvas{
+    display:block;
     width:100% !important;
     height:100% !important;
+    max-width:100% !important;
 }
 
-/* INDICADORES INFERIORES */
+/* Indicadores inferiores */
 
 .amostra-indicadores{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:10px;
-    margin-top:10px;
-    margin-bottom:8px;
+    gap:8px;
+    margin:0 0 8px;
 }
 
 .amostra-indicador-card{
+    width:100%;
     min-width:0;
-    min-height:176px;
-    padding:15px 16px 10px;
+    height:142px;
+    min-height:142px;
+    padding:10px 11px 7px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -1942,96 +1974,131 @@ td{
 }
 
 .amostra-indicador-conteudo{
-    display:flex;
-    align-items:flex-start;
-    gap:13px;
+    display:grid;
+    grid-template-columns:44px minmax(0,1fr);
+    align-items:center;
+    gap:9px;
     min-width:0;
 }
 
 .amostra-indicador-conteudo > div:last-child{
     min-width:0;
-    flex:1;
+    overflow:hidden;
 }
 
 .amostra-indicador-icone{
-    width:54px;
-    height:54px;
-    flex:0 0 54px;
-    border-radius:16px;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    border-radius:13px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(
-        135deg,
-        rgba(37,99,235,.08),
-        rgba(37,99,235,.18)
-    );
-    color:#1454df;
-    font-size:30px;
-    font-weight:700;
+    background:#e8f0ff;
+    border:1px solid var(--line2);
+    color:var(--primary);
+    font-size:24px;
+    font-weight:900;
 }
 
 .amostra-indicador-titulo{
     display:block;
-    color:#1454df;
-    font-size:11px;
+    margin:0 0 3px;
+    color:var(--primary);
+    font-size:10px;
     font-weight:900;
+    line-height:1.15;
     text-transform:uppercase;
-    line-height:1.25;
-    margin-bottom:5px;
+    white-space:normal;
 }
 
 .amostra-indicador-valor{
     display:block;
-    color:#102052;
-    font-size:clamp(24px,2vw,32px);
+    max-width:100%;
+    color:var(--text);
+    font-size:25px;
     font-weight:900;
-    line-height:1.05;
+    line-height:1;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
 .amostra-indicador-valor.amostra-sku{
-    font-size:clamp(21px,1.8vw,29px);
+    font-size:22px;
 }
 
 .amostra-indicador-subtitulo{
     display:block;
-    color:#33457b;
-    font-size:12px;
-    font-weight:700;
-    margin-top:5px;
+    max-width:100%;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    line-height:1.15;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
+/* Mini gráficos */
+
 .amostra-mini-chart{
     position:relative;
     width:100%;
-    height:53px;
-    margin-top:8px;
+    height:42px;
+    min-height:42px;
+    margin-top:4px;
 }
 
 .amostra-mini-chart canvas{
+    display:block;
     width:100% !important;
     height:100% !important;
+    max-width:100% !important;
 }
 
-/* RESPONSIVIDADE DA ABA AMOSTRA */
+/* Notebook */
 
-@media(max-width:1200px){
+@media(max-width:1250px){
 
-    .amostra-indicadores{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .amostra-panel-principal{
+        height:340px;
+    }
+
+    .amostra-indicador-card{
+        height:138px;
+        min-height:138px;
+        padding:9px;
+    }
+
+    .amostra-indicador-icone{
+        width:40px;
+        height:40px;
+        min-width:40px;
+        font-size:22px;
+    }
+
+    .amostra-indicador-conteudo{
+        grid-template-columns:40px minmax(0,1fr);
+        gap:7px;
+    }
+
+    .amostra-indicador-valor{
+        font-size:22px;
+    }
+
+    .amostra-indicador-valor.amostra-sku{
+        font-size:19px;
     }
 }
+
+/* Tablet */
 
 @media(max-width:900px){
 
     .amostra-cards-topo{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .amostra-graficos-principais{
@@ -2039,17 +2106,32 @@ td{
     }
 
     .amostra-panel-principal{
-        height:410px;
+        height:350px;
+    }
+
+    .amostra-indicadores{
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 }
 
+/* Celular */
+
 @media(max-width:600px){
+
+    .amostra-cards-topo{
+        grid-template-columns:1fr;
+    }
+
+    .amostra-panel-principal{
+        height:330px;
+    }
 
     .amostra-indicadores{
         grid-template-columns:1fr;
     }
 
-    .amostra-panel-principal{
-        height:380px;
+    .amostra-indicador-card{
+        height:135px;
+        min-height:135px;
     }
 }
