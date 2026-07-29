@@ -2,6 +2,14 @@
 @import url("./layout.css");
 @import url("./componentes.css");
 @import url("./responsivo.css");
+
+@import url("./paginas/importacao.css");
+@import url("./paginas/esfig.css");
+@import url("./paginas/descarte.css");
+@import url("./paginas/amostra.css");
+@import url("./paginas/retrabalho.css");
+@import url("./paginas/fornecedores.css");
+@import url("./paginas/informativo.css");
 :root{
     --bg:#dfeeff;
     --top1:#0f3cc9;
