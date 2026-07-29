@@ -1,1 +1,263 @@
+/* ==========================================================
+   PÁGINA — RETRABALHO
+========================================================== */
 
+
+/* ==========================================================
+   INDICADORES
+========================================================== */
+
+.retrabalho-indicadores,
+.cards-retrabalho{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.retrabalho-indicadores > *,
+.cards-retrabalho > *{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   GRADE PRINCIPAL
+   GRÁFICO + TABELA
+========================================================== */
+
+.retrabalho-grid,
+.grid-retrabalho{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:8px;
+    align-items:stretch;
+    margin-bottom:8px;
+}
+
+.retrabalho-grid > .panel,
+.grid-retrabalho > .panel{
+    width:100%;
+    min-width:0;
+    min-height:430px;
+}
+
+
+/* ==========================================================
+   GRÁFICO
+========================================================== */
+
+.retrabalho-chart-box,
+.retrabalho-grid .chart-box,
+.grid-retrabalho .chart-box{
+    position:relative;
+    width:100%;
+    min-width:0;
+    height:350px;
+    min-height:350px;
+}
+
+.retrabalho-chart-box canvas,
+.retrabalho-grid .chart-box canvas,
+.grid-retrabalho .chart-box canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.retrabalho-tabela,
+.retrabalho-grid .table-wrap,
+.grid-retrabalho .table-wrap{
+    width:100%;
+    min-width:0;
+}
+
+.retrabalho-tabela .table-scroll,
+.retrabalho-grid .table-scroll,
+.grid-retrabalho .table-scroll{
+    width:100%;
+    max-height:355px;
+    overflow:auto;
+}
+
+.retrabalho-tabela table{
+    width:100%;
+    min-width:650px;
+}
+
+
+/* ==========================================================
+   FILTRO / PESQUISA
+========================================================== */
+
+.retrabalho-filtros{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+}
+
+.retrabalho-filtros input,
+.retrabalho-filtros select,
+#buscaFabricante{
+    min-height:38px;
+    padding:8px 10px;
+
+    border:1px solid var(--line);
+    border-radius:8px;
+
+    background:#fff;
+    color:var(--text);
+
+    outline:none;
+}
+
+.retrabalho-filtros input,
+#buscaFabricante{
+    min-width:220px;
+    flex:1;
+}
+
+.retrabalho-filtros input:focus,
+.retrabalho-filtros select:focus,
+#buscaFabricante:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 2px rgba(29,78,255,.10);
+}
+
+
+/* ==========================================================
+   COMPATIBILIDADE COM CLASSES GERAIS
+========================================================== */
+
+.pagina-retrabalho .cards{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.pagina-retrabalho .grid-2{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:8px;
+    align-items:stretch;
+    margin-bottom:8px;
+}
+
+.pagina-retrabalho .grid-2 > .panel{
+    width:100%;
+    min-width:0;
+    min-height:430px;
+}
+
+.pagina-retrabalho .grid-2 .chart-box.tall{
+    position:relative;
+    width:100%;
+    min-width:0;
+    height:350px;
+    min-height:350px;
+}
+
+.pagina-retrabalho .grid-2 .chart-box.tall canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1050px){
+
+    .retrabalho-grid,
+    .grid-retrabalho,
+    .pagina-retrabalho .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .retrabalho-grid > .panel,
+    .grid-retrabalho > .panel,
+    .pagina-retrabalho .grid-2 > .panel{
+        min-height:0;
+    }
+
+    .retrabalho-chart-box,
+    .retrabalho-grid .chart-box,
+    .grid-retrabalho .chart-box,
+    .pagina-retrabalho .grid-2 .chart-box.tall{
+        height:330px;
+        min-height:330px;
+    }
+
+    .retrabalho-tabela .table-scroll,
+    .retrabalho-grid .table-scroll,
+    .grid-retrabalho .table-scroll{
+        max-height:380px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .retrabalho-indicadores,
+    .cards-retrabalho,
+    .pagina-retrabalho .cards{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .retrabalho-chart-box,
+    .retrabalho-grid .chart-box,
+    .grid-retrabalho .chart-box,
+    .pagina-retrabalho .grid-2 .chart-box.tall{
+        height:300px;
+        min-height:300px;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .retrabalho-indicadores,
+    .cards-retrabalho,
+    .pagina-retrabalho .cards{
+        grid-template-columns:1fr;
+    }
+
+    .retrabalho-chart-box,
+    .retrabalho-grid .chart-box,
+    .grid-retrabalho .chart-box,
+    .pagina-retrabalho .grid-2 .chart-box.tall{
+        height:260px;
+        min-height:260px;
+    }
+
+    .retrabalho-filtros{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .retrabalho-filtros input,
+    .retrabalho-filtros select,
+    #buscaFabricante{
+        width:100%;
+        min-width:0;
+    }
+
+    .retrabalho-tabela .table-scroll{
+        max-height:300px;
+    }
+}
