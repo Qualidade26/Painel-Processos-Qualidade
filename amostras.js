@@ -614,14 +614,14 @@ function renderAmostra() {
                 maintainAspectRatio: false,
                 indexAxis: "y",
 
-                layout: {
-                    padding: {
-                        top: 4,
-                        right: 58,
-                        bottom: 0,
-                        left: 4
-                    }
-                },
+               layout: {
+    padding: {
+        top: 0,
+        right: 48,
+        bottom: 0,
+        left: 0
+    }
+},
 
                 interaction: {
                     mode: "nearest",
