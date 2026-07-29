@@ -10,51 +10,43 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="description"
+        content="Painel de Processos do Sistema de Gestão da Qualidade"
+    >
+
     <title>Painel de Processos SGQ</title>
 
 
     <!-- =====================================================
-         ESTILOS PRINCIPAIS
+         ARQUIVOS CSS
+         A ordem de carregamento é importante
     ====================================================== -->
 
     <link
         rel="stylesheet"
-        href="style.css?v=8"
+        href="css/base.css?v=9"
     >
 
     <link
         rel="stylesheet"
-        href="importacao.css?v=8"
+        href="css/layout.css?v=9"
     >
 
     <link
         rel="stylesheet"
-        href="esfig.css?v=8"
+        href="css/components.css?v=9"
     >
 
     <link
         rel="stylesheet"
-        href="descarte.css?v=8"
+        href="css/style.css?v=9"
     >
 
     <link
         rel="stylesheet"
-        href="amostras.css?v=8"
+        href="css/responsive.css?v=9"
     >
-
-    <link
-        rel="stylesheet"
-        href="retrabalho.css?v=8"
-    >
-
-    <!--
-    Ative esta linha somente quando o arquivo fornecedores.css existir.
-
-    <link
-        rel="stylesheet"
-        href="fornecedores.css?v=8"
-    >
-    -->
 
 </head>
 
@@ -148,10 +140,13 @@
                 id="btnToggleMenu"
                 onclick="toggleMenu()"
                 title="Esconder menu"
+                aria-label="Esconder menu lateral"
             >
                 ◀
             </button>
 
+
+            <!-- INSPEÇÃO DE IMPORTAÇÃO -->
 
             <button
                 type="button"
@@ -172,6 +167,8 @@
             </button>
 
 
+            <!-- ESFIGMOMANÔMETRO -->
+
             <button
                 type="button"
                 onclick="abrirAba('esfig', this)"
@@ -187,6 +184,8 @@
 
             </button>
 
+
+            <!-- DESCARTE -->
 
             <button
                 type="button"
@@ -204,13 +203,15 @@
             </button>
 
 
+            <!-- AMOSTRAS -->
+
             <button
                 type="button"
                 onclick="abrirAba('amostra', this)"
             >
 
                 <span class="ico">
-                    📦
+                    🧪
                 </span>
 
                 <span class="label">
@@ -219,6 +220,8 @@
 
             </button>
 
+
+            <!-- RETRABALHO -->
 
             <button
                 type="button"
@@ -236,6 +239,8 @@
             </button>
 
 
+            <!-- FORNECEDORES -->
+
             <button
                 type="button"
                 onclick="abrirAba('fornecedores', this)"
@@ -251,6 +256,8 @@
 
             </button>
 
+
+            <!-- INFORMATIVO -->
 
             <button
                 type="button"
@@ -271,28 +278,45 @@
 
 
         <!-- =================================================
-             CONTEÚDO DAS ABAS
+             CONTEÚDO DINÂMICO DAS ABAS
         ================================================== -->
 
         <main
             class="content"
             id="conteudo"
         >
+
+            <noscript>
+
+                <div class="aviso-sistema">
+
+                    Para utilizar este painel, habilite o JavaScript no
+                    navegador.
+
+                </div>
+
+            </noscript>
+
         </main>
 
     </div>
 
 
     <!-- =====================================================
-         BIBLIOTECAS DE GRÁFICOS
+         BIBLIOTECAS EXTERNAS
     ====================================================== -->
+
+    <!-- Chart.js carregado somente uma vez -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"
     ></script>
 
+
+    <!-- Plugin de rótulos dos gráficos -->
+
     <script
-        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"
     ></script>
 
 
@@ -300,38 +324,41 @@
          TEMA GLOBAL DOS GRÁFICOS
     ====================================================== -->
 
-    <script src="chart-theme.js?v=4"></script>
+    <script src="js/chart-theme.js?v=9"></script>
 
 
     <!-- =====================================================
          FUNÇÕES AUXILIARES
     ====================================================== -->
 
-    <script src="utils.js?v=7"></script>
+    <script src="js/utils.js?v=9"></script>
 
 
     <!-- =====================================================
          ARQUIVOS DAS ABAS
     ====================================================== -->
 
-    <script src="importacao.js?v=7"></script>
+    <script src="js/importacao.js?v=9"></script>
 
-    <script src="esfig.js?v=4"></script>
+    <script src="js/esfig.js?v=9"></script>
 
-    <script src="descarte.js?v=7"></script>
+    <script src="js/descarte.js?v=9"></script>
 
-    <script src="amostras.js?v=13"></script>
+    <script src="js/amostras.js?v=15"></script>
 
-    <script src="retrabalho.js?v=7"></script>
+    <script src="js/retrabalho.js?v=9"></script>
 
-    <script src="fornecedores.js?v=7"></script>
+    <script src="js/fornecedores.js?v=9"></script>
+
+    <script src="js/informativo.js?v=9"></script>
 
 
     <!-- =====================================================
-         CONTROLE PRINCIPAL DO PAINEL
+         CONTROLE PRINCIPAL
+         Deve ser o último arquivo carregado
     ====================================================== -->
 
-    <script src="script.js?v=7"></script>
+    <script src="js/script.js?v=9"></script>
 
 </body>
 
