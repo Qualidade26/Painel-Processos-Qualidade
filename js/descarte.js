@@ -1,3 +1,4 @@
+
 function renderDescarte(){
 
     if(!senhaDescarteLiberada){
