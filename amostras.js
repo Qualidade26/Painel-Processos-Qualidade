@@ -579,9 +579,9 @@ function renderAmostra() {
                         borderColor: "#1647c9",
                         borderWidth: 1,
                         borderRadius: 1,
-                        maxBarThickness: 15,
-                        categoryPercentage: 0.62,
-                        barPercentage: 0.85,
+                        maxBarThickness: 18,
+categoryPercentage: 0.72,
+barPercentage: 0.82,
                         xAxisID: "x",
                         yAxisID: "y",
                         order: 2
