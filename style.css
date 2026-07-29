@@ -1954,7 +1954,7 @@ td{
     overflow:hidden;
 }
 
-.amostra-indicador-conteudo{
+.amostra-indicador-cabecalho{
     display:grid;
     grid-template-columns:44px minmax(0,1fr);
     align-items:center;
@@ -1962,7 +1962,7 @@ td{
     min-width:0;
 }
 
-.amostra-indicador-conteudo > div:last-child{
+.amostra-indicador-cabecalho > div:last-child{
     min-width:0;
 }
 
@@ -2068,5 +2068,4 @@ td{
     .amostra-indicadores{
         grid-template-columns:1fr;
     }
-}
 }
