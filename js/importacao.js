@@ -16,6 +16,7 @@ let graficoParetoImportacao = null;
 */
 function valorGrafico(valor) {
 
+    
     if (
         valor === null ||
         valor === undefined ||
