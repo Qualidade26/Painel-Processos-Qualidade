@@ -1883,230 +1883,75 @@ td{
     }
 }
 /* ==========================================================
-   ABA AMOSTRA — LAYOUT COMPACTO E ALINHADO
+   AMOSTRA — GRÁFICO ÚNICO
    ========================================================== */
 
-/* Cards superiores */
-
-.amostra-cards-topo{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
+.amostra-grafico-unico{
+    display:block;
+    width:100%;
     margin-bottom:8px;
 }
 
-.amostra-cards-topo .kpi-card{
-    min-height:76px;
-}
-
-/* Área dos dois gráficos principais */
-
-.amostra-graficos-principais{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:8px;
-    align-items:stretch;
-    margin-bottom:8px;
-}
-
-.amostra-panel-principal{
+.amostra-panel-grafico-unico{
     width:100%;
     min-width:0;
-    height:355px;
-    padding:9px;
+    height:390px;
     display:flex;
     flex-direction:column;
     overflow:hidden;
 }
 
-.amostra-panel-principal h3{
+.amostra-panel-grafico-unico h3{
     flex:0 0 auto;
-    min-height:22px;
-    margin:0 0 4px;
-    padding:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    line-height:1.2;
+    margin:0 0 6px;
     text-align:center;
 }
 
-/* Caixas dos gráficos */
-
-.amostra-chart-principal,
-.amostra-chart-pareto{
+.amostra-chart-unico{
     position:relative;
-    flex:1 1 auto;
+    flex:1;
     width:100%;
     min-width:0;
     min-height:0;
-    height:auto;
 }
 
-.amostra-chart-principal canvas,
-.amostra-chart-pareto canvas{
+.amostra-chart-unico canvas{
     display:block;
     width:100% !important;
     height:100% !important;
     max-width:100% !important;
 }
 
-/* Indicadores inferiores */
+/* Mantém os quatro indicadores na mesma linha */
 
 .amostra-indicadores{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
     gap:8px;
-    margin:0 0 8px;
+    margin-bottom:8px;
 }
 
-.amostra-indicador-card{
-    width:100%;
-    min-width:0;
-    height:142px;
-    min-height:142px;
-    padding:10px 11px 7px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    overflow:hidden;
-}
-
-.amostra-indicador-conteudo{
-    display:grid;
-    grid-template-columns:44px minmax(0,1fr);
-    align-items:center;
-    gap:9px;
-    min-width:0;
-}
-
-.amostra-indicador-conteudo > div:last-child{
-    min-width:0;
-    overflow:hidden;
-}
-
-.amostra-indicador-icone{
-    width:44px;
-    height:44px;
-    min-width:44px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#e8f0ff;
-    border:1px solid var(--line2);
-    color:var(--primary);
-    font-size:24px;
-    font-weight:900;
-}
-
-.amostra-indicador-titulo{
-    display:block;
-    margin:0 0 3px;
-    color:var(--primary);
-    font-size:10px;
-    font-weight:900;
-    line-height:1.15;
-    text-transform:uppercase;
-    white-space:normal;
-}
-
-.amostra-indicador-valor{
-    display:block;
-    max-width:100%;
-    color:var(--text);
-    font-size:25px;
-    font-weight:900;
-    line-height:1;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.amostra-indicador-valor.amostra-sku{
-    font-size:22px;
-}
-
-.amostra-indicador-subtitulo{
-    display:block;
-    max-width:100%;
-    margin-top:3px;
-    color:var(--muted);
-    font-size:10px;
-    font-weight:900;
-    line-height:1.15;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-/* Mini gráficos */
+/* Evita números externos sobre os minigráficos */
 
 .amostra-mini-chart{
     position:relative;
     width:100%;
     height:42px;
-    min-height:42px;
-    margin-top:4px;
+    overflow:hidden;
 }
 
 .amostra-mini-chart canvas{
     display:block;
     width:100% !important;
     height:100% !important;
-    max-width:100% !important;
 }
 
-/* Notebook */
+/* Notebook e tablet */
 
-@media(max-width:1250px){
+@media(max-width:1000px){
 
-    .amostra-panel-principal{
-        height:340px;
-    }
-
-    .amostra-indicador-card{
-        height:138px;
-        min-height:138px;
-        padding:9px;
-    }
-
-    .amostra-indicador-icone{
-        width:40px;
-        height:40px;
-        min-width:40px;
-        font-size:22px;
-    }
-
-    .amostra-indicador-conteudo{
-        grid-template-columns:40px minmax(0,1fr);
-        gap:7px;
-    }
-
-    .amostra-indicador-valor{
-        font-size:22px;
-    }
-
-    .amostra-indicador-valor.amostra-sku{
-        font-size:19px;
-    }
-}
-
-/* Tablet */
-
-@media(max-width:900px){
-
-    .amostra-cards-topo{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .amostra-graficos-principais{
-        grid-template-columns:1fr;
-    }
-
-    .amostra-panel-principal{
-        height:350px;
+    .amostra-panel-grafico-unico{
+        height:370px;
     }
 
     .amostra-indicadores{
@@ -2118,20 +1963,11 @@ td{
 
 @media(max-width:600px){
 
-    .amostra-cards-topo{
-        grid-template-columns:1fr;
-    }
-
-    .amostra-panel-principal{
-        height:330px;
+    .amostra-panel-grafico-unico{
+        height:350px;
     }
 
     .amostra-indicadores{
         grid-template-columns:1fr;
-    }
-
-    .amostra-indicador-card{
-        height:135px;
-        min-height:135px;
     }
 }
