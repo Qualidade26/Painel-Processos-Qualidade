@@ -1,4 +1,5 @@
 
+
 /* ==========================================================
    AMOSTRA — ARQUIVO COMPLETO
    Substitua todo o conteúdo atual de amostras.js por este.
