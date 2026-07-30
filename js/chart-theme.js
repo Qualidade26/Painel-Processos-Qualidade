@@ -1,4 +1,3 @@
-```javascript
 /* ==========================================================
    TEMA GLOBAL DOS GRÁFICOS — CHART.JS
 ========================================================== */
@@ -12,7 +11,6 @@
         return;
     }
 
-
     /* ======================================================
        QUALIDADE E RESPONSIVIDADE
     ====================================================== */
@@ -20,7 +18,6 @@
     Chart.defaults.devicePixelRatio = 2;
     Chart.defaults.responsive = true;
     Chart.defaults.maintainAspectRatio = false;
-
 
     /* ======================================================
        TIPOGRAFIA
@@ -34,15 +31,12 @@
 
     Chart.defaults.color = "#344260";
 
-
     /* ======================================================
        ANIMAÇÃO
-       Não substituir o objeto inteiro
     ====================================================== */
 
     Chart.defaults.animation.duration = 700;
     Chart.defaults.animation.easing = "easeOutQuart";
-
 
     /* ======================================================
        LINHAS
@@ -56,7 +50,6 @@
     Chart.defaults.elements.point.borderWidth = 2;
     Chart.defaults.elements.point.backgroundColor = "#ffffff";
 
-
     /* ======================================================
        BARRAS
     ====================================================== */
@@ -65,21 +58,20 @@
     Chart.defaults.elements.bar.borderRadius = 4;
     Chart.defaults.elements.bar.borderSkipped = false;
 
-
     /* ======================================================
        LEGENDA
-       Alterar propriedade por propriedade
     ====================================================== */
 
     Chart.defaults.plugins.legend.display = true;
     Chart.defaults.plugins.legend.position = "top";
+    Chart.defaults.plugins.legend.align = "center";
 
     Chart.defaults.plugins.legend.labels.color = "#172653";
     Chart.defaults.plugins.legend.labels.usePointStyle = true;
     Chart.defaults.plugins.legend.labels.pointStyle = "circle";
-    Chart.defaults.plugins.legend.labels.boxWidth = 9;
-    Chart.defaults.plugins.legend.labels.boxHeight = 9;
-    Chart.defaults.plugins.legend.labels.padding = 14;
+    Chart.defaults.plugins.legend.labels.boxWidth = 8;
+    Chart.defaults.plugins.legend.labels.boxHeight = 8;
+    Chart.defaults.plugins.legend.labels.padding = 8;
 
     Chart.defaults.plugins.legend.labels.font = {
         family: "'Segoe UI', Arial, sans-serif",
@@ -87,6 +79,16 @@
         weight: "700"
     };
 
+    /* ======================================================
+       TÍTULO
+    ====================================================== */
+
+    Chart.defaults.plugins.title.display = false;
+
+    Chart.defaults.plugins.title.padding = {
+        top: 0,
+        bottom: 4
+    };
 
     /* ======================================================
        TOOLTIP
@@ -121,7 +123,6 @@
         weight: "600"
     };
 
-
     /* ======================================================
        EIXOS
     ====================================================== */
@@ -152,20 +153,19 @@
         weight: "700"
     };
 
-
     /* ======================================================
        LAYOUT INTERNO
     ====================================================== */
 
-    Chart.defaults.layout.padding.top = 8;
-    Chart.defaults.layout.padding.right = 8;
-    Chart.defaults.layout.padding.bottom = 5;
-    Chart.defaults.layout.padding.left = 5;
-
+    Chart.defaults.layout.padding = {
+        top: 0,
+        right: 8,
+        bottom: 3,
+        left: 5
+    };
 
     console.log(
         "Tema global dos gráficos carregado com sucesso."
     );
 
 })();
-```
