@@ -747,39 +747,42 @@ if (
                 },
 
 
-                plugins:{
+              plugins:{
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LEGENDA
-                    |--------------------------------------------------------------------------
-                    */
-                    legend:{
+    valorFlutuante:false,
 
-                        display:true,
+    /*
+    |--------------------------------------------------------------------------
+    | LEGENDA
+    |--------------------------------------------------------------------------
+    */
+    legend:{
 
-                        position:"top",
+        display:true,
 
-                        align:"center",
+        position:"top",
 
-                        labels:{
+        align:"center",
 
-                            boxWidth:28,
+        labels:{
 
-                            boxHeight:10,
+            boxWidth:28,
 
-                            padding:20,
+            boxHeight:10,
 
-                            usePointStyle:false,
+            padding:20,
 
-                            font:{
+            usePointStyle:false,
 
-                                size:12,
+            font:{
 
-                                weight:"600"
-                            }
-                        }
-                    },
+                size:12,
+
+                weight:"600"
+            }
+        }
+    },
+
 
 
                     /*
