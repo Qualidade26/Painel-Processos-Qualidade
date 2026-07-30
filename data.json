@@ -1260,6 +1260,58 @@
       "avaliacao": "Sem avaliação"
     }
   ],
+    "graficoTop10": [
+  {
+    "posicao": 1,
+    "fornecedor": "Biomed Healthcare",
+    "naoConformidades": 5
+  },
+  {
+    "posicao": 2,
+    "fornecedor": "Fornecedor 02",
+    "naoConformidades": 4
+  },
+  {
+    "posicao": 3,
+    "fornecedor": "Fornecedor 03",
+    "naoConformidades": 4
+  },
+  {
+    "posicao": 4,
+    "fornecedor": "Fornecedor 04",
+    "naoConformidades": 3
+  },
+  {
+    "posicao": 5,
+    "fornecedor": "Fornecedor 05",
+    "naoConformidades": 3
+  },
+  {
+    "posicao": 6,
+    "fornecedor": "Fornecedor 06",
+    "naoConformidades": 2
+  },
+  {
+    "posicao": 7,
+    "fornecedor": "Fornecedor 07",
+    "naoConformidades": 2
+  },
+  {
+    "posicao": 8,
+    "fornecedor": "Fornecedor 08",
+    "naoConformidades": 2
+  },
+  {
+    "posicao": 9,
+    "fornecedor": "Fornecedor 09",
+    "naoConformidades": 1
+  },
+  {
+    "posicao": 10,
+    "fornecedor": "Medico Electroude",
+    "naoConformidades": 0
+  }
+],
 
   "ranking": [
     {
