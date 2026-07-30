@@ -145,9 +145,8 @@ function formatarHorasImportacao(valor) {
     );
 }
 
-
 /* ==========================================================
-   PLUGIN LOCAL — RÓTULOS DAS BARRAS MENSAIS
+   PLUGIN LOCAL — RÓTULOS CENTRALIZADOS NAS BARRAS MENSAIS
 ========================================================== */
 
 const rotulosBarrasMensaisImportacao = {
@@ -158,26 +157,28 @@ const rotulosBarrasMensaisImportacao = {
 
         const { ctx, chartArea } = chart;
 
-
         if (!chartArea) {
             return;
         }
 
-
         ctx.save();
-
 
         chart.data.datasets.forEach(
             (dataset, datasetIndex) => {
+
+                /*
+                --------------------------------------------------
+                Exibe valores somente nas barras.
+                A linha de horas não recebe rótulo aqui.
+                --------------------------------------------------
+                */
 
                 if (dataset.type !== "bar") {
                     return;
                 }
 
-
                 const meta =
                     chart.getDatasetMeta(datasetIndex);
-
 
                 if (
                     !meta ||
@@ -186,13 +187,11 @@ const rotulosBarrasMensaisImportacao = {
                     return;
                 }
 
-
                 meta.data.forEach(
                     (elemento, indice) => {
 
                         const valor =
                             dataset.data[indice];
-
 
                         if (
                             !possuiValorImportacao(valor) ||
@@ -203,45 +202,28 @@ const rotulosBarrasMensaisImportacao = {
                             return;
                         }
 
+                        const texto =
+                            Number(valor)
+                                .toLocaleString("pt-BR");
 
                         /*
                         --------------------------------------------------
-                        Cada série recebe um deslocamento vertical
-                        diferente para evitar sobreposição dos valores.
+                        elemento.x já é o centro exato da barra.
+                        elemento.y é o topo da barra.
                         --------------------------------------------------
                         */
 
-                     let ajusteX = 0;
-let ajusteY = -3;
+                        const posicaoX =
+                            elemento.x;
 
-switch (dataset.label) {
+                        const posicaoY =
+                            Math.max(
+                                elemento.y - 5,
+                                chartArea.top + 10
+                            );
 
-    case "Processos":
-        ajusteX = 0;
-        ajusteY = -3;
-        break;
-
-    case "SKU":
-        ajusteX = 0;
-        ajusteY = -3;
-        break;
-
-    case "Lotes":
-        ajusteX = 0;
-        ajusteY = -3;
-        break;
-
-    case "Laudos":
-        ajusteX = 0;
-        ajusteY = -3;
-        break;
-}
-
-const posicaoX = elemento.x + ajusteX;
-const posicaoY = elemento.y + ajusteY;
-
-
-                        ctx.font = "700 11px Segoe UI";
+                        ctx.font =
+                            "700 10px 'Segoe UI', Arial, sans-serif";
 
                         ctx.fillStyle =
                             "#10245c";
@@ -251,7 +233,6 @@ const posicaoY = elemento.y + ajusteY;
 
                         ctx.textBaseline =
                             "bottom";
-
 
                         ctx.fillText(
                             texto,
@@ -263,12 +244,9 @@ const posicaoY = elemento.y + ajusteY;
             }
         );
 
-
         ctx.restore();
     }
 };
-
-
 /* ==========================================================
    PLUGIN LOCAL — VALORES DO GRÁFICO HORIZONTAL
 ========================================================== */
