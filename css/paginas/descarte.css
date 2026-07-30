@@ -4,7 +4,7 @@
 
 
 /* ==========================================================
-   INDICADORES SUPERIORES
+   INDICADORES
 ========================================================== */
 
 .descarte-indicadores{
@@ -21,7 +21,7 @@
 
 
 /* ==========================================================
-   ESTRUTURA PRINCIPAL
+   LAYOUT PRINCIPAL
 ========================================================== */
 
 .descarte-grid{
@@ -36,14 +36,28 @@
     width:100%;
     min-width:0;
 
-    /*
-    Mantém os dois lados com a mesma altura.
-    Ajuste 690px caso seu painel precise ficar mais alto.
-    */
     height:690px;
     min-height:690px;
 
     align-items:stretch;
+}
+
+
+/* ==========================================================
+   TÍTULOS
+========================================================== */
+
+.descarte-titulo-painel{
+    margin:0;
+    padding:0 0 4px;
+
+    text-align:center;
+
+    color:#0647f5;
+
+    font-size:13px;
+    font-weight:900;
+    text-transform:uppercase;
 }
 
 
@@ -54,17 +68,12 @@
 .descarte-panel-origens{
     display:grid;
 
-    /*
-    Título
-    Gráfico expansível
-    Área do Top 3
-    */
     grid-template-rows:
         auto
         minmax(0,1fr)
         auto;
 
-    gap:6px;
+    gap:5px;
 
     width:100%;
     min-width:0;
@@ -73,13 +82,6 @@
     padding:10px;
 
     overflow:hidden;
-}
-
-.descarte-panel-origens > h3{
-    margin:0;
-    padding:0 0 3px;
-
-    flex-shrink:0;
 }
 
 
@@ -94,7 +96,7 @@
     min-width:0;
 
     height:100%;
-    min-height:360px;
+    min-height:390px;
 
     overflow:hidden;
 }
@@ -110,7 +112,7 @@
 
 
 /* ==========================================================
-   ÁREA DO TOP 3
+   TOP 3
 ========================================================== */
 
 .descarte-top3-area{
@@ -122,7 +124,7 @@
 }
 
 .descarte-titulo-top3{
-    margin:3px 0 7px;
+    margin:2px 0 8px;
     padding:0;
 
     text-align:center;
@@ -134,48 +136,139 @@
     text-transform:uppercase;
 }
 
-.descarte-top3-cards{
-    width:100%;
-    min-width:0;
-}
-
-
-/*
-O conteúdo gerado pela função rankTop3Origem()
-fica limitado corretamente dentro do painel.
-*/
-
-.descarte-top3-cards > *{
-    width:100%;
-    min-width:0;
-    margin:0;
-}
-
-
-/*
-Caso a função gere uma estrutura em grid,
-mantém os três indicadores lado a lado.
-*/
-
-.descarte-top3-cards .rank-grid,
-.descarte-top3-cards .top3-grid,
-.descarte-top3-cards .ranking-grid{
+.descarte-top3-grid{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
     gap:8px;
 
     width:100%;
     min-width:0;
 }
 
+.descarte-top3-card{
+    display:flex;
+    flex-direction:column;
 
-/*
-Também cobre o caso em que a função retorna
-diretamente três cartões.
-*/
+    justify-content:space-between;
 
-.descarte-top3-cards > div{
+    width:100%;
     min-width:0;
+
+    min-height:130px;
+
+    padding:10px 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1f6ff
+        );
+
+    border:
+        1px solid
+        rgba(29,78,255,.22);
+
+    border-radius:10px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(15,60,201,.10);
+
+    overflow:hidden;
+}
+
+.descarte-top3-cabecalho{
+    display:grid;
+
+    grid-template-columns:
+        28px
+        minmax(0,1fr)
+        12px;
+
+    gap:7px;
+
+    align-items:center;
+
+    width:100%;
+    min-width:0;
+}
+
+.descarte-top3-posicao{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:27px;
+    height:27px;
+
+    border-radius:50%;
+
+    color:#ffffff;
+
+    font-size:13px;
+    font-weight:900;
+}
+
+.descarte-top3-nome{
+    min-width:0;
+
+    color:#0f2557;
+
+    font-size:11px;
+    font-weight:800;
+
+    line-height:1.2;
+
+    overflow:hidden;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.descarte-top3-seta{
+    color:#7c96d5;
+
+    font-size:8px;
+    text-align:right;
+}
+
+.descarte-top3-valor{
+    margin-top:10px;
+
+    color:#071a4b;
+
+    text-align:center;
+
+    font-size:16px;
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+.descarte-top3-percentual{
+    margin-top:8px;
+
+    color:#0f2557;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:900;
+}
+
+.descarte-top3-vazio{
+    padding:18px;
+
+    text-align:center;
+
+    color:#64748b;
+    font-weight:700;
 }
 
 
@@ -187,8 +280,8 @@ diretamente três cartões.
     display:grid;
 
     grid-template-rows:
-        minmax(0,1.1fr)
-        minmax(0,.9fr);
+        minmax(0,1.12fr)
+        minmax(0,.88fr);
 
     gap:8px;
 
@@ -222,16 +315,6 @@ diretamente três cartões.
     overflow:hidden;
 }
 
-.descarte-panel-pizza > h3{
-    margin:0;
-    padding:0 0 3px;
-}
-
-
-/* ==========================================================
-   GRÁFICO DE PIZZA
-========================================================== */
-
 .descarte-chart-pizza{
     position:relative;
 
@@ -255,7 +338,7 @@ diretamente três cartões.
 
 
 /* ==========================================================
-   TOP 10 DESCARTE
+   TOP 10
 ========================================================== */
 
 .descarte-panel-top10{
@@ -276,18 +359,20 @@ diretamente três cartões.
     overflow:hidden;
 }
 
-.descarte-panel-top10 > h3{
-    margin:0;
-    padding:0 0 3px;
+.descarte-top10-conteudo{
+    width:100%;
+    min-width:0;
+    min-height:0;
 
-    text-align:center;
+    overflow:hidden;
 }
 
 .descarte-panel-top10 .table-scroll{
     width:100%;
     min-width:0;
-    min-height:0;
+
     height:100%;
+    max-height:none;
 
     overflow-x:auto;
     overflow-y:auto;
@@ -318,7 +403,7 @@ diretamente três cartões.
 
 
 /* ==========================================================
-   EVITAR ESTOURO DOS PAINÉIS
+   PADRONIZAÇÃO
 ========================================================== */
 
 .descarte-grid *,
@@ -329,7 +414,7 @@ diretamente três cartões.
 
 
 /* ==========================================================
-   TELAS MENORES
+   NOTEBOOK
 ========================================================== */
 
 @media(max-width:1200px){
@@ -344,7 +429,11 @@ diretamente três cartões.
     }
 
     .descarte-chart-barra{
-        min-height:340px;
+        min-height:365px;
+    }
+
+    .descarte-top3-valor{
+        font-size:14px;
     }
 }
 
@@ -363,19 +452,15 @@ diretamente três cartões.
     }
 
     .descarte-panel-origens{
-        height:580px;
+        height:610px;
     }
 
     .descarte-coluna-direita{
         height:auto;
 
         grid-template-rows:
-            390px
+            420px
             350px;
-    }
-
-    .descarte-chart-barra{
-        min-height:350px;
     }
 }
 
@@ -395,20 +480,22 @@ diretamente três cartões.
 
         grid-template-rows:
             auto
-            340px
+            350px
             auto;
+    }
+
+    .descarte-top3-grid{
+        grid-template-columns:1fr;
+    }
+
+    .descarte-top3-card{
+        min-height:115px;
     }
 
     .descarte-coluna-direita{
         grid-template-rows:
-            400px
-            340px;
-    }
-
-    .descarte-top3-cards .rank-grid,
-    .descarte-top3-cards .top3-grid,
-    .descarte-top3-cards .ranking-grid{
-        grid-template-columns:1fr;
+            430px
+            350px;
     }
 }
 
@@ -427,14 +514,14 @@ diretamente três cartões.
     .descarte-panel-origens{
         grid-template-rows:
             auto
-            300px
+            310px
             auto;
     }
 
     .descarte-coluna-direita{
         grid-template-rows:
-            430px
-            320px;
+            440px
+            330px;
     }
 
     .descarte-panel-top10 table{
