@@ -12,7 +12,7 @@ const rotulosExternosPizza = {
 
         const dataset = data.datasets[0];
 
-        if (!dataset || !dataset.data) {
+        if (!dataset || !Array.isArray(dataset.data)) {
             return;
         }
 
@@ -38,7 +38,7 @@ const rotulosExternosPizza = {
 
         ctx.fillStyle = "#0f2557";
         ctx.strokeStyle = "#64748b";
-        ctx.lineWidth = 1.2;
+        ctx.lineWidth = 1.1;
         ctx.textBaseline = "middle";
 
         meta.data.forEach((elemento, indice) => {
@@ -69,11 +69,8 @@ const rotulosExternosPizza = {
                     propriedades.endAngle
                 ) / 2;
 
-            const direcaoX =
-                Math.cos(angulo);
-
-            const direcaoY =
-                Math.sin(angulo);
+            const direcaoX = Math.cos(angulo);
+            const direcaoY = Math.sin(angulo);
 
             const inicioX =
                 propriedades.x +
@@ -164,28 +161,29 @@ const totalCentroPizza = {
 
     id: "totalCentroPizza",
 
-    afterDraw(chart) {
+    afterDatasetsDraw(chart) {
 
-        const {
-            ctx,
-            chartArea
-        } = chart;
+        const meta =
+            chart.getDatasetMeta(0);
 
-        if (!chartArea) {
+        if (
+            !meta ||
+            !meta.data ||
+            !meta.data.length
+        ) {
             return;
         }
 
-        const centroX =
-            (
-                chartArea.left +
-                chartArea.right
-            ) / 2;
+        const primeiroArco =
+            meta.data[0];
 
-        const centroY =
-            (
-                chartArea.top +
-                chartArea.bottom
-            ) / 2;
+        const { x, y } =
+            primeiroArco.getProps(
+                ["x", "y"],
+                true
+            );
+
+        const ctx = chart.ctx;
 
         ctx.save();
 
@@ -194,21 +192,21 @@ const totalCentroPizza = {
         ctx.fillStyle = "#0f2557";
 
         ctx.font =
-            "900 27px 'Segoe UI', Arial, sans-serif";
+            "900 26px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "100%",
-            centroX,
-            centroY - 8
+            x,
+            y - 7
         );
 
         ctx.font =
-            "800 12px 'Segoe UI', Arial, sans-serif";
+            "800 11px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "Total",
-            centroX,
-            centroY + 17
+            x,
+            y + 17
         );
 
         ctx.restore();
@@ -315,15 +313,6 @@ function renderDescarte(){
     const valoresOrigens = origens.map(item =>
 
         Number(item.valor || 0)
-    );
-
-
-    const totalOrigens = valoresOrigens.reduce(
-
-        (soma, valor) =>
-            soma + valor,
-
-        0
     );
 
 
@@ -538,7 +527,7 @@ function renderDescarte(){
 
                                 top: 8,
 
-                                right: 90,
+                                right: 95,
 
                                 bottom: 8,
 
@@ -552,6 +541,11 @@ function renderDescarte(){
                                 baseOptions().plugins ||
                                 {}
                             ),
+
+                            datalabels: {
+
+                                display: false
+                            },
 
                             legend: {
 
@@ -691,23 +685,30 @@ function renderDescarte(){
 
                         maintainAspectRatio: false,
 
-                        cutout: "53%",
+                        cutout: "52%",
+
+                        radius: "78%",
 
                         layout: {
 
                             padding: {
 
-                                top: 30,
+                                top: 38,
 
-                                right: 48,
+                                right: 35,
 
-                                bottom: 30,
+                                bottom: 38,
 
-                                left: 48
+                                left: 35
                             }
                         },
 
                         plugins: {
+
+                            datalabels: {
+
+                                display: false
+                            },
 
                             legend: {
 
