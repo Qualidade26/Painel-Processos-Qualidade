@@ -469,8 +469,6 @@ function criarGraficoMensalImportacao(imp) {
 
           plugins: {
 
-    valorFlutuante: false,
-
     /*
     |--------------------------------------------------------------------------
     | LEGENDA
