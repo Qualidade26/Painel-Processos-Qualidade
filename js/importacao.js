@@ -998,13 +998,13 @@ function criarGraficoMensalImportacao(imp) {
 
     padding: {
 
-        top: 35,
+        top: 0,
 
-        right: 25,
+        right: 12,
 
-        bottom: 15,
+        bottom: 0,
 
-        left: 25
+        left: 12
     }
 },
                     /* ======================================
@@ -1047,7 +1047,7 @@ function criarGraficoMensalImportacao(imp) {
                            LEGENDA
                         ================================== */
 
-                       legend: {
+                    legend: {
 
     display: true,
 
@@ -1055,26 +1055,30 @@ function criarGraficoMensalImportacao(imp) {
 
     align: "center",
 
-    fullSize: true,
+    fullSize: false,
 
     labels: {
 
-        boxWidth: 24,
+        boxWidth: 18,
 
         boxHeight: 8,
 
-        padding: 18,
+        padding: 8,
 
-                                color: "#374151",
+        usePointStyle: true,
 
-                                font: {
+        pointStyle: "circle",
 
-                                    size: 11,
+        color: "#374151",
 
-                                    weight: "600"
-                                }
-                            }
-                        },
+        font: {
+
+            size: 11,
+
+            weight: "600"
+        }
+    }
+},
 
 
                         /* ==================================
