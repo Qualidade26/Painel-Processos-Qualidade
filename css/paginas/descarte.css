@@ -51,13 +51,15 @@
     margin:0;
     padding:0 0 4px;
 
-    text-align:center;
-
     color:#0647f5;
+
+    text-align:center;
+    text-transform:uppercase;
 
     font-size:13px;
     font-weight:900;
-    text-transform:uppercase;
+
+    flex-shrink:0;
 }
 
 
@@ -96,7 +98,7 @@
     min-width:0;
 
     height:100%;
-    min-height:390px;
+    min-height:385px;
 
     overflow:hidden;
 }
@@ -127,13 +129,13 @@
     margin:2px 0 8px;
     padding:0;
 
-    text-align:center;
-
     color:#0647f5;
+
+    text-align:center;
+    text-transform:uppercase;
 
     font-size:13px;
     font-weight:900;
-    text-transform:uppercase;
 }
 
 .descarte-top3-grid{
@@ -151,13 +153,11 @@
 .descarte-top3-card{
     display:flex;
     flex-direction:column;
-
     justify-content:space-between;
 
     width:100%;
     min-width:0;
-
-    min-height:130px;
+    height:126px;
 
     padding:10px 12px;
 
@@ -187,7 +187,7 @@
     grid-template-columns:
         28px
         minmax(0,1fr)
-        12px;
+        10px;
 
     gap:7px;
 
@@ -221,7 +221,6 @@
 
     font-size:11px;
     font-weight:800;
-
     line-height:1.2;
 
     overflow:hidden;
@@ -234,12 +233,15 @@
 .descarte-top3-seta{
     color:#7c96d5;
 
-    font-size:8px;
     text-align:right;
+
+    font-size:8px;
 }
 
 .descarte-top3-valor{
-    margin-top:10px;
+    display:block;
+
+    margin-top:8px;
 
     color:#071a4b;
 
@@ -252,7 +254,9 @@
 }
 
 .descarte-top3-percentual{
-    margin-top:8px;
+    display:block;
+
+    margin-top:6px;
 
     color:#0f2557;
 
@@ -265,9 +269,10 @@
 .descarte-top3-vazio{
     padding:18px;
 
+    color:#64748b;
+
     text-align:center;
 
-    color:#64748b;
     font-weight:700;
 }
 
@@ -280,8 +285,8 @@
     display:grid;
 
     grid-template-rows:
-        minmax(0,1.12fr)
-        minmax(0,.88fr);
+        minmax(0,1.1fr)
+        minmax(0,.9fr);
 
     gap:8px;
 
@@ -338,7 +343,7 @@
 
 
 /* ==========================================================
-   TOP 10
+   PAINEL TOP 10
 ========================================================== */
 
 .descarte-panel-top10{
@@ -359,31 +364,85 @@
     overflow:hidden;
 }
 
-.descarte-top10-conteudo{
+
+/*
+O título fica fora da área de rolagem.
+*/
+
+.descarte-top10-titulo{
+    position:relative;
+
+    z-index:5;
+
+    background:#ffffff;
+}
+
+
+/*
+Somente a tabela rola.
+*/
+
+.descarte-top10-scroll{
     width:100%;
     min-width:0;
     min-height:0;
+    height:100%;
 
     overflow:hidden;
 }
 
-.descarte-panel-top10 .table-scroll{
+
+/*
+Remove o controle de altura antigo,
+caso tabelaFixa tenha criado table-scroll.
+*/
+
+.descarte-top10-scroll .table-scroll{
     width:100%;
     min-width:0;
-
     height:100%;
     max-height:none;
 
     overflow-x:auto;
     overflow-y:auto;
+
+    position:relative;
 }
+
+
+/* ==========================================================
+   CABEÇALHO FIXO DA TABELA
+========================================================== */
 
 .descarte-panel-top10 table{
     width:100%;
     min-width:580px;
 
     table-layout:fixed;
-    border-collapse:collapse;
+    border-collapse:separate;
+    border-spacing:0;
+}
+
+.descarte-panel-top10 thead{
+    position:sticky;
+    top:0;
+
+    z-index:10;
+}
+
+.descarte-panel-top10 thead th{
+    position:sticky;
+    top:0;
+
+    z-index:11;
+
+    background:#eaf2ff;
+
+    box-shadow:
+        0 1px 0
+        rgba(29,78,255,.22);
+
+    color:#0f2557;
 }
 
 .descarte-panel-top10 th:nth-child(1),
@@ -429,7 +488,7 @@
     }
 
     .descarte-chart-barra{
-        min-height:365px;
+        min-height:360px;
     }
 
     .descarte-top3-valor{
@@ -489,7 +548,7 @@
     }
 
     .descarte-top3-card{
-        min-height:115px;
+        height:115px;
     }
 
     .descarte-coluna-direita{
