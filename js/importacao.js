@@ -1157,7 +1157,7 @@ function criarGraficoMensalImportacao(imp) {
 
                             position: "left",
 
-                            grace: "30%",
+                            grace: "20%",
 
                             title: {
 
