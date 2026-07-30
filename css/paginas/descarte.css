@@ -21,78 +21,64 @@
 
 
 /* ==========================================================
-   LAYOUT PRINCIPAL
+   ESTRUTURA PRINCIPAL
 ========================================================== */
 
 .descarte-grid{
     display:grid;
 
     grid-template-columns:
-        minmax(0,1.12fr)
-        minmax(0,.88fr);
+        minmax(0,1.05fr)
+        minmax(0,.95fr);
 
     gap:8px;
 
     width:100%;
     min-width:0;
+
+    /*
+    Mantém os dois lados com a mesma altura.
+    Ajuste 690px caso seu painel precise ficar mais alto.
+    */
+    height:690px;
+    min-height:690px;
 
     align-items:stretch;
 }
 
 
 /* ==========================================================
-   COLUNA ESQUERDA
+   PAINEL ESQUERDO
 ========================================================== */
 
 .descarte-panel-origens{
-    width:100%;
-    min-width:0;
-
-    display:flex;
-    flex-direction:column;
-
-    overflow:hidden;
-}
-
-
-/* ==========================================================
-   COLUNA DIREITA
-========================================================== */
-
-.descarte-coluna-direita{
-    width:100%;
-    min-width:0;
-
     display:grid;
 
+    /*
+    Título
+    Gráfico expansível
+    Área do Top 3
+    */
     grid-template-rows:
+        auto
         minmax(0,1fr)
-        minmax(0,.88fr);
+        auto;
 
-    gap:8px;
-}
+    gap:6px;
 
-
-/* ==========================================================
-   PAINÉIS
-========================================================== */
-
-.descarte-panel-pizza,
-.descarte-panel-top10{
     width:100%;
     min-width:0;
+    height:100%;
+
+    padding:10px;
 
     overflow:hidden;
 }
 
+.descarte-panel-origens > h3{
+    margin:0;
+    padding:0 0 3px;
 
-/* ==========================================================
-   TÍTULOS DOS PAINÉIS
-========================================================== */
-
-.descarte-panel-origens h3,
-.descarte-panel-pizza h3,
-.descarte-panel-top10 h3{
     flex-shrink:0;
 }
 
@@ -107,10 +93,10 @@
     width:100%;
     min-width:0;
 
-    height:370px;
-    min-height:370px;
+    height:100%;
+    min-height:360px;
 
-    overflow:visible;
+    overflow:hidden;
 }
 
 .descarte-chart-barra canvas{
@@ -124,15 +110,127 @@
 
 
 /* ==========================================================
-   GRÁFICO DE PIZZA / ROSCA
+   ÁREA DO TOP 3
+========================================================== */
+
+.descarte-top3-area{
+    width:100%;
+    min-width:0;
+
+    margin:0;
+    padding:0;
+}
+
+.descarte-titulo-top3{
+    margin:3px 0 7px;
+    padding:0;
+
+    text-align:center;
+
+    color:#0647f5;
+
+    font-size:13px;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+.descarte-top3-cards{
+    width:100%;
+    min-width:0;
+}
+
+
+/*
+O conteúdo gerado pela função rankTop3Origem()
+fica limitado corretamente dentro do painel.
+*/
+
+.descarte-top3-cards > *{
+    width:100%;
+    min-width:0;
+    margin:0;
+}
+
+
+/*
+Caso a função gere uma estrutura em grid,
+mantém os três indicadores lado a lado.
+*/
+
+.descarte-top3-cards .rank-grid,
+.descarte-top3-cards .top3-grid,
+.descarte-top3-cards .ranking-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+}
+
+
+/*
+Também cobre o caso em que a função retorna
+diretamente três cartões.
+*/
+
+.descarte-top3-cards > div{
+    min-width:0;
+}
+
+
+/* ==========================================================
+   COLUNA DIREITA
+========================================================== */
+
+.descarte-coluna-direita{
+    display:grid;
+
+    grid-template-rows:
+        minmax(0,1.1fr)
+        minmax(0,.9fr);
+
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+    height:100%;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   PAINEL DA PIZZA
 ========================================================== */
 
 .descarte-panel-pizza{
-    display:flex;
-    flex-direction:column;
+    display:grid;
 
+    grid-template-rows:
+        auto
+        minmax(0,1fr);
+
+    gap:4px;
+
+    width:100%;
+    min-width:0;
     min-height:0;
+
+    padding:10px;
+
+    overflow:hidden;
 }
+
+.descarte-panel-pizza > h3{
+    margin:0;
+    padding:0 0 3px;
+}
+
+
+/* ==========================================================
+   GRÁFICO DE PIZZA
+========================================================== */
 
 .descarte-chart-pizza{
     position:relative;
@@ -140,12 +238,10 @@
     width:100%;
     min-width:0;
 
-    height:300px;
-    min-height:300px;
+    height:100%;
+    min-height:0;
 
-    flex:1;
-
-    overflow:visible;
+    overflow:hidden;
 }
 
 .descarte-chart-pizza canvas{
@@ -159,30 +255,39 @@
 
 
 /* ==========================================================
-   TOP 3 ORIGENS
-========================================================== */
-
-.descarte-titulo-top3{
-    margin-top:10px;
-    margin-bottom:8px;
-}
-
-
-/* ==========================================================
    TOP 10 DESCARTE
 ========================================================== */
 
 .descarte-panel-top10{
-    display:flex;
-    flex-direction:column;
+    display:grid;
 
+    grid-template-rows:
+        auto
+        minmax(0,1fr);
+
+    gap:4px;
+
+    width:100%;
+    min-width:0;
     min-height:0;
+
+    padding:8px;
+
+    overflow:hidden;
+}
+
+.descarte-panel-top10 > h3{
+    margin:0;
+    padding:0 0 3px;
+
+    text-align:center;
 }
 
 .descarte-panel-top10 .table-scroll{
     width:100%;
-
-    max-height:285px;
+    min-width:0;
+    min-height:0;
+    height:100%;
 
     overflow-x:auto;
     overflow-y:auto;
@@ -190,18 +295,20 @@
 
 .descarte-panel-top10 table{
     width:100%;
+    min-width:580px;
 
     table-layout:fixed;
+    border-collapse:collapse;
 }
 
 .descarte-panel-top10 th:nth-child(1),
 .descarte-panel-top10 td:nth-child(1){
-    width:18%;
+    width:16%;
 }
 
 .descarte-panel-top10 th:nth-child(2),
 .descarte-panel-top10 td:nth-child(2){
-    width:57%;
+    width:59%;
 }
 
 .descarte-panel-top10 th:nth-child(3),
@@ -211,40 +318,33 @@
 
 
 /* ==========================================================
-   EVITAR CORTE DOS VALORES
+   EVITAR ESTOURO DOS PAINÉIS
 ========================================================== */
 
-.descarte-panel-origens,
-.descarte-panel-pizza{
-    overflow:visible;
-}
-
-.descarte-grid > *,
-.descarte-coluna-direita > *{
+.descarte-grid *,
+.descarte-grid *::before,
+.descarte-grid *::after{
     box-sizing:border-box;
 }
 
 
 /* ==========================================================
-   NOTEBOOK
+   TELAS MENORES
 ========================================================== */
 
 @media(max-width:1200px){
 
     .descarte-grid{
         grid-template-columns:
-            minmax(0,1.05fr)
-            minmax(0,.95fr);
+            minmax(0,1fr)
+            minmax(0,1fr);
+
+        height:660px;
+        min-height:660px;
     }
 
     .descarte-chart-barra{
-        height:350px;
-        min-height:350px;
-    }
-
-    .descarte-chart-pizza{
-        height:285px;
-        min-height:285px;
+        min-height:340px;
     }
 }
 
@@ -257,24 +357,25 @@
 
     .descarte-grid{
         grid-template-columns:1fr;
+
+        height:auto;
+        min-height:0;
+    }
+
+    .descarte-panel-origens{
+        height:580px;
     }
 
     .descarte-coluna-direita{
-        grid-template-rows:auto;
+        height:auto;
+
+        grid-template-rows:
+            390px
+            350px;
     }
 
     .descarte-chart-barra{
-        height:340px;
-        min-height:340px;
-    }
-
-    .descarte-chart-pizza{
-        height:330px;
-        min-height:330px;
-    }
-
-    .descarte-panel-top10 .table-scroll{
-        max-height:340px;
+        min-height:350px;
     }
 }
 
@@ -289,18 +390,25 @@
         grid-template-columns:1fr;
     }
 
-    .descarte-chart-barra{
-        height:310px;
-        min-height:310px;
+    .descarte-panel-origens{
+        height:auto;
+
+        grid-template-rows:
+            auto
+            340px
+            auto;
     }
 
-    .descarte-chart-pizza{
-        height:310px;
-        min-height:310px;
+    .descarte-coluna-direita{
+        grid-template-rows:
+            400px
+            340px;
     }
 
-    .descarte-panel-top10 .table-scroll{
-        max-height:320px;
+    .descarte-top3-cards .rank-grid,
+    .descarte-top3-cards .top3-grid,
+    .descarte-top3-cards .ranking-grid{
+        grid-template-columns:1fr;
     }
 }
 
@@ -311,26 +419,22 @@
 
 @media(max-width:520px){
 
-    .descarte-grid{
-        gap:6px;
-    }
-
+    .descarte-grid,
     .descarte-coluna-direita{
         gap:6px;
     }
 
-    .descarte-chart-barra{
-        height:285px;
-        min-height:285px;
+    .descarte-panel-origens{
+        grid-template-rows:
+            auto
+            300px
+            auto;
     }
 
-    .descarte-chart-pizza{
-        height:360px;
-        min-height:360px;
-    }
-
-    .descarte-panel-top10 .table-scroll{
-        max-height:300px;
+    .descarte-coluna-direita{
+        grid-template-rows:
+            430px
+            320px;
     }
 
     .descarte-panel-top10 table{
