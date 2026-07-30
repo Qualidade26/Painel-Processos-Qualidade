@@ -1,11 +1,31 @@
+/* ==========================================================
+   DADOS GLOBAIS DO SISTEMA
+========================================================== */
+
 let dados = {};
 let graficoAtual = null;
 let senhaDescarteLiberada = false;
 
-const valorFlutuantePlugin = {
-    id:"valorFlutuante",
 
-    afterDatasetsDraw(chart){
+/* ==========================================================
+   PLUGIN — VALORES FLUTUANTES NOS GRÁFICOS
+========================================================== */
+
+const valorFlutuantePlugin = {
+
+    id: "valorFlutuante",
+
+    afterDatasetsDraw(chart) {
+
+        /*
+        ----------------------------------------------------------
+        Permite desligar o plugin em gráficos específicos usando:
+
+        plugins: {
+            valorFlutuante: false
+        }
+        ----------------------------------------------------------
+        */
 
         if (
             chart.options.plugins &&
@@ -14,224 +34,717 @@ const valorFlutuantePlugin = {
             return;
         }
 
-        const {ctx} = chart;
+
+        const { ctx } = chart;
+
         ctx.save();
 
-        chart.data.datasets.forEach((dataset, datasetIndex) => {
 
-            const meta = chart.getDatasetMeta(datasetIndex);
+        chart.data.datasets.forEach(
+            (dataset, datasetIndex) => {
 
-            if(meta.hidden) return;
+                const meta =
+                    chart.getDatasetMeta(datasetIndex);
 
-            meta.data.forEach((element, index) => {
 
-                const valor = dataset.data[index];
+                /*
+                --------------------------------------------------
+                Não desenha valores de datasets ocultos
+                --------------------------------------------------
+                */
 
-                if(
-                    valor === null ||
-                    valor === undefined ||
-                    (dataset._ocultarZero && Number(valor) === 0)
-                ) return;
-
-                ctx.font = dataset._horas
-                    ? "800 10px Arial"
-                    : "900 11px Arial";
-
-                ctx.fillStyle = dataset._horas
-                    ? "#c026d3"
-                    : "#0f1f4d";
-
-                const texto = dataset._moeda
-                    ? moedaCurta(valor)
-                    : dataset._horas
-                        ? `${Number(valor || 0).toLocaleString("pt-BR", {
-                            minimumFractionDigits:0,
-                            maximumFractionDigits:2
-                        })} h`
-                        : numero(valor);
-
-                if(chart.options.indexAxis === "y"){
-
-                    ctx.textAlign = "left";
-                    ctx.textBaseline = "middle";
-
-                    ctx.fillText(
-                        texto,
-                        element.x + 8,
-                        element.y
-                    );
-
-                }else if(dataset._horas){
-
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "top";
-
-                    ctx.fillText(
-                        texto,
-                        element.x,
-                        element.y + 11
-                    );
-
-                }else{
-
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "bottom";
-
-                    ctx.fillText(
-                        texto,
-                        element.x,
-                        element.y - 7
-                    );
+                if (meta.hidden) {
+                    return;
                 }
 
-            });
 
-        });
+                meta.data.forEach(
+                    (element, index) => {
+
+                        const valor =
+                            dataset.data[index];
+
+
+                        /*
+                        ------------------------------------------
+                        Ignora valores nulos ou indefinidos
+                        ------------------------------------------
+                        */
+
+                        if (
+                            valor === null ||
+                            valor === undefined
+                        ) {
+                            return;
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        Oculta valores zerados quando solicitado
+                        ------------------------------------------
+                        */
+
+                        if (
+                            dataset._ocultarZero &&
+                            Number(valor) === 0
+                        ) {
+                            return;
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        Impede desenho sobre elementos inválidos
+                        ------------------------------------------
+                        */
+
+                        if (
+                            !element ||
+                            !Number.isFinite(element.x) ||
+                            !Number.isFinite(element.y)
+                        ) {
+                            return;
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        FORMATAÇÃO DA FONTE
+                        ------------------------------------------
+                        */
+
+                        ctx.font = dataset._horas
+                            ? "800 10px Arial"
+                            : "900 11px Arial";
+
+
+                        ctx.fillStyle = dataset._horas
+                            ? "#c026d3"
+                            : "#0f1f4d";
+
+
+                        /*
+                        ------------------------------------------
+                        FORMATAÇÃO DO TEXTO
+                        ------------------------------------------
+                        */
+
+                        let texto;
+
+
+                        if (dataset._moeda) {
+
+                            texto = moedaCurta(valor);
+
+                        } else if (dataset._horas) {
+
+                            texto =
+                                `${Number(valor || 0)
+                                    .toLocaleString(
+                                        "pt-BR",
+                                        {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2
+                                        }
+                                    )} h`;
+
+                        } else {
+
+                            texto = numero(valor);
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        GRÁFICO HORIZONTAL
+                        ------------------------------------------
+                        */
+
+                        if (
+                            chart.options.indexAxis === "y"
+                        ) {
+
+                            ctx.textAlign = "left";
+                            ctx.textBaseline = "middle";
+
+                            ctx.fillText(
+                                texto,
+                                element.x + 8,
+                                element.y
+                            );
+
+                            return;
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        LINHA DE HORAS
+                        ------------------------------------------
+                        */
+
+                        if (dataset._horas) {
+
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "top";
+
+                            ctx.fillText(
+                                texto,
+                                element.x,
+                                element.y + 11
+                            );
+
+                            return;
+                        }
+
+
+                        /*
+                        ------------------------------------------
+                        GRÁFICO VERTICAL
+                        ------------------------------------------
+                        */
+
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "bottom";
+
+                        ctx.fillText(
+                            texto,
+                            element.x,
+                            element.y - 7
+                        );
+                    });
+            }
+        );
+
 
         ctx.restore();
     }
 };
 
-Chart.register(valorFlutuantePlugin);
 
-fetch("data.json")
-.then(r => r.json())
-.then(json => {
+/* ==========================================================
+   REGISTRO DO PLUGIN
+========================================================== */
 
-    dados = normalizarDados(json);
-    renderImportacao();
+function registrarPluginValorFlutuante() {
 
-})
-.catch(() => {
+    if (
+        typeof Chart === "undefined"
+    ) {
 
-    dados = normalizarDados({});
-    renderImportacao();
+        console.error(
+            "Chart.js não foi carregado."
+        );
 
-});
+        return;
+    }
 
-setInterval(()=>{
 
-    fetch("data.json")
-    .then(r=>r.json())
-    .then(json=>{
+    /*
+    ----------------------------------------------------------
+    Evita registrar o mesmo plugin mais de uma vez
+    ----------------------------------------------------------
+    */
 
-        dados = normalizarDados(json);
+    const pluginRegistrado =
+        Chart.registry &&
+        Chart.registry.plugins &&
+        typeof Chart.registry.plugins.get === "function"
+            ? Chart.registry.plugins.get(
+                "valorFlutuante"
+            )
+            : null;
 
-        const abaAtiva =
-            document.querySelector(".menu button.active");
 
-        if(abaAtiva){
-            abaAtiva.click();
-        }
+    if (!pluginRegistrado) {
 
-    });
+        Chart.register(
+            valorFlutuantePlugin
+        );
+    }
+}
 
-},120000);
 
-function normalizarDados(json){
+registrarPluginValorFlutuante();
 
-    if(Array.isArray(json.esfig)){
 
-        json.esfig = {
+/* ==========================================================
+   CARREGAMENTO DOS DADOS
+========================================================== */
+
+function carregarDadosIniciais() {
+
+    fetch("data.json", {
+        cache: "no-store"
+    })
+
+        .then(resposta => {
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    `Erro ao carregar data.json: ${resposta.status}`
+                );
+            }
+
+            return resposta.json();
+        })
+
+        .then(json => {
+
+            dados = normalizarDados(json);
+
+            renderImportacao();
+        })
+
+        .catch(erro => {
+
+            console.error(
+                "Não foi possível carregar os dados:",
+                erro
+            );
+
+            dados = normalizarDados({});
+
+            renderImportacao();
+        });
+}
+
+
+carregarDadosIniciais();
+
+
+/* ==========================================================
+   ATUALIZAÇÃO AUTOMÁTICA DOS DADOS
+========================================================== */
+
+const intervaloAtualizacaoDados = setInterval(
+    atualizarDadosAutomaticamente,
+    120000
+);
+
+
+function atualizarDadosAutomaticamente() {
+
+    fetch("data.json", {
+        cache: "no-store"
+    })
+
+        .then(resposta => {
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    `Erro ao atualizar data.json: ${resposta.status}`
+                );
+            }
+
+            return resposta.json();
+        })
+
+        .then(json => {
+
+            dados = normalizarDados(json);
+
+
+            /*
+            ------------------------------------------------------
+            Atualiza somente a aba que estiver aberta
+            ------------------------------------------------------
+            */
+
+            const abaAtiva =
+                document.querySelector(
+                    ".menu button.active"
+                );
+
+
+            if (abaAtiva) {
+
+                abaAtiva.click();
+
+                return;
+            }
+
+
+            /*
+            ------------------------------------------------------
+            Caso nenhum botão esteja marcado como ativo
+            ------------------------------------------------------
+            */
+
+            renderImportacao();
+        })
+
+        .catch(erro => {
+
+            console.error(
+                "Erro na atualização automática:",
+                erro
+            );
+        });
+}
+
+
+/* ==========================================================
+   NORMALIZAÇÃO DOS DADOS
+========================================================== */
+
+function normalizarDados(json) {
+
+    const dadosNormalizados =
+        json &&
+        typeof json === "object"
+            ? json
+            : {};
+
+
+    /*
+    ----------------------------------------------------------
+    Compatibilidade com o formato antigo da área ESFIG
+    ----------------------------------------------------------
+    */
+
+    if (
+        Array.isArray(
+            dadosNormalizados.esfig
+        )
+    ) {
+
+        dadosNormalizados.esfig = {
 
             ultimaAfericao:
-                json.ultimaAfericao || "",
+                dadosNormalizados
+                    .ultimaAfericao || "",
 
             proximaAfericao:
-                json.proximaAfericao || "",
+                dadosNormalizados
+                    .proximaAfericao || "",
 
             produtos:
-                json.esfig
+                dadosNormalizados.esfig
         };
     }
 
-    return json;
+
+    return dadosNormalizados;
 }
 
-function abrirAba(aba, botao){
+
+/* ==========================================================
+   ABERTURA DAS ABAS
+========================================================== */
+
+function abrirAba(aba, botao) {
+
+    /*
+    ----------------------------------------------------------
+    Remove a marcação ativa dos botões
+    ----------------------------------------------------------
+    */
 
     document
-        .querySelectorAll(".menu button")
-        .forEach(b => b.classList.remove("active"));
+        .querySelectorAll(
+            ".menu button"
+        )
+        .forEach(item => {
 
-    if(botao)
-        botao.classList.add("active");
+            item.classList.remove(
+                "active"
+            );
+        });
+
+
+    /*
+    ----------------------------------------------------------
+    Marca o botão selecionado
+    ----------------------------------------------------------
+    */
+
+    if (botao) {
+
+        botao.classList.add(
+            "active"
+        );
+    }
+
+
+    /*
+    ----------------------------------------------------------
+    Destrói gráficos da página anterior
+    ----------------------------------------------------------
+    */
 
     destruirGrafico();
 
-    if(aba === "importacao")
-        renderImportacao();
 
-    if(aba === "esfig")
-        renderEsfig();
+    /*
+    ----------------------------------------------------------
+    Renderiza a aba solicitada
+    ----------------------------------------------------------
+    */
 
-    if(aba === "descarte")
-        renderDescarte();
+    switch (aba) {
 
-    if(aba === "amostra")
-        renderAmostra();
+        case "importacao":
 
-    if(aba === "retrabalho")
-        renderRetrabalho();
+            if (
+                typeof renderImportacao ===
+                "function"
+            ) {
 
-    if(aba === "fornecedores")
-    renderFornecedores();
+                renderImportacao();
+            }
 
-    if(aba === "informativo")
-        renderInformativo();
-}
+            break;
 
-function destruirGrafico(){
 
-    if(graficoAtual){
+        case "esfig":
 
-        graficoAtual.destroy();
-        graficoAtual = null;
+            if (
+                typeof renderEsfig ===
+                "function"
+            ) {
 
+                renderEsfig();
+            }
+
+            break;
+
+
+        case "descarte":
+
+            if (
+                typeof renderDescarte ===
+                "function"
+            ) {
+
+                renderDescarte();
+            }
+
+            break;
+
+
+        case "amostra":
+
+            if (
+                typeof renderAmostra ===
+                "function"
+            ) {
+
+                renderAmostra();
+            }
+
+            break;
+
+
+        case "retrabalho":
+
+            if (
+                typeof renderRetrabalho ===
+                "function"
+            ) {
+
+                renderRetrabalho();
+            }
+
+            break;
+
+
+        case "fornecedores":
+
+            if (
+                typeof renderFornecedores ===
+                "function"
+            ) {
+
+                renderFornecedores();
+            }
+
+            break;
+
+
+        case "informativo":
+
+            if (
+                typeof renderInformativo ===
+                "function"
+            ) {
+
+                renderInformativo();
+            }
+
+            break;
+
+
+        default:
+
+            console.warn(
+                `Aba não reconhecida: ${aba}`
+            );
+
+            if (
+                typeof renderImportacao ===
+                "function"
+            ) {
+
+                renderImportacao();
+            }
     }
 }
 
-function atualizarRelogio(){
+
+/* ==========================================================
+   DESTRUIÇÃO DOS GRÁFICOS
+========================================================== */
+
+function destruirGrafico() {
+
+    /*
+    ----------------------------------------------------------
+    Gráfico padrão utilizado pelas outras páginas
+    ----------------------------------------------------------
+    */
+
+    if (graficoAtual) {
+
+        graficoAtual.destroy();
+        graficoAtual = null;
+    }
+
+
+    /*
+    ----------------------------------------------------------
+    Gráficos específicos da página de Importação
+    ----------------------------------------------------------
+    */
+
+    if (
+        typeof destruirGraficosImportacao ===
+        "function"
+    ) {
+
+        destruirGraficosImportacao();
+    }
+}
+
+
+/* ==========================================================
+   RELÓGIO DO PAINEL
+========================================================== */
+
+function atualizarRelogio() {
 
     const agora = new Date();
 
+
     const dia =
-        String(agora.getDate()).padStart(2,"0");
+        String(
+            agora.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
 
     const mes =
         agora
-        .toLocaleDateString("pt-BR",{month:"long"})
-        .toUpperCase();
+            .toLocaleDateString(
+                "pt-BR",
+                {
+                    month: "long"
+                }
+            )
+            .toUpperCase();
+
 
     const ano =
         agora.getFullYear();
 
-    document.getElementById("dataAtual").innerText =
-        `${dia} ${mes} ${ano}`;
 
-    document.getElementById("horaAtual").innerText =
-        agora.toLocaleTimeString("pt-BR");
+    const elementoData =
+        document.getElementById(
+            "dataAtual"
+        );
+
+
+    const elementoHora =
+        document.getElementById(
+            "horaAtual"
+        );
+
+
+    if (elementoData) {
+
+        elementoData.innerText =
+            `${dia} ${mes} ${ano}`;
+    }
+
+
+    if (elementoHora) {
+
+        elementoHora.innerText =
+            agora.toLocaleTimeString(
+                "pt-BR"
+            );
+    }
 }
 
-setInterval(atualizarRelogio,1000);
+
+setInterval(
+    atualizarRelogio,
+    1000
+);
+
 
 atualizarRelogio();
 
-function toggleMenu(){
+
+/* ==========================================================
+   ABRIR E FECHAR MENU LATERAL
+========================================================== */
+
+function toggleMenu() {
 
     const wrap =
-        document.getElementById("mainWrap");
+        document.getElementById(
+            "mainWrap"
+        );
+
 
     const btn =
-        document.getElementById("btnToggleMenu");
+        document.getElementById(
+            "btnToggleMenu"
+        );
 
-    wrap.classList.toggle("menu-collapsed");
+
+    if (!wrap || !btn) {
+
+        console.warn(
+            "Elementos do menu não encontrados."
+        );
+
+        return;
+    }
+
+
+    wrap.classList.toggle(
+        "menu-collapsed"
+    );
+
 
     const recolhido =
-        wrap.classList.contains("menu-collapsed");
+        wrap.classList.contains(
+            "menu-collapsed"
+        );
+
 
     btn.innerText =
-        recolhido ? "▶" : "◀";
+        recolhido
+            ? "▶"
+            : "◀";
+
 
     btn.title =
         recolhido
