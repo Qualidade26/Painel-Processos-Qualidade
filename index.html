@@ -198,7 +198,7 @@
             >
 
                 <span class="ico">
-                    🧪
+                    📦
                 </span>
 
                 <span class="label">
@@ -305,13 +305,29 @@
     <script
         src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"
     ></script>
+<script>
+    if (
+        typeof Chart !== "undefined" &&
+        typeof ChartDataLabels !== "undefined"
+    ) {
+        Chart.register(ChartDataLabels);
+
+        console.log(
+            "Plugin ChartDataLabels registrado com sucesso."
+        );
+    } else {
+        console.error(
+            "Chart.js ou ChartDataLabels não foi carregado."
+        );
+    }
+</script>
 
 
     <!-- =====================================================
          TEMA GLOBAL DOS GRÁFICOS
     ====================================================== -->
 
-    <script src="js/chart-theme.js?v=11"></script>
+    <script src="js/chart-theme.js?v=12"></script>
 
 
     <!-- =====================================================
