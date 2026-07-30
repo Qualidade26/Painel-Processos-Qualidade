@@ -2,59 +2,226 @@
    PÁGINA — DESCARTE
 ========================================================== */
 
+
 /* ==========================================================
-   GRÁFICOS PRINCIPAIS
+   INDICADORES SUPERIORES
 ========================================================== */
 
-.descarte-graficos{
+.descarte-indicadores{
     display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:8px;
     margin-bottom:8px;
 }
 
-.descarte-graficos > .panel{
+.descarte-indicadores > .card{
     width:100%;
     min-width:0;
 }
 
-.chart-box-descarte{
+
+/* ==========================================================
+   LAYOUT PRINCIPAL
+========================================================== */
+
+.descarte-grid{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.12fr)
+        minmax(0,.88fr);
+
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+
+    align-items:stretch;
+}
+
+
+/* ==========================================================
+   COLUNA ESQUERDA
+========================================================== */
+
+.descarte-panel-origens{
+    width:100%;
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   COLUNA DIREITA
+========================================================== */
+
+.descarte-coluna-direita{
+    width:100%;
+    min-width:0;
+
+    display:grid;
+
+    grid-template-rows:
+        minmax(0,1fr)
+        minmax(0,.88fr);
+
+    gap:8px;
+}
+
+
+/* ==========================================================
+   PAINÉIS
+========================================================== */
+
+.descarte-panel-pizza,
+.descarte-panel-top10{
+    width:100%;
+    min-width:0;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   TÍTULOS DOS PAINÉIS
+========================================================== */
+
+.descarte-panel-origens h3,
+.descarte-panel-pizza h3,
+.descarte-panel-top10 h3{
+    flex-shrink:0;
+}
+
+
+/* ==========================================================
+   GRÁFICO DE BARRAS
+========================================================== */
+
+.descarte-chart-barra{
     position:relative;
+
     width:100%;
     min-width:0;
-    height:300px;
+
+    height:370px;
+    min-height:370px;
+
+    overflow:visible;
 }
 
-.chart-box-descarte canvas{
+.descarte-chart-barra canvas{
+    display:block;
+
     width:100% !important;
     height:100% !important;
+
     max-width:100%;
 }
 
 
 /* ==========================================================
-   INDICADORES
+   GRÁFICO DE PIZZA / ROSCA
 ========================================================== */
 
-.descarte-indicadores{
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:8px;
+.descarte-panel-pizza{
+    display:flex;
+    flex-direction:column;
+
+    min-height:0;
+}
+
+.descarte-chart-pizza{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+
+    height:300px;
+    min-height:300px;
+
+    flex:1;
+
+    overflow:visible;
+}
+
+.descarte-chart-pizza canvas{
+    display:block;
+
+    width:100% !important;
+    height:100% !important;
+
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   TOP 3 ORIGENS
+========================================================== */
+
+.descarte-titulo-top3{
+    margin-top:10px;
     margin-bottom:8px;
 }
 
 
 /* ==========================================================
-   TABELA
+   TOP 10 DESCARTE
 ========================================================== */
 
-.descarte-tabela{
-    width:100%;
+.descarte-panel-top10{
+    display:flex;
+    flex-direction:column;
+
+    min-height:0;
 }
 
-.descarte-tabela .table-scroll{
-    max-height:340px;
-    overflow:auto;
+.descarte-panel-top10 .table-scroll{
+    width:100%;
+
+    max-height:285px;
+
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.descarte-panel-top10 table{
+    width:100%;
+
+    table-layout:fixed;
+}
+
+.descarte-panel-top10 th:nth-child(1),
+.descarte-panel-top10 td:nth-child(1){
+    width:18%;
+}
+
+.descarte-panel-top10 th:nth-child(2),
+.descarte-panel-top10 td:nth-child(2){
+    width:57%;
+}
+
+.descarte-panel-top10 th:nth-child(3),
+.descarte-panel-top10 td:nth-child(3){
+    width:25%;
+}
+
+
+/* ==========================================================
+   EVITAR CORTE DOS VALORES
+========================================================== */
+
+.descarte-panel-origens,
+.descarte-panel-pizza{
+    overflow:visible;
+}
+
+.descarte-grid > *,
+.descarte-coluna-direita > *{
+    box-sizing:border-box;
 }
 
 
@@ -62,18 +229,52 @@
    NOTEBOOK
 ========================================================== */
 
+@media(max-width:1200px){
+
+    .descarte-grid{
+        grid-template-columns:
+            minmax(0,1.05fr)
+            minmax(0,.95fr);
+    }
+
+    .descarte-chart-barra{
+        height:350px;
+        min-height:350px;
+    }
+
+    .descarte-chart-pizza{
+        height:285px;
+        min-height:285px;
+    }
+}
+
+
+/* ==========================================================
+   NOTEBOOK MENOR
+========================================================== */
+
 @media(max-width:1050px){
 
-    .descarte-graficos{
+    .descarte-grid{
         grid-template-columns:1fr;
     }
 
-    .descarte-indicadores{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .descarte-coluna-direita{
+        grid-template-rows:auto;
     }
 
-    .chart-box-descarte{
-        height:280px;
+    .descarte-chart-barra{
+        height:340px;
+        min-height:340px;
+    }
+
+    .descarte-chart-pizza{
+        height:330px;
+        min-height:330px;
+    }
+
+    .descarte-panel-top10 .table-scroll{
+        max-height:340px;
     }
 }
 
@@ -84,12 +285,22 @@
 
 @media(max-width:800px){
 
-    .chart-box-descarte{
-        height:250px;
+    .descarte-indicadores{
+        grid-template-columns:1fr;
     }
 
-    .descarte-indicadores{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .descarte-chart-barra{
+        height:310px;
+        min-height:310px;
+    }
+
+    .descarte-chart-pizza{
+        height:310px;
+        min-height:310px;
+    }
+
+    .descarte-panel-top10 .table-scroll{
+        max-height:320px;
     }
 }
 
@@ -100,15 +311,29 @@
 
 @media(max-width:520px){
 
-    .chart-box-descarte{
-        height:220px;
+    .descarte-grid{
+        gap:6px;
     }
 
-    .descarte-indicadores{
-        grid-template-columns:1fr;
+    .descarte-coluna-direita{
+        gap:6px;
     }
 
-    .descarte-tabela .table-scroll{
+    .descarte-chart-barra{
+        height:285px;
+        min-height:285px;
+    }
+
+    .descarte-chart-pizza{
+        height:360px;
+        min-height:360px;
+    }
+
+    .descarte-panel-top10 .table-scroll{
         max-height:300px;
+    }
+
+    .descarte-panel-top10 table{
+        min-width:620px;
     }
 }
