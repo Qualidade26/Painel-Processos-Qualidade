@@ -221,10 +221,11 @@ const rotulosBarrasMensaisImportacao = {
                         --------------------------------------------------
                         */
 
-                        const deslocamento =
-                            datasetIndex % 2 === 0
-                                ? 7
-                                : 18;
+                     const deslocamento =
+    datasetIndex === 0 ? 12 :
+    datasetIndex === 1 ? 24 :
+    datasetIndex === 2 ? 36 :
+    48;
 
                         ctx.font =
                             "800 9px Arial";
@@ -932,7 +933,7 @@ function criarGraficoMensalImportacao(imp) {
 
                         padding: {
 
-                            top: 22,
+                            top: 55,
 
                             right: 8,
 
@@ -1001,6 +1002,8 @@ function criarGraficoMensalImportacao(imp) {
                             position: "top",
 
                             align: "center",
+                           
+                           fullSize: true,
 
                             labels: {
 
@@ -1010,7 +1013,7 @@ function criarGraficoMensalImportacao(imp) {
 
                                 boxHeight: 10,
 
-                                padding: 18,
+                                padding: 30,
 
                                 color: "#374151",
 
