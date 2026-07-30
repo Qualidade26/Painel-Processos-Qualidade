@@ -211,45 +211,39 @@ const rotulosBarrasMensaisImportacao = {
                         --------------------------------------------------
                         */
 
-                        let deslocamentoY = 10;
-                        let ajusteX = 0;
+                       let deslocamentoY = 4;
+let ajusteX = 0;
 
+switch (dataset.label) {
 
-                        switch (dataset.label) {
+    case "Processos":
 
-                            case "Processos":
+        deslocamentoY = 4;
+        ajusteX = 0;
 
-                                deslocamentoY = 10;
-                                ajusteX = -2;
+        break;
 
-                                break;
+    case "SKU":
 
+        deslocamentoY = 10;
+        ajusteX = 0;
 
-                            case "SKU":
+        break;
 
-                                deslocamentoY = 22;
-                                ajusteX = -5;
+    case "Lotes":
 
-                                break;
+        deslocamentoY = 16;
+        ajusteX = 0;
 
+        break;
 
-                            case "Lotes":
+    case "Laudos":
 
-                                deslocamentoY = 34;
-                                ajusteX = 4;
+        deslocamentoY = 22;
+        ajusteX = 0;
 
-                                break;
-
-
-                            case "Laudos":
-
-                                deslocamentoY = 46;
-                                ajusteX = 7;
-
-                                break;
-                        }
-
-
+        break;
+}
                         const texto =
                             Number(valor)
                                 .toLocaleString("pt-BR");
@@ -259,15 +253,10 @@ const rotulosBarrasMensaisImportacao = {
                             elemento.x + ajusteX;
 
 
-                        const posicaoY =
-                            Math.max(
-                                elemento.y - deslocamentoY,
-                                chartArea.top + 10
-                            );
+                        const posicaoY = elemento.y - deslocamentoY;
 
 
-                        ctx.font =
-                            "800 9px Arial";
+                        ctx.font = "700 10px Segoe UI";
 
                         ctx.fillStyle =
                             "#10245c";
