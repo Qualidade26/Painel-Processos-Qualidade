@@ -467,23 +467,25 @@ function criarGraficoMensalImportacao(imp) {
                 },
 
 
-                plugins: {
+          plugins: {
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LEGENDA
-                    |--------------------------------------------------------------------------
-                    */
-                    legend: {
-                        position: "top",
+    valorFlutuante: false,
 
-                        labels: {
-                            usePointStyle: false,
-                            boxWidth: 32,
-                            padding: 18
-                        }
-                    },
+    /*
+    |--------------------------------------------------------------------------
+    | LEGENDA
+    |--------------------------------------------------------------------------
+    */
+    legend: {
 
+        position: "top",
+
+        labels: {
+            usePointStyle: false,
+            boxWidth: 32,
+            padding: 18
+        }
+    },
 
                     /*
                     |--------------------------------------------------------------------------
@@ -807,7 +809,9 @@ function criarGraficoParetoImportacao(imp) {
                 },
 
 
-                plugins: {
+               plugins: {
+
+    valorFlutuante: false,
 
                     legend: {
                         position: "top",
