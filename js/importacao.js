@@ -10,9 +10,8 @@
 let graficoMensalImportacao = null;
 let graficoSkuImportacao = null;
 
-
 /* ==========================================================
-   CONVERSÃO DOS VALORES
+   CONVERSÃO CORRETA DOS VALORES DO GRÁFICO
 ========================================================== */
 
 function valorGraficoImportacao(valor) {
@@ -25,13 +24,74 @@ function valorGraficoImportacao(valor) {
         return null;
     }
 
-    const valorNormalizado = String(valor)
-        .trim()
-        .replace(/\./g, "")
-        .replace(",", ".");
+    let valorNormalizado =
+        String(valor).trim();
+
+
+    /*
+    ----------------------------------------------------------
+    Trata os formatos:
+
+    10,5       → 10.5
+    10.5       → 10.5
+    1.250,50   → 1250.50
+    1,250.50   → 1250.50
+    ----------------------------------------------------------
+    */
+
+    if (
+        valorNormalizado.includes(".") &&
+        valorNormalizado.includes(",")
+    ) {
+
+        const ultimoPonto =
+            valorNormalizado.lastIndexOf(".");
+
+        const ultimaVirgula =
+            valorNormalizado.lastIndexOf(",");
+
+
+        if (ultimaVirgula > ultimoPonto) {
+
+            /*
+            Formato brasileiro:
+            1.250,50
+            */
+
+            valorNormalizado =
+                valorNormalizado
+                    .replace(/\./g, "")
+                    .replace(",", ".");
+
+        } else {
+
+            /*
+            Formato internacional:
+            1,250.50
+            */
+
+            valorNormalizado =
+                valorNormalizado
+                    .replace(/,/g, "");
+        }
+
+    } else if (
+        valorNormalizado.includes(",")
+    ) {
+
+        /*
+        Formato decimal brasileiro:
+        10,5
+        */
+
+        valorNormalizado =
+            valorNormalizado.replace(",", ".");
+    }
+
 
     const numeroConvertido =
         Number(valorNormalizado);
+
 
     if (
         !Number.isFinite(numeroConvertido) ||
@@ -39,6 +99,7 @@ function valorGraficoImportacao(valor) {
     ) {
         return null;
     }
+
 
     return numeroConvertido;
 }
@@ -76,15 +137,21 @@ function escaparTextoImportacao(valor) {
 
 
 /* ==========================================================
-   FORMATAÇÃO DE HORAS
+   FORMATAÇÃO CORRETA DAS HORAS
 ========================================================== */
 
 function formatarHorasImportacao(valor) {
 
-    const numeroHoras =
-        Number(valor || 0);
+    const horas =
+        valorGraficoImportacao(valor);
 
-    return numeroHoras.toLocaleString(
+
+    if (horas === null) {
+        return "0";
+    }
+
+
+    return horas.toLocaleString(
         "pt-BR",
         {
             minimumFractionDigits: 0,
