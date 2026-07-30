@@ -1,3 +1,10 @@
+/*
+|--------------------------------------------------------------------------
+| INSTÂNCIAS DOS GRÁFICOS
+|--------------------------------------------------------------------------
+*/
+
+let graficoAtual = null;
 let graficoParetoImportacao = null;
 
 
@@ -6,17 +13,19 @@ let graficoParetoImportacao = null;
 | TRATAMENTO DOS VALORES DO GRÁFICO
 |--------------------------------------------------------------------------
 | Converte valores zerados, vazios ou inválidos em null.
+|
 | Dessa forma:
 |
 | - o mês continua aparecendo no eixo horizontal;
-| - nenhuma barra é desenhada;
-| - nenhum ponto é desenhado;
+| - nenhuma barra é desenhada para valores zerados;
+| - nenhum ponto é desenhado para valores zerados;
 | - a linha de horas não desce até zero;
 | - o tooltip não mostra valores zerados.
+|--------------------------------------------------------------------------
 */
+
 function valorGrafico(valor) {
 
-    
     if (
         valor === null ||
         valor === undefined ||
@@ -27,20 +36,25 @@ function valorGrafico(valor) {
 
     /*
     |--------------------------------------------------------------------------
-    | Aceita números com vírgula ou ponto.
+    | ACEITA NÚMEROS COM VÍRGULA OU PONTO
     |--------------------------------------------------------------------------
+    |
     | Exemplos:
     |
     | "10,5" vira 10.5
     | "10.5" continua 10.5
     | "0" vira null
     | "0,00" vira null
+    |--------------------------------------------------------------------------
     */
+
     const valorNormalizado = String(valor)
         .trim()
         .replace(",", ".");
 
-    const valorNumerico = Number(valorNormalizado);
+    const valorNumerico = Number(
+        valorNormalizado
+    );
 
     if (
         !Number.isFinite(valorNumerico) ||
@@ -58,14 +72,81 @@ function valorGrafico(valor) {
 | VERIFICA SE O VALOR DO GRÁFICO É VÁLIDO
 |--------------------------------------------------------------------------
 */
+
 function possuiValorGrafico(valor) {
 
     return (
         valor !== null &&
         valor !== undefined &&
         valor !== "" &&
-        Number(valor) !== 0
+        Number(valor) !== 0 &&
+        Number.isFinite(Number(valor))
     );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DESTRÓI OS GRÁFICOS DA IMPORTAÇÃO
+|--------------------------------------------------------------------------
+| Executado antes de montar novamente a página.
+|--------------------------------------------------------------------------
+*/
+
+function destruirGraficosImportacao() {
+
+    if (graficoAtual) {
+
+        graficoAtual.destroy();
+        graficoAtual = null;
+    }
+
+    if (graficoParetoImportacao) {
+
+        graficoParetoImportacao.destroy();
+        graficoParetoImportacao = null;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SEGURANÇA ADICIONAL
+    |--------------------------------------------------------------------------
+    | Verifica se o Chart.js ainda possui alguma instância vinculada
+    | aos canvases da página.
+    |--------------------------------------------------------------------------
+    */
+
+    const canvasMensal =
+        document.getElementById(
+            "graficoImportacao"
+        );
+
+    if (canvasMensal) {
+
+        const existenteMensal =
+            Chart.getChart(canvasMensal);
+
+        if (existenteMensal) {
+            existenteMensal.destroy();
+        }
+    }
+
+
+    const canvasPareto =
+        document.getElementById(
+            "graficoParetoImportacao"
+        );
+
+    if (canvasPareto) {
+
+        const existentePareto =
+            Chart.getChart(canvasPareto);
+
+        if (existentePareto) {
+            existentePareto.destroy();
+        }
+    }
 }
 
 
@@ -74,14 +155,32 @@ function possuiValorGrafico(valor) {
 | RENDERIZAÇÃO DA PÁGINA DE IMPORTAÇÃO
 |--------------------------------------------------------------------------
 */
+
 function renderImportacao() {
 
+    /*
+    |--------------------------------------------------------------------------
+    | DESTRÓI OS GRÁFICOS DA PÁGINA ANTERIOR
+    |--------------------------------------------------------------------------
+    */
+
+    destruirGraficosImportacao();
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DADOS DA IMPORTAÇÃO
+    |--------------------------------------------------------------------------
+    */
+
     const imp = dados.importacao || {
+
         processosAno: 0,
         totalSku: 0,
         totalLotes: 0,
         laudosEmitidos: 0,
         totalHoras: 0,
+
         mensal: [],
         paretoSku: [],
         fluxo: []
@@ -90,29 +189,16 @@ function renderImportacao() {
 
     /*
     |--------------------------------------------------------------------------
-    | DESTRÓI OS GRÁFICOS ANTERIORES
+    | MONTA O CONTEÚDO DA PÁGINA
     |--------------------------------------------------------------------------
-    | Evita gráficos duplicados quando o usuário sai da página
-    | e entra novamente.
     */
-    if (
-        typeof graficoAtual !== "undefined" &&
-        graficoAtual
-    ) {
-        graficoAtual.destroy();
-        graficoAtual = null;
-    }
-
-    if (graficoParetoImportacao) {
-        graficoParetoImportacao.destroy();
-        graficoParetoImportacao = null;
-    }
-
 
     conteudo.innerHTML = `
+
         <div class="page-title">
             📦 INSPEÇÃO DE IMPORTAÇÃO
         </div>
+
 
         <section class="cards">
 
@@ -153,6 +239,7 @@ function renderImportacao() {
 
         </section>
 
+
         <section class="panel">
 
             <h3>
@@ -160,12 +247,18 @@ function renderImportacao() {
             </h3>
 
             <div class="chart-box chart-box-importacao">
-                <canvas id="graficoImportacao"></canvas>
+
+                <canvas
+                    id="graficoImportacao"
+                ></canvas>
+
             </div>
 
         </section>
 
+
         <section class="importacao-bottom-grid">
+
 
             <div class="panel">
 
@@ -174,10 +267,15 @@ function renderImportacao() {
                 </h3>
 
                 <div class="chart-box chart-box-pareto">
-                    <canvas id="graficoParetoImportacao"></canvas>
+
+                    <canvas
+                        id="graficoParetoImportacao"
+                    ></canvas>
+
                 </div>
 
             </div>
+
 
             <div class="panel">
 
@@ -185,20 +283,25 @@ function renderImportacao() {
                     📋 Fluxo da Inspeção de Importação
                 </h3>
 
-               ${tabelaFixa(
-    [
-        "PO",
-        "SKU",
-        "Descrição do Produto",
-        "Lote",
-        "Status",
-        "Observação"
-    ],
-    montarLinhasImportacao(
-        imp.fluxo || []
-    ),
-    false
-)}
+
+                ${tabelaFixa(
+
+                    [
+                        "PO",
+                        "SKU",
+                        "Descrição do Produto",
+                        "Lote",
+                        "Status",
+                        "Observação"
+                    ],
+
+                    montarLinhasImportacao(
+                        imp.fluxo || []
+                    ),
+
+                    false
+                )}
+
 
                 <div class="table-footer">
 
@@ -218,30 +321,50 @@ function renderImportacao() {
     `;
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | CRIA OS GRÁFICOS APÓS O HTML SER INSERIDO
+    |--------------------------------------------------------------------------
+    */
+
     criarGraficoMensalImportacao(imp);
     criarGraficoParetoImportacao(imp);
 }
-
-
 /*
 |--------------------------------------------------------------------------
 | GRÁFICO DE EVOLUÇÃO MENSAL
 |--------------------------------------------------------------------------
 */
+
 function criarGraficoMensalImportacao(imp) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | DADOS MENSAIS
+    |--------------------------------------------------------------------------
+    */
 
     const mensal = Array.isArray(imp.mensal)
         ? imp.mensal
         : [];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOCALIZA O CANVAS
+    |--------------------------------------------------------------------------
+    */
 
     const canvas = document.getElementById(
         "graficoImportacao"
     );
 
     if (!canvas) {
+
         console.error(
             "Canvas graficoImportacao não encontrado."
         );
+
         return;
     }
 
@@ -250,9 +373,8 @@ function criarGraficoMensalImportacao(imp) {
     |--------------------------------------------------------------------------
     | PREPARAÇÃO DOS DADOS
     |--------------------------------------------------------------------------
-    | Os 12 meses continuam no gráfico.
-    | Somente os valores zerados são transformados em null.
     */
+
     const meses = mensal.map(item =>
         item.mes || ""
     );
@@ -278,6 +400,34 @@ function criarGraficoMensalImportacao(imp) {
     );
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | REMOVE QUALQUER INSTÂNCIA ANTERIOR
+    |--------------------------------------------------------------------------
+    */
+
+    if (graficoAtual) {
+
+        graficoAtual.destroy();
+        graficoAtual = null;
+    }
+
+
+    const graficoExistente =
+        Chart.getChart(canvas);
+
+    if (graficoExistente) {
+
+        graficoExistente.destroy();
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRIA O GRÁFICO
+    |--------------------------------------------------------------------------
+    */
+
     graficoAtual = new Chart(
         canvas,
         {
@@ -292,17 +442,22 @@ function criarGraficoMensalImportacao(imp) {
                     | PROCESSOS
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "bar",
+
                         label: "Processos",
+
                         data: processos,
 
                         backgroundColor: "#1d4eff",
                         borderColor: "#1d4eff",
+
                         borderWidth: 1,
                         borderRadius: 3,
 
                         yAxisID: "y",
+
                         order: 2,
 
                         skipNull: true
@@ -314,19 +469,24 @@ function criarGraficoMensalImportacao(imp) {
                     | SKU
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "bar",
+
                         label: "SKU",
+
                         data: sku,
 
                         backgroundColor:
                             "rgba(240, 77, 216, 0.65)",
 
                         borderColor: "#f04dd8",
+
                         borderWidth: 2,
                         borderRadius: 3,
 
                         yAxisID: "y",
+
                         order: 2,
 
                         skipNull: true
@@ -338,19 +498,24 @@ function criarGraficoMensalImportacao(imp) {
                     | LOTES
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "bar",
+
                         label: "Lotes",
+
                         data: lotes,
 
                         backgroundColor:
                             "rgba(34, 197, 94, 0.55)",
 
                         borderColor: "#22c55e",
+
                         borderWidth: 2,
                         borderRadius: 3,
 
                         yAxisID: "y",
+
                         order: 2,
 
                         skipNull: true
@@ -362,19 +527,24 @@ function criarGraficoMensalImportacao(imp) {
                     | LAUDOS
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "bar",
+
                         label: "Laudos",
+
                         data: laudos,
 
                         backgroundColor:
                             "rgba(139, 92, 246, 0.55)",
 
                         borderColor: "#6d28d9",
+
                         borderWidth: 2,
                         borderRadius: 3,
 
                         yAxisID: "y",
+
                         order: 2,
 
                         skipNull: true
@@ -385,11 +555,13 @@ function criarGraficoMensalImportacao(imp) {
                     |--------------------------------------------------------------------------
                     | HORAS
                     |--------------------------------------------------------------------------
-                    | A linha não será desenhada nos valores null.
                     */
+
                     {
                         type: "line",
+
                         label: "Horas",
+
                         data: horas,
 
                         borderColor: "#f97316",
@@ -397,13 +569,16 @@ function criarGraficoMensalImportacao(imp) {
 
                         pointBackgroundColor: "#f97316",
                         pointBorderColor: "#ffffff",
+
                         pointBorderWidth: 1,
+
 
                         /*
                         |--------------------------------------------------------------------------
-                        | ESCONDE O PONTO QUANDO O VALOR FOR NULL OU ZERO
+                        | ESCONDE O PONTO QUANDO NÃO HÁ VALOR
                         |--------------------------------------------------------------------------
                         */
+
                         pointRadius: function(context) {
 
                             return possuiValorGrafico(
@@ -412,6 +587,7 @@ function criarGraficoMensalImportacao(imp) {
                                 ? 4
                                 : 0;
                         },
+
 
                         pointHoverRadius: function(context) {
 
@@ -422,6 +598,7 @@ function criarGraficoMensalImportacao(imp) {
                                 : 0;
                         },
 
+
                         pointHitRadius: function(context) {
 
                             return possuiValorGrafico(
@@ -431,24 +608,17 @@ function criarGraficoMensalImportacao(imp) {
                                 : 0;
                         },
 
+
                         borderWidth: 2,
+
                         tension: 0.35,
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | NÃO UNE A LINHA ATRAVÉS DE MESES SEM DADOS
-                        |--------------------------------------------------------------------------
-                        */
                         spanGaps: false,
 
-                        /*
-                        |--------------------------------------------------------------------------
-                        | Não desenha pontos nulos.
-                        |--------------------------------------------------------------------------
-                        */
                         skipNull: true,
 
                         yAxisID: "y1",
+
                         order: 1
                     }
 
@@ -456,43 +626,79 @@ function criarGraficoMensalImportacao(imp) {
             },
 
 
+            /*
+            |--------------------------------------------------------------------------
+            | CONFIGURAÇÕES
+            |--------------------------------------------------------------------------
+            */
+
             options: {
 
                 responsive: true,
+
                 maintainAspectRatio: false,
 
+
+                /*
+                |--------------------------------------------------------------------------
+                | INTERAÇÃO
+                |--------------------------------------------------------------------------
+                */
+
                 interaction: {
+
                     mode: "index",
+
                     intersect: false
                 },
 
 
-          plugins: {
+                /*
+                |--------------------------------------------------------------------------
+                | PLUGINS
+                |--------------------------------------------------------------------------
+                */
 
-    /*
-    |--------------------------------------------------------------------------
-    | LEGENDA
-    |--------------------------------------------------------------------------
-    */
-    legend: {
+                plugins: {
 
-        position: "top",
 
-        labels: {
-            usePointStyle: false,
-            boxWidth: 32,
-            padding: 18
-        }
-    },
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LEGENDA
+                    |--------------------------------------------------------------------------
+                    */
+
+                    legend: {
+
+                        position: "top",
+
+                        labels: {
+
+                            usePointStyle: false,
+
+                            boxWidth: 32,
+
+                            padding: 18
+                        }
+                    },
+
 
                     /*
                     |--------------------------------------------------------------------------
                     | TOOLTIP
                     |--------------------------------------------------------------------------
-                    | Não apresenta valores null ou zero.
                     */
+
                     tooltip: {
+
                         enabled: true,
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | NÃO MOSTRA VALORES NULOS OU ZERADOS
+                        |--------------------------------------------------------------------------
+                        */
 
                         filter: function(context) {
 
@@ -501,7 +707,15 @@ function criarGraficoMensalImportacao(imp) {
                             );
                         },
 
+
                         callbacks: {
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | TEXTO DO TOOLTIP
+                            |--------------------------------------------------------------------------
+                            */
 
                             label: function(context) {
 
@@ -513,8 +727,10 @@ function criarGraficoMensalImportacao(imp) {
                                     return "";
                                 }
 
+
                                 const nome =
                                     context.dataset.label || "";
+
 
                                 return (
                                     `${nome}: ` +
@@ -527,51 +743,50 @@ function criarGraficoMensalImportacao(imp) {
 
                     /*
                     |--------------------------------------------------------------------------
-                    | CHARTJS-PLUGIN-DATALABELS
+                    | EVITA DUPLICAÇÃO DOS NÚMEROS
                     |--------------------------------------------------------------------------
-                    | Caso o projeto esteja usando o plugin DataLabels,
-                    | impede que o número zero apareça sobre o gráfico.
+                    | O plugin DataLabels permanece desligado.
+                    |
+                    | Os valores continuam sendo exibidos pelo plugin global
+                    | valorFlutuante registrado no script.js.
+                    |--------------------------------------------------------------------------
                     */
+
                     datalabels: {
 
-                        display: function(context) {
-
-                            const valor =
-                                context.dataset.data[
-                                    context.dataIndex
-                                ];
-
-                            return possuiValorGrafico(
-                                valor
-                            );
-                        },
-
-                        formatter: function(valor) {
-
-                            return possuiValorGrafico(valor)
-                                ? valor
-                                : "";
-                        }
+                        display: false
                     }
                 },
 
 
+                /*
+                |--------------------------------------------------------------------------
+                | ESCALAS
+                |--------------------------------------------------------------------------
+                */
+
                 scales: {
+
 
                     /*
                     |--------------------------------------------------------------------------
                     | EIXO DOS MESES
                     |--------------------------------------------------------------------------
                     */
+
                     x: {
 
                         grid: {
+
                             display: false
                         },
 
                         ticks: {
+
                             autoSkip: false,
+
                             maxRotation: 45,
+
                             minRotation: 0
                         }
                     },
@@ -582,16 +797,22 @@ function criarGraficoMensalImportacao(imp) {
                     | EIXO DE QUANTIDADE
                     |--------------------------------------------------------------------------
                     */
+
                     y: {
+
                         beginAtZero: true,
+
                         position: "left",
 
                         title: {
+
                             display: true,
+
                             text: "Quantidade"
                         },
 
                         ticks: {
+
                             precision: 0
                         }
                     },
@@ -602,16 +823,22 @@ function criarGraficoMensalImportacao(imp) {
                     | EIXO DE HORAS
                     |--------------------------------------------------------------------------
                     */
+
                     y1: {
+
                         beginAtZero: true,
+
                         position: "right",
 
                         title: {
+
                             display: true,
+
                             text: "Horas"
                         },
 
                         grid: {
+
                             drawOnChartArea: false
                         }
                     }
@@ -620,14 +847,19 @@ function criarGraficoMensalImportacao(imp) {
         }
     );
 }
-
-
 /*
 |--------------------------------------------------------------------------
 | GRÁFICO DE PARETO DOS SKUs
 |--------------------------------------------------------------------------
 */
+
 function criarGraficoParetoImportacao(imp) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | DADOS ORIGINAIS
+    |--------------------------------------------------------------------------
+    */
 
     const paretoOriginal = Array.isArray(
         imp.paretoSku
@@ -638,9 +870,12 @@ function criarGraficoParetoImportacao(imp) {
 
     /*
     |--------------------------------------------------------------------------
-    | REMOVE REGISTROS ZERADOS DO PARETO
+    | TRATAMENTO DOS DADOS
+    |--------------------------------------------------------------------------
+    | Remove registros zerados e ordena do maior para o menor.
     |--------------------------------------------------------------------------
     */
+
     const pareto = paretoOriginal
         .map(item => {
 
@@ -648,6 +883,7 @@ function criarGraficoParetoImportacao(imp) {
                 valorGrafico(item.quantidade);
 
             return {
+
                 sku:
                     item.sku ||
                     "Sem identificação",
@@ -668,17 +904,53 @@ function criarGraficoParetoImportacao(imp) {
         );
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | LOCALIZA O CANVAS
+    |--------------------------------------------------------------------------
+    */
+
     const canvas = document.getElementById(
         "graficoParetoImportacao"
     );
 
     if (!canvas) {
+
         console.error(
             "Canvas graficoParetoImportacao não encontrado."
         );
+
         return;
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | REMOVE QUALQUER INSTÂNCIA ANTERIOR
+    |--------------------------------------------------------------------------
+    */
+
+    if (graficoParetoImportacao) {
+
+        graficoParetoImportacao.destroy();
+        graficoParetoImportacao = null;
+    }
+
+
+    const graficoExistente =
+        Chart.getChart(canvas);
+
+    if (graficoExistente) {
+
+        graficoExistente.destroy();
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PREPARAÇÃO DOS DADOS
+    |--------------------------------------------------------------------------
+    */
 
     const labels = pareto.map(item =>
         item.sku
@@ -689,6 +961,12 @@ function criarGraficoParetoImportacao(imp) {
     );
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | TOTAL DAS QUANTIDADES
+    |--------------------------------------------------------------------------
+    */
+
     const total = quantidades.reduce(
         (soma, valor) =>
             soma + valor,
@@ -696,8 +974,13 @@ function criarGraficoParetoImportacao(imp) {
     );
 
 
-    let acumulado = 0;
+    /*
+    |--------------------------------------------------------------------------
+    | PERCENTUAL ACUMULADO
+    |--------------------------------------------------------------------------
+    */
 
+    let acumulado = 0;
 
     const percentuaisAcumulados =
         quantidades.map(valor => {
@@ -717,6 +1000,12 @@ function criarGraficoParetoImportacao(imp) {
         });
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | CRIA O GRÁFICO
+    |--------------------------------------------------------------------------
+    */
+
     graficoParetoImportacao = new Chart(
         canvas,
         {
@@ -731,17 +1020,22 @@ function criarGraficoParetoImportacao(imp) {
                     | QUANTIDADE
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "bar",
+
                         label: "Quantidade",
+
                         data: quantidades,
 
                         backgroundColor: "#1455d9",
                         borderColor: "#1455d9",
+
                         borderWidth: 1,
                         borderRadius: 3,
 
                         xAxisID: "x",
+
                         order: 2,
 
                         skipNull: true
@@ -753,9 +1047,12 @@ function criarGraficoParetoImportacao(imp) {
                     | PERCENTUAL ACUMULADO
                     |--------------------------------------------------------------------------
                     */
+
                     {
                         type: "line",
+
                         label: "% Acumulado",
+
                         data: percentuaisAcumulados,
 
                         borderColor: "#f97316",
@@ -763,7 +1060,15 @@ function criarGraficoParetoImportacao(imp) {
 
                         pointBackgroundColor: "#f97316",
                         pointBorderColor: "#ffffff",
+
                         pointBorderWidth: 1,
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | ESCONDE PONTOS SEM VALOR
+                        |--------------------------------------------------------------------------
+                        */
 
                         pointRadius: function(context) {
 
@@ -774,6 +1079,7 @@ function criarGraficoParetoImportacao(imp) {
                                 : 0;
                         },
 
+
                         pointHoverRadius: function(context) {
 
                             return possuiValorGrafico(
@@ -783,11 +1089,25 @@ function criarGraficoParetoImportacao(imp) {
                                 : 0;
                         },
 
+
+                        pointHitRadius: function(context) {
+
+                            return possuiValorGrafico(
+                                context.raw
+                            )
+                                ? 10
+                                : 0;
+                        },
+
+
                         borderWidth: 2,
+
                         tension: 0.2,
+
                         spanGaps: false,
 
                         xAxisID: "x1",
+
                         order: 1
                     }
 
@@ -795,33 +1115,83 @@ function criarGraficoParetoImportacao(imp) {
             },
 
 
+            /*
+            |--------------------------------------------------------------------------
+            | CONFIGURAÇÕES
+            |--------------------------------------------------------------------------
+            */
+
             options: {
 
                 responsive: true,
+
                 maintainAspectRatio: false,
+
                 indexAxis: "y",
 
+
+                /*
+                |--------------------------------------------------------------------------
+                | INTERAÇÃO
+                |--------------------------------------------------------------------------
+                */
+
                 interaction: {
+
                     mode: "index",
+
                     intersect: false
                 },
 
 
-               plugins: {
+                /*
+                |--------------------------------------------------------------------------
+                | PLUGINS
+                |--------------------------------------------------------------------------
+                */
 
-    valorFlutuante: false,
+                plugins: {
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | DESLIGA O PLUGIN GLOBAL DE NÚMEROS
+                    |--------------------------------------------------------------------------
+                    | No Pareto, os valores permanecem visíveis somente
+                    | no tooltip.
+                    |--------------------------------------------------------------------------
+                    */
+
+                    valorFlutuante: false,
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | LEGENDA
+                    |--------------------------------------------------------------------------
+                    */
 
                     legend: {
+
                         position: "top",
 
                         labels: {
+
                             boxWidth: 25,
+
                             padding: 15
                         }
                     },
 
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | TOOLTIP
+                    |--------------------------------------------------------------------------
+                    */
+
                     tooltip: {
+
                         enabled: true,
 
                         filter: function(context) {
@@ -830,6 +1200,7 @@ function criarGraficoParetoImportacao(imp) {
                                 context.raw
                             );
                         },
+
 
                         callbacks: {
 
@@ -843,6 +1214,7 @@ function criarGraficoParetoImportacao(imp) {
                                     return "";
                                 }
 
+
                                 if (
                                     context.dataset.label ===
                                     "% Acumulado"
@@ -853,6 +1225,7 @@ function criarGraficoParetoImportacao(imp) {
                                     );
                                 }
 
+
                                 return (
                                     `Quantidade: ` +
                                     `${context.raw}`
@@ -862,78 +1235,107 @@ function criarGraficoParetoImportacao(imp) {
                     },
 
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EVITA NÚMEROS DUPLICADOS
+                    |--------------------------------------------------------------------------
+                    */
+
                     datalabels: {
 
-                        display: function(context) {
-
-                            const valor =
-                                context.dataset.data[
-                                    context.dataIndex
-                                ];
-
-                            return possuiValorGrafico(
-                                valor
-                            );
-                        },
-
-                        formatter: function(valor) {
-
-                            return possuiValorGrafico(valor)
-                                ? valor
-                                : "";
-                        }
+                        display: false
                     }
                 },
 
 
+                /*
+                |--------------------------------------------------------------------------
+                | ESCALAS
+                |--------------------------------------------------------------------------
+                */
+
                 scales: {
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DOS SKUs
+                    |--------------------------------------------------------------------------
+                    */
 
                     y: {
 
                         grid: {
+
                             display: false
                         },
 
                         title: {
+
                             display: true,
+
                             text: "SKU"
                         }
                     },
 
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DE QUANTIDADE
+                    |--------------------------------------------------------------------------
+                    */
+
                     x: {
+
                         beginAtZero: true,
+
                         position: "bottom",
 
                         title: {
+
                             display: true,
+
                             text: "Quantidade"
                         },
 
                         ticks: {
+
                             precision: 0
                         }
                     },
 
 
+                    /*
+                    |--------------------------------------------------------------------------
+                    | EIXO DO PERCENTUAL ACUMULADO
+                    |--------------------------------------------------------------------------
+                    */
+
                     x1: {
+
                         beginAtZero: true,
+
                         max: 100,
+
                         position: "top",
 
                         grid: {
+
                             drawOnChartArea: false
                         },
 
                         ticks: {
 
                             callback: function(valor) {
+
                                 return `${valor}%`;
                             }
                         },
 
                         title: {
+
                             display: true,
+
                             text: "% Acumulado"
                         }
                     }
@@ -942,27 +1344,31 @@ function criarGraficoParetoImportacao(imp) {
         }
     );
 }
-
-
 /*
 |--------------------------------------------------------------------------
 | BOTÃO VER TODOS
 |--------------------------------------------------------------------------
 */
+
 function verTodosImportacao() {
 
     console.log(
         "Abrir todos os registros da inspeção de importação."
     );
 
+
     /*
     |--------------------------------------------------------------------------
-    | Aqui poderá ser adicionada futuramente:
+    | IMPLEMENTAÇÃO FUTURA
     |--------------------------------------------------------------------------
     |
+    | Aqui poderá ser adicionada futuramente:
+    |
     | - abertura de um modal;
-    | - exibição de uma tabela completa;
+    | - exibição da tabela completa;
     | - redirecionamento para outra página;
-    | - exportação dos registros.
+    | - exportação dos registros;
+    | - filtros por PO, SKU, lote ou status.
+    |--------------------------------------------------------------------------
     */
 }
