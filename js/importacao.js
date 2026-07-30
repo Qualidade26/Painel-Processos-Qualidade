@@ -993,21 +993,20 @@ function criarGraficoMensalImportacao(imp) {
                        ESPAÇAMENTO INTERNO
                     ====================================== */
 
-                    layout: {
 
-                        padding: {
+  layout: {
 
-                            top: 60,
+    padding: {
 
-                            right: 10,
+        top: 35,
 
-                            bottom: 0,
+        right: 25,
 
-                            left: 0
-                        }
-                    },
+        bottom: 15,
 
-
+        left: 25
+    }
+},
                     /* ======================================
                        INTERAÇÃO
                     ====================================== */
@@ -1048,25 +1047,23 @@ function criarGraficoMensalImportacao(imp) {
                            LEGENDA
                         ================================== */
 
-                        legend: {
+                       legend: {
 
-                            display: true,
+    display: true,
 
-                            position: "top",
+    position: "top",
 
-                            align: "center",
+    align: "center",
 
-                            fullSize: true,
+    fullSize: true,
 
-                            labels: {
+    labels: {
 
-                                usePointStyle: false,
+        boxWidth: 24,
 
-                                boxWidth: 30,
+        boxHeight: 8,
 
-                                boxHeight: 10,
-
-                                padding: 25,
+        padding: 18,
 
                                 color: "#374151",
 
@@ -1197,16 +1194,17 @@ function criarGraficoMensalImportacao(imp) {
                            EIXO DE QUANTIDADES
                         ================================== */
 
-                        y: {
+                       y: {
 
-                            beginAtZero: true,
+    beginAtZero: true,
 
-                            min: 0,
+    min: 0,
 
-                            position: "left",
+    max: 200,
 
-                            grace: "30%",
+    position: "left",
 
+    grace: 0,
                             title: {
 
                                 display: true,
