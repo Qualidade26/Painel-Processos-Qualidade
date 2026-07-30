@@ -4,7 +4,16 @@ let senhaDescarteLiberada = false;
 
 const valorFlutuantePlugin = {
     id:"valorFlutuante",
+
     afterDatasetsDraw(chart){
+
+        if (
+            chart.options.plugins &&
+            chart.options.plugins.valorFlutuante === false
+        ) {
+            return;
+        }
+
         const {ctx} = chart;
         ctx.save();
 
