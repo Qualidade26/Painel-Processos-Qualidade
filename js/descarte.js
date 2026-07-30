@@ -1,152 +1,479 @@
 /* ==========================================================
+   PÁGINA — DESCARTE
+========================================================== */
+
+
+/* ==========================================================
+   CORES DOS GRÁFICOS
+========================================================== */
+
+const coresDescarte = [
+    "#1d4eff",
+    "#0f3cc9",
+    "#6b7cff",
+    "#f04dd8",
+    "#16a05d",
+    "#38bdf8",
+    "#8b5cf6",
+    "#f59e0b",
+    "#ef4444",
+    "#14b8a6"
+];
+
+
+/* ==========================================================
+   FORMATAÇÃO DE PERCENTUAL
+========================================================== */
+
+function percentualDescarte(valor, total){
+
+    const numeroValor = Number(valor || 0);
+    const numeroTotal = Number(total || 0);
+
+    if(numeroTotal <= 0){
+        return 0;
+    }
+
+    return (
+        numeroValor /
+        numeroTotal
+    ) * 100;
+}
+
+
+function formatarPercentualDescarte(valor){
+
+    return Number(valor || 0)
+        .toLocaleString(
+            "pt-BR",
+            {
+                minimumFractionDigits:1,
+                maximumFractionDigits:1
+            }
+        ) + "%";
+}
+
+
+/* ==========================================================
+   ESCAPAR TEXTO HTML
+========================================================== */
+
+function escaparTextoDescarte(valor){
+
+    return String(valor ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* ==========================================================
+   TOP 3 ORIGENS
+========================================================== */
+
+function montarTop3Descarte(origens){
+
+    const lista =
+        Array.isArray(origens)
+            ? [...origens]
+            : [];
+
+
+    const total = lista.reduce(
+        (soma, item) =>
+            soma + Number(item.valor || 0),
+        0
+    );
+
+
+    const top3 = lista
+
+        .sort(
+            (a,b) =>
+                Number(b.valor || 0) -
+                Number(a.valor || 0)
+        )
+
+        .slice(0,3);
+
+
+    if(!top3.length){
+
+        return `
+            <div class="descarte-top3-vazio">
+                Nenhuma origem registrada.
+            </div>
+        `;
+    }
+
+
+    return `
+
+        <div class="descarte-top3-grid">
+
+            ${top3.map((item, indice) => {
+
+                const nome =
+                    item.nome ||
+                    item.origem ||
+                    "Sem origem";
+
+                const valor =
+                    Number(item.valor || 0);
+
+                const percentual =
+                    percentualDescarte(
+                        valor,
+                        total
+                    );
+
+                const cor =
+                    coresDescarte[
+                        indice %
+                        coresDescarte.length
+                    ];
+
+                return `
+
+                    <div class="descarte-top3-card">
+
+                        <div class="descarte-top3-cabecalho">
+
+                            <span
+                                class="descarte-top3-posicao"
+                                style="
+                                    background:${cor};
+                                "
+                            >
+                                ${indice + 1}
+                            </span>
+
+                            <span class="descarte-top3-nome">
+                                ${escaparTextoDescarte(nome)}
+                            </span>
+
+                        </div>
+
+                        <div class="descarte-top3-valor">
+                            ${moeda(valor)}
+                        </div>
+
+                        <div class="descarte-top3-percentual">
+                            ${formatarPercentualDescarte(percentual)}
+                            do total
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("")}
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   RÓTULOS DOS VALORES NAS BARRAS
+========================================================== */
+
+const rotulosBarrasDescarte = {
+
+    id:"rotulosBarrasDescarte",
+
+    afterDatasetsDraw(chart){
+
+        const meta =
+            chart.getDatasetMeta(0);
+
+        const dataset =
+            chart.data.datasets[0];
+
+        if(
+            !meta ||
+            !meta.data ||
+            !dataset ||
+            !Array.isArray(dataset.data)
+        ){
+            return;
+        }
+
+        const ctx = chart.ctx;
+
+        ctx.save();
+
+        ctx.font =
+            "800 11px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillStyle = "#0f2557";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+
+
+        meta.data.forEach((barra, indice) => {
+
+            if(
+                barra.hidden ||
+                !chart.getDataVisibility(indice)
+            ){
+                return;
+            }
+
+            const valor =
+                Number(
+                    dataset.data[indice] || 0
+                );
+
+            const propriedades =
+                barra.getProps(
+                    [
+                        "x",
+                        "y",
+                        "base"
+                    ],
+                    true
+                );
+
+            let posicaoX =
+                propriedades.x + 7;
+
+            const limiteDireito =
+                chart.chartArea.right - 4;
+
+            const texto =
+                moeda(valor);
+
+            const larguraTexto =
+                ctx.measureText(texto).width;
+
+            if(
+                posicaoX +
+                larguraTexto >
+                limiteDireito
+            ){
+
+                posicaoX =
+                    limiteDireito -
+                    larguraTexto;
+            }
+
+            ctx.fillText(
+                texto,
+                posicaoX,
+                propriedades.y
+            );
+        });
+
+        ctx.restore();
+    }
+};
+
+
+/* ==========================================================
    RÓTULOS EXTERNOS DO GRÁFICO DE PIZZA
 ========================================================== */
 
 const rotulosExternosPizza = {
 
-    id: "rotulosExternosPizza",
+    id:"rotulosExternosPizza",
 
-    afterDatasetsDraw(chart) {
+    afterDatasetsDraw(chart){
 
-        const { ctx, data } = chart;
+        const dataset =
+            chart.data.datasets[0];
 
-        const dataset = data.datasets[0];
-
-        if (!dataset || !Array.isArray(dataset.data)) {
+        if(
+            !dataset ||
+            !Array.isArray(dataset.data)
+        ){
             return;
         }
 
-        const valores = dataset.data.map(valor =>
-            Number(valor || 0)
-        );
+        const valores =
+            dataset.data.map(
+                valor =>
+                    Number(valor || 0)
+            );
 
-        const total = valores.reduce(
-            (soma, valor) => soma + valor,
-            0
-        );
 
-        if (total <= 0) {
+        const total =
+            valores.reduce(
+                (soma, valor) =>
+                    soma + valor,
+                0
+            );
+
+
+        if(total <= 0){
             return;
         }
 
-        const meta = chart.getDatasetMeta(0);
+
+        const meta =
+            chart.getDatasetMeta(0);
+
+        const ctx =
+            chart.ctx;
+
 
         ctx.save();
 
         ctx.font =
-            "700 11px 'Segoe UI', Arial, sans-serif";
+            "800 10px 'Segoe UI', Arial, sans-serif";
 
-        ctx.fillStyle = "#0f2557";
-        ctx.strokeStyle = "#64748b";
-        ctx.lineWidth = 1.1;
-        ctx.textBaseline = "middle";
+        ctx.fillStyle =
+            "#0f2557";
 
-        meta.data.forEach((elemento, indice) => {
+        ctx.strokeStyle =
+            "#64748b";
 
-            if (!chart.getDataVisibility(indice)) {
-                return;
-            }
+        ctx.lineWidth =
+            1;
 
-            const valor = valores[indice];
+        ctx.textBaseline =
+            "middle";
 
-            const percentual =
-                (valor / total) * 100;
 
-            const propriedades = elemento.getProps(
-                [
-                    "x",
-                    "y",
-                    "startAngle",
-                    "endAngle",
-                    "outerRadius"
-                ],
-                true
-            );
+        meta.data.forEach(
+            (elemento, indice) => {
 
-            const angulo =
-                (
-                    propriedades.startAngle +
-                    propriedades.endAngle
-                ) / 2;
+                if(
+                    !chart.getDataVisibility(indice)
+                ){
+                    return;
+                }
 
-            const direcaoX = Math.cos(angulo);
-            const direcaoY = Math.sin(angulo);
 
-            const inicioX =
-                propriedades.x +
-                direcaoX *
-                (propriedades.outerRadius + 2);
+                const valor =
+                    valores[indice];
 
-            const inicioY =
-                propriedades.y +
-                direcaoY *
-                (propriedades.outerRadius + 2);
 
-            const meioX =
-                propriedades.x +
-                direcaoX *
-                (propriedades.outerRadius + 14);
+                const percentual =
+                    percentualDescarte(
+                        valor,
+                        total
+                    );
 
-            const meioY =
-                propriedades.y +
-                direcaoY *
-                (propriedades.outerRadius + 14);
 
-            const ladoDireito =
-                direcaoX >= 0;
+                const propriedades =
+                    elemento.getProps(
+                        [
+                            "x",
+                            "y",
+                            "startAngle",
+                            "endAngle",
+                            "outerRadius"
+                        ],
+                        true
+                    );
 
-            const finalX =
-                meioX +
-                (
-                    ladoDireito
-                        ? 18
-                        : -18
+
+                const angulo =
+                    (
+                        propriedades.startAngle +
+                        propriedades.endAngle
+                    ) / 2;
+
+
+                const direcaoX =
+                    Math.cos(angulo);
+
+                const direcaoY =
+                    Math.sin(angulo);
+
+
+                const inicioX =
+                    propriedades.x +
+                    direcaoX *
+                    (
+                        propriedades.outerRadius +
+                        2
+                    );
+
+
+                const inicioY =
+                    propriedades.y +
+                    direcaoY *
+                    (
+                        propriedades.outerRadius +
+                        2
+                    );
+
+
+                const meioX =
+                    propriedades.x +
+                    direcaoX *
+                    (
+                        propriedades.outerRadius +
+                        13
+                    );
+
+
+                const meioY =
+                    propriedades.y +
+                    direcaoY *
+                    (
+                        propriedades.outerRadius +
+                        13
+                    );
+
+
+                const ladoDireito =
+                    direcaoX >= 0;
+
+
+                const finalX =
+                    meioX +
+                    (
+                        ladoDireito
+                            ? 18
+                            : -18
+                    );
+
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    inicioX,
+                    inicioY
                 );
 
-            ctx.beginPath();
+                ctx.lineTo(
+                    meioX,
+                    meioY
+                );
 
-            ctx.moveTo(
-                inicioX,
-                inicioY
-            );
+                ctx.lineTo(
+                    finalX,
+                    meioY
+                );
 
-            ctx.lineTo(
-                meioX,
-                meioY
-            );
+                ctx.stroke();
 
-            ctx.lineTo(
-                finalX,
-                meioY
-            );
 
-            ctx.stroke();
-
-            ctx.textAlign =
-                ladoDireito
-                    ? "left"
-                    : "right";
-
-            const texto =
-                percentual.toLocaleString(
-                    "pt-BR",
-                    {
-                        minimumFractionDigits: 1,
-                        maximumFractionDigits: 1
-                    }
-                ) + "%";
-
-            ctx.fillText(
-                texto,
-                finalX +
-                (
+                ctx.textAlign =
                     ladoDireito
-                        ? 5
-                        : -5
-                ),
-                meioY
-            );
-        });
+                        ? "left"
+                        : "right";
+
+
+                ctx.fillText(
+                    formatarPercentualDescarte(
+                        percentual
+                    ),
+                    finalX +
+                    (
+                        ladoDireito
+                            ? 4
+                            : -4
+                    ),
+                    meioY
+                );
+            }
+        );
+
 
         ctx.restore();
     }
@@ -159,59 +486,136 @@ const rotulosExternosPizza = {
 
 const totalCentroPizza = {
 
-    id: "totalCentroPizza",
+    id:"totalCentroPizza",
 
-    afterDatasetsDraw(chart) {
+    afterDraw(chart){
 
         const meta =
             chart.getDatasetMeta(0);
 
-        if (
+
+        if(
             !meta ||
             !meta.data ||
             !meta.data.length
-        ) {
+        ){
             return;
         }
+
 
         const primeiroArco =
             meta.data[0];
 
-        const { x, y } =
+
+        const propriedades =
             primeiroArco.getProps(
-                ["x", "y"],
+                [
+                    "x",
+                    "y",
+                    "innerRadius"
+                ],
                 true
             );
 
-        const ctx = chart.ctx;
+
+        const ctx =
+            chart.ctx;
+
+
+        /*
+        Limpa somente o centro da rosca.
+
+        Isso evita borrões causados por outros plugins
+        ou redesenhos sucessivos.
+        */
 
         ctx.save();
 
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#0f2557";
+        ctx.beginPath();
+
+        ctx.arc(
+            propriedades.x,
+            propriedades.y,
+            Math.max(
+                propriedades.innerRadius - 2,
+                1
+            ),
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.fill();
+
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+        ctx.fillStyle =
+            "#0f2557";
+
 
         ctx.font =
-            "900 26px 'Segoe UI', Arial, sans-serif";
+            "900 27px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "100%",
-            x,
-            y - 7
+            propriedades.x,
+            propriedades.y - 8
         );
+
 
         ctx.font =
             "800 11px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "Total",
-            x,
-            y + 17
+            propriedades.x,
+            propriedades.y + 17
         );
+
 
         ctx.restore();
     }
 };
+
+
+/* ==========================================================
+   DESTRUIR GRÁFICOS DA PÁGINA
+========================================================== */
+
+function destruirGraficosDescarte(){
+
+    if(
+        window.graficoDescarteBarra &&
+        typeof window.graficoDescarteBarra.destroy ===
+        "function"
+    ){
+
+        window.graficoDescarteBarra.destroy();
+
+        window.graficoDescarteBarra =
+            null;
+    }
+
+
+    if(
+        window.graficoDescartePizza &&
+        typeof window.graficoDescartePizza.destroy ===
+        "function"
+    ){
+
+        window.graficoDescartePizza.destroy();
+
+        window.graficoDescartePizza =
+            null;
+    }
+}
 
 
 /* ==========================================================
@@ -238,6 +642,7 @@ function renderDescarte(){
                     type="password"
                     id="senhaDescarte"
                     placeholder="Digite a senha"
+                    autocomplete="current-password"
                     onkeydown="
                         if(event.key === 'Enter'){
                             validarSenhaDescarte();
@@ -246,6 +651,7 @@ function renderDescarte(){
                 >
 
                 <button
+                    type="button"
                     class="btn"
                     onclick="validarSenhaDescarte()"
                 >
@@ -271,16 +677,17 @@ function renderDescarte(){
        DADOS
     ====================================================== */
 
-    const d = dados.descarte || {
+    const d =
+        dados.descarte || {
 
-        total: 0,
+            total:0,
 
-        ultimoDescarte: 0,
+            ultimoDescarte:0,
 
-        origens: [],
+            origens:[],
 
-        top10: []
-    };
+            top10:[]
+        };
 
 
     const origens =
@@ -295,71 +702,30 @@ function renderDescarte(){
             : [];
 
 
-    top.sort((a,b) =>
-
-        Number(b.valor || 0) -
-        Number(a.valor || 0)
+    top.sort(
+        (a,b) =>
+            Number(b.valor || 0) -
+            Number(a.valor || 0)
     );
 
 
-    const nomesOrigens = origens.map(item =>
-
-        item.nome ||
-        item.origem ||
-        "Sem origem"
-    );
-
-
-    const valoresOrigens = origens.map(item =>
-
-        Number(item.valor || 0)
-    );
+    const nomesOrigens =
+        origens.map(
+            item =>
+                item.nome ||
+                item.origem ||
+                "Sem origem"
+        );
 
 
-    const coresOrigens = [
-
-        "#1d4eff",
-
-        "#0f3cc9",
-
-        "#6b7cff",
-
-        "#f04dd8",
-
-        "#22c55e",
-
-        "#38bdf8",
-
-        "#8b5cf6",
-
-        "#f59e0b",
-
-        "#ef4444",
-
-        "#14b8a6"
-    ];
+    const valoresOrigens =
+        origens.map(
+            item =>
+                Number(item.valor || 0)
+        );
 
 
-    /* ======================================================
-       DESTRUIR GRÁFICOS ANTERIORES
-    ====================================================== */
-
-    if(
-        window.graficoDescarteBarra &&
-        typeof window.graficoDescarteBarra.destroy === "function"
-    ){
-
-        window.graficoDescarteBarra.destroy();
-    }
-
-
-    if(
-        window.graficoDescartePizza &&
-        typeof window.graficoDescartePizza.destroy === "function"
-    ){
-
-        window.graficoDescartePizza.destroy();
-    }
+    destruirGraficosDescarte();
 
 
     /* ======================================================
@@ -369,7 +735,9 @@ function renderDescarte(){
     conteudo.innerHTML = `
 
         <div class="page-title">
+
             🗑 DESCARTE
+
         </div>
 
 
@@ -381,6 +749,7 @@ function renderDescarte(){
                 moeda(d.total),
                 "Financeiro impactado"
             )}
+
 
             ${card(
                 "📋",
@@ -395,10 +764,17 @@ function renderDescarte(){
         <section class="descarte-grid">
 
 
+            <!-- ==========================================
+                 PAINEL ESQUERDO
+            =========================================== -->
+
             <div class="panel descarte-panel-origens">
 
-                <h3>
+
+                <h3 class="descarte-titulo-painel">
+
                     📊 Descarte por Origem
+
                 </h3>
 
 
@@ -411,23 +787,36 @@ function renderDescarte(){
                 </div>
 
 
-                <h3 class="descarte-titulo-top3">
-                    Top 3 Origens de Destino
-                </h3>
+                <div class="descarte-top3-area">
+
+                    <h3 class="descarte-titulo-top3">
+
+                        Top 3 Origens de Destino
+
+                    </h3>
 
 
-                ${rankTop3Origem(origens)}
+                    ${montarTop3Descarte(origens)}
+
+                </div>
 
             </div>
 
+
+            <!-- ==========================================
+                 COLUNA DIREITA
+            =========================================== -->
 
             <div class="descarte-coluna-direita">
 
 
                 <div class="panel descarte-panel-pizza">
 
-                    <h3>
+
+                    <h3 class="descarte-titulo-painel">
+
                         Descarte por Origem (%)
+
                     </h3>
 
 
@@ -444,22 +833,31 @@ function renderDescarte(){
 
                 <div class="panel descarte-panel-top10">
 
-                    <h3>
+
+                    <h3 class="descarte-titulo-painel">
+
                         Top 10 Descarte
+
                     </h3>
 
 
-                    ${
-                        tabelaFixa(
-                            [
-                                "SKU",
-                                "Descrição",
-                                "Valor"
-                            ],
-                            montarLinhasTopDescarte(top),
-                            true
-                        )
-                    }
+                    <div class="descarte-top10-conteudo">
+
+                        ${
+                            tabelaFixa(
+                                [
+                                    "SKU",
+                                    "Descrição",
+                                    "Valor"
+                                ],
+                                montarLinhasTopDescarte(
+                                    top
+                                ),
+                                true
+                            )
+                        }
+
+                    </div>
 
                 </div>
 
@@ -481,80 +879,101 @@ function renderDescarte(){
 
     if(canvasBarra){
 
+        const opcoesBaseBarra =
+            typeof baseOptions === "function"
+                ? baseOptions()
+                : {};
+
+
         window.graficoDescarteBarra =
             new Chart(
                 canvasBarra,
                 {
 
-                    type: "bar",
+                    type:"bar",
 
-                    data: {
+                    plugins:[
+                        rotulosBarrasDescarte
+                    ],
 
-                        labels: nomesOrigens,
+                    data:{
 
-                        datasets: [{
+                        labels:
+                            nomesOrigens,
 
-                            label: "Valor",
+                        datasets:[{
 
-                            data: valoresOrigens,
+                            label:"Valor",
+
+                            data:
+                                valoresOrigens,
 
                             backgroundColor:
-                                coresOrigens,
+                                coresDescarte,
 
-                            borderWidth: 0,
+                            borderWidth:0,
 
-                            borderRadius: 4,
+                            borderRadius:4,
 
-                            borderSkipped: false,
+                            borderSkipped:false,
 
-                            _moeda: true
+                            barPercentage:.72,
+
+                            categoryPercentage:.78,
+
+                            _moeda:true
                         }]
                     },
 
-                    options: {
+                    options:{
 
-                        ...baseOptions(),
+                        ...opcoesBaseBarra,
 
-                        indexAxis: "y",
+                        indexAxis:"y",
 
-                        responsive: true,
+                        responsive:true,
 
-                        maintainAspectRatio: false,
+                        maintainAspectRatio:false,
 
-                        layout: {
+                        animation:{
 
-                            padding: {
+                            duration:500
+                        },
 
-                                top: 8,
+                        layout:{
 
-                                right: 95,
+                            padding:{
 
-                                bottom: 8,
+                                top:8,
 
-                                left: 5
+                                right:105,
+
+                                bottom:4,
+
+                                left:4
                             }
                         },
 
-                        plugins: {
+                        plugins:{
 
                             ...(
-                                baseOptions().plugins ||
+                                opcoesBaseBarra.plugins ||
                                 {}
                             ),
 
-                            datalabels: {
+                            datalabels:{
 
-                                display: false
+                                display:false
                             },
 
-                            legend: {
+                            legend:{
 
-                                display: false
+                                display:false
                             },
 
-                            tooltip: {
+                            tooltip:{
 
-                                callbacks: {
+                                callbacks:{
 
                                     label(context){
 
@@ -566,17 +985,24 @@ function renderDescarte(){
                             }
                         },
 
-                        scales: {
+                        scales:{
 
-                            x: {
+                            x:{
 
-                                beginAtZero: true,
+                                beginAtZero:true,
 
-                                grace: "18%",
+                                grace:"18%",
 
-                                ticks: {
+                                ticks:{
 
-                                    color: "#334155",
+                                    color:"#334155",
+
+                                    font:{
+
+                                        size:10,
+
+                                        weight:"600"
+                                    },
 
                                     callback(valor){
 
@@ -587,42 +1013,42 @@ function renderDescarte(){
                                     }
                                 },
 
-                                grid: {
+                                grid:{
 
                                     color:
-                                        "rgba(148,163,184,.20)"
+                                        "rgba(148,163,184,.22)"
                                 },
 
-                                border: {
+                                border:{
 
-                                    display: false
+                                    display:false
                                 }
                             },
 
-                            y: {
+                            y:{
 
-                                ticks: {
+                                ticks:{
 
-                                    color: "#334155",
+                                    color:"#334155",
 
-                                    padding: 8,
+                                    padding:8,
 
-                                    font: {
+                                    font:{
 
-                                        size: 11,
+                                        size:11,
 
-                                        weight: "600"
+                                        weight:"600"
                                     }
                                 },
 
-                                grid: {
+                                grid:{
 
-                                    display: false
+                                    display:false
                                 },
 
-                                border: {
+                                border:{
 
-                                    display: false
+                                    display:false
                                 }
                             }
                         }
@@ -649,94 +1075,104 @@ function renderDescarte(){
                 canvasPizza,
                 {
 
-                    type: "doughnut",
+                    type:"doughnut",
 
-                    plugins: [
+                    plugins:[
 
                         rotulosExternosPizza,
 
                         totalCentroPizza
                     ],
 
-                    data: {
+                    data:{
 
-                        labels: nomesOrigens,
+                        labels:
+                            nomesOrigens,
 
-                        datasets: [{
+                        datasets:[{
 
-                            label: "Percentual",
+                            label:"Percentual",
 
-                            data: valoresOrigens,
+                            data:
+                                valoresOrigens,
 
                             backgroundColor:
-                                coresOrigens,
+                                coresDescarte,
 
-                            borderColor: "#ffffff",
+                            borderColor:
+                                "#ffffff",
 
-                            borderWidth: 2,
+                            borderWidth:2,
 
-                            hoverOffset: 7
+                            hoverOffset:5,
+
+                            spacing:0
                         }]
                     },
 
-                    options: {
+                    options:{
 
-                        responsive: true,
+                        responsive:true,
 
-                        maintainAspectRatio: false,
+                        maintainAspectRatio:false,
 
-                        cutout: "52%",
+                        animation:{
 
-                        radius: "78%",
+                            duration:500
+                        },
 
-                        layout: {
+                        cutout:"48%",
 
-                            padding: {
+                        radius:"82%",
 
-                                top: 38,
+                        layout:{
 
-                                right: 35,
+                            padding:{
 
-                                bottom: 38,
+                                top:28,
 
-                                left: 35
+                                right:24,
+
+                                bottom:28,
+
+                                left:24
                             }
                         },
 
-                        plugins: {
+                        plugins:{
 
-                            datalabels: {
+                            datalabels:{
 
-                                display: false
+                                display:false
                             },
 
-                            legend: {
+                            legend:{
 
-                                display: true,
+                                display:true,
 
-                                position: "right",
+                                position:"right",
 
-                                align: "center",
+                                align:"center",
 
-                                labels: {
+                                labels:{
 
-                                    usePointStyle: true,
+                                    usePointStyle:true,
 
-                                    pointStyle: "circle",
+                                    pointStyle:"circle",
 
-                                    boxWidth: 9,
+                                    boxWidth:8,
 
-                                    boxHeight: 9,
+                                    boxHeight:8,
 
-                                    padding: 14,
+                                    padding:12,
 
-                                    color: "#0f2557",
+                                    color:"#0f2557",
 
-                                    font: {
+                                    font:{
 
-                                        size: 11,
+                                        size:10,
 
-                                        weight: "700"
+                                        weight:"700"
                                     },
 
                                     generateLabels(chart){
@@ -746,6 +1182,7 @@ function renderDescarte(){
                                                 .datasets[0]
                                                 .data;
 
+
                                         const total =
                                             valores.reduce(
                                                 (
@@ -754,10 +1191,12 @@ function renderDescarte(){
                                                 ) =>
                                                     soma +
                                                     Number(
-                                                        valor || 0
+                                                        valor ||
+                                                        0
                                                     ),
                                                 0
                                             );
+
 
                                         return chart.data.labels.map(
                                             (
@@ -769,38 +1208,35 @@ function renderDescarte(){
                                                     Number(
                                                         valores[
                                                             indice
-                                                        ] || 0
+                                                        ] ||
+                                                        0
                                                     );
 
+
                                                 const percentual =
-                                                    total > 0
-                                                        ? (
-                                                            valor /
-                                                            total
-                                                        ) * 100
-                                                        : 0;
+                                                    percentualDescarte(
+                                                        valor,
+                                                        total
+                                                    );
+
 
                                                 const cor =
                                                     chart.data
                                                         .datasets[0]
                                                         .backgroundColor[
-                                                            indice
+                                                            indice %
+                                                            coresDescarte.length
                                                         ];
+
 
                                                 return {
 
                                                     text:
                                                         label +
                                                         " — " +
-                                                        percentual
-                                                            .toLocaleString(
-                                                                "pt-BR",
-                                                                {
-                                                                    minimumFractionDigits: 1,
-                                                                    maximumFractionDigits: 1
-                                                                }
-                                                            ) +
-                                                        "%",
+                                                        formatarPercentualDescarte(
+                                                            percentual
+                                                        ),
 
                                                     fillStyle:
                                                         cor,
@@ -845,9 +1281,9 @@ function renderDescarte(){
                                 }
                             },
 
-                            tooltip: {
+                            tooltip:{
 
-                                callbacks: {
+                                callbacks:{
 
                                     label(context){
 
@@ -857,41 +1293,38 @@ function renderDescarte(){
                                                 0
                                             );
 
+
                                         const total =
-                                            context.dataset.data.reduce(
-                                                (
-                                                    soma,
-                                                    item
-                                                ) =>
-                                                    soma +
-                                                    Number(
-                                                        item || 0
-                                                    ),
-                                                0
-                                            );
+                                            context.dataset.data
+                                                .reduce(
+                                                    (
+                                                        soma,
+                                                        item
+                                                    ) =>
+                                                        soma +
+                                                        Number(
+                                                            item ||
+                                                            0
+                                                        ),
+                                                    0
+                                                );
+
 
                                         const percentual =
-                                            total > 0
-                                                ? (
-                                                    valor /
-                                                    total
-                                                ) * 100
-                                                : 0;
+                                            percentualDescarte(
+                                                valor,
+                                                total
+                                            );
+
 
                                         return (
                                             context.label +
                                             ": " +
                                             moeda(valor) +
                                             " — " +
-                                            percentual
-                                                .toLocaleString(
-                                                    "pt-BR",
-                                                    {
-                                                        minimumFractionDigits: 1,
-                                                        maximumFractionDigits: 1
-                                                    }
-                                                ) +
-                                            "%"
+                                            formatarPercentualDescarte(
+                                                percentual
+                                            )
                                         );
                                     }
                                 }
@@ -937,21 +1370,23 @@ function validarSenhaDescarte(){
 
     if(senha === "SGQ2026"){
 
-        senhaDescarteLiberada = true;
+        senhaDescarteLiberada =
+            true;
 
         renderDescarte();
 
-    }else{
-
-        if(erroSenha){
-
-            erroSenha.innerText =
-                "Senha incorreta.";
-        }
-
-
-        campoSenha.focus();
-
-        campoSenha.select();
+        return;
     }
+
+
+    if(erroSenha){
+
+        erroSenha.innerText =
+            "Senha incorreta.";
+    }
+
+
+    campoSenha.focus();
+
+    campoSenha.select();
 }
