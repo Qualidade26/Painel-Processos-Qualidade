@@ -211,49 +211,34 @@ const rotulosBarrasMensaisImportacao = {
                         --------------------------------------------------
                         */
 
-                       let deslocamentoY = 4;
-let ajusteX = 0;
+                     let ajusteX = 0;
+let ajusteY = -3;
 
 switch (dataset.label) {
 
     case "Processos":
-
-        deslocamentoY = 4;
         ajusteX = 0;
-
+        ajusteY = -3;
         break;
 
     case "SKU":
-
-        deslocamentoY = 10;
         ajusteX = 0;
-
+        ajusteY = -3;
         break;
 
     case "Lotes":
-
-        deslocamentoY = 16;
         ajusteX = 0;
-
+        ajusteY = -3;
         break;
 
     case "Laudos":
-
-        deslocamentoY = 22;
         ajusteX = 0;
-
+        ajusteY = -3;
         break;
 }
-                        const texto =
-                            Number(valor)
-                                .toLocaleString("pt-BR");
 
-
-                        const posicaoX =
-                            elemento.x + ajusteX;
-
-
-                        const posicaoY = elemento.y - deslocamentoY;
+const posicaoX = elemento.x + ajusteX;
+const posicaoY = elemento.y + ajusteY;
 
 
                         ctx.font = "700 10px Segoe UI";
