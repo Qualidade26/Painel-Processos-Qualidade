@@ -43,6 +43,7 @@ function renderEsfig(){
     | TOTAIS DO FLUXO OPERACIONAL
     |--------------------------------------------------------------------------
     */
+   
     const totalAguardando =
         produtos.reduce(
             (soma,item) =>
