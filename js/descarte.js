@@ -4,16 +4,16 @@
 
 
 /* ==========================================================
-   CORES DOS GRÁFICOS
+   CORES
 ========================================================== */
 
 const coresDescarte = [
     "#1d4eff",
     "#0f3cc9",
-    "#6b7cff",
-    "#f04dd8",
-    "#16a05d",
-    "#38bdf8",
+    "#6676f4",
+    "#ed3fd0",
+    "#22a861",
+    "#2eb3e8",
     "#8b5cf6",
     "#f59e0b",
     "#ef4444",
@@ -22,13 +22,16 @@ const coresDescarte = [
 
 
 /* ==========================================================
-   FORMATAÇÃO DE PERCENTUAL
+   FUNÇÕES AUXILIARES
 ========================================================== */
 
-function percentualDescarte(valor, total){
+function calcularPercentualDescarte(valor, total){
 
-    const numeroValor = Number(valor || 0);
-    const numeroTotal = Number(total || 0);
+    const numeroValor =
+        Number(valor || 0);
+
+    const numeroTotal =
+        Number(total || 0);
 
     if(numeroTotal <= 0){
         return 0;
@@ -54,11 +57,7 @@ function formatarPercentualDescarte(valor){
 }
 
 
-/* ==========================================================
-   ESCAPAR TEXTO HTML
-========================================================== */
-
-function escaparTextoDescarte(valor){
+function escaparHtmlDescarte(valor){
 
     return String(valor ?? "")
         .replaceAll("&", "&amp;")
@@ -81,29 +80,33 @@ function montarTop3Descarte(origens){
             : [];
 
 
-    const total = lista.reduce(
-        (soma, item) =>
-            soma + Number(item.valor || 0),
-        0
-    );
+    const total =
+        lista.reduce(
+            (soma, item) =>
+                soma +
+                Number(item.valor || 0),
+            0
+        );
 
 
-    const top3 = lista
-
-        .sort(
-            (a,b) =>
-                Number(b.valor || 0) -
-                Number(a.valor || 0)
-        )
-
-        .slice(0,3);
+    const top3 =
+        lista
+            .sort(
+                (a,b) =>
+                    Number(b.valor || 0) -
+                    Number(a.valor || 0)
+            )
+            .slice(0,3);
 
 
     if(!top3.length){
 
         return `
+
             <div class="descarte-top3-vazio">
+
                 Nenhuma origem registrada.
+
             </div>
         `;
     }
@@ -124,7 +127,7 @@ function montarTop3Descarte(origens){
                     Number(item.valor || 0);
 
                 const percentual =
-                    percentualDescarte(
+                    calcularPercentualDescarte(
                         valor,
                         total
                     );
@@ -143,26 +146,39 @@ function montarTop3Descarte(origens){
 
                             <span
                                 class="descarte-top3-posicao"
-                                style="
-                                    background:${cor};
-                                "
+                                style="background:${cor};"
                             >
                                 ${indice + 1}
                             </span>
 
                             <span class="descarte-top3-nome">
-                                ${escaparTextoDescarte(nome)}
+
+                                ${escaparHtmlDescarte(nome)}
+
+                            </span>
+
+                            <span class="descarte-top3-seta">
+
+                                ◆
+
                             </span>
 
                         </div>
 
+
                         <div class="descarte-top3-valor">
+
                             ${moeda(valor)}
+
                         </div>
 
+
                         <div class="descarte-top3-percentual">
-                            ${formatarPercentualDescarte(percentual)}
-                            do total
+
+                            ${formatarPercentualDescarte(
+                                percentual
+                            )}
+
                         </div>
 
                     </div>
@@ -176,12 +192,12 @@ function montarTop3Descarte(origens){
 
 
 /* ==========================================================
-   RÓTULOS DOS VALORES NAS BARRAS
+   RÓTULO ÚNICO NAS BARRAS
 ========================================================== */
 
-const rotulosBarrasDescarte = {
+const valorExternoBarraDescarte = {
 
-    id:"rotulosBarrasDescarte",
+    id:"valorExternoBarraDescarte",
 
     afterDatasetsDraw(chart){
 
@@ -190,6 +206,7 @@ const rotulosBarrasDescarte = {
 
         const dataset =
             chart.data.datasets[0];
+
 
         if(
             !meta ||
@@ -200,71 +217,81 @@ const rotulosBarrasDescarte = {
             return;
         }
 
-        const ctx = chart.ctx;
+
+        const ctx =
+            chart.ctx;
+
 
         ctx.save();
 
         ctx.font =
             "800 11px 'Segoe UI', Arial, sans-serif";
 
-        ctx.fillStyle = "#0f2557";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
+        ctx.fillStyle =
+            "#0f2557";
+
+        ctx.textAlign =
+            "left";
+
+        ctx.textBaseline =
+            "middle";
 
 
-        meta.data.forEach((barra, indice) => {
+        meta.data.forEach(
+            (barra, indice) => {
 
-            if(
-                barra.hidden ||
-                !chart.getDataVisibility(indice)
-            ){
-                return;
-            }
+                const valor =
+                    Number(
+                        dataset.data[indice] || 0
+                    );
 
-            const valor =
-                Number(
-                    dataset.data[indice] || 0
+
+                const propriedades =
+                    barra.getProps(
+                        [
+                            "x",
+                            "y"
+                        ],
+                        true
+                    );
+
+
+                const texto =
+                    moeda(valor);
+
+
+                const larguraTexto =
+                    ctx.measureText(texto).width;
+
+
+                let posicaoX =
+                    propriedades.x + 7;
+
+
+                const limiteDireito =
+                    chart.chartArea.right - 3;
+
+
+                if(
+                    posicaoX +
+                    larguraTexto >
+                    limiteDireito
+                ){
+
+                    posicaoX =
+                        limiteDireito -
+                        larguraTexto;
+                }
+
+
+                ctx.fillText(
+                    texto,
+                    posicaoX,
+                    propriedades.y
                 );
-
-            const propriedades =
-                barra.getProps(
-                    [
-                        "x",
-                        "y",
-                        "base"
-                    ],
-                    true
-                );
-
-            let posicaoX =
-                propriedades.x + 7;
-
-            const limiteDireito =
-                chart.chartArea.right - 4;
-
-            const texto =
-                moeda(valor);
-
-            const larguraTexto =
-                ctx.measureText(texto).width;
-
-            if(
-                posicaoX +
-                larguraTexto >
-                limiteDireito
-            ){
-
-                posicaoX =
-                    limiteDireito -
-                    larguraTexto;
             }
+        );
 
-            ctx.fillText(
-                texto,
-                posicaoX,
-                propriedades.y
-            );
-        });
 
         ctx.restore();
     }
@@ -272,7 +299,7 @@ const rotulosBarrasDescarte = {
 
 
 /* ==========================================================
-   RÓTULOS EXTERNOS DO GRÁFICO DE PIZZA
+   RÓTULOS EXTERNOS DA PIZZA
 ========================================================== */
 
 const rotulosExternosPizza = {
@@ -284,12 +311,14 @@ const rotulosExternosPizza = {
         const dataset =
             chart.data.datasets[0];
 
+
         if(
             !dataset ||
             !Array.isArray(dataset.data)
         ){
             return;
         }
+
 
         const valores =
             dataset.data.map(
@@ -313,6 +342,7 @@ const rotulosExternosPizza = {
 
         const meta =
             chart.getDatasetMeta(0);
+
 
         const ctx =
             chart.ctx;
@@ -351,7 +381,7 @@ const rotulosExternosPizza = {
 
 
                 const percentual =
-                    percentualDescarte(
+                    calcularPercentualDescarte(
                         valor,
                         total
                     );
@@ -379,6 +409,7 @@ const rotulosExternosPizza = {
 
                 const direcaoX =
                     Math.cos(angulo);
+
 
                 const direcaoY =
                     Math.sin(angulo);
@@ -481,7 +512,7 @@ const rotulosExternosPizza = {
 
 
 /* ==========================================================
-   TEXTO CENTRAL DO GRÁFICO DE ROSCA
+   CENTRO DA ROSCA
 ========================================================== */
 
 const totalCentroPizza = {
@@ -503,12 +534,12 @@ const totalCentroPizza = {
         }
 
 
-        const primeiroArco =
+        const arco =
             meta.data[0];
 
 
         const propriedades =
-            primeiroArco.getProps(
+            arco.getProps(
                 [
                     "x",
                     "y",
@@ -522,14 +553,13 @@ const totalCentroPizza = {
             chart.ctx;
 
 
-        /*
-        Limpa somente o centro da rosca.
-
-        Isso evita borrões causados por outros plugins
-        ou redesenhos sucessivos.
-        */
-
         ctx.save();
+
+
+        /*
+        Limpa o centro para impedir borrões
+        provocados pelo redesenho do gráfico.
+        */
 
         ctx.beginPath();
 
@@ -563,6 +593,7 @@ const totalCentroPizza = {
         ctx.font =
             "900 27px 'Segoe UI', Arial, sans-serif";
 
+
         ctx.fillText(
             "100%",
             propriedades.x,
@@ -572,6 +603,7 @@ const totalCentroPizza = {
 
         ctx.font =
             "800 11px 'Segoe UI', Arial, sans-serif";
+
 
         ctx.fillText(
             "Total",
@@ -586,7 +618,7 @@ const totalCentroPizza = {
 
 
 /* ==========================================================
-   DESTRUIR GRÁFICOS DA PÁGINA
+   DESTRUIR GRÁFICOS ANTERIORES
 ========================================================== */
 
 function destruirGraficosDescarte(){
@@ -619,7 +651,7 @@ function destruirGraficosDescarte(){
 
 
 /* ==========================================================
-   PÁGINA — DESCARTE
+   RENDERIZAR DESCARTE
 ========================================================== */
 
 function renderDescarte(){
@@ -764,10 +796,6 @@ function renderDescarte(){
         <section class="descarte-grid">
 
 
-            <!-- ==========================================
-                 PAINEL ESQUERDO
-            =========================================== -->
-
             <div class="panel descarte-panel-origens">
 
 
@@ -802,10 +830,6 @@ function renderDescarte(){
 
             </div>
 
-
-            <!-- ==========================================
-                 COLUNA DIREITA
-            =========================================== -->
 
             <div class="descarte-coluna-direita">
 
@@ -879,7 +903,7 @@ function renderDescarte(){
 
     if(canvasBarra){
 
-        const opcoesBaseBarra =
+        const opcoesBase =
             typeof baseOptions === "function"
                 ? baseOptions()
                 : {};
@@ -892,14 +916,18 @@ function renderDescarte(){
 
                     type:"bar",
 
+
                     plugins:[
-                        rotulosBarrasDescarte
+
+                        valorExternoBarraDescarte
                     ],
+
 
                     data:{
 
                         labels:
                             nomesOrigens,
+
 
                         datasets:[{
 
@@ -917,17 +945,22 @@ function renderDescarte(){
 
                             borderSkipped:false,
 
-                            barPercentage:.72,
+                            barPercentage:.70,
 
-                            categoryPercentage:.78,
+                            categoryPercentage:.76
 
-                            _moeda:true
+                            /*
+                            Não usar _moeda:true aqui.
+                            Essa propriedade ativava outro
+                            rótulo global e duplicava valores.
+                            */
                         }]
                     },
 
+
                     options:{
 
-                        ...opcoesBaseBarra,
+                        ...opcoesBase,
 
                         indexAxis:"y",
 
@@ -937,8 +970,9 @@ function renderDescarte(){
 
                         animation:{
 
-                            duration:500
+                            duration:450
                         },
+
 
                         layout:{
 
@@ -954,22 +988,31 @@ function renderDescarte(){
                             }
                         },
 
+
                         plugins:{
 
                             ...(
-                                opcoesBaseBarra.plugins ||
+                                opcoesBase.plugins ||
                                 {}
                             ),
+
+
+                            /*
+                            Impede que o plugin global
+                            escreva outro valor.
+                            */
 
                             datalabels:{
 
                                 display:false
                             },
 
+
                             legend:{
 
                                 display:false
                             },
+
 
                             tooltip:{
 
@@ -984,6 +1027,7 @@ function renderDescarte(){
                                 }
                             }
                         },
+
 
                         scales:{
 
@@ -1025,6 +1069,7 @@ function renderDescarte(){
                                 }
                             },
 
+
                             y:{
 
                                 ticks:{
@@ -1059,7 +1104,7 @@ function renderDescarte(){
 
 
     /* ======================================================
-       GRÁFICO DE PIZZA / ROSCA
+       GRÁFICO DE PIZZA
     ====================================================== */
 
     const canvasPizza =
@@ -1077,6 +1122,7 @@ function renderDescarte(){
 
                     type:"doughnut",
 
+
                     plugins:[
 
                         rotulosExternosPizza,
@@ -1084,10 +1130,12 @@ function renderDescarte(){
                         totalCentroPizza
                     ],
 
+
                     data:{
 
                         labels:
                             nomesOrigens,
+
 
                         datasets:[{
 
@@ -1110,6 +1158,7 @@ function renderDescarte(){
                         }]
                     },
 
+
                     options:{
 
                         responsive:true,
@@ -1118,12 +1167,13 @@ function renderDescarte(){
 
                         animation:{
 
-                            duration:500
+                            duration:450
                         },
 
                         cutout:"48%",
 
                         radius:"82%",
+
 
                         layout:{
 
@@ -1139,12 +1189,14 @@ function renderDescarte(){
                             }
                         },
 
+
                         plugins:{
 
                             datalabels:{
 
                                 display:false
                             },
+
 
                             legend:{
 
@@ -1153,6 +1205,7 @@ function renderDescarte(){
                                 position:"right",
 
                                 align:"center",
+
 
                                 labels:{
 
@@ -1175,6 +1228,7 @@ function renderDescarte(){
                                         weight:"700"
                                     },
 
+
                                     generateLabels(chart){
 
                                         const valores =
@@ -1191,8 +1245,7 @@ function renderDescarte(){
                                                 ) =>
                                                     soma +
                                                     Number(
-                                                        valor ||
-                                                        0
+                                                        valor || 0
                                                     ),
                                                 0
                                             );
@@ -1208,13 +1261,12 @@ function renderDescarte(){
                                                     Number(
                                                         valores[
                                                             indice
-                                                        ] ||
-                                                        0
+                                                        ] || 0
                                                     );
 
 
                                                 const percentual =
-                                                    percentualDescarte(
+                                                    calcularPercentualDescarte(
                                                         valor,
                                                         total
                                                     );
@@ -1264,6 +1316,7 @@ function renderDescarte(){
                                     }
                                 },
 
+
                                 onClick(
                                     evento,
                                     item,
@@ -1273,13 +1326,16 @@ function renderDescarte(){
                                     const chart =
                                         legenda.chart;
 
+
                                     chart.toggleDataVisibility(
                                         item.index
                                     );
 
+
                                     chart.update();
                                 }
                             },
+
 
                             tooltip:{
 
@@ -1289,8 +1345,7 @@ function renderDescarte(){
 
                                         const valor =
                                             Number(
-                                                context.raw ||
-                                                0
+                                                context.raw || 0
                                             );
 
 
@@ -1303,15 +1358,14 @@ function renderDescarte(){
                                                     ) =>
                                                         soma +
                                                         Number(
-                                                            item ||
-                                                            0
+                                                            item || 0
                                                         ),
                                                     0
                                                 );
 
 
                                         const percentual =
-                                            percentualDescarte(
+                                            calcularPercentualDescarte(
                                                 valor,
                                                 total
                                             );
