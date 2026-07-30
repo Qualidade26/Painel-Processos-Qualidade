@@ -1,30 +1,21 @@
-/*
-|--------------------------------------------------------------------------
-| INSTÂNCIAS DOS GRÁFICOS
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   PÁGINA — INSPEÇÃO DE IMPORTAÇÃO
+========================================================== */
+
+
+/* ==========================================================
+   INSTÂNCIAS DOS GRÁFICOS
+========================================================== */
 
 let graficoMensalImportacao = null;
-let graficoParetoImportacao = null;
+let graficoSkuImportacao = null;
 
 
-/*
-|--------------------------------------------------------------------------
-| TRATAMENTO DOS VALORES DO GRÁFICO
-|--------------------------------------------------------------------------
-| Converte valores zerados, vazios ou inválidos em null.
-|
-| Dessa forma:
-|
-| - o mês continua aparecendo no eixo horizontal;
-| - nenhuma barra é desenhada para valores zerados;
-| - nenhum ponto é desenhado para valores zerados;
-| - a linha de horas não desce até zero;
-| - o tooltip não mostra valores zerados.
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   CONVERSÃO DOS VALORES
+========================================================== */
 
-function valorGrafico(valor) {
+function valorGraficoImportacao(valor) {
 
     if (
         valor === null ||
@@ -34,87 +25,259 @@ function valorGrafico(valor) {
         return null;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | ACEITA NÚMEROS COM VÍRGULA OU PONTO
-    |--------------------------------------------------------------------------
-    |
-    | Exemplos:
-    |
-    | "10,5" vira 10.5
-    | "10.5" continua 10.5
-    | "0" vira null
-    | "0,00" vira null
-    |--------------------------------------------------------------------------
-    */
-
     const valorNormalizado = String(valor)
         .trim()
+        .replace(/\./g, "")
         .replace(",", ".");
 
-    const valorNumerico = Number(
-        valorNormalizado
-    );
+    const numeroConvertido =
+        Number(valorNormalizado);
 
     if (
-        !Number.isFinite(valorNumerico) ||
-        valorNumerico === 0
+        !Number.isFinite(numeroConvertido) ||
+        numeroConvertido === 0
     ) {
         return null;
     }
 
-    return valorNumerico;
+    return numeroConvertido;
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| VERIFICA SE O VALOR DO GRÁFICO É VÁLIDO
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   VERIFICA SE O VALOR É VÁLIDO
+========================================================== */
 
-function possuiValorGrafico(valor) {
+function possuiValorImportacao(valor) {
 
     return (
         valor !== null &&
         valor !== undefined &&
         valor !== "" &&
-        Number(valor) !== 0 &&
-        Number.isFinite(Number(valor))
+        Number.isFinite(Number(valor)) &&
+        Number(valor) !== 0
     );
 }
 
 
+/* ==========================================================
+   ESCAPA TEXTOS PARA EVITAR HTML INDESEJADO
+========================================================== */
+
+function escaparTextoImportacao(valor) {
+
+    return String(valor ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* ==========================================================
+   FORMATAÇÃO DE HORAS
+========================================================== */
+
+function formatarHorasImportacao(valor) {
+
+    const numeroHoras =
+        Number(valor || 0);
+
+    return numeroHoras.toLocaleString(
+        "pt-BR",
+        {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        }
+    );
+}
+
+
+/* ==========================================================
+   PLUGIN LOCAL — NÚMEROS APENAS NAS BARRAS MENSAIS
+========================================================== */
 /*
-|--------------------------------------------------------------------------
-| DESTRÓI OS GRÁFICOS DA IMPORTAÇÃO
-|--------------------------------------------------------------------------
-| Executado antes de montar novamente a página.
-|--------------------------------------------------------------------------
-*/
+   O plugin global valorFlutuante será desligado no gráfico
+   mensal da Importação.
+
+   Este plugin desenha somente os números das barras.
+
+   A linha de Horas continuará sem números, conforme solicitado.
+========================================================== */
+
+const rotulosBarrasMensaisImportacao = {
+
+    id: "rotulosBarrasMensaisImportacao",
+
+    afterDatasetsDraw(chart) {
+
+        const { ctx } = chart;
+
+        ctx.save();
+
+        chart.data.datasets.forEach(
+            (dataset, datasetIndex) => {
+
+                if (dataset.type !== "bar") {
+                    return;
+                }
+
+                const meta =
+                    chart.getDatasetMeta(datasetIndex);
+
+                if (meta.hidden) {
+                    return;
+                }
+
+                meta.data.forEach(
+                    (elemento, indice) => {
+
+                        const valor =
+                            dataset.data[indice];
+
+                        if (
+                            !possuiValorImportacao(valor) ||
+                            !elemento ||
+                            !Number.isFinite(elemento.x) ||
+                            !Number.isFinite(elemento.y)
+                        ) {
+                            return;
+                        }
+
+                        /*
+                        --------------------------------------------------
+                        Alterna levemente a altura dos números.
+
+                        Isso reduz a sobreposição quando duas barras
+                        possuem valores iguais ou muito próximos.
+                        --------------------------------------------------
+                        */
+
+                        const deslocamento =
+                            datasetIndex % 2 === 0
+                                ? 7
+                                : 18;
+
+                        ctx.font =
+                            "800 9px Arial";
+
+                        ctx.fillStyle =
+                            "#10245c";
+
+                        ctx.textAlign =
+                            "center";
+
+                        ctx.textBaseline =
+                            "bottom";
+
+                        ctx.fillText(
+                            Number(valor)
+                                .toLocaleString("pt-BR"),
+                            elemento.x,
+                            elemento.y - deslocamento
+                        );
+                    });
+            }
+        );
+
+        ctx.restore();
+    }
+};
+
+
+/* ==========================================================
+   PLUGIN LOCAL — VALORES DO GRÁFICO HORIZONTAL
+========================================================== */
+
+const rotulosGraficoSkuImportacao = {
+
+    id: "rotulosGraficoSkuImportacao",
+
+    afterDatasetsDraw(chart) {
+
+        const { ctx } = chart;
+
+        const dataset =
+            chart.data.datasets[0];
+
+        const meta =
+            chart.getDatasetMeta(0);
+
+        if (
+            !dataset ||
+            !meta ||
+            meta.hidden
+        ) {
+            return;
+        }
+
+        ctx.save();
+
+        ctx.font =
+            "800 11px Arial";
+
+        ctx.fillStyle =
+            "#10245c";
+
+        ctx.textAlign =
+            "left";
+
+        ctx.textBaseline =
+            "middle";
+
+        meta.data.forEach(
+            (elemento, indice) => {
+
+                const valor =
+                    dataset.data[indice];
+
+                if (
+                    !possuiValorImportacao(valor) ||
+                    !elemento ||
+                    !Number.isFinite(elemento.x) ||
+                    !Number.isFinite(elemento.y)
+                ) {
+                    return;
+                }
+
+                ctx.fillText(
+                    Number(valor)
+                        .toLocaleString("pt-BR"),
+                    elemento.x + 8,
+                    elemento.y
+                );
+            }
+        );
+
+        ctx.restore();
+    }
+};
+
+
+/* ==========================================================
+   DESTRUIÇÃO DOS GRÁFICOS
+========================================================== */
 
 function destruirGraficosImportacao() {
 
-    if (graficoAtual) {
+    if (graficoMensalImportacao) {
 
-        graficoAtual.destroy();
-        graficoAtual = null;
+        graficoMensalImportacao.destroy();
+        graficoMensalImportacao = null;
     }
 
-    if (graficoParetoImportacao) {
+    if (graficoSkuImportacao) {
 
-        graficoParetoImportacao.destroy();
-        graficoParetoImportacao = null;
+        graficoSkuImportacao.destroy();
+        graficoSkuImportacao = null;
     }
 
 
     /*
-    |--------------------------------------------------------------------------
-    | SEGURANÇA ADICIONAL
-    |--------------------------------------------------------------------------
-    | Verifica se o Chart.js ainda possui alguma instância vinculada
-    | aos canvases da página.
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Segurança adicional do Chart.js
+    ----------------------------------------------------------
     */
 
     const canvasMensal =
@@ -122,76 +285,63 @@ function destruirGraficosImportacao() {
             "graficoImportacao"
         );
 
-    if (canvasMensal) {
+    if (
+        canvasMensal &&
+        typeof Chart !== "undefined"
+    ) {
 
-        const existenteMensal =
+        const graficoExistente =
             Chart.getChart(canvasMensal);
 
-        if (existenteMensal) {
-            existenteMensal.destroy();
+        if (graficoExistente) {
+            graficoExistente.destroy();
         }
     }
 
 
-    const canvasPareto =
+    const canvasSku =
         document.getElementById(
-            "graficoParetoImportacao"
+            "graficoSkuImportacao"
         );
 
-    if (canvasPareto) {
+    if (
+        canvasSku &&
+        typeof Chart !== "undefined"
+    ) {
 
-        const existentePareto =
-            Chart.getChart(canvasPareto);
+        const graficoExistente =
+            Chart.getChart(canvasSku);
 
-        if (existentePareto) {
-            existentePareto.destroy();
+        if (graficoExistente) {
+            graficoExistente.destroy();
         }
     }
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| RENDERIZAÇÃO DA PÁGINA DE IMPORTAÇÃO
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   RENDERIZAÇÃO DA PÁGINA
+========================================================== */
 
 function renderImportacao() {
-
-    /*
-    |--------------------------------------------------------------------------
-    | DESTRÓI OS GRÁFICOS DA PÁGINA ANTERIOR
-    |--------------------------------------------------------------------------
-    */
 
     destruirGraficosImportacao();
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | DADOS DA IMPORTAÇÃO
-    |--------------------------------------------------------------------------
-    */
+    const imp =
+        dados.importacao || {
 
-    const imp = dados.importacao || {
+            processosAno: 0,
+            totalSku: 0,
+            totalLotes: 0,
+            laudosEmitidos: 0,
+            totalHoras: 0,
 
-        processosAno: 0,
-        totalSku: 0,
-        totalLotes: 0,
-        laudosEmitidos: 0,
-        totalHoras: 0,
+            mensal: [],
+            paretoSku: [],
+            fluxo: []
+        };
 
-        mensal: [],
-        paretoSku: [],
-        fluxo: []
-    };
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | MONTA O CONTEÚDO DA PÁGINA
-    |--------------------------------------------------------------------------
-    */
 
     conteudo.innerHTML = `
 
@@ -200,7 +350,7 @@ function renderImportacao() {
         </div>
 
 
-        <section class="cards">
+        <section class="cards importacao-cards">
 
             ${card(
                 "📋",
@@ -217,7 +367,7 @@ function renderImportacao() {
             )}
 
             ${card(
-                "📑",
+                "📦",
                 "Total de Lotes",
                 numero(imp.totalLotes),
                 "Lotes controlados"
@@ -233,16 +383,18 @@ function renderImportacao() {
             ${card(
                 "⏱️",
                 "Total de Horas",
-                numero(imp.totalHoras),
+                formatarHorasImportacao(
+                    imp.totalHoras
+                ),
                 "Horas da atividade"
             )}
 
         </section>
 
 
-        <section class="panel">
+        <section class="panel importacao-panel-mensal">
 
-            <h3>
+            <h3 class="importacao-panel-titulo">
                 📊 Evolução Mensal da Inspeção de Importação
             </h3>
 
@@ -260,16 +412,16 @@ function renderImportacao() {
         <section class="importacao-bottom-grid">
 
 
-            <div class="panel">
+            <div class="panel importacao-panel-sku">
 
-                <h3>
-                    📈 Pareto de SKUs Inspecionados — Ano
+                <h3 class="importacao-panel-titulo">
+                    📊 Quantidade por SKU (Maior para Menor)
                 </h3>
 
-                <div class="chart-box chart-box-pareto">
+                <div class="chart-box chart-box-sku-importacao">
 
                     <canvas
-                        id="graficoParetoImportacao"
+                        id="graficoSkuImportacao"
                     ></canvas>
 
                 </div>
@@ -277,40 +429,34 @@ function renderImportacao() {
             </div>
 
 
-            <div class="panel">
+            <div class="panel importacao-panel-fluxo">
 
-                <h3>
-                    📋 Fluxo da Inspeção de Importação
-                </h3>
+                <div class="importacao-fluxo-cabecalho">
+
+                    <h3 class="importacao-panel-titulo">
+                        📋 Fluxo da Inspeção de Importação
+                    </h3>
+
+                </div>
 
 
-                ${tabelaFixa(
+                <div class="importacao-tabela-wrap">
 
-                    [
-                        "PO",
-                        "SKU",
-                        "Descrição do Produto",
-                        "Lote",
-                        "Status",
-                        "Observação"
-                    ],
-
-                    montarLinhasImportacao(
+                    ${montarTabelaFluxoImportacao(
                         imp.fluxo || []
-                    ),
+                    )}
 
-                    false
-                )}
+                </div>
 
 
-                <div class="table-footer">
+                <div class="importacao-table-footer">
 
                     <button
                         type="button"
-                        class="btn-ver-todos"
+                        class="btn-ver-todos importacao-btn-ver-todos"
                         onclick="verTodosImportacao()"
                     >
-                        VER TODOS
+                        ☷ VER TODOS
                     </button>
 
                 </div>
@@ -318,46 +464,47 @@ function renderImportacao() {
             </div>
 
         </section>
+
+
+        <div class="importacao-aviso-zero">
+
+            <span class="importacao-aviso-icone">
+                ⓘ
+            </span>
+
+            Os valores zerados não são exibidos nos gráficos.
+            Apenas valores maiores que zero são apresentados.
+
+        </div>
     `;
 
 
     /*
-    |--------------------------------------------------------------------------
-    | CRIA OS GRÁFICOS APÓS O HTML SER INSERIDO
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Cria os gráficos somente depois que os canvases existem
+    ----------------------------------------------------------
     */
 
     criarGraficoMensalImportacao(imp);
-    criarGraficoParetoImportacao(imp);
+    criarGraficoSkuImportacao(imp);
 }
-/*
-|--------------------------------------------------------------------------
-| GRÁFICO DE EVOLUÇÃO MENSAL
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   GRÁFICO — EVOLUÇÃO MENSAL
+========================================================== */
 
 function criarGraficoMensalImportacao(imp) {
 
-    /*
-    |--------------------------------------------------------------------------
-    | DADOS MENSAIS
-    |--------------------------------------------------------------------------
-    */
-
-    const mensal = Array.isArray(imp.mensal)
-        ? imp.mensal
-        : [];
+    const mensal =
+        Array.isArray(imp.mensal)
+            ? imp.mensal
+            : [];
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | LOCALIZA O CANVAS
-    |--------------------------------------------------------------------------
-    */
+    const canvas =
+        document.getElementById(
+            "graficoImportacao"
+        );
 
-    const canvas = document.getElementById(
-        "graficoImportacao"
-    );
 
     if (!canvas) {
 
@@ -370,51 +517,79 @@ function criarGraficoMensalImportacao(imp) {
 
 
     /*
-    |--------------------------------------------------------------------------
-    | PREPARAÇÃO DOS DADOS
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Preparação dos meses
+    ----------------------------------------------------------
     */
 
-    const meses = mensal.map(item =>
-        item.mes || ""
-    );
-
-    const processos = mensal.map(item =>
-        valorGrafico(item.processos)
-    );
-
-    const sku = mensal.map(item =>
-        valorGrafico(item.sku)
-    );
-
-    const lotes = mensal.map(item =>
-        valorGrafico(item.lotes)
-    );
-
-    const laudos = mensal.map(item =>
-        valorGrafico(item.laudos)
-    );
-
-    const horas = mensal.map(item =>
-        valorGrafico(item.horas)
-    );
+    const meses =
+        mensal.map(item =>
+            item.mes || ""
+        );
 
 
     /*
-    |--------------------------------------------------------------------------
-    | REMOVE QUALQUER INSTÂNCIA ANTERIOR
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Preparação dos valores
+    ----------------------------------------------------------
     */
 
-    if (graficoAtual) {
+    const processos =
+        mensal.map(item =>
+            valorGraficoImportacao(
+                item.processos
+            )
+        );
 
-        graficoAtual.destroy();
-        graficoAtual = null;
+
+    const sku =
+        mensal.map(item =>
+            valorGraficoImportacao(
+                item.sku
+            )
+        );
+
+
+    const lotes =
+        mensal.map(item =>
+            valorGraficoImportacao(
+                item.lotes
+            )
+        );
+
+
+    const laudos =
+        mensal.map(item =>
+            valorGraficoImportacao(
+                item.laudos
+            )
+        );
+
+
+    const horas =
+        mensal.map(item =>
+            valorGraficoImportacao(
+                item.horas
+            )
+        );
+
+
+    /*
+    ----------------------------------------------------------
+    Remove instâncias anteriores
+    ----------------------------------------------------------
+    */
+
+    if (graficoMensalImportacao) {
+
+        graficoMensalImportacao.destroy();
+        graficoMensalImportacao = null;
     }
 
 
     const graficoExistente =
         Chart.getChart(canvas);
+
 
     if (graficoExistente) {
 
@@ -423,501 +598,702 @@ function criarGraficoMensalImportacao(imp) {
 
 
     /*
-    |--------------------------------------------------------------------------
-    | CRIA O GRÁFICO
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Criação do gráfico
+    ----------------------------------------------------------
     */
 
-    graficoAtual = new Chart(
-        canvas,
-        {
-            data: {
-
-                labels: meses,
-
-                datasets: [
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | PROCESSOS
-                    |--------------------------------------------------------------------------
-                    */
-
-                    {
-                        type: "bar",
-
-                        label: "Processos",
-
-                        data: processos,
-
-                        backgroundColor: "#1d4eff",
-                        borderColor: "#1d4eff",
-
-                        borderWidth: 1,
-                        borderRadius: 3,
-
-                        yAxisID: "y",
-
-                        order: 2,
-
-                        skipNull: true
-                    },
+    graficoMensalImportacao =
+        new Chart(
+            canvas,
+            {
+                plugins: [
+                    rotulosBarrasMensaisImportacao
+                ],
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | SKU
-                    |--------------------------------------------------------------------------
-                    */
+                data: {
 
-                    {
-                        type: "bar",
-
-                        label: "SKU",
-
-                        data: sku,
-
-                        backgroundColor:
-                            "rgba(240, 77, 216, 0.65)",
-
-                        borderColor: "#f04dd8",
-
-                        borderWidth: 2,
-                        borderRadius: 3,
-
-                        yAxisID: "y",
-
-                        order: 2,
-
-                        skipNull: true
-                    },
+                    labels: meses,
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LOTES
-                    |--------------------------------------------------------------------------
-                    */
+                    datasets: [
 
-                    {
-                        type: "bar",
+                        /*
+                        ------------------------------------------
+                        PROCESSOS
+                        ------------------------------------------
+                        */
 
-                        label: "Lotes",
+                        {
+                            type: "bar",
 
-                        data: lotes,
+                            label: "Processos",
 
-                        backgroundColor:
-                            "rgba(34, 197, 94, 0.55)",
+                            data: processos,
 
-                        borderColor: "#22c55e",
+                            backgroundColor:
+                                "#1d4ed8",
 
-                        borderWidth: 2,
-                        borderRadius: 3,
+                            borderColor:
+                                "#1d4ed8",
 
-                        yAxisID: "y",
+                            borderWidth: 1,
 
-                        order: 2,
+                            borderRadius: 4,
 
-                        skipNull: true
-                    },
+                            borderSkipped: false,
 
+                            categoryPercentage: 0.72,
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LAUDOS
-                    |--------------------------------------------------------------------------
-                    */
+                            barPercentage: 0.84,
 
-                    {
-                        type: "bar",
+                            maxBarThickness: 25,
 
-                        label: "Laudos",
+                            yAxisID: "y",
 
-                        data: laudos,
+                            order: 2,
 
-                        backgroundColor:
-                            "rgba(139, 92, 246, 0.55)",
-
-                        borderColor: "#6d28d9",
-
-                        borderWidth: 2,
-                        borderRadius: 3,
-
-                        yAxisID: "y",
-
-                        order: 2,
-
-                        skipNull: true
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | HORAS
-                    |--------------------------------------------------------------------------
-                    */
-
-                    {
-                        type: "line",
-
-                        label: "Horas",
-
-                        data: horas,
-
-                        borderColor: "#f97316",
-                        backgroundColor: "#f97316",
-
-                        pointBackgroundColor: "#f97316",
-                        pointBorderColor: "#ffffff",
-
-                        pointBorderWidth: 1,
+                            skipNull: true
+                        },
 
 
                         /*
-                        |--------------------------------------------------------------------------
-                        | ESCONDE O PONTO QUANDO NÃO HÁ VALOR
-                        |--------------------------------------------------------------------------
+                        ------------------------------------------
+                        SKU
+                        ------------------------------------------
                         */
 
-                        pointRadius: function(context) {
+                        {
+                            type: "bar",
 
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 4
-                                : 0;
+                            label: "SKU",
+
+                            data: sku,
+
+                            backgroundColor:
+                                "rgba(236, 72, 199, 0.62)",
+
+                            borderColor:
+                                "#ec4899",
+
+                            borderWidth: 1.5,
+
+                            borderRadius: 4,
+
+                            borderSkipped: false,
+
+                            categoryPercentage: 0.72,
+
+                            barPercentage: 0.84,
+
+                            maxBarThickness: 25,
+
+                            yAxisID: "y",
+
+                            order: 2,
+
+                            skipNull: true
                         },
 
 
-                        pointHoverRadius: function(context) {
+                        /*
+                        ------------------------------------------
+                        LOTES
+                        ------------------------------------------
+                        */
 
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 6
-                                : 0;
+                        {
+                            type: "bar",
+
+                            label: "Lotes",
+
+                            data: lotes,
+
+                            backgroundColor:
+                                "rgba(34, 197, 94, 0.54)",
+
+                            borderColor:
+                                "#22c55e",
+
+                            borderWidth: 1.5,
+
+                            borderRadius: 4,
+
+                            borderSkipped: false,
+
+                            categoryPercentage: 0.72,
+
+                            barPercentage: 0.84,
+
+                            maxBarThickness: 25,
+
+                            yAxisID: "y",
+
+                            order: 2,
+
+                            skipNull: true
                         },
 
 
-                        pointHitRadius: function(context) {
+                        /*
+                        ------------------------------------------
+                        LAUDOS
+                        ------------------------------------------
+                        */
 
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 10
-                                : 0;
+                        {
+                            type: "bar",
+
+                            label: "Laudos",
+
+                            data: laudos,
+
+                            backgroundColor:
+                                "rgba(139, 92, 246, 0.52)",
+
+                            borderColor:
+                                "#7c3aed",
+
+                            borderWidth: 1.5,
+
+                            borderRadius: 4,
+
+                            borderSkipped: false,
+
+                            categoryPercentage: 0.72,
+
+                            barPercentage: 0.84,
+
+                            maxBarThickness: 25,
+
+                            yAxisID: "y",
+
+                            order: 2,
+
+                            skipNull: true
                         },
 
 
-                        borderWidth: 2,
+                        /*
+                        ------------------------------------------
+                        HORAS
+                        ------------------------------------------
+                        A linha permanece sem números.
+                        ------------------------------------------
+                        */
 
-                        tension: 0.35,
+                        {
+                            type: "line",
 
-                        spanGaps: false,
+                            label: "Horas",
 
-                        skipNull: true,
+                            data: horas,
 
-                        yAxisID: "y1",
+                            borderColor:
+                                "#f97316",
 
-                        order: 1
-                    }
+                            backgroundColor:
+                                "#f97316",
 
-                ]
-            },
+                            pointBackgroundColor:
+                                "#f97316",
 
+                            pointBorderColor:
+                                "#ffffff",
 
-            /*
-            |--------------------------------------------------------------------------
-            | CONFIGURAÇÕES
-            |--------------------------------------------------------------------------
-            */
+                            pointBorderWidth: 2,
 
-            options: {
+                            pointRadius(context) {
 
-                responsive: true,
+                                return possuiValorImportacao(
+                                    context.raw
+                                )
+                                    ? 4
+                                    : 0;
+                            },
 
-                maintainAspectRatio: false,
+                            pointHoverRadius(context) {
 
+                                return possuiValorImportacao(
+                                    context.raw
+                                )
+                                    ? 6
+                                    : 0;
+                            },
 
-                /*
-                |--------------------------------------------------------------------------
-                | INTERAÇÃO
-                |--------------------------------------------------------------------------
-                */
+                            pointHitRadius(context) {
 
-                interaction: {
+                                return possuiValorImportacao(
+                                    context.raw
+                                )
+                                    ? 10
+                                    : 0;
+                            },
 
-                    mode: "index",
+                            borderWidth: 2.5,
 
-                    intersect: false
+                            tension: 0.35,
+
+                            cubicInterpolationMode:
+                                "monotone",
+
+                            spanGaps: false,
+
+                            yAxisID: "y1",
+
+                            order: 1
+                        }
+                    ]
                 },
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | PLUGINS
-                |--------------------------------------------------------------------------
-                */
+                options: {
 
-                plugins: {
+                    responsive: true,
+
+                    maintainAspectRatio: false,
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | LEGENDA
-                    |--------------------------------------------------------------------------
+                    ------------------------------------------
+                    Espaço adicional para os números das barras
+                    ------------------------------------------
                     */
 
-                    legend: {
+                    layout: {
 
-                        position: "top",
+                        padding: {
 
-                        labels: {
+                            top: 22,
 
-                            usePointStyle: false,
+                            right: 8,
 
-                            boxWidth: 32,
+                            bottom: 0,
 
-                            padding: 18
+                            left: 0
                         }
                     },
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | TOOLTIP
-                    |--------------------------------------------------------------------------
+                    ------------------------------------------
+                    Interação
+                    ------------------------------------------
                     */
 
-                    tooltip: {
+                    interaction: {
 
-                        enabled: true,
+                        mode: "index",
+
+                        intersect: false
+                    },
+
+
+                    /*
+                    ------------------------------------------
+                    Plugins
+                    ------------------------------------------
+                    */
+
+                    plugins: {
 
 
                         /*
-                        |--------------------------------------------------------------------------
-                        | NÃO MOSTRA VALORES NULOS OU ZERADOS
-                        |--------------------------------------------------------------------------
+                        ------------------------------------------
+                        Desliga o plugin global.
+
+                        Os números das barras serão controlados
+                        somente pelo plugin local.
+                        ------------------------------------------
                         */
 
-                        filter: function(context) {
+                        valorFlutuante: false,
 
-                            return possuiValorGrafico(
-                                context.raw
-                            );
+
+                        /*
+                        ------------------------------------------
+                        Evita duplicação com ChartDataLabels
+                        ------------------------------------------
+                        */
+
+                        datalabels: {
+
+                            display: false
                         },
 
 
-                        callbacks: {
+                        /*
+                        ------------------------------------------
+                        Legenda
+                        ------------------------------------------
+                        */
 
+                        legend: {
 
-                            /*
-                            |--------------------------------------------------------------------------
-                            | TEXTO DO TOOLTIP
-                            |--------------------------------------------------------------------------
-                            */
+                            position: "top",
 
-                            label: function(context) {
+                            align: "center",
 
-                                if (
-                                    !possuiValorGrafico(
-                                        context.raw
-                                    )
-                                ) {
-                                    return "";
+                            labels: {
+
+                                usePointStyle: false,
+
+                                boxWidth: 30,
+
+                                boxHeight: 10,
+
+                                padding: 18,
+
+                                color: "#374151",
+
+                                font: {
+
+                                    size: 11,
+
+                                    weight: "600"
                                 }
+                            }
+                        },
 
 
-                                const nome =
-                                    context.dataset.label || "";
+                        /*
+                        ------------------------------------------
+                        Tooltip
+                        ------------------------------------------
+                        */
 
+                        tooltip: {
 
-                                return (
-                                    `${nome}: ` +
-                                    `${context.formattedValue}`
+                            enabled: true,
+
+                            mode: "index",
+
+                            intersect: false,
+
+                            filter(context) {
+
+                                return possuiValorImportacao(
+                                    context.raw
                                 );
+                            },
+
+                            callbacks: {
+
+                                label(context) {
+
+                                    const valor =
+                                        context.raw;
+
+
+                                    if (
+                                        !possuiValorImportacao(
+                                            valor
+                                        )
+                                    ) {
+                                        return "";
+                                    }
+
+
+                                    const nome =
+                                        context.dataset.label ||
+                                        "";
+
+
+                                    if (
+                                        nome === "Horas"
+                                    ) {
+
+                                        return (
+                                            `${nome}: ` +
+                                            `${formatarHorasImportacao(valor)} h`
+                                        );
+                                    }
+
+
+                                    return (
+                                        `${nome}: ` +
+                                        `${Number(valor)
+                                            .toLocaleString("pt-BR")}`
+                                    );
+                                }
                             }
                         }
                     },
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | EVITA DUPLICAÇÃO DOS NÚMEROS
-                    |--------------------------------------------------------------------------
-                    | O plugin DataLabels permanece desligado.
-                    |
-                    | Os valores continuam sendo exibidos pelo plugin global
-                    | valorFlutuante registrado no script.js.
-                    |--------------------------------------------------------------------------
+                    ------------------------------------------
+                    Escalas
+                    ------------------------------------------
                     */
 
-                    datalabels: {
-
-                        display: false
-                    }
-                },
+                    scales: {
 
 
-                /*
-                |--------------------------------------------------------------------------
-                | ESCALAS
-                |--------------------------------------------------------------------------
-                */
+                        /*
+                        ------------------------------------------
+                        Eixo horizontal
+                        ------------------------------------------
+                        */
 
-                scales: {
+                        x: {
 
+                            stacked: false,
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DOS MESES
-                    |--------------------------------------------------------------------------
-                    */
+                            offset: true,
 
-                    x: {
+                            grid: {
 
-                        grid: {
+                                display: false,
 
-                            display: false
+                                drawBorder: false
+                            },
+
+                            border: {
+
+                                color:
+                                    "rgba(148, 163, 184, 0.38)"
+                            },
+
+                            ticks: {
+
+                                autoSkip: false,
+
+                                maxRotation: 0,
+
+                                minRotation: 0,
+
+                                color: "#4b5563",
+
+                                padding: 8,
+
+                                font: {
+
+                                    size: 10,
+
+                                    weight: "500"
+                                }
+                            }
                         },
 
-                        ticks: {
 
-                            autoSkip: false,
+                        /*
+                        ------------------------------------------
+                        Eixo de quantidades
+                        ------------------------------------------
+                        */
 
-                            maxRotation: 45,
+                        y: {
 
-                            minRotation: 0
+                            beginAtZero: true,
+
+                            position: "left",
+
+                            grace: "12%",
+
+                            title: {
+
+                                display: true,
+
+                                text: "Quantidade",
+
+                                color: "#4b5563",
+
+                                font: {
+
+                                    size: 11,
+
+                                    weight: "600"
+                                }
+                            },
+
+                            grid: {
+
+                                color:
+                                    "rgba(148, 163, 184, 0.22)",
+
+                                drawBorder: false
+                            },
+
+                            border: {
+
+                                display: false
+                            },
+
+                            ticks: {
+
+                                precision: 0,
+
+                                color: "#4b5563",
+
+                                padding: 6,
+
+                                font: {
+
+                                    size: 10
+                                },
+
+                                callback(valor) {
+
+                                    return Number(valor)
+                                        .toLocaleString(
+                                            "pt-BR"
+                                        );
+                                }
+                            }
+                        },
+
+
+                        /*
+                        ------------------------------------------
+                        Eixo de horas
+                        ------------------------------------------
+                        */
+
+                        y1: {
+
+                            beginAtZero: true,
+
+                            position: "right",
+
+                            grace: "8%",
+
+                            title: {
+
+                                display: true,
+
+                                text: "Horas",
+
+                                color: "#4b5563",
+
+                                font: {
+
+                                    size: 11,
+
+                                    weight: "600"
+                                }
+                            },
+
+                            grid: {
+
+                                drawOnChartArea: false,
+
+                                drawBorder: false
+                            },
+
+                            border: {
+
+                                display: false
+                            },
+
+                            ticks: {
+
+                                color: "#4b5563",
+
+                                padding: 6,
+
+                                font: {
+
+                                    size: 10
+                                },
+
+                                callback(valor) {
+
+                                    return Number(valor)
+                                        .toLocaleString(
+                                            "pt-BR",
+                                            {
+                                                maximumFractionDigits: 1
+                                            }
+                                        );
+                                }
+                            }
                         }
                     },
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DE QUANTIDADE
-                    |--------------------------------------------------------------------------
+                    ------------------------------------------
+                    Animação
+                    ------------------------------------------
                     */
 
-                    y: {
+                    animation: {
 
-                        beginAtZero: true,
-
-                        position: "left",
-
-                        title: {
-
-                            display: true,
-
-                            text: "Quantidade"
-                        },
-
-                        ticks: {
-
-                            precision: 0
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DE HORAS
-                    |--------------------------------------------------------------------------
-                    */
-
-                    y1: {
-
-                        beginAtZero: true,
-
-                        position: "right",
-
-                        title: {
-
-                            display: true,
-
-                            text: "Horas"
-                        },
-
-                        grid: {
-
-                            drawOnChartArea: false
-                        }
+                        duration: 500
                     }
                 }
             }
-        }
-    );
+        );
 }
-/*
-|--------------------------------------------------------------------------
-| GRÁFICO DE PARETO DOS SKUs
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   GRÁFICO — QUANTIDADE POR SKU
+========================================================== */
 
-function criarGraficoParetoImportacao(imp) {
+function criarGraficoSkuImportacao(imp) {
 
-    /*
-    |--------------------------------------------------------------------------
-    | DADOS ORIGINAIS
-    |--------------------------------------------------------------------------
-    */
-
-    const paretoOriginal = Array.isArray(
-        imp.paretoSku
-    )
-        ? imp.paretoSku
-        : [];
+    const dadosSkuOriginais =
+        Array.isArray(imp.paretoSku)
+            ? imp.paretoSku
+            : [];
 
 
     /*
-    |--------------------------------------------------------------------------
-    | TRATAMENTO DOS DADOS
-    |--------------------------------------------------------------------------
-    | Remove registros zerados e ordena do maior para o menor.
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Normaliza, remove valores inválidos e ordena
+    do maior para o menor
+    ----------------------------------------------------------
     */
 
-    const pareto = paretoOriginal
-        .map(item => {
+    const dadosSku =
+        dadosSkuOriginais
 
-            const quantidade =
-                valorGrafico(item.quantidade);
+            .map(item => {
 
-            return {
+                const quantidade =
+                    valorGraficoImportacao(
+                        item.quantidade
+                    );
 
-                sku:
-                    item.sku ||
-                    "Sem identificação",
+                return {
 
-                quantidade:
-                    quantidade === null
-                        ? 0
-                        : quantidade
-            };
-        })
-        .filter(item =>
-            item.quantidade > 0
-        )
-        .sort(
-            (a, b) =>
-                b.quantidade -
-                a.quantidade
+                    sku:
+                        escaparTextoImportacao(
+                            item.sku ||
+                            "Sem identificação"
+                        ),
+
+                    quantidade:
+                        quantidade === null
+                            ? 0
+                            : quantidade
+                };
+            })
+
+            .filter(item =>
+                item.quantidade > 0
+            )
+
+            .sort(
+                (a, b) =>
+                    b.quantidade -
+                    a.quantidade
+            )
+
+            .slice(0, 10);
+
+
+    const canvas =
+        document.getElementById(
+            "graficoSkuImportacao"
         );
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | LOCALIZA O CANVAS
-    |--------------------------------------------------------------------------
-    */
-
-    const canvas = document.getElementById(
-        "graficoParetoImportacao"
-    );
 
     if (!canvas) {
 
         console.error(
-            "Canvas graficoParetoImportacao não encontrado."
+            "Canvas graficoSkuImportacao não encontrado."
         );
 
         return;
@@ -925,20 +1301,21 @@ function criarGraficoParetoImportacao(imp) {
 
 
     /*
-    |--------------------------------------------------------------------------
-    | REMOVE QUALQUER INSTÂNCIA ANTERIOR
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Remove instâncias anteriores
+    ----------------------------------------------------------
     */
 
-    if (graficoParetoImportacao) {
+    if (graficoSkuImportacao) {
 
-        graficoParetoImportacao.destroy();
-        graficoParetoImportacao = null;
+        graficoSkuImportacao.destroy();
+        graficoSkuImportacao = null;
     }
 
 
     const graficoExistente =
         Chart.getChart(canvas);
+
 
     if (graficoExistente) {
 
@@ -947,428 +1324,585 @@ function criarGraficoParetoImportacao(imp) {
 
 
     /*
-    |--------------------------------------------------------------------------
-    | PREPARAÇÃO DOS DADOS
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Dados finais
+    ----------------------------------------------------------
     */
 
-    const labels = pareto.map(item =>
-        item.sku
-    );
+    const labels =
+        dadosSku.map(item =>
+            item.sku
+        );
 
-    const quantidades = pareto.map(item =>
-        item.quantidade
-    );
+
+    const quantidades =
+        dadosSku.map(item =>
+            item.quantidade
+        );
 
 
     /*
-    |--------------------------------------------------------------------------
-    | TOTAL DAS QUANTIDADES
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+    Criação do gráfico horizontal
+    ----------------------------------------------------------
     */
 
-    const total = quantidades.reduce(
-        (soma, valor) =>
-            soma + valor,
-        0
-    );
+    graficoSkuImportacao =
+        new Chart(
+            canvas,
+            {
+                type: "bar",
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | PERCENTUAL ACUMULADO
-    |--------------------------------------------------------------------------
-    */
-
-    let acumulado = 0;
-
-    const percentuaisAcumulados =
-        quantidades.map(valor => {
-
-            acumulado += valor;
-
-            if (total === 0) {
-                return null;
-            }
-
-            return Number(
-                (
-                    (acumulado / total) *
-                    100
-                ).toFixed(1)
-            );
-        });
+                plugins: [
+                    rotulosGraficoSkuImportacao
+                ],
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CRIA O GRÁFICO
-    |--------------------------------------------------------------------------
-    */
+                data: {
 
-    graficoParetoImportacao = new Chart(
-        canvas,
-        {
-            data: {
+                    labels: labels,
 
-                labels: labels,
 
-                datasets: [
+                    datasets: [
+
+                        {
+                            label: "Quantidade",
+
+                            data: quantidades,
+
+                            backgroundColor:
+                                "rgba(29, 78, 216, 0.82)",
+
+                            borderColor:
+                                "#1d4ed8",
+
+                            borderWidth: 1,
+
+                            borderRadius: 5,
+
+                            borderSkipped: false,
+
+                            barThickness: 18,
+
+                            maxBarThickness: 22,
+
+                            minBarLength: 3,
+
+                            _ocultarZero: true
+                        }
+                    ]
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    indexAxis: "y",
+
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | QUANTIDADE
-                    |--------------------------------------------------------------------------
+                    --------------------------------------------------
+                    Reserva espaço à direita para os valores
+                    --------------------------------------------------
                     */
 
-                    {
-                        type: "bar",
+                    layout: {
 
-                        label: "Quantidade",
+                        padding: {
 
-                        data: quantidades,
+                            top: 4,
 
-                        backgroundColor: "#1455d9",
-                        borderColor: "#1455d9",
+                            right: 42,
 
-                        borderWidth: 1,
-                        borderRadius: 3,
+                            bottom: 0,
 
-                        xAxisID: "x",
-
-                        order: 2,
-
-                        skipNull: true
+                            left: 0
+                        }
                     },
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | PERCENTUAL ACUMULADO
-                    |--------------------------------------------------------------------------
+                    --------------------------------------------------
+                    Interação
+                    --------------------------------------------------
                     */
 
-                    {
-                        type: "line",
+                    interaction: {
 
-                        label: "% Acumulado",
+                        mode: "nearest",
 
-                        data: percentuaisAcumulados,
+                        axis: "y",
 
-                        borderColor: "#f97316",
-                        backgroundColor: "#f97316",
+                        intersect: false
+                    },
 
-                        pointBackgroundColor: "#f97316",
-                        pointBorderColor: "#ffffff",
 
-                        pointBorderWidth: 1,
+                    /*
+                    --------------------------------------------------
+                    Plugins
+                    --------------------------------------------------
+                    */
+
+                    plugins: {
 
 
                         /*
-                        |--------------------------------------------------------------------------
-                        | ESCONDE PONTOS SEM VALOR
-                        |--------------------------------------------------------------------------
+                        ------------------------------------------------
+                        Desliga o plugin global para impedir
+                        valores duplicados
+                        ------------------------------------------------
                         */
 
-                        pointRadius: function(context) {
-
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 3
-                                : 0;
-                        },
+                        valorFlutuante: false,
 
 
-                        pointHoverRadius: function(context) {
-
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 5
-                                : 0;
-                        },
-
-
-                        pointHitRadius: function(context) {
-
-                            return possuiValorGrafico(
-                                context.raw
-                            )
-                                ? 10
-                                : 0;
-                        },
-
-
-                        borderWidth: 2,
-
-                        tension: 0.2,
-
-                        spanGaps: false,
-
-                        xAxisID: "x1",
-
-                        order: 1
-                    }
-
-                ]
-            },
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | CONFIGURAÇÕES
-            |--------------------------------------------------------------------------
-            */
-
-            options: {
-
-                responsive: true,
-
-                maintainAspectRatio: false,
-
-                indexAxis: "y",
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | INTERAÇÃO
-                |--------------------------------------------------------------------------
-                */
-
-                interaction: {
-
-                    mode: "index",
-
-                    intersect: false
-                },
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | PLUGINS
-                |--------------------------------------------------------------------------
-                */
-
-                plugins: {
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | DESLIGA O PLUGIN GLOBAL DE NÚMEROS
-                    |--------------------------------------------------------------------------
-                    | No Pareto, os valores permanecem visíveis somente
-                    | no tooltip.
-                    |--------------------------------------------------------------------------
-                    */
-
-                    valorFlutuante: false,
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | LEGENDA
-                    |--------------------------------------------------------------------------
-                    */
-
-                    legend: {
-
-                        position: "top",
-
-                        labels: {
-
-                            boxWidth: 25,
-
-                            padding: 15
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | TOOLTIP
-                    |--------------------------------------------------------------------------
-                    */
-
-                    tooltip: {
-
-                        enabled: true,
-
-                        filter: function(context) {
-
-                            return possuiValorGrafico(
-                                context.raw
-                            );
-                        },
-
-
-                        callbacks: {
-
-                            label: function(context) {
-
-                                if (
-                                    !possuiValorGrafico(
-                                        context.raw
-                                    )
-                                ) {
-                                    return "";
-                                }
-
-
-                                if (
-                                    context.dataset.label ===
-                                    "% Acumulado"
-                                ) {
-                                    return (
-                                        `% acumulado: ` +
-                                        `${context.raw}%`
-                                    );
-                                }
-
-
-                                return (
-                                    `Quantidade: ` +
-                                    `${context.raw}`
-                                );
-                            }
-                        }
-                    },
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EVITA NÚMEROS DUPLICADOS
-                    |--------------------------------------------------------------------------
-                    */
-
-                    datalabels: {
-
-                        display: false
-                    }
-                },
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | ESCALAS
-                |--------------------------------------------------------------------------
-                */
-
-                scales: {
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DOS SKUs
-                    |--------------------------------------------------------------------------
-                    */
-
-                    y: {
-
-                        grid: {
+                        datalabels: {
 
                             display: false
                         },
 
-                        title: {
 
-                            display: true,
+                        legend: {
 
-                            text: "SKU"
+                            display: false
+                        },
+
+
+                        tooltip: {
+
+                            enabled: true,
+
+                            displayColors: false,
+
+                            callbacks: {
+
+                                title(contextos) {
+
+                                    if (
+                                        !contextos ||
+                                        !contextos.length
+                                    ) {
+                                        return "";
+                                    }
+
+                                    return contextos[0].label;
+                                },
+
+
+                                label(context) {
+
+                                    const valor =
+                                        context.raw;
+
+
+                                    if (
+                                        !possuiValorImportacao(
+                                            valor
+                                        )
+                                    ) {
+                                        return "";
+                                    }
+
+
+                                    return (
+                                        "Quantidade: " +
+                                        Number(valor)
+                                            .toLocaleString(
+                                                "pt-BR"
+                                            )
+                                    );
+                                }
+                            }
                         }
                     },
 
 
                     /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DE QUANTIDADE
-                    |--------------------------------------------------------------------------
+                    --------------------------------------------------
+                    Escalas
+                    --------------------------------------------------
                     */
 
-                    x: {
-
-                        beginAtZero: true,
-
-                        position: "bottom",
-
-                        title: {
-
-                            display: true,
-
-                            text: "Quantidade"
-                        },
-
-                        ticks: {
-
-                            precision: 0
-                        }
-                    },
+                    scales: {
 
 
-                    /*
-                    |--------------------------------------------------------------------------
-                    | EIXO DO PERCENTUAL ACUMULADO
-                    |--------------------------------------------------------------------------
-                    */
+                        /*
+                        ------------------------------------------------
+                        Eixo dos valores
+                        ------------------------------------------------
+                        */
 
-                    x1: {
+                        x: {
 
-                        beginAtZero: true,
+                            beginAtZero: true,
 
-                        max: 100,
+                            grace: "12%",
 
-                        position: "top",
+                            title: {
 
-                        grid: {
+                                display: true,
 
-                            drawOnChartArea: false
-                        },
+                                text: "Quantidade",
 
-                        ticks: {
+                                color: "#4b5563",
 
-                            callback: function(valor) {
+                                font: {
 
-                                return `${valor}%`;
+                                    size: 11,
+
+                                    weight: "600"
+                                }
+                            },
+
+                            grid: {
+
+                                color:
+                                    "rgba(148, 163, 184, 0.22)",
+
+                                drawBorder: false
+                            },
+
+                            border: {
+
+                                display: false
+                            },
+
+                            ticks: {
+
+                                precision: 0,
+
+                                color: "#4b5563",
+
+                                padding: 6,
+
+                                font: {
+
+                                    size: 10
+                                },
+
+                                callback(valor) {
+
+                                    return Number(valor)
+                                        .toLocaleString(
+                                            "pt-BR"
+                                        );
+                                }
                             }
                         },
 
-                        title: {
 
-                            display: true,
+                        /*
+                        ------------------------------------------------
+                        Eixo dos SKUs
+                        ------------------------------------------------
+                        */
 
-                            text: "% Acumulado"
+                        y: {
+
+                            offset: true,
+
+                            grid: {
+
+                                display: false,
+
+                                drawBorder: false
+                            },
+
+                            border: {
+
+                                display: false
+                            },
+
+                            ticks: {
+
+                                color: "#334155",
+
+                                padding: 8,
+
+                                font: {
+
+                                    size: 10,
+
+                                    weight: "600"
+                                },
+
+
+                                /*
+                                ------------------------------------------
+                                Limita textos muito grandes
+                                ------------------------------------------
+                                */
+
+                                callback(valor) {
+
+                                    const texto =
+                                        this.getLabelForValue(
+                                            valor
+                                        );
+
+
+                                    if (
+                                        texto.length > 22
+                                    ) {
+
+                                        return (
+                                            texto.slice(
+                                                0,
+                                                22
+                                            ) +
+                                            "..."
+                                        );
+                                    }
+
+
+                                    return texto;
+                                }
+                            }
                         }
+                    },
+
+
+                    /*
+                    --------------------------------------------------
+                    Animação
+                    --------------------------------------------------
+                    */
+
+                    animation: {
+
+                        duration: 500
                     }
                 }
             }
-        }
-    );
+        );
 }
-/*
-|--------------------------------------------------------------------------
-| BOTÃO VER TODOS
-|--------------------------------------------------------------------------
-*/
+/* ==========================================================
+   TABELA — FLUXO DA INSPEÇÃO DE IMPORTAÇÃO
+========================================================== */
+
+function badgeStatusImportacao(status) {
+
+    const texto =
+        String(status || "")
+            .trim()
+            .toUpperCase();
+
+    switch (texto) {
+
+        case "APROVADO":
+
+            return `
+                <span class="status-badge status-aprovado">
+                    🟢 APROVADO
+                </span>
+            `;
+
+        case "REPROVADO":
+
+            return `
+                <span class="status-badge status-reprovado">
+                    🔴 REPROVADO
+                </span>
+            `;
+
+        case "PENDENTE":
+
+            return `
+                <span class="status-badge status-pendente">
+                    ⚪ PENDENTE
+                </span>
+            `;
+
+        case "ATENÇÃO":
+
+        case "ATENCAO":
+
+            return `
+                <span class="status-badge status-atencao">
+                    🟡 ATENÇÃO
+                </span>
+            `;
+
+        default:
+
+            return `
+                <span class="status-badge">
+                    ${escaparTextoImportacao(status)}
+                </span>
+            `;
+    }
+
+}
+
+
+/* ==========================================================
+   LINHAS DA TABELA
+========================================================== */
+
+function montarTabelaFluxoImportacao(lista) {
+
+    const fluxo =
+        Array.isArray(lista)
+            ? lista
+            : [];
+
+
+    if (!fluxo.length) {
+
+        return `
+
+            <div class="tabela-vazia">
+
+                Nenhum processo de importação encontrado.
+
+            </div>
+
+        `;
+    }
+
+
+    const linhas =
+        fluxo.map(item => `
+
+            <tr>
+
+                <td>
+                    ${escaparTextoImportacao(item.po)}
+                </td>
+
+                <td>
+                    ${escaparTextoImportacao(item.sku)}
+                </td>
+
+                <td class="descricao">
+
+                    ${escaparTextoImportacao(
+                        item.descricao
+                    )}
+
+                </td>
+
+                <td>
+
+                    ${escaparTextoImportacao(
+                        item.lote
+                    )}
+
+                </td>
+
+                <td>
+
+                    ${badgeStatusImportacao(
+                        item.status
+                    )}
+
+                </td>
+
+                <td>
+
+                    ${escaparTextoImportacao(
+                        item.observacao
+                    )}
+
+                </td>
+
+            </tr>
+
+        `).join("");
+
+
+    return `
+
+        <div class="importacao-tabela-scroll">
+
+            <table class="importacao-tabela">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="width:14%">
+                            PO
+                        </th>
+
+                        <th style="width:12%">
+                            SKU
+                        </th>
+
+                        <th style="width:30%">
+                            DESCRIÇÃO
+                        </th>
+
+                        <th style="width:14%">
+                            LOTE
+                        </th>
+
+                        <th style="width:12%">
+                            STATUS
+                        </th>
+
+                        <th style="width:18%">
+                            OBSERVAÇÃO
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${linhas}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   BOTÃO VER TODOS
+========================================================== */
 
 function verTodosImportacao() {
 
     console.log(
-        "Abrir todos os registros da inspeção de importação."
+        "Visualizar todos os processos de importação."
     );
 
-
     /*
-    |--------------------------------------------------------------------------
-    | IMPLEMENTAÇÃO FUTURA
-    |--------------------------------------------------------------------------
-    |
-    | Aqui poderá ser adicionada futuramente:
-    |
-    | - abertura de um modal;
-    | - exibição da tabela completa;
-    | - redirecionamento para outra página;
-    | - exportação dos registros;
-    | - filtros por PO, SKU, lote ou status.
-    |--------------------------------------------------------------------------
+    ----------------------------------------------------------
+
+    Futuras implementações
+
+    • Modal
+    • Nova página
+    • Exportação Excel
+    • Exportação PDF
+    • Pesquisa
+    • Filtros
+    • Ordenação
+
+    ----------------------------------------------------------
     */
+
 }
+
+
+/* ==========================================================
+   EXPORTA PARA O ESCOPO GLOBAL
+========================================================== */
+
+window.renderImportacao =
+    renderImportacao;
+
+window.verTodosImportacao =
+    verTodosImportacao;
