@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 */
 
-let graficoAtual = null;
+let graficoMensalImportacao = null;
 let graficoParetoImportacao = null;
 
 
