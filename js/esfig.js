@@ -585,14 +585,25 @@ function renderEsfig(){
     };
 
 
-    /* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
 | PLUGINS DISPONÍVEIS
-| ChartDataLabels já está registrado globalmente no index.html.
 -------------------------------------------------------------------------- */
+
+if (
+    typeof ChartDataLabels !== "undefined"
+) {
+    Chart.unregister(ChartDataLabels);
+}
 
 const pluginsGrafico = [
     linhaMetaPareto
 ];
+
+if (
+    typeof ChartDataLabels !== "undefined"
+) {
+    pluginsGrafico.push(ChartDataLabels);
+}
 
     /*
     |--------------------------------------------------------------------------
