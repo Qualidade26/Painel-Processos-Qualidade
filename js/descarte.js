@@ -1,165 +1,241 @@
+/* ==========================================================
+   RÓTULOS EXTERNOS DO GRÁFICO DE PIZZA
+========================================================== */
 
-function renderDescarte(){
+const rotulosExternosPizza = {
 
-    if(!senhaDescarteLiberada){
+    id: "rotulosExternosPizza",
 
-        conteudo.innerHTML = `
-            <div class="senha-box">
-                <h2>🔒 Área Restrita - Descarte</h2>
+    afterDatasetsDraw(chart) {
 
-                <p>
-                    Digite a senha para acessar as informações.
-                </p>
+        const {
+            ctx,
+            data
+        } = chart;
 
-                <input
-                    type="password"
-                    id="senhaDescarte"
-                    placeholder="Digite a senha"
-                >
+        const dataset = data.datasets[0];
 
-                <button
-                    class="btn"
-                    onclick="validarSenhaDescarte()"
-                >
-                    Acessar
-                </button>
+        if (!dataset || !dataset.data) {
+            return;
+        }
 
-                <p
-                    id="erroSenha"
-                    style="color:#ef4444;font-weight:900;"
-                ></p>
-            </div>
-        `;
-
-        return;
-    }
-
-    const d = dados.descarte || {
-        origens:[],
-        top10:[]
-    };
-
-    const top = [...(d.top10 || [])]
-        .sort((a,b)=>
-            Number(b.valor || 0) -
-            Number(a.valor || 0)
+        const valores = dataset.data.map(valor =>
+            Number(valor || 0)
         );
 
-    conteudo.innerHTML = `
-        <div class="page-title">🗑 DESCARTE</div>
+        const total = valores.reduce(
+            (soma, valor) => soma + valor,
+            0
+        );
 
-        <section class="cards">
+        if (total <= 0) {
+            return;
+        }
 
-            ${card(
-                "🗑",
-                "Valor Atual",
-                moeda(d.total),
-                "Financeiro impactado"
-            )}
+        const meta = chart.getDatasetMeta(0);
 
-            ${card(
-                "📋",
-                "Último Descarte",
-                moeda(d.ultimoDescarte),
-                "Última operação registrada"
-            )}
+        ctx.save();
 
-        </section>
+        ctx.font = "700 11px 'Segoe UI', Arial, sans-serif";
+        ctx.fillStyle = "#0f2557";
+        ctx.strokeStyle = "#64748b";
+        ctx.lineWidth = 1.2;
+        ctx.textBaseline = "middle";
 
-        <section class="grid-2">
+        meta.data.forEach((elemento, indice) => {
 
-            <div class="panel">
-
-                <h3>📊 Descarte por Origem</h3>
-
-                <div class="chart-box tall">
-                    <canvas id="grafico"></canvas>
-                </div>
-
-                <h3 style="margin-top:10px;">
-                    Top 3 Origens de Destino
-                </h3>
-
-                ${rankTop3Origem(d.origens || [])}
-
-            </div>
-
-            <div class="panel">
-
-                <h3>Top 10 Descarte</h3>
-
-                ${
-                    tabelaFixa(
-                        ["SKU","Descrição","Valor"],
-                        montarLinhasTopDescarte(top),
-                        true
-                    )
-                }
-
-            </div>
-
-        </section>
-    `;
-
-    graficoAtual = new Chart(
-        document.getElementById("grafico"),
-        {
-
-            type:"bar",
-
-            data:{
-                labels:(d.origens || [])
-                    .map(i => i.nome),
-
-                datasets:[{
-                    label:"Valor",
-
-                    data:(d.origens || [])
-                        .map(i => i.valor),
-
-                    backgroundColor:[
-                        "#1d4eff",
-                        "#0f3cc9",
-                        "#6b7cff",
-                        "#f04dd8",
-                        "#22c55e",
-                        "#38bdf8",
-                        "#8b5cf6"
-                    ],
-
-                    borderWidth:0,
-
-                    _moeda:true
-                }]
-            },
-
-            options:{
-                ...baseOptions(),
-                indexAxis:"y",
-                plugins:{
-                    legend:{
-                        display:false
-                    }
-                }
+            if (!chart.getDataVisibility(indice)) {
+                return;
             }
 
-        }
-    );
-}
+            const valor = valores[indice];
 
-function validarSenhaDescarte(){
+            const percentual =
+                (valor / total) * 100;
 
-    const senha =
-        document.getElementById("senhaDescarte").value;
+            const propriedades = elemento.getProps(
+                [
+                    "x",
+                    "y",
+                    "startAngle",
+                    "endAngle",
+                    "outerRadius"
+                ],
+                true
+            );
 
-    if(senha === "SGQ2026"){
+            const angulo =
+                (
+                    propriedades.startAngle +
+                    propriedades.endAngle
+                ) / 2;
 
-        senhaDescarteLiberada = true;
-        renderDescarte();
+            const direcaoX = Math.cos(angulo);
+            const direcaoY = Math.sin(angulo);
 
-    }else{
+            const inicioX =
+                propriedades.x +
+                direcaoX *
+                (propriedades.outerRadius + 2);
 
-        document.getElementById("erroSenha").innerText =
-            "Senha incorreta.";
+            const inicioY =
+                propriedades.y +
+                direcaoY *
+                (propriedades.outerRadius + 2);
+
+            const meioX =
+                propriedades.x +
+                direcaoX *
+                (propriedades.outerRadius + 14);
+
+            const meioY =
+                propriedades.y +
+                direcaoY *
+                (propriedades.outerRadius + 14);
+
+            const ladoDireito =
+                direcaoX >= 0;
+
+            const finalX =
+                meioX +
+                (
+                    ladoDireito
+                        ? 15
+                        : -15
+                );
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                inicioX,
+                inicioY
+            );
+
+            ctx.lineTo(
+                meioX,
+                meioY
+            );
+
+            ctx.lineTo(
+                finalX,
+                meioY
+            );
+
+            ctx.stroke();
+
+            ctx.textAlign =
+                ladoDireito
+                    ? "left"
+                    : "right";
+
+            const texto =
+                percentual.toLocaleString(
+                    "pt-BR",
+                    {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    }
+                ) + "%";
+
+            ctx.fillText(
+                texto,
+                finalX +
+                (
+                    ladoDireito
+                        ? 4
+                        : -4
+                ),
+                meioY
+            );
+        });
+
+        ctx.restore();
     }
-}
+};
+
+
+/* ==========================================================
+   TEXTO CENTRAL DA ROSCA
+========================================================== */
+
+const totalCentroPizza = {
+
+    id: "totalCentroPizza",
+
+    afterDraw(chart) {
+
+        const {
+            ctx,
+            chartArea
+        } = chart;
+
+        if (!chartArea) {
+            return;
+        }
+
+        const centroX =
+            (
+                chartArea.left +
+                chartArea.right
+            ) / 2;
+
+        const centroY =
+            (
+                chartArea.top +
+                chartArea.bottom
+            ) / 2;
+
+        ctx.save();
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        ctx.fillStyle = "#0f2557";
+
+        ctx.font =
+            "900 27px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillText(
+            "100%",
+            centroX,
+            centroY - 7
+        );
+
+        ctx.font =
+            "800 12px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillText(
+            "Total",
+            centroX,
+            centroY + 17
+        );
+
+        ctx.restore();
+    }
+};
+"origens": [
+  {
+    "nome": "Avaria estoque",
+    "valor": 3446.36
+  },
+  {
+    "nome": "Devolução avaria",
+    "valor": 11625.72
+  },
+  {
+    "nome": "Desvio de Qualidade",
+    "valor": 150618.83
+  },
+  {
+    "nome": "Vencido",
+    "valor": 421475.70
+  },
+  {
+    "nome": "Avaria Nacional",
+    "valor": 186.78
+  },
+  {
+    "nome": "Destinado pela Empresa",
+    "valor": 405596.38
+  }
+]
