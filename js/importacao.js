@@ -241,7 +241,7 @@ const posicaoX = elemento.x + ajusteX;
 const posicaoY = elemento.y + ajusteY;
 
 
-                        ctx.font = "700 10px Segoe UI";
+                        ctx.font = "700 11px Segoe UI";
 
                         ctx.fillStyle =
                             "#10245c";
