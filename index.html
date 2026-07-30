@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -293,44 +293,36 @@
          BIBLIOTECAS EXTERNAS
     ====================================================== -->
 
-    <!-- Chart.js -->
-
     <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"
     ></script>
 
-
-    <!-- Plugin de rótulos dos gráficos -->
-
     <script
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"
     ></script>
-<script>
-    if (
-        typeof Chart !== "undefined" &&
-        typeof ChartDataLabels !== "undefined"
-    ) {
-        Chart.register(ChartDataLabels);
 
-        console.log(
-            "Plugin ChartDataLabels registrado com sucesso."
-        );
-    } else {
-        console.error(
-            "Chart.js ou ChartDataLabels não foi carregado."
-        );
-    }
-</script>
-<!--
-<script>
-    if (
-        typeof Chart !== "undefined" &&
-        typeof ChartDataLabels !== "undefined"
-    ) {
-        Chart.register(ChartDataLabels);
-    }
-</script>
--->
+    <script>
+
+        if (
+            typeof Chart !== "undefined" &&
+            typeof ChartDataLabels !== "undefined"
+        ) {
+
+            Chart.register(ChartDataLabels);
+
+            console.log(
+                "Plugin ChartDataLabels registrado com sucesso."
+            );
+
+        } else {
+
+            console.error(
+                "Chart.js ou ChartDataLabels não foi carregado."
+            );
+        }
+
+    </script>
+
 
     <!-- =====================================================
          TEMA GLOBAL DOS GRÁFICOS
@@ -354,7 +346,7 @@
 
     <script src="js/esfig.js?v=11"></script>
 
-    <script src="js/descarte.js?v=10"></script>
+    <script src="js/descarte.js?v=11"></script>
 
     <script src="js/amostras.js?v=16"></script>
 
@@ -367,8 +359,6 @@
 
     <!-- =====================================================
          CONTROLE PRINCIPAL
-
-         Deve permanecer como o último arquivo JavaScript
     ====================================================== -->
 
     <script src="js/script.js?v=18"></script>
@@ -376,4 +366,3 @@
 </body>
 
 </html>
-```
