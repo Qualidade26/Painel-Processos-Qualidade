@@ -219,6 +219,8 @@ devicePixelRatio: 2,
             },
 
             plugins: {
+               valorFlutuante: false,
+               
                 legend: {
                     display: false
                 },
@@ -830,6 +832,7 @@ devicePixelRatio: 2,
 
 
                 plugins: {
+                   valorFlutuante: false,
 
                     legend: {
 
@@ -1239,6 +1242,7 @@ barPercentage: 0.95,
 
 
                 plugins: {
+                   valorFlutuante: false,
 
                     legend: {
 
