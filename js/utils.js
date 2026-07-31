@@ -125,51 +125,101 @@ function baseOptions(){
 function tabelaFixa(
     headers,
     rows,
-    infinito=false
+    infinito = false
 ){
 
+    const cabecalhos =
+        Array.isArray(headers)
+            ? headers
+            : [];
+
+    const linhas =
+        typeof rows === "string"
+            ? rows
+            : "";
+
     const tabela = `
+
         <table>
 
             <thead>
+
                 <tr>
+
                     ${
-                        headers
-                        .map(h => `<th>${h}</th>`)
-                        .join("")
+                        cabecalhos
+                            .map(
+                                header =>
+                                    `<th>${header}</th>`
+                            )
+                            .join("")
                     }
+
                 </tr>
+
             </thead>
 
             <tbody>
-                ${rows}
+
+                ${linhas}
+
             </tbody>
 
         </table>
     `;
 
+
+    /*
+    Tabela normal:
+    uma única tabela com rolagem manual.
+    */
+
     if(!infinito){
 
         return `
+
             <div class="table-wrap">
+
                 <div class="table-scroll">
+
                     ${tabela}
+
                 </div>
+
             </div>
         `;
     }
 
+
+    /*
+    Tabela infinita:
+    duplica a tabela para permitir animação contínua.
+    Usar somente nas páginas que realmente precisam
+    de rolagem automática.
+    */
+
     return `
+
         <div class="table-wrap">
+
             <div class="table-scroll infinite">
+
                 <div class="scroll-content">
+
                     ${tabela}
+
                     ${tabela}
+
                 </div>
+
             </div>
+
         </div>
     `;
 }
+function baseOptions(){
+   } 
+    
 function montarLinhasImportacao(lista){
 
     if(!lista || !lista.length)
