@@ -282,11 +282,9 @@
 ========================================================== */
 
 .descarte-coluna-direita{
-    display:grid;
 
-    grid-template-rows:
-        minmax(0,1.1fr)
-        minmax(0,.9fr);
+    display:flex;
+    flex-direction:column;
 
     gap:8px;
 
@@ -310,6 +308,8 @@
         minmax(0,1fr);
 
     gap:4px;
+
+    flex:1.1;
 
     width:100%;
     min-width:0;
@@ -341,7 +341,6 @@
     max-width:100%;
 }
 
-
 /* ==========================================================
    PAINEL TOP 10
 ========================================================== */
@@ -350,9 +349,9 @@
     display:flex;
     flex-direction:column;
 
-    width:100%;
-    max-height:320px;
+    flex:.9;
 
+    width:100%;
     min-width:0;
     min-height:0;
 
@@ -360,7 +359,6 @@
 
     overflow:hidden;
 }
-
 
 /* ==========================================================
    TÍTULO DO PAINEL TOP 10
@@ -618,10 +616,40 @@
 
 
 /* ==========================================================
+   NOTEBOOK MENOR
+========================================================== */
+
+@media (max-width:1050px){
+
+    .descarte-grid{
+        grid-template-columns:1fr;
+        height:auto;
+        min-height:0;
+    }
+
+    .descarte-panel-origens{
+        height:610px;
+    }
+
+    .descarte-coluna-direita{
+        height:780px;
+    }
+
+    .descarte-panel-pizza{
+        flex:1.2;
+    }
+
+    .descarte-panel-top10{
+        flex:.8;
+    }
+}
+
+
+/* ==========================================================
    TABLET
 ========================================================== */
 
-@media(max-width:800px){
+@media (max-width:800px){
 
     .descarte-indicadores{
         grid-template-columns:1fr;
@@ -629,7 +657,6 @@
 
     .descarte-panel-origens{
         height:auto;
-
         grid-template-rows:
             auto
             350px
@@ -645,9 +672,15 @@
     }
 
     .descarte-coluna-direita{
-        grid-template-rows:
-            430px
-            350px;
+        height:760px;
+    }
+
+    .descarte-panel-pizza{
+        flex:1.2;
+    }
+
+    .descarte-panel-top10{
+        flex:.8;
     }
 }
 
@@ -656,7 +689,7 @@
    CELULAR
 ========================================================== */
 
-@media(max-width:520px){
+@media (max-width:520px){
 
     .descarte-grid,
     .descarte-coluna-direita{
@@ -671,9 +704,15 @@
     }
 
     .descarte-coluna-direita{
-        grid-template-rows:
-            440px
-            330px;
+        height:720px;
+    }
+
+    .descarte-panel-pizza{
+        flex:1.2;
+    }
+
+    .descarte-panel-top10{
+        flex:.8;
     }
 
     .descarte-panel-top10 table{
