@@ -1,32 +1,31 @@
-
 {
   "descarte": {
-    "total": 0,
-    "ultimoDescarte": 0,
+    "total": 992949.77,
+    "ultimoDescarte": 614772.09,
     "origens": [
       {
         "nome": "Avaria estoque",
-        "valor": 0
+        "valor": 3446.36
       },
       {
         "nome": "Devolução avaria",
-        "valor": 0
+        "valor": 11625.72
       },
       {
         "nome": "Desvio de Qualidade",
-        "valor": 0
+        "valor": 150618.83
       },
       {
         "nome": "Vencido",
-        "valor": 0
+        "valor": 421475.70
       },
       {
         "nome": "Avaria Nacional",
-        "valor": 0
+        "valor": 186.78
       },
       {
         "nome": "Destinado pela Empresa",
-        "valor": 0
+        "valor": 405596.38
       }
     ],
     "top10": [
