@@ -816,215 +816,173 @@ function renderDescarte(){
         </section>
     `;
 
+/* ======================================================
+   GRÁFICO DE BARRAS
+====================================================== */
 
-    /* ======================================================
-       GRÁFICO DE BARRAS
-    ====================================================== */
-
-    const canvasBarra =
-        document.getElementById(
-            "graficoDescarteOrigem"
-        );
-
-
-    if(canvasBarra){
-
-        window.graficoDescarteBarra =
-            new Chart(
-                canvasBarra,
-                {
-
-                    type:"bar",
+const canvasBarra =
+    document.getElementById(
+        "graficoDescarteOrigem"
+    );
 
 
-                    data:{
+if(canvasBarra){
 
-                        labels:
-                            nomesOrigens,
+    window.graficoDescarteBarra =
+        new Chart(
+            canvasBarra,
+            {
 
+                type:"bar",
 
-                        datasets:[{
+                plugins:[
+                    valorExternoBarraDescarte
+                ],
 
-                            label:"Valor",
+                data:{
 
-                            data:
-                                valoresOrigens,
+                    labels:
+                        nomesOrigens,
 
-                            backgroundColor:
-                                coresDescarte,
+                    datasets:[{
 
-                            borderWidth:0,
+                        label:"Valor",
 
-                            borderRadius:4,
+                        data:
+                            valoresOrigens,
 
-                            borderSkipped:false,
+                        backgroundColor:
+                            coresDescarte,
 
-                            barPercentage:.70,
+                        borderWidth:0,
 
-                            categoryPercentage:.76
-                        }]
+                        borderRadius:4,
+
+                        borderSkipped:false,
+
+                        barPercentage:.70,
+
+                        categoryPercentage:.76
+                    }]
+                },
+
+                options:{
+
+                    indexAxis:"y",
+
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+                    layout:{
+
+                        padding:{
+
+                            top:8,
+
+                            right:105,
+
+                            bottom:4,
+
+                            left:4
+                        }
                     },
 
+                    plugins:{
 
-                    options:{
+                        datalabels:{
 
-                        indexAxis:"y",
+                            display:false,
 
-                        responsive:true,
+                            formatter(){
 
-                        maintainAspectRatio:false,
-
-                        animation:{
-
-                            duration:350
-                        },
-
-
-                        layout:{
-
-                            padding:{
-
-                                top:8,
-
-                                right:105,
-
-                                bottom:4,
-
-                                left:4
+                                return "";
                             }
                         },
 
+                        legend:{
 
-                        plugins:{
+                            display:false
+                        },
 
-                            /*
-                            Configuração explícita.
-                            Não utiliza os plugins do baseOptions().
-                            */
+                        tooltip:{
 
-                            datalabels:{
+                            callbacks:{
 
-                                display:true,
+                                label(context){
 
-                                anchor:"end",
+                                    return moeda(
+                                        context.raw
+                                    );
+                                }
+                            }
+                        }
+                    },
 
-                                align:"right",
+                    scales:{
 
-                                offset:5,
+                        x:{
 
-                                clamp:true,
+                            beginAtZero:true,
 
-                                clip:false,
+                            grace:"20%",
 
-                                color:"#0f2557",
+                            ticks:{
 
-                                font:{
+                                color:"#334155",
 
-                                    size:10,
+                                callback(valor){
 
-                                    weight:"900"
-                                },
-
-                                formatter(valor){
-
-                                    return moeda(valor);
+                                    return Number(valor)
+                                        .toLocaleString(
+                                            "pt-BR"
+                                        );
                                 }
                             },
 
+                            grid:{
 
-                            legend:{
+                                color:
+                                    "rgba(148,163,184,.22)"
+                            },
+
+                            border:{
+
+                                display:false
+                            }
+                        },
+
+                        y:{
+
+                            ticks:{
+
+                                color:"#334155",
+
+                                padding:8,
+
+                                font:{
+
+                                    size:11,
+
+                                    weight:"600"
+                                }
+                            },
+
+                            grid:{
 
                                 display:false
                             },
 
+                            border:{
 
-                            tooltip:{
-
-                                callbacks:{
-
-                                    label(context){
-
-                                        return moeda(
-                                            context.raw
-                                        );
-                                    }
-                                }
-                            }
-                        },
-
-
-                        scales:{
-
-                            x:{
-
-                                beginAtZero:true,
-
-                                grace:"20%",
-
-                                ticks:{
-
-                                    color:"#334155",
-
-                                    font:{
-
-                                        size:10,
-
-                                        weight:"600"
-                                    },
-
-                                    callback(valor){
-
-                                        return Number(valor)
-                                            .toLocaleString(
-                                                "pt-BR"
-                                            );
-                                    }
-                                },
-
-                                grid:{
-
-                                    color:
-                                        "rgba(148,163,184,.22)"
-                                },
-
-                                border:{
-
-                                    display:false
-                                }
-                            },
-
-
-                            y:{
-
-                                ticks:{
-
-                                    color:"#334155",
-
-                                    padding:8,
-
-                                    font:{
-
-                                        size:11,
-
-                                        weight:"600"
-                                    }
-                                },
-
-                                grid:{
-
-                                    display:false
-                                },
-
-                                border:{
-
-                                    display:false
-                                }
+                                display:false
                             }
                         }
                     }
                 }
-            );
-    }
+            }
+        );
+}
 
 
     /* ======================================================
