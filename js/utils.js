@@ -122,6 +122,7 @@ function baseOptions(){
     };
 }
 
+    
 function tabelaFixa(
     headers,
     rows,
@@ -137,6 +138,7 @@ function tabelaFixa(
         typeof rows === "string"
             ? rows
             : "";
+
 
     const tabela = `
 
@@ -171,7 +173,7 @@ function tabelaFixa(
 
     /*
     Tabela normal:
-    uma única tabela com rolagem manual.
+    mantém a estrutura usada pelas outras páginas.
     */
 
     if(!infinito){
@@ -192,33 +194,25 @@ function tabelaFixa(
 
 
     /*
-    Tabela infinita:
-    duplica a tabela para permitir animação contínua.
-    Usar somente nas páginas que realmente precisam
-    de rolagem automática.
+    Tabela com área preparada para scroll automático.
+    Não duplica a tabela, pois o JavaScript faz
+    o movimento para baixo e para cima.
     */
 
     return `
 
         <div class="table-wrap">
 
-            <div class="table-scroll infinite">
+            <div class="table-scroll">
 
-                <div class="scroll-content">
-
-                    ${tabela}
-
-                    ${tabela}
-
-                </div>
+                ${tabela}
 
             </div>
 
         </div>
     `;
 }
-function baseOptions(){
-   } 
+
     
 function montarLinhasImportacao(lista){
 
