@@ -384,15 +384,25 @@
 ========================================================== */
 
 .descarte-top10-scroll{
-    position:relative;
-
     flex:1;
+    min-height:0;
+    overflow:hidden;
+}
 
+.descarte-top10-scroll .table-scroll{
     width:100%;
-    min-width:0;
+    height:100%;
     min-height:0;
 
-    overflow:hidden;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.descarte-panel-top10 thead th{
+    position:sticky;
+    top:0;
+    z-index:25;
+    background:#eaf2ff;
 }
 
 
