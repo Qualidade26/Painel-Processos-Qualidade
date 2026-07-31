@@ -351,7 +351,7 @@
     flex-direction:column;
 
     width:100%;
-    height:100%;
+    max-height:320px;
 
     min-width:0;
     min-height:0;
@@ -425,11 +425,9 @@
 /* ==========================================================
    ÁREA DE ROLAGEM
 ========================================================== */
-
 .descarte-top10-scroll .table-scroll{
-    position:relative;
 
-    flex:1 1 auto;
+    position:relative;
 
     width:100%;
     height:100%;
@@ -437,14 +435,34 @@
     min-width:0;
     min-height:0;
 
-    overflow-x:auto;
-    overflow-y:auto;
+    /* ESTA LINHA É A QUE FALTAVA */
+    max-height:none;
 
+    flex:1;
+
+    overflow-y:auto;
+    overflow-x:auto;
+
+    scrollbar-width:thin;
     scrollbar-gutter:stable;
+
     overscroll-behavior:contain;
 }
+.descarte-top10-scroll .table-wrap{
 
+    display:flex;
+    flex-direction:column;
 
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    border:1px solid var(--line2);
+    border-radius:10px;
+
+    overflow:hidden;
+}
 /* ==========================================================
    BARRA DE ROLAGEM
 ========================================================== */
