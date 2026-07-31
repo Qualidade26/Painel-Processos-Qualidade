@@ -793,21 +793,18 @@ function renderDescarte(){
 
                     <div class="descarte-top10-scroll">
 
-                        ${
-                            tabelaFixa(
-                                [
-                                    "SKU",
-                                    "Descrição",
-                                    "Valor"
-                                ],
-                                montarLinhasTopDescarte(
-                                    top
-                                ),
-                                true
-                            )
-                        }
+    ${
+        tabelaFixa(
+            [
+                "SKU",
+                "Descrição",
+                "Valor"
+            ],
+            montarLinhasTopDescarte(top)
+        )
+    }
 
-                    </div>
+</div>
 
                 </div>
 
