@@ -367,33 +367,29 @@ const rotulosExternosPizzaDescarte = {
 
                 if(indice === 0){
 
-                    item.forcarTopo =
-                        true;
+    item.forcarTopo = true;
+    item.yDesejado =
+        propriedades.y -
+        propriedades.outerRadius -
+        24;
 
-                    item.yDesejado =
-                        propriedades.y -
-                        propriedades.outerRadius -
-                        24;
+    rotulosEsquerda.push(item);   // era Direita
 
-                    rotulosDireita.push(item);
+    return;
+}
 
-                    return;
-                }
+if(indice === 1){
 
-                if(indice === 1){
+    item.forcarTopo = true;
+    item.yDesejado =
+        propriedades.y -
+        propriedades.outerRadius -
+        24;
 
-                    item.forcarTopo =
-                        true;
+    rotulosDireita.push(item);    // era Esquerda
 
-                    item.yDesejado =
-                        propriedades.y -
-                        propriedades.outerRadius -
-                        24;
-
-                    rotulosEsquerda.push(item);
-
-                    return;
-                }
+    return;
+}
 
                 if(direcaoX >= 0){
 
