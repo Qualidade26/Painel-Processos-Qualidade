@@ -1481,7 +1481,6 @@ window.graficoDescarteBarra =
   /* ======================================================
    GRÁFICO DE PIZZA
 ====================================================== */
-
 const canvasPizza =
     document.getElementById(
         "graficoDescartePizza"
@@ -1494,17 +1493,20 @@ if(canvasPizza){
         typeof window.graficoDescartePizza.destroy ===
         "function"
     ){
+
         window.graficoDescartePizza.destroy();
 
         window.graficoDescartePizza =
             null;
     }
 
+
     window.graficoDescartePizza =
         new Chart(
             canvasPizza,
             {
-                type:"doughnut",
+                type:
+                    "doughnut",
 
                 plugins:[
                     rotulosExternosPizzaDescarte,
@@ -1522,17 +1524,16 @@ if(canvasPizza){
                             "Percentual",
 
                         /*
-                        Estes valores controlam apenas
-                        o tamanho visual das fatias.
+                        Valores utilizados apenas
+                        para desenhar visualmente as fatias.
                         */
 
                         data:
                             valoresVisuaisOrigens,
 
                         /*
-                        Estes são os valores financeiros reais.
-                        São usados na legenda, tooltip
-                        e cálculo dos percentuais.
+                        Valores financeiros reais utilizados
+                        na legenda, tooltip e percentuais.
                         */
 
                         valoresReais:
@@ -1561,6 +1562,7 @@ if(canvasPizza){
                     }]
                 },
 
+
                 options:{
 
                     responsive:
@@ -1575,25 +1577,40 @@ if(canvasPizza){
                             350
                     },
 
+
+                    /* ======================================
+                       TAMANHO DO GRÁFICO
+                    ====================================== */
+
                     cutout:
                         "48%",
 
                     radius:
                         "90%",
 
+
+                    /* ======================================
+                       ESPAÇAMENTO INTERNO
+                    ====================================== */
+
                     layout:{
 
-    padding:{
+                        padding:{
 
-        top:15,
+                            top:
+                                15,
 
-        right:20,
+                            right:
+                                20,
 
-        bottom:15,
+                            bottom:
+                                15,
 
-        left:20
-    }
-},
+                            left:
+                                20
+                        }
+                    },
+
 
                     plugins:{
 
@@ -1608,6 +1625,11 @@ if(canvasPizza){
                             }
                         },
 
+
+                        /* ==================================
+                           LEGENDA
+                        ================================== */
+
                         legend:{
 
                             display:
@@ -1616,8 +1638,13 @@ if(canvasPizza){
                             position:
                                 "right",
 
+                            /*
+                            Posiciona a legenda na parte
+                            inferior do lado direito.
+                            */
+
                             align:
-                                "endr",
+                                "end",
 
                             labels:{
 
@@ -1648,6 +1675,7 @@ if(canvasPizza){
                                         "700"
                                 },
 
+
                                 generateLabels(chart){
 
                                     const dataset =
@@ -1673,6 +1701,7 @@ if(canvasPizza){
                                                 ),
                                             0
                                         );
+
 
                                     return chart.data.labels.map(
                                         (
@@ -1706,6 +1735,7 @@ if(canvasPizza){
                                                     cores.length
                                                 ] ||
                                                 "#64748b";
+
 
                                             return {
 
@@ -1742,6 +1772,7 @@ if(canvasPizza){
                                 }
                             },
 
+
                             onClick(
                                 evento,
                                 item,
@@ -1758,6 +1789,11 @@ if(canvasPizza){
                                 chart.update();
                             }
                         },
+
+
+                        /* ==================================
+                           TOOLTIP
+                        ================================== */
 
                         tooltip:{
 
@@ -1804,6 +1840,7 @@ if(canvasPizza){
                                             total
                                         );
 
+
                                     return (
                                         context.label +
                                         ": " +
@@ -1822,9 +1859,9 @@ if(canvasPizza){
         );
 }
 
-    graficoAtual =
-        window.graficoDescarteBarra;
-}
+
+graficoAtual =
+    window.graficoDescarteBarra;
 
 
 /* ==========================================================
