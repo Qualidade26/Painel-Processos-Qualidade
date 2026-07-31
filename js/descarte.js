@@ -895,7 +895,63 @@ function destruirGraficosDescarte(){
             null;
     }
 }
+/* ==========================================================
+   SCROLL AUTOMÁTICO — TOP 10 DESCARTE
+========================================================== */
 
+let intervaloScrollTop10Descarte = null;
+
+function iniciarScrollAutomaticoTop10Descarte(){
+
+    const areaScroll =
+        document.querySelector(
+            ".descarte-top10-scroll .table-scroll"
+        );
+
+    if(!areaScroll){
+        return;
+    }
+
+    if(intervaloScrollTop10Descarte){
+        clearInterval(intervaloScrollTop10Descarte);
+    }
+
+    intervaloScrollTop10Descarte = null;
+
+    if(
+        areaScroll.scrollHeight <=
+        areaScroll.clientHeight
+    ){
+        return;
+    }
+
+    let direcao = 1;
+    let pausado = false;
+
+    areaScroll.onmouseenter = () => pausado = true;
+    areaScroll.onmouseleave = () => pausado = false;
+
+    intervaloScrollTop10Descarte = setInterval(() => {
+
+        if(pausado) return;
+
+        if(
+            areaScroll.scrollTop +
+            areaScroll.clientHeight >=
+            areaScroll.scrollHeight - 2
+        ){
+            direcao = -1;
+        }
+
+        if(areaScroll.scrollTop <= 0){
+            direcao = 1;
+        }
+
+        areaScroll.scrollTop += direcao;
+
+    },35);
+
+}
 
 /* ==========================================================
    RENDERIZAR PÁGINA
@@ -1139,29 +1195,44 @@ const valoresVisuaisOrigens =
                         Top 10 Descarte
 
                     </h3>
+<div class="panel descarte-panel-top10">
 
+    <h3 class="descarte-titulo-painel descarte-top10-titulo">
 
-      <div class="descarte-top10-scroll">
+        Top 10 Descarte
 
-    ${
-        tabelaFixa(
-            [
-                "SKU",
-                "Descrição",
-                "Valor"
-            ],
-            montarLinhasTopDescarte(top)
-        )
-    }
+    </h3>
+<div class="panel descarte-panel-top10">
+
+    <h3 class="descarte-titulo-painel descarte-top10-titulo">
+
+        Top 10 Descarte
+
+    </h3>
+
+    <div class="descarte-top10-scroll">
+
+        ${
+            tabelaFixa(
+                [
+                    "SKU",
+                    "Descrição",
+                    "Valor"
+                ],
+                montarLinhasTopDescarte(top)
+            )
+        }
+
+    </div>
 
 </div>
-                </div>
 
-            </div>
+</div>
 
-        </section>
-    `;
+</section>
+`;
 
+iniciarScrollAutomaticoTop10Descarte();
 /* ======================================================
    GRÁFICO DE BARRAS
 ====================================================== */
