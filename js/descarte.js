@@ -1141,22 +1141,20 @@ const valoresVisuaisOrigens =
                     </h3>
 
 
-       <div class="descarte-top10-scroll">
+      <div class="descarte-top10-scroll">
 
-    <div class="table-scroll">
+    ${
+        tabelaFixa(
+            [
+                "SKU",
+                "Descrição",
+                "Valor"
+            ],
+            montarLinhasTopDescarte(top)
+        )
+    }
 
-        ${
-            tabelaFixa(
-                [
-                    "SKU",
-                    "Descrição",
-                    "Valor"
-                ],
-                montarLinhasTopDescarte(top)
-            )
-        }
-
-    </div>
+</div>
                 </div>
 
             </div>
