@@ -201,17 +201,14 @@ function montarTop3Descarte(origens){
 /* ==========================================================
    RÓTULOS EXTERNOS DA PIZZA
 ========================================================== */
-
 const rotulosExternosPizzaDescarte = {
 
     id:"rotulosExternosPizzaDescarte",
-
 
     afterDatasetsDraw(chart){
 
         const dataset =
             chart.data.datasets[0];
-
 
         if(
             !dataset ||
@@ -220,13 +217,11 @@ const rotulosExternosPizzaDescarte = {
             return;
         }
 
-
         const valores =
             dataset.data.map(
                 valor =>
                     Number(valor || 0)
             );
-
 
         const total =
             valores.reduce(
@@ -235,42 +230,38 @@ const rotulosExternosPizzaDescarte = {
                 0
             );
 
-
         if(total <= 0){
             return;
         }
 
-
         const meta =
             chart.getDatasetMeta(0);
 
+        if(
+            !meta ||
+            !Array.isArray(meta.data)
+        ){
+            return;
+        }
 
         const ctx =
             chart.ctx;
 
+        const area =
+            chart.chartArea;
 
-        ctx.save();
+        const espacamentoMinimo =
+            14;
 
+        const margemSuperior =
+            area.top + 8;
 
-        ctx.font =
-            "800 10px 'Segoe UI', Arial, sans-serif";
+        const margemInferior =
+            area.bottom - 8;
 
+        const rotulosDireita = [];
 
-        ctx.fillStyle =
-            "#0f2557";
-
-
-        ctx.strokeStyle =
-            "#64748b";
-
-
-        ctx.lineWidth =
-            1;
-
-
-        ctx.textBaseline =
-            "middle";
-
+        const rotulosEsquerda = [];
 
         meta.data.forEach(
             (arco, indice) => {
@@ -281,27 +272,18 @@ const rotulosExternosPizzaDescarte = {
                     return;
                 }
 
-
                 const valor =
                     valores[indice];
 
+                if(valor <= 0){
+                    return;
+                }
 
                 const percentual =
                     calcularPercentualDescarte(
                         valor,
                         total
                     );
-
-
-                /*
-                Percentuais muito pequenos ficam apenas
-                na legenda para evitar sobreposição.
-                */
-
-                if(percentual < 1){
-                    return;
-                }
-
 
                 const propriedades =
                     arco.getProps(
@@ -315,122 +297,283 @@ const rotulosExternosPizzaDescarte = {
                         true
                     );
 
-
                 const angulo =
                     (
                         propriedades.startAngle +
                         propriedades.endAngle
                     ) / 2;
 
-
                 const direcaoX =
                     Math.cos(angulo);
-
 
                 const direcaoY =
                     Math.sin(angulo);
 
+                const item = {
 
-                const inicioX =
-                    propriedades.x +
-                    direcaoX *
-                    (
-                        propriedades.outerRadius +
-                        2
-                    );
+                    indice,
 
+                    percentual,
 
-                const inicioY =
-                    propriedades.y +
-                    direcaoY *
-                    (
-                        propriedades.outerRadius +
-                        2
-                    );
+                    centroX:
+                        propriedades.x,
 
+                    centroY:
+                        propriedades.y,
 
-                const meioX =
-                    propriedades.x +
-                    direcaoX *
-                    (
-                        propriedades.outerRadius +
-                        13
-                    );
+                    raio:
+                        propriedades.outerRadius,
 
+                    angulo,
 
-                const meioY =
-                    propriedades.y +
-                    direcaoY *
-                    (
-                        propriedades.outerRadius +
-                        13
-                    );
+                    direcaoX,
 
+                    direcaoY,
 
-                const ladoDireito =
-                    direcaoX >= 0;
+                    inicioX:
+                        propriedades.x +
+                        direcaoX *
+                        (
+                            propriedades.outerRadius +
+                            2
+                        ),
 
+                    inicioY:
+                        propriedades.y +
+                        direcaoY *
+                        (
+                            propriedades.outerRadius +
+                            2
+                        ),
 
-                const finalX =
-                    meioX +
-                    (
-                        ladoDireito
-                            ? 17
-                            : -17
-                    );
+                    yDesejado:
+                        propriedades.y +
+                        direcaoY *
+                        (
+                            propriedades.outerRadius +
+                            18
+                        )
+                };
 
+                if(direcaoX >= 0){
 
-                ctx.beginPath();
+                    rotulosDireita.push(item);
 
+                } else {
 
-                ctx.moveTo(
-                    inicioX,
-                    inicioY
-                );
-
-
-                ctx.lineTo(
-                    meioX,
-                    meioY
-                );
-
-
-                ctx.lineTo(
-                    finalX,
-                    meioY
-                );
-
-
-                ctx.stroke();
-
-
-                ctx.textAlign =
-                    ladoDireito
-                        ? "left"
-                        : "right";
-
-
-                ctx.fillText(
-                    formatarPercentualDescarte(
-                        percentual
-                    ),
-                    finalX +
-                    (
-                        ladoDireito
-                            ? 4
-                            : -4
-                    ),
-                    meioY
-                );
+                    rotulosEsquerda.push(item);
+                }
             }
         );
 
+        function organizarRotulos(lista){
+
+            lista.sort(
+                (a,b) =>
+                    a.yDesejado -
+                    b.yDesejado
+            );
+
+            lista.forEach(
+                (item, indice) => {
+
+                    if(indice === 0){
+
+                        item.yFinal =
+                            Math.max(
+                                item.yDesejado,
+                                margemSuperior
+                            );
+
+                        return;
+                    }
+
+                    item.yFinal =
+                        Math.max(
+                            item.yDesejado,
+                            lista[indice - 1].yFinal +
+                            espacamentoMinimo
+                        );
+                }
+            );
+
+            if(!lista.length){
+                return;
+            }
+
+            const ultimo =
+                lista[lista.length - 1];
+
+            if(
+                ultimo.yFinal >
+                margemInferior
+            ){
+
+                const excesso =
+                    ultimo.yFinal -
+                    margemInferior;
+
+                lista.forEach(
+                    item => {
+
+                        item.yFinal -= excesso;
+                    }
+                );
+            }
+
+            for(
+                let indice =
+                    lista.length - 2;
+
+                indice >= 0;
+
+                indice--
+            ){
+
+                const atual =
+                    lista[indice];
+
+                const proximo =
+                    lista[indice + 1];
+
+                if(
+                    atual.yFinal >
+                    proximo.yFinal -
+                    espacamentoMinimo
+                ){
+
+                    atual.yFinal =
+                        proximo.yFinal -
+                        espacamentoMinimo;
+                }
+            }
+
+            if(
+                lista[0] &&
+                lista[0].yFinal <
+                margemSuperior
+            ){
+
+                const ajuste =
+                    margemSuperior -
+                    lista[0].yFinal;
+
+                lista.forEach(
+                    item => {
+
+                        item.yFinal += ajuste;
+                    }
+                );
+            }
+        }
+
+        organizarRotulos(
+            rotulosDireita
+        );
+
+        organizarRotulos(
+            rotulosEsquerda
+        );
+
+        ctx.save();
+
+        ctx.font =
+            "800 10px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillStyle =
+            "#0f2557";
+
+        ctx.strokeStyle =
+            "#64748b";
+
+        ctx.lineWidth =
+            1;
+
+        ctx.textBaseline =
+            "middle";
+
+        function desenharRotulos(
+            lista,
+            ladoDireito
+        ){
+
+            lista.forEach(
+                item => {
+
+                    const distanciaHorizontal =
+                        23;
+
+                    const finalX =
+                        item.centroX +
+                        (
+                            ladoDireito
+                                ? item.raio +
+                                  distanciaHorizontal
+                                : -item.raio -
+                                  distanciaHorizontal
+                        );
+
+                    const joelhoX =
+                        item.centroX +
+                        (
+                            ladoDireito
+                                ? item.raio + 10
+                                : -item.raio - 10
+                        );
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        item.inicioX,
+                        item.inicioY
+                    );
+
+                    ctx.lineTo(
+                        joelhoX,
+                        item.yFinal
+                    );
+
+                    ctx.lineTo(
+                        finalX,
+                        item.yFinal
+                    );
+
+                    ctx.stroke();
+
+                    ctx.textAlign =
+                        ladoDireito
+                            ? "left"
+                            : "right";
+
+                    ctx.fillText(
+                        formatarPercentualDescarte(
+                            item.percentual
+                        ),
+                        finalX +
+                        (
+                            ladoDireito
+                                ? 4
+                                : -4
+                        ),
+                        item.yFinal
+                    );
+                }
+            );
+        }
+
+        desenharRotulos(
+            rotulosDireita,
+            true
+        );
+
+        desenharRotulos(
+            rotulosEsquerda,
+            false
+        );
 
         ctx.restore();
     }
 };
-
-
 /* ==========================================================
    TEXTO CENTRAL DA ROSCA
 ========================================================== */
@@ -1298,24 +1441,24 @@ window.graficoDescarteBarra =
                             duration:350
                         },
 
-                        cutout:"51%",
+                       cutout:"56%",
 
-                        radius:"81%",
+radius:"72%",
 
 
-                        layout:{
+                      layout:{
 
-                            padding:{
+    padding:{
 
-                                top:28,
+        top:45,
 
-                                right:24,
+        right:70,
 
-                                bottom:28,
+        bottom:45,
 
-                                left:24
-                            }
-                        },
+        left:70
+    }
+},
 
 
                         plugins:{
