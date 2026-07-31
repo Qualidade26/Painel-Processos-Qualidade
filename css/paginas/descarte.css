@@ -313,15 +313,12 @@
 
     width:100%;
     min-width:0;
-
-    /* AUMENTA A ÁREA DISPONÍVEL PARA O GRÁFICO */
-    min-height:350px;
+    min-height:0;
 
     padding:10px;
 
     overflow:hidden;
 }
-
 
 .descarte-chart-pizza{
     position:relative;
@@ -329,13 +326,11 @@
     width:100%;
     min-width:0;
 
-    /* ALTURA REAL DO GRÁFICO */
-    height:310px;
-    min-height:310px;
+    height:100%;
+    min-height:0;
 
-    overflow:visible;
+    overflow:hidden;
 }
-
 
 .descarte-chart-pizza canvas{
     display:block;
@@ -345,6 +340,7 @@
 
     max-width:100%;
 }
+
 /* ==========================================================
    PAINEL TOP 10
 ========================================================== */
