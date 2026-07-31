@@ -341,7 +341,6 @@
     max-width:100%;
 }
 
-
 /* ==========================================================
    PAINEL TOP 10
 ========================================================== */
@@ -358,6 +357,7 @@
     width:100%;
     min-width:0;
     min-height:0;
+    height:100%;
 
     padding:8px;
 
@@ -365,24 +365,29 @@
 }
 
 
-/*
-O título fica fora da área de rolagem.
-*/
+/* ==========================================================
+   TÍTULO DO PAINEL
+========================================================== */
 
 .descarte-top10-titulo{
     position:relative;
 
-    z-index:5;
+    z-index:30;
+
+    margin:0;
+    padding:0 0 4px;
 
     background:#ffffff;
 }
 
 
-/*
-Somente a tabela rola.
-*/
+/* ==========================================================
+   ÁREA DA TABELA
+========================================================== */
 
 .descarte-top10-scroll{
+    position:relative;
+
     width:100%;
     min-width:0;
     min-height:0;
@@ -392,26 +397,28 @@ Somente a tabela rola.
 }
 
 
-/*
-Remove o controle de altura antigo,
-caso tabelaFixa tenha criado table-scroll.
-*/
+/* ==========================================================
+   ÁREA DE ROLAGEM
+========================================================== */
 
 .descarte-top10-scroll .table-scroll{
+    position:relative;
+
     width:100%;
     min-width:0;
+    min-height:0;
     height:100%;
     max-height:none;
 
     overflow-x:auto;
     overflow-y:auto;
 
-    position:relative;
+    scrollbar-gutter:stable;
 }
 
 
 /* ==========================================================
-   CABEÇALHO FIXO DA TABELA
+   TABELA
 ========================================================== */
 
 .descarte-panel-top10 table{
@@ -419,31 +426,44 @@ caso tabelaFixa tenha criado table-scroll.
     min-width:580px;
 
     table-layout:fixed;
+
     border-collapse:separate;
     border-spacing:0;
 }
 
-.descarte-panel-top10 thead{
-    position:sticky;
-    top:0;
 
-    z-index:10;
+/* ==========================================================
+   CABEÇALHO FIXO
+========================================================== */
+
+.descarte-panel-top10 thead{
+    position:relative;
+
+    z-index:20;
 }
 
 .descarte-panel-top10 thead th{
     position:sticky;
+
     top:0;
 
-    z-index:11;
+    z-index:25;
 
     background:#eaf2ff;
+
+    color:#0f2557;
+
+    font-weight:900;
 
     box-shadow:
         0 1px 0
         rgba(29,78,255,.22);
-
-    color:#0f2557;
 }
+
+
+/* ==========================================================
+   COLUNAS
+========================================================== */
 
 .descarte-panel-top10 th:nth-child(1),
 .descarte-panel-top10 td:nth-child(1){
@@ -462,16 +482,34 @@ caso tabelaFixa tenha criado table-scroll.
 
 
 /* ==========================================================
-   PADRONIZAÇÃO
+   ALINHAMENTO DAS COLUNAS
 ========================================================== */
 
-.descarte-grid *,
-.descarte-grid *::before,
-.descarte-grid *::after{
-    box-sizing:border-box;
+.descarte-panel-top10 th:nth-child(1),
+.descarte-panel-top10 td:nth-child(1){
+    text-align:center;
+}
+
+.descarte-panel-top10 th:nth-child(2),
+.descarte-panel-top10 td:nth-child(2){
+    text-align:left;
+}
+
+.descarte-panel-top10 th:nth-child(3),
+.descarte-panel-top10 td:nth-child(3){
+    text-align:right;
 }
 
 
+/* ==========================================================
+   EVITAR QUE O TEXTO ESTOURE
+========================================================== */
+
+.descarte-panel-top10 td{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
