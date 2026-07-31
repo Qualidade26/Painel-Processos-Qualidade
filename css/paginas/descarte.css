@@ -854,4 +854,28 @@
     .descarte-panel-top10 table{
         min-width:620px;
     }
+/* ==========================================================
+   NITIDEZ VISUAL
+========================================================== */
+
+.descarte-grid,
+.descarte-panel-origens,
+.descarte-panel-pizza,
+.descarte-panel-top10,
+.descarte-top3-card{
+    transform:translateZ(0);
+    backface-visibility:hidden;
+}
+
+.descarte-titulo-painel,
+.descarte-titulo-top3,
+.descarte-top3-nome,
+.descarte-top3-valor,
+.descarte-top3-percentual,
+.descarte-panel-top10 th,
+.descarte-panel-top10 td{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+}
 }
