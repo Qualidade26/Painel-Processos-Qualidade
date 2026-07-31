@@ -59,6 +59,8 @@
     font-size:13px;
     font-weight:900;
 
+    line-height:1.2;
+
     flex-shrink:0;
 }
 
@@ -80,6 +82,7 @@
     width:100%;
     min-width:0;
     height:100%;
+    min-height:0;
 
     padding:10px;
 
@@ -110,6 +113,12 @@
     height:100% !important;
 
     max-width:100%;
+    max-height:100%;
+
+    transform:none !important;
+    filter:none !important;
+
+    image-rendering:auto;
 }
 
 
@@ -136,6 +145,7 @@
 
     font-size:13px;
     font-weight:900;
+    line-height:1.2;
 }
 
 .descarte-top3-grid{
@@ -212,6 +222,7 @@
 
     font-size:13px;
     font-weight:900;
+    line-height:1;
 }
 
 .descarte-top3-nome{
@@ -236,6 +247,7 @@
     text-align:right;
 
     font-size:8px;
+    line-height:1;
 }
 
 .descarte-top3-valor{
@@ -249,6 +261,7 @@
 
     font-size:16px;
     font-weight:900;
+    line-height:1.15;
 
     white-space:nowrap;
 }
@@ -264,6 +277,7 @@
 
     font-size:13px;
     font-weight:900;
+    line-height:1.15;
 }
 
 .descarte-top3-vazio{
@@ -282,7 +296,6 @@
 ========================================================== */
 
 .descarte-coluna-direita{
-
     display:flex;
     flex-direction:column;
 
@@ -291,6 +304,7 @@
     width:100%;
     min-width:0;
     height:100%;
+    min-height:0;
 
     overflow:hidden;
 }
@@ -339,7 +353,14 @@
     height:100% !important;
 
     max-width:100%;
+    max-height:100%;
+
+    transform:none !important;
+    filter:none !important;
+
+    image-rendering:auto;
 }
+
 
 /* ==========================================================
    PAINEL TOP 10
@@ -359,6 +380,7 @@
 
     overflow:hidden;
 }
+
 
 /* ==========================================================
    TÍTULO DO PAINEL TOP 10
@@ -390,7 +412,6 @@
     flex:1 1 auto;
 
     width:100%;
-
     min-width:0;
     min-height:0;
 
@@ -416,6 +437,9 @@
     min-width:0;
     min-height:0;
 
+    border:1px solid var(--line2);
+    border-radius:10px;
+
     overflow:hidden;
 }
 
@@ -423,52 +447,33 @@
 /* ==========================================================
    ÁREA DE ROLAGEM
 ========================================================== */
-.descarte-top10-scroll .table-scroll{
 
+.descarte-top10-scroll .table-scroll{
     position:relative;
+
+    flex:1 1 auto;
 
     width:100%;
     height:100%;
 
     min-width:0;
     min-height:0;
-
-    /* ESTA LINHA É A QUE FALTAVA */
     max-height:none;
-
-    flex:1;
 
     overflow-y:auto;
     overflow-x:auto;
 
     scrollbar-width:thin;
+    scrollbar-color:#94a3b8 #eef2f7;
     scrollbar-gutter:stable;
 
     overscroll-behavior:contain;
 }
-.descarte-top10-scroll .table-wrap{
 
-    display:flex;
-    flex-direction:column;
 
-    width:100%;
-    height:100%;
-
-    min-height:0;
-
-    border:1px solid var(--line2);
-    border-radius:10px;
-
-    overflow:hidden;
-}
 /* ==========================================================
    BARRA DE ROLAGEM
 ========================================================== */
-
-.descarte-top10-scroll .table-scroll{
-    scrollbar-width:thin;
-    scrollbar-color:#94a3b8 #eef2f7;
-}
 
 .descarte-top10-scroll .table-scroll::-webkit-scrollbar{
     width:7px;
@@ -502,6 +507,8 @@
 
     border-collapse:separate;
     border-spacing:0;
+
+    font-size:12px;
 }
 
 
@@ -524,6 +531,7 @@
     color:#0f2557;
 
     font-weight:900;
+    line-height:1.2;
 
     box-shadow:
         0 1px 0
@@ -558,11 +566,21 @@
    CÉLULAS
 ========================================================== */
 
+.descarte-panel-top10 th,
+.descarte-panel-top10 td{
+    font-kerning:normal;
+    text-rendering:auto;
+}
+
 .descarte-panel-top10 td{
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+
+    line-height:1.25;
 }
+
+
 /* ==========================================================
    TV / TELAS GRANDES
 ========================================================== */
@@ -613,11 +631,7 @@
         overflow:hidden;
     }
 
-    .descarte-chart-barra{
-        min-height:0;
-        height:100%;
-    }
-
+    .descarte-chart-barra,
     .descarte-chart-pizza{
         min-height:0;
         height:100%;
@@ -632,6 +646,7 @@
 
     .descarte-top10-scroll .table-scroll{
         max-height:none;
+
         overflow-y:auto;
         overflow-x:auto;
     }
@@ -710,6 +725,7 @@
     }
 }
 
+
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
@@ -781,6 +797,7 @@
     }
 }
 
+
 /* ==========================================================
    TABLET
 ========================================================== */
@@ -793,6 +810,7 @@
 
     .descarte-panel-origens{
         height:auto;
+
         grid-template-rows:
             auto
             350px
@@ -854,8 +872,11 @@
     .descarte-panel-top10 table{
         min-width:620px;
     }
+}
+
+
 /* ==========================================================
-   NITIDEZ VISUAL
+   PADRÃO DE NITIDEZ
 ========================================================== */
 
 .descarte-grid,
@@ -863,8 +884,9 @@
 .descarte-panel-pizza,
 .descarte-panel-top10,
 .descarte-top3-card{
-    transform:translateZ(0);
-    backface-visibility:hidden;
+    transform:none;
+    filter:none;
+    backface-visibility:visible;
 }
 
 .descarte-titulo-painel,
@@ -874,8 +896,9 @@
 .descarte-top3-percentual,
 .descarte-panel-top10 th,
 .descarte-panel-top10 td{
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    text-rendering:optimizeLegibility;
-}
+    -webkit-font-smoothing:auto;
+    -moz-osx-font-smoothing:auto;
+
+    text-rendering:auto;
+    font-kerning:normal;
 }
