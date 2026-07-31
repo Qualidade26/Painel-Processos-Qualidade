@@ -1,4 +1,3 @@
-
 /* ==========================================================
    PÁGINA — DESCARTE
 ========================================================== */
@@ -543,108 +542,6 @@ const centroPizzaDescarte = {
     }
 };
 
-/* ==========================================================
-   VALORES EXTERNOS DO GRÁFICO DE BARRAS
-========================================================== */
-
-const valorExternoBarraDescarte = {
-
-    id:"valorExternoBarraDescarte",
-
-    afterDatasetsDraw(chart){
-
-        const dataset =
-            chart.data.datasets[0];
-
-        const meta =
-            chart.getDatasetMeta(0);
-
-        if(
-            !dataset ||
-            !Array.isArray(dataset.data) ||
-            !meta ||
-            !Array.isArray(meta.data)
-        ){
-            return;
-        }
-
-        const ctx =
-            chart.ctx;
-
-        const areaGrafico =
-            chart.chartArea;
-
-        ctx.save();
-
-        ctx.font =
-            "800 10px 'Segoe UI', Arial, sans-serif";
-
-        ctx.fillStyle =
-            "#0f2557";
-
-        ctx.textAlign =
-            "left";
-
-        ctx.textBaseline =
-            "middle";
-
-        meta.data.forEach(
-            (barra, indice) => {
-
-                const valor =
-                    Number(
-                        dataset.data[indice] || 0
-                    );
-
-                if(valor <= 0){
-                    return;
-                }
-
-                const propriedades =
-                    barra.getProps(
-                        [
-                            "x",
-                            "y"
-                        ],
-                        true
-                    );
-
-                const texto =
-                    moeda(valor);
-
-                const larguraTexto =
-                    ctx.measureText(texto).width;
-
-                const margem =
-                    7;
-
-                let posicaoX =
-                    propriedades.x + margem;
-
-                const limiteDireito =
-                    areaGrafico.right + 103;
-
-                if(
-                    posicaoX +
-                    larguraTexto >
-                    limiteDireito
-                ){
-                    posicaoX =
-                        limiteDireito -
-                        larguraTexto;
-                }
-
-                ctx.fillText(
-                    texto,
-                    posicaoX,
-                    propriedades.y
-                );
-            }
-        );
-
-        ctx.restore();
-    }
-};
 
 /* ==========================================================
    DESTRUIR GRÁFICOS
@@ -896,18 +793,21 @@ function renderDescarte(){
 
                     <div class="descarte-top10-scroll">
 
-    ${
-        tabelaFixa(
-            [
-                "SKU",
-                "Descrição",
-                "Valor"
-            ],
-            montarLinhasTopDescarte(top)
-        )
-    }
+                        ${
+                            tabelaFixa(
+                                [
+                                    "SKU",
+                                    "Descrição",
+                                    "Valor"
+                                ],
+                                montarLinhasTopDescarte(
+                                    top
+                                ),
+                                true
+                            )
+                        }
 
-</div>
+                    </div>
 
                 </div>
 
@@ -927,15 +827,11 @@ const canvasBarra =
 
 if(canvasBarra){
 
-    if(
-        window.graficoDescarteBarra &&
-        typeof window.graficoDescarteBarra.destroy ===
-        "function"
-    ){
+    if(window.graficoDescarteBarra){
+
         window.graficoDescarteBarra.destroy();
 
-        window.graficoDescarteBarra =
-            null;
+        window.graficoDescarteBarra = null;
     }
 
     window.graficoDescarteBarra =
@@ -949,282 +845,47 @@ if(canvasBarra){
                 ],
 
                 data:{
-
-                    labels:
-                        nomesOrigens,
+                    labels:nomesOrigens,
 
                     datasets:[{
-
-                        label:
-                            "Valor descartado",
-
-                        data:
-                            valoresOrigens,
-
-                        backgroundColor:
-                            nomesOrigens.map(
-                                (_, indice) =>
-                                    coresDescarte[
-                                        indice %
-                                        coresDescarte.length
-                                    ]
-                            ),
-
+                        label:"Valor",
+                        data:valoresOrigens,
+                        backgroundColor:coresDescarte,
                         borderWidth:0,
-
                         borderRadius:4,
-
                         borderSkipped:false,
-
                         barPercentage:.70,
-
                         categoryPercentage:.76
                     }]
                 },
 
                 options:{
-
                     indexAxis:"y",
-
                     responsive:true,
-
                     maintainAspectRatio:false,
 
-                    animation:{
-
-                        duration:350
-                    },
-
                     layout:{
-
                         padding:{
-
                             top:8,
-
-                            right:110,
-
-                            bottom:5,
-
-                            left:5
+                            right:105,
+                            bottom:4,
+                            left:4
                         }
                     },
 
                     plugins:{
-
-                        /*
-                        Impede que o ChartDataLabels global
-                        desenhe valores sobre as barras.
-                        */
-
                         datalabels:{
-
-                            display:false,
-
-                            formatter(){
-
-                                return "";
-                            }
+                            display:false
                         },
 
                         legend:{
-
                             display:false
                         },
 
                         tooltip:{
-
-                            displayColors:false,
-
                             callbacks:{
-
-                                title(context){
-
-                                    return (
-                                        context[0]?.label ||
-                                        "Sem origem"
-                                    );
-                                },
-
                                 label(context){
-
-                                    return (
-                                        "Valor: " +
-                                        moeda(
-                                            Number(
-                                                context.raw || 0
-                                            )
-                                        )
-                                    );
-                                }
-                            }
-                        }
-                    },
-
-                    scales:{
-
-                        /*
-                        Eixo horizontal — valores financeiros
-                        */
-
-                        x:{
-
-                            beginAtZero:true,
-
-                            grace:"5%",
-
-                            border:{
-
-                                display:false
-                            },
-
-                            grid:{
-
-                                color:
-                                    "rgba(15,37,87,.08)",
-
-                                drawBorder:false
-                            },
-
-                            title:{
-
-                                display:false
-                            },
-
-                            ticks:{
-
-                                color:"#64748b",
-
-                                padding:6,
-
-                                maxTicksLimit:6,
-
-                                font:{
-
-                                    size:10,
-
-                                    weight:"600"
-                                },
-
-                                callback(valor){
-
-                                    const numero =
-                                        Number(valor || 0);
-
-                                    if(
-                                        Math.abs(numero) >=
-                                        1000000
-                                    ){
-                                        return (
-                                            "R$ " +
-                                            (
-                                                numero /
-                                                1000000
-                                            )
-                                                .toLocaleString(
-                                                    "pt-BR",
-                                                    {
-                                                        maximumFractionDigits:1
-                                                    }
-                                                ) +
-                                            " mi"
-                                        );
-                                    }
-
-                                    if(
-                                        Math.abs(numero) >=
-                                        1000
-                                    ){
-                                        return (
-                                            "R$ " +
-                                            (
-                                                numero /
-                                                1000
-                                            )
-                                                .toLocaleString(
-                                                    "pt-BR",
-                                                    {
-                                                        maximumFractionDigits:0
-                                                    }
-                                                ) +
-                                            " mil"
-                                        );
-                                    }
-
-                                    return (
-                                        "R$ " +
-                                        numero.toLocaleString(
-                                            "pt-BR"
-                                        )
-                                    );
-                                }
-                            }
-                        },
-
-                        /*
-                        Eixo vertical — origens
-                        */
-
-                        y:{
-
-                            border:{
-
-                                display:false
-                            },
-
-                            grid:{
-
-                                display:false,
-
-                                drawBorder:false
-                            },
-
-                            ticks:{
-
-                                color:"#0f2557",
-
-                                padding:8,
-
-                                autoSkip:false,
-
-                                font:{
-
-                                    size:10,
-
-                                    weight:"700"
-                                },
-
-                                callback(
-                                    valor,
-                                    indice
-                                ){
-
-                                    const label =
-                                        this.getLabelForValue(
-                                            valor
-                                        );
-
-                                    const texto =
-                                        String(
-                                            label || "-"
-                                        );
-
-                                    const limite =
-                                        24;
-
-                                    if(
-                                        texto.length <=
-                                        limite
-                                    ){
-                                        return texto;
-                                    }
-
-                                    return (
-                                        texto.slice(
-                                            0,
-                                            limite
-                                        ) +
-                                        "…"
-                                    );
+                                    return moeda(context.raw);
                                 }
                             }
                         }
