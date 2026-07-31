@@ -1186,22 +1186,6 @@ const valoresVisuaisOrigens =
 
                 </div>
 
-
-                <div class="panel descarte-panel-top10">
-
-
-                    <h3 class="descarte-titulo-painel descarte-top10-titulo">
-
-                        Top 10 Descarte
-
-                    </h3>
-<div class="panel descarte-panel-top10">
-
-    <h3 class="descarte-titulo-painel descarte-top10-titulo">
-
-        Top 10 Descarte
-
-    </h3>
 <div class="panel descarte-panel-top10">
 
     <h3 class="descarte-titulo-painel descarte-top10-titulo">
@@ -1219,8 +1203,8 @@ const valoresVisuaisOrigens =
                     "Descrição",
                     "Valor"
                 ],
-                montarLinhasTopDescarte(top)
-               true
+                montarLinhasTopDescarte(top),
+                true
             )
         }
 
@@ -1234,6 +1218,9 @@ const valoresVisuaisOrigens =
 `;
 
 iniciarScrollAutomaticoTop10Descarte();
+</div>
+
+
 /* ======================================================
    GRÁFICO DE BARRAS
 ====================================================== */
