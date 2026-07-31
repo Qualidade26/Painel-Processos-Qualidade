@@ -564,6 +564,153 @@
     white-space:nowrap;
 }
 /* ==========================================================
+   TV / TELAS GRANDES
+========================================================== */
+
+@media (min-width:1600px) and (min-height:800px){
+
+    .descarte-grid{
+        grid-template-columns:
+            minmax(0,1.08fr)
+            minmax(0,.92fr);
+
+        height:calc(100vh - 225px);
+        min-height:690px;
+        max-height:900px;
+
+        gap:10px;
+    }
+
+    .descarte-indicadores{
+        gap:10px;
+        margin-bottom:10px;
+    }
+
+    .descarte-panel-origens,
+    .descarte-panel-pizza{
+        padding:12px;
+    }
+
+    .descarte-coluna-direita{
+        height:100%;
+        gap:10px;
+    }
+
+    .descarte-panel-pizza{
+        flex:1.1;
+        min-height:0;
+    }
+
+    .descarte-panel-top10{
+        flex:.9;
+
+        width:100%;
+        min-width:0;
+        min-height:0;
+
+        padding:10px;
+
+        overflow:hidden;
+    }
+
+    .descarte-chart-barra{
+        min-height:0;
+        height:100%;
+    }
+
+    .descarte-chart-pizza{
+        min-height:0;
+        height:100%;
+    }
+
+    .descarte-top10-scroll,
+    .descarte-top10-scroll .table-wrap,
+    .descarte-top10-scroll .table-scroll{
+        min-height:0;
+        height:100%;
+    }
+
+    .descarte-top10-scroll .table-scroll{
+        max-height:none;
+        overflow-y:auto;
+        overflow-x:auto;
+    }
+
+    .descarte-titulo-painel,
+    .descarte-titulo-top3{
+        font-size:14px;
+    }
+
+    .descarte-top3-card{
+        height:138px;
+        padding:12px 14px;
+    }
+
+    .descarte-top3-nome{
+        font-size:12px;
+    }
+
+    .descarte-top3-valor{
+        font-size:18px;
+    }
+
+    .descarte-top3-percentual{
+        font-size:14px;
+    }
+
+    .descarte-panel-top10 table{
+        min-width:0;
+        font-size:14px;
+    }
+
+    .descarte-panel-top10 th{
+        padding:10px 8px;
+    }
+
+    .descarte-panel-top10 td{
+        padding:8px 7px;
+    }
+}
+
+
+/* ==========================================================
+   TV FULL HD — 1920 × 1080 OU MAIOR
+========================================================== */
+
+@media (min-width:1900px) and (min-height:950px){
+
+    .descarte-grid{
+        height:calc(100vh - 235px);
+        min-height:780px;
+        max-height:980px;
+    }
+
+    .descarte-coluna-direita{
+        gap:12px;
+    }
+
+    .descarte-panel-pizza{
+        flex:1.15;
+    }
+
+    .descarte-panel-top10{
+        flex:.85;
+    }
+
+    .descarte-top3-card{
+        height:148px;
+    }
+
+    .descarte-top3-valor{
+        font-size:20px;
+    }
+
+    .descarte-panel-top10 table{
+        font-size:15px;
+    }
+}
+
+/* ==========================================================
    NOTEBOOK
 ========================================================== */
 
