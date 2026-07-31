@@ -210,27 +210,27 @@ const rotulosExternosPizzaDescarte = {
         const dataset =
             chart.data.datasets[0];
 
-        if(
-            !dataset ||
-            !Array.isArray(dataset.data)
-        ){
+        if(!dataset){
             return;
         }
 
-        const valores =
-            dataset.data.map(
-                valor =>
-                    Number(valor || 0)
-            );
+        const valoresReais =
+            Array.isArray(dataset.valoresReais)
+                ? dataset.valoresReais.map(
+                    valor => Number(valor || 0)
+                )
+                : dataset.data.map(
+                    valor => Number(valor || 0)
+                );
 
-        const total =
-            valores.reduce(
+        const totalReal =
+            valoresReais.reduce(
                 (soma, valor) =>
                     soma + valor,
                 0
             );
 
-        if(total <= 0){
+        if(totalReal <= 0){
             return;
         }
 
@@ -250,8 +250,13 @@ const rotulosExternosPizzaDescarte = {
         const area =
             chart.chartArea;
 
+        const cores =
+            Array.isArray(dataset.backgroundColor)
+                ? dataset.backgroundColor
+                : [];
+
         const espacamentoMinimo =
-            14;
+            15;
 
         const margemSuperior =
             area.top + 8;
@@ -272,17 +277,13 @@ const rotulosExternosPizzaDescarte = {
                     return;
                 }
 
-                const valor =
-                    valores[indice];
-
-                if(valor <= 0){
-                    return;
-                }
+                const valorReal =
+                    valoresReais[indice];
 
                 const percentual =
                     calcularPercentualDescarte(
-                        valor,
-                        total
+                        valorReal,
+                        totalReal
                     );
 
                 const propriedades =
@@ -315,6 +316,12 @@ const rotulosExternosPizzaDescarte = {
 
                     percentual,
 
+                    cor:
+                        cores[
+                            indice %
+                            cores.length
+                        ] || "#64748b",
+
                     centroX:
                         propriedades.x,
 
@@ -323,8 +330,6 @@ const rotulosExternosPizzaDescarte = {
 
                     raio:
                         propriedades.outerRadius,
-
-                    angulo,
 
                     direcaoX,
 
@@ -354,6 +359,41 @@ const rotulosExternosPizzaDescarte = {
                             18
                         )
                 };
+
+                /*
+                Os dois menores percentuais do topo ficam
+                separados: um à esquerda e outro à direita.
+                */
+
+                if(indice === 0){
+
+                    item.forcarTopo =
+                        true;
+
+                    item.yDesejado =
+                        propriedades.y -
+                        propriedades.outerRadius -
+                        24;
+
+                    rotulosDireita.push(item);
+
+                    return;
+                }
+
+                if(indice === 1){
+
+                    item.forcarTopo =
+                        true;
+
+                    item.yDesejado =
+                        propriedades.y -
+                        propriedades.outerRadius -
+                        24;
+
+                    rotulosEsquerda.push(item);
+
+                    return;
+                }
 
                 if(direcaoX >= 0){
 
@@ -480,15 +520,6 @@ const rotulosExternosPizzaDescarte = {
         ctx.font =
             "800 10px 'Segoe UI', Arial, sans-serif";
 
-        ctx.fillStyle =
-            "#0f2557";
-
-        ctx.strokeStyle =
-            "#64748b";
-
-        ctx.lineWidth =
-            1;
-
         ctx.textBaseline =
             "middle";
 
@@ -500,26 +531,55 @@ const rotulosExternosPizzaDescarte = {
             lista.forEach(
                 item => {
 
-                    const distanciaHorizontal =
-                        23;
+                    let finalX;
 
-                    const finalX =
-                        item.centroX +
-                        (
-                            ladoDireito
-                                ? item.raio +
-                                  distanciaHorizontal
-                                : -item.raio -
-                                  distanciaHorizontal
-                        );
+                    let joelhoX;
 
-                    const joelhoX =
-                        item.centroX +
-                        (
-                            ladoDireito
-                                ? item.raio + 10
-                                : -item.raio - 10
-                        );
+                    if(item.forcarTopo){
+
+                        finalX =
+                            item.centroX +
+                            (
+                                ladoDireito
+                                    ? item.raio + 42
+                                    : -item.raio - 42
+                            );
+
+                        joelhoX =
+                            item.centroX +
+                            (
+                                ladoDireito
+                                    ? 18
+                                    : -18
+                            );
+
+                    } else {
+
+                        finalX =
+                            item.centroX +
+                            (
+                                ladoDireito
+                                    ? item.raio + 26
+                                    : -item.raio - 26
+                            );
+
+                        joelhoX =
+                            item.centroX +
+                            (
+                                ladoDireito
+                                    ? item.raio + 10
+                                    : -item.raio - 10
+                            );
+                    }
+
+                    ctx.strokeStyle =
+                        item.cor;
+
+                    ctx.fillStyle =
+                        item.cor;
+
+                    ctx.lineWidth =
+                        1.2;
 
                     ctx.beginPath();
 
@@ -540,6 +600,25 @@ const rotulosExternosPizzaDescarte = {
 
                     ctx.stroke();
 
+                    /*
+                    Ponto colorido antes do percentual.
+                    */
+
+                    ctx.beginPath();
+
+                    ctx.arc(
+                        finalX,
+                        item.yFinal,
+                        2.7,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    ctx.fill();
+
+                    ctx.fillStyle =
+                        "#0f2557";
+
                     ctx.textAlign =
                         ladoDireito
                             ? "left"
@@ -552,8 +631,8 @@ const rotulosExternosPizzaDescarte = {
                         finalX +
                         (
                             ladoDireito
-                                ? 4
-                                : -4
+                                ? 6
+                                : -6
                         ),
                         item.yFinal
                     );
@@ -573,7 +652,8 @@ const rotulosExternosPizzaDescarte = {
 
         ctx.restore();
     }
-};
+}; 
+
 /* ==========================================================
    TEXTO CENTRAL DA ROSCA
 ========================================================== */
@@ -930,7 +1010,36 @@ function renderDescarte(){
 
     destruirGraficosDescarte();
 
+/*
+Cria um tamanho visual mínimo para que todas as cores
+apareçam na rosquinha, sem alterar o percentual verdadeiro.
+*/
 
+const totalOrigensDescarte =
+    valoresOrigens.reduce(
+        (soma, valor) =>
+            soma + Number(valor || 0),
+        0
+    );
+
+const tamanhoMinimoVisualDescarte =
+    totalOrigensDescarte > 0
+        ? totalOrigensDescarte * 0.006
+        : 1;
+
+const valoresVisuaisOrigens =
+    valoresOrigens.map(
+        valor => {
+
+            const numero =
+                Number(valor || 0);
+
+            return Math.max(
+                numero,
+                tamanhoMinimoVisualDescarte
+            );
+        }
+    );
     /* ======================================================
        HTML
     ====================================================== */
@@ -1374,301 +1483,353 @@ window.graficoDescarteBarra =
         );
 }
 
-    /* ======================================================
-       GRÁFICO DE PIZZA
-    ====================================================== */
+  /* ======================================================
+   GRÁFICO DE PIZZA
+====================================================== */
 
-    const canvasPizza =
-        document.getElementById(
-            "graficoDescartePizza"
-        );
+const canvasPizza =
+    document.getElementById(
+        "graficoDescartePizza"
+    );
 
+if(canvasPizza){
 
-    if(canvasPizza){
+    if(
+        window.graficoDescartePizza &&
+        typeof window.graficoDescartePizza.destroy ===
+        "function"
+    ){
+        window.graficoDescartePizza.destroy();
 
         window.graficoDescartePizza =
-            new Chart(
-                canvasPizza,
-                {
+            null;
+    }
 
-                    type:"doughnut",
+    window.graficoDescartePizza =
+        new Chart(
+            canvasPizza,
+            {
+                type:"doughnut",
 
+                plugins:[
+                    rotulosExternosPizzaDescarte,
+                    centroPizzaDescarte
+                ],
 
-                    plugins:[
+                data:{
 
-                        rotulosExternosPizzaDescarte,
+                    labels:
+                        nomesOrigens,
 
-                        centroPizzaDescarte
-                    ],
+                    datasets:[{
 
+                        label:
+                            "Percentual",
 
-                    data:{
+                        /*
+                        Estes valores controlam apenas
+                        o tamanho visual das fatias.
+                        */
 
-                        labels:
-                            nomesOrigens,
+                        data:
+                            valoresVisuaisOrigens,
 
+                        /*
+                        Estes são os valores financeiros reais.
+                        São usados na legenda, tooltip
+                        e cálculo dos percentuais.
+                        */
 
-                        datasets:[{
+                        valoresReais:
+                            valoresOrigens,
 
-                            label:"Percentual",
+                        backgroundColor:
+                            nomesOrigens.map(
+                                (_, indice) =>
+                                    coresDescarte[
+                                        indice %
+                                        coresDescarte.length
+                                    ]
+                            ),
 
-                            data:
-                                valoresOrigens,
+                        borderColor:
+                            "#ffffff",
 
-                            backgroundColor:
-                                coresDescarte,
+                        borderWidth:
+                            2,
 
-                            borderColor:
-                                "#ffffff",
+                        hoverOffset:
+                            4,
 
-                            borderWidth:2,
+                        spacing:
+                            0
+                    }]
+                },
 
-                            hoverOffset:4,
+                options:{
 
-                            spacing:0
-                        }]
+                    responsive:
+                        true,
+
+                    maintainAspectRatio:
+                        false,
+
+                    animation:{
+
+                        duration:
+                            350
                     },
 
+                    cutout:
+                        "56%",
 
-                    options:{
+                    radius:
+                        "72%",
 
-                        responsive:true,
+                    layout:{
 
-                        maintainAspectRatio:false,
+                        padding:{
 
-                        animation:{
+                            top:
+                                45,
 
-                            duration:350
+                            right:
+                                70,
+
+                            bottom:
+                                45,
+
+                            left:
+                                70
+                        }
+                    },
+
+                    plugins:{
+
+                        datalabels:{
+
+                            display:
+                                false,
+
+                            formatter(){
+
+                                return "";
+                            }
                         },
 
-                       cutout:"56%",
+                        legend:{
 
-radius:"72%",
+                            display:
+                                true,
 
+                            position:
+                                "right",
 
-                      layout:{
+                            align:
+                                "center",
 
-    padding:{
+                            labels:{
 
-        top:45,
+                                usePointStyle:
+                                    true,
 
-        right:70,
+                                pointStyle:
+                                    "circle",
 
-        bottom:45,
+                                boxWidth:
+                                    8,
 
-        left:70
-    }
-},
+                                boxHeight:
+                                    8,
 
+                                padding:
+                                    11,
 
-                        plugins:{
+                                color:
+                                    "#0f2557",
 
-                            /*
-                            Desativa integralmente os rótulos
-                            globais no gráfico de pizza.
-                            */
+                                font:{
 
-                            datalabels:{
+                                    size:
+                                        10,
 
-                                display:false,
-
-                                formatter(){
-
-                                    return "";
-                                }
-                            },
-
-
-                            legend:{
-
-                                display:true,
-
-                                position:"right",
-
-                                align:"center",
-
-
-                                labels:{
-
-                                    usePointStyle:true,
-
-                                    pointStyle:"circle",
-
-                                    boxWidth:8,
-
-                                    boxHeight:8,
-
-                                    padding:11,
-
-                                    color:"#0f2557",
-
-                                    font:{
-
-                                        size:10,
-
-                                        weight:"700"
-                                    },
-
-
-                                    generateLabels(chart){
-
-                                        const valores =
-                                            chart.data
-                                                .datasets[0]
-                                                .data;
-
-
-                                        const total =
-                                            valores.reduce(
-                                                (
-                                                    soma,
-                                                    valor
-                                                ) =>
-                                                    soma +
-                                                    Number(
-                                                        valor || 0
-                                                    ),
-                                                0
-                                            );
-
-
-                                        return chart.data.labels.map(
-                                            (
-                                                label,
-                                                indice
-                                            ) => {
-
-                                                const valor =
-                                                    Number(
-                                                        valores[
-                                                            indice
-                                                        ] || 0
-                                                    );
-
-
-                                                const percentual =
-                                                    calcularPercentualDescarte(
-                                                        valor,
-                                                        total
-                                                    );
-
-
-                                                const cor =
-                                                    chart.data
-                                                        .datasets[0]
-                                                        .backgroundColor[
-                                                            indice %
-                                                            coresDescarte.length
-                                                        ];
-
-
-                                                return {
-
-                                                    text:
-                                                        label +
-                                                        " — " +
-                                                        formatarPercentualDescarte(
-                                                            percentual
-                                                        ),
-
-                                                    fillStyle:
-                                                        cor,
-
-                                                    strokeStyle:
-                                                        cor,
-
-                                                    lineWidth:0,
-
-                                                    pointStyle:
-                                                        "circle",
-
-                                                    hidden:
-                                                        !chart
-                                                            .getDataVisibility(
-                                                                indice
-                                                            ),
-
-                                                    index:
-                                                        indice
-                                                };
-                                            }
-                                        );
-                                    }
+                                    weight:
+                                        "700"
                                 },
 
+                                generateLabels(chart){
 
-                                onClick(
-                                    evento,
-                                    item,
-                                    legenda
-                                ){
+                                    const dataset =
+                                        chart.data
+                                            .datasets[0];
 
-                                    const chart =
-                                        legenda.chart;
+                                    const valores =
+                                        Array.isArray(
+                                            dataset.valoresReais
+                                        )
+                                            ? dataset.valoresReais
+                                            : dataset.data;
 
+                                    const total =
+                                        valores.reduce(
+                                            (
+                                                soma,
+                                                valor
+                                            ) =>
+                                                soma +
+                                                Number(
+                                                    valor || 0
+                                                ),
+                                            0
+                                        );
 
-                                    chart.toggleDataVisibility(
-                                        item.index
+                                    return chart.data.labels.map(
+                                        (
+                                            label,
+                                            indice
+                                        ) => {
+
+                                            const valor =
+                                                Number(
+                                                    valores[
+                                                        indice
+                                                    ] || 0
+                                                );
+
+                                            const percentual =
+                                                calcularPercentualDescarte(
+                                                    valor,
+                                                    total
+                                                );
+
+                                            const cores =
+                                                Array.isArray(
+                                                    dataset.backgroundColor
+                                                )
+                                                    ? dataset.backgroundColor
+                                                    : [];
+
+                                            const cor =
+                                                cores[
+                                                    indice %
+                                                    cores.length
+                                                ] ||
+                                                "#64748b";
+
+                                            return {
+
+                                                text:
+                                                    label +
+                                                    " — " +
+                                                    formatarPercentualDescarte(
+                                                        percentual
+                                                    ),
+
+                                                fillStyle:
+                                                    cor,
+
+                                                strokeStyle:
+                                                    cor,
+
+                                                lineWidth:
+                                                    0,
+
+                                                pointStyle:
+                                                    "circle",
+
+                                                hidden:
+                                                    !chart
+                                                        .getDataVisibility(
+                                                            indice
+                                                        ),
+
+                                                index:
+                                                    indice
+                                            };
+                                        }
                                     );
-
-
-                                    chart.update();
                                 }
                             },
 
+                            onClick(
+                                evento,
+                                item,
+                                legenda
+                            ){
 
-                            tooltip:{
+                                const chart =
+                                    legenda.chart;
 
-                                callbacks:{
+                                chart.toggleDataVisibility(
+                                    item.index
+                                );
 
-                                    label(context){
+                                chart.update();
+                            }
+                        },
 
-                                        const valor =
-                                            Number(
-                                                context.raw || 0
-                                            );
+                        tooltip:{
 
+                            displayColors:
+                                true,
 
-                                        const total =
-                                            context.dataset.data
-                                                .reduce(
-                                                    (
-                                                        soma,
-                                                        item
-                                                    ) =>
-                                                        soma +
-                                                        Number(
-                                                            item || 0
-                                                        ),
-                                                    0
-                                                );
+                            callbacks:{
 
+                                label(context){
 
-                                        const percentual =
-                                            calcularPercentualDescarte(
-                                                valor,
-                                                total
-                                            );
+                                    const dataset =
+                                        context.dataset;
 
+                                    const valores =
+                                        Array.isArray(
+                                            dataset.valoresReais
+                                        )
+                                            ? dataset.valoresReais
+                                            : dataset.data;
 
-                                        return (
-                                            context.label +
-                                            ": " +
-                                            moeda(valor) +
-                                            " — " +
-                                            formatarPercentualDescarte(
-                                                percentual
-                                            )
+                                    const valor =
+                                        Number(
+                                            valores[
+                                                context.dataIndex
+                                            ] || 0
                                         );
-                                    }
+
+                                    const total =
+                                        valores.reduce(
+                                            (
+                                                soma,
+                                                item
+                                            ) =>
+                                                soma +
+                                                Number(
+                                                    item || 0
+                                                ),
+                                            0
+                                        );
+
+                                    const percentual =
+                                        calcularPercentualDescarte(
+                                            valor,
+                                            total
+                                        );
+
+                                    return (
+                                        context.label +
+                                        ": " +
+                                        moeda(valor) +
+                                        " — " +
+                                        formatarPercentualDescarte(
+                                            percentual
+                                        )
+                                    );
                                 }
                             }
                         }
                     }
                 }
-            );
-    }
-
+            }
+        );
+}
 
     graficoAtual =
         window.graficoDescarteBarra;
