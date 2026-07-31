@@ -5,27 +5,27 @@
     "origens": [
       {
         "nome": "Avaria estoque",
-        "valor": 3446.36
+        "valor": 0
       },
       {
         "nome": "Devolução avaria",
-        "valor": 11625.72
+        "valor": 0
       },
       {
         "nome": "Desvio de Qualidade",
-        "valor": 150618.83
+        "valor": 0
       },
       {
         "nome": "Vencido",
-        "valor": 421475.70
+        "valor": 0
       },
       {
         "nome": "Avaria Nacional",
-        "valor": 186.78
+        "valor": 0
       },
       {
         "nome": "Destinado pela Empresa",
-        "valor": 405596.38
+        "valor": 0
       }
     ],
     "top10": [
