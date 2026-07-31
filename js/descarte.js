@@ -795,7 +795,7 @@ const valorExternoBarraDescarte = {
         ctx.save();
 
         ctx.font =
-            "800 10px 'Segoe UI', Arial, sans-serif";
+    "900 12px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillStyle =
             "#0f2557";
@@ -1344,9 +1344,9 @@ window.graficoDescarteBarra =
 
                                 font:{
 
-                                    size:10,
+                                    size:11,
 
-                                    weight:"600"
+                                    weight:"900"
                                 },
 
                                 callback(valor){
@@ -1432,9 +1432,9 @@ window.graficoDescarteBarra =
 
                                 font:{
 
-                                    size:10,
+                                    size:12,
 
-                                    weight:"700"
+                                    weight:"900"
                                 },
 
                                 callback(
