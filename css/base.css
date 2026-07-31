@@ -39,7 +39,17 @@
 html{
     width:100%;
     min-height:100%;
-    font-size:clamp(13px, .75vw, 17px);
+
+    /*
+    Ajusta automaticamente conforme largura e altura.
+    Evita que notebooks de baixa resolução fiquem gigantes.
+    */
+
+    font-size:clamp(
+        12px,
+        min(.72vw, 1.35vh),
+        16px
+    );
 }
 
 body{
