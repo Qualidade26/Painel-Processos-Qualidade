@@ -15,9 +15,20 @@
        QUALIDADE E RESPONSIVIDADE
     ====================================================== */
 
-    Chart.defaults.devicePixelRatio = 2;
-    Chart.defaults.responsive = true;
-    Chart.defaults.maintainAspectRatio = false;
+ /* ======================================================
+   QUALIDADE E NITIDEZ
+====================================================== */
+
+Chart.defaults.devicePixelRatio =
+    Math.min(
+        window.devicePixelRatio || 1,
+        3
+    );
+
+Chart.defaults.responsive = true;
+Chart.defaults.maintainAspectRatio = false;
+
+Chart.defaults.resizeDelay = 100;
 
     /* ======================================================
        TIPOGRAFIA
