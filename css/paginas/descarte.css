@@ -714,50 +714,39 @@
    NOTEBOOK
 ========================================================== */
 
-@media(max-width:1200px){
+@media (min-width:1051px) and (max-width:1366px){
 
     .descarte-grid{
         grid-template-columns:
             minmax(0,1fr)
             minmax(0,1fr);
 
-        height:660px;
-        min-height:660px;
+        height:590px;
+        min-height:590px;
     }
 
     .descarte-chart-barra{
-        min-height:360px;
+        min-height:315px;
+    }
+
+    .descarte-top3-card{
+        height:108px;
     }
 
     .descarte-top3-valor{
         font-size:14px;
     }
-}
-
-
-/* ==========================================================
-   NOTEBOOK MENOR
-========================================================== */
-
-@media(max-width:1050px){
-
-    .descarte-grid{
-        grid-template-columns:1fr;
-
-        height:auto;
-        min-height:0;
-    }
-
-    .descarte-panel-origens{
-        height:610px;
-    }
 
     .descarte-coluna-direita{
-        height:auto;
+        height:100%;
+    }
 
-        grid-template-rows:
-            420px
-            350px;
+    .descarte-panel-pizza{
+        flex:1.05;
+    }
+
+    .descarte-panel-top10{
+        flex:.95;
     }
 }
 
@@ -770,27 +759,27 @@
 
     .descarte-grid{
         grid-template-columns:1fr;
+
         height:auto;
         min-height:0;
     }
 
     .descarte-panel-origens{
-        height:610px;
+        height:560px;
     }
 
     .descarte-coluna-direita{
-        height:780px;
+        height:700px;
     }
 
     .descarte-panel-pizza{
-        flex:1.2;
+        flex:1.15;
     }
 
     .descarte-panel-top10{
-        flex:.8;
+        flex:.85;
     }
 }
-
 
 /* ==========================================================
    TABLET
