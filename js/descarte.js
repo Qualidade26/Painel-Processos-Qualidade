@@ -1576,28 +1576,24 @@ if(canvasPizza){
                     },
 
                     cutout:
-                        "56%",
+                        "48%",
 
                     radius:
-                        "72%",
+                        "90%",
 
                     layout:{
 
-                        padding:{
+    padding:{
 
-                            top:
-                                45,
+        top:15,
 
-                            right:
-                                70,
+        right:20,
 
-                            bottom:
-                                45,
+        bottom:15,
 
-                            left:
-                                70
-                        }
-                    },
+        left:20
+    }
+},
 
                     plugins:{
 
@@ -1621,7 +1617,7 @@ if(canvasPizza){
                                 "right",
 
                             align:
-                                "center",
+                                "endr",
 
                             labels:{
 
@@ -1638,7 +1634,7 @@ if(canvasPizza){
                                     8,
 
                                 padding:
-                                    11,
+                                    8,
 
                                 color:
                                     "#0f2557",
@@ -1646,7 +1642,7 @@ if(canvasPizza){
                                 font:{
 
                                     size:
-                                        10,
+                                        9,
 
                                     weight:
                                         "700"
