@@ -936,50 +936,48 @@ if(canvasBarra){
         window.graficoDescarteBarra =
             null;
     }
+window.graficoDescarteBarra =
+    new Chart(
+        canvasBarra,
+        {
+            type:"bar",
 
-    window.graficoDescarteBarra =
-        new Chart(
-            canvasBarra,
-            {
-                type:"bar",
+            plugins:[],
 
-                plugins:[
-                    valorExternoBarraDescarte
-                ],
+            data:{
 
-                data:{
+                labels:
+                    nomesOrigens,
 
-                    labels:
-                        nomesOrigens,
+                datasets:[{
 
-                    datasets:[{
+                    label:
+                        "Valor descartado",
 
-                        label:
-                            "Valor descartado",
+                    data:
+                        valoresOrigens,
 
-                        data:
-                            valoresOrigens,
+                    backgroundColor:
+                        nomesOrigens.map(
+                            (_, indice) =>
+                                coresDescarte[
+                                    indice %
+                                    coresDescarte.length
+                                ]
+                        ),
 
-                        backgroundColor:
-                            nomesOrigens.map(
-                                (_, indice) =>
-                                    coresDescarte[
-                                        indice %
-                                        coresDescarte.length
-                                    ]
-                            ),
+                    borderWidth:0,
 
-                        borderWidth:0,
+                    borderRadius:4,
 
-                        borderRadius:4,
+                    borderSkipped:false,
 
-                        borderSkipped:false,
+                    barPercentage:.70,
 
-                        barPercentage:.70,
-
-                        categoryPercentage:.76
-                    }]
-                },
+                    categoryPercentage:.76
+                }]
+            },
+ 
 
                 options:{
 
