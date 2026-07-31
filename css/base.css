@@ -40,17 +40,20 @@ html{
     width:100%;
     min-height:100%;
 
-    /*
-    Ajusta automaticamente conforme largura e altura.
-    Evita que notebooks de baixa resolução fiquem gigantes.
-    */
-
     font-size:clamp(
         12px,
-        min(.72vw, 1.35vh),
+        min(.72vw,1.35vh),
         16px
     );
+
+    text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+
+    text-rendering:optimizeLegibility;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 }
+
 
 body{
     width:100%;
