@@ -825,14 +825,19 @@ const canvasBarra =
         "graficoDescarteOrigem"
     );
 
-
 if(canvasBarra){
+
+    if(window.graficoDescarteBarra){
+
+        window.graficoDescarteBarra.destroy();
+
+        window.graficoDescarteBarra = null;
+    }
 
     window.graficoDescarteBarra =
         new Chart(
             canvasBarra,
             {
-
                 type:"bar",
 
                 plugins:[
@@ -840,142 +845,48 @@ if(canvasBarra){
                 ],
 
                 data:{
-
-                    labels:
-                        nomesOrigens,
+                    labels:nomesOrigens,
 
                     datasets:[{
-
                         label:"Valor",
-
-                        data:
-                            valoresOrigens,
-
-                        backgroundColor:
-                            coresDescarte,
-
+                        data:valoresOrigens,
+                        backgroundColor:coresDescarte,
                         borderWidth:0,
-
                         borderRadius:4,
-
                         borderSkipped:false,
-
                         barPercentage:.70,
-
                         categoryPercentage:.76
                     }]
                 },
 
                 options:{
-
                     indexAxis:"y",
-
                     responsive:true,
-
                     maintainAspectRatio:false,
 
                     layout:{
-
                         padding:{
-
                             top:8,
-
                             right:105,
-
                             bottom:4,
-
                             left:4
                         }
                     },
 
                     plugins:{
-
                         datalabels:{
-
-                            display:false,
-
-                            formatter(){
-
-                                return "";
-                            }
+                            display:false
                         },
 
                         legend:{
-
                             display:false
                         },
 
                         tooltip:{
-
                             callbacks:{
-
                                 label(context){
-
-                                    return moeda(
-                                        context.raw
-                                    );
+                                    return moeda(context.raw);
                                 }
-                            }
-                        }
-                    },
-
-                    scales:{
-
-                        x:{
-
-                            beginAtZero:true,
-
-                            grace:"20%",
-
-                            ticks:{
-
-                                color:"#334155",
-
-                                callback(valor){
-
-                                    return Number(valor)
-                                        .toLocaleString(
-                                            "pt-BR"
-                                        );
-                                }
-                            },
-
-                            grid:{
-
-                                color:
-                                    "rgba(148,163,184,.22)"
-                            },
-
-                            border:{
-
-                                display:false
-                            }
-                        },
-
-                        y:{
-
-                            ticks:{
-
-                                color:"#334155",
-
-                                padding:8,
-
-                                font:{
-
-                                    size:11,
-
-                                    weight:"600"
-                                }
-                            },
-
-                            grid:{
-
-                                display:false
-                            },
-
-                            border:{
-
-                                display:false
                             }
                         }
                     }
@@ -983,7 +894,6 @@ if(canvasBarra){
             }
         );
 }
-
 
     /* ======================================================
        GRÁFICO DE PIZZA
