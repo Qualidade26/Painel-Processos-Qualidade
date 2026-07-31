@@ -1220,6 +1220,7 @@ const valoresVisuaisOrigens =
                     "Valor"
                 ],
                 montarLinhasTopDescarte(top)
+               true
             )
         }
 
