@@ -341,18 +341,14 @@
     max-width:100%;
 }
 
+
 /* ==========================================================
    PAINEL TOP 10
 ========================================================== */
 
 .descarte-panel-top10{
-    display:grid;
-
-    grid-template-rows:
-        auto
-        minmax(0,1fr);
-
-    gap:4px;
+    display:flex;
+    flex-direction:column;
 
     width:100%;
     min-width:0;
@@ -366,13 +362,15 @@
 
 
 /* ==========================================================
-   TÍTULO DO PAINEL
+   TÍTULO DO PAINEL TOP 10
 ========================================================== */
 
 .descarte-top10-titulo{
     position:relative;
 
     z-index:30;
+
+    flex-shrink:0;
 
     margin:0;
     padding:0 0 4px;
@@ -382,16 +380,17 @@
 
 
 /* ==========================================================
-   ÁREA DA TABELA
+   ÁREA EXTERNA DA TABELA
 ========================================================== */
 
 .descarte-top10-scroll{
     position:relative;
 
+    flex:1;
+
     width:100%;
     min-width:0;
     min-height:0;
-    height:100%;
 
     overflow:hidden;
 }
@@ -405,15 +404,40 @@
     position:relative;
 
     width:100%;
+    height:100%;
+
     min-width:0;
     min-height:0;
-    height:100%;
-    max-height:none;
 
     overflow-x:auto;
     overflow-y:auto;
 
     scrollbar-gutter:stable;
+    overscroll-behavior:contain;
+}
+
+
+/* ==========================================================
+   BARRA DE ROLAGEM
+========================================================== */
+
+.descarte-top10-scroll .table-scroll::-webkit-scrollbar{
+    width:7px;
+    height:7px;
+}
+
+.descarte-top10-scroll .table-scroll::-webkit-scrollbar-track{
+    background:#eef2f7;
+    border-radius:10px;
+}
+
+.descarte-top10-scroll .table-scroll::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:10px;
+}
+
+.descarte-top10-scroll .table-scroll::-webkit-scrollbar-thumb:hover{
+    background:#64748b;
 }
 
 
@@ -510,6 +534,8 @@
     text-overflow:ellipsis;
     white-space:nowrap;
 }
+
+
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
