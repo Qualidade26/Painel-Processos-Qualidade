@@ -268,9 +268,9 @@
 .content{
     width:100%;
     min-width:0;
+    min-height:0;
 
-    padding-right:2px;
+    padding:clamp(6px, .6vw, 12px);
 
-    overflow-x:hidden;
-    overflow-y:visible;
+    overflow:auto;
 }
