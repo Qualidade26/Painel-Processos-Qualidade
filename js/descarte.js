@@ -1049,24 +1049,17 @@ top.sort(
    Mantém ordem e cores originais
 ====================================================== */
 const origensPizza =
-    origens
-        .map(
-            (item, indice) => ({
+    origens.map(
+        (item, indice) => ({
 
-                ...item,
+            ...item,
 
-                corOriginal:
-                    coresDescarte[
-                        indice % coresDescarte.length
-                    ]
-            })
-        )
-        .sort(
-            (a, b) =>
-                Number(b.valor || 0) -
-                Number(a.valor || 0)
-        );
-
+            corOriginal:
+                coresDescarte[
+                    indice % coresDescarte.length
+                ]
+        })
+    );
 
 const nomesPizza =
     origensPizza.map(
