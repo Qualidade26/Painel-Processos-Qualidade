@@ -378,10 +378,20 @@ const variacaoAmostras =
         penultimoMes.amostras
     );
 
+const tempoMedioUltimoMes =
+    ultimoMes.amostras > 0
+        ? ultimoMes.horas / ultimoMes.amostras
+        : 0;
+
+const tempoMedioPenultimoMes =
+    penultimoMes.amostras > 0
+        ? penultimoMes.horas / penultimoMes.amostras
+        : 0;
+
 const variacaoHoras =
     calcularVariacao(
-        ultimoMes.horas,
-        penultimoMes.horas
+        tempoMedioUltimoMes,
+        tempoMedioPenultimoMes
     );
     const labelsMeses =
         mensalVisivel.map(item => item.mes);
@@ -670,24 +680,33 @@ const variacaoHoras =
                             )} h
                         </strong>
 
-                        <span class="amostra-indicador-subtitulo">
-                            ${amostraFormatarNumero(
-                                tempoMedioMinutos,
-                                1
-                            )} min por amostra
-                        </span>
+                      <span class="amostra-indicador-subtitulo">
+    ${amostraFormatarNumero(
+        tempoMedioMinutos,
+        1
+    )} min por amostra
+</span>
 
-                    </div>
+<div class="amostra-comparacao ${variacaoHoras.classe}">
 
-                </div>
+    ${variacaoHoras.icone}
+    ${variacaoHoras.texto}
 
+    <small>
+        vs mês anterior
+    </small>
 
-                <div class="amostra-mini-chart">
-                    <canvas
-                        id="miniTempoAmostra"
-                    ></canvas>
-                </div>
+</div>
 
+</div>
+
+</div>
+
+<div class="amostra-mini-chart">
+
+    <canvas id="miniTempoAmostra"></canvas>
+
+</div>
             </div>
 
         </section>
