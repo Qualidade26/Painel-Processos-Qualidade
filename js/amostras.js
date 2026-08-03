@@ -316,7 +316,73 @@ function renderAmostra() {
         ultimoMesComDados >= 0
             ? mensalCompleto.slice(0, ultimoMesComDados + 1)
             : mensalCompleto.slice(0, 1);
+/* ==========================================================
+   COMPARAÇÃO COM O MÊS ANTERIOR
+========================================================== */
 
+const ultimoMes =
+    mensalVisivel.at(-1) || {
+        amostras:0,
+        horas:0
+    };
+
+const penultimoMes =
+    mensalVisivel.at(-2) || {
+        amostras:0,
+        horas:0
+    };
+
+function calcularVariacao(atual, anterior){
+
+    atual = Number(atual || 0);
+    anterior = Number(anterior || 0);
+
+    if(anterior <= 0){
+
+        return{
+            valor:0,
+            texto:"Sem comparação",
+            classe:"neutro",
+            icone:"•"
+        };
+    }
+
+    const percentual =
+        (
+            (atual - anterior) /
+            anterior
+        ) * 100;
+
+    return{
+
+        valor:percentual,
+
+        texto:
+            `${Math.abs(percentual).toFixed(1).replace(".",",")}%`,
+
+        classe:
+            percentual >= 0
+                ? "positivo"
+                : "negativo",
+
+        icone:
+            percentual >= 0
+                ? "▲"
+                : "▼"
+    };
+}
+
+const variacaoAmostras =
+    calcularVariacao(
+        ultimoMes.amostras,
+        penultimoMes.amostras
+    );
+
+const variacaoHoras =
+    calcularVariacao(
+        ultimoMes.horas,
+        penultimoMes.horas
+    );
     const labelsMeses =
         mensalVisivel.map(item => item.mes);
 
@@ -482,14 +548,22 @@ function renderAmostra() {
                             ${amostraFormatarNumero(mediaMensal, 1)}
                         </strong>
 
-                        <span class="amostra-indicador-subtitulo">
-                            Amostras por mês
-                        </span>
+                       <span class="amostra-indicador-subtitulo">
+    Amostras por mês
+</span>
 
-                    </div>
+<div class="amostra-comparacao ${variacaoAmostras.classe}">
 
-                </div>
+    ${variacaoAmostras.icone}
+    ${variacaoAmostras.texto}
 
+    <small>
+        vs mês anterior
+    </small>
+
+</div>
+</div>
+</div>
 
                 <div class="amostra-mini-chart">
                     <canvas
