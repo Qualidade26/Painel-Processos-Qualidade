@@ -896,23 +896,87 @@ function destruirGraficosDescarte(){
     }
 }
 /* ==========================================================
-   SCROLL INFINITO — TOP 10 DESCARTE
+   SCROLL INFINITO — ESTILO PAINEL DE AEROPORTO
 ========================================================== */
 
-let intervaloScrollTop10Descarte = null;
+let animacaoScrollTop10Descarte = null;
+
+function pararScrollAutomaticoTop10Descarte(){
+
+    if(animacaoScrollTop10Descarte){
+
+        cancelAnimationFrame(
+            animacaoScrollTop10Descarte
+        );
+
+        animacaoScrollTop10Descarte = null;
+    }
+}
+
 
 function iniciarScrollAutomaticoTop10Descarte(){
+
+    pararScrollAutomaticoTop10Descarte();
+
 
     const areaScroll =
         document.querySelector(
             ".descarte-top10-scroll .table-scroll"
         );
 
+
     if(!areaScroll){
         return;
     }
 
-    clearInterval(intervaloScrollTop10Descarte);
+
+    const tabela =
+        areaScroll.querySelector("table");
+
+
+    const corpoTabela =
+        tabela?.querySelector("tbody");
+
+
+    if(
+        !tabela ||
+        !corpoTabela
+    ){
+        return;
+    }
+
+
+    /*
+    Remove uma duplicação anterior, caso a aba
+    seja renderizada novamente.
+    */
+
+    corpoTabela
+        .querySelectorAll(
+            'tr[data-scroll-copia="true"]'
+        )
+        .forEach(
+            linha => linha.remove()
+        );
+
+
+    const linhasOriginais =
+        Array.from(
+            corpoTabela.querySelectorAll(
+                "tr"
+            )
+        );
+
+
+    if(!linhasOriginais.length){
+        return;
+    }
+
+
+    /*
+    Se não existir conteúdo suficiente para rolar,
+    não inicia a animação.
+    */
 
     if(
         areaScroll.scrollHeight <=
@@ -921,45 +985,193 @@ function iniciarScrollAutomaticoTop10Descarte(){
         return;
     }
 
+
+    /*
+    Duplica as linhas originais.
+    A segunda lista cria a continuidade visual.
+    */
+
+    linhasOriginais.forEach(
+        linhaOriginal => {
+
+            const linhaCopia =
+                linhaOriginal.cloneNode(true);
+
+            linhaCopia.setAttribute(
+                "data-scroll-copia",
+                "true"
+            );
+
+            linhaCopia.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            corpoTabela.appendChild(
+                linhaCopia
+            );
+        }
+    );
+
+
+    /*
+    A altura da primeira lista é exatamente
+    a distância necessária para reiniciar
+    sem que o usuário perceba.
+    */
+
+    const primeiraLinha =
+        linhasOriginais[0];
+
+
+    const primeiraLinhaCopia =
+        corpoTabela.querySelector(
+            'tr[data-scroll-copia="true"]'
+        );
+
+
+    if(
+        !primeiraLinha ||
+        !primeiraLinhaCopia
+    ){
+        return;
+    }
+
+
+    const inicioOriginal =
+        primeiraLinha.offsetTop;
+
+
+    const inicioCopia =
+        primeiraLinhaCopia.offsetTop;
+
+
+    const alturaListaOriginal =
+        inicioCopia -
+        inicioOriginal;
+
+
+    if(alturaListaOriginal <= 0){
+        return;
+    }
+
+
+    areaScroll.scrollTop = 0;
+
+
     let pausado = false;
 
-    areaScroll.addEventListener(
-        "mouseenter",
-        () => pausado = true
-    );
+    let posicaoAtual = 0;
 
-    areaScroll.addEventListener(
-        "mouseleave",
-        () => pausado = false
-    );
+    let tempoAnterior = null;
 
-    intervaloScrollTop10Descarte = setInterval(() => {
 
-        if(pausado){
+    /*
+    Velocidade em pixels por segundo.
+    Diminua para deixar mais lento.
+    Aumente para deixar mais rápido.
+    */
+
+    const velocidade = 18;
+
+
+    areaScroll.onmouseenter = () => {
+
+        pausado = true;
+    };
+
+
+    areaScroll.onmouseleave = () => {
+
+        pausado = false;
+
+        tempoAnterior = null;
+    };
+
+
+    areaScroll.onfocusin = () => {
+
+        pausado = true;
+    };
+
+
+    areaScroll.onfocusout = () => {
+
+        pausado = false;
+
+        tempoAnterior = null;
+    };
+
+
+    function animarScroll(tempoAtual){
+
+        if(!document.body.contains(areaScroll)){
+
+            pararScrollAutomaticoTop10Descarte();
+
             return;
         }
 
-        areaScroll.scrollTop += 1;
 
-        if(
-            areaScroll.scrollTop >=
-            areaScroll.scrollHeight -
-            areaScroll.clientHeight
-        ){
+        if(tempoAnterior === null){
 
-            setTimeout(() => {
-
-                areaScroll.scrollTo({
-                    top:0,
-                    behavior:"instant"
-                });
-
-            },1000);
+            tempoAnterior = tempoAtual;
         }
 
-    },45);
-}
 
+        const tempoDecorrido =
+            tempoAtual -
+            tempoAnterior;
+
+
+        tempoAnterior = tempoAtual;
+
+
+        if(!pausado){
+
+            posicaoAtual +=
+                velocidade *
+                (
+                    tempoDecorrido /
+                    1000
+                );
+
+
+            /*
+            Quando chega ao início da lista duplicada,
+            remove exatamente a altura da lista original.
+
+            Visualmente, nada muda porque a cópia
+            é idêntica à primeira lista.
+            */
+
+            if(
+                posicaoAtual >=
+                alturaListaOriginal
+            ){
+
+                posicaoAtual -=
+                    alturaListaOriginal;
+            }
+
+
+            areaScroll.scrollTop =
+                posicaoAtual;
+        }
+
+
+        animacaoScrollTop10Descarte =
+            requestAnimationFrame(
+                animarScroll
+            );
+    }
+
+
+    animacaoScrollTop10Descarte =
+        requestAnimationFrame(
+            animarScroll
+        );
+}
 
 /* ==========================================================
    RENDERIZAR PÁGINA
