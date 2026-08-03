@@ -1071,11 +1071,46 @@ const nomesOrigens =
 /*
 Valores das origens já ordenados.
 */
-
 const valoresOrigens =
     origens.map(
         item =>
             Number(item.valor || 0)
+    );
+
+
+/*
+Cria um tamanho visual mínimo para que as menores
+fatias continuem aparecendo no gráfico de pizza.
+Os percentuais reais continuam sendo calculados
+pelos valores originais.
+*/
+
+const totalOrigensDescarte =
+    valoresOrigens.reduce(
+        (soma, valor) =>
+            soma + Number(valor || 0),
+        0
+    );
+
+
+const tamanhoMinimoVisualDescarte =
+    totalOrigensDescarte > 0
+        ? totalOrigensDescarte * 0.006
+        : 1;
+
+
+const valoresVisuaisOrigens =
+    valoresOrigens.map(
+        valor => {
+
+            const valorNumerico =
+                Number(valor || 0);
+
+            return Math.max(
+                valorNumerico,
+                tamanhoMinimoVisualDescarte
+            );
+        }
     );
 
 
@@ -1235,9 +1270,7 @@ window.graficoDescarteBarra =
         {
             type:"bar",
 
-           plugins:[
-    valorExternoBarraDescarte
-],
+           plugins:[],
 
             data:{
 
