@@ -595,3 +595,133 @@
         min-height:82px;
     }
 }
+/* ==========================================================
+   AJUSTE PARA TELA DESKTOP COM POUCA ALTURA
+   Mostra toda a aba Amostra em zoom de 100%
+========================================================== */
+
+@media (min-width:1201px) and (max-height:900px){
+
+    /* Gráficos principais mais compactos */
+
+    .amostra-panel-principal{
+        height:285px;
+    }
+
+
+    /* Espaçamento entre as áreas */
+
+    .amostra-cards-topo{
+        margin-bottom:6px;
+    }
+
+    .amostra-graficos-principais{
+        gap:8px;
+        margin-bottom:6px;
+    }
+
+    .amostra-indicadores{
+        gap:10px;
+        margin-top:4px;
+        margin-bottom:6px;
+    }
+
+
+    /* Cards inferiores */
+
+    .amostra-indicador-card{
+        height:225px;
+        padding:14px 16px 10px;
+        border-radius:15px;
+    }
+
+
+    /* Barra colorida superior */
+
+    .amostra-indicador-card::before{
+        height:6px;
+    }
+
+
+    /* Cabeçalho */
+
+    .amostra-indicador-cabecalho{
+        grid-template-columns:
+            52px
+            minmax(0,1fr);
+
+        gap:11px;
+    }
+
+
+    /* Ícones */
+
+    .amostra-indicador-icone{
+        width:52px;
+        height:52px;
+
+        font-size:23px;
+    }
+
+
+    /* Título */
+
+    .amostra-indicador-titulo{
+        min-height:25px;
+
+        font-size:12px;
+        line-height:1.2;
+    }
+
+
+    /* Valor principal */
+
+    .amostra-indicador-valor{
+        margin-top:8px;
+
+        font-size:34px;
+    }
+
+    .amostra-sku{
+        font-size:29px;
+    }
+
+
+    /* Subtítulo */
+
+    .amostra-indicador-subtitulo{
+        margin-top:6px;
+
+        font-size:12px;
+    }
+
+
+    /* Badge de comparação */
+
+    .amostra-comparacao{
+        gap:5px;
+
+        margin-top:10px;
+        padding:5px 9px;
+
+        font-size:10px;
+    }
+
+    .amostra-comparacao strong{
+        font-size:11px;
+    }
+
+    .amostra-comparacao small{
+        font-size:9px;
+    }
+
+
+    /* Mini gráficos */
+
+    .amostra-mini-chart{
+        height:58px;
+        min-height:58px;
+
+        padding:5px 2px 0;
+    }
+}
