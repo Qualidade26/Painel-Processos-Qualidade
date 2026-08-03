@@ -170,7 +170,49 @@
     font-size:17px;
 }
 
+.amostra-comparacao{
 
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    margin-top:10px;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+    font-weight:800;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.05);
+}
+
+.amostra-comparacao small{
+
+    font-size:11px;
+    font-weight:600;
+    opacity:.85;
+}
+
+.amostra-comparacao.positivo{
+
+    color:#059669;
+    background:#ecfdf5;
+}
+
+.amostra-comparacao.negativo{
+
+    color:#dc2626;
+    background:#fef2f2;
+}
+
+.amostra-comparacao.neutro{
+
+    color:#64748b;
+    background:#f1f5f9;
+}
 /* ==========================================================
    MINI GRÁFICOS
 ========================================================== */
