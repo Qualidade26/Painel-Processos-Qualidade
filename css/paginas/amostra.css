@@ -72,93 +72,252 @@
 
 
 /* ==========================================================
-   INDICADORES INFERIORES
+   INDICADORES INFERIORES — MODELO MODERNO
 ========================================================== */
 
 .amostra-indicadores{
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:8px;
-    margin-bottom:8px;
+
+    gap:14px;
+
+    width:100%;
+    margin-bottom:10px;
 }
 
+
+/* ==========================================================
+   CARD
+========================================================== */
+
 .amostra-indicador-card{
-    width:100%;
-    min-width:0;
-    height:160px;
-    padding:12px;
+    position:relative;
 
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
+
+    width:100%;
+    min-width:0;
+    height:330px;
+
+    padding:22px 22px 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fbfdff 100%
+        );
+
+    border:
+        1px solid
+        rgba(37,99,235,.16);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(15,37,87,.09);
 
     overflow:hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
+
+
+/* Barra colorida superior */
+
+.amostra-indicador-card::before{
+    content:"";
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+
+    height:8px;
+
+    background:#2563eb;
+}
+
+
+/* Efeito ao passar o mouse */
+
+.amostra-indicador-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 16px 34px
+        rgba(15,37,87,.14);
+}
+
+
+/* ==========================================================
+   CORES INDIVIDUAIS
+========================================================== */
+
+.amostra-indicador-card:nth-child(1)::before{
+    background:#2563eb;
+}
+
+.amostra-indicador-card:nth-child(2)::before{
+    background:#f5b700;
+}
+
+.amostra-indicador-card:nth-child(3)::before{
+    background:#7c3aed;
+}
+
+.amostra-indicador-card:nth-child(4)::before{
+    background:#16a05d;
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
 
 .amostra-indicador-cabecalho{
     display:grid;
-    grid-template-columns:46px minmax(0,1fr);
-    align-items:center;
-    gap:9px;
+
+    grid-template-columns:
+        72px
+        minmax(0,1fr);
+
+    align-items:start;
+
+    gap:18px;
+
+    width:100%;
     min-width:0;
 }
 
-.amostra-indicador-icone{
-    width:46px;
-    height:46px;
 
+/* ==========================================================
+   ÍCONE
+========================================================== */
+
+.amostra-indicador-icone{
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    border-radius:12px;
+    width:72px;
+    height:72px;
 
-    background:var(--card2);
-    color:var(--primary);
+    border-radius:50%;
 
-    font-size:21px;
+    background:#eaf2ff;
+    color:#2563eb;
+
+    font-size:32px;
     font-weight:900;
+    line-height:1;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(37,99,235,.06);
 }
+
+
+.amostra-indicador-card:nth-child(2)
+.amostra-indicador-icone{
+    background:#fff4d6;
+    color:#e8a600;
+}
+
+
+.amostra-indicador-card:nth-child(3)
+.amostra-indicador-icone{
+    background:#eee7ff;
+    color:#6d28d9;
+}
+
+
+.amostra-indicador-card:nth-child(4)
+.amostra-indicador-icone{
+    background:#e2f7ec;
+    color:#059669;
+}
+
+
+/* ==========================================================
+   TEXTO
+========================================================== */
 
 .amostra-indicador-texto{
     display:flex;
     flex-direction:column;
+
     min-width:0;
 }
 
-.amostra-indicador-titulo{
-    color:var(--muted);
 
-    font-size:10px;
-    font-weight:800;
-    line-height:1.25;
+/* Título */
+
+.amostra-indicador-titulo{
+    display:block;
+
+    min-height:42px;
+
+    color:#53658f;
+
+    font-size:15px;
+    font-weight:900;
+
+    line-height:1.35;
+
     text-transform:uppercase;
+
+    letter-spacing:.2px;
 }
+
+
+/* Valor principal */
 
 .amostra-indicador-valor{
     display:block;
 
-    margin-top:3px;
+    margin-top:28px;
 
-    color:var(--text);
+    color:#071a4b;
 
-    font-size:22px;
+    font-size:54px;
     font-weight:900;
-    line-height:1.1;
+
+    line-height:1;
+
+    letter-spacing:-1.5px;
 
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
 }
 
+
+/* SKU */
+
+.amostra-sku{
+    font-size:44px;
+    letter-spacing:-1px;
+}
+
+
+/* Subtítulo */
+
 .amostra-indicador-subtitulo{
     display:block;
 
-    margin-top:3px;
+    margin-top:14px;
 
-    color:var(--muted);
+    color:#65769c;
 
-    font-size:10px;
+    font-size:17px;
+    font-weight:600;
+
     line-height:1.25;
 
     overflow:hidden;
@@ -166,53 +325,64 @@
     white-space:nowrap;
 }
 
-.amostra-sku{
-    font-size:17px;
-}
+
+/* ==========================================================
+   COMPARAÇÃO MENSAL
+========================================================== */
 
 .amostra-comparacao{
-
     display:inline-flex;
+
     align-items:center;
-    gap:6px;
 
-    margin-top:10px;
+    gap:7px;
 
-    padding:6px 12px;
+    width:max-content;
+    max-width:100%;
 
-    border-radius:999px;
+    margin-top:22px;
 
-    font-size:12px;
-    font-weight:800;
+    padding:8px 14px;
+
+    border-radius:12px;
+
+    font-size:14px;
+    font-weight:900;
+
+    line-height:1;
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,.05);
+        0 3px 10px
+        rgba(15,37,87,.05);
 }
+
 
 .amostra-comparacao small{
+    font-size:13px;
+    font-weight:700;
 
-    font-size:11px;
-    font-weight:600;
-    opacity:.85;
+    opacity:.8;
 }
 
-.amostra-comparacao.positivo{
 
+.amostra-comparacao.positivo{
     color:#059669;
     background:#ecfdf5;
 }
 
-.amostra-comparacao.negativo{
 
+.amostra-comparacao.negativo{
     color:#dc2626;
     background:#fef2f2;
 }
 
-.amostra-comparacao.neutro{
 
+.amostra-comparacao.neutro{
     color:#64748b;
     background:#f1f5f9;
 }
+
+
 /* ==========================================================
    MINI GRÁFICOS
 ========================================================== */
@@ -221,42 +391,97 @@
     position:relative;
 
     width:100%;
-    height:45px;
-    min-height:45px;
+    height:105px;
+    min-height:105px;
 
-    margin-top:8px;
+    margin-top:auto;
+    padding-top:14px;
 }
+
 
 .amostra-mini-chart canvas{
+    display:block;
+
     width:100% !important;
     height:100% !important;
+
     max-width:100%;
+    max-height:100%;
 }
-
-
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
-
 @media(max-width:1200px){
 
     .amostra-indicadores{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .amostra-indicador-card{
+        height:310px;
     }
 }
 
 
-@media(max-width:1050px){
+@media(max-width:800px){
 
-    .amostra-graficos-principais{
+    .amostra-indicadores{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .amostra-indicador-card{
+        height:290px;
+        padding:20px;
+    }
+
+    .amostra-indicador-valor{
+        font-size:46px;
+    }
+
+    .amostra-sku{
+        font-size:37px;
+    }
+
+    .amostra-mini-chart{
+        height:90px;
+        min-height:90px;
+    }
+}
+
+
+@media(max-width:520px){
+
+    .amostra-indicadores{
         grid-template-columns:1fr;
     }
 
-    .amostra-panel-principal{
-        height:340px;
+    .amostra-indicador-card{
+        height:300px;
+    }
+
+    .amostra-indicador-cabecalho{
+        grid-template-columns:
+            62px
+            minmax(0,1fr);
+    }
+
+    .amostra-indicador-icone{
+        width:62px;
+        height:62px;
+
+        font-size:27px;
+    }
+
+    .amostra-indicador-valor{
+        font-size:44px;
+    }
+
+    .amostra-sku{
+        font-size:36px;
     }
 }
-
 
 /* ==========================================================
    TABLET
