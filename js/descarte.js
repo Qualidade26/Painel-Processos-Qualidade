@@ -1218,8 +1218,6 @@ const valoresVisuaisOrigens =
 `;
 
 iniciarScrollAutomaticoTop10Descarte();
-</div>
-
 
 /* ======================================================
    GRÁFICO DE BARRAS
@@ -1676,7 +1674,7 @@ if(canvasPizza){
                                 "right",
 
                             align:
-                                "endr",
+                                "end",
 
                             labels:{
 
