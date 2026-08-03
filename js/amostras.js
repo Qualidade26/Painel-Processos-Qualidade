@@ -160,106 +160,269 @@ function amostraCardTopo(icone, titulo, valor, legenda) {
 
 
 /* ==========================================================
-   MINI GRÁFICOS
-   Sem números, eixos, tooltip ou legenda.
-   ========================================================== */
+   MINI GRÁFICOS DOS INDICADORES
+========================================================== */
 
-function amostraCriarMiniGrafico(idCanvas, tipo, valores, destacarMaior = false) {
-    const canvas = document.getElementById(idCanvas);
-    if (!canvas) return;
+function amostraCriarMiniGrafico(
+    idCanvas,
+    tipo,
+    valores,
+    corPrincipal,
+    destacarMaior = false
+) {
 
-    const dadosMini = valores.map(amostraNumero);
-    const maior = dadosMini.length ? Math.max(...dadosMini) : 0;
+    const canvas =
+        document.getElementById(idCanvas);
 
-    const cores = dadosMini.map(valor => {
-        if (destacarMaior && valor === maior && valor > 0) {
-            return "#22c55e";
-        }
+    if (!canvas) {
+        return;
+    }
 
-        return "#3b82f6";
-    });
+    const dadosMini =
+        valores.map(amostraNumero);
 
-    const grafico = new Chart(canvas, {
-        type: tipo,
+    const maior =
+        dadosMini.length
+            ? Math.max(...dadosMini)
+            : 0;
 
-        data: {
-            labels: dadosMini.map((_, indice) => indice + 1),
 
-            datasets: [{
-                data: dadosMini,
-                backgroundColor: tipo === "bar" ? cores : "transparent",
-                borderColor: "#2563eb",
-                borderWidth: tipo === "line" ? 2 : 0,
-                pointRadius: 0,
-                pointHoverRadius: 0,
-                tension: 0.28,
-                fill: false,
-                borderRadius: 2,
-                maxBarThickness: 10,
-                datalabels: {
-                    display: false
-                }
-            }]
-        },
+    const coresBarras =
+        dadosMini.map(valor => {
 
-         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-devicePixelRatio: 2,
-           animation: {
-    duration: 700,
-    easing: "easeOutQuart"
-},
-         
-
-            events: [],
-
-            layout: {
-                padding: 0
-            },
-
-            plugins: {
-               valorFlutuante: false,
-               
-                legend: {
-                    display: false
-                },
-
-                tooltip: {
-                    enabled: false
-                },
-
-                datalabels: {
-                    display: false
-                }
-            },
-
-            scales: {
-                x: {
-                    display: false,
-                    grid: {
-                        display: false
-                    },
-                    border: {
-                        display: false
-                    }
-                },
-
-                y: {
-                    display: false,
-                    beginAtZero: true,
-                    grid: {
-                        display: false
-                    },
-                    border: {
-                        display: false
-                    }
-                }
+            if (
+                destacarMaior &&
+                valor === maior &&
+                valor > 0
+            ) {
+                return corPrincipal;
             }
-        },
 
-        plugins: []
-    });
+            return corPrincipal;
+        });
+
+
+    let fundoGrafico = "transparent";
+
+
+    /*
+    Cria o degradê somente para o gráfico
+    do Tempo Médio por Amostra.
+    */
+
+    if (tipo === "line") {
+
+        const contexto =
+            canvas.getContext("2d");
+
+        const degradê =
+            contexto.createLinearGradient(
+                0,
+                0,
+                0,
+                canvas.clientHeight || 110
+            );
+
+        degradê.addColorStop(
+            0,
+            "rgba(124,58,237,.28)"
+        );
+
+        degradê.addColorStop(
+            1,
+            "rgba(124,58,237,0)"
+        );
+
+        fundoGrafico = degradê;
+    }
+
+
+    const grafico =
+        new Chart(canvas, {
+
+            type: tipo,
+
+            data: {
+
+                labels:
+                    dadosMini.map(
+                        (_, indice) =>
+                            indice + 1
+                    ),
+
+                datasets: [{
+
+                    data:
+                        dadosMini,
+
+                    backgroundColor:
+                        tipo === "bar"
+                            ? coresBarras
+                            : fundoGrafico,
+
+                    borderColor:
+                        corPrincipal,
+
+                    borderWidth:
+                        tipo === "line"
+                            ? 3
+                            : 0,
+
+                    borderRadius:
+                        tipo === "bar"
+                            ? 4
+                            : 0,
+
+                    maxBarThickness:
+                        12,
+
+                    categoryPercentage:
+                        .72,
+
+                    barPercentage:
+                        .72,
+
+                    tension:
+                        .38,
+
+                    fill:
+                        tipo === "line",
+
+                    pointRadius:
+                        tipo === "line"
+                            ? 4
+                            : 0,
+
+                    pointHoverRadius:
+                        tipo === "line"
+                            ? 6
+                            : 0,
+
+                    pointBackgroundColor:
+                        tipo === "line"
+                            ? "#ffffff"
+                            : corPrincipal,
+
+                    pointBorderColor:
+                        corPrincipal,
+
+                    pointBorderWidth:
+                        tipo === "line"
+                            ? 2.5
+                            : 0,
+
+                    datalabels: {
+
+                        display: false
+                    }
+                }]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                devicePixelRatio: 2,
+
+                animation: {
+
+                    duration: 700,
+
+                    easing: "easeOutQuart"
+                },
+
+                events: [],
+
+                layout: {
+
+                    padding: {
+
+                        top: 8,
+
+                        right: 5,
+
+                        bottom: 2,
+
+                        left: 5
+                    }
+                },
+
+                plugins: {
+
+                    valorFlutuante: false,
+
+                    legend: {
+
+                        display: false
+                    },
+
+                    tooltip: {
+
+                        enabled: false
+                    },
+
+                    datalabels: {
+
+                        display: false
+                    }
+                },
+
+                scales: {
+
+                    x: {
+
+                        display: false,
+
+                        grid: {
+
+                            display: false
+                        },
+
+                        border: {
+
+                            display: false
+                        }
+                    },
+
+                    y: {
+
+                        display: false,
+
+                        beginAtZero: true,
+
+                        suggestedMax:
+                            maior > 0
+                                ? maior * 1.15
+                                : 1,
+
+                        grid: {
+
+                            display: false
+                        },
+
+                        border: {
+
+                            display: false
+                        }
+                    }
+                },
+
+                elements: {
+
+                    line: {
+
+                        borderJoinStyle: "round",
+
+                        borderCapStyle: "round"
+                    }
+                }
+            },
+
+            plugins: []
+        });
+
 
     miniGraficosAmostra.push(grafico);
 }
@@ -442,7 +605,11 @@ const variacaoHoras =
             horas: 0
         }
     );
-
+const variacaoMelhorMes =
+    calcularVariacao(
+        melhorMes.amostras,
+        mediaMensal
+    );
     const rankingSku = rankingOriginal
         .map(item => ({
             sku: amostraSku(item),
@@ -562,16 +729,19 @@ const variacaoHoras =
             Amostras por mês
         </span>
 
-        <div class="amostra-comparacao ${variacaoAmostras.classe}">
+       <div class="amostra-comparacao ${variacaoAmostras.classe}">
 
-            ${variacaoAmostras.icone}
-            ${variacaoAmostras.texto}
+    ${variacaoAmostras.icone}
 
-            <small>
-                vs mês anterior
-            </small>
+    <strong>
+        ${variacaoAmostras.texto}
+    </strong>
 
-        </div>
+    <small>
+        vs mês anterior
+    </small>
+
+</div>
 
     </div>
 
@@ -610,7 +780,19 @@ const variacaoHoras =
                     </div>
 
                 </div>
+<div class="amostra-comparacao ${variacaoMelhorMes.classe}">
 
+    ${variacaoMelhorMes.icone}
+
+    <strong>
+        ${variacaoMelhorMes.texto}
+    </strong>
+
+    <small>
+        vs média mensal
+    </small>
+
+</div>
 
                 <div class="amostra-mini-chart">
                     <canvas
@@ -690,7 +872,10 @@ const variacaoHoras =
 <div class="amostra-comparacao ${variacaoHoras.classe}">
 
     ${variacaoHoras.icone}
-    ${variacaoHoras.texto}
+
+    <strong>
+        ${variacaoHoras.texto}
+    </strong>
 
     <small>
         vs mês anterior
@@ -721,33 +906,53 @@ const variacaoHoras =
     amostraCriarGraficoHorizontal(
         rankingSku
     );
+/* Média mensal — verde */
 
-    amostraCriarMiniGrafico(
-        "miniMediaAmostras",
-        "bar",
-        valoresAmostras
-    );
+amostraCriarMiniGrafico(
+    "miniMediaAmostras",
+    "bar",
+    valoresAmostras,
+    "#16a05d"
+);
 
-    amostraCriarMiniGrafico(
-        "miniMelhorMes",
-        "bar",
-        valoresAmostras,
-        true
-    );
 
-    amostraCriarMiniGrafico(
-        "miniSkuAmostra",
-        "bar",
-        rankingSku.map(
-            item => item.quantidade
-        )
-    );
+/* Melhor mês — amarelo */
 
-    amostraCriarMiniGrafico(
-        "miniTempoAmostra",
-        "line",
-        valoresHoras
-    );
+amostraCriarMiniGrafico(
+    "miniMelhorMes",
+    "bar",
+    valoresAmostras,
+    "#f5b000",
+    true
+);
+
+
+/* SKU mais solicitado — azul */
+
+amostraCriarMiniGrafico(
+    "miniSkuAmostra",
+    "bar",
+    rankingSku.map(
+        item => item.quantidade
+    ),
+    "#1d4ed8"
+);
+
+
+/* Tempo médio — roxo com pontos e sombra */
+
+amostraCriarMiniGrafico(
+    "miniTempoAmostra",
+    "line",
+    mensalVisivel.map(
+        item =>
+            item.amostras > 0
+                ? item.horas /
+                  item.amostras
+                : 0
+    ),
+    "#7c3aed"
+);
 }
 /* ==========================================================
    GRÁFICO MENSAL
