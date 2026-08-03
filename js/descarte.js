@@ -896,7 +896,7 @@ function destruirGraficosDescarte(){
     }
 }
 /* ==========================================================
-   SCROLL AUTOMÁTICO — TOP 10 DESCARTE
+   SCROLL INFINITO — TOP 10 DESCARTE
 ========================================================== */
 
 let intervaloScrollTop10Descarte = null;
@@ -912,11 +912,7 @@ function iniciarScrollAutomaticoTop10Descarte(){
         return;
     }
 
-    if(intervaloScrollTop10Descarte){
-        clearInterval(intervaloScrollTop10Descarte);
-    }
-
-    intervaloScrollTop10Descarte = null;
+    clearInterval(intervaloScrollTop10Descarte);
 
     if(
         areaScroll.scrollHeight <=
@@ -925,33 +921,45 @@ function iniciarScrollAutomaticoTop10Descarte(){
         return;
     }
 
-    let direcao = 1;
     let pausado = false;
 
-    areaScroll.onmouseenter = () => pausado = true;
-    areaScroll.onmouseleave = () => pausado = false;
+    areaScroll.addEventListener(
+        "mouseenter",
+        () => pausado = true
+    );
+
+    areaScroll.addEventListener(
+        "mouseleave",
+        () => pausado = false
+    );
 
     intervaloScrollTop10Descarte = setInterval(() => {
 
-        if(pausado) return;
+        if(pausado){
+            return;
+        }
+
+        areaScroll.scrollTop += 1;
 
         if(
-            areaScroll.scrollTop +
-            areaScroll.clientHeight >=
-            areaScroll.scrollHeight - 2
+            areaScroll.scrollTop >=
+            areaScroll.scrollHeight -
+            areaScroll.clientHeight
         ){
-            direcao = -1;
+
+            setTimeout(() => {
+
+                areaScroll.scrollTo({
+                    top:0,
+                    behavior:"instant"
+                });
+
+            },1000);
         }
 
-        if(areaScroll.scrollTop <= 0){
-            direcao = 1;
-        }
-
-        areaScroll.scrollTop += direcao;
-
-    },35);
-
+    },25);
 }
+
 
 /* ==========================================================
    RENDERIZAR PÁGINA
