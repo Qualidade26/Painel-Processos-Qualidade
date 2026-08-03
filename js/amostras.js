@@ -764,10 +764,10 @@ barPercentage: 0.82,
                         data: horas,
 
                         borderColor:
-                            "#c026d3",
+                            "#7c3aed",
 
                         backgroundColor:
-                            "#c026d3",
+                            "#7c3aed",
 
                         borderWidth: 3,
 
@@ -788,7 +788,7 @@ barPercentage: 0.82,
                             "#ffffff",
 
                         pointBorderColor:
-                            "#c026d3",
+                            "#7c3aed",
 
                         pointBorderWidth: 3,
 
@@ -1025,7 +1025,7 @@ ticks: {
                             text: "Horas",
 
                             color:
-                                "#c026d3",
+                                "#7c3aed",
 
                             font: {
 
@@ -1038,7 +1038,7 @@ ticks: {
                         ticks: {
                           stepSize: 2,
                             color:
-                                "#c026d3",
+                               "#7c3aed",
 
                             callback(valor) {
 
