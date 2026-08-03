@@ -912,7 +912,11 @@ function iniciarScrollAutomaticoTop10Descarte(){
         return;
     }
 
-    clearInterval(intervaloScrollTop10Descarte);
+    if(intervaloScrollTop10Descarte){
+        clearInterval(intervaloScrollTop10Descarte);
+    }
+
+    intervaloScrollTop10Descarte = null;
 
     if(
         areaScroll.scrollHeight <=
@@ -921,31 +925,32 @@ function iniciarScrollAutomaticoTop10Descarte(){
         return;
     }
 
+    let direcao = 1;
     let pausado = false;
 
-    areaScroll.addEventListener("mouseenter", () => {
-        pausado = true;
-    });
-
-    areaScroll.addEventListener("mouseleave", () => {
-        pausado = false;
-    });
+    areaScroll.onmouseenter = () => pausado = true;
+    areaScroll.onmouseleave = () => pausado = false;
 
     intervaloScrollTop10Descarte = setInterval(() => {
 
         if(pausado) return;
 
-        areaScroll.scrollTop += 1;
-
         if(
-            areaScroll.scrollTop >=
-            areaScroll.scrollHeight -
-            areaScroll.clientHeight
+            areaScroll.scrollTop +
+            areaScroll.clientHeight >=
+            areaScroll.scrollHeight - 2
         ){
-            areaScroll.scrollTop = 0;
+            direcao = -1;
         }
 
-    },30);
+        if(areaScroll.scrollTop <= 0){
+            direcao = 1;
+        }
+
+        areaScroll.scrollTop += direcao;
+
+    },35);
+
 }
 
 /* ==========================================================
@@ -1002,85 +1007,91 @@ function renderDescarte(){
         return;
     }
 
-/* ======================================================
-   DADOS
-====================================================== */
 
-const d =
-    dados.descarte || {
+    /* ======================================================
+       DADOS
+    ====================================================== */
 
-        total:0,
+    const d =
+        dados.descarte || {
 
-        ultimoDescarte:0,
+            total:0,
 
-        origens:[],
+            ultimoDescarte:0,
 
-        top10:[]
-    };
+            origens:[],
 
-
-/*
-Copia e ordena as origens do maior valor
-para o menor valor.
-*/
-
-const origens =
-    Array.isArray(d.origens)
-        ? [...d.origens]
-        : [];
+            top10:[]
+        };
 
 
-origens.sort(
-    (a, b) =>
-        Number(b.valor || 0) -
-        Number(a.valor || 0)
-);
+    const origens =
+        Array.isArray(d.origens)
+            ? d.origens
+            : [];
 
 
-/*
-Copia e ordena o Top 10 do maior valor
-para o menor valor.
-*/
-
-const top =
-    Array.isArray(d.top10)
-        ? [...d.top10]
-        : [];
+    const top =
+        Array.isArray(d.top10)
+            ? [...d.top10]
+            : [];
 
 
-top.sort(
-    (a, b) =>
-        Number(b.valor || 0) -
-        Number(a.valor || 0)
-);
-
-
-/*
-Nomes das origens já ordenados.
-*/
-
-const nomesOrigens =
-    origens.map(
-        item =>
-            item.nome ||
-            item.origem ||
-            "Sem origem"
+    top.sort(
+        (a,b) =>
+            Number(b.valor || 0) -
+            Number(a.valor || 0)
     );
 
 
+    const nomesOrigens =
+        origens.map(
+            item =>
+                item.nome ||
+                item.origem ||
+                "Sem origem"
+        );
+
+
+    const valoresOrigens =
+        origens.map(
+            item =>
+                Number(item.valor || 0)
+        );
+
+
+    destruirGraficosDescarte();
+
 /*
-Valores das origens já ordenados.
+Cria um tamanho visual mínimo para que todas as cores
+apareçam na rosquinha, sem alterar o percentual verdadeiro.
 */
 
-const valoresOrigens =
-    origens.map(
-        item =>
-            Number(item.valor || 0)
+const totalOrigensDescarte =
+    valoresOrigens.reduce(
+        (soma, valor) =>
+            soma + Number(valor || 0),
+        0
     );
 
+const tamanhoMinimoVisualDescarte =
+    totalOrigensDescarte > 0
+        ? totalOrigensDescarte * 0.006
+        : 1;
 
-destruirGraficosDescarte();
- 
+const valoresVisuaisOrigens =
+    valoresOrigens.map(
+        valor => {
+
+            const numero =
+                Number(valor || 0);
+
+            return Math.max(
+                numero,
+                tamanhoMinimoVisualDescarte
+            );
+        }
+    );
     /* ======================================================
        HTML
     ====================================================== */
@@ -1235,9 +1246,7 @@ window.graficoDescarteBarra =
         {
             type:"bar",
 
-           plugins:[
-    valorExternoBarraDescarte
-],
+            plugins:[],
 
             data:{
 
@@ -1456,18 +1465,19 @@ window.graficoDescarteBarra =
                         Eixo vertical — origens
                         */
 
-                       y:{
+                        y:{
 
+                            border:{
 
+                                display:false
+                            },
 
-    border:{
-        display:false
-    },
+                            grid:{
 
-    grid:{
-        display:false,
-        drawBorder:false
-    },
+                                display:false,
+
+                                drawBorder:false
+                            },
 
                             ticks:{
 
