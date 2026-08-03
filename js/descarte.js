@@ -21,7 +21,6 @@ const coresDescarte = [
     "#14b8a6"
 ];
 
-
 /* ==========================================================
    FUNÇÕES AUXILIARES
 ========================================================== */
@@ -1009,59 +1008,129 @@ function renderDescarte(){
     }
 
 
-    /* ======================================================
-       DADOS
-    ====================================================== */
+ /* ======================================================
+   DADOS
+====================================================== */
 
-    const d =
-        dados.descarte || {
+const d =
+    dados.descarte || {
 
-            total:0,
+        total: 0,
 
-            ultimoDescarte:0,
+        ultimoDescarte: 0,
 
-            origens:[],
+        origens: [],
 
-            top10:[]
-        };
-
-
-    const origens =
-        Array.isArray(d.origens)
-            ? d.origens
-            : [];
+        top10: []
+    };
 
 
-    const top =
-        Array.isArray(d.top10)
-            ? [...d.top10]
-            : [];
+const origens =
+    Array.isArray(d.origens)
+        ? d.origens
+        : [];
 
 
-    top.sort(
-        (a,b) =>
+const top =
+    Array.isArray(d.top10)
+        ? [...d.top10]
+        : [];
+
+
+top.sort(
+    (a, b) =>
+        Number(b.valor || 0) -
+        Number(a.valor || 0)
+);
+
+
+/* ======================================================
+   DADOS ORIGINAIS — PIZZA
+   Mantém ordem e cores originais
+====================================================== */
+const origensPizza =
+    origens.map(
+        (item, indice) => ({
+
+            ...item,
+
+            /*
+            Guarda exatamente a cor que esta origem
+            possuía originalmente no gráfico de pizza.
+            */
+
+            corOriginal:
+                coresDescarte[
+                    indice % coresDescarte.length
+                ]
+        })
+    );
+
+
+const nomesPizza =
+    origensPizza.map(
+        item =>
+            item.nome ||
+            item.origem ||
+            "Sem origem"
+    );
+
+
+const valoresPizza =
+    origensPizza.map(
+        item =>
+            Number(item.valor || 0)
+    );
+
+
+const coresPizza =
+    origensPizza.map(
+        item =>
+            item.corOriginal
+    );
+
+
+/* ======================================================
+   DADOS ORDENADOS — SOMENTE GRÁFICO DE BARRAS
+====================================================== */
+
+const origensOrdenadas =
+    [...origensPizza].sort(
+        (a, b) =>
             Number(b.valor || 0) -
             Number(a.valor || 0)
     );
 
 
-    const nomesOrigens =
-        origens.map(
-            item =>
-                item.nome ||
-                item.origem ||
-                "Sem origem"
-        );
+const nomesOrigens =
+    origensOrdenadas.map(
+        item =>
+            item.nome ||
+            item.origem ||
+            "Sem origem"
+    );
 
 
-    const valoresOrigens =
-        origens.map(
-            item =>
-                Number(item.valor || 0)
-        );
+const valoresOrigens =
+    origensOrdenadas.map(
+        item =>
+            Number(item.valor || 0)
+    );
 
 
-    destruirGraficosDescarte();
+const coresOrigens =
+    origensOrdenadas.map(
+        item =>
+            item.corOriginal
+    );
+
+
+destruirGraficosDescarte();
+
+
+/* ======================================================
+   TAMANHO VISUAL MÍNIMO DA PIZZA
+====================================================== */
 
 /*
 Cria um tamanho visual mínimo para que todas as cores
@@ -1069,19 +1138,21 @@ apareçam na rosquinha, sem alterar o percentual verdadeiro.
 */
 
 const totalOrigensDescarte =
-    valoresOrigens.reduce(
+    valoresPizza.reduce(
         (soma, valor) =>
             soma + Number(valor || 0),
         0
     );
+
 
 const tamanhoMinimoVisualDescarte =
     totalOrigensDescarte > 0
         ? totalOrigensDescarte * 0.006
         : 1;
 
-const valoresVisuaisOrigens =
-    valoresOrigens.map(
+
+const valoresVisuaisPizza =
+    valoresPizza.map(
         valor => {
 
             const numero =
@@ -1263,13 +1334,8 @@ window.graficoDescarteBarra =
                         valoresOrigens,
 
                     backgroundColor:
-                        nomesOrigens.map(
-                            (_, indice) =>
-                                coresDescarte[
-                                    indice %
-                                    coresDescarte.length
-                                ]
-                        ),
+                         coresOrigens,
+                        
 
                     borderWidth:0,
 
@@ -1572,7 +1638,7 @@ if(canvasPizza){
                 data:{
 
                     labels:
-                        nomesOrigens,
+                        nomesPizza,
 
                     datasets:[{
 
@@ -1585,7 +1651,7 @@ if(canvasPizza){
                         */
 
                         data:
-                            valoresVisuaisOrigens,
+                            valoresVisuaisPizza,
 
                         /*
                         Estes são os valores financeiros reais.
@@ -1594,16 +1660,10 @@ if(canvasPizza){
                         */
 
                         valoresReais:
-                            valoresOrigens,
+                            valoresPizza,
 
                         backgroundColor:
-                            nomesOrigens.map(
-                                (_, indice) =>
-                                    coresDescarte[
-                                        indice %
-                                        coresDescarte.length
-                                    ]
-                            ),
+                           coresPizza,
 
                         borderColor:
                             "#ffffff",
