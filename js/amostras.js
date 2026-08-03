@@ -532,45 +532,46 @@ const variacaoHoras =
 
             <div class="panel amostra-indicador-card">
 
-                <div class="amostra-indicador-cabecalho">
+               <div class="amostra-indicador-cabecalho">
 
-                    <span class="amostra-indicador-icone">
-                        ▦
-                    </span>
+    <span class="amostra-indicador-icone">
+        ▦
+    </span>
 
-                    <div class="amostra-indicador-texto">
+    <div class="amostra-indicador-texto">
 
-                        <span class="amostra-indicador-titulo">
-                            Média de Amostras/Mês
-                        </span>
+        <span class="amostra-indicador-titulo">
+            Média de Amostras/Mês
+        </span>
 
-                        <strong class="amostra-indicador-valor">
-                            ${amostraFormatarNumero(mediaMensal, 1)}
-                        </strong>
+        <strong class="amostra-indicador-valor">
+            ${amostraFormatarNumero(mediaMensal, 1)}
+        </strong>
 
-                       <span class="amostra-indicador-subtitulo">
-    Amostras por mês
-</span>
+        <span class="amostra-indicador-subtitulo">
+            Amostras por mês
+        </span>
 
-<div class="amostra-comparacao ${variacaoAmostras.classe}">
+        <div class="amostra-comparacao ${variacaoAmostras.classe}">
 
-    ${variacaoAmostras.icone}
-    ${variacaoAmostras.texto}
+            ${variacaoAmostras.icone}
+            ${variacaoAmostras.texto}
 
-    <small>
-        vs mês anterior
-    </small>
+            <small>
+                vs mês anterior
+            </small>
+
+        </div>
+
+    </div>
 
 </div>
-</div>
-</div>
 
-                <div class="amostra-mini-chart">
-                    <canvas
-                        id="miniMediaAmostras"
-                    ></canvas>
-                </div>
+<div class="amostra-mini-chart">
 
+    <canvas id="miniMediaAmostras"></canvas>
+
+</div>
             </div>
 
 
