@@ -1458,7 +1458,7 @@ window.graficoDescarteBarra =
 
                        y:{
 
-
+ reverse:true,
 
     border:{
         display:false
