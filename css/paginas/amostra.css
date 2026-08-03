@@ -1,77 +1,4 @@
 /* ==========================================================
-   PÁGINA — AMOSTRA
-========================================================== */
-
-
-/* ==========================================================
-   CARDS SUPERIORES
-========================================================== */
-
-.amostra-cards-topo{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-    margin-bottom:8px;
-}
-
-.amostra-cards-topo > *{
-    width:100%;
-    min-width:0;
-}
-
-
-/* ==========================================================
-   GRÁFICOS PRINCIPAIS
-========================================================== */
-
-.amostra-graficos-principais{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:8px;
-    margin-bottom:8px;
-    align-items:stretch;
-}
-
-.amostra-graficos-principais > .panel{
-    width:100%;
-    min-width:0;
-}
-
-.amostra-panel-principal{
-    width:100%;
-    min-width:0;
-    height:365px;
-
-    display:flex;
-    flex-direction:column;
-
-    overflow:hidden;
-}
-
-.amostra-panel-principal h3{
-    flex:0 0 auto;
-    margin:0 0 8px;
-}
-
-.amostra-chart-principal,
-.amostra-chart-horizontal{
-    position:relative;
-
-    width:100%;
-    min-width:0;
-    min-height:0;
-    flex:1;
-}
-
-.amostra-chart-principal canvas,
-.amostra-chart-horizontal canvas{
-    width:100% !important;
-    height:100% !important;
-    max-width:100%;
-}
-
-
-/* ==========================================================
    INDICADORES INFERIORES — MODELO MODERNO
 ========================================================== */
 
@@ -79,9 +6,10 @@
     display:grid;
     grid-template-columns:repeat(4,minmax(0,1fr));
 
-    gap:14px;
+    gap:12px;
 
     width:100%;
+    margin-top:8px;
     margin-bottom:10px;
 }
 
@@ -98,9 +26,9 @@
 
     width:100%;
     min-width:0;
-    height:330px;
+    height:310px;
 
-    padding:22px 22px 18px;
+    padding:20px 20px 16px;
 
     background:
         linear-gradient(
@@ -109,15 +37,11 @@
             #fbfdff 100%
         );
 
-    border:
-        1px solid
-        rgba(37,99,235,.16);
-
-    border-radius:20px;
+    border:1px solid rgba(37,99,235,.14);
+    border-radius:18px;
 
     box-shadow:
-        0 10px 28px
-        rgba(15,37,87,.09);
+        0 8px 22px rgba(15,37,87,.09);
 
     overflow:hidden;
 
@@ -127,7 +51,15 @@
 }
 
 
-/* Barra colorida superior */
+.amostra-indicador-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 14px 30px rgba(15,37,87,.14);
+}
+
+
+/* Barra superior */
 
 .amostra-indicador-card::before{
     content:"";
@@ -137,41 +69,39 @@
     left:0;
     right:0;
 
-    height:8px;
-
-    background:#2563eb;
-}
-
-
-/* Efeito ao passar o mouse */
-
-.amostra-indicador-card:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 16px 34px
-        rgba(15,37,87,.14);
+    height:7px;
 }
 
 
 /* ==========================================================
-   CORES INDIVIDUAIS
+   CORES DOS QUATRO CARDS
 ========================================================== */
 
+/* Média de amostras — verde */
+
 .amostra-indicador-card:nth-child(1)::before{
-    background:#2563eb;
+    background:#16a05d;
 }
+
+
+/* Melhor mês — amarelo */
 
 .amostra-indicador-card:nth-child(2)::before{
-    background:#f5b700;
+    background:#f5b000;
 }
+
+
+/* SKU — azul */
 
 .amostra-indicador-card:nth-child(3)::before{
-    background:#7c3aed;
+    background:#1d4ed8;
 }
 
+
+/* Tempo médio — roxo */
+
 .amostra-indicador-card:nth-child(4)::before{
-    background:#16a05d;
+    background:#7c3aed;
 }
 
 
@@ -181,14 +111,10 @@
 
 .amostra-indicador-cabecalho{
     display:grid;
-
-    grid-template-columns:
-        72px
-        minmax(0,1fr);
+    grid-template-columns:64px minmax(0,1fr);
 
     align-items:start;
-
-    gap:18px;
+    gap:14px;
 
     width:100%;
     min-width:0;
@@ -196,56 +122,63 @@
 
 
 /* ==========================================================
-   ÍCONE
+   ÍCONES
 ========================================================== */
 
 .amostra-indicador-icone{
     display:flex;
-
     align-items:center;
     justify-content:center;
 
-    width:72px;
-    height:72px;
+    width:64px;
+    height:64px;
 
     border-radius:50%;
 
-    background:#eaf2ff;
-    color:#2563eb;
-
-    font-size:32px;
+    font-size:28px;
     font-weight:900;
     line-height:1;
-
-    box-shadow:
-        inset 0 0 0 1px
-        rgba(37,99,235,.06);
 }
 
+
+/* Verde */
+
+.amostra-indicador-card:nth-child(1)
+.amostra-indicador-icone{
+    color:#059669;
+    background:#e6f7ef;
+}
+
+
+/* Amarelo */
 
 .amostra-indicador-card:nth-child(2)
 .amostra-indicador-icone{
+    color:#e5a400;
     background:#fff4d6;
-    color:#e8a600;
 }
 
+
+/* Azul */
 
 .amostra-indicador-card:nth-child(3)
 .amostra-indicador-icone{
-    background:#eee7ff;
-    color:#6d28d9;
+    color:#1d4ed8;
+    background:#eaf2ff;
 }
 
 
+/* Roxo */
+
 .amostra-indicador-card:nth-child(4)
 .amostra-indicador-icone{
-    background:#e2f7ec;
-    color:#059669;
+    color:#7c3aed;
+    background:#f0e8ff;
 }
 
 
 /* ==========================================================
-   TEXTO
+   ÁREA DE TEXTO
 ========================================================== */
 
 .amostra-indicador-texto{
@@ -256,41 +189,72 @@
 }
 
 
-/* Título */
+/* ==========================================================
+   TÍTULOS
+========================================================== */
 
 .amostra-indicador-titulo{
     display:block;
 
-    min-height:42px;
+    min-height:34px;
 
-    color:#53658f;
-
-    font-size:15px;
+    font-size:13px;
     font-weight:900;
-
-    line-height:1.35;
+    line-height:1.25;
 
     text-transform:uppercase;
-
     letter-spacing:.2px;
 }
 
 
-/* Valor principal */
+/* Verde */
+
+.amostra-indicador-card:nth-child(1)
+.amostra-indicador-titulo{
+    color:#059669;
+}
+
+
+/* Amarelo */
+
+.amostra-indicador-card:nth-child(2)
+.amostra-indicador-titulo{
+    color:#d99a00;
+}
+
+
+/* Azul */
+
+.amostra-indicador-card:nth-child(3)
+.amostra-indicador-titulo{
+    color:#1d4ed8;
+}
+
+
+/* Roxo */
+
+.amostra-indicador-card:nth-child(4)
+.amostra-indicador-titulo{
+    color:#7c3aed;
+}
+
+
+/* ==========================================================
+   VALOR PRINCIPAL
+========================================================== */
 
 .amostra-indicador-valor{
     display:block;
 
-    margin-top:28px;
+    margin-top:14px;
 
     color:#071a4b;
 
-    font-size:54px;
+    font-size:42px;
     font-weight:900;
-
     line-height:1;
 
-    letter-spacing:-1.5px;
+    letter-spacing:-1px;
 
     overflow:hidden;
     text-overflow:ellipsis;
@@ -298,27 +262,26 @@
 }
 
 
-/* SKU */
-
 .amostra-sku{
-    font-size:44px;
-    letter-spacing:-1px;
+    font-size:34px;
+    letter-spacing:-.5px;
 }
 
 
-/* Subtítulo */
+/* ==========================================================
+   SUBTÍTULO
+========================================================== */
 
 .amostra-indicador-subtitulo{
     display:block;
 
-    margin-top:14px;
+    margin-top:10px;
 
-    color:#65769c;
+    color:#62749a;
 
-    font-size:17px;
-    font-weight:600;
-
-    line-height:1.25;
+    font-size:14px;
+    font-weight:700;
+    line-height:1.2;
 
     overflow:hidden;
     text-overflow:ellipsis;
@@ -327,41 +290,44 @@
 
 
 /* ==========================================================
-   COMPARAÇÃO MENSAL
+   COMPARAÇÃO
 ========================================================== */
 
 .amostra-comparacao{
     display:inline-flex;
-
     align-items:center;
 
-    gap:7px;
+    gap:6px;
 
     width:max-content;
     max-width:100%;
 
-    margin-top:22px;
+    margin-top:16px;
+    padding:7px 11px;
 
-    padding:8px 14px;
+    border-radius:999px;
 
-    border-radius:12px;
-
-    font-size:14px;
-    font-weight:900;
-
+    font-size:12px;
+    font-weight:800;
     line-height:1;
 
+    white-space:nowrap;
+
     box-shadow:
-        0 3px 10px
-        rgba(15,37,87,.05);
+        0 3px 9px rgba(15,37,87,.05);
+}
+
+
+.amostra-comparacao strong{
+    font-size:13px;
+    font-weight:900;
 }
 
 
 .amostra-comparacao small{
-    font-size:13px;
+    font-size:11px;
     font-weight:700;
-
-    opacity:.8;
+    opacity:.82;
 }
 
 
@@ -391,11 +357,11 @@
     position:relative;
 
     width:100%;
-    height:105px;
-    min-height:105px;
+    height:92px;
+    min-height:92px;
 
     margin-top:auto;
-    padding-top:14px;
+    padding:9px 3px 0;
 }
 
 
@@ -408,9 +374,12 @@
     max-width:100%;
     max-height:100%;
 }
+
+
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
+
 @media(max-width:1200px){
 
     .amostra-indicadores{
@@ -419,69 +388,10 @@
     }
 
     .amostra-indicador-card{
-        height:310px;
-    }
-}
-
-
-@media(max-width:800px){
-
-    .amostra-indicadores{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .amostra-indicador-card{
-        height:290px;
-        padding:20px;
-    }
-
-    .amostra-indicador-valor{
-        font-size:46px;
-    }
-
-    .amostra-sku{
-        font-size:37px;
-    }
-
-    .amostra-mini-chart{
-        height:90px;
-        min-height:90px;
-    }
-}
-
-
-@media(max-width:520px){
-
-    .amostra-indicadores{
-        grid-template-columns:1fr;
-    }
-
-    .amostra-indicador-card{
         height:300px;
     }
-
-    .amostra-indicador-cabecalho{
-        grid-template-columns:
-            62px
-            minmax(0,1fr);
-    }
-
-    .amostra-indicador-icone{
-        width:62px;
-        height:62px;
-
-        font-size:27px;
-    }
-
-    .amostra-indicador-valor{
-        font-size:44px;
-    }
-
-    .amostra-sku{
-        font-size:36px;
-    }
 }
+
 
 /* ==========================================================
    TABLET
@@ -493,24 +403,50 @@
         grid-template-columns:1fr;
     }
 
-    .amostra-indicadores{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .amostra-graficos-principais{
+        grid-template-columns:1fr;
     }
 
     .amostra-panel-principal{
         height:315px;
     }
 
+    .amostra-indicadores{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
     .amostra-indicador-card{
-        height:150px;
+        height:290px;
+        padding:18px;
+    }
+
+    .amostra-indicador-cabecalho{
+        grid-template-columns:
+            58px
+            minmax(0,1fr);
+
+        gap:12px;
+    }
+
+    .amostra-indicador-icone{
+        width:58px;
+        height:58px;
+
+        font-size:25px;
     }
 
     .amostra-indicador-valor{
-        font-size:20px;
+        font-size:38px;
     }
 
     .amostra-sku{
-        font-size:16px;
+        font-size:31px;
+    }
+
+    .amostra-mini-chart{
+        height:85px;
+        min-height:85px;
     }
 }
 
@@ -530,21 +466,42 @@
     }
 
     .amostra-indicador-card{
-        height:145px;
+        height:290px;
+        padding:18px;
     }
 
     .amostra-indicador-cabecalho{
-        grid-template-columns:42px minmax(0,1fr);
+        grid-template-columns:
+            54px
+            minmax(0,1fr);
     }
 
     .amostra-indicador-icone{
-        width:42px;
-        height:42px;
-        font-size:19px;
+        width:54px;
+        height:54px;
+
+        font-size:24px;
+    }
+
+    .amostra-indicador-valor{
+        font-size:38px;
+    }
+
+    .amostra-sku{
+        font-size:30px;
+    }
+
+    .amostra-comparacao{
+        padding:6px 9px;
+        gap:4px;
+    }
+
+    .amostra-comparacao small{
+        font-size:10px;
     }
 
     .amostra-mini-chart{
-        height:40px;
-        min-height:40px;
+        height:82px;
+        min-height:82px;
     }
 }
