@@ -1001,14 +1001,15 @@ ticks: {
                 },
 
 
-                    y1: {
+                   y1: {
 
-                        beginAtZero: true,
+    beginAtZero: true,
 
-                        suggestedMax:
-                            maiorHora * 1.4,
+    min: 0,
 
-                        position: "right",
+    max: 30,
+
+    position: "right",
 
                         grid: {
 
@@ -1035,7 +1036,7 @@ ticks: {
                         },
 
                         ticks: {
-
+                          stepSize: 2,
                             color:
                                 "#c026d3",
 
