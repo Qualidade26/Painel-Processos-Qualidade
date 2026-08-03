@@ -957,7 +957,7 @@ function iniciarScrollAutomaticoTop10Descarte(){
             },1000);
         }
 
-    },25);
+    },45);
 }
 
 
