@@ -1053,7 +1053,7 @@ function criarGraficoAdequacaoStatus(a){
 
 
             const finalX =
-                inicioX + 33;
+                inicioX - 55;
 
             const finalY =
                 inicioY - 16;
@@ -1088,7 +1088,7 @@ function criarGraficoAdequacaoStatus(a){
             /* 2% */
 
             ctx.textAlign =
-                "left";
+      "right";
 
             ctx.textBaseline =
                 "bottom";
@@ -1101,7 +1101,7 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.fillText(
                 `${Math.round(percentualAvaria)}%`,
-                finalX + 5,
+                finalX - 5,
                 finalY - 1
             );
 
@@ -1119,7 +1119,7 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.fillText(
                 "AVARIA",
-                finalX + 5,
+                finalX - 5,
                 finalY + 2
             );
 
