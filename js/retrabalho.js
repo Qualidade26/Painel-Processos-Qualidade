@@ -1072,10 +1072,10 @@ function criarGraficoAdequacaoStatus(a){
             /* linha para cima e para a direita */
 
             const finalX =
-                meioX + 48;
+                meioX + 70;
 
             const finalY =
-                meioY - 28;
+                meioY - 35;
 
 
             ctx.save();
@@ -1231,8 +1231,8 @@ function criarGraficoAdequacaoStatus(a){
 
                         padding:{
 
-                            top:35,
-                            right:110,
+                            top:45,
+                            right:150,
                             bottom:10,
                             left:10
                         }
