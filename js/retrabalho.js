@@ -976,7 +976,6 @@ function criarGraficoAdequacaoStatus(a){
             ctx.textBaseline =
                 "middle";
 
-
             ctx.fillStyle =
                 "#111827";
 
@@ -988,7 +987,6 @@ function criarGraficoAdequacaoStatus(a){
                 centroX,
                 centroY - 5
             );
-
 
             ctx.fillStyle =
                 "#334155";
@@ -1041,117 +1039,119 @@ function criarGraficoAdequacaoStatus(a){
                 ) / 2;
 
 
-           const inicioX =
-    arcoAvaria.x +
-    Math.cos(angulo) *
-    arcoAvaria.outerRadius;
+            /* início na borda da fatia */
 
-const inicioY =
-    arcoAvaria.y +
-    Math.sin(angulo) *
-    arcoAvaria.outerRadius;
+            const inicioX =
+                arcoAvaria.x +
+                Math.cos(angulo) *
+                arcoAvaria.outerRadius;
 
-
-/*
-    Primeiro ponto fora da rosca.
-*/
-
-const meioX =
-    arcoAvaria.x +
-    Math.cos(angulo) *
-    (
-        arcoAvaria.outerRadius + 12
-    );
-
-const meioY =
-    arcoAvaria.y +
-    Math.sin(angulo) *
-    (
-        arcoAvaria.outerRadius + 12
-    );
+            const inicioY =
+                arcoAvaria.y +
+                Math.sin(angulo) *
+                arcoAvaria.outerRadius;
 
 
-/*
-    Linha para cima e para a direita.
-*/
+            /* primeiro ponto fora da rosca */
 
-const finalX =
-    meioX + 48;
+            const meioX =
+                arcoAvaria.x +
+                Math.cos(angulo) *
+                (
+                    arcoAvaria.outerRadius + 12
+                );
 
-const finalY =
-    meioY - 28;
-
-
-ctx.save();
-
-
-ctx.beginPath();
-
-ctx.moveTo(
-    inicioX,
-    inicioY
-);
-
-ctx.lineTo(
-    meioX,
-    meioY
-);
-
-ctx.lineTo(
-    finalX,
-    finalY
-);
-
-ctx.strokeStyle =
-    "#ef4444";
-
-ctx.lineWidth =
-    1.4;
-
-ctx.stroke();
+            const meioY =
+                arcoAvaria.y +
+                Math.sin(angulo) *
+                (
+                    arcoAvaria.outerRadius + 12
+                );
 
 
-/* 2% */
+            /* linha para cima e para a direita */
 
-ctx.textAlign =
-    "left";
+            const finalX =
+                meioX + 48;
 
-ctx.textBaseline =
-    "bottom";
-
-ctx.fillStyle =
-    "#ef4444";
-
-ctx.font =
-    "800 17px 'Segoe UI', Arial, sans-serif";
-
-ctx.fillText(
-    `${Math.round(percentualAvaria)}%`,
-    finalX + 5,
-    finalY - 1
-);
+            const finalY =
+                meioY - 28;
 
 
-/* AVARIA */
+            ctx.save();
 
-ctx.textBaseline =
-    "top";
+            ctx.beginPath();
 
-ctx.fillStyle =
-    "#475569";
+            ctx.moveTo(
+                inicioX,
+                inicioY
+            );
 
-ctx.font =
-    "700 8px 'Segoe UI', Arial, sans-serif";
+            ctx.lineTo(
+                meioX,
+                meioY
+            );
 
-ctx.fillText(
-    "AVARIA",
-    finalX + 5,
-    finalY + 2
-);
+            ctx.lineTo(
+                finalX,
+                finalY
+            );
+
+            ctx.strokeStyle =
+                "#ef4444";
+
+            ctx.lineWidth =
+                1.4;
+
+            ctx.stroke();
 
 
-ctx.restore();
+            /* percentual */
 
+            ctx.textAlign =
+                "left";
+
+            ctx.textBaseline =
+                "bottom";
+
+            ctx.fillStyle =
+                "#ef4444";
+
+            ctx.font =
+                "800 17px 'Segoe UI', Arial, sans-serif";
+
+            ctx.fillText(
+                `${Math.round(percentualAvaria)}%`,
+                finalX + 5,
+                finalY - 1
+            );
+
+
+            /* descrição */
+
+            ctx.textBaseline =
+                "top";
+
+            ctx.fillStyle =
+                "#475569";
+
+            ctx.font =
+                "700 8px 'Segoe UI', Arial, sans-serif";
+
+            ctx.fillText(
+                "AVARIA",
+                finalX + 5,
+                finalY + 2
+            );
+
+            ctx.restore();
+        }
+    };
+
+
+    /* ======================================================
+       CRIAÇÃO DO GRÁFICO
+    ====================================================== */
 
     graficoAdequacaoStatus =
         new Chart(
@@ -1212,11 +1212,11 @@ ctx.restore();
                     cutout:"58%",
 
                     /*
-                        Coloca a fatia vermelha
-                        no alto à direita.
+                        Ajusta a posição da fatia vermelha.
+                        Para o lado direito, use aproximadamente -78.
                     */
 
-                    rotation:102,
+                    rotation:-78,
 
                     circumference:360,
 
@@ -1232,11 +1232,8 @@ ctx.restore();
                         padding:{
 
                             top:35,
-
                             right:110,
-
                             bottom:10,
-
                             left:10
                         }
                     },
@@ -1294,7 +1291,6 @@ ctx.restore();
 /* ==========================================================
    GRÁFICO — MOTIVOS
 ========================================================== */
-
 function criarGraficoAdequacaoMotivos(a){
 
     const canvas =
@@ -1344,15 +1340,12 @@ function criarGraficoAdequacaoMotivos(a){
                                     )
                             ),
 
-                        backgroundColor:
-                            "#2453d4",
+                        backgroundColor:"#2453d4",
 
                         borderWidth:0,
 
                         borderRadius:4
-
                     }]
-
                 },
 
                 options:{
@@ -1364,7 +1357,6 @@ function criarGraficoAdequacaoMotivos(a){
                     layout:{
 
                         padding:{
-
                             top:8,
                             right:65,
                             left:5,
@@ -1394,9 +1386,7 @@ function criarGraficoAdequacaoMotivos(a){
                                         ];
 
                                     return (
-                                        moeda(
-                                            context.raw
-                                        ) +
+                                        moeda(context.raw) +
                                         " - " +
                                         formatarPercentualAdequacao(
                                             motivo.percentual
@@ -1414,9 +1404,7 @@ function criarGraficoAdequacaoMotivos(a){
                             beginAtZero:true,
 
                             grid:{
-
-                                color:
-                                    "rgba(148,163,184,.22)"
+                                color:"rgba(148,163,184,.22)"
                             },
 
                             border:{
@@ -1446,7 +1434,6 @@ function criarGraficoAdequacaoMotivos(a){
                             ticks:{
 
                                 font:{
-
                                     size:10,
                                     weight:"700"
                                 }
