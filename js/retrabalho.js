@@ -1041,90 +1041,116 @@ function criarGraficoAdequacaoStatus(a){
                 ) / 2;
 
 
-            const inicioX =
-                arcoAvaria.x +
-                Math.cos(angulo) *
-                arcoAvaria.outerRadius;
+           const inicioX =
+    arcoAvaria.x +
+    Math.cos(angulo) *
+    arcoAvaria.outerRadius;
 
-            const inicioY =
-                arcoAvaria.y +
-                Math.sin(angulo) *
-                arcoAvaria.outerRadius;
-
-
-            const finalX =
-                inicioX - 55;
-
-            const finalY =
-                inicioY - 16;
+const inicioY =
+    arcoAvaria.y +
+    Math.sin(angulo) *
+    arcoAvaria.outerRadius;
 
 
-            ctx.save();
+/*
+    Primeiro ponto fora da rosca.
+*/
+
+const meioX =
+    arcoAvaria.x +
+    Math.cos(angulo) *
+    (
+        arcoAvaria.outerRadius + 12
+    );
+
+const meioY =
+    arcoAvaria.y +
+    Math.sin(angulo) *
+    (
+        arcoAvaria.outerRadius + 12
+    );
 
 
-            /* linha curta */
+/*
+    Linha para cima e para a esquerda.
+*/
 
-            ctx.beginPath();
+const finalX =
+    meioX - 60;
 
-            ctx.moveTo(
-                inicioX,
-                inicioY
-            );
-
-            ctx.lineTo(
-                finalX,
-                finalY
-            );
-
-            ctx.strokeStyle =
-                "#ef4444";
-
-            ctx.lineWidth =
-                1.3;
-
-            ctx.stroke();
+const finalY =
+    meioY - 25;
 
 
-            /* 2% */
-
-            ctx.textAlign =
-      "right";
-
-            ctx.textBaseline =
-                "bottom";
-
-            ctx.fillStyle =
-                "#ef4444";
-
-            ctx.font =
-                "800 17px 'Segoe UI', Arial, sans-serif";
-
-            ctx.fillText(
-                `${Math.round(percentualAvaria)}%`,
-                finalX - 5,
-                finalY - 1
-            );
+ctx.save();
 
 
-            /* AVARIA */
+ctx.beginPath();
 
-            ctx.textBaseline =
-                "top";
+ctx.moveTo(
+    inicioX,
+    inicioY
+);
 
-            ctx.fillStyle =
-                "#475569";
+ctx.lineTo(
+    meioX,
+    meioY
+);
 
-            ctx.font =
-                "700 8px 'Segoe UI', Arial, sans-serif";
+ctx.lineTo(
+    finalX,
+    finalY
+);
 
-            ctx.fillText(
-                "AVARIA",
-                finalX - 5,
-                finalY + 2
-            );
+ctx.strokeStyle =
+    "#ef4444";
+
+ctx.lineWidth =
+    1.4;
+
+ctx.stroke();
 
 
-            ctx.restore();
+/* 2% */
+
+ctx.textAlign =
+    "right";
+
+ctx.textBaseline =
+    "bottom";
+
+ctx.fillStyle =
+    "#ef4444";
+
+ctx.font =
+    "800 17px 'Segoe UI', Arial, sans-serif";
+
+ctx.fillText(
+    `${Math.round(percentualAvaria)}%`,
+    finalX - 5,
+    finalY - 1
+);
+
+
+/* AVARIA */
+
+ctx.textBaseline =
+    "top";
+
+ctx.fillStyle =
+    "#475569";
+
+ctx.font =
+    "700 8px 'Segoe UI', Arial, sans-serif";
+
+ctx.fillText(
+    "AVARIA",
+    finalX - 5,
+    finalY + 2
+);
+
+
+ctx.restore();
         }
     };
 
@@ -1192,7 +1218,7 @@ function criarGraficoAdequacaoStatus(a){
                         no alto à direita.
                     */
 
-                    rotation:-78,
+                    rotation:102,
 
                     circumference:360,
 
@@ -1209,11 +1235,11 @@ function criarGraficoAdequacaoStatus(a){
 
                             top:28,
 
-                            right:75,
+                            right:10,
 
                             bottom:10,
 
-                            left:10
+                            left:90
                         }
                     },
 
