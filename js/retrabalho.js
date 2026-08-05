@@ -944,87 +944,102 @@ function criarGraficoAdequacaoStatus(a){
             : 0;
 
 
-    /* ======================================================
-       TEXTO CENTRAL — 98% / BOM
-    ====================================================== */
+   /* ======================================================
+   TEXTO CENTRAL — LIMPA O PLUGIN GLOBAL E ESCREVE 98%
+====================================================== */
 
-    const textoCentroAdequacao = {
+const textoCentroAdequacao = {
 
-        id:"textoCentroAdequacao",
+    id:"textoCentroAdequacao",
 
-        afterDatasetsDraw(chart){
+    afterDraw(chart){
 
-            const meta =
-                chart.getDatasetMeta(0);
+        const meta =
+            chart.getDatasetMeta(0);
 
-            if(
-                !meta ||
-                !meta.data ||
-                !meta.data.length
-            ){
-                return;
-            }
-
-            /*
-                O primeiro arco é AVARIA.
-                O segundo arco é BOM.
-                Ambos possuem o mesmo centro.
-            */
-
-            const arco =
-                meta.data[0];
-
-            const ctx =
-                chart.ctx;
-
-            const centroX =
-                arco.x;
-
-            const centroY =
-                arco.y;
-
-
-            ctx.save();
-
-            ctx.textAlign =
-                "center";
-
-            ctx.textBaseline =
-                "middle";
-
-
-            /* percentual central */
-
-            ctx.fillStyle =
-                "#111827";
-
-            ctx.font =
-                "800 22px 'Segoe UI', Arial, sans-serif";
-
-            ctx.fillText(
-                `${Math.round(percentualBom)}%`,
-                centroX,
-                centroY - 7
-            );
-
-
-            /* descrição central */
-
-            ctx.fillStyle =
-                "#334155";
-
-            ctx.font =
-                "700 9px 'Segoe UI', Arial, sans-serif";
-
-            ctx.fillText(
-                "BOM",
-                centroX,
-                centroY + 14
-            );
-
-            ctx.restore();
+        if(
+            !meta ||
+            !meta.data ||
+            !meta.data.length
+        ){
+            return;
         }
-    };
+
+        const arco =
+            meta.data[0];
+
+        const ctx =
+            chart.ctx;
+
+        const centroX =
+            arco.x;
+
+        const centroY =
+            arco.y;
+
+        const raioInterno =
+            arco.innerRadius;
+
+
+        ctx.save();
+
+
+        /* limpa qualquer texto criado pelo tema global */
+
+        ctx.beginPath();
+
+        ctx.arc(
+            centroX,
+            centroY,
+            raioInterno - 2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.fill();
+
+
+        /* percentual central */
+
+        ctx.textAlign =
+            "center";
+
+        ctx.textBaseline =
+            "middle";
+
+        ctx.fillStyle =
+            "#111827";
+
+        ctx.font =
+            "800 22px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillText(
+            `${Math.round(percentualBom)}%`,
+            centroX,
+            centroY - 6
+        );
+
+
+        /* texto BOM */
+
+        ctx.fillStyle =
+            "#334155";
+
+        ctx.font =
+            "700 9px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillText(
+            "BOM",
+            centroX,
+            centroY + 15
+        );
+
+        ctx.restore();
+    }
+};
 
 
     /* ======================================================
