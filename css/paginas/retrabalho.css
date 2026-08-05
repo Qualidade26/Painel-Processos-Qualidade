@@ -958,16 +958,16 @@
    AJUSTE FINAL — GRÁFICO BOM X AVARIA
 ========================================================== */
 
-.adequacao-panel-bom-avaria{F
+.adequacao-panel-bom-avaria{
     min-height:310px;
-    overflow:visible;F
+    overflow:hidden;
 }
 
 .adequacao-bom-avaria-conteudo{
     display:grid;
-    grid-template-columns:minmax(300px,1fr) minmax(230px,.85fr);
+    grid-template-columns:minmax(330px,1fr) minmax(230px,.8fr);
     align-items:center;
-    gap:4px;
+    gap:8px;
 
     width:100%;
     min-width:0;
@@ -979,8 +979,8 @@
     width:100%;
     min-width:0;
 
-    height:270px;
-    min-height:270px;
+    height:300px;
+    min-height:300px;
 
     overflow:visible;
 }
@@ -988,6 +988,7 @@
 .adequacao-chart-box canvas{
     width:100% !important;
     height:100% !important;
+    max-width:100%;
 }
 
 .adequacao-legenda{
@@ -999,7 +1000,7 @@
     width:100%;
     min-width:0;
 
-    padding:0 8px 0 0;
+    padding-right:8px;
 }
 
 .adequacao-legenda-item{
@@ -1009,12 +1010,14 @@
     gap:8px;
 
     width:100%;
+    min-width:0;
 }
 
 .adequacao-legenda-cor{
     width:13px;
     height:13px;
-    border-radius:1px;
+
+    border-radius:2px;
 }
 
 .adequacao-legenda-cor.bom{
@@ -1022,32 +1025,37 @@
 }
 
 .adequacao-legenda-cor.avaria{
-    background:#ef3f3f;
+    background:#ef4444;
 }
 
 .adequacao-legenda-nome{
+    min-width:0;
+
     color:#172554;
+
     font-size:13px;
     font-weight:700;
 }
 
 .adequacao-legenda-valor{
     color:#172554;
+
     font-size:12px;
     font-weight:800;
+
     text-align:right;
     white-space:nowrap;
 }
 
 
 /* ==========================================================
-   RESPONSIVIDADE DO BOM X AVARIA
+   RESPONSIVIDADE — BOM X AVARIA
 ========================================================== */
 
 @media(max-width:1200px){
 
     .adequacao-bom-avaria-conteudo{
-        grid-template-columns:minmax(260px,1fr) minmax(210px,.9fr);
+        grid-template-columns:minmax(270px,1fr) minmax(210px,.85fr);
     }
 
     .adequacao-legenda-item{
@@ -1067,26 +1075,26 @@
     }
 
     .adequacao-legenda{
+        width:100%;
         max-width:430px;
+
         margin:0 auto;
         padding:0 12px 12px;
     }
 }
-/* ==========================================================
-   BOM X AVARIA — AJUSTE DE ENQUADRAMENTO
-========================================================== */
 
-.adequacao-panel-bom-avaria{
-    overflow:hidden;
-}
+@media(max-width:520px){
 
-.adequacao-bom-avaria-conteudo{
-    grid-template-columns:minmax(330px,1fr) minmax(230px,.8fr);
-    align-items:center;
-}
+    .adequacao-chart-box{
+        height:260px;
+        min-height:260px;
+    }
 
-.adequacao-chart-box{
-    height:300px;
-    min-height:300px;
-    overflow:visible;
+    .adequacao-legenda-item{
+        grid-template-columns:12px 48px minmax(0,1fr);
+    }
+
+    .adequacao-legenda-valor{
+        text-align:right;
+    }
 }
