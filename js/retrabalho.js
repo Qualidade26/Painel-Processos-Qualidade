@@ -579,13 +579,10 @@ function renderAdequacaoCaixa(){
                                             adequacao-legenda-valor
                                         "
                                     >
-                                        ${moeda(valorBom)}
-                                        -
-                                        ${formatarPercentualAdequacao(
-                                            a.indicadores
-                                            ?.bom
-                                            ?.percentual
-                                        )}
+                                       ${moeda(valorBom)}
+(${formatarPercentualAdequacao(
+    a.indicadores?.bom?.percentual
+)})
                                     </span>
 
                                 </div>
@@ -616,13 +613,10 @@ function renderAdequacaoCaixa(){
                                             adequacao-legenda-valor
                                         "
                                     >
-                                        ${moeda(valorAvaria)}
-                                        -
-                                        ${formatarPercentualAdequacao(
-                                            a.indicadores
-                                            ?.avaria
-                                            ?.percentual
-                                        )}
+                                      ${moeda(valorAvaria)}
+(${formatarPercentualAdequacao(
+    a.indicadores?.avaria?.percentual
+)})
                                     </span>
 
                                 </div>
