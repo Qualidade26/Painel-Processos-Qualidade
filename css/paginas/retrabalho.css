@@ -1326,3 +1326,120 @@
 .pagina-retrabalho .adequacao-legenda-valor{
     font-weight:800;
 }
+/* ==========================================================
+   AJUSTE PARA NOTEBOOKS (IGUAL À ABA AMOSTRA)
+========================================================== */
+
+@media (min-width:1201px) and (max-height:900px){
+
+    /* Cards superiores */
+
+    .adequacao-indicadores,
+    .pagina-retrabalho .cards{
+        gap:6px;
+        margin-bottom:6px;
+    }
+
+    /* Grade principal */
+
+    .adequacao-grid,
+    .pagina-retrabalho .grid-2{
+        gap:6px;
+        margin-bottom:6px;
+    }
+
+    /* Painéis */
+
+    .adequacao-panel,
+    .retrabalho-panel,
+    .pagina-retrabalho .panel{
+
+        padding:8px;
+    }
+
+    /* BOM × AVARIA */
+
+    .adequacao-panel-bom-avaria{
+        min-height:265px;
+    }
+
+    .adequacao-chart-box{
+        height:215px;
+        min-height:215px;
+    }
+
+    /* Motivos */
+
+    .adequacao-panel-motivos{
+        min-height:265px;
+    }
+
+    .adequacao-chart-box-motivos{
+        height:215px;
+        min-height:215px;
+    }
+
+    /* Tabela */
+
+    .adequacao-panel-tabela{
+        min-height:536px;
+    }
+
+    .adequacao-tabela-scroll{
+        max-height:455px;
+    }
+
+    /* Gráfico Retrabalho */
+
+    .retrabalho-chart-box,
+    .pagina-retrabalho .chart-box.tall{
+
+        height:285px;
+        min-height:285px;
+    }
+
+    /* Legenda */
+
+    .adequacao-legenda-nome{
+        font-size:12px;
+        font-weight:800;
+    }
+
+    .adequacao-legenda-valor{
+        font-size:11px;
+        font-weight:800;
+    }
+
+    /* Pesquisa */
+
+    .adequacao-pesquisa input,
+    #buscaFabricante{
+        min-height:36px;
+        font-size:12px;
+    }
+
+    /* Tabela */
+
+    .adequacao-tabela th{
+        font-size:11px;
+    }
+
+    .adequacao-tabela td{
+        font-size:11px;
+    }
+
+    /* Cards */
+
+    .card-titulo{
+        font-size:12px;
+    }
+
+    .card-valor{
+        font-size:18px;
+        font-weight:900;
+    }
+
+    .card-subtitulo{
+        font-size:11px;
+    }
+}
