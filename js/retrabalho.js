@@ -888,7 +888,6 @@ function filtrarTabelaAdequacao(){
 
     );
 }
-
 /* ==========================================================
    GRÁFICO — BOM X AVARIA
 ========================================================== */
@@ -942,7 +941,7 @@ function criarGraficoAdequacaoStatus(a){
 
 
     /* ======================================================
-       PLUGIN — TEXTO CENTRAL
+       TEXTO CENTRAL
     ====================================================== */
 
     const textoCentralAdequacao = {
@@ -953,7 +952,6 @@ function criarGraficoAdequacaoStatus(a){
 
             const meta =
                 chart.getDatasetMeta(0);
-
 
             if(
                 !meta ||
@@ -967,14 +965,11 @@ function criarGraficoAdequacaoStatus(a){
             const arco =
                 meta.data[0];
 
-
             const centroX =
                 arco.x;
 
-
             const centroY =
                 arco.y;
-
 
             const ctx =
                 chart.ctx;
@@ -982,41 +977,31 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.save();
 
-
             ctx.textAlign =
                 "center";
-
 
             ctx.textBaseline =
                 "middle";
 
 
-            /* percentual */
-
             ctx.fillStyle =
                 "#0f172a";
-
 
             ctx.font =
                 "800 28px 'Segoe UI', Arial, sans-serif";
 
-
             ctx.fillText(
                 `${Math.round(percentualBom)}%`,
                 centroX,
-                centroY - 7
+                centroY - 8
             );
 
-
-            /* texto BOM */
 
             ctx.fillStyle =
                 "#334155";
 
-
             ctx.font =
                 "800 12px 'Segoe UI', Arial, sans-serif";
-
 
             ctx.fillText(
                 "BOM",
@@ -1032,7 +1017,7 @@ function criarGraficoAdequacaoStatus(a){
 
 
     /* ======================================================
-       PLUGIN — RÓTULO EXTERNO DA AVARIA
+       RÓTULO EXTERNO — AVARIA
     ====================================================== */
 
     const rotuloExternoAvaria = {
@@ -1044,7 +1029,6 @@ function criarGraficoAdequacaoStatus(a){
             const meta =
                 chart.getDatasetMeta(0);
 
-
             if(
                 !meta ||
                 !meta.data ||
@@ -1054,14 +1038,8 @@ function criarGraficoAdequacaoStatus(a){
             }
 
 
-            /*
-                Como o primeiro item do dataset é a avaria,
-                o arco vermelho está no índice zero.
-            */
-
             const arcoAvaria =
                 meta.data[0];
-
 
             const ctx =
                 chart.ctx;
@@ -1077,21 +1055,24 @@ function criarGraficoAdequacaoStatus(a){
             const inicioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
-                arcoAvaria.outerRadius;
+                (
+                    arcoAvaria.outerRadius - 2
+                );
 
 
             const inicioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
-                arcoAvaria.outerRadius;
+                (
+                    arcoAvaria.outerRadius - 2
+                );
 
 
             const meioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
                 (
-                    arcoAvaria.outerRadius +
-                    17
+                    arcoAvaria.outerRadius + 22
                 );
 
 
@@ -1099,14 +1080,16 @@ function criarGraficoAdequacaoStatus(a){
                 arcoAvaria.y +
                 Math.sin(angulo) *
                 (
-                    arcoAvaria.outerRadius +
-                    17
+                    arcoAvaria.outerRadius + 22
                 );
 
 
-            const finalX =
-                meioX + 37;
+            /*
+                Mantém o texto e a linha do lado esquerdo.
+            */
 
+            const finalX =
+                meioX - 70;
 
             const finalY =
                 meioY;
@@ -1114,8 +1097,6 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.save();
 
-
-            /* linha vermelha */
 
             ctx.beginPath();
 
@@ -1143,48 +1124,37 @@ function criarGraficoAdequacaoStatus(a){
             ctx.stroke();
 
 
-            /* percentual */
-
             ctx.textAlign =
-                "left";
-
+                "right";
 
             ctx.textBaseline =
                 "bottom";
 
-
             ctx.fillStyle =
                 "#ef4444";
-
 
             ctx.font =
                 "800 20px 'Segoe UI', Arial, sans-serif";
 
-
             ctx.fillText(
                 `${Math.round(percentualAvaria)}%`,
-                finalX + 5,
+                finalX - 6,
                 finalY - 1
             );
 
 
-            /* descrição */
-
             ctx.textBaseline =
                 "top";
-
 
             ctx.fillStyle =
                 "#334155";
 
-
             ctx.font =
                 "800 10px 'Segoe UI', Arial, sans-serif";
 
-
             ctx.fillText(
                 "AVARIA",
-                finalX + 5,
+                finalX - 6,
                 finalY + 3
             );
 
@@ -1203,11 +1173,6 @@ function criarGraficoAdequacaoStatus(a){
                 type:"doughnut",
 
                 data:{
-
-                    /*
-                        A avaria vem primeiro para que a fatia
-                        vermelha apareça no alto à direita.
-                    */
 
                     labels:[
                         "Avaria",
@@ -1235,24 +1200,20 @@ function criarGraficoAdequacaoStatus(a){
 
                         hoverOffset:3,
 
-                        /*
-                            Evita plugins globais exibirem
-                            os valores sobre o gráfico.
-                        */
-
                         _ocultarZero:true,
-                        _ocultarRotulos:true
+                        _ocultarRotulos:true,
+
+                        mostrarTextoCentro:false,
+                        mostrarValorCentro:false,
+                        mostrarPercentualCentro:false
 
                     }]
 
                 },
 
                 plugins:[
-
                     textoCentralAdequacao,
-
                     rotuloExternoAvaria
-
                 ],
 
                 options:{
@@ -1263,7 +1224,11 @@ function criarGraficoAdequacaoStatus(a){
 
                     cutout:"64%",
 
-                    rotation:-90,
+                    /*
+                        Posiciona a fatia vermelha à esquerda.
+                    */
+
+                    rotation:90,
 
                     circumference:360,
 
@@ -1272,32 +1237,29 @@ function criarGraficoAdequacaoStatus(a){
                         duration:700,
 
                         easing:"easeOutQuart"
-
                     },
 
                     layout:{
 
                         padding:{
 
-                            top:30,
+                            top:25,
 
-                            right:95,
+                            right:25,
 
                             bottom:15,
 
-                            left:15
+                            left:115
                         }
                     },
 
                     plugins:{
 
                         legend:{
-
                             display:false
                         },
 
                         datalabels:{
-
                             display:false
                         },
 
@@ -1312,7 +1274,6 @@ function criarGraficoAdequacaoStatus(a){
                                             context.raw || 0
                                         );
 
-
                                     const percentual =
                                         total > 0
                                             ? (
@@ -1320,7 +1281,6 @@ function criarGraficoAdequacaoStatus(a){
                                                 total
                                             ) * 100
                                             : 0;
-
 
                                     return (
                                         context.label +
@@ -1349,7 +1309,6 @@ function criarGraficoAdequacaoStatus(a){
             }
         );
 }
-
 /* ==========================================================
    GRÁFICO — MOTIVOS
 ========================================================== */
