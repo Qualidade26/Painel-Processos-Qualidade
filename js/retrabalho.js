@@ -1131,7 +1131,7 @@ const textoCentroAdequacao = {
 
             const finalX =
                 Math.min(
-                    cotoveloX + 48,
+                    cotoveloX + 28,
                     chartArea.right - 46
                 );
 
