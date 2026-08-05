@@ -1089,7 +1089,7 @@ function criarGraficoAdequacaoStatus(a){
             */
 
             const finalX =
-                meioX - 70;
+                meioX - 105;
 
             const finalY =
                 meioY;
@@ -1136,11 +1136,11 @@ function criarGraficoAdequacaoStatus(a){
             ctx.font =
                 "800 20px 'Segoe UI', Arial, sans-serif";
 
-            ctx.fillText(
-                `${Math.round(percentualAvaria)}%`,
-                finalX - 6,
-                finalY - 1
-            );
+           ctx.fillText(
+    `${Math.round(percentualAvaria)}%`,
+    finalX - 8,
+    finalY - 4
+);
 
 
             ctx.textBaseline =
@@ -1152,11 +1152,11 @@ function criarGraficoAdequacaoStatus(a){
             ctx.font =
                 "800 10px 'Segoe UI', Arial, sans-serif";
 
-            ctx.fillText(
-                "AVARIA",
-                finalX - 6,
-                finalY + 3
-            );
+           ctx.fillText(
+    "AVARIA",
+    finalX - 8,
+    finalY + 4
+);
 
 
             ctx.restore();
@@ -1249,7 +1249,7 @@ function criarGraficoAdequacaoStatus(a){
 
                             bottom:15,
 
-                            left:115
+                            left:145
                         }
                     },
 
