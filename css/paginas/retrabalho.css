@@ -958,9 +958,9 @@
    AJUSTE FINAL — GRÁFICO BOM X AVARIA
 ========================================================== */
 
-.adequacao-panel-bom-avaria{
+.adequacao-panel-bom-avaria{F
     min-height:310px;
-    overflow:visible;
+    overflow:visible;F
 }
 
 .adequacao-bom-avaria-conteudo{
