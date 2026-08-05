@@ -1268,3 +1268,61 @@
         text-align:right;
     }
 }
+/* ==========================================================
+   RETRABALHO — TEXTO EM NEGRITO
+========================================================== */
+
+.pagina-retrabalho,
+.pagina-retrabalho *{
+    font-weight:700;
+}
+
+/* Valores principais */
+
+.pagina-retrabalho .card-valor,
+.pagina-retrabalho .adequacao-card-valor,
+.pagina-retrabalho .kpi-valor{
+    font-weight:800;
+}
+
+/* Títulos */
+
+.pagina-retrabalho h1,
+.pagina-retrabalho h2,
+.pagina-retrabalho h3,
+.pagina-retrabalho .page-title,
+.pagina-retrabalho .panel h3{
+    font-weight:800;
+}
+
+/* Cabeçalho das tabelas */
+
+.pagina-retrabalho table th{
+    font-weight:800;
+}
+
+/* Conteúdo das tabelas */
+
+.pagina-retrabalho table td{
+    font-weight:700;
+}
+
+/* Inputs */
+
+.pagina-retrabalho input,
+.pagina-retrabalho input::placeholder{
+    font-weight:700;
+}
+
+/* Botões */
+
+.pagina-retrabalho button{
+    font-weight:800;
+}
+
+/* Legenda do gráfico */
+
+.pagina-retrabalho .adequacao-legenda-nome,
+.pagina-retrabalho .adequacao-legenda-valor{
+    font-weight:800;
+}
