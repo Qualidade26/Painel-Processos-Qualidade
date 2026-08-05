@@ -2,9 +2,129 @@
    PÁGINA — RETRABALHO
 ========================================================== */
 
+.pagina-retrabalho{
+    width:100%;
+    min-width:0;
+}
+
 
 /* ==========================================================
-   INDICADORES
+   NAVEGAÇÃO INTERNA
+   RETRABALHO NORMAL + ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.retrabalho-abas{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    width:100%;
+    min-width:0;
+
+    margin-bottom:8px;
+
+    border:1px solid var(--line);
+    border-radius:10px;
+
+    background:#ffffff;
+
+    overflow:hidden;
+}
+
+.retrabalho-aba{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+    min-height:44px;
+
+    padding:10px 16px;
+
+    border:none;
+    border-bottom:3px solid transparent;
+
+    background:#ffffff;
+    color:#334155;
+
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+.retrabalho-aba:first-child{
+    border-right:1px solid var(--line);
+}
+
+.retrabalho-aba:hover{
+    background:#f6f9ff;
+    color:var(--primary);
+}
+
+.retrabalho-aba.ativa{
+    color:var(--primary);
+    background:#f8fbff;
+    border-bottom-color:var(--primary);
+}
+
+.retrabalho-aba-icone{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:24px;
+    height:24px;
+
+    flex:0 0 24px;
+
+    font-size:17px;
+}
+
+
+/* ==========================================================
+   CONTEÚDO INTERNO DAS ABAS
+========================================================== */
+
+#conteudoRetrabalho{
+    width:100%;
+    min-width:0;
+}
+
+.retrabalho-conteudo-aba{
+    width:100%;
+    min-width:0;
+}
+
+.retrabalho-conteudo-aba.animar{
+    animation:entradaAbaRetrabalho .22s ease;
+}
+
+@keyframes entradaAbaRetrabalho{
+
+    from{
+        opacity:0;
+        transform:translateY(4px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* ==========================================================
+   INDICADORES — RETRABALHO NORMAL
 ========================================================== */
 
 .retrabalho-indicadores,
@@ -23,8 +143,106 @@
 
 
 /* ==========================================================
+   INDICADORES — ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.adequacao-indicadores{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.adequacao-indicadores > *{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   CARD ESPECÍFICO DA ADEQUAÇÃO
+========================================================== */
+
+.adequacao-card{
+    position:relative;
+
+    display:grid;
+    grid-template-columns:58px minmax(0,1fr);
+    align-items:center;
+    gap:12px;
+
+    width:100%;
+    min-width:0;
+    min-height:105px;
+
+    padding:14px 16px;
+
+    border:1px solid var(--line);
+    border-radius:12px;
+
+    background:#ffffff;
+
+    overflow:hidden;
+}
+
+.adequacao-card-icone{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    background:#edf3ff;
+    color:var(--primary);
+
+    font-size:27px;
+}
+
+.adequacao-card-conteudo{
+    min-width:0;
+}
+
+.adequacao-card-titulo{
+    margin-bottom:4px;
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:800;
+    line-height:1.2;
+
+    text-transform:uppercase;
+}
+
+.adequacao-card-valor{
+    color:#0f172a;
+
+    font-size:27px;
+    font-weight:800;
+    line-height:1.05;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.adequacao-card-subtitulo{
+    margin-top:5px;
+
+    color:#475569;
+
+    font-size:12px;
+    font-weight:600;
+    line-height:1.2;
+}
+
+
+/* ==========================================================
    GRADE PRINCIPAL
-   GRÁFICO + TABELA
+   RETRABALHO NORMAL
 ========================================================== */
 
 .retrabalho-grid,
@@ -45,15 +263,92 @@
 
 
 /* ==========================================================
-   GRÁFICO
+   GRADE PRINCIPAL
+   ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.adequacao-grid{
+    display:grid;
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);
+    gap:8px;
+    align-items:stretch;
+    margin-bottom:8px;
+}
+
+.adequacao-grid > *{
+    min-width:0;
+}
+
+.adequacao-coluna-graficos{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    min-width:0;
+}
+
+.adequacao-panel-bom-avaria{
+    min-height:310px;
+}
+
+.adequacao-panel-motivos{
+    min-height:310px;
+}
+
+.adequacao-panel-tabela{
+    min-height:628px;
+}
+
+
+/* ==========================================================
+   PAINÉIS
+========================================================== */
+
+.retrabalho-panel,
+.adequacao-panel{
+    width:100%;
+    min-width:0;
+
+    padding:10px;
+
+    border:1px solid var(--line);
+    border-radius:10px;
+
+    background:#ffffff;
+
+    overflow:hidden;
+}
+
+.retrabalho-panel-titulo,
+.adequacao-panel-titulo{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    min-height:30px;
+
+    margin-bottom:6px;
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+
+/* ==========================================================
+   GRÁFICO — RETRABALHO NORMAL
 ========================================================== */
 
 .retrabalho-chart-box,
 .retrabalho-grid .chart-box,
 .grid-retrabalho .chart-box{
     position:relative;
+
     width:100%;
     min-width:0;
+
     height:350px;
     min-height:350px;
 }
@@ -68,7 +363,102 @@
 
 
 /* ==========================================================
-   TABELA
+   GRÁFICOS — ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.adequacao-chart-box{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+
+    height:255px;
+    min-height:255px;
+}
+
+.adequacao-chart-box-motivos{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+
+    height:255px;
+    min-height:255px;
+}
+
+.adequacao-chart-box canvas,
+.adequacao-chart-box-motivos canvas{
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   GRÁFICO BOM X AVARIA
+========================================================== */
+
+.adequacao-bom-avaria-conteudo{
+    display:grid;
+    grid-template-columns:minmax(230px,.9fr) minmax(220px,1fr);
+    align-items:center;
+    gap:10px;
+
+    width:100%;
+    min-width:0;
+}
+
+.adequacao-legenda{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    width:100%;
+    min-width:0;
+}
+
+.adequacao-legenda-item{
+    display:grid;
+    grid-template-columns:14px minmax(0,1fr) auto;
+    align-items:center;
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+
+    color:#1e293b;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.adequacao-legenda-cor{
+    width:13px;
+    height:13px;
+
+    border-radius:2px;
+}
+
+.adequacao-legenda-cor.bom{
+    background:#2453d4;
+}
+
+.adequacao-legenda-cor.avaria{
+    background:#ef4444;
+}
+
+.adequacao-legenda-nome{
+    min-width:0;
+}
+
+.adequacao-legenda-valor{
+    text-align:right;
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   TABELA — RETRABALHO
 ========================================================== */
 
 .retrabalho-tabela,
@@ -83,6 +473,7 @@
 .grid-retrabalho .table-scroll{
     width:100%;
     max-height:355px;
+
     overflow:auto;
 }
 
@@ -93,41 +484,190 @@
 
 
 /* ==========================================================
+   TABELA — ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.adequacao-tabela{
+    display:flex;
+    flex-direction:column;
+
+    width:100%;
+    min-width:0;
+    height:100%;
+}
+
+.adequacao-tabela-scroll{
+    width:100%;
+    min-width:0;
+    max-height:520px;
+
+    border:1px solid #e2e8f0;
+    border-radius:9px;
+
+    overflow:auto;
+}
+
+.adequacao-tabela table{
+    width:100%;
+    min-width:720px;
+
+    border-collapse:collapse;
+}
+
+.adequacao-tabela thead{
+    position:sticky;
+    top:0;
+    z-index:3;
+}
+
+.adequacao-tabela th{
+    padding:10px 8px;
+
+    border-bottom:1px solid #dbe4f0;
+
+    background:#edf3ff;
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:800;
+    text-align:center;
+
+    text-transform:uppercase;
+}
+
+.adequacao-tabela td{
+    padding:8px;
+
+    border-bottom:1px solid #e2e8f0;
+
+    color:#0f172a;
+
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+    vertical-align:middle;
+}
+
+.adequacao-tabela td:first-child,
+.adequacao-tabela th:first-child{
+    text-align:left;
+}
+
+.adequacao-tabela tbody tr:hover{
+    background:#f8fbff;
+}
+
+.adequacao-tabela tbody tr:last-child td{
+    border-bottom:none;
+}
+
+.adequacao-tabela-motivo{
+    max-width:260px;
+
+    color:var(--primary) !important;
+    font-weight:700 !important;
+
+    line-height:1.25;
+}
+
+
+/* ==========================================================
    FILTRO / PESQUISA
 ========================================================== */
 
-.retrabalho-filtros{
+.retrabalho-filtros,
+.adequacao-filtros{
     display:flex;
     align-items:center;
     gap:6px;
     flex-wrap:wrap;
+
     margin-bottom:8px;
 }
 
 .retrabalho-filtros input,
 .retrabalho-filtros select,
-#buscaFabricante{
+.adequacao-filtros input,
+.adequacao-filtros select,
+#buscaFabricante,
+#buscaFabricanteAdequacao{
     min-height:38px;
+
     padding:8px 10px;
 
     border:1px solid var(--line);
     border-radius:8px;
 
-    background:#fff;
+    background:#ffffff;
     color:var(--text);
 
     outline:none;
 }
 
 .retrabalho-filtros input,
-#buscaFabricante{
+.adequacao-filtros input,
+#buscaFabricante,
+#buscaFabricanteAdequacao{
     min-width:220px;
     flex:1;
 }
 
 .retrabalho-filtros input:focus,
 .retrabalho-filtros select:focus,
-#buscaFabricante:focus{
+.adequacao-filtros input:focus,
+.adequacao-filtros select:focus,
+#buscaFabricante:focus,
+#buscaFabricanteAdequacao:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 2px rgba(29,78,255,.10);
+}
+
+
+/* ==========================================================
+   CAMPO DE PESQUISA COM ÍCONE
+========================================================== */
+
+.adequacao-pesquisa{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    min-width:0;
+
+    margin-bottom:8px;
+}
+
+.adequacao-pesquisa-icone{
+    position:absolute;
+    left:12px;
+    z-index:1;
+
+    color:#64748b;
+
+    font-size:16px;
+
+    pointer-events:none;
+}
+
+.adequacao-pesquisa input{
+    width:100%;
+    min-width:0;
+    min-height:40px;
+
+    padding:9px 12px 9px 38px;
+
+    border:1px solid var(--line);
+    border-radius:20px;
+
+    background:#ffffff;
+    color:var(--text);
+
+    outline:none;
+}
+
+.adequacao-pesquisa input:focus{
     border-color:var(--primary);
     box-shadow:0 0 0 2px rgba(29,78,255,.10);
 }
@@ -146,6 +686,7 @@
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     gap:8px;
     align-items:stretch;
+
     margin-bottom:8px;
 }
 
@@ -157,8 +698,10 @@
 
 .pagina-retrabalho .grid-2 .chart-box.tall{
     position:relative;
+
     width:100%;
     min-width:0;
+
     height:350px;
     min-height:350px;
 }
@@ -170,14 +713,80 @@
 
 
 /* ==========================================================
+   BARRA DE ROLAGEM
+========================================================== */
+
+.adequacao-tabela-scroll,
+.retrabalho-tabela .table-scroll,
+.retrabalho-grid .table-scroll,
+.grid-retrabalho .table-scroll{
+    scrollbar-width:thin;
+    scrollbar-color:#94a3b8 #eef2f7;
+}
+
+.adequacao-tabela-scroll::-webkit-scrollbar,
+.retrabalho-tabela .table-scroll::-webkit-scrollbar,
+.retrabalho-grid .table-scroll::-webkit-scrollbar,
+.grid-retrabalho .table-scroll::-webkit-scrollbar{
+    width:7px;
+    height:7px;
+}
+
+.adequacao-tabela-scroll::-webkit-scrollbar-track,
+.retrabalho-tabela .table-scroll::-webkit-scrollbar-track,
+.retrabalho-grid .table-scroll::-webkit-scrollbar-track,
+.grid-retrabalho .table-scroll::-webkit-scrollbar-track{
+    background:#eef2f7;
+    border-radius:10px;
+}
+
+.adequacao-tabela-scroll::-webkit-scrollbar-thumb,
+.retrabalho-tabela .table-scroll::-webkit-scrollbar-thumb,
+.retrabalho-grid .table-scroll::-webkit-scrollbar-thumb,
+.grid-retrabalho .table-scroll::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:10px;
+}
+
+.adequacao-tabela-scroll::-webkit-scrollbar-thumb:hover,
+.retrabalho-tabela .table-scroll::-webkit-scrollbar-thumb:hover,
+.retrabalho-grid .table-scroll::-webkit-scrollbar-thumb:hover,
+.grid-retrabalho .table-scroll::-webkit-scrollbar-thumb:hover{
+    background:#64748b;
+}
+
+
+/* ==========================================================
    NOTEBOOK
 ========================================================== */
+
+@media(max-width:1200px){
+
+    .adequacao-indicadores{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .adequacao-grid{
+        grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+    }
+
+    .adequacao-bom-avaria-conteudo{
+        grid-template-columns:1fr;
+    }
+
+    .adequacao-legenda{
+        max-width:400px;
+        margin:0 auto;
+    }
+}
+
 
 @media(max-width:1050px){
 
     .retrabalho-grid,
     .grid-retrabalho,
-    .pagina-retrabalho .grid-2{
+    .pagina-retrabalho .grid-2,
+    .adequacao-grid{
         grid-template-columns:1fr;
     }
 
@@ -200,6 +809,14 @@
     .grid-retrabalho .table-scroll{
         max-height:380px;
     }
+
+    .adequacao-panel-tabela{
+        min-height:0;
+    }
+
+    .adequacao-tabela-scroll{
+        max-height:430px;
+    }
 }
 
 
@@ -211,7 +828,8 @@
 
     .retrabalho-indicadores,
     .cards-retrabalho,
-    .pagina-retrabalho .cards{
+    .pagina-retrabalho .cards,
+    .adequacao-indicadores{
         grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
@@ -222,6 +840,29 @@
         height:300px;
         min-height:300px;
     }
+
+    .adequacao-chart-box,
+    .adequacao-chart-box-motivos{
+        height:280px;
+        min-height:280px;
+    }
+
+    .adequacao-card{
+        grid-template-columns:50px minmax(0,1fr);
+        min-height:95px;
+        padding:12px;
+    }
+
+    .adequacao-card-icone{
+        width:50px;
+        height:50px;
+
+        font-size:23px;
+    }
+
+    .adequacao-card-valor{
+        font-size:24px;
+    }
 }
 
 
@@ -231,9 +872,23 @@
 
 @media(max-width:520px){
 
+    .retrabalho-abas{
+        grid-template-columns:1fr;
+    }
+
+    .retrabalho-aba:first-child{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+    }
+
+    .retrabalho-aba.ativa{
+        border-bottom-color:var(--primary);
+    }
+
     .retrabalho-indicadores,
     .cards-retrabalho,
-    .pagina-retrabalho .cards{
+    .pagina-retrabalho .cards,
+    .adequacao-indicadores{
         grid-template-columns:1fr;
     }
 
@@ -245,19 +900,57 @@
         min-height:260px;
     }
 
-    .retrabalho-filtros{
+    .adequacao-chart-box,
+    .adequacao-chart-box-motivos{
+        height:250px;
+        min-height:250px;
+    }
+
+    .retrabalho-filtros,
+    .adequacao-filtros{
         flex-direction:column;
         align-items:stretch;
     }
 
     .retrabalho-filtros input,
     .retrabalho-filtros select,
-    #buscaFabricante{
+    .adequacao-filtros input,
+    .adequacao-filtros select,
+    #buscaFabricante,
+    #buscaFabricanteAdequacao{
         width:100%;
         min-width:0;
     }
 
     .retrabalho-tabela .table-scroll{
         max-height:300px;
+    }
+
+    .adequacao-tabela-scroll{
+        max-height:350px;
+    }
+
+    .adequacao-card{
+        grid-template-columns:46px minmax(0,1fr);
+    }
+
+    .adequacao-card-icone{
+        width:46px;
+        height:46px;
+
+        font-size:21px;
+    }
+
+    .adequacao-card-valor{
+        font-size:22px;
+    }
+
+    .adequacao-legenda-item{
+        grid-template-columns:12px minmax(0,1fr);
+    }
+
+    .adequacao-legenda-valor{
+        grid-column:2;
+        text-align:left;
     }
 }
