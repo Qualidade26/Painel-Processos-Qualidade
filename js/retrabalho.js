@@ -910,6 +910,7 @@ function criarGraficoAdequacaoStatus(a){
         graficoAdequacaoStatus = null;
     }
 
+
     const valorBom =
         Number(
             a.indicadores?.bom?.valor || 0
@@ -975,6 +976,7 @@ function criarGraficoAdequacaoStatus(a){
             ctx.textBaseline =
                 "middle";
 
+
             ctx.fillStyle =
                 "#0f172a";
 
@@ -986,6 +988,7 @@ function criarGraficoAdequacaoStatus(a){
                 centroX,
                 centroY - 8
             );
+
 
             ctx.fillStyle =
                 "#334155";
@@ -1006,7 +1009,7 @@ function criarGraficoAdequacaoStatus(a){
 
     /* ======================================================
        RÓTULO EXTERNO — AVARIA
-       PARTE SUPERIOR DIREITA
+       PARTE SUPERIOR ESQUERDA
     ====================================================== */
 
     const rotuloExternoAvaria = {
@@ -1038,6 +1041,7 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.endAngle
                 ) / 2;
 
+
             const inicioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
@@ -1052,39 +1056,38 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.outerRadius - 2
                 );
 
-            /*
-                Ponto intermediário fora da rosca.
-            */
 
             const meioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
                 (
-                    arcoAvaria.outerRadius + 22
+                    arcoAvaria.outerRadius + 18
                 );
 
             const meioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
                 (
-                    arcoAvaria.outerRadius + 22
+                    arcoAvaria.outerRadius + 18
                 );
 
+
             /*
-                Puxa a linha para cima e à direita.
+                Direção para cima e para a esquerda.
             */
 
             const subidaX =
-                meioX + 34;
+                meioX - 28;
 
             const subidaY =
-                meioY - 70;
+                meioY - 72;
 
             const finalX =
-                subidaX + 55;
+                subidaX - 52;
 
             const finalY =
                 subidaY;
+
 
             ctx.save();
 
@@ -1114,7 +1117,7 @@ function criarGraficoAdequacaoStatus(a){
                 "#ef4444";
 
             ctx.lineWidth =
-                1.5;
+                1.6;
 
             ctx.stroke();
 
@@ -1135,8 +1138,8 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.fillText(
                 `${Math.round(percentualAvaria)}%`,
-                finalX - 22,
-                finalY - 6
+                finalX + 25,
+                finalY - 7
             );
 
 
@@ -1153,7 +1156,7 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.fillText(
                 "AVARIA",
-                finalX - 22,
+                finalX + 25,
                 finalY + 2
             );
 
@@ -1221,11 +1224,10 @@ function criarGraficoAdequacaoStatus(a){
                     cutout:"64%",
 
                     /*
-                        Coloca a fatia vermelha
-                        na lateral direita.
+                        Fatia vermelha no lado esquerdo.
                     */
 
-                    rotation:-90,
+                    rotation:90,
 
                     circumference:360,
 
@@ -1242,11 +1244,11 @@ function criarGraficoAdequacaoStatus(a){
 
                             top:90,
 
-                            right:120,
+                            right:20,
 
                             bottom:15,
 
-                            left:20
+                            left:125
                         }
                     },
 
