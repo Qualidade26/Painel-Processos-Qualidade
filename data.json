@@ -654,7 +654,307 @@
         "motivo": ""
       }
     ]
+    "adequacaocaixa": {
+    "totalocorrenciasano": 4,
+    "quantidaderetrabalhada": 190,
+    "totalhoras": 20,
+
+    "indicadores": {
+      "bom": {
+        "valor": 26106.18,
+        "percentual": 0.98
+      },
+      "avaria": {
+        "valor": 463.81,
+        "percentual": 0.02
+      }
+    },
+
+    "motivos": [
+      {
+        "nome": "Devolução",
+        "valor": 22561.03,
+        "percentual": 0.85
+      },
+      {
+        "nome": "Avaria de Transporte Importação",
+        "valor": 2940.72,
+        "percentual": 0.11
+      },
+      {
+        "nome": "Avaria de Transporte Nacional",
+        "valor": 1068.24,
+        "percentual": 0.04
+      },
+      {
+        "nome": "Outros",
+        "valor": 0,
+        "percentual": 0
+      }
+    ],
+
+    "fabricantes": [
+      {
+        "fabricante": "Anhui Easyway Medical",
+        "quantidade": 133,
+        "horas": 10,
+        "motivo": "Devolução e Avaria de Transporte Importação"
+      },
+      {
+        "fabricante": "SR Produtos para la salud S.A",
+        "quantidade": 57,
+        "horas": 10,
+        "motivo": "Avaria de Transporte Nacional"
+      },
+      {
+        "fabricante": "Bonrre Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "AB Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "All Lab Comercial",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "SteriLance Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Biomed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Accumax",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shanxian Huayu Suture Product Co,. Ltd",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shandong Aosaite",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shangai Kindly",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shanghai SA Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Ayset Plastik",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Medico Electroude",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Huaian Tianda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Medico (Huaian) CO., LTDA",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Well Lead medical co., ltd.",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Polymed Medicure",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Phoenix Innovative HealtCare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Wellspring Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Yangzhou Medline Industry",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Webest Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Honsun (Nantong)",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shandong Weigao",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Nanjing Jiangnan Novel",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Vitromed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Garware Bestretch",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Xiantao Xingrong",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Nantong Renon",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangxi Hongda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dailymag Magnetic",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Yancheng Tiandi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dfi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Pharmaplast AS",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Blue",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Huida Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Guangzhou Improve Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Hangzhou Rollmed",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dalian GoodWood",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Anhui hongyu",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Alphaven",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      }
+    ]
   },
+  
   "fornecedores":
   {
   "totalFornecedores": 43,
