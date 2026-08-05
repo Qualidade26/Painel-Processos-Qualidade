@@ -1072,14 +1072,14 @@ const meioY =
 
 
 /*
-    Linha para cima e para a esquerda.
+    Linha para cima e para a direita.
 */
 
 const finalX =
-    meioX - 60;
+    meioX + 48;
 
 const finalY =
-    meioY - 25;
+    meioY - 28;
 
 
 ctx.save();
@@ -1114,7 +1114,7 @@ ctx.stroke();
 /* 2% */
 
 ctx.textAlign =
-    "right";
+    "left";
 
 ctx.textBaseline =
     "bottom";
@@ -1127,7 +1127,7 @@ ctx.font =
 
 ctx.fillText(
     `${Math.round(percentualAvaria)}%`,
-    finalX - 5,
+    finalX + 5,
     finalY - 1
 );
 
@@ -1145,14 +1145,12 @@ ctx.font =
 
 ctx.fillText(
     "AVARIA",
-    finalX - 5,
+    finalX + 5,
     finalY + 2
 );
 
 
 ctx.restore();
-        }
-    };
 
 
     graficoAdequacaoStatus =
@@ -1233,13 +1231,13 @@ ctx.restore();
 
                         padding:{
 
-                            top:28,
+                            top:35,
 
-                            right:10,
+                            right:110,
 
                             bottom:10,
 
-                            left:90
+                            left:10
                         }
                     },
 
