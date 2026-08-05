@@ -903,6 +903,11 @@ function criarGraficoAdequacaoStatus(a){
         return;
     }
 
+
+    /* ======================================================
+       DESTRUIR GRÁFICO ANTERIOR
+    ====================================================== */
+
     if(graficoAdequacaoStatus){
 
         graficoAdequacaoStatus.destroy();
@@ -910,6 +915,10 @@ function criarGraficoAdequacaoStatus(a){
         graficoAdequacaoStatus = null;
     }
 
+
+    /* ======================================================
+       DADOS
+    ====================================================== */
 
     const valorBom =
         Number(
@@ -936,7 +945,7 @@ function criarGraficoAdequacaoStatus(a){
 
 
     /* ======================================================
-       TEXTO CENTRAL
+       TEXTO CENTRAL — 98% / BOM
     ====================================================== */
 
     const textoCentroAdequacao = {
@@ -956,6 +965,12 @@ function criarGraficoAdequacaoStatus(a){
                 return;
             }
 
+            /*
+                O primeiro arco é AVARIA.
+                O segundo arco é BOM.
+                Ambos possuem o mesmo centro.
+            */
+
             const arco =
                 meta.data[0];
 
@@ -968,6 +983,7 @@ function criarGraficoAdequacaoStatus(a){
             const centroY =
                 arco.y;
 
+
             ctx.save();
 
             ctx.textAlign =
@@ -976,28 +992,34 @@ function criarGraficoAdequacaoStatus(a){
             ctx.textBaseline =
                 "middle";
 
+
+            /* percentual central */
+
             ctx.fillStyle =
                 "#111827";
 
             ctx.font =
-                "800 23px 'Segoe UI', Arial, sans-serif";
+                "800 22px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 `${Math.round(percentualBom)}%`,
                 centroX,
-                centroY - 5
+                centroY - 7
             );
+
+
+            /* descrição central */
 
             ctx.fillStyle =
                 "#334155";
 
             ctx.font =
-                "700 10px 'Segoe UI', Arial, sans-serif";
+                "700 9px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 "BOM",
                 centroX,
-                centroY + 17
+                centroY + 14
             );
 
             ctx.restore();
@@ -1006,7 +1028,7 @@ function criarGraficoAdequacaoStatus(a){
 
 
     /* ======================================================
-       RÓTULO EXTERNO — AVARIA
+       LINHA E RÓTULO EXTERNO — AVARIA
     ====================================================== */
 
     const rotuloAvariaAdequacao = {
@@ -1026,11 +1048,23 @@ function criarGraficoAdequacaoStatus(a){
                 return;
             }
 
+
+            /*
+                Como AVARIA é o primeiro valor do dataset,
+                utilizamos o arco de índice zero.
+            */
+
             const arcoAvaria =
                 meta.data[0];
 
             const ctx =
                 chart.ctx;
+
+            const chartArea =
+                chart.chartArea;
+
+
+            /* ângulo central da fatia vermelha */
 
             const angulo =
                 (
@@ -1039,46 +1073,61 @@ function criarGraficoAdequacaoStatus(a){
                 ) / 2;
 
 
-            /* início na borda da fatia */
+            /* início da linha na fatia */
 
             const inicioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
-                arcoAvaria.outerRadius;
+                (
+                    arcoAvaria.outerRadius - 2
+                );
 
             const inicioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
-                arcoAvaria.outerRadius;
+                (
+                    arcoAvaria.outerRadius - 2
+                );
 
 
-            /* primeiro ponto fora da rosca */
+            /* pequeno avanço para fora da pizza */
 
-            const meioX =
+            const cotoveloX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
                 (
-                    arcoAvaria.outerRadius + 12
+                    arcoAvaria.outerRadius + 13
                 );
 
-            const meioY =
+            const cotoveloY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
                 (
-                    arcoAvaria.outerRadius + 12
+                    arcoAvaria.outerRadius + 13
                 );
 
 
-            /* linha para cima e para a direita */
+            /*
+                Posição final do rótulo.
+
+                O Math.min impede que o texto saia
+                para fora da área do canvas.
+            */
 
             const finalX =
-                meioX + 70;
+                Math.min(
+                    cotoveloX + 48,
+                    chartArea.right - 46
+                );
 
             const finalY =
-                meioY - 35;
+                cotoveloY - 18;
 
 
             ctx.save();
+
+
+            /* linha indicativa */
 
             ctx.beginPath();
 
@@ -1088,8 +1137,8 @@ function criarGraficoAdequacaoStatus(a){
             );
 
             ctx.lineTo(
-                meioX,
-                meioY
+                cotoveloX,
+                cotoveloY
             );
 
             ctx.lineTo(
@@ -1101,12 +1150,18 @@ function criarGraficoAdequacaoStatus(a){
                 "#ef4444";
 
             ctx.lineWidth =
-                1.4;
+                1.5;
+
+            ctx.lineCap =
+                "round";
+
+            ctx.lineJoin =
+                "round";
 
             ctx.stroke();
 
 
-            /* percentual */
+            /* percentual 2% */
 
             ctx.textAlign =
                 "left";
@@ -1127,7 +1182,7 @@ function criarGraficoAdequacaoStatus(a){
             );
 
 
-            /* descrição */
+            /* texto AVARIA */
 
             ctx.textBaseline =
                 "top";
@@ -1162,6 +1217,12 @@ function criarGraficoAdequacaoStatus(a){
 
                 data:{
 
+                    /*
+                        AVARIA deve continuar primeiro,
+                        pois o rótulo externo utiliza
+                        o arco de índice zero.
+                    */
+
                     labels:[
                         "Avaria",
                         "Bom"
@@ -1186,7 +1247,9 @@ function criarGraficoAdequacaoStatus(a){
 
                         borderWidth:2,
 
-                        hoverOffset:2,
+                        hoverOffset:0,
+
+                        spacing:0,
 
                         _ocultarZero:true,
                         _ocultarRotulos:true,
@@ -1198,10 +1261,17 @@ function criarGraficoAdequacaoStatus(a){
                     }]
                 },
 
+
+                /* plugins exclusivos deste gráfico */
+
                 plugins:[
+
                     textoCentroAdequacao,
+
                     rotuloAvariaAdequacao
+
                 ],
+
 
                 options:{
 
@@ -1209,16 +1279,23 @@ function criarGraficoAdequacaoStatus(a){
 
                     maintainAspectRatio:false,
 
-                    cutout:"58%",
 
                     /*
-                        Ajusta a posição da fatia vermelha.
-                        Para o lado direito, use aproximadamente -78.
+                        Espessura semelhante à imagem.
                     */
 
-                    rotation:-78,
+                    cutout:"57%",
+
+
+                    /*
+                        Posiciona a fatia vermelha
+                        na região superior direita.
+                    */
+
+                    rotation:38,
 
                     circumference:360,
+
 
                     animation:{
 
@@ -1227,16 +1304,23 @@ function criarGraficoAdequacaoStatus(a){
                         easing:"easeOutQuart"
                     },
 
+
+                    /*
+                        Espaço superior e direito para
+                        a linha e o texto da avaria.
+                    */
+
                     layout:{
 
                         padding:{
 
-                            top:45,
-                            right:150,
-                            bottom:10,
-                            left:10
+                            top:34,
+                            right:72,
+                            bottom:12,
+                            left:12
                         }
                     },
+
 
                     plugins:{
 
@@ -1275,6 +1359,7 @@ function criarGraficoAdequacaoStatus(a){
                                         percentual.toLocaleString(
                                             "pt-BR",
                                             {
+                                                minimumFractionDigits:0,
                                                 maximumFractionDigits:1
                                             }
                                         ) +
