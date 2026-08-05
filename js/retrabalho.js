@@ -939,9 +939,9 @@ function criarGraficoAdequacaoStatus(a){
        TEXTO CENTRAL
     ====================================================== */
 
-    const textoCentralAdequacao = {
+    const textoCentroAdequacao = {
 
-        id:"textoCentralAdequacao",
+        id:"textoCentroAdequacao",
 
         afterDatasetsDraw(chart){
 
@@ -959,14 +959,14 @@ function criarGraficoAdequacaoStatus(a){
             const arco =
                 meta.data[0];
 
+            const ctx =
+                chart.ctx;
+
             const centroX =
                 arco.x;
 
             const centroY =
                 arco.y;
-
-            const ctx =
-                chart.ctx;
 
             ctx.save();
 
@@ -978,15 +978,15 @@ function criarGraficoAdequacaoStatus(a){
 
 
             ctx.fillStyle =
-                "#0f172a";
+                "#111827";
 
             ctx.font =
-                "800 28px 'Segoe UI', Arial, sans-serif";
+                "800 23px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 `${Math.round(percentualBom)}%`,
                 centroX,
-                centroY - 8
+                centroY - 5
             );
 
 
@@ -994,12 +994,12 @@ function criarGraficoAdequacaoStatus(a){
                 "#334155";
 
             ctx.font =
-                "800 12px 'Segoe UI', Arial, sans-serif";
+                "700 10px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 "BOM",
                 centroX,
-                centroY + 22
+                centroY + 17
             );
 
             ctx.restore();
@@ -1009,12 +1009,11 @@ function criarGraficoAdequacaoStatus(a){
 
     /* ======================================================
        RÓTULO EXTERNO — AVARIA
-       PARTE SUPERIOR ESQUERDA
     ====================================================== */
 
-    const rotuloExternoAvaria = {
+    const rotuloAvariaAdequacao = {
 
-        id:"rotuloExternoAvaria",
+        id:"rotuloAvariaAdequacao",
 
         afterDatasetsDraw(chart){
 
@@ -1045,67 +1044,31 @@ function criarGraficoAdequacaoStatus(a){
             const inicioX =
                 arcoAvaria.x +
                 Math.cos(angulo) *
-                (
-                    arcoAvaria.outerRadius - 2
-                );
+                arcoAvaria.outerRadius;
 
             const inicioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
-                (
-                    arcoAvaria.outerRadius - 2
-                );
+                arcoAvaria.outerRadius;
 
-
-            const meioX =
-                arcoAvaria.x +
-                Math.cos(angulo) *
-                (
-                    arcoAvaria.outerRadius + 35
-                );
-
-            const meioY =
-                arcoAvaria.y +
-                Math.sin(angulo) *
-                (
-                    arcoAvaria.outerRadius + 35
-                );
-
-
-            /*
-                Direção para cima e para a esquerda.
-            */
-
-            const subidaX =
-    meioX - 50;
-
-const subidaY =
-    meioY - 95;
 
             const finalX =
-                subidaX - 100;
+                inicioX + 33;
 
             const finalY =
-                subidaY;
+                inicioY - 16;
 
 
             ctx.save();
+
+
+            /* linha curta */
 
             ctx.beginPath();
 
             ctx.moveTo(
                 inicioX,
                 inicioY
-            );
-
-            ctx.lineTo(
-                meioX,
-                meioY
-            );
-
-            ctx.lineTo(
-                subidaX,
-                subidaY
             );
 
             ctx.lineTo(
@@ -1117,7 +1080,7 @@ const subidaY =
                 "#ef4444";
 
             ctx.lineWidth =
-                1.6;
+                1.3;
 
             ctx.stroke();
 
@@ -1125,7 +1088,7 @@ const subidaY =
             /* 2% */
 
             ctx.textAlign =
-                "center";
+                "left";
 
             ctx.textBaseline =
                 "bottom";
@@ -1134,12 +1097,12 @@ const subidaY =
                 "#ef4444";
 
             ctx.font =
-                "800 20px 'Segoe UI', Arial, sans-serif";
+                "800 17px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 `${Math.round(percentualAvaria)}%`,
-                finalX + 25,
-                finalY - 7
+                finalX + 5,
+                finalY - 1
             );
 
 
@@ -1149,16 +1112,17 @@ const subidaY =
                 "top";
 
             ctx.fillStyle =
-                "#334155";
+                "#475569";
 
             ctx.font =
-                "800 10px 'Segoe UI', Arial, sans-serif";
+                "700 8px 'Segoe UI', Arial, sans-serif";
 
             ctx.fillText(
                 "AVARIA",
-                finalX + 25,
+                finalX + 5,
                 finalY + 2
             );
+
 
             ctx.restore();
         }
@@ -1187,7 +1151,7 @@ const subidaY =
                         ],
 
                         backgroundColor:[
-                            "#ef3f3f",
+                            "#ef4444",
                             "#2855d9"
                         ],
 
@@ -1198,7 +1162,7 @@ const subidaY =
 
                         borderWidth:2,
 
-                        hoverOffset:3,
+                        hoverOffset:2,
 
                         _ocultarZero:true,
                         _ocultarRotulos:true,
@@ -1211,8 +1175,8 @@ const subidaY =
                 },
 
                 plugins:[
-                    textoCentralAdequacao,
-                    rotuloExternoAvaria
+                    textoCentroAdequacao,
+                    rotuloAvariaAdequacao
                 ],
 
                 options:{
@@ -1221,19 +1185,20 @@ const subidaY =
 
                     maintainAspectRatio:false,
 
-                    cutout:"64%",
+                    cutout:"58%",
 
                     /*
-                        Fatia vermelha no lado esquerdo.
+                        Coloca a fatia vermelha
+                        no alto à direita.
                     */
 
-                    rotation:90,
+                    rotation:-78,
 
                     circumference:360,
 
                     animation:{
 
-                        duration:700,
+                        duration:600,
 
                         easing:"easeOutQuart"
                     },
@@ -1242,13 +1207,13 @@ const subidaY =
 
                         padding:{
 
-                            top:90,
+                            top:28,
 
-                            right:20,
+                            right:75,
 
-                            bottom:15,
+                            bottom:10,
 
-                            left:125
+                            left:10
                         }
                     },
 
@@ -1289,7 +1254,6 @@ const subidaY =
                                         percentual.toLocaleString(
                                             "pt-BR",
                                             {
-                                                minimumFractionDigits:0,
                                                 maximumFractionDigits:1
                                             }
                                         ) +
