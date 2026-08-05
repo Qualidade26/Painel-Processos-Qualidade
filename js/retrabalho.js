@@ -895,7 +895,6 @@ function filtrarTabelaAdequacao(){
     );
 }
 
-
 /* ==========================================================
    GRÁFICO — BOM X AVARIA
 ========================================================== */
@@ -911,15 +910,296 @@ function criarGraficoAdequacaoStatus(a){
         return;
     }
 
+
+    if(graficoAdequacaoStatus){
+
+        graficoAdequacaoStatus.destroy();
+
+        graficoAdequacaoStatus = null;
+    }
+
+
     const valorBom =
         Number(
             a.indicadores?.bom?.valor || 0
         );
 
+
     const valorAvaria =
         Number(
             a.indicadores?.avaria?.valor || 0
         );
+
+
+    const total =
+        valorBom + valorAvaria;
+
+
+    const percentualBom =
+        total > 0
+            ? (valorBom / total) * 100
+            : 0;
+
+
+    const percentualAvaria =
+        total > 0
+            ? (valorAvaria / total) * 100
+            : 0;
+
+
+    /* ======================================================
+       PLUGIN — TEXTO CENTRAL
+    ====================================================== */
+
+    const textoCentralAdequacao = {
+
+        id:"textoCentralAdequacao",
+
+        afterDatasetsDraw(chart){
+
+            const meta =
+                chart.getDatasetMeta(0);
+
+
+            if(
+                !meta ||
+                !meta.data ||
+                !meta.data.length
+            ){
+                return;
+            }
+
+
+            const arco =
+                meta.data[0];
+
+
+            const centroX =
+                arco.x;
+
+
+            const centroY =
+                arco.y;
+
+
+            const ctx =
+                chart.ctx;
+
+
+            ctx.save();
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.textBaseline =
+                "middle";
+
+
+            /* percentual */
+
+            ctx.fillStyle =
+                "#0f172a";
+
+
+            ctx.font =
+                "800 28px 'Segoe UI', Arial, sans-serif";
+
+
+            ctx.fillText(
+                `${Math.round(percentualBom)}%`,
+                centroX,
+                centroY - 7
+            );
+
+
+            /* texto BOM */
+
+            ctx.fillStyle =
+                "#334155";
+
+
+            ctx.font =
+                "800 12px 'Segoe UI', Arial, sans-serif";
+
+
+            ctx.fillText(
+                "BOM",
+                centroX,
+                centroY + 22
+            );
+
+
+            ctx.restore();
+        }
+
+    };
+
+
+    /* ======================================================
+       PLUGIN — RÓTULO EXTERNO DA AVARIA
+    ====================================================== */
+
+    const rotuloExternoAvaria = {
+
+        id:"rotuloExternoAvaria",
+
+        afterDatasetsDraw(chart){
+
+            const meta =
+                chart.getDatasetMeta(0);
+
+
+            if(
+                !meta ||
+                !meta.data ||
+                !meta.data[0]
+            ){
+                return;
+            }
+
+
+            /*
+                Como o primeiro item do dataset é a avaria,
+                o arco vermelho está no índice zero.
+            */
+
+            const arcoAvaria =
+                meta.data[0];
+
+
+            const ctx =
+                chart.ctx;
+
+
+            const angulo =
+                (
+                    arcoAvaria.startAngle +
+                    arcoAvaria.endAngle
+                ) / 2;
+
+
+            const inicioX =
+                arcoAvaria.x +
+                Math.cos(angulo) *
+                arcoAvaria.outerRadius;
+
+
+            const inicioY =
+                arcoAvaria.y +
+                Math.sin(angulo) *
+                arcoAvaria.outerRadius;
+
+
+            const meioX =
+                arcoAvaria.x +
+                Math.cos(angulo) *
+                (
+                    arcoAvaria.outerRadius +
+                    17
+                );
+
+
+            const meioY =
+                arcoAvaria.y +
+                Math.sin(angulo) *
+                (
+                    arcoAvaria.outerRadius +
+                    17
+                );
+
+
+            const finalX =
+                meioX + 37;
+
+
+            const finalY =
+                meioY;
+
+
+            ctx.save();
+
+
+            /* linha vermelha */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                inicioX,
+                inicioY
+            );
+
+            ctx.lineTo(
+                meioX,
+                meioY
+            );
+
+            ctx.lineTo(
+                finalX,
+                finalY
+            );
+
+            ctx.strokeStyle =
+                "#ef4444";
+
+            ctx.lineWidth =
+                1.5;
+
+            ctx.stroke();
+
+
+            /* percentual */
+
+            ctx.textAlign =
+                "left";
+
+
+            ctx.textBaseline =
+                "bottom";
+
+
+            ctx.fillStyle =
+                "#ef4444";
+
+
+            ctx.font =
+                "800 20px 'Segoe UI', Arial, sans-serif";
+
+
+            ctx.fillText(
+                `${Math.round(percentualAvaria)}%`,
+                finalX + 5,
+                finalY - 1
+            );
+
+
+            /* descrição */
+
+            ctx.textBaseline =
+                "top";
+
+
+            ctx.fillStyle =
+                "#334155";
+
+
+            ctx.font =
+                "800 10px 'Segoe UI', Arial, sans-serif";
+
+
+            ctx.fillText(
+                "AVARIA",
+                finalX + 5,
+                finalY + 3
+            );
+
+
+            ctx.restore();
+        }
+
+    };
+
 
     graficoAdequacaoStatus =
         new Chart(
@@ -930,30 +1210,56 @@ function criarGraficoAdequacaoStatus(a){
 
                 data:{
 
+                    /*
+                        A avaria vem primeiro para que a fatia
+                        vermelha apareça no alto à direita.
+                    */
+
                     labels:[
-                        "Bom",
-                        "Avaria"
+                        "Avaria",
+                        "Bom"
                     ],
 
                     datasets:[{
 
                         data:[
-                            valorBom,
-                            valorAvaria
+                            valorAvaria,
+                            valorBom
                         ],
 
                         backgroundColor:[
-                            "#2453d4",
-                            "#ef4444"
+                            "#ef3f3f",
+                            "#2855d9"
                         ],
 
-                        borderColor:"#ffffff",
+                        borderColor:[
+                            "#ffffff",
+                            "#ffffff"
+                        ],
 
-                        borderWidth:2
+                        borderWidth:2,
+
+                        hoverOffset:3,
+
+                        /*
+                            Evita plugins globais exibirem
+                            os valores sobre o gráfico.
+                        */
+
+                        _ocultarZero:true,
+                        _ocultarRotulos:true
 
                     }]
 
                 },
+
+                plugins:[
+
+                    textoCentralAdequacao,
+
+                    rotuloExternoAvaria
+
+                ],
 
                 options:{
 
@@ -961,15 +1267,43 @@ function criarGraficoAdequacaoStatus(a){
 
                     maintainAspectRatio:false,
 
-                    cutout:"67%",
+                    cutout:"64%",
+
+                    rotation:-90,
+
+                    circumference:360,
+
+                    animation:{
+
+                        duration:700,
+
+                        easing:"easeOutQuart"
+
+                    },
+
+                    layout:{
+
+                        padding:{
+
+                            top:30,
+
+                            right:95,
+
+                            bottom:15,
+
+                            left:15
+                        }
+                    },
 
                     plugins:{
 
                         legend:{
+
                             display:false
                         },
 
                         datalabels:{
+
                             display:false
                         },
 
@@ -984,9 +1318,6 @@ function criarGraficoAdequacaoStatus(a){
                                             context.raw || 0
                                         );
 
-                                    const total =
-                                        valorBom +
-                                        valorAvaria;
 
                                     const percentual =
                                         total > 0
@@ -996,29 +1327,34 @@ function criarGraficoAdequacaoStatus(a){
                                             ) * 100
                                             : 0;
 
+
                                     return (
                                         context.label +
                                         ": " +
                                         moeda(valor) +
-                                        " - " +
-                                        percentual
-                                        .toLocaleString(
+                                        " (" +
+                                        percentual.toLocaleString(
                                             "pt-BR",
                                             {
+                                                minimumFractionDigits:0,
                                                 maximumFractionDigits:1
                                             }
                                         ) +
-                                        "%"
+                                        "%)"
                                     );
                                 }
+
                             }
+
                         }
+
                     }
+
                 }
+
             }
         );
 }
-
 
 /* ==========================================================
    GRÁFICO — MOTIVOS
