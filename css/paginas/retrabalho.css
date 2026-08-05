@@ -395,69 +395,6 @@
 
 
 /* ==========================================================
-   GRÁFICO BOM X AVARIA
-========================================================== */
-
-.adequacao-bom-avaria-conteudo{
-    display:grid;
-    grid-template-columns:minmax(230px,.9fr) minmax(220px,1fr);
-    align-items:center;
-    gap:10px;
-
-    width:100%;
-    min-width:0;
-}
-
-.adequacao-legenda{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-
-    width:100%;
-    min-width:0;
-}
-
-.adequacao-legenda-item{
-    display:grid;
-    grid-template-columns:14px minmax(0,1fr) auto;
-    align-items:center;
-    gap:8px;
-
-    width:100%;
-    min-width:0;
-
-    color:#1e293b;
-
-    font-size:13px;
-    font-weight:700;
-}
-
-.adequacao-legenda-cor{
-    width:13px;
-    height:13px;
-
-    border-radius:2px;
-}
-
-.adequacao-legenda-cor.bom{
-    background:#2453d4;
-}
-
-.adequacao-legenda-cor.avaria{
-    background:#ef4444;
-}
-
-.adequacao-legenda-nome{
-    min-width:0;
-}
-
-.adequacao-legenda-valor{
-    text-align:right;
-    white-space:nowrap;
-}
-
-
-/* ==========================================================
    TABELA — RETRABALHO
 ========================================================== */
 
@@ -954,99 +891,6 @@
         text-align:left;
     }
 }
-/* ==========================================================
-   AJUSTE FINAL — GRÁFICO BOM X AVARIA
-========================================================== */
-
-.adequacao-panel-bom-avaria{
-    min-height:310px;
-    overflow:hidden;
-}
-
-.adequacao-bom-avaria-conteudo{
-    display:grid;
-    grid-template-columns:minmax(330px,1fr) minmax(230px,.8fr);
-    align-items:center;
-    gap:8px;
-
-    width:100%;
-    min-width:0;
-}
-
-.adequacao-chart-box{
-    position:relative;
-
-    width:100%;
-    min-width:0;
-
-    height:300px;
-    min-height:300px;
-
-    overflow:visible;
-}
-
-.adequacao-chart-box canvas{
-    width:100% !important;
-    height:100% !important;
-    max-width:100%;
-}
-
-.adequacao-legenda{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:14px;
-
-    width:100%;
-    min-width:0;
-
-    padding-right:8px;
-}
-
-.adequacao-legenda-item{
-    display:grid;
-    grid-template-columns:14px 54px minmax(145px,1fr);
-    align-items:center;
-    gap:8px;
-
-    width:100%;
-    min-width:0;
-}
-
-.adequacao-legenda-cor{
-    width:13px;
-    height:13px;
-
-    border-radius:2px;
-}
-
-.adequacao-legenda-cor.bom{
-    background:#2855d9;
-}
-
-.adequacao-legenda-cor.avaria{
-    background:#ef4444;
-}
-
-.adequacao-legenda-nome{
-    min-width:0;
-
-    color:#172554;
-
-    font-size:13px;
-    font-weight:700;
-}
-
-.adequacao-legenda-valor{
-    color:#172554;
-
-    font-size:12px;
-    font-weight:800;
-
-    text-align:right;
-    white-space:nowrap;
-}
-
 
 /* ==========================================================
    RESPONSIVIDADE — BOM X AVARIA
@@ -1095,6 +939,320 @@
     }
 
     .adequacao-legenda-valor{
+        text-align:right;
+    }
+}
+/* ==========================================================
+   GRÁFICO BOM × AVARIA — CONFIGURAÇÃO DEFINITIVA
+========================================================== */
+
+.adequacao-panel-bom-avaria{
+    width:100%;
+    min-width:0;
+    min-height:310px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   GRÁFICO À ESQUERDA + LEGENDA À DIREITA
+========================================================== */
+
+.adequacao-bom-avaria-conteudo{
+    display:grid;
+
+    grid-template-columns:
+        minmax(230px,260px)
+        minmax(230px,1fr);
+
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    width:100%;
+    min-width:0;
+    height:255px;
+
+    padding:0 6px;
+}
+
+
+/* ==========================================================
+   ÁREA DA ROSCA
+========================================================== */
+
+.adequacao-chart-box{
+    position:relative;
+
+    width:100%;
+    max-width:260px;
+
+    height:240px;
+    min-height:240px;
+
+    margin:0 auto;
+
+    overflow:visible;
+}
+
+.adequacao-chart-box canvas{
+    display:block;
+
+    width:100% !important;
+    height:100% !important;
+
+    max-width:100%;
+    max-height:100%;
+}
+
+
+/* ==========================================================
+   LEGENDA LATERAL
+========================================================== */
+
+.adequacao-legenda{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    gap:16px;
+
+    width:100%;
+    min-width:0;
+    max-width:330px;
+
+    margin:0;
+    padding:0;
+
+    justify-self:start;
+}
+
+
+/* ==========================================================
+   LINHAS DA LEGENDA
+========================================================== */
+
+.adequacao-legenda-item{
+    display:grid;
+
+    grid-template-columns:
+        13px
+        54px
+        minmax(130px,1fr);
+
+    align-items:center;
+
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+
+    color:#172554;
+}
+
+
+/* ==========================================================
+   QUADRADOS DE COR
+========================================================== */
+
+.adequacao-legenda-cor{
+    display:block;
+
+    width:12px;
+    height:12px;
+
+    border-radius:1px;
+}
+
+.adequacao-legenda-cor.bom{
+    background:#2855d9;
+}
+
+.adequacao-legenda-cor.avaria{
+    background:#ef4444;
+}
+
+
+/* ==========================================================
+   NOME DA LEGENDA
+========================================================== */
+
+.adequacao-legenda-nome{
+    min-width:0;
+
+    color:#172554;
+
+    font-size:12px;
+    font-weight:700;
+    line-height:1.2;
+
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   VALOR DA LEGENDA
+========================================================== */
+
+.adequacao-legenda-valor{
+    min-width:0;
+
+    color:#172554;
+
+    font-size:11px;
+    font-weight:800;
+    line-height:1.2;
+
+    text-align:right;
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1200px){
+
+    .adequacao-bom-avaria-conteudo{
+        grid-template-columns:
+            minmax(220px,250px)
+            minmax(210px,1fr);
+
+        gap:8px;
+    }
+
+    .adequacao-chart-box{
+        max-width:250px;
+
+        height:235px;
+        min-height:235px;
+    }
+
+    .adequacao-legenda{
+        max-width:310px;
+    }
+
+    .adequacao-legenda-item{
+        grid-template-columns:
+            12px
+            50px
+            minmax(125px,1fr);
+
+        gap:7px;
+    }
+
+    .adequacao-legenda-nome{
+        font-size:11px;
+    }
+
+    .adequacao-legenda-valor{
+        font-size:10px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .adequacao-panel-bom-avaria{
+        min-height:480px;
+    }
+
+    .adequacao-bom-avaria-conteudo{
+        grid-template-columns:1fr;
+
+        height:auto;
+
+        gap:4px;
+
+        padding:0 10px 12px;
+    }
+
+    .adequacao-chart-box{
+        width:100%;
+        max-width:290px;
+
+        height:270px;
+        min-height:270px;
+    }
+
+    .adequacao-legenda{
+        width:100%;
+        max-width:390px;
+
+        margin:0 auto;
+
+        gap:12px;
+
+        justify-self:center;
+    }
+
+    .adequacao-legenda-item{
+        grid-template-columns:
+            13px
+            55px
+            minmax(140px,1fr);
+    }
+
+    .adequacao-legenda-nome{
+        font-size:12px;
+    }
+
+    .adequacao-legenda-valor{
+        font-size:11px;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .adequacao-panel-bom-avaria{
+        min-height:440px;
+    }
+
+    .adequacao-bom-avaria-conteudo{
+        padding:0 4px 10px;
+    }
+
+    .adequacao-chart-box{
+        max-width:250px;
+
+        height:240px;
+        min-height:240px;
+    }
+
+    .adequacao-legenda{
+        max-width:100%;
+
+        padding:0 6px;
+    }
+
+    .adequacao-legenda-item{
+        grid-template-columns:
+            12px
+            48px
+            minmax(0,1fr);
+
+        gap:6px;
+    }
+
+    .adequacao-legenda-nome{
+        font-size:11px;
+    }
+
+    .adequacao-legenda-valor{
+        font-size:10px;
+
         text-align:right;
     }
 }
