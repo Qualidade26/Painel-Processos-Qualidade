@@ -1061,14 +1061,14 @@ function criarGraficoAdequacaoStatus(a){
                 arcoAvaria.x +
                 Math.cos(angulo) *
                 (
-                    arcoAvaria.outerRadius + 18
+                    arcoAvaria.outerRadius + 35
                 );
 
             const meioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
                 (
-                    arcoAvaria.outerRadius + 18
+                    arcoAvaria.outerRadius + 35
                 );
 
 
@@ -1077,13 +1077,13 @@ function criarGraficoAdequacaoStatus(a){
             */
 
             const subidaX =
-                meioX - 28;
+    meioX - 50;
 
-            const subidaY =
-                meioY - 72;
+const subidaY =
+    meioY - 95;
 
             const finalX =
-                subidaX - 52;
+                subidaX - 100;
 
             const finalY =
                 subidaY;
