@@ -954,3 +954,121 @@
         text-align:left;
     }
 }
+/* ==========================================================
+   AJUSTE FINAL — GRÁFICO BOM X AVARIA
+========================================================== */
+
+.adequacao-panel-bom-avaria{
+    min-height:310px;
+    overflow:visible;
+}
+
+.adequacao-bom-avaria-conteudo{
+    display:grid;
+    grid-template-columns:minmax(300px,1fr) minmax(230px,.85fr);
+    align-items:center;
+    gap:4px;
+
+    width:100%;
+    min-width:0;
+}
+
+.adequacao-chart-box{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+
+    height:270px;
+    min-height:270px;
+
+    overflow:visible;
+}
+
+.adequacao-chart-box canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+.adequacao-legenda{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:14px;
+
+    width:100%;
+    min-width:0;
+
+    padding:0 8px 0 0;
+}
+
+.adequacao-legenda-item{
+    display:grid;
+    grid-template-columns:14px 54px minmax(145px,1fr);
+    align-items:center;
+    gap:8px;
+
+    width:100%;
+}
+
+.adequacao-legenda-cor{
+    width:13px;
+    height:13px;
+    border-radius:1px;
+}
+
+.adequacao-legenda-cor.bom{
+    background:#2855d9;
+}
+
+.adequacao-legenda-cor.avaria{
+    background:#ef3f3f;
+}
+
+.adequacao-legenda-nome{
+    color:#172554;
+    font-size:13px;
+    font-weight:700;
+}
+
+.adequacao-legenda-valor{
+    color:#172554;
+    font-size:12px;
+    font-weight:800;
+    text-align:right;
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE DO BOM X AVARIA
+========================================================== */
+
+@media(max-width:1200px){
+
+    .adequacao-bom-avaria-conteudo{
+        grid-template-columns:minmax(260px,1fr) minmax(210px,.9fr);
+    }
+
+    .adequacao-legenda-item{
+        grid-template-columns:13px 48px minmax(130px,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .adequacao-bom-avaria-conteudo{
+        grid-template-columns:1fr;
+    }
+
+    .adequacao-chart-box{
+        height:280px;
+        min-height:280px;
+    }
+
+    .adequacao-legenda{
+        max-width:430px;
+        margin:0 auto;
+        padding:0 12px 12px;
+    }
+}
