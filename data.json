@@ -6,7 +6,7 @@
       {
         "nome": "Avaria estoque",
         "valor": 3446.36
-      },
+      },F
       {
         "nome": "Devolução avaria",
         "valor": 11625.72
@@ -384,7 +384,7 @@
       }
     ]
   },
-  "retrabalho": {
+   "retrabalho": {
     "processos": 7,
     "totalUnidades": 3928,
     "totalHoras": 69,
@@ -654,11 +654,12 @@
         "motivo": ""
       }
     ]
-    "adequacaocaixa": {
+  },
+
+  "adequacaocaixa": {
     "totalocorrenciasano": 4,
     "quantidaderetrabalhada": 190,
     "totalhoras": 20,
-
     "indicadores": {
       "bom": {
         "valor": 26106.18,
@@ -669,7 +670,6 @@
         "percentual": 0.02
       }
     },
-
     "motivos": [
       {
         "nome": "Devolução",
@@ -692,7 +692,6 @@
         "percentual": 0
       }
     ],
-
     "fabricantes": [
       {
         "fabricante": "Anhui Easyway Medical",
@@ -954,6 +953,8 @@
       }
     ]
   },
+
+  "fornecedores": {
   
   "fornecedores":
   {
