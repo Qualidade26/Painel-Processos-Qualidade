@@ -903,7 +903,6 @@ function criarGraficoAdequacaoStatus(a){
         return;
     }
 
-
     if(graficoAdequacaoStatus){
 
         graficoAdequacaoStatus.destroy();
@@ -911,28 +910,23 @@ function criarGraficoAdequacaoStatus(a){
         graficoAdequacaoStatus = null;
     }
 
-
     const valorBom =
         Number(
             a.indicadores?.bom?.valor || 0
         );
-
 
     const valorAvaria =
         Number(
             a.indicadores?.avaria?.valor || 0
         );
 
-
     const total =
         valorBom + valorAvaria;
-
 
     const percentualBom =
         total > 0
             ? (valorBom / total) * 100
             : 0;
-
 
     const percentualAvaria =
         total > 0
@@ -961,7 +955,6 @@ function criarGraficoAdequacaoStatus(a){
                 return;
             }
 
-
             const arco =
                 meta.data[0];
 
@@ -974,7 +967,6 @@ function criarGraficoAdequacaoStatus(a){
             const ctx =
                 chart.ctx;
 
-
             ctx.save();
 
             ctx.textAlign =
@@ -982,7 +974,6 @@ function criarGraficoAdequacaoStatus(a){
 
             ctx.textBaseline =
                 "middle";
-
 
             ctx.fillStyle =
                 "#0f172a";
@@ -996,7 +987,6 @@ function criarGraficoAdequacaoStatus(a){
                 centroY - 8
             );
 
-
             ctx.fillStyle =
                 "#334155";
 
@@ -1009,15 +999,14 @@ function criarGraficoAdequacaoStatus(a){
                 centroY + 22
             );
 
-
             ctx.restore();
         }
-
     };
 
 
     /* ======================================================
        RÓTULO EXTERNO — AVARIA
+       PARTE SUPERIOR DIREITA
     ====================================================== */
 
     const rotuloExternoAvaria = {
@@ -1037,20 +1026,17 @@ function criarGraficoAdequacaoStatus(a){
                 return;
             }
 
-
             const arcoAvaria =
                 meta.data[0];
 
             const ctx =
                 chart.ctx;
 
-
             const angulo =
                 (
                     arcoAvaria.startAngle +
                     arcoAvaria.endAngle
                 ) / 2;
-
 
             const inicioX =
                 arcoAvaria.x +
@@ -1059,7 +1045,6 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.outerRadius - 2
                 );
 
-
             const inicioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
@@ -1067,6 +1052,9 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.outerRadius - 2
                 );
 
+            /*
+                Ponto intermediário fora da rosca.
+            */
 
             const meioX =
                 arcoAvaria.x +
@@ -1075,7 +1063,6 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.outerRadius + 22
                 );
 
-
             const meioY =
                 arcoAvaria.y +
                 Math.sin(angulo) *
@@ -1083,20 +1070,23 @@ function criarGraficoAdequacaoStatus(a){
                     arcoAvaria.outerRadius + 22
                 );
 
-
             /*
-                Mantém o texto e a linha do lado esquerdo.
+                Puxa a linha para cima e à direita.
             */
 
+            const subidaX =
+                meioX + 34;
+
+            const subidaY =
+                meioY - 70;
+
             const finalX =
-                meioX - 105;
+                subidaX + 55;
 
             const finalY =
-                meioY;
-
+                subidaY;
 
             ctx.save();
-
 
             ctx.beginPath();
 
@@ -1108,6 +1098,11 @@ function criarGraficoAdequacaoStatus(a){
             ctx.lineTo(
                 meioX,
                 meioY
+            );
+
+            ctx.lineTo(
+                subidaX,
+                subidaY
             );
 
             ctx.lineTo(
@@ -1124,8 +1119,10 @@ function criarGraficoAdequacaoStatus(a){
             ctx.stroke();
 
 
+            /* 2% */
+
             ctx.textAlign =
-                "right";
+                "center";
 
             ctx.textBaseline =
                 "bottom";
@@ -1136,12 +1133,14 @@ function criarGraficoAdequacaoStatus(a){
             ctx.font =
                 "800 20px 'Segoe UI', Arial, sans-serif";
 
-           ctx.fillText(
-    `${Math.round(percentualAvaria)}%`,
-    finalX - 8,
-    finalY - 4
-);
+            ctx.fillText(
+                `${Math.round(percentualAvaria)}%`,
+                finalX - 22,
+                finalY - 6
+            );
 
+
+            /* AVARIA */
 
             ctx.textBaseline =
                 "top";
@@ -1152,16 +1151,14 @@ function criarGraficoAdequacaoStatus(a){
             ctx.font =
                 "800 10px 'Segoe UI', Arial, sans-serif";
 
-           ctx.fillText(
-    "AVARIA",
-    finalX - 8,
-    finalY + 4
-);
-
+            ctx.fillText(
+                "AVARIA",
+                finalX - 22,
+                finalY + 2
+            );
 
             ctx.restore();
         }
-
     };
 
 
@@ -1208,7 +1205,6 @@ function criarGraficoAdequacaoStatus(a){
                         mostrarPercentualCentro:false
 
                     }]
-
                 },
 
                 plugins:[
@@ -1225,10 +1221,11 @@ function criarGraficoAdequacaoStatus(a){
                     cutout:"64%",
 
                     /*
-                        Posiciona a fatia vermelha à esquerda.
+                        Coloca a fatia vermelha
+                        na lateral direita.
                     */
 
-                    rotation:90,
+                    rotation:-90,
 
                     circumference:360,
 
@@ -1243,13 +1240,13 @@ function criarGraficoAdequacaoStatus(a){
 
                         padding:{
 
-                            top:25,
+                            top:90,
 
-                            right:25,
+                            right:120,
 
                             bottom:15,
 
-                            left:145
+                            left:20
                         }
                     },
 
@@ -1297,15 +1294,10 @@ function criarGraficoAdequacaoStatus(a){
                                         "%)"
                                     );
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
-
             }
         );
 }
