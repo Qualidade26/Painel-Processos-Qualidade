@@ -1193,7 +1193,7 @@ const textoCentroAdequacao = {
             ctx.fillText(
                 `${Math.round(percentualAvaria)}%`,
                 finalX + 5,
-                finalY - 1
+                finalY - 18
             );
 
 
@@ -1211,7 +1211,7 @@ const textoCentroAdequacao = {
             ctx.fillText(
                 "AVARIA",
                 finalX + 5,
-                finalY + 2
+                finalY - 12
             );
 
             ctx.restore();
