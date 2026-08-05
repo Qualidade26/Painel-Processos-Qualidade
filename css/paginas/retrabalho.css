@@ -1072,3 +1072,21 @@
         padding:0 12px 12px;
     }
 }
+/* ==========================================================
+   BOM X AVARIA — AJUSTE DE ENQUADRAMENTO
+========================================================== */
+
+.adequacao-panel-bom-avaria{
+    overflow:hidden;
+}
+
+.adequacao-bom-avaria-conteudo{
+    grid-template-columns:minmax(330px,1fr) minmax(230px,.8fr);
+    align-items:center;
+}
+
+.adequacao-chart-box{
+    height:300px;
+    min-height:300px;
+    overflow:visible;
+}
