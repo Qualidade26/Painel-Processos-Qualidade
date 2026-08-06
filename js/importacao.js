@@ -6,7 +6,7 @@
 /* ==========================================================
    INSTÂNCIAS DOS GRÁFICOS
 ========================================================== */
-
+F
 let graficoMensalImportacao = null;
 let graficoSkuImportacao = null;
 
@@ -513,7 +513,7 @@ function renderImportacao() {
             <div class="panel importacao-panel-sku">
 
                 <h3 class="importacao-panel-titulo">
-                    📊 Quantidade por SKU (Maior para Menor)
+                    📊 Ranking de SKU 
                 </h3>
 
 
@@ -1150,13 +1150,13 @@ function criarGraficoMensalImportacao(imp) {
                            EIXO DE QUANTIDADES
                         ================================== */
 
-                       y: {
+                     y:{
 
-    beginAtZero: true,
+    beginAtZero:true,
 
-    min: 0,
+    suggestedMax:200,
 
-    max: 200,
+    grace:"10%",
 
     position: "left",
 
@@ -1218,13 +1218,13 @@ function criarGraficoMensalImportacao(imp) {
                            EIXO DE HORAS
                         ================================== */
 
-                        y1: {
+                       y1:{
 
-                            beginAtZero: true,
+    beginAtZero:true,
 
-                            min: 0,
+    suggestedMax:180,
 
-                            max: 180,
+    grace:"10%",
 
                             position: "right",
 
@@ -1297,7 +1297,8 @@ function criarGraficoMensalImportacao(imp) {
         );
 }
 /* ==========================================================
-   GRÁFICO — QUANTIDADE POR SKU
+   GRÁFICO — QUANTIDADE INSPECIONADA POR SKU
+   BARRAS HORIZONTAIS — MENOR PARA MAIOR
 ========================================================== */
 
 function criarGraficoSkuImportacao(imp) {
@@ -1322,13 +1323,18 @@ function criarGraficoSkuImportacao(imp) {
                         item.quantidade
                     );
 
-
                 return {
 
                     sku:
                         escaparTextoImportacao(
                             item.sku ||
                             "Sem identificação"
+                        ),
+
+                    descricao:
+                        escaparTextoImportacao(
+                            item.descricao ||
+                            "Sem descrição"
                         ),
 
                     quantidade:
@@ -1338,15 +1344,33 @@ function criarGraficoSkuImportacao(imp) {
                 };
             })
 
+            /*
+            --------------------------------------------------
+            Remove valores zerados.
+            --------------------------------------------------
+            */
+
             .filter(item =>
                 item.quantidade > 0
             )
 
+            /*
+            --------------------------------------------------
+            Ordena do menor para o maior.
+            --------------------------------------------------
+            */
+
             .sort(
                 (a, b) =>
-                    b.quantidade -
-                    a.quantidade
+                    a.quantidade -
+                    b.quantidade
             )
+
+            /*
+            --------------------------------------------------
+            Exibe no máximo 10 SKUs.
+            --------------------------------------------------
+            */
 
             .slice(0, 10);
 
@@ -1438,9 +1462,11 @@ function criarGraficoSkuImportacao(imp) {
                     datasets: [
 
                         {
-                            label: "Quantidade",
+                            label:
+                                "Quantidade Inspecionada",
 
-                            data: quantidades,
+                            data:
+                                quantidades,
 
                             backgroundColor:
                                 "rgba(29, 78, 216, 0.82)",
@@ -1448,19 +1474,19 @@ function criarGraficoSkuImportacao(imp) {
                             borderColor:
                                 "#1d4ed8",
 
-                            borderWidth: 1,
+                            borderWidth:1,
 
-                            borderRadius: 5,
+                            borderRadius:5,
 
-                            borderSkipped: false,
+                            borderSkipped:false,
 
-                            barThickness: 18,
+                            barThickness:18,
 
-                            maxBarThickness: 22,
+                            maxBarThickness:22,
 
-                            minBarLength: 3,
+                            minBarLength:3,
 
-                            _ocultarZero: true
+                            _ocultarZero:true
                         }
                     ]
                 },
@@ -1468,11 +1494,17 @@ function criarGraficoSkuImportacao(imp) {
 
                 options: {
 
-                    responsive: true,
+                    responsive:true,
 
-                    maintainAspectRatio: false,
+                    maintainAspectRatio:false,
 
-                    indexAxis: "y",
+                    /*
+                    --------------------------------------------------
+                    Transforma as barras em horizontais.
+                    --------------------------------------------------
+                    */
+
+                    indexAxis:"y",
 
 
                     /* ======================================
@@ -1483,13 +1515,13 @@ function criarGraficoSkuImportacao(imp) {
 
                         padding: {
 
-                            top: 4,
+                            top:4,
 
-                            right: 48,
+                            right:85,
 
-                            bottom: 0,
+                            bottom:0,
 
-                            left: 0
+                            left:0
                         }
                     },
 
@@ -1500,11 +1532,11 @@ function criarGraficoSkuImportacao(imp) {
 
                     interaction: {
 
-                        mode: "nearest",
+                        mode:"nearest",
 
-                        axis: "y",
+                        axis:"y",
 
-                        intersect: false
+                        intersect:false
                     },
 
 
@@ -1514,28 +1546,29 @@ function criarGraficoSkuImportacao(imp) {
 
                     plugins: {
 
-                        valorFlutuante: false,
+                        valorFlutuante:false,
 
 
                         datalabels: {
 
-                            display: false
+                            display:false
                         },
 
 
                         legend: {
 
-                            display: false
+                            display:false
                         },
 
 
                         tooltip: {
 
-                            enabled: true,
+                            enabled:true,
 
-                            displayColors: false,
+                            displayColors:false,
 
                             callbacks: {
+
 
                                 title(contextos) {
 
@@ -1546,8 +1579,38 @@ function criarGraficoSkuImportacao(imp) {
                                         return "";
                                     }
 
+                                    const indice =
+                                        contextos[0].dataIndex;
 
-                                    return contextos[0].label;
+                                    const item =
+                                        dadosSku[indice];
+
+
+                                    return item
+                                        ? `SKU ${item.sku}`
+                                        : "";
+                                },
+
+
+                                afterTitle(contextos) {
+
+                                    if (
+                                        !contextos ||
+                                        !contextos.length
+                                    ) {
+                                        return "";
+                                    }
+
+                                    const indice =
+                                        contextos[0].dataIndex;
+
+                                    const item =
+                                        dadosSku[indice];
+
+
+                                    return item
+                                        ? item.descricao
+                                        : "";
                                 },
 
 
@@ -1567,11 +1630,12 @@ function criarGraficoSkuImportacao(imp) {
 
 
                                     return (
-                                        "Quantidade: " +
+                                        "Quantidade inspecionada: " +
                                         Number(valor)
                                             .toLocaleString(
                                                 "pt-BR"
-                                            )
+                                            ) +
+                                        " unidades"
                                     );
                                 }
                             }
@@ -1587,28 +1651,29 @@ function criarGraficoSkuImportacao(imp) {
 
 
                         /* ==================================
-                           EIXO DOS VALORES
+                           EIXO DAS QUANTIDADES
                         ================================== */
 
                         x: {
 
-                            beginAtZero: true,
+                            beginAtZero:true,
 
-                            grace: "15%",
+                            grace:"18%",
 
                             title: {
 
-                                display: true,
+                                display:true,
 
-                                text: "Quantidade",
+                                text:
+                                    "Quantidade Inspecionada",
 
-                                color: "#4b5563",
+                                color:"#4b5563",
 
                                 font: {
 
-                                    size: 11,
+                                    size:11,
 
-                                    weight: "600"
+                                    weight:"600"
                                 }
                             },
 
@@ -1617,30 +1682,97 @@ function criarGraficoSkuImportacao(imp) {
                                 color:
                                     "rgba(148, 163, 184, 0.22)",
 
-                                drawBorder: false
+                                drawBorder:false
                             },
 
                             border: {
 
-                                display: false
+                                display:false
                             },
 
                             ticks: {
 
-                                precision: 0,
+                                precision:0,
 
-                                color: "#4b5563",
+                                color:"#4b5563",
 
-                                padding: 6,
+                                padding:6,
 
                                 font: {
 
-                                    size: 10
+                                    size:10
                                 },
 
                                 callback(valor) {
 
-                                    return Number(valor)
+                                    const numero =
+                                        Number(valor);
+
+
+                                    if (
+                                        numero >=
+                                        1000000000
+                                    ) {
+
+                                        return (
+                                            Number(
+                                                numero /
+                                                1000000000
+                                            )
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:1
+                                                }
+                                            ) +
+                                            " bi"
+                                        );
+                                    }
+
+
+                                    if (
+                                        numero >=
+                                        1000000
+                                    ) {
+
+                                        return (
+                                            Number(
+                                                numero /
+                                                1000000
+                                            )
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:1
+                                                }
+                                            ) +
+                                            " mi"
+                                        );
+                                    }
+
+
+                                    if (
+                                        numero >=
+                                        1000
+                                    ) {
+
+                                        return (
+                                            Number(
+                                                numero /
+                                                1000
+                                            )
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:1
+                                                }
+                                            ) +
+                                            " mil"
+                                        );
+                                    }
+
+
+                                    return numero
                                         .toLocaleString(
                                             "pt-BR"
                                         );
@@ -1650,62 +1782,46 @@ function criarGraficoSkuImportacao(imp) {
 
 
                         /* ==================================
-                           EIXO DOS SKUS
+                           EIXO DOS SKUs
                         ================================== */
 
                         y: {
 
-                            offset: true,
+                            offset:true,
 
                             grid: {
 
-                                display: false,
+                                display:false,
 
-                                drawBorder: false
+                                drawBorder:false
                             },
 
                             border: {
 
-                                display: false
+                                display:false
                             },
 
                             ticks: {
 
-                                color: "#334155",
+                                color:"#334155",
 
-                                padding: 8,
+                                padding:8,
 
                                 font: {
 
-                                    size: 10,
+                                    size:10,
 
-                                    weight: "600"
+                                    weight:"700"
                                 },
-
 
                                 callback(valor) {
 
-                                    const texto =
+                                    return (
+                                        "SKU " +
                                         this.getLabelForValue(
                                             valor
-                                        );
-
-
-                                    if (
-                                        texto.length > 22
-                                    ) {
-
-                                        return (
-                                            texto.slice(
-                                                0,
-                                                22
-                                            ) +
-                                            "..."
-                                        );
-                                    }
-
-
-                                    return texto;
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1718,13 +1834,12 @@ function criarGraficoSkuImportacao(imp) {
 
                     animation: {
 
-                        duration: 500
+                        duration:500
                     }
                 }
             }
         );
 }
-
 
 /* ==========================================================
    TABELA — STATUS DA IMPORTAÇÃO
@@ -1777,7 +1892,13 @@ function badgeStatusImportacao(status) {
                 </span>
             `;
 
+case "AGUARDANDO CHEGADA":
 
+    return `
+        <span class="status-badge status-aguardando">
+            🔵 AGUARDANDO
+        </span>
+    `;
         default:
 
             return `
@@ -1848,12 +1969,19 @@ function montarTabelaFluxoImportacao(lista) {
                     )}
                 </td>
 
-                <td>
-                    ${escaparTextoImportacao(
-                        item.observacao
-                    )}
-                </td>
+               <td>
+    ${
+        !item.observacao ||
+        item.observacao === "0" ||
+        item.observacao === 0
 
+            ? "-"
+
+            : escaparTextoImportacao(
+                item.observacao
+            )
+    }
+</td>
             </tr>
 
         `).join("");
