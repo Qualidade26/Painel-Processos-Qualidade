@@ -514,7 +514,7 @@ function renderImportacao() {
             <div class="panel importacao-panel-sku">
 
                 <h3 class="importacao-panel-titulo">
-                    📊 Ranking de SKU 
+                    📊 Ranking por SKU 
                 </h3>
 
 
@@ -1304,10 +1304,10 @@ function criarGraficoMensalImportacao(imp) {
 
 function criarGraficoSkuImportacao(imp) {
 
-    const dadosSkuOriginais =
-        Array.isArray(imp.paretoSku)
-            ? imp.paretoSku
-            : [];
+   const dadosSkuOriginais =
+    Array.isArray(imp.graficoSku)
+        ? imp.graficoSku
+        : [];
 
 
     /* ======================================================
