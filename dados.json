@@ -287,349 +287,345 @@
       }
     ]
   },
-  "importacao": {
-    "processosAno": 113,
-    "totalSku": 321,
-    "totalLotes": 901,
-    "laudosEmitidos": 594,
-    "totalHoras": 396.09,
-    "mensal": [
-      {
-        "mes": "Janeiro",
-        "processos": 13,
-        "sku": 0,
-        "lotes": 95,
-        "laudos": 95,
-        "horas": 54.0
-      },
-      {
-        "mes": "Fevereiro",
-        "processos": 15,
-        "sku": 66,
-        "lotes": 99,
-        "laudos": 104,
-        "horas": 86.0
-      },
-      {
-        "mes": "Março",
-        "processos": 15,
-        "sku": 116,
-        "lotes": 124,
-        "laudos": 132,
-        "horas": 70.0
-      },
-      {
-        "mes": "Abril",
-        "processos": 20,
-        "sku": 180,
-        "lotes": 180,
-        "laudos": 180,
-        "horas": 91.0
-      },
-      {
-        "mes": "Maio",
-        "processos": 19,
-        "sku": 82,
-        "lotes": 141,
-        "laudos": 54,
-        "horas": 68.4
-      },
-      {
-        "mes": "Junho",
-        "processos": 9,
-        "sku": 21,
-        "lotes": 48,
-        "laudos": 8,
-        "horas": 6.42
-      },
-      {
-        "mes": "Julho",
-        "processos": 18,
-        "sku": 64,
-        "lotes": 202,
-        "laudos": 17,
-        "horas": 20.08
-      },
-      {
-        "mes": "Agosto",
-        "processos": 4,
-        "sku": 0,
-        "lotes": 12,
-        "laudos": 4,
-        "horas": 0.19
-      },
-      {
-        "mes": "Setembro",
-        "processos": 0,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Outubro",
-        "processos": 0,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Novembro",
-        "processos": 0,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Dezembro",
-        "processos": 0,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      }
-    ],
-    "inspecaosemanal": [
-      {
-        "processos": "2026I181-SR",
-        "sku": 6041,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1508",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6041,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1518",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6041,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N797",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6041,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1273",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6041,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N812",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6037,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1481",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6037,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1498",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6042,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1428",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6042,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1464",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6042,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1504",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6042,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1432",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6038,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1483",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6038,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1479",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6038,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1502",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6038,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1467",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6039,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1492",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6039,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1452",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1474",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1090",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1403",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1511",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1490",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      },
-      {
-        "processos": "2026I181-SR",
-        "sku": 6036,
-        "descricao": "SR Produtos para la salud S.A",
-        "lote": "N1507",
-        "status": "Aguardando chegada",
-        "observacao": "0"
-      }
-    ],
-    "top10inspecao": [
-      {
-        "sku": "86003",
-        "descricao": "PT-ALCOOL SWAB C/100 (PH)",
-        "quantidade": 109096000
-      },
-      {
-        "sku": "5468",
-        "descricao": "PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500",
-        "quantidade": 48960000
-      },
-      {
-        "sku": "345",
-        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100",
-        "quantidade": 27970000
-      },
-      {
-        "sku": "341",
-        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100",
-        "quantidade": 16720000
-      },
-      {
-        "sku": "5401",
-        "descricao": "PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25",
-        "quantidade": 10898500
-      },
-      {
-        "sku": "342",
-        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X8 C/100",
-        "quantidade": 8185000
-      },
-      {
-        "sku": "344",
-        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100",
-        "quantidade": 8000000
-      },
-      {
-        "sku": "365",
-        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100",
-        "quantidade": 7000000
-      },
-      {
-        "sku": "4253",
-        "descricao": "PT-SCALP VACUO (JH) 21G C/100",
-        "quantidade": 5266000
-      },
-      {
-        "sku": "4254",
-        "descricao": "PT-SCALP VACUO (JH) 23G C/100",
-        "quantidade": 4816000
-      }
-    ]
-  },
+ {
+  "processosAno": 113,
+  "totalSku": 321,
+  "totalLotes": 901,
+  "laudosEmitidos": 594,
+  "totalHoras": 396.09,
+
+  "mensal": [
+    {
+      "mes": "Fevereiro",
+      "processos": 15,
+      "sku": 66,
+      "lotes": 99,
+      "laudos": 104,
+      "horas": 86.00
+    },
+    {
+      "mes": "Março",
+      "processos": 15,
+      "sku": 116,
+      "lotes": 124,
+      "laudos": 132,
+      "horas": 70.00
+    },
+    {
+      "mes": "Abril",
+      "processos": 20,
+      "sku": 180,
+      "lotes": 180,
+      "laudos": 180,
+      "horas": 91.00
+    },
+    {
+      "mes": "Maio",
+      "processos": 19,
+      "sku": 82,
+      "lotes": 141,
+      "laudos": 54,
+      "horas": 68.40
+    },
+    {
+      "mes": "Junho",
+      "processos": 9,
+      "sku": 21,
+      "lotes": 48,
+      "laudos": 8,
+      "horas": 6.42
+    },
+    {
+      "mes": "Julho",
+      "processos": 18,
+      "sku": 64,
+      "lotes": 202,
+      "laudos": 17,
+      "horas": 20.08
+    },
+    {
+      "mes": "Agosto",
+      "processos": 4,
+      "sku": 0,
+      "lotes": 12,
+      "laudos": 4,
+      "horas": 0.19
+    },
+    {
+      "mes": "Setembro",
+      "processos": 0,
+      "sku": 0,
+      "lotes": 0,
+      "laudos": 0,
+      "horas": 0.00
+    },
+    {
+      "mes": "Outubro",
+      "processos": 0,
+      "sku": 0,
+      "lotes": 0,
+      "laudos": 0,
+      "horas": 0.00
+    },
+    {
+      "mes": "Novembro",
+      "processos": 0,
+      "sku": 0,
+      "lotes": 0,
+      "laudos": 0,
+      "horas": 0.00
+    },
+    {
+      "mes": "Dezembro",
+      "processos": 0,
+      "sku": 0,
+      "lotes": 0,
+      "laudos": 0,
+      "horas": 0.00
+    }
+  ],
+
+  "inspecaosemanal": [
+    {
+      "processos": "2026I181-SR",
+      "sku": 6041,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1508",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6041,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1518",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6041,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N797",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6041,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1273",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6041,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N812",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6037,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1481",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6037,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1498",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6042,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1428",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6042,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1464",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6042,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1504",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6042,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1432",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6038,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1483",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6038,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1479",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6038,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1502",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6038,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1467",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6039,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1492",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6039,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1452",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1474",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1090",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1403",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1511",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1490",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    },
+    {
+      "processos": "2026I181-SR",
+      "sku": 6036,
+      "descricao": "SR Produtos para la salud S.A",
+      "lote": "N1507",
+      "status": "Aguardando chegada",
+      "observacao": "0"
+    }
+  ],
+
+  "top10inspecao": [
+    {
+      "sku": "86003",
+      "descricao": "PT-ALCOOL SWAB C/100 (PH)",
+      "quantidade": 109096000
+    },
+    {
+      "sku": "5468",
+      "descricao": "PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500",
+      "quantidade": 48960000
+    },
+    {
+      "sku": "345",
+      "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100",
+      "quantidade": 27970000
+    },
+    {
+      "sku": "341",
+      "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100",
+      "quantidade": 16720000
+    },
+    {
+      "sku": "5401",
+      "descricao": "PT-EQUIPO MACRO GOTAS LI L2 (COMPLETO) C/25",
+      "quantidade": 10898500
+    },
+    {
+      "sku": "342",
+      "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X8 C/100",
+      "quantidade": 8185000
+    },
+    {
+      "sku": "344",
+      "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100",
+      "quantidade": 8000000
+    },
+    {
+      "sku": "365",
+      "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 20X5,5 C/100",
+      "quantidade": 7000000
+    },
+    {
+      "sku": "4253",
+      "descricao": "PT-SCALP VACUO (JH) 21G C/100",
+      "quantidade": 5266000
+    },
+    {
+      "sku": "4254",
+      "descricao": "PT-SCALP VACUO (JH) 23G C/100",
+      "quantidade": 4816000
+    }
+  ]
+},
+  
   "retrabalho": {
     "processos": 7,
     "totalUnidades": 3928,
