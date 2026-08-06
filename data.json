@@ -2,7 +2,6 @@
   "descarte": {
     "total": 992949.77,
     "ultimoDescarte": 614772.09,
-
     "origens": [
       {
         "nome": "Avaria estoque",
@@ -18,7 +17,7 @@
       },
       {
         "nome": "Vencido",
-        "valor": 421475.70
+        "valor": 421475.7
       },
       {
         "nome": "Avaria Nacional",
@@ -29,7 +28,6 @@
         "valor": 405596.38
       }
     ],
-
     "top10": [
       {
         "sku": "518",
@@ -64,7 +62,7 @@
       {
         "sku": "5390",
         "descricao": "PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR",
-        "valor": 53978.70
+        "valor": 53978.7
       },
       {
         "sku": "5388",
@@ -82,15 +80,12 @@
         "valor": 121921.75
       }
     ]
-  }
-}
-{
+  },
   "esfig": {
     "totalHoras": 818,
     "totalGruInmetro": 146951.87,
     "ultimaAfericao": "08/07/2026",
     "proximaAfericao": "Aguardando",
-
     "produtos": [
       {
         "sku": "267",
@@ -175,10 +170,8 @@
       }
     ]
   },
-
   "amostras": {
     "totalHoras": 61.51,
-
     "mensal": [
       {
         "mes": "Janeiro",
@@ -218,30 +211,29 @@
       {
         "mes": "Agosto",
         "valor": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Setembro",
         "valor": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Outubro",
         "valor": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Novembro",
         "valor": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Dezembro",
         "valor": 0,
-        "horas": 0.00
+        "horas": 0.0
       }
     ],
-
     "top10": [
       {
         "sku": "AM5468",
@@ -294,16 +286,13 @@
         "quantidade": 92
       }
     ]
-  }
-}
-{
+  },
   "importacao": {
     "processosAno": 113,
     "totalSku": 321,
     "totalLotes": 901,
     "laudosEmitidos": 594,
     "totalHoras": 396.09,
-
     "mensal": [
       {
         "mes": "Janeiro",
@@ -311,7 +300,7 @@
         "sku": 0,
         "lotes": 95,
         "laudos": 95,
-        "horas": 54.00
+        "horas": 54.0
       },
       {
         "mes": "Fevereiro",
@@ -319,7 +308,7 @@
         "sku": 66,
         "lotes": 99,
         "laudos": 104,
-        "horas": 86.00
+        "horas": 86.0
       },
       {
         "mes": "Março",
@@ -327,7 +316,7 @@
         "sku": 116,
         "lotes": 124,
         "laudos": 132,
-        "horas": 70.00
+        "horas": 70.0
       },
       {
         "mes": "Abril",
@@ -335,7 +324,7 @@
         "sku": 180,
         "lotes": 180,
         "laudos": 180,
-        "horas": 91.00
+        "horas": 91.0
       },
       {
         "mes": "Maio",
@@ -343,7 +332,7 @@
         "sku": 82,
         "lotes": 141,
         "laudos": 54,
-        "horas": 68.40
+        "horas": 68.4
       },
       {
         "mes": "Junho",
@@ -375,7 +364,7 @@
         "sku": 0,
         "lotes": 0,
         "laudos": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Outubro",
@@ -383,7 +372,7 @@
         "sku": 0,
         "lotes": 0,
         "laudos": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Novembro",
@@ -391,7 +380,7 @@
         "sku": 0,
         "lotes": 0,
         "laudos": 0,
-        "horas": 0.00
+        "horas": 0.0
       },
       {
         "mes": "Dezembro",
@@ -399,866 +388,859 @@
         "sku": 0,
         "lotes": 0,
         "laudos": 0,
-        "horas": 0.00
+        "horas": 0.0
+      }
+    ],
+    "inspecaosemanal": [
+      {
+        "processos": "2026I181-SR",
+        "sku": 6041,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1508",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6041,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1518",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6041,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N797",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6041,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1273",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6041,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N812",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6037,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1481",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6037,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1498",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6042,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1428",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6042,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1464",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6042,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1504",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6042,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1432",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6038,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1483",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6038,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1479",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6038,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1502",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6038,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1467",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6039,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1492",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6039,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1452",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1474",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1090",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1403",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1511",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1490",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      },
+      {
+        "processos": "2026I181-SR",
+        "sku": 6036,
+        "descricao": "SR Produtos para la salud S.A",
+        "lote": "N1507",
+        "status": "Aguardando chegada",
+        "observacao": "0"
+      }
+    ],
+    "top10inspecao": [
+      {
+        "sku": "86003",
+        "descricao": "PT-ALCOOL SWAB C/100 (PH)",
+        "quantidade": 109096000
+      },
+      {
+        "sku": "5468",
+        "descricao": "PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500",
+        "quantidade": 48960000
+      },
+      {
+        "sku": "345",
+        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100",
+        "quantidade": 27970000
+      },
+      {
+        "sku": "341",
+        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100",
+        "quantidade": 16720000
+      },
+      {
+        "sku": "5401",
+        "descricao": "PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25",
+        "quantidade": 10898500
+      },
+      {
+        "sku": "342",
+        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X8 C/100",
+        "quantidade": 8185000
+      },
+      {
+        "sku": "344",
+        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100",
+        "quantidade": 8000000
+      },
+      {
+        "sku": "365",
+        "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100",
+        "quantidade": 7000000
+      },
+      {
+        "sku": "4253",
+        "descricao": "PT-SCALP VACUO (JH) 21G C/100",
+        "quantidade": 5266000
+      },
+      {
+        "sku": "4254",
+        "descricao": "PT-SCALP VACUO (JH) 23G C/100",
+        "quantidade": 4816000
       }
     ]
-  }
-}
-"inspecaosemanal": [
-  {
-    "processos": "2026I181-SR",
-    "sku": 6041,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1508",
-    "status": "Aguardando chegada",
-    "observacao": "0"
   },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6041,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1518",
-    "status": "Aguardando chegada",
-    "observacao": "0"
+  "retrabalho": {
+    "processos": 7,
+    "totalUnidades": 3928,
+    "totalHoras": 69,
+    "fabricantes": [
+      {
+        "fabricante": "Bonrre Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "AB Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "All Lab Comercial",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "SteriLance Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Biomed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Accumax",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shanxian Huayu Suture Product Co,. Ltd",
+        "quantidade": 625,
+        "horas": 4,
+        "motivo": "Nome da Responsável Técnica antiga"
+      },
+      {
+        "fabricante": "Shandong Aosaite",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shangai Kindly",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shanghai SA Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Ayset Plastik",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Medico Electroude",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Anhui Easyway Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Huaian Tianda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Medico (Huaian) CO., LTDA",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Well Lead medical co., ltd.",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Polymed Medicure",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Phoenix Innovative HealtCare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Wellspring Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Yangzhou Medline Industry",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Webest Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Honsun (Nantong)",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Shandong Weigao",
+        "quantidade": 2460,
+        "horas": 11,
+        "motivo": "Nome da Responsável Técnica antiga"
+      },
+      {
+        "fabricante": "Nanjing Jiangnan Novel",
+        "quantidade": 843,
+        "horas": 54,
+        "motivo": "Nome da Responsável Técnica antiga"
+      },
+      {
+        "fabricante": "Vitromed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Garware Bestretch",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Xiantao Xingrong",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Nantong Renon",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangxi Hongda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Huaian Tianda Medica",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dailymag Magnetic",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Yancheng Tiandi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dfi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Pharmaplast AS",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Blue",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Jiangsu Huida Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Guangzhou Improve Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Hangzhou Rollmed",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Dalian GoodWood",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Anhui hongyu",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "Alphaven",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      },
+      {
+        "fabricante": "SR Produtos para la salud S.A",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": ""
+      }
+    ]
   },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6041,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N797",
-    "status": "Aguardando chegada",
-    "observacao": "0"
+  "adequacaocaixa": {
+    "totalocorrenciasano": 4,
+    "quantidaderetrabalhada": 190,
+    "totalhoras": 20,
+    "indicadores": {
+      "bom": {
+        "valor": 26106.18,
+        "percentual": 0.98
+      },
+      "avaria": {
+        "valor": 463.81,
+        "percentual": 0.02
+      }
+    },
+    "motivos": [
+      {
+        "nome": "Devolução",
+        "valor": 22561.03,
+        "percentual": 0.85
+      },
+      {
+        "nome": "Avaria de Transporte Importação",
+        "valor": 2940.72,
+        "percentual": 0.11
+      },
+      {
+        "nome": "Avaria de Transporte Nacional",
+        "valor": 1068.24,
+        "percentual": 0.04
+      },
+      {
+        "nome": "Outros",
+        "valor": 0,
+        "percentual": 0
+      }
+    ],
+    "fabricantes": [
+      {
+        "fabricante": "Anhui Easyway Medical",
+        "quantidade": 133,
+        "horas": 10,
+        "motivo": "Devolução e Avaria de Transporte Importação",
+        "observacao": ""
+      },
+      {
+        "fabricante": "SR Produtos para la salud S.A",
+        "quantidade": 57,
+        "horas": 10,
+        "motivo": "Avaria de Transporte Nacional",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Bonrre Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "AB Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "All Lab Comercial",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "SteriLance Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Biomed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Accumax",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Shanxian Huayu Suture Product Co,. Ltd",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Shandong Aosaite",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Shangai Kindly",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Shanghai SA Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Ayset Plastik",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Medico Electroude",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Huaian Tianda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Medico (Huaian) CO., LTDA",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Well Lead medical co., ltd.",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Polymed Medicure",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Phoenix Innovative HealtCare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Wellspring Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Yangzhou Medline Industry",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Jiangsu Webest Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Honsun (Nantong)",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Shandong Weigao",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Nanjing Jiangnan Novel",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Vitromed Healthcare",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Garware Bestretch",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Xiantao Xingrong",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Nantong Renon",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Jiangxi Hongda Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Jiangsu Kangjian Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Dailymag Magnetic",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Yancheng Tiandi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Dfi",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Pharmaplast AS",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Blue",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Jiangsu Huida Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Guangzhou Improve Medical",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Hangzhou Rollmed",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Dalian GoodWood",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Anhui hongyu",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      },
+      {
+        "fabricante": "Alphaven",
+        "quantidade": 0,
+        "horas": 0,
+        "motivo": "",
+        "observacao": ""
+      }
+    ]
   },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6041,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1273",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6041,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N812",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6037,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1481",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6037,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1498",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6042,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1428",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6042,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1464",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6042,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1504",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6042,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1432",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6038,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1483",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6038,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1479",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6038,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1502",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6038,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1467",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6039,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1492",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6039,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1452",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1474",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1090",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1403",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1511",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1490",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  },
-  {
-    "processos": "2026I181-SR",
-    "sku": 6036,
-    "descricao": "SR Produtos para la salud S.A",
-    "lote": "N1507",
-    "status": "Aguardando chegada",
-    "observacao": "0"
-  }
-],
-"top10inspecao": [
-  {
-    "sku": "86003",
-    "descricao": "PT-ALCOOL SWAB C/100 (PH)",
-    "quantidade": 109096000
-  },
-  {
-    "sku": "5468",
-    "descricao": "PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500",
-    "quantidade": 48960000
-  },
-  {
-    "sku": "345",
-    "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100",
-    "quantidade": 27970000
-  },
-  {
-    "sku": "341",
-    "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100",
-    "quantidade": 16720000
-  },
-  {
-    "sku": "5401",
-    "descricao": "PT-EQUIPO MACRO GOTAS LI L2 (COMPLETO) C/25",
-    "quantidade": 10898500
-  },
-  {
-    "sku": "342",
-    "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 25X8 C/100",
-    "quantidade": 8185000
-  },
-  {
-    "sku": "344",
-    "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100",
-    "quantidade": 8000000
-  },
-  {
-    "sku": "365",
-    "descricao": "PT-AGULHA HIPODERMICA SOLIDOR 20X5,5 C/100",
-    "quantidade": 7000000
-  },
-  {
-    "sku": "4253",
-    "descricao": "PT-SCALP VACUO (JH) 21G C/100",
-    "quantidade": 5266000
-  },
-  {
-    "sku": "4254",
-    "descricao": "PT-SCALP VACUO (JH) 23G C/100",
-    "quantidade": 4816000
-  }
-]
-"retrabalho": {
-  "processos": 7,
-  "totalUnidades": 3928,
-  "totalHoras": 69,
-
-  "fabricantes": [
-    {
-      "fabricante": "Bonrre Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "AB Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "All Lab Comercial",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "SteriLance Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Biomed Healthcare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Accumax",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Shanxian Huayu Suture Product Co,. Ltd",
-      "quantidade": 625,
-      "horas": 4,
-      "motivo": "Nome da Responsável Técnica antiga"
-    },
-    {
-      "fabricante": "Shandong Aosaite",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Shangai Kindly",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Shanghai SA Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Ayset Plastik",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Medico Electroude",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Anhui Easyway Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Huaian Tianda Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Medico (Huaian) CO., LTDA",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Well Lead medical co., ltd.",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Polymed Medicure",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Phoenix Innovative HealtCare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Wellspring Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Yangzhou Medline Industry",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Jiangsu Webest Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Honsun (Nantong)",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Shandong Weigao",
-      "quantidade": 2460,
-      "horas": 11,
-      "motivo": "Nome da Responsável Técnica antiga"
-    },
-    {
-      "fabricante": "Nanjing Jiangnan Novel",
-      "quantidade": 843,
-      "horas": 54,
-      "motivo": "Nome da Responsável Técnica antiga"
-    },
-    {
-      "fabricante": "Vitromed Healthcare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Jiangsu Kangjian",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Garware Bestretch",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Xiantao Xingrong",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Nantong Renon",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Jiangxi Hongda Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Huaian Tianda Medica",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Jiangsu Kangjian Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Dailymag Magnetic",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Yancheng Tiandi",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Dfi",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Pharmaplast AS",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Blue",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Jiangsu Huida Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Guangzhou Improve Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Hangzhou Rollmed",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Dalian GoodWood",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Anhui hongyu",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "Alphaven",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    },
-    {
-      "fabricante": "SR Produtos para la salud S.A",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": ""
-    }
-  ]
-},
-
-"adequacaocaixa": {
-  "totalocorrenciasano": 4,
-  "quantidaderetrabalhada": 190,
-  "totalhoras": 20,
-
-  "indicadores": {
-    "bom": {
-      "valor": 26106.18,
-      "percentual": 0.98
-    },
-    "avaria": {
-      "valor": 463.81,
-      "percentual": 0.02
-    }
-  },
-
-  "motivos": [
-    {
-      "nome": "Devolução",
-      "valor": 22561.03,
-      "percentual": 0.85
-    },
-    {
-      "nome": "Avaria de Transporte Importação",
-      "valor": 2940.72,
-      "percentual": 0.11
-    },
-    {
-      "nome": "Avaria de Transporte Nacional",
-      "valor": 1068.24,
-      "percentual": 0.04
-    },
-    {
-      "nome": "Outros",
-      "valor": 0,
-      "percentual": 0
-    }
-  ],
-
-  "fabricantes": [
-    {
-      "fabricante": "Anhui Easyway Medical",
-      "quantidade": 133,
-      "horas": 10,
-      "motivo": "Devolução e Avaria de Transporte Importação",
-      "observacao": ""
-    },
-    {
-      "fabricante": "SR Produtos para la salud S.A",
-      "quantidade": 57,
-      "horas": 10,
-      "motivo": "Avaria de Transporte Nacional",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Bonrre Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "AB Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "All Lab Comercial",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "SteriLance Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Biomed Healthcare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Accumax",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Shanxian Huayu Suture Product Co,. Ltd",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Shandong Aosaite",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Shangai Kindly",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Shanghai SA Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Ayset Plastik",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Medico Electroude",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Huaian Tianda Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Medico (Huaian) CO., LTDA",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Well Lead medical co., ltd.",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Polymed Medicure",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Phoenix Innovative HealtCare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Wellspring Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Yangzhou Medline Industry",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Jiangsu Webest Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Honsun (Nantong)",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Shandong Weigao",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Nanjing Jiangnan Novel",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Vitromed Healthcare",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Jiangsu Kangjian",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Garware Bestretch",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Xiantao Xingrong",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Nantong Renon",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Jiangxi Hongda Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Jiangsu Kangjian Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Dailymag Magnetic",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Yancheng Tiandi",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Dfi",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Pharmaplast AS",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Blue",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Jiangsu Huida Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Guangzhou Improve Medical",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Hangzhou Rollmed",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Dalian GoodWood",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Anhui hongyu",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    },
-    {
-      "fabricante": "Alphaven",
-      "quantidade": 0,
-      "horas": 0,
-      "motivo": "",
-      "observacao": ""
-    }
-  ]
-},
-{
   "fornecedores": {
     "totalFornecedores": 43,
     "processosAno": 108,
