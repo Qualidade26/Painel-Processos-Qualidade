@@ -1,11 +1,83 @@
 /* ==========================================================
-   PÁGINA — IMPORTAÇÃO
+   PÁGINA — INSPEÇÃO DE IMPORTAÇÃO
+========================================================== */
+
+.pagina-importacao{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   CARDS SUPERIORES
+========================================================== */
+
+.importacao-cards{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:8px;
+
+    width:100%;
+    min-width:0;
+
+    margin-bottom:8px;
+}
+
+.importacao-cards > *{
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   PAINÉIS
+========================================================== */
+
+.importacao-panel-mensal,
+.importacao-panel-sku,
+.importacao-panel-fluxo{
+    width:100%;
+    min-width:0;
+}
+
+.importacao-panel-titulo{
+    margin:0 0 8px;
+
+    color:#1e293b;
+
+    font-size:15px;
+    font-weight:800;
+}
+
+
+/* ==========================================================
+   GRÁFICO PRINCIPAL
+========================================================== */
+
+.chart-box-importacao{
+    position:relative;
+
+    width:100%;
+    min-width:0;
+    height:285px;
+}
+
+
+/* ==========================================================
+   ÁREA INFERIOR
+   GRÁFICO DE SKU + FLUXO
 ========================================================== */
 
 .importacao-bottom-grid{
     display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(0,1fr);
+
     gap:10px;
+
+    width:100%;
+    min-width:0;
 
     margin-top:8px;
     margin-bottom:8px;
@@ -18,18 +90,10 @@
 
 
 /* ==========================================================
-   GRÁFICOS
+   GRÁFICO DE QUANTIDADE POR SKU
 ========================================================== */
 
-.chart-box-importacao{
-    position:relative;
-
-    width:100%;
-    min-width:0;
-    height:285px;
-}
-
-.chart-box-pareto{
+.chart-box-sku-importacao{
     position:relative;
 
     width:100%;
@@ -37,11 +101,90 @@
     height:275px;
 }
 
+
+/* ==========================================================
+   CANVAS DOS GRÁFICOS
+========================================================== */
+
 .chart-box-importacao canvas,
-.chart-box-pareto canvas{
+.chart-box-sku-importacao canvas{
+    display:block;
+
     width:100% !important;
     height:100% !important;
+
     max-width:100%;
+}
+
+
+/* ==========================================================
+   PAINEL DO FLUXO
+========================================================== */
+
+.importacao-panel-fluxo{
+    display:flex;
+    flex-direction:column;
+
+    min-height:0;
+}
+
+.importacao-fluxo-cabecalho{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    width:100%;
+    min-width:0;
+}
+
+
+/* ==========================================================
+   ÁREA DA TABELA
+========================================================== */
+
+.importacao-tabela-wrap{
+    width:100%;
+    min-width:0;
+
+    flex:1 1 auto;
+}
+
+.importacao-tabela-scroll{
+    width:100%;
+    max-height:275px;
+
+    overflow-x:auto;
+    overflow-y:auto;
+
+    scrollbar-width:thin;
+    scrollbar-color:#94a3b8 #eef2f7;
+
+    scrollbar-gutter:stable;
+    overscroll-behavior:contain;
+}
+
+
+/* ==========================================================
+   BARRA DE ROLAGEM
+========================================================== */
+
+.importacao-tabela-scroll::-webkit-scrollbar{
+    width:7px;
+    height:7px;
+}
+
+.importacao-tabela-scroll::-webkit-scrollbar-track{
+    background:#eef2f7;
+    border-radius:10px;
+}
+
+.importacao-tabela-scroll::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:10px;
+}
+
+.importacao-tabela-scroll::-webkit-scrollbar-thumb:hover{
+    background:#64748b;
 }
 
 
@@ -49,15 +192,144 @@
    TABELA
 ========================================================== */
 
-.importacao-bottom-grid .table-wrap{
+.importacao-tabela{
     width:100%;
+    min-width:850px;
+
+    border-collapse:collapse;
+    table-layout:fixed;
+
+    background:#ffffff;
 }
 
-.importacao-bottom-grid .table-scroll{
-    width:100%;
-    max-height:275px;
+.importacao-tabela thead{
+    position:sticky;
+    top:0;
+    z-index:5;
+}
 
-    overflow:auto;
+.importacao-tabela th{
+    padding:10px 8px;
+
+    border-bottom:1px solid #cbd5e1;
+
+    background:#f1f5f9;
+    color:#334155;
+
+    font-size:11px;
+    font-weight:800;
+
+    text-align:left;
+    white-space:nowrap;
+}
+
+.importacao-tabela td{
+    padding:9px 8px;
+
+    border-bottom:1px solid #e2e8f0;
+
+    color:#475569;
+
+    font-size:11px;
+    font-weight:500;
+
+    vertical-align:middle;
+
+    word-break:break-word;
+}
+
+.importacao-tabela tbody tr{
+    transition:background-color .2s ease;
+}
+
+.importacao-tabela tbody tr:hover{
+    background:#f8fafc;
+}
+
+.importacao-tabela td.descricao{
+    line-height:1.35;
+}
+
+
+/* ==========================================================
+   TABELA VAZIA
+========================================================== */
+
+.tabela-vazia{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
+    min-height:180px;
+
+    padding:20px;
+
+    color:#64748b;
+
+    font-size:13px;
+    font-weight:600;
+
+    text-align:center;
+}
+
+
+/* ==========================================================
+   BADGES DE STATUS
+========================================================== */
+
+.status-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+
+    min-width:92px;
+
+    padding:5px 8px;
+
+    border:1px solid #cbd5e1;
+    border-radius:999px;
+
+    background:#f8fafc;
+    color:#475569;
+
+    font-size:9px;
+    font-weight:800;
+
+    line-height:1.2;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.status-aprovado{
+    border-color:#86efac;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status-reprovado{
+    border-color:#fca5a5;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.status-pendente{
+    border-color:#cbd5e1;
+    background:#f1f5f9;
+    color:#475569;
+}
+
+.status-atencao{
+    border-color:#fde047;
+    background:#fef9c3;
+    color:#854d0e;
+}
+
+.status-aguardando{
+    border-color:#93c5fd;
+    background:#dbeafe;
+    color:#1d4ed8;
 }
 
 
@@ -65,12 +337,20 @@
    RODAPÉ DA TABELA
 ========================================================== */
 
-.table-footer{
+.importacao-table-footer{
     display:flex;
+    align-items:center;
     justify-content:center;
+
+    width:100%;
 
     padding-top:12px;
 }
+
+
+/* ==========================================================
+   BOTÃO VER TODOS
+========================================================== */
 
 .btn-ver-todos{
     min-width:200px;
@@ -80,27 +360,83 @@
     border:1px solid var(--primary);
     border-radius:8px;
 
-    background:#fff;
+    background:#ffffff;
     color:var(--primary-dark);
 
-    font-weight:700;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:800;
 
     cursor:pointer;
 
     transition:
-        background .2s ease,
-        color .2s ease;
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
 }
 
 .btn-ver-todos:hover{
+    border-color:var(--primary-dark);
+
     background:var(--primary-dark);
-    color:#fff;
+    color:#ffffff;
+
+    transform:translateY(-1px);
+}
+
+.btn-ver-todos:active{
+    transform:translateY(0);
+}
+
+
+/* ==========================================================
+   AVISO SOBRE VALORES ZERADOS
+========================================================== */
+
+.importacao-aviso-zero{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    width:100%;
+
+    margin-top:8px;
+    padding:9px 12px;
+
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+
+    background:#eff6ff;
+    color:#1e40af;
+
+    font-size:11px;
+    font-weight:600;
+
+    text-align:center;
+}
+
+.importacao-aviso-icone{
+    flex:0 0 auto;
+
+    font-size:15px;
+    font-weight:800;
 }
 
 
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
+
+@media(max-width:1200px){
+
+    .importacao-cards{
+        grid-template-columns:
+            repeat(3,minmax(0,1fr));
+    }
+}
+
 
 @media(max-width:1050px){
 
@@ -112,11 +448,11 @@
         height:270px;
     }
 
-    .chart-box-pareto{
-        height:260px;
+    .chart-box-sku-importacao{
+        height:280px;
     }
 
-    .importacao-bottom-grid .table-scroll{
+    .importacao-tabela-scroll{
         max-height:320px;
     }
 }
@@ -128,12 +464,27 @@
 
 @media(max-width:800px){
 
+    .importacao-cards{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
     .chart-box-importacao{
         height:250px;
     }
 
-    .chart-box-pareto{
-        height:240px;
+    .chart-box-sku-importacao{
+        height:260px;
+    }
+
+    .importacao-panel-titulo{
+        font-size:14px;
+    }
+
+    .importacao-aviso-zero{
+        align-items:flex-start;
+
+        font-size:10px;
     }
 }
 
@@ -144,16 +495,36 @@
 
 @media(max-width:520px){
 
-    .chart-box-importacao{
-        height:220px;
+    .importacao-cards{
+        grid-template-columns:1fr;
     }
 
-    .chart-box-pareto{
-        height:215px;
+    .chart-box-importacao{
+        height:240px;
+    }
+
+    .chart-box-sku-importacao{
+        height:250px;
+    }
+
+    .importacao-tabela-scroll{
+        max-height:300px;
+    }
+
+    .importacao-tabela{
+        min-width:780px;
     }
 
     .btn-ver-todos{
         width:100%;
         min-width:0;
+    }
+
+    .status-badge{
+        min-width:85px;
+
+        padding:4px 6px;
+
+        font-size:8px;
     }
 }
