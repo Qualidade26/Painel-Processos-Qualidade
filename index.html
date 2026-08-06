@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -16,24 +16,26 @@
         content="Painel de Processos do Sistema de Gestão da Qualidade"
     >
 
-    <title>Painel de Processos SGQ</title>
+    <title>
+        Painel de Processos SGQ
+    </title>
 
 
     <!-- =====================================================
          CSS PRINCIPAL
 
-         O arquivo style.css já importa:
+         O arquivo style.css importa:
          - base.css
          - layout.css
          - componentes.css
          - responsivo.css
-         - todos os CSS das páginas
+         - CSS de todas as páginas
     ====================================================== -->
 
     <link
-    rel="stylesheet"
-    href="css/style.css?v=17"
->
+        rel="stylesheet"
+        href="css/style.css?v=18"
+    >
 
 </head>
 
@@ -90,7 +92,10 @@
 
             <span class="pill">
 
-                <span class="online-dot">
+                <span
+                    class="online-dot"
+                    aria-hidden="true"
+                >
                     ●
                 </span>
 
@@ -119,6 +124,7 @@
         <aside
             class="menu"
             id="menuLateral"
+            aria-label="Menu principal"
         >
 
             <button
@@ -141,7 +147,10 @@
                 onclick="abrirAba('importacao', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     📦
                 </span>
 
@@ -161,7 +170,10 @@
                 onclick="abrirAba('esfig', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     ⏱
                 </span>
 
@@ -179,7 +191,10 @@
                 onclick="abrirAba('descarte', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     🗑
                 </span>
 
@@ -197,7 +212,10 @@
                 onclick="abrirAba('amostra', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     📦
                 </span>
 
@@ -215,7 +233,10 @@
                 onclick="abrirAba('retrabalho', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     🔄
                 </span>
 
@@ -233,7 +254,10 @@
                 onclick="abrirAba('fornecedores', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     🏭
                 </span>
 
@@ -251,7 +275,10 @@
                 onclick="abrirAba('informativo', this)"
             >
 
-                <span class="ico">
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
                     ℹ️
                 </span>
 
@@ -271,14 +298,15 @@
         <main
             class="content"
             id="conteudo"
+            aria-live="polite"
         >
 
             <noscript>
 
                 <div class="aviso-sistema">
 
-                    Para utilizar este painel, habilite o JavaScript no
-                    navegador.
+                    Para utilizar este painel, habilite o
+                    JavaScript no navegador.
 
                 </div>
 
@@ -301,6 +329,11 @@
         src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"
     ></script>
 
+
+    <!-- =====================================================
+         REGISTRO DO PLUGIN CHART DATA LABELS
+    ====================================================== -->
+
     <script>
 
         if (
@@ -308,7 +341,9 @@
             typeof ChartDataLabels !== "undefined"
         ) {
 
-            Chart.register(ChartDataLabels);
+            Chart.register(
+                ChartDataLabels
+            );
 
             console.log(
                 "Plugin ChartDataLabels registrado com sucesso."
@@ -342,7 +377,7 @@
          ARQUIVOS DAS ABAS
     ====================================================== -->
 
-    <script src="js/importacao.js?v=18"></script>
+    <script src="js/importacao.js?v=19"></script>
 
     <script src="js/esfig.js?v=12"></script>
 
@@ -361,8 +396,9 @@
          CONTROLE PRINCIPAL
     ====================================================== -->
 
-    <script src="js/script.js?v=18"></script>
+    <script src="js/script.js?v=19"></script>
 
 </body>
 
 </html>
+```
