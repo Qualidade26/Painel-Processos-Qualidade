@@ -1,3 +1,4 @@
+```css
 /* ==========================================================
    PÁGINA — INSPEÇÃO DE IMPORTAÇÃO
 ========================================================== */
@@ -90,7 +91,7 @@
 
 
 /* ==========================================================
-   GRÁFICO DE QUANTIDADE POR SKU
+   GRÁFICO HORIZONTAL POR SKU
 ========================================================== */
 
 .chart-box-sku-importacao{
@@ -327,7 +328,10 @@
 }
 
 .status-aguardando{
+    min-width:120px;
+
     border-color:#93c5fd;
+
     background:#dbeafe;
     color:#1d4ed8;
 }
@@ -527,4 +531,9 @@
 
         font-size:8px;
     }
+
+    .status-aguardando{
+        min-width:105px;
+    }
 }
+```
