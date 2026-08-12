@@ -12,19 +12,21 @@
    ABAS INTERNAS
 ========================================================== */
 
-.importacao-abas{
+.pagina-importacao .importacao-abas{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
     width:100%;
     min-width:0;
     margin-bottom:8px;
-    border:1px solid var(--line);
+    border:1px solid #b7ceff;
     border-radius:10px;
     background:#ffffff;
     overflow:hidden;
 }
 
-.importacao-aba{
+.pagina-importacao .importacao-aba{
+    -webkit-appearance:none;
+    appearance:none;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -36,10 +38,11 @@
     border:0;
     border-bottom:3px solid transparent;
     background:#ffffff;
-    color:#334155;
+    color:#10245c;
     font-family:inherit;
-    font-size:13px;
+    font-size:14px;
     font-weight:800;
+    line-height:1.2;
     cursor:pointer;
     transition:
         background-color .2s ease,
@@ -47,19 +50,19 @@
         border-color .2s ease;
 }
 
-.importacao-aba + .importacao-aba{
-    border-left:1px solid var(--line);
+.pagina-importacao .importacao-aba + .importacao-aba{
+    border-left:1px solid #d4e1ff;
 }
 
-.importacao-aba:hover{
+.pagina-importacao .importacao-aba:hover{
     background:#f8fafc;
-    color:var(--primary-dark);
+    color:#0b45d8;
 }
 
-.importacao-aba.ativa{
-    border-bottom-color:var(--primary);
+.pagina-importacao .importacao-aba.ativa{
+    border-bottom-color:#1557ff;
     background:#eff6ff;
-    color:var(--primary-dark);
+    color:#0b45d8;
 }
 
 .importacao-aba-icone{
@@ -609,7 +612,7 @@
         min-width:105px;
     }
 
-    .importacao-aba{
+    .pagina-importacao .importacao-aba{
         min-height:48px;
         padding:8px 6px;
         font-size:10px;
