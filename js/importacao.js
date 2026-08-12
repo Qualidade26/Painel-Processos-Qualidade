@@ -8,6 +8,7 @@
 ========================================================== */
 let graficoMensalImportacao = null;
 let graficoSkuImportacao = null;
+let abaInternaImportacao = "resumo";
 
 
 /* ==========================================================
@@ -396,170 +397,180 @@ function destruirGraficosImportacao(){
 function renderImportacao() {
 
     destruirGraficosImportacao();
-
-
-    const imp =
-        dados.importacao || {
-
-            processosAno: 0,
-            totalSku: 0,
-            totalLotes: 0,
-            laudosEmitidos: 0,
-            totalHoras: 0,
-
-            mensal: [],
-            paretoSku: [],
-            fluxo: []
-        };
-
-
     conteudo.innerHTML = `
-
-        <div class="page-title">
-            📦 INSPEÇÃO DE IMPORTAÇÃO
-        </div>
-
-
-        <section class="cards importacao-cards">
-
-            ${card(
-                "📋",
-                "Processos por Ano",
-                numero(imp.processosAno),
-                "Quantidade de processos"
-            )}
-
-            ${card(
-                "🏷️",
-                "Total de SKU",
-                numero(imp.totalSku),
-                "SKUs inspecionados"
-            )}
-
-            ${card(
-                "📦",
-                "Total de Lotes",
-                numero(imp.totalLotes),
-                "Lotes controlados"
-            )}
-
-            ${card(
-                "📄",
-                "Laudos Emitidos",
-                numero(imp.laudosEmitidos),
-                "Registros emitidos"
-            )}
-
-            ${card(
-                "⏱️",
-                "Total de Horas",
-                formatarHorasImportacao(
-                    imp.totalHoras
-                ),
-                "Horas da atividade"
-            )}
-
-        </section>
-
-
-        <section class="panel importacao-panel-mensal">
-
-            <h3 class="importacao-panel-titulo">
-                📊 Evolução Mensal da Inspeção de Importação
-            </h3>
-
-
-            <div class="chart-box chart-box-importacao">
-
-                <canvas
-                    id="graficoImportacao"
-                ></canvas>
-
+        <div class="pagina-importacao">
+            <div class="page-title">
+                📦 INSPEÇÃO DE IMPORTAÇÃO
             </div>
 
-        </section>
+            <nav class="importacao-abas" aria-label="Abas da Importação">
+                <button
+                    type="button"
+                    id="botaoAbaResumoImportacao"
+                    class="importacao-aba"
+                    onclick="abrirAbaInternaImportacao('resumo')"
+                >
+                    <span class="importacao-aba-icone">📊</span>
+                    INSPEÇÃO DE IMPORTAÇÃO
+                </button>
 
+                <button
+                    type="button"
+                    id="botaoAbaFluxoImportacao"
+                    class="importacao-aba"
+                    onclick="abrirAbaInternaImportacao('fluxo')"
+                >
+                    <span class="importacao-aba-icone">📋</span>
+                    FLUXO DE INSPEÇÃO SEMANAL
+                </button>
+            </nav>
 
-        <section class="importacao-bottom-grid">
-
-
-            <div class="panel importacao-panel-sku">
-
-                <h3 class="importacao-panel-titulo">
-                    📊 Ranking por SKU 
-                </h3>
-
-
-                <div class="chart-box chart-box-sku-importacao">
-
-                    <canvas
-                        id="graficoSkuImportacao"
-                    ></canvas>
-
-                </div>
-
-            </div>
-
-
-            <div class="panel importacao-panel-fluxo">
-
-                <div class="importacao-fluxo-cabecalho">
-
-                    <h3 class="importacao-panel-titulo">
-                        📋 Fluxo da Inspeção de Importação
-                    </h3>
-
-                </div>
-
-
-                <div class="importacao-tabela-wrap">
-
-                    ${montarTabelaFluxoImportacao(
-                        imp.fluxo || []
-                    )}
-
-                </div>
-
-
-                <div class="importacao-table-footer">
-
-                    <button
-                        type="button"
-                        class="btn-ver-todos importacao-btn-ver-todos"
-                        onclick="verTodosImportacao()"
-                    >
-                        ☷ VER TODOS
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <div class="importacao-aviso-zero">
-
-            <span class="importacao-aviso-icone">
-                ⓘ
-            </span>
-
-            Os valores zerados não são exibidos nos gráficos.
-            Apenas valores maiores que zero são apresentados.
-
+            <div id="conteudoInternoImportacao"></div>
         </div>
     `;
 
+    abrirAbaInternaImportacao(
+        abaInternaImportacao
+    );
+}
 
-    /*
-    ----------------------------------------------------------
-    Os gráficos são criados depois que os canvases
-    foram adicionados ao HTML.
-    ----------------------------------------------------------
-    */
+
+function obterDadosImportacao() {
+
+    return dados.importacao || {
+        processosAno: 0,
+        totalSku: 0,
+        totalLotes: 0,
+        laudosEmitidos: 0,
+        totalHoras: 0,
+        mensal: [],
+        graficoSku: [],
+        paretoSku: [],
+        fluxo: []
+    };
+}
+
+
+function abrirAbaInternaImportacao(aba) {
+
+    abaInternaImportacao =
+        aba === "fluxo"
+            ? "fluxo"
+            : "resumo";
+
+    destruirGraficosImportacao();
+
+    const botaoResumo =
+        document.getElementById(
+            "botaoAbaResumoImportacao"
+        );
+
+    const botaoFluxo =
+        document.getElementById(
+            "botaoAbaFluxoImportacao"
+        );
+
+    if (botaoResumo) {
+        botaoResumo.classList.toggle(
+            "ativa",
+            abaInternaImportacao === "resumo"
+        );
+    }
+
+    if (botaoFluxo) {
+        botaoFluxo.classList.toggle(
+            "ativa",
+            abaInternaImportacao === "fluxo"
+        );
+    }
+
+    if (abaInternaImportacao === "fluxo") {
+        renderFluxoSemanalImportacao();
+        return;
+    }
+
+    renderResumoImportacao();
+}
+
+
+function renderResumoImportacao() {
+
+    const imp = obterDadosImportacao();
+    const area =
+        document.getElementById(
+            "conteudoInternoImportacao"
+        );
+
+    if (!area) {
+        return;
+    }
+
+    area.innerHTML = `
+        <section class="cards importacao-cards">
+            ${card("📋", "Processos por Ano", numero(imp.processosAno), "Quantidade de processos")}
+            ${card("🏷️", "Total de SKU", numero(imp.totalSku), "SKUs inspecionados")}
+            ${card("📦", "Total de Lotes", numero(imp.totalLotes), "Lotes controlados")}
+            ${card("📄", "Laudos Emitidos", numero(imp.laudosEmitidos), "Registros emitidos")}
+            ${card("⏱️", "Total de Horas", formatarHorasImportacao(imp.totalHoras), "Horas da atividade")}
+        </section>
+
+        <section class="panel importacao-panel-mensal">
+            <h3 class="importacao-panel-titulo">
+                📊 Evolução Mensal da Inspeção de Importação
+            </h3>
+            <div class="chart-box chart-box-importacao">
+                <canvas id="graficoImportacao"></canvas>
+            </div>
+        </section>
+
+        <section class="panel importacao-panel-sku importacao-ranking-completo">
+            <h3 class="importacao-panel-titulo">
+                📊 Ranking por SKU
+            </h3>
+            <div class="chart-box chart-box-sku-importacao">
+                <canvas id="graficoSkuImportacao"></canvas>
+            </div>
+        </section>
+
+        <div class="importacao-aviso-zero">
+            <span class="importacao-aviso-icone">ⓘ</span>
+            Os valores zerados não são exibidos nos gráficos.
+            Apenas valores maiores que zero são apresentados.
+        </div>
+    `;
 
     criarGraficoMensalImportacao(imp);
     criarGraficoSkuImportacao(imp);
+}
+
+
+function renderFluxoSemanalImportacao() {
+
+    const imp = obterDadosImportacao();
+    const area =
+        document.getElementById(
+            "conteudoInternoImportacao"
+        );
+
+    if (!area) {
+        return;
+    }
+
+    area.innerHTML = `
+        <section class="panel importacao-panel-fluxo importacao-fluxo-semanal">
+            <div class="importacao-fluxo-cabecalho">
+                <h3 class="importacao-panel-titulo">
+                    📋 Fluxo de Inspeção Semanal
+                </h3>
+            </div>
+
+            <div class="importacao-tabela-wrap">
+                ${montarTabelaFluxoImportacao(
+                    imp.fluxo || []
+                )}
+            </div>
+        </section>
+    `;
 }
 /* ==========================================================
    GRÁFICO — EVOLUÇÃO MENSAL
@@ -1271,15 +1282,17 @@ function criarGraficoMensalImportacao(imp) {
 }
 /* ==========================================================
    GRÁFICO — QUANTIDADE INSPECIONADA POR SKU
-   BARRAS HORIZONTAIS — MENOR PARA MAIOR
+   BARRAS HORIZONTAIS — MAIOR PARA MENOR
 ========================================================== */
 
 function criarGraficoSkuImportacao(imp) {
 
-   const dadosSkuOriginais =
-    Array.isArray(imp.graficoSku)
-        ? imp.graficoSku
-        : [];
+    const dadosSkuOriginais =
+        Array.isArray(imp.graficoSku)
+            ? imp.graficoSku
+            : Array.isArray(imp.paretoSku)
+                ? imp.paretoSku
+                : [];
 
 
     /* ======================================================
@@ -1329,14 +1342,15 @@ function criarGraficoSkuImportacao(imp) {
 
             /*
             --------------------------------------------------
-            Ordena do menor para o maior.
+            Ordena do maior para o menor.
             --------------------------------------------------
             */
 
-           .sort(
-    (a, b) =>
-        b.quantidade - a.quantidade
-)
+            .sort(
+                (a, b) =>
+                    b.quantidade -
+                    a.quantidade
+            )
 
             /*
             --------------------------------------------------
@@ -2012,56 +2026,6 @@ function montarTabelaFluxoImportacao(lista) {
 
 
 /* ==========================================================
-   BOTÃO — VER TODOS
-========================================================== */
-
-function verTodosImportacao() {
-
-    const painel =
-        document.querySelector(
-            ".importacao-panel-fluxo"
-        );
-
-    const tabela =
-        document.querySelector(
-            ".importacao-tabela-scroll"
-        );
-
-    const botao =
-        document.querySelector(
-            ".importacao-btn-ver-todos"
-        );
-
-    if (!painel || !tabela || !botao) {
-        return;
-    }
-
-    const expandido =
-        painel.classList.toggle(
-            "importacao-mostrar-todos"
-        );
-
-    tabela.style.maxHeight =
-        expandido
-            ? "none"
-            : "";
-
-    tabela.style.height =
-        expandido
-            ? "auto"
-            : "";
-
-    tabela.style.overflowY =
-        expandido
-            ? "visible"
-            : "";
-
-    botao.innerHTML =
-        expandido
-            ? "✕ MOSTRAR MENOS"
-            : "☷ VER TODOS";
-}
-/* ==========================================================
    AJUSTE DOS GRÁFICOS AO REDIMENSIONAR A TELA
 ========================================================== */
 
@@ -2092,8 +2056,8 @@ window.renderImportacao =
     renderImportacao;
 
 
-window.verTodosImportacao =
-    verTodosImportacao;
+window.abrirAbaInternaImportacao =
+    abrirAbaInternaImportacao;
 
 
 window.destruirGraficosImportacao =
