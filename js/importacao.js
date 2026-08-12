@@ -1333,11 +1333,10 @@ function criarGraficoSkuImportacao(imp) {
             --------------------------------------------------
             */
 
-            .sort(
-                (b, a) =>
-                    b.quantidade -
-                    a.quantidade
-            )
+           .sort(
+    (a, b) =>
+        b.quantidade - a.quantidade
+)
 
             /*
             --------------------------------------------------
@@ -1758,21 +1757,20 @@ function criarGraficoSkuImportacao(imp) {
                            EIXO DOS SKUs
                         ================================== */
 
-                        y: {
+                      y: {
+    reverse: true,
 
-                            offset:true,
+    offset: true,
 
-                            grid: {
+    grid: {
+        display: false,
+        drawBorder: false
+    },
 
-                                display:false,
-
-                                drawBorder:false
-                            },
-
-                            border: {
-
-                                display:false
-                            },
+    border: {
+        display: false
+    }
+}
 
                             ticks: {
 
