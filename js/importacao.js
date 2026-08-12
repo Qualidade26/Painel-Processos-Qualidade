@@ -2116,3 +2116,6 @@ window.verTodosImportacao =
 
 window.destruirGraficosImportacao =
     destruirGraficosImportacao;
+
+window.verTodosImportacao =
+    verTodosImportacao;
