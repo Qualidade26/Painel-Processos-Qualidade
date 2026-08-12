@@ -2061,24 +2061,6 @@ function verTodosImportacao() {
             ? "✕ MOSTRAR MENOS"
             : "☷ VER TODOS";
 }
-
-
-    /*
-    ----------------------------------------------------------
-    Futuras implementações:
-
-    • Modal
-    • Nova página
-    • Exportação Excel
-    • Exportação PDF
-    • Pesquisa
-    • Filtros
-    • Ordenação
-    ----------------------------------------------------------
-    */
-}
-
-
 /* ==========================================================
    AJUSTE DOS GRÁFICOS AO REDIMENSIONAR A TELA
 ========================================================== */
@@ -2116,6 +2098,3 @@ window.verTodosImportacao =
 
 window.destruirGraficosImportacao =
     destruirGraficosImportacao;
-
-window.verTodosImportacao =
-    verTodosImportacao;
