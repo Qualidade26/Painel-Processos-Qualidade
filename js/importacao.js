@@ -1334,9 +1334,9 @@ function criarGraficoSkuImportacao(imp) {
             */
 
             .sort(
-                (a, b) =>
-                    a.quantidade -
-                    b.quantidade
+                (b, a) =>
+                    b.quantidade -
+                    a.quantidade
             )
 
             /*
