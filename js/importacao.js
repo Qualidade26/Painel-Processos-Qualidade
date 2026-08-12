@@ -2017,9 +2017,50 @@ function montarTabelaFluxoImportacao(lista) {
 
 function verTodosImportacao() {
 
-    console.log(
-        "Visualizar todos os processos de importação."
-    );
+    const painel =
+        document.querySelector(
+            ".importacao-panel-fluxo"
+        );
+
+    const tabela =
+        document.querySelector(
+            ".importacao-tabela-scroll"
+        );
+
+    const botao =
+        document.querySelector(
+            ".importacao-btn-ver-todos"
+        );
+
+    if (!painel || !tabela || !botao) {
+        return;
+    }
+
+    const expandido =
+        painel.classList.toggle(
+            "importacao-mostrar-todos"
+        );
+
+    tabela.style.maxHeight =
+        expandido
+            ? "none"
+            : "";
+
+    tabela.style.height =
+        expandido
+            ? "auto"
+            : "";
+
+    tabela.style.overflowY =
+        expandido
+            ? "visible"
+            : "";
+
+    botao.innerHTML =
+        expandido
+            ? "✕ MOSTRAR MENOS"
+            : "☷ VER TODOS";
+}
 
 
     /*
