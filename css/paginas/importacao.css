@@ -534,7 +534,14 @@
     .status-aguardando{
         min-width:105px;
     }
-}.importacao-panel-fluxo.importacao-mostrar-todos{
+}
+
+
+/* ==========================================================
+   FLUXO EXPANDIDO — VER TODOS
+========================================================== */
+
+.importacao-panel-fluxo.importacao-mostrar-todos{
     height:auto;
     max-height:none;
 }
