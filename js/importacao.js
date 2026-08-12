@@ -1757,8 +1757,7 @@ function criarGraficoSkuImportacao(imp) {
                            EIXO DOS SKUs
                         ================================== */
 
-                      y: {
-    reverse: true,
+        y: {
 
     offset: true,
 
@@ -1769,8 +1768,9 @@ function criarGraficoSkuImportacao(imp) {
 
     border: {
         display: false
-    }
-}
+    },
+
+
 
                             ticks: {
 
