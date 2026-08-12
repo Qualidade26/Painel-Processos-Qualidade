@@ -1,3 +1,4 @@
+
 /* ==========================================================
    PÁGINA — INSPEÇÃO DE IMPORTAÇÃO
 ========================================================== */
@@ -422,7 +423,7 @@ function renderImportacao() {
                     onclick="abrirAbaInternaImportacao('resumo')"
                 >
                     <span class="importacao-aba-icone">📊</span>
-                    Inspeção de Importação
+                    Indicador de Importação
                 </button>
 
                 <button
@@ -1284,7 +1285,7 @@ function criarGraficoMensalImportacao(imp) {
         );
 }
 /* ==========================================================
-   GRÁFICO — QUANTIDADE INSPECIONADA POR SKU
+   GRÁFICO — QUANTIDADE recebida POR SKU
    BARRAS HORIZONTAIS — MAIOR PARA MENOR
 ========================================================== */
 
@@ -1452,7 +1453,7 @@ function criarGraficoSkuImportacao(imp) {
 
                         {
                             label:
-                                "Quantidade Inspecionada",
+                                "Quantidade Recebida",
 
                             data:
                                 quantidades,
@@ -1619,7 +1620,7 @@ function criarGraficoSkuImportacao(imp) {
 
 
                                     return (
-                                        "Quantidade inspecionada: " +
+                                        "Quantidade recebida: " +
                                         Number(valor)
                                             .toLocaleString(
                                                 "pt-BR"
@@ -1654,7 +1655,7 @@ function criarGraficoSkuImportacao(imp) {
                                 display:true,
 
                                 text:
-                                    "Quantidade Inspecionada",
+                                    "Quantidade recebida",
 
                                 color:"#4b5563",
 
