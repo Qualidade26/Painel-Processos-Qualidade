@@ -397,11 +397,22 @@ function destruirGraficosImportacao(){
 function renderImportacao() {
 
     destruirGraficosImportacao();
+
+    const imp = obterDadosImportacao();
+
     conteudo.innerHTML = `
         <div class="pagina-importacao">
             <div class="page-title">
                 📦 INSPEÇÃO DE IMPORTAÇÃO
             </div>
+
+            <section class="cards importacao-cards">
+                ${card("📋", "Processos por Ano", numero(imp.processosAno), "Quantidade de processos")}
+                ${card("🏷️", "Total de SKU", numero(imp.totalSku), "SKUs inspecionados")}
+                ${card("📦", "Total de Lotes", numero(imp.totalLotes), "Lotes controlados")}
+                ${card("📄", "Laudos Emitidos", numero(imp.laudosEmitidos), "Registros emitidos")}
+                ${card("⏱️", "Total de Horas", formatarHorasImportacao(imp.totalHoras), "Horas da atividade")}
+            </section>
 
             <nav class="importacao-abas" aria-label="Abas da Importação">
                 <button
@@ -411,7 +422,7 @@ function renderImportacao() {
                     onclick="abrirAbaInternaImportacao('resumo')"
                 >
                     <span class="importacao-aba-icone">📊</span>
-                    INSPEÇÃO DE IMPORTAÇÃO
+                    Inspeção de Importação
                 </button>
 
                 <button
@@ -421,7 +432,7 @@ function renderImportacao() {
                     onclick="abrirAbaInternaImportacao('fluxo')"
                 >
                     <span class="importacao-aba-icone">📋</span>
-                    FLUXO DE INSPEÇÃO SEMANAL
+                    Fluxo de Inspeção Semanal
                 </button>
             </nav>
 
@@ -506,14 +517,6 @@ function renderResumoImportacao() {
     }
 
     area.innerHTML = `
-        <section class="cards importacao-cards">
-            ${card("📋", "Processos por Ano", numero(imp.processosAno), "Quantidade de processos")}
-            ${card("🏷️", "Total de SKU", numero(imp.totalSku), "SKUs inspecionados")}
-            ${card("📦", "Total de Lotes", numero(imp.totalLotes), "Lotes controlados")}
-            ${card("📄", "Laudos Emitidos", numero(imp.laudosEmitidos), "Registros emitidos")}
-            ${card("⏱️", "Total de Horas", formatarHorasImportacao(imp.totalHoras), "Horas da atividade")}
-        </section>
-
         <section class="panel importacao-panel-mensal">
             <h3 class="importacao-panel-titulo">
                 📊 Evolução Mensal da Inspeção de Importação
