@@ -1285,7 +1285,7 @@ function criarGraficoMensalImportacao(imp) {
         );
 }
 /* ==========================================================
-   GRÁFICO — QUANTIDADE recebida POR SKU
+   GRÁFICO — QUANTIDADE em unidade Recebida POR SKU
    BARRAS HORIZONTAIS — MAIOR PARA MENOR
 ========================================================== */
 
@@ -1453,7 +1453,7 @@ function criarGraficoSkuImportacao(imp) {
 
                         {
                             label:
-                                "Quantidade Recebida",
+                                "Quantidade em unidade Recebida",
 
                             data:
                                 quantidades,
@@ -1620,7 +1620,7 @@ function criarGraficoSkuImportacao(imp) {
 
 
                                     return (
-                                        "Quantidade recebida: " +
+                                        "Quantidade em Unidade Recebida: " +
                                         Number(valor)
                                             .toLocaleString(
                                                 "pt-BR"
@@ -1655,7 +1655,7 @@ function criarGraficoSkuImportacao(imp) {
                                 display:true,
 
                                 text:
-                                    "Quantidade recebida",
+                                    "Quantidade em Unidade Recebida",
 
                                 color:"#4b5563",
 
