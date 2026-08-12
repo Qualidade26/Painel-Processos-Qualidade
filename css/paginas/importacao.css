@@ -534,5 +534,21 @@
     .status-aguardando{
         min-width:105px;
     }
+}.importacao-panel-fluxo.importacao-mostrar-todos{
+    height:auto;
+    max-height:none;
 }
-```
+
+.importacao-panel-fluxo.importacao-mostrar-todos
+.importacao-tabela-wrap{
+    height:auto;
+    max-height:none;
+    overflow:visible;
+}
+
+.importacao-panel-fluxo.importacao-mostrar-todos
+.importacao-tabela-scroll{
+    height:auto;
+    max-height:none;
+    overflow-y:visible;
+}
