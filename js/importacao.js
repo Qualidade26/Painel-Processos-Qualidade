@@ -351,26 +351,44 @@ const rotulosGraficoSkuImportacao = {
    DESTRUIÇÃO DOS GRÁFICOS
 ========================================================== */
 
-function destruirGraficosImportacao() {
+function destruirGraficosImportacao(){
 
-    if (graficoMensalImportacao) {
-
+    if(graficoMensalImportacao){
         graficoMensalImportacao.destroy();
         graficoMensalImportacao = null;
     }
 
-
-    if (graficoSkuImportacao) {
-
+    if(graficoSkuImportacao){
         graficoSkuImportacao.destroy();
         graficoSkuImportacao = null;
     }
 
+    const canvasMensal =
+        document.getElementById("graficoImportacao");
 
-    if (typeof Chart === "undefined") {
-        return;
+    const canvasSku =
+        document.getElementById("graficoSkuImportacao");
+
+    if(canvasMensal){
+
+        const instanciaMensal =
+            Chart.getChart(canvasMensal);
+
+        if(instanciaMensal){
+            instanciaMensal.destroy();
+        }
     }
 
+    if(canvasSku){
+
+        const instanciaSku =
+            Chart.getChart(canvasSku);
+
+        if(instanciaSku){
+            instanciaSku.destroy();
+        }
+    }
+}
 
     /*
     ----------------------------------------------------------
