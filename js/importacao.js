@@ -6,7 +6,6 @@
 /* ==========================================================
    INSTÂNCIAS DOS GRÁFICOS
 ========================================================== */
-F
 let graficoMensalImportacao = null;
 let graficoSkuImportacao = null;
 
@@ -389,50 +388,6 @@ function destruirGraficosImportacao(){
         }
     }
 }
-
-    /*
-    ----------------------------------------------------------
-    Segurança adicional para eliminar gráficos anteriores
-    associados aos canvases.
-    ----------------------------------------------------------
-    */
-
-    const canvasMensal =
-        document.getElementById(
-            "graficoImportacao"
-        );
-
-
-    if (canvasMensal) {
-
-        const graficoExistente =
-            Chart.getChart(canvasMensal);
-
-
-        if (graficoExistente) {
-            graficoExistente.destroy();
-        }
-    }
-
-
-    const canvasSku =
-        document.getElementById(
-            "graficoSkuImportacao"
-        );
-
-
-    if (canvasSku) {
-
-        const graficoExistente =
-            Chart.getChart(canvasSku);
-
-
-        if (graficoExistente) {
-            graficoExistente.destroy();
-        }
-    }
-}
-
 
 /* ==========================================================
    RENDERIZAÇÃO DA PÁGINA
