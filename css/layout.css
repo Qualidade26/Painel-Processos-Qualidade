@@ -269,7 +269,116 @@
     width:100%;
     min-width:0;
     min-height:0;
+/* ==========================================================
+   CORREÇÃO DE ENQUADRAMENTO DA TELA
+========================================================== */
 
+html,
+body{
+    width:100%;
+    height:100%;
+
+    margin:0;
+}
+
+body{
+    height:100vh;
+    height:100dvh;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+/* Cabeçalho ocupa somente sua altura necessária */
+.topbar{
+    flex:0 0 auto;
+
+    width:100%;
+    max-width:none;
+
+    box-sizing:border-box;
+}
+
+
+/* Área principal ocupa exatamente o restante da tela */
+.main-wrap{
+    flex:1 1 auto;
+
+    width:100%;
+    max-width:none;
+
+    height:auto;
+    min-height:0;
+
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+
+/* Menu com rolagem independente */
+.menu{
+    height:100%;
+    min-height:0;
+
+    box-sizing:border-box;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+/* Conteúdo com rolagem vertical */
+.content{
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    box-sizing:border-box;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+/* ==========================================================
+   CELULARES
+========================================================== */
+
+@media (max-width:640px){
+
+    body{
+        height:auto;
+        min-height:100vh;
+        min-height:100dvh;
+
+        display:block;
+
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    .main-wrap{
+        height:auto;
+        min-height:0;
+
+        overflow:visible;
+    }
+
+    .menu{
+        height:auto;
+    }
+
+    .content{
+        height:auto;
+
+        overflow:visible;
+    }
+}
     padding:clamp(6px, .6vw, 12px);
 
     overflow:auto;
