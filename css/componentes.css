@@ -784,3 +784,84 @@ textarea:focus{
 ::-webkit-scrollbar-thumb:hover{
     background:var(--primary);
 }
+
+
+/* ==========================================================
+   AJUSTES DE NITIDEZ E ENQUADRAMENTO
+   Compatível com os painéis específicos (incluindo Fornecedores)
+========================================================== */
+
+/*
+   Evita que elementos flex/grid estourem a largura disponível.
+   Não altera dimensões específicas definidas pelos CSS das páginas.
+*/
+.card,
+.panel,
+.kpi-card,
+.rank-card,
+.panel-body,
+.chart-box,
+.chart-wrap,
+.table-wrap,
+.table-scroll{
+    min-width:0;
+    box-sizing:border-box;
+}
+
+/*
+   Canvas ocupa exatamente a caixa definida pelo módulo da página.
+   A resolução interna continua sendo controlada pelo Chart.js.
+*/
+.chart-box canvas,
+.chart-wrap canvas{
+    display:block;
+    width:100% !important;
+    height:100% !important;
+    max-width:100%;
+}
+
+/*
+   Melhora a estabilidade visual das bordas e fundos sem aplicar
+   transform/zoom, que poderia borrar textos e gráficos.
+*/
+.card,
+.panel,
+.kpi-card,
+.rank-card,
+.table-wrap{
+    backface-visibility:hidden;
+}
+
+/*
+   Mantém tabelas e textos visualmente nítidos.
+*/
+table,
+input,
+select,
+textarea,
+button{
+    text-rendering:optimizeLegibility;
+}
+
+/*
+   Scrollbars não deslocam o conteúdo quando aparecem em navegadores
+   compatíveis.
+*/
+.table-scroll{
+    scrollbar-gutter:stable;
+}
+
+/*
+   Em telas menores, evita que grades genéricas forcem largura excessiva.
+*/
+@media (max-width:900px){
+
+    .grid-2,
+    .grid-3-2{
+        grid-template-columns:1fr;
+    }
+
+    .rank-grid{
+        grid-template-columns:1fr;
+    }
+}
