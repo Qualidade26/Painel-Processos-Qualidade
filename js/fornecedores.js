@@ -1941,137 +1941,6 @@
         estado.graficos.clear();
     }
 
-
-    /* ======================================================
-       PLUGIN DE RÓTULOS DAS BARRAS
-    ====================================================== */
-
-    const pluginRotulosBarras = {
-
-        id:"rotulosFimBarraFornecedores",
-
-
-        afterDatasetsDraw(
-            grafico,
-            _args,
-            opcoes
-        ){
-
-            if(
-                grafico.options.indexAxis !== "y"
-            ){
-                return;
-            }
-
-
-            const {
-                ctx,
-                chartArea
-            } = grafico;
-
-
-            const meta =
-                grafico.getDatasetMeta(0);
-
-
-            const dados =
-                grafico.data
-                    .datasets[0]
-                    ?.data || [];
-
-
-            const sufixo =
-                opcoes?.sufixo || "";
-
-
-            ctx.save();
-
-
-            ctx.fillStyle =
-                "#111827";
-
-
-            ctx.font =
-                "700 11px Segoe UI, Arial, sans-serif";
-
-
-            ctx.textBaseline =
-                "middle";
-
-
-            ctx.textAlign =
-                "left";
-
-
-            meta.data.forEach(
-                (
-                    barra,
-                    indice
-                ) => {
-
-                    const valor =
-                        numero(
-                            dados[indice]
-                        );
-
-
-                    const posicao =
-                        barra.tooltipPosition();
-
-
-                    const texto =
-                        sufixo === "%"
-                            ? formatarPercentual(
-                                valor
-                            )
-                            : formatarInteiro(
-                                valor
-                            );
-
-
-                    const largura =
-                        ctx.measureText(
-                            texto
-                        ).width;
-
-
-                    let x =
-                        posicao.x + 7;
-
-
-                    if(
-                        x + largura >
-                        chartArea.right + 56
-                    ){
-
-                        x =
-                            Math.max(
-                                chartArea.left + 4,
-                                posicao.x -
-                                largura -
-                                7
-                            );
-                    }
-
-
-                    ctx.fillStyle =
-                        "#111827";
-
-
-                    ctx.fillText(
-                        texto,
-                        x,
-                        posicao.y
-                    );
-                }
-            );
-
-
-            ctx.restore();
-        }
-    };
-
-
     /* ======================================================
        PREPARAR DADOS DOS GRÁFICOS
     ====================================================== */
@@ -2310,16 +2179,34 @@
                             */
 
                             datalabels:{
-                                display:false
-                            }
+    display:true,
+
+    anchor:"end",
+    align:"end",
+
+    offset:4,
+    clamp:true,
+    clip:false,
+
+    color:"#1f2937",
+
+    font:{
+        family:"Segoe UI",
+        size:10,
+        weight:"700"
+    },
+
+    formatter:function(valor){
+
+        if(sufixo === "%"){
+            return `${Math.round(valor)}%`;
+        }
+
+        return formatarInteiro(valor);
+    }
+}
                         }]
                     },
-
-
-                    plugins:[
-                        pluginRotulosBarras
-                    ],
-
 
                     options:{
 
@@ -2366,13 +2253,6 @@
                                DESATIVA DAT LABELS GLOBAL
                                SOMENTE NESTES GRÁFICOS
                             */
-
-                            datalabels:{
-
-                                display:false
-                            },
-
-
                             tooltip:{
 
                                 displayColors:false,
@@ -2412,14 +2292,6 @@
                                     }
                                 }
                             },
-
-
-                            rotulosFimBarraFornecedores:{
-
-                                sufixo
-                            }
-                        },
-
 
                         scales:{
 
