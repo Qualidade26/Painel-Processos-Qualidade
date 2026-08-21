@@ -286,6 +286,13 @@
  "quantidade":6,
  "percentual":0.04}
      },
+  "origens": {
+  "importacao": 111,
+  "retrabalho": 7,
+  "naoConformidade": 38,
+  "reclamacao": 0,
+  "ocorrencias": 6
+}
  "avaliados":[
 
  {"fabricante":"SteriLance   Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":8385000,"skuano":13,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢   Excelente" },
