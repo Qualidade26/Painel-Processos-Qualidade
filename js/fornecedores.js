@@ -1,10 +1,8 @@
 /* ==========================================================
 FORNECEDORES.JS
 Painel de Processos SGQ
-
 Entrada esperada:
 renderizarFornecedores(dados.fornecedores)
-
 Estrutura compatível:
 fornecedores
 ├── totalrncano
@@ -19,8 +17,8 @@ fornecedores
 ├── ranking
 └── top10Rnc
 ========================================================== */
-
 (function(){
+
 
 "use strict";
 
@@ -89,6 +87,347 @@ const ORDEM_CLASSIFICACOES = [
     "ruim",
     "critico"
 ];
+
+
+function garantirEstiloFornecedores(){
+
+    const id = "fornecedores-runtime-style";
+
+    document.getElementById(id)?.remove();
+
+    const style = document.createElement("style");
+
+    style.id = id;
+
+    style.textContent = `
+        .pagina-fornecedores{
+            width:100%;
+            min-width:0;
+            font-family:"Segoe UI",Arial,sans-serif;
+        }
+
+        .pagina-fornecedores *,
+        .pagina-fornecedores *::before,
+        .pagina-fornecedores *::after{
+            box-sizing:border-box;
+        }
+
+        .pagina-fornecedores .fornecedores-abas{
+            min-height:36px;
+            margin-bottom:6px;
+        }
+
+        .pagina-fornecedores .fornecedores-aba{
+            min-height:36px;
+            padding:6px 10px;
+            font-size:11px;
+        }
+
+        .pagina-fornecedores .fornecedores-conteudo[data-fornecedores-conteudo="geral"]{
+            height:calc(100dvh - 148px);
+            min-height:520px;
+            display:grid;
+            grid-template-rows:78px minmax(0,1fr);
+            gap:7px;
+            overflow:hidden;
+        }
+
+        .pagina-fornecedores .fornecedores-indicadores{
+            display:grid;
+            grid-template-columns:repeat(5,minmax(0,1fr));
+            gap:7px;
+            margin:0;
+            min-height:0;
+        }
+
+        .pagina-fornecedores .fornecedor-kpi{
+            min-width:0;
+            min-height:0;
+            height:78px;
+            padding:6px 8px;
+            grid-template-columns:36px minmax(0,1fr);
+            grid-template-rows:auto 1fr;
+            border-radius:8px;
+        }
+
+        .pagina-fornecedores .fornecedor-kpi__titulo{
+            margin:0 0 2px;
+            font-size:9px;
+            line-height:1.05;
+        }
+
+        .pagina-fornecedores .fornecedor-kpi__icone{
+            width:33px;
+            height:33px;
+        }
+
+        .pagina-fornecedores .fornecedor-kpi__icone svg{
+            width:30px;
+            height:30px;
+        }
+
+        .pagina-fornecedores .fornecedor-kpi__valor{
+            font-size:clamp(25px,2.1vw,36px);
+            line-height:1;
+        }
+
+        .pagina-fornecedores .fornecedores-graficos{
+            min-height:0;
+            height:100%;
+            display:grid;
+            grid-template-columns:repeat(2,minmax(0,1fr));
+            grid-template-rows:repeat(2,minmax(0,1fr));
+            gap:7px;
+            margin:0;
+        }
+
+        .pagina-fornecedores .fornecedores-panel{
+            min-width:0;
+            min-height:0;
+            height:100%;
+            padding:7px 9px 6px;
+            border-radius:8px;
+            overflow:hidden;
+        }
+
+        .pagina-fornecedores .fornecedores-panel__titulo{
+            margin:0 0 2px;
+            font-size:12px;
+            line-height:1.05;
+            font-weight:900;
+            color:#0b45d8;
+        }
+
+        .pagina-fornecedores .fornecedores-chart-box{
+            position:relative;
+            width:100%;
+            height:calc(100% - 20px) !important;
+            min-height:0 !important;
+        }
+
+        .pagina-fornecedores .fornecedores-chart-box canvas{
+            display:block;
+            width:100% !important;
+            height:100% !important;
+        }
+
+        .pagina-fornecedores .fornecedores-panel--classificacao{
+            display:grid;
+            grid-template-rows:auto minmax(0,1fr) auto;
+        }
+
+        .pagina-fornecedores .fornecedores-panel--classificacao .fornecedores-chart-box{
+            height:auto !important;
+            min-height:0 !important;
+        }
+
+        .pagina-fornecedores .fornecedores-rosca-centro{
+            position:absolute;
+            left:32%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            z-index:3;
+            pointer-events:none;
+            text-align:center;
+            color:#0f1b3d;
+            font-weight:900;
+            line-height:1;
+        }
+
+        .pagina-fornecedores .fornecedores-rosca-centro strong{
+            display:block;
+            font-size:24px;
+            line-height:1;
+        }
+
+        .pagina-fornecedores .fornecedores-rosca-centro span{
+            display:block;
+            margin-top:4px;
+            font-size:12px;
+        }
+
+        .pagina-fornecedores .fornecedores-classificacao-total{
+            margin:0 10px 1px auto;
+            color:#0f1b3d;
+            font-size:9px;
+            line-height:1;
+            font-weight:800;
+            white-space:nowrap;
+        }
+
+        .pagina-fornecedores .fornecedores-classificacao-total strong{
+            color:#0b45d8;
+            font-weight:900;
+        }
+
+        .pagina-fornecedores .fornecedores-panel--origem{
+            display:grid;
+            grid-template-rows:auto minmax(0,1fr) auto;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-grid{
+            min-height:0;
+            height:100%;
+            margin:0;
+            display:grid;
+            grid-template-columns:repeat(5,minmax(0,1fr));
+            border:1px solid #b8d1ff;
+            border-radius:6px;
+            overflow:hidden;
+            background:#fff;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item{
+            min-width:0;
+            min-height:0;
+            display:grid;
+            grid-template-rows:minmax(46px,1fr) auto auto;
+            align-items:center;
+            justify-items:center;
+            padding:4px 2px;
+            border-right:1px solid #b8d1ff;
+            text-align:center;
+            background:#fff;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item:last-child{
+            border-right:0;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__topo{
+            min-width:0;
+            min-height:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:2px;
+            padding:0;
+            border:0;
+            background:transparent;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__icone{
+            display:block;
+            width:27px;
+            height:27px;
+            color:var(--origem-cor);
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__icone svg{
+            display:block;
+            width:100%;
+            height:100%;
+            fill:currentColor;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__label{
+            min-height:18px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#0f1b3d;
+            font-size:9px;
+            line-height:1.03;
+            font-weight:800;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__valor{
+            width:100%;
+            padding:4px 2px;
+            border-top:1px solid #dce8ff;
+            border-bottom:1px solid #dce8ff;
+            color:#0f1b3d;
+            font-size:22px;
+            line-height:1;
+            font-weight:900;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-item__percentual{
+            width:100%;
+            padding:4px 2px;
+            color:var(--origem-cor);
+            font-size:17px;
+            line-height:1;
+            font-weight:900;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-total{
+            margin:2px 0 0;
+            color:#0f1b3d;
+            font-size:9px;
+            line-height:1;
+            font-weight:800;
+            text-align:center;
+        }
+
+        .pagina-fornecedores .fornecedores-origem-total strong{
+            color:#ff4b18;
+            font-weight:900;
+        }
+
+        @media (max-height:760px) and (min-width:901px){
+            .pagina-fornecedores .fornecedores-conteudo[data-fornecedores-conteudo="geral"]{
+                height:calc(100dvh - 132px);
+                min-height:480px;
+                grid-template-rows:68px minmax(0,1fr);
+            }
+
+            .pagina-fornecedores .fornecedor-kpi{
+                height:68px;
+                padding:5px 7px;
+            }
+
+            .pagina-fornecedores .fornecedor-kpi__titulo{
+                font-size:8px;
+            }
+
+            .pagina-fornecedores .fornecedor-kpi__icone,
+            .pagina-fornecedores .fornecedor-kpi__icone svg{
+                width:27px;
+                height:27px;
+            }
+
+            .pagina-fornecedores .fornecedor-kpi__valor{
+                font-size:24px;
+            }
+
+            .pagina-fornecedores .fornecedores-panel__titulo{
+                font-size:11px;
+            }
+        }
+
+        @media (max-width:900px){
+            .pagina-fornecedores .fornecedores-conteudo[data-fornecedores-conteudo="geral"]{
+                height:auto;
+                min-height:0;
+                display:block;
+                overflow:visible;
+            }
+
+            .pagina-fornecedores .fornecedores-indicadores{
+                grid-template-columns:repeat(2,minmax(0,1fr));
+                margin-bottom:7px;
+            }
+
+            .pagina-fornecedores .fornecedores-graficos{
+                height:auto;
+                grid-template-columns:1fr;
+                grid-template-rows:none;
+            }
+
+            .pagina-fornecedores .fornecedores-panel{
+                min-height:245px;
+            }
+
+            .pagina-fornecedores .fornecedores-rosca-centro{
+                left:35%;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+}
 
 
 /* ======================================================
@@ -940,8 +1279,7 @@ function iconeSvg(tipo){
 
 function criarPainelGrafico(
     titulo,
-    idCanvas,
-    rosca = false
+    idCanvas
 ){
 
     return `
@@ -951,7 +1289,7 @@ function criarPainelGrafico(
                 ${titulo}
             </h3>
 
-            <div class="fornecedores-chart-box${rosca ? " fornecedores-chart-box--rosca" : ""}">
+            <div class="fornecedores-chart-box">
 
                 <canvas
                     id="${idCanvas}"
@@ -959,6 +1297,40 @@ function criarPainelGrafico(
                     aria-label="${titulo}"
                 ></canvas>
 
+            </div>
+
+        </article>
+    `;
+}
+
+
+function criarPainelClassificacao(){
+
+    return `
+        <article class="fornecedores-panel fornecedores-panel--classificacao">
+
+            <h3 class="fornecedores-panel__titulo">
+                DISTRIBUIÇÃO POR CLASSIFICAÇÃO
+            </h3>
+
+            <div class="fornecedores-chart-box fornecedores-chart-box--rosca">
+
+                <canvas
+                    id="grafico-fornecedores-classificacao"
+                    role="img"
+                    aria-label="Distribuição por classificação"
+                ></canvas>
+
+                <div class="fornecedores-rosca-centro" aria-hidden="true">
+                    <strong>100%</strong>
+                    <span>TOTAL</span>
+                </div>
+
+            </div>
+
+            <div class="fornecedores-classificacao-total">
+                Total de fornecedores:
+                <strong id="fornecedores-total-classificacao">0</strong>
             </div>
 
         </article>
@@ -1223,11 +1595,7 @@ function montarEstrutura(raiz){
                     "grafico-fornecedores-rncs"
                 )}
 
-                ${criarPainelGrafico(
-                    "DISTRIBUIÇÃO POR CLASSIFICAÇÃO",
-                    "grafico-fornecedores-classificacao",
-                    true
-                )}
+                ${criarPainelClassificacao()}
 
                 ${criarPainelDistribuicaoOrigem()}
 
@@ -2151,189 +2519,6 @@ function destruirGraficosFornecedores(){
 }
 
 /* ======================================================
-   PLUGINS EXCLUSIVOS DOS GRÁFICOS
-====================================================== */
-
-const rotuloBarraFornecedores = {
-
-    id:"rotuloBarraFornecedoresUnico",
-
-    afterDatasetsDraw(chart,args,options){
-
-        if(
-            chart.config.type !== "bar" ||
-            chart.options.indexAxis !== "y"
-        ){
-            return;
-        }
-
-        const dataset = chart.data.datasets[0];
-        const meta = chart.getDatasetMeta(0);
-
-        if(!dataset || !meta){
-            return;
-        }
-
-        const ctx = chart.ctx;
-        const sufixo = options?.sufixo || "";
-
-        ctx.save();
-        ctx.font = "800 12px Segoe UI, Arial, sans-serif";
-        ctx.fillStyle = "#172033";
-        ctx.textBaseline = "middle";
-        ctx.textAlign = "left";
-
-        meta.data.forEach((barra,indice) => {
-
-            const valor = numero(dataset.data[indice]);
-
-            const texto = sufixo === "%"
-                ? `${Math.round(valor)}%`
-                : formatarInteiro(valor);
-
-            const posicao = barra.tooltipPosition();
-
-            ctx.fillText(
-                texto,
-                posicao.x + 7,
-                posicao.y
-            );
-        });
-
-        ctx.restore();
-    }
-};
-
-
-const rotuloRoscaFornecedores = {
-
-    id:"rotuloRoscaFornecedores",
-
-    afterDatasetsDraw(chart){
-
-        if(chart.config.type !== "doughnut"){
-            return;
-        }
-
-        const dataset = chart.data.datasets[0];
-        const meta = chart.getDatasetMeta(0);
-
-        if(!dataset || !meta){
-            return;
-        }
-
-        const total = dataset.data.reduce(
-            (soma,valor) => soma + numero(valor),
-            0
-        );
-
-        if(!total){
-            return;
-        }
-
-        const ctx = chart.ctx;
-
-        ctx.save();
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.font = "800 13px Segoe UI, Arial, sans-serif";
-        ctx.fillStyle = "#ffffff";
-
-        meta.data.forEach((arco,indice) => {
-
-            const valor = numero(dataset.data[indice]);
-
-            if(!valor){
-                return;
-            }
-
-            const percentual = Math.round((valor / total) * 100);
-
-            if(percentual < 5){
-                return;
-            }
-
-            const ponto = arco.getCenterPoint();
-
-            ctx.fillText(
-                `${percentual}%`,
-                ponto.x,
-                ponto.y
-            );
-        });
-
-        const primeiroArco = meta.data.find(Boolean);
-
-        if(primeiroArco){
-
-            const centro = primeiroArco.getProps(
-                ["x","y"],
-                true
-            );
-
-            ctx.fillStyle = "#0f1b3d";
-            ctx.font = "800 30px Segoe UI, Arial, sans-serif";
-            ctx.fillText(
-                "100%",
-                centro.x,
-                centro.y - 9
-            );
-
-            ctx.font = "800 15px Segoe UI, Arial, sans-serif";
-            ctx.fillText(
-                "TOTAL",
-                centro.x,
-                centro.y + 19
-            );
-        }
-
-        ctx.restore();
-    },
-
-    afterDraw(chart){
-
-        if(chart.config.type !== "doughnut"){
-            return;
-        }
-
-        const total = chart.data.datasets[0].data.reduce(
-            (soma,valor) => soma + numero(valor),
-            0
-        );
-
-        if(!total){
-            return;
-        }
-
-        const legend = chart.legend;
-
-        if(!legend){
-            return;
-        }
-
-        const ctx = chart.ctx;
-        const x = legend.left + 2;
-        const y = Math.min(
-            chart.height - 10,
-            legend.bottom + 22
-        );
-
-        ctx.save();
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
-        ctx.font = "800 12px Segoe UI, Arial, sans-serif";
-        ctx.fillStyle = "#172033";
-        ctx.fillText(
-            `Total de fornecedores: ${formatarInteiro(total)}`,
-            x,
-            y
-        );
-        ctx.restore();
-    }
-};
-
-
-/* ======================================================
    PREPARAR DADOS DOS GRÁFICOS
 ====================================================== */
 
@@ -2458,8 +2643,8 @@ function criarGraficoBarras(
                     borderWidth:0,
                     borderRadius:1,
                     borderSkipped:false,
-                    barThickness:16,
-                    maxBarThickness:18,
+                    barThickness:13,
+                    maxBarThickness:15,
                     categoryPercentage:.72,
                     datalabels:{
                         display:false
@@ -2467,25 +2652,18 @@ function criarGraficoBarras(
                 }]
             },
 
-            plugins:[
-                rotuloBarraFornecedores
-            ],
-
             options:{
                 indexAxis:"y",
                 responsive:true,
                 maintainAspectRatio:false,
-                devicePixelRatio:3,
+                devicePixelRatio:2,
 
-                animation:{
-                    duration:650,
-                    easing:"easeOutQuart"
-                },
+                animation:false,
 
                 layout:{
                     padding:{
-                        top:8,
-                        right:52,
+                        top:2,
+                        right:34,
                         bottom:2,
                         left:0
                     }
@@ -2497,11 +2675,27 @@ function criarGraficoBarras(
                     },
 
                     datalabels:{
-                        display:false
-                    },
+                        display:
+                            typeof window.ChartDataLabels !== "undefined",
 
-                    rotuloBarraFornecedoresUnico:{
-                        sufixo:sufixo
+                        color:"#0f1b3d",
+                        anchor:"end",
+                        align:"end",
+                        offset:3,
+                        clamp:true,
+                        clip:false,
+
+                        formatter(valor){
+                            return sufixo === "%"
+                                ? `${Math.round(numero(valor))}%`
+                                : formatarInteiro(valor);
+                        },
+
+                        font:{
+                            family:"Segoe UI",
+                            size:10,
+                            weight:"800"
+                        }
                     },
 
                     tooltip:{
@@ -2601,7 +2795,7 @@ function criarGraficoBarras(
                         },
 
                         afterFit(scale){
-                            scale.width = 175;
+                            scale.width = 160;
                         }
                     }
                 }
@@ -2720,35 +2914,43 @@ function criarGraficoClassificacoes(){
                 }]
             },
 
-            plugins:[
-                rotuloRoscaFornecedores
-            ],
-
             options:{
                 responsive:true,
                 maintainAspectRatio:false,
-                devicePixelRatio:3,
-                cutout:"54%",
-                radius:"96%",
+                devicePixelRatio:2,
+                cutout:"57%",
+                radius:"91%",
 
-                animation:{
-                    duration:650,
-                    easing:"easeOutQuart"
-                },
+                animation:false,
 
                 layout:{
                     padding:{
                         top:4,
                         right:4,
-                        bottom:28,
+                        bottom:2,
                         left:4
                     }
                 },
 
                 plugins:{
                     datalabels:{
-                        display:false
-                    },
+                            display:
+                                typeof window.ChartDataLabels !== "undefined",
+
+                            color:"#ffffff",
+
+                            formatter(valor){
+                                return total
+                                    ? `${Math.round((numero(valor) / total) * 100)}%`
+                                    : "";
+                            },
+
+                            font:{
+                                family:"Segoe UI",
+                                size:10,
+                                weight:"800"
+                            }
+                        },
 
                     legend:{
                         display:true,
@@ -2758,13 +2960,13 @@ function criarGraficoClassificacoes(){
                         labels:{
                             color:"#1f2937",
                             usePointStyle:false,
-                            boxWidth:13,
-                            boxHeight:13,
-                            padding:16,
+                            boxWidth:10,
+                            boxHeight:10,
+                            padding:9,
 
                             font:{
                                 family:"Segoe UI",
-                                size:11,
+                                size:9,
                                 weight:"700"
                             },
 
@@ -2826,6 +3028,11 @@ function criarGraficoClassificacoes(){
                 }
             }
         }
+    );
+
+    definirTexto(
+        "fornecedores-total-classificacao",
+        formatarInteiro(total)
     );
 
     estado.graficos.set(
@@ -2944,6 +3151,9 @@ function renderizarFornecedores(
 
 
     destruirGraficosFornecedores();
+
+
+    garantirEstiloFornecedores();
 
 
     const normalizado =
@@ -3125,5 +3335,6 @@ if(
 
     tentarInicializacaoAutomatica();
 }
+
 
 })();
