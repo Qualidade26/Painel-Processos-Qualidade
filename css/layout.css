@@ -1,18 +1,49 @@
 /* ==========================================================
+   LAYOUT.CSS
+   Estrutura geral do Painel de Processos SGQ
+   Ajustado para melhor enquadramento e nitidez visual
+========================================================== */
+
+
+/* ==========================================================
+   BASE DE ENQUADRAMENTO
+========================================================== */
+
+html,
+body{
+    width:100%;
+    min-width:0;
+    height:100%;
+    margin:0;
+}
+
+body{
+    min-height:100vh;
+    min-height:100dvh;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
    CABEÇALHO
 ========================================================== */
 
 .topbar{
-    width:100%;
-    max-width:1920px;
+    flex:0 0 auto;
 
-    min-height:clamp(60px, 8vh, 82px);
+    width:100%;
+    max-width:none;
+
+    min-height:clamp(60px,8vh,82px);
     height:auto;
 
-    margin-left:auto;
-    margin-right:auto;
+    margin:0 auto;
 
-    padding:clamp(8px, 1vw, 18px);
+    padding:clamp(8px,1vw,18px);
 
     display:grid;
     grid-template-columns:
@@ -21,7 +52,9 @@
         minmax(250px,320px);
 
     align-items:center;
-    gap:clamp(6px, 1vw, 16px);
+    gap:clamp(6px,1vw,16px);
+
+    box-sizing:border-box;
 
     background:linear-gradient(
         90deg,
@@ -31,54 +64,71 @@
 
     color:#fff;
 
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.18);
+
+    position:relative;
+    z-index:10;
 }
 
+
 .logo-labor{
+    min-width:0;
     min-height:50px;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
 
-    border-right:1px solid rgba(255,255,255,.35);
+    padding-right:12px;
+
+    border-right:
+        1px solid rgba(255,255,255,.35);
 
     line-height:1;
 }
 
+
 .logo-main{
-    font-size:clamp(24px, 2vw, 36px);
+    font-size:clamp(24px,2vw,36px);
     font-weight:900;
     letter-spacing:5px;
 }
+
 
 .logo-sub{
     margin-top:6px;
 
-    font-size:clamp(8px, .7vw, 11px);
+    font-size:clamp(8px,.7vw,11px);
     font-weight:900;
     letter-spacing:5px;
 }
+
 
 .top-title{
     min-width:0;
     text-align:center;
 }
 
+
 .top-title h1{
     margin:0;
 
-    font-size:clamp(18px, 1.7vw, 28px);
+    font-size:clamp(18px,1.7vw,28px);
     font-weight:900;
+    line-height:1.08;
     letter-spacing:.5px;
 }
+
 
 .top-title p{
     margin:6px 0 0;
 
-    font-size:clamp(9px, .75vw, 13px);
-    font-weight:900;
+    font-size:clamp(9px,.75vw,13px);
+    font-weight:800;
+    line-height:1.2;
 }
+
 
 .top-status{
     min-width:0;
@@ -87,6 +137,7 @@
     align-items:center;
     justify-content:flex-end;
     flex-wrap:wrap;
+
     gap:8px;
 
     font-size:11px;
@@ -99,30 +150,38 @@
 ========================================================== */
 
 .main-wrap{
-    width:100%;
-    max-width:1920px;
+    flex:1 1 auto;
 
-    min-height:calc(100dvh - 82px);
+    width:100%;
+    max-width:none;
+
+    min-width:0;
+    min-height:0;
     height:auto;
 
-    margin-left:auto;
-    margin-right:auto;
+    margin:0 auto;
 
-    padding:clamp(6px, .7vw, 12px);
+    padding:clamp(6px,.7vw,12px);
 
     display:grid;
     grid-template-columns:
-        clamp(150px, 11vw, 190px)
+        clamp(150px,11vw,190px)
         minmax(0,1fr);
 
-    gap:clamp(6px, .7vw, 12px);
+    gap:clamp(6px,.7vw,12px);
 
-    transition:grid-template-columns .25s ease;
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+    transition:
+        grid-template-columns .25s ease;
 }
+
 
 .main-wrap.menu-collapsed{
     grid-template-columns:
-        clamp(58px, 5vw, 72px)
+        clamp(58px,5vw,72px)
         minmax(0,1fr);
 }
 
@@ -133,21 +192,33 @@
 
 .menu{
     width:100%;
-    min-width:0;
+    height:100%;
 
-    padding:clamp(6px, .7vw, 10px);
+    min-width:0;
+    min-height:0;
+
+    padding:clamp(6px,.7vw,10px);
+
+    box-sizing:border-box;
 
     background:rgba(248,251,255,.92);
 
     border:1px solid var(--line);
     border-radius:12px;
 
-    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.06);
 
-    overflow:auto;
+    overflow-x:hidden;
+    overflow-y:auto;
 
-    transition:.25s ease;
+    scrollbar-gutter:stable;
+
+    transition:
+        padding .25s ease,
+        width .25s ease;
 }
+
 
 .toggle-menu{
     width:100%;
@@ -172,9 +243,10 @@
     cursor:pointer;
 }
 
+
 .menu button{
     width:100%;
-    min-height:clamp(48px, 6vh, 60px);
+    min-height:clamp(48px,6vh,60px);
 
     margin-bottom:8px;
     padding:8px 6px;
@@ -190,7 +262,7 @@
 
     color:var(--text);
 
-    font-size:clamp(10px, .7vw, 13px);
+    font-size:clamp(10px,.7vw,13px);
     font-weight:900;
     line-height:1.2;
 
@@ -205,17 +277,21 @@
         box-shadow .2s ease;
 }
 
+
 .menu button .ico{
     display:block;
 
     margin-bottom:4px;
 
-    font-size:clamp(20px, 1.5vw, 27px);
+    font-size:clamp(20px,1.5vw,27px);
+    line-height:1;
 }
+
 
 .menu button .label{
     display:block;
 }
+
 
 .menu button:hover,
 .menu button.active{
@@ -229,7 +305,8 @@
 
     transform:translateY(-1px);
 
-    box-shadow:0 6px 12px rgba(29,78,255,.25);
+    box-shadow:
+        0 6px 12px rgba(29,78,255,.25);
 }
 
 
@@ -241,20 +318,24 @@
     padding:8px;
 }
 
+
 .main-wrap.menu-collapsed .toggle-menu{
     height:38px;
     margin-bottom:8px;
 }
+
 
 .main-wrap.menu-collapsed .menu button{
     min-height:45px;
     padding:8px 4px;
 }
 
+
 .main-wrap.menu-collapsed .menu button .ico{
     margin-bottom:0;
     font-size:22px;
 }
+
 
 .main-wrap.menu-collapsed .menu button .label{
     display:none;
@@ -267,81 +348,70 @@
 
 .content{
     width:100%;
+    height:100%;
+
     min-width:0;
     min-height:0;
+
+    padding:clamp(6px,.6vw,12px);
+
+    box-sizing:border-box;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    scrollbar-gutter:stable;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+
+/* Evita que páginas internas ultrapassem a largura útil */
+.content > *{
+    max-width:100%;
+    min-width:0;
+}
+
+
 /* ==========================================================
-   CORREÇÃO DE ENQUADRAMENTO DA TELA
+   TELAS GRANDES / FULL HD
 ========================================================== */
 
-html,
-body{
-    width:100%;
-    height:100%;
+@media (min-width:1440px){
 
-    margin:0;
-}
+    .main-wrap{
+        padding:10px 12px 12px;
+        gap:10px;
+    }
 
-body{
-    height:100vh;
-    height:100dvh;
+    .content{
+        padding:8px 10px 12px;
+    }
 
-    display:flex;
-    flex-direction:column;
-
-    overflow:hidden;
-}
-
-
-/* Cabeçalho ocupa somente sua altura necessária */
-.topbar{
-    flex:0 0 auto;
-
-    width:100%;
-    max-width:none;
-
-    box-sizing:border-box;
+    .menu{
+        padding:8px;
+    }
 }
 
 
-/* Área principal ocupa exatamente o restante da tela */
-.main-wrap{
-    flex:1 1 auto;
+/* ==========================================================
+   TABLETS / NOTEBOOKS
+========================================================== */
 
-    width:100%;
-    max-width:none;
+@media (max-width:1100px){
 
-    height:auto;
-    min-height:0;
+    .topbar{
+        grid-template-columns:
+            minmax(150px,210px)
+            minmax(250px,1fr)
+            minmax(210px,280px);
+    }
 
-    box-sizing:border-box;
-    overflow:hidden;
-}
-
-
-/* Menu com rolagem independente */
-.menu{
-    height:100%;
-    min-height:0;
-
-    box-sizing:border-box;
-
-    overflow-x:hidden;
-    overflow-y:auto;
-}
-
-
-/* Conteúdo com rolagem vertical */
-.content{
-    width:100%;
-    height:100%;
-
-    min-width:0;
-    min-height:0;
-
-    box-sizing:border-box;
-
-    overflow-x:hidden;
-    overflow-y:auto;
+    .main-wrap{
+        grid-template-columns:
+            clamp(130px,13vw,165px)
+            minmax(0,1fr);
+    }
 }
 
 
@@ -351,8 +421,13 @@ body{
 
 @media (max-width:640px){
 
+    html,
     body{
         height:auto;
+        min-height:100%;
+    }
+
+    body{
         min-height:100vh;
         min-height:100dvh;
 
@@ -362,24 +437,86 @@ body{
         overflow-y:auto;
     }
 
-    .main-wrap{
-        height:auto;
+
+    .topbar{
+        width:100%;
+
+        grid-template-columns:1fr;
+
+        gap:8px;
+
+        padding:10px 12px;
+
+        text-align:center;
+    }
+
+
+    .logo-labor{
         min-height:0;
+
+        align-items:center;
+
+        padding-right:0;
+        padding-bottom:8px;
+
+        border-right:0;
+        border-bottom:
+            1px solid rgba(255,255,255,.28);
+    }
+
+
+    .top-status{
+        justify-content:center;
+    }
+
+
+    .main-wrap,
+    .main-wrap.menu-collapsed{
+        width:100%;
+        height:auto;
+
+        min-height:0;
+
+        padding:8px;
+
+        display:block;
 
         overflow:visible;
     }
 
+
     .menu{
+        width:100%;
         height:auto;
+
+        margin-bottom:8px;
+
+        overflow:visible;
     }
 
+
     .content{
+        width:100%;
         height:auto;
+
+        min-height:0;
+
+        padding:6px 0;
 
         overflow:visible;
     }
 }
-    padding:clamp(6px, .6vw, 12px);
 
-    overflow:auto;
+
+/* ==========================================================
+   MOVIMENTO REDUZIDO
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .main-wrap,
+    .menu,
+    .menu button{
+        transition:none !important;
+    }
 }
