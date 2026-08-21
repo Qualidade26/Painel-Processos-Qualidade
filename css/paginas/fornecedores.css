@@ -756,3 +756,159 @@
         min-height:58px;
     }
 }
+/* ==========================================================
+   AJUSTE VISUAL — MODELO APROVADO
+   Mantém funções; refina proporção, nitidez e Processos por Tipo
+========================================================== */
+
+.pagina-fornecedores{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:geometricPrecision;
+}
+
+.fornecedores-indicadores{
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.fornecedor-kpi{
+    min-height:138px;
+    padding:17px 18px;
+    border-radius:12px;
+}
+
+.fornecedor-kpi__titulo{
+    color:var(--forn-azul-escuro);
+    font-size:12px;
+    font-weight:800;
+}
+
+.fornecedor-kpi__icone{
+    width:52px;
+    height:52px;
+}
+
+.fornecedor-kpi__icone svg{
+    width:46px;
+    height:46px;
+}
+
+.fornecedor-kpi__valor{
+    color:#101a35;
+    font-size:clamp(36px,3vw,52px);
+    font-weight:800;
+}
+
+.fornecedores-graficos{
+    gap:14px;
+}
+
+.fornecedores-panel{
+    min-height:326px;
+    padding:17px 20px 15px;
+    border-radius:12px;
+}
+
+.fornecedores-panel__titulo{
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:800;
+}
+
+.fornecedores-chart-box,
+.fornecedores-chart-box--rosca{
+    height:275px;
+    min-height:275px;
+}
+
+/* Processos por tipo / distribuição por origem */
+.fornecedores-panel--origem{
+    min-height:326px;
+}
+
+.fornecedores-origem-grid{
+    min-height:230px;
+    margin-top:8px;
+    border-radius:8px;
+}
+
+.fornecedores-origem-item{
+    grid-template-rows:112px 66px 62px;
+}
+
+.fornecedores-origem-item__topo{
+    min-height:112px;
+    gap:7px;
+    padding:9px 5px;
+    background:#fff;
+}
+
+.fornecedores-origem-item__marcador{
+    width:44px;
+    height:44px;
+    border-radius:0;
+    background:transparent;
+    color:var(--origem-cor,#1557d6);
+}
+
+.fornecedores-origem-item__marcador svg{
+    display:block;
+    width:100%;
+    height:100%;
+    fill:currentColor;
+}
+
+.fornecedores-origem-item__label{
+    min-height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#101827;
+    font-size:12px;
+    font-weight:800;
+    line-height:1.12;
+}
+
+.fornecedores-origem-item__valor{
+    min-height:66px;
+    font-size:31px;
+    font-weight:800;
+    color:#101a35;
+}
+
+.fornecedores-origem-item__percentual{
+    min-height:62px;
+    font-size:25px;
+    font-weight:800;
+    color:var(--origem-cor,#f05a28);
+}
+
+.fornecedores-origem-total{
+    margin-top:13px;
+    color:#101827;
+    font-size:14px;
+    font-weight:800;
+}
+
+.fornecedores-origem-total strong{
+    font-size:15px;
+    font-weight:800;
+    color:#ff5a16;
+}
+
+@media (min-width:1400px){
+    .fornecedores-panel{
+        min-height:340px;
+    }
+
+    .fornecedores-chart-box,
+    .fornecedores-chart-box--rosca{
+        height:288px;
+        min-height:288px;
+    }
+
+    .fornecedores-origem-grid{
+        min-height:238px;
+    }
+}
