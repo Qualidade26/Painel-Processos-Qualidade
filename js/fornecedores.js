@@ -197,101 +197,277 @@
        Aceita nomes alternativos para facilitar integração
        com o JSON atual do painel.
     ====================================================== */
+function normalizarFornecedor(item,indice){
 
-    function normalizarFornecedor(item,indice){
-        const nome = String(primeiroValor(
+    const nome = String(
+        primeiroValor(
             item,
-            ["fornecedor","nome","fabricante","razaoSocial","descricao"],
+            [
+                "fabricante",
+                "fornecedor",
+                "nome",
+                "razaoSocial",
+                "descricao"
+            ],
             `Fornecedor ${indice + 1}`
-        )).trim();
+        )
+    ).trim();
 
-        const avaliacao = normalizarIndice(primeiroValor(
+
+    const avaliacao = normalizarIndice(
+        primeiroValor(
             item,
-            ["indice","indiceAvaliacao","scoreFinal","score","avaliacao","percentual"],
+            [
+                "indiceavaliacao",
+                "indiceAvaliacao",
+                "indice",
+                "scoreFinal",
+                "score",
+                "percentual"
+            ],
             0
-        ));
+        )
+    );
 
-        const classificacao = obterClassificacao(avaliacao);
 
-        return {
-            id:criarId(nome,indice),
-            nome,
-            processos:primeiroNumero(item,["processos","totalProcessos","processosAno"],0),
-            produtos:primeiroNumero(item,["produtos","totalProdutos","sku","skus","totalSku","quantidadeProdutos"],0),
-            rncs:primeiroNumero(item,["rncs","rnc","totalRnc","naoConformidades","nãoConformidades"],0),
-            retrabalhos:primeiroNumero(item,["retrabalhos","retrabalho","totalRetrabalhos","totalRetrabalho"],0),
-            reclamacoes:primeiroNumero(item,["reclamacoes","reclamações","totalReclamacoes","totalReclamações"],0),
-            indice:avaliacao,
-            classificacao,
-            original:item
-        };
+    const classificacao = obterClassificacao(avaliacao);
+
+
+    return {
+
+        id: criarId(nome,indice),
+
+        nome,
+
+        processos: primeiroNumero(
+            item,
+            [
+                "processosano",
+                "processosAno",
+                "processos",
+                "totalProcessos"
+            ],
+            0
+        ),
+
+        produtos: primeiroNumero(
+            item,
+            [
+                "produtosfornecidos",
+                "produtos",
+                "totalProdutos",
+                "skuano",
+                "sku",
+                "skus",
+                "totalSku",
+                "quantidadeProdutos"
+            ],
+            0
+        ),
+
+        rncs: primeiroNumero(
+            item,
+            [
+                "rnc",
+                "rncs",
+                "totalRnc",
+                "naoConformidades",
+                "nãoConformidades"
+            ],
+            0
+        ),
+
+        retrabalhos: primeiroNumero(
+            item,
+            [
+                "retrabalhos",
+                "retrabalho",
+                "totalRetrabalhos",
+                "totalRetrabalho"
+            ],
+            0
+        ),
+
+        reclamacoes: primeiroNumero(
+            item,
+            [
+                "reclamacoes",
+                "reclamações",
+                "totalReclamacoes",
+                "totalReclamações"
+            ],
+            0
+        ),
+
+        ocorrencias: primeiroNumero(
+            item,
+            [
+                "ocorrencias",
+                "ocorrências"
+            ],
+            0
+        ),
+
+        horas: primeiroNumero(
+            item,
+            ["horas"],
+            0
+        ),
+
+        indice: avaliacao,
+
+        classificacao,
+
+        original: item
+    };
+}
+
+
+function localizarLista(entrada,raizDados){
+
+    const candidatas = [
+
+        Array.isArray(entrada)
+            ? entrada
+            : null,
+
+        raizDados?.avaliados,
+
+        raizDados?.lista,
+
+        raizDados?.avaliacoes,
+
+        raizDados?.avaliações,
+
+        raizDados?.detalhes,
+
+        Array.isArray(raizDados?.fornecedores)
+            ? raizDados.fornecedores
+            : null,
+
+        raizDados?.ranking
+    ];
+
+
+    return candidatas.find(Array.isArray) || [];
+}
+
+
+function normalizarEntrada(entrada){
+
+    let raizDados = entrada || {};
+
+
+    if(
+        !Array.isArray(entrada) &&
+        entrada?.fornecedores &&
+        !Array.isArray(entrada.fornecedores)
+    ){
+        raizDados = entrada.fornecedores;
     }
 
-    function localizarLista(entrada,raizDados){
-        const candidatas = [
-            Array.isArray(entrada) ? entrada : null,
-            raizDados?.lista,
-            raizDados?.avaliacoes,
-            raizDados?.avaliações,
-            raizDados?.ranking,
-            raizDados?.detalhes,
-            Array.isArray(raizDados?.fornecedores) ? raizDados.fornecedores : null
-        ];
 
-        return candidatas.find(Array.isArray) || [];
+    const lista = localizarLista(
+        entrada,
+        raizDados
+    )
+        .filter(
+            item =>
+                item &&
+                typeof item === "object"
+        )
+        .map(normalizarFornecedor);
+
+
+    const resumo = {
+
+        totalFornecedores: primeiroNumero(
+            raizDados,
+            [
+                "totalfornecedores",
+                "totalFornecedores",
+                "fornecedoresAno",
+                "quantidadeFornecedores"
+            ],
+            lista.length
+        ),
+
+
+        processos: primeiroNumero(
+            raizDados,
+            [
+                "totalprocessos",
+                "totalProcessos",
+                "processosAno",
+                "processos"
+            ],
+            somar(lista,"processos")
+        ),
+
+
+        rncs: primeiroNumero(
+            raizDados,
+            [
+                "totalrncano",
+                "totalRncAno",
+                "totalRnc",
+                "totalRncs",
+                "rncAno",
+                "rncsAno",
+                "naoConformidades"
+            ],
+            somar(lista,"rncs")
+        ),
+
+
+        retrabalhos: primeiroNumero(
+            raizDados,
+            [
+                "totalretrabalho",
+                "totalRetrabalho",
+                "totalRetrabalhos",
+                "retrabalhosAno"
+            ],
+            somar(lista,"retrabalhos")
+        ),
+
+
+        indiceMedio: normalizarIndice(
+            primeiroValor(
+                raizDados,
+                [
+                    "indicemedioavaliacao",
+                    "indiceMedioAvaliacao",
+                    "indiceMedio",
+                    "mediaIndice",
+                    "scoreMedio",
+                    "avaliacaoMedia"
+                ],
+                media(
+                    lista.map(
+                        item => item.indice
+                    )
+                )
+            )
+        )
+    };
+
+
+    if(
+        !resumo.totalFornecedores &&
+        lista.length
+    ){
+        resumo.totalFornecedores =
+            lista.length;
     }
 
-    function normalizarEntrada(entrada){
-        let raizDados = entrada || {};
 
-        if(
-            !Array.isArray(entrada) &&
-            entrada?.fornecedores &&
-            !Array.isArray(entrada.fornecedores)
-        ){
-            raizDados = entrada.fornecedores;
-        }
-
-        const lista = localizarLista(entrada,raizDados)
-            .filter(item => item && typeof item === "object")
-            .map(normalizarFornecedor);
-
-        const resumo = {
-            totalFornecedores:primeiroNumero(
-                raizDados,
-                ["totalFornecedores","fornecedoresAno","quantidadeFornecedores"],
-                lista.length
-            ),
-            processos:primeiroNumero(
-                raizDados,
-                ["totalProcessos","processosAno","processos"],
-                somar(lista,"processos")
-            ),
-            rncs:primeiroNumero(
-                raizDados,
-                ["totalRnc","totalRncs","rncAno","rncsAno","naoConformidades"],
-                somar(lista,"rncs")
-            ),
-            retrabalhos:primeiroNumero(
-                raizDados,
-                ["totalRetrabalho","totalRetrabalhos","retrabalhosAno"],
-                somar(lista,"retrabalhos")
-            ),
-            indiceMedio:normalizarIndice(primeiroValor(
-                raizDados,
-                ["indiceMedio","mediaIndice","scoreMedio","avaliacaoMedia"],
-                media(lista.map(item => item.indice))
-            ))
-        };
-
-        if(!resumo.totalFornecedores && lista.length){
-            resumo.totalFornecedores = lista.length;
-        }
-
-        return {resumo,lista,raizDados};
-    }
-
-
+    return {
+        resumo,
+        lista,
+        raizDados
+    };
+}
     /* ======================================================
        ÍCONES SVG
     ====================================================== */
