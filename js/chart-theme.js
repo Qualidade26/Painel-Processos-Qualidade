@@ -1,8 +1,11 @@
 /* ==========================================================
    TEMA GLOBAL DOS GRÁFICOS — CHART.JS
+   Ajustado para maior nitidez, estabilidade e consistência
 ========================================================== */
 
 (function configurarTemaDosGraficos() {
+
+    "use strict";
 
     if(typeof Chart === "undefined"){
 
@@ -16,6 +19,11 @@
 
     /* ======================================================
        QUALIDADE E NITIDEZ RESPONSIVA
+
+       - Mantém os gráficos nítidos em telas comuns e HiDPI.
+       - Limita o DPR em 3 para evitar consumo excessivo.
+       - O fornecedores.js pode definir devicePixelRatio:3
+         localmente sem conflito.
     ====================================================== */
 
     function obterProporcaoNitidezGrafico(){
@@ -29,7 +37,7 @@
             2,
             Math.min(
                 proporcaoTela * 1.5,
-                4
+                3
             )
         );
     }
@@ -45,7 +53,7 @@
         false;
 
     Chart.defaults.resizeDelay =
-        80;
+        120;
 
 
     /* ======================================================
@@ -70,7 +78,7 @@
     ====================================================== */
 
     Chart.defaults.animation.duration =
-        700;
+        650;
 
     Chart.defaults.animation.easing =
         "easeOutQuart";
@@ -101,13 +109,16 @@
 
     /* ======================================================
        BARRAS
+
+       Os gráficos específicos podem sobrescrever espessura,
+       raio ou cores sem perder o padrão global.
     ====================================================== */
 
     Chart.defaults.elements.bar.borderWidth =
-        1;
+        0;
 
     Chart.defaults.elements.bar.borderRadius =
-        4;
+        3;
 
     Chart.defaults.elements.bar.borderSkipped =
         false;
@@ -136,13 +147,13 @@
         "circle";
 
     Chart.defaults.plugins.legend.labels.boxWidth =
-        8;
+        9;
 
     Chart.defaults.plugins.legend.labels.boxHeight =
-        8;
+        9;
 
     Chart.defaults.plugins.legend.labels.padding =
-        8;
+        10;
 
     Chart.defaults.plugins.legend.labels.font = {
 
@@ -182,7 +193,7 @@
         true;
 
     Chart.defaults.plugins.tooltip.backgroundColor =
-        "rgba(255,255,255,.98)";
+        "rgba(255,255,255,.985)";
 
     Chart.defaults.plugins.tooltip.titleColor =
         "#102052";
@@ -238,7 +249,7 @@
     ====================================================== */
 
     Chart.defaults.scale.grid.color =
-        "rgba(15,31,77,.08)";
+        "rgba(15,31,77,.075)";
 
     Chart.defaults.scale.grid.lineWidth =
         1;
@@ -247,7 +258,10 @@
         false;
 
     Chart.defaults.scale.border.color =
-        "rgba(15,31,77,.15)";
+        "rgba(15,31,77,.14)";
+
+    Chart.defaults.scale.border.width =
+        1;
 
     Chart.defaults.scale.ticks.color =
         "#44516f";
@@ -304,7 +318,28 @@
 
 
     /* ======================================================
+       DATALABELS
+
+       Se o plugin estiver carregado globalmente, fica
+       desligado por padrão. Cada gráfico ativa quando precisar.
+       Isso evita textos duplicados nos painéis.
+    ====================================================== */
+
+    if(
+        Chart.defaults.plugins &&
+        Chart.defaults.plugins.datalabels
+    ){
+
+        Chart.defaults.plugins.datalabels.display =
+            false;
+    }
+
+
+    /* ======================================================
        ATUALIZAÇÃO AUTOMÁTICA DA NITIDEZ
+
+       Recalcula apenas quando a proporção realmente muda.
+       Evita o setInterval a cada 500ms, reduzindo consumo.
     ====================================================== */
 
     let proporcaoNitidezAnterior =
@@ -312,6 +347,24 @@
 
     let temporizadorNitidez =
         null;
+
+
+    function obterInstanciasChart(){
+
+        const instancias =
+            Chart.instances || {};
+
+        if(instancias instanceof Map){
+
+            return Array.from(
+                instancias.values()
+            );
+        }
+
+        return Object.values(
+            instancias
+        );
+    }
 
 
     function atualizarNitidezDosGraficos(){
@@ -333,6 +386,10 @@
                             proporcaoNitidezAnterior
                         ) > 0.01;
 
+                    if(!proporcaoMudou){
+                        return;
+                    }
+
                     proporcaoNitidezAnterior =
                         novaProporcao;
 
@@ -340,9 +397,7 @@
                         novaProporcao;
 
 
-                    Object.values(
-                        Chart.instances || {}
-                    ).forEach(
+                    obterInstanciasChart().forEach(
                         grafico => {
 
                             if(
@@ -353,20 +408,34 @@
                                 return;
                             }
 
-                            grafico.options.devicePixelRatio =
-                                novaProporcao;
+
+                            /*
+                               Respeita gráficos que definem DPR
+                               próprio (ex.: fornecedores = 3).
+                            */
+
+                            const possuiDprLocal =
+                                grafico.config?._config?.options
+                                    ?.devicePixelRatio !==
+                                undefined;
+
+
+                            if(!possuiDprLocal){
+
+                                grafico.options.devicePixelRatio =
+                                    novaProporcao;
+                            }
+
 
                             grafico.resize();
 
                             grafico.update(
-                                proporcaoMudou
-                                    ? "resize"
-                                    : "none"
+                                "none"
                             );
                         }
                     );
                 },
-                120
+                160
             );
     }
 
@@ -392,22 +461,18 @@
     }
 
 
-    setInterval(
-        () => {
+    /*
+       Alguns navegadores mudam o devicePixelRatio ao mover
+       a janela entre monitores. orientationchange também
+       força uma nova verificação.
+    */
 
-            const proporcaoAtual =
-                obterProporcaoNitidezGrafico();
-
-            if(
-                Math.abs(
-                    proporcaoAtual -
-                    proporcaoNitidezAnterior
-                ) > 0.01
-            ){
-                atualizarNitidezDosGraficos();
-            }
-        },
-        500
+    window.addEventListener(
+        "orientationchange",
+        atualizarNitidezDosGraficos,
+        {
+            passive:true
+        }
     );
 
 
