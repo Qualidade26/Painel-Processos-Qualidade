@@ -1936,6 +1936,93 @@
         estado.graficos.clear();
     }
 
+    /* ======================================================
+       PLUGIN EXCLUSIVO — VALOR NO FINAL DA BARRA
+    ====================================================== */
+
+    const rotuloBarraFornecedores = {
+
+        id:"rotuloBarraFornecedoresUnico",
+
+        afterDatasetsDraw(chart,args,options){
+
+            if(chart.config.type !== "bar"){
+                return;
+            }
+
+            if(chart.options.indexAxis !== "y"){
+                return;
+            }
+
+
+            const dataset =
+                chart.data.datasets[0];
+
+
+            const meta =
+                chart.getDatasetMeta(0);
+
+
+            if(!dataset || !meta){
+                return;
+            }
+
+
+            const ctx =
+                chart.ctx;
+
+
+            const sufixo =
+                options?.sufixo || "";
+
+
+            ctx.save();
+
+            ctx.font =
+                "700 10px Segoe UI, Arial, sans-serif";
+
+            ctx.fillStyle =
+                "#111827";
+
+            ctx.textBaseline =
+                "middle";
+
+            ctx.textAlign =
+                "left";
+
+
+            meta.data.forEach(
+                (barra,indice) => {
+
+                    const valor =
+                        numero(
+                            dataset.data[indice]
+                        );
+
+
+                    const texto =
+                        sufixo === "%"
+                            ? `${Math.round(valor)}%`
+                            : formatarInteiro(valor);
+
+
+                    const posicao =
+                        barra.tooltipPosition();
+
+
+                    ctx.fillText(
+                        texto,
+                        posicao.x + 6,
+                        posicao.y
+                    );
+                }
+            );
+
+
+            ctx.restore();
+        }
+    };
+
 
     /* ======================================================
        PREPARAR DADOS DOS GRÁFICOS
@@ -1958,6 +2045,10 @@
             return;
         }
 
+
+        /* ==================================================
+           RANKING DE AVALIAÇÃO
+        ================================================== */
 
         const ranking =
             [...estado.fornecedores]
@@ -1986,6 +2077,10 @@
             );
 
 
+        /* ==================================================
+           MAIS RNCs
+        ================================================== */
+
         const maisRncs =
             [...estado.fornecedores]
 
@@ -2009,6 +2104,10 @@
                 10
             );
 
+
+        /* ==================================================
+           MAIS PROCESSOS
+        ================================================== */
 
         const maisProcessos =
             [...estado.fornecedores]
@@ -2050,7 +2149,7 @@
 
             "%",
 
-            100
+            105
         );
 
 
@@ -2086,7 +2185,9 @@
             ""
         );
     }
-       /* ======================================================
+
+
+    /* ======================================================
        GRÁFICO DE BARRAS
     ====================================================== */
 
@@ -2127,6 +2228,26 @@
             );
 
 
+        /*
+           Para gráficos sem máximo fixo,
+           cria espaço após a maior barra
+           para o rótulo.
+        */
+
+        const maiorValor =
+            Math.max(
+                ...valores,
+                1
+            );
+
+
+        const limiteX =
+            maximo ||
+            Math.ceil(
+                maiorValor * 1.18
+            );
+
+
         const grafico =
             new window.Chart(
                 canvas,
@@ -2155,61 +2276,35 @@
                             borderColor:
                                 cor,
 
-                            borderWidth:
-                                0,
+                            borderWidth:0,
 
-                            borderRadius:
-                                2,
+                            borderRadius:2,
 
-                            barPercentage:
-                                .70,
+                            barPercentage:.68,
 
-                            categoryPercentage:
-                                .82,
+                            categoryPercentage:.82,
 
+
+                            /*
+                               IMPORTANTE:
+                               ChartDataLabels desligado.
+                            */
 
                             datalabels:{
-
-                                display:true,
-
-                                anchor:"end",
-
-                                align:"end",
-
-                                offset:4,
-
-                                clamp:true,
-
-                                clip:false,
-
-                                color:"#1f2937",
-
-                                font:{
-
-                                    family:"Segoe UI",
-
-                                    size:10,
-
-                                    weight:"700"
-                                },
-
-                                formatter:function(valor){
-
-                                    if(sufixo === "%"){
-
-                                        return `${Math.round(
-                                            numero(valor)
-                                        )}%`;
-                                    }
-
-
-                                    return formatarInteiro(
-                                        valor
-                                    );
-                                }
+                                display:false
                             }
                         }]
                     },
+
+
+                    /*
+                       Apenas nosso plugin escreve
+                       os números das barras.
+                    */
+
+                    plugins:[
+                        rotuloBarraFornecedores
+                    ],
 
 
                     options:{
@@ -2234,13 +2329,13 @@
 
                             padding:{
 
-                                top:6,
+                                top:5,
 
-                                right:64,
+                                right:30,
 
-                                bottom:6,
+                                bottom:5,
 
-                                left:4
+                                left:0
                             }
                         },
 
@@ -2248,15 +2343,28 @@
                         plugins:{
 
                             legend:{
-
                                 display:false
+                            },
+
+
+                            /*
+                               Também desliga explicitamente
+                               qualquer DataLabels global.
+                            */
+
+                            datalabels:{
+                                display:false
+                            },
+
+
+                            rotuloBarraFornecedoresUnico:{
+                                sufixo:sufixo
                             },
 
 
                             tooltip:{
 
                                 displayColors:false,
-
 
                                 callbacks:{
 
@@ -2275,9 +2383,11 @@
                                             sufixo === "%"
                                         ){
 
-                                            return ` ${formatarPercentual(
-                                                context.raw
-                                            )}`;
+                                            return ` ${Math.round(
+                                                numero(
+                                                    context.raw
+                                                )
+                                            )}%`;
                                         }
 
 
@@ -2296,11 +2406,8 @@
 
                                 beginAtZero:true,
 
-                                suggestedMax:
-                                    maximo,
-
                                 max:
-                                    maximo,
+                                    limiteX,
 
 
                                 grid:{
@@ -2308,13 +2415,11 @@
                                     color:
                                         CORES.grade,
 
-                                    drawBorder:
-                                        false
+                                    drawBorder:false
                                 },
 
 
                                 border:{
-
                                     display:false
                                 },
 
@@ -2332,10 +2437,9 @@
                                         family:
                                             "Segoe UI",
 
-                                        size:10,
+                                        size:9,
 
-                                        weight:
-                                            "600"
+                                        weight:"600"
                                     }
                                 }
                             },
@@ -2344,16 +2448,11 @@
                             y:{
 
                                 grid:{
-
-                                    display:false,
-
-                                    drawBorder:
-                                        false
+                                    display:false
                                 },
 
 
                                 border:{
-
                                     display:false
                                 },
 
@@ -2365,7 +2464,7 @@
 
                                     autoSkip:false,
 
-                                    padding:8,
+                                    padding:7,
 
 
                                     font:{
@@ -2373,16 +2472,13 @@
                                         family:
                                             "Segoe UI",
 
-                                        size:10,
+                                        size:9,
 
-                                        weight:
-                                            "600"
+                                        weight:"600"
                                     },
 
 
-                                    callback:function(
-                                        value
-                                    ){
+                                    callback:function(value){
 
                                         const label =
                                             String(
@@ -2394,13 +2490,13 @@
 
                                         if(
                                             label.length >
-                                            30
+                                            27
                                         ){
 
                                             return (
                                                 label.slice(
                                                     0,
-                                                    30
+                                                    27
                                                 ) +
                                                 "…"
                                             );
@@ -2415,7 +2511,7 @@
                                 afterFit(scale){
 
                                     scale.width =
-                                        170;
+                                        145;
                                 }
                             }
                         }
@@ -2462,14 +2558,16 @@
         };
 
 
-        const fornecedoresValidos =
-            estado.fornecedores.filter(
-                item =>
-                    item.processos > 0
-            );
+        /*
+           IMPORTANTE:
 
+           Aqui entram TODOS os fornecedores
+           da lista "avaliados".
 
-        fornecedoresValidos.forEach(
+           Não filtramos mais processos > 0.
+        */
+
+        estado.fornecedores.forEach(
             item => {
 
                 const slug =
@@ -2487,16 +2585,79 @@
         );
 
 
+        const configuracoes = [
+
+            {
+                slug:"excelente",
+                label:"Excelente",
+                faixa:"95% - 100%",
+                cor:
+                    CLASSIFICACOES
+                        .excelente
+                        .cor
+            },
+
+            {
+                slug:"muito-bom",
+                label:"Muito bom",
+                faixa:"90% - 94%",
+                cor:
+                    CLASSIFICACOES
+                        .muitoBom
+                        .cor
+            },
+
+            {
+                slug:"atencao",
+                label:"Atenção",
+                faixa:"80% - 89%",
+                cor:
+                    CLASSIFICACOES
+                        .atencao
+                        .cor
+            },
+
+            {
+                slug:"ruim",
+                label:"Ruim",
+                faixa:"70% - 79%",
+                cor:
+                    CLASSIFICACOES
+                        .ruim
+                        .cor
+            },
+
+            {
+                slug:"critico",
+                label:"Crítico",
+                faixa:"< 70%",
+                cor:
+                    CLASSIFICACOES
+                        .critico
+                        .cor
+            }
+        ];
+
+
         const dados =
-            ORDEM_CLASSIFICACOES.map(
-                slug =>
-                    totais[slug]
+            configuracoes.map(
+                item =>
+                    totais[
+                        item.slug
+                    ]
             );
 
 
-        if(
-            !dados.some(Boolean)
-        ){
+        const total =
+            dados.reduce(
+                (soma,valor) =>
+                    soma +
+                    numero(valor),
+                0
+            );
+
+
+        if(!total){
 
             mostrarAvisoCanvas(
                 canvas,
@@ -2505,56 +2666,6 @@
 
             return;
         }
-
-
-        const rotulos = [
-
-            "Excelente (95% - 100%)",
-
-            "Muito bom (90% - 94%)",
-
-            "Atenção (80% - 89%)",
-
-            "Ruim (70% - 79%)",
-
-            "Crítico (< 70%)"
-        ];
-
-
-        const cores = [
-
-            CLASSIFICACOES
-                .excelente
-                .cor,
-
-            CLASSIFICACOES
-                .muitoBom
-                .cor,
-
-            CLASSIFICACOES
-                .atencao
-                .cor,
-
-            CLASSIFICACOES
-                .ruim
-                .cor,
-
-            CLASSIFICACOES
-                .critico
-                .cor
-        ];
-
-
-        const total =
-            dados.reduce(
-                (
-                    soma,
-                    valor
-                ) =>
-                    soma +
-                    numero(valor),
-                0
-            );
 
 
         const grafico =
@@ -2568,7 +2679,10 @@
                     data:{
 
                         labels:
-                            rotulos,
+                            configuracoes.map(
+                                item =>
+                                    item.label
+                            ),
 
 
                         datasets:[{
@@ -2577,19 +2691,25 @@
                                 dados,
 
                             backgroundColor:
-                                cores,
+                                configuracoes.map(
+                                    item =>
+                                        item.cor
+                                ),
 
                             borderColor:
                                 "#ffffff",
 
-                            borderWidth:
-                                2,
+                            borderWidth:2,
 
-                            hoverOffset:
-                                4,
+                            hoverOffset:3,
+
+
+                            /*
+                               Nada escrito sobre
+                               a própria rosca.
+                            */
 
                             datalabels:{
-
                                 display:false
                             }
                         }]
@@ -2602,13 +2722,12 @@
 
                         maintainAspectRatio:false,
 
-                        cutout:"62%",
+                        cutout:"58%",
 
 
                         animation:{
 
-                            duration:
-                                650,
+                            duration:650,
 
                             easing:
                                 "easeOutQuart"
@@ -2619,13 +2738,13 @@
 
                             padding:{
 
-                                top:8,
+                                top:4,
 
-                                right:8,
+                                right:5,
 
-                                bottom:8,
+                                bottom:4,
 
-                                left:8
+                                left:5
                             }
                         },
 
@@ -2633,12 +2752,13 @@
                         plugins:{
 
                             datalabels:{
-
                                 display:false
                             },
 
 
                             legend:{
+
+                                display:true,
 
                                 position:"right",
 
@@ -2647,23 +2767,17 @@
 
                                 labels:{
 
-                                    color:
-                                        "#1f2937",
+                                    color:"#1f2937",
 
-                                    boxWidth:
-                                        11,
+                                    usePointStyle:true,
 
-                                    boxHeight:
-                                        11,
+                                    pointStyle:"circle",
 
-                                    padding:
-                                        11,
+                                    boxWidth:8,
 
-                                    usePointStyle:
-                                        true,
+                                    boxHeight:8,
 
-                                    pointStyle:
-                                        "circle",
+                                    padding:10,
 
 
                                     font:{
@@ -2671,30 +2785,15 @@
                                         family:
                                             "Segoe UI",
 
-                                        size:
-                                            10,
+                                        size:9,
 
-                                        weight:
-                                            "600"
+                                        weight:"600"
                                     },
 
 
-                                    generateLabels(
-                                        chart
-                                    ){
+                                    generateLabels(chart){
 
-                                        const padrao =
-                                            window.Chart
-                                                .defaults
-                                                .plugins
-                                                .legend
-                                                .labels
-                                                .generateLabels(
-                                                    chart
-                                                );
-
-
-                                        return padrao.map(
+                                        return configuracoes.map(
                                             (
                                                 item,
                                                 indice
@@ -2718,14 +2817,55 @@
                                                         : 0;
 
 
-                                                item.text =
-                                                    `${rotulos[indice]}  ${valor} (${percentual}%)`;
+                                                return {
 
+                                                    text:
+                                                        `${item.label} (${item.faixa})  ${valor} (${percentual}%)`,
 
-                                                return item;
+                                                    fillStyle:
+                                                        item.cor,
+
+                                                    strokeStyle:
+                                                        item.cor,
+
+                                                    lineWidth:
+                                                        0,
+
+                                                    pointStyle:
+                                                        "circle",
+
+                                                    hidden:
+                                                        false,
+
+                                                    index:
+                                                        indice
+                                                };
                                             }
                                         );
                                     }
+                                },
+
+
+                                onClick(
+                                    evento,
+                                    item,
+                                    legend
+                                ){
+
+                                    const indice =
+                                        item.index;
+
+
+                                    const chart =
+                                        legend.chart;
+
+
+                                    chart.toggleDataVisibility(
+                                        indice
+                                    );
+
+
+                                    chart.update();
                                 }
                             },
 
@@ -2734,9 +2874,11 @@
 
                                 callbacks:{
 
-                                    label(
-                                        context
-                                    ){
+                                    label(context){
+
+                                        const indice =
+                                            context.dataIndex;
+
 
                                         const valor =
                                             numero(
@@ -2753,9 +2895,7 @@
                                                     ) *
                                                     100
                                                 )
-                                                    .toFixed(
-                                                        1
-                                                    )
+                                                    .toFixed(1)
                                                     .replace(
                                                         ".",
                                                         ","
@@ -2763,9 +2903,15 @@
                                                 : "0";
 
 
+                                        const item =
+                                            configuracoes[
+                                                indice
+                                            ];
+
+
                                         return (
-                                            ` ${context.label}: ` +
-                                            `${valor} ` +
+                                            ` ${item.label}: ` +
+                                            `${valor} fornecedores ` +
                                             `(${percentual}%)`
                                         );
                                     }
@@ -2782,7 +2928,6 @@
             grafico
         );
     }
-
 
     /* ======================================================
        AVISOS NOS GRÁFICOS
