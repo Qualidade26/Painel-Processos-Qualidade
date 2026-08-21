@@ -247,7 +247,6 @@
 
         /*
            Permite:
-
            0.95
            95
            "95%"
@@ -589,13 +588,9 @@
                 : null,
 
             /*
-               IMPORTANTE:
-
-               avaliados precisa vir antes
-               de ranking.
-
-               O ranking possui somente
-               dados resumidos.
+               avaliados precisa vir antes de ranking,
+               porque ranking pode conter somente
+               informações resumidas.
             */
 
             raizDados?.avaliados,
@@ -885,7 +880,9 @@
             </div>
         `;
     }
-       /* ======================================================
+
+
+    /* ======================================================
        CRIAÇÃO DOS KPIs
     ====================================================== */
 
@@ -917,9 +914,7 @@
             </article>
         `;
     }
-
-
-    /* ======================================================
+       /* ======================================================
        MONTAGEM DA ESTRUTURA
     ====================================================== */
 
@@ -1941,6 +1936,7 @@
         estado.graficos.clear();
     }
 
+
     /* ======================================================
        PREPARAR DADOS DOS GRÁFICOS
     ====================================================== */
@@ -2172,41 +2168,49 @@
                                 .82,
 
 
-                            /*
-                               Evita duplicação caso
-                               ChartDataLabels esteja
-                               registrado globalmente.
-                            */
-
                             datalabels:{
-    display:true,
 
-    anchor:"end",
-    align:"end",
+                                display:true,
 
-    offset:4,
-    clamp:true,
-    clip:false,
+                                anchor:"end",
 
-    color:"#1f2937",
+                                align:"end",
 
-    font:{
-        family:"Segoe UI",
-        size:10,
-        weight:"700"
-    },
+                                offset:4,
 
-    formatter:function(valor){
+                                clamp:true,
 
-        if(sufixo === "%"){
-            return `${Math.round(valor)}%`;
-        }
+                                clip:false,
 
-        return formatarInteiro(valor);
-    }
-}
+                                color:"#1f2937",
+
+                                font:{
+
+                                    family:"Segoe UI",
+
+                                    size:10,
+
+                                    weight:"700"
+                                },
+
+                                formatter:function(valor){
+
+                                    if(sufixo === "%"){
+
+                                        return `${Math.round(
+                                            numero(valor)
+                                        )}%`;
+                                    }
+
+
+                                    return formatarInteiro(
+                                        valor
+                                    );
+                                }
+                            }
                         }]
                     },
+
 
                     options:{
 
@@ -2240,158 +2244,181 @@
                             }
                         },
 
-plugins:{
 
-    legend:{
-        display:false
-    },
+                        plugins:{
 
-    tooltip:{
+                            legend:{
 
-        displayColors:false,
-
-        callbacks:{
-
-            title(context){
-
-                return (
-                    context[0]?.label ||
-                    ""
-                );
-            },
-
-            label(context){
-
-                if(sufixo === "%"){
-
-                    return ` ${formatarPercentual(
-                        context.raw
-                    )}`;
-                }
-
-                return ` ${formatarInteiro(
-                    context.raw
-                )}`;
-            }
-        }
-    }
-
-},
+                                display:false
+                            },
 
 
-scales:{
+                            tooltip:{
 
-    x:{
-
-        beginAtZero:true,
-
-        suggestedMax:
-            maximo,
-
-        max:
-            maximo,
-
-        grid:{
-
-            color:
-                CORES.grade,
-
-            drawBorder:
-                false
-        },
-
-        border:{
-
-            display:false
-        },
-
-        ticks:{
-
-            color:
-                CORES.texto,
-
-            precision:0,
-
-            font:{
-
-                family:
-                    "Segoe UI",
-
-                size:10,
-
-                weight:
-                    "600"
-            }
-        }
-    },
+                                displayColors:false,
 
 
-    y:{
+                                callbacks:{
 
-        grid:{
+                                    title(context){
 
-            display:false,
+                                        return (
+                                            context[0]?.label ||
+                                            ""
+                                        );
+                                    },
 
-            drawBorder:
-                false
-        },
 
-        border:{
+                                    label(context){
 
-            display:false
-        },
+                                        if(
+                                            sufixo === "%"
+                                        ){
 
-        ticks:{
+                                            return ` ${formatarPercentual(
+                                                context.raw
+                                            )}`;
+                                        }
 
-            color:
-                "#1f2937",
 
-            autoSkip:false,
+                                        return ` ${formatarInteiro(
+                                            context.raw
+                                        )}`;
+                                    }
+                                }
+                            }
+                        },
 
-            padding:8,
 
-            font:{
+                        scales:{
 
-                family:
-                    "Segoe UI",
+                            x:{
 
-                size:10,
+                                beginAtZero:true,
 
-                weight:
-                    "600"
-            },
+                                suggestedMax:
+                                    maximo,
 
-            callback:function(value){
+                                max:
+                                    maximo,
 
-                const label =
-                    String(
-                        this.getLabelForValue(
-                            value
-                        ) ?? ""
-                    );
 
-                if(label.length > 30){
+                                grid:{
 
-                    return (
-                        label.slice(
-                            0,
-                            30
-                        ) +
-                        "…"
-                    );
-                }
+                                    color:
+                                        CORES.grade,
 
-                return label;
-            }
-        },
+                                    drawBorder:
+                                        false
+                                },
 
-        afterFit(scale){
 
-            scale.width =
-                170;
-        }
-    }
-}
+                                border:{
+
+                                    display:false
+                                },
+
+
+                                ticks:{
+
+                                    color:
+                                        CORES.texto,
+
+                                    precision:0,
+
+
+                                    font:{
+
+                                        family:
+                                            "Segoe UI",
+
+                                        size:10,
+
+                                        weight:
+                                            "600"
+                                    }
+                                }
+                            },
+
+
+                            y:{
+
+                                grid:{
+
+                                    display:false,
+
+                                    drawBorder:
+                                        false
+                                },
+
+
+                                border:{
+
+                                    display:false
+                                },
+
+
+                                ticks:{
+
+                                    color:
+                                        "#1f2937",
+
+                                    autoSkip:false,
+
+                                    padding:8,
+
+
+                                    font:{
+
+                                        family:
+                                            "Segoe UI",
+
+                                        size:10,
+
+                                        weight:
+                                            "600"
+                                    },
+
+
+                                    callback:function(
+                                        value
+                                    ){
+
+                                        const label =
+                                            String(
+                                                this.getLabelForValue(
+                                                    value
+                                                ) ?? ""
+                                            );
+
+
+                                        if(
+                                            label.length >
+                                            30
+                                        ){
+
+                                            return (
+                                                label.slice(
+                                                    0,
+                                                    30
+                                                ) +
+                                                "…"
+                                            );
+                                        }
+
+
+                                        return label;
+                                    }
+                                },
+
+
+                                afterFit(scale){
+
+                                    scale.width =
+                                        170;
+                                }
+                            }
+                        }
                     }
                 }
             );
@@ -2434,11 +2461,6 @@ scales:{
             critico:0
         };
 
-
-        /*
-           Ignora fornecedores sem
-           movimentação no ano.
-        */
 
         const fornecedoresValidos =
             estado.fornecedores.filter(
@@ -2540,8 +2562,7 @@ scales:{
                 canvas,
                 {
 
-                    type:
-                        "doughnut",
+                    type:"doughnut",
 
 
                     data:{
@@ -2567,12 +2588,6 @@ scales:{
                             hoverOffset:
                                 4,
 
-
-                            /*
-                               Impede valores
-                               sobrepostos na rosca.
-                            */
-
                             datalabels:{
 
                                 display:false
@@ -2587,14 +2602,7 @@ scales:{
 
                         maintainAspectRatio:false,
 
-
-                        /*
-                           Centro maior,
-                           visual mais limpo.
-                        */
-
-                        cutout:
-                            "62%",
+                        cutout:"62%",
 
 
                         animation:{
@@ -2624,11 +2632,6 @@ scales:{
 
                         plugins:{
 
-                            /*
-                               Desliga plugin global
-                               de datalabels.
-                            */
-
                             datalabels:{
 
                                 display:false
@@ -2637,11 +2640,9 @@ scales:{
 
                             legend:{
 
-                                position:
-                                    "right",
+                                position:"right",
 
-                                align:
-                                    "center",
+                                align:"center",
 
 
                                 labels:{
@@ -2777,9 +2778,7 @@ scales:{
 
 
         estado.graficos.set(
-
             "grafico-fornecedores-classificacao",
-
             grafico
         );
     }
@@ -2894,11 +2893,6 @@ scales:{
         }
 
 
-        /*
-           Destrói gráficos antigos
-           antes de recriar a página.
-        */
-
         destruirGraficosFornecedores();
 
 
@@ -2940,42 +2934,19 @@ scales:{
             null;
 
 
-        /*
-           Montagem da interface.
-        */
-
         montarEstrutura(
             raiz
         );
 
 
-        /*
-           Indicadores superiores.
-        */
-
         preencherIndicadores();
 
-
-        /*
-           Eventos.
-        */
 
         configurarEventos();
 
 
-        /*
-           Preenche tabela e
-           seleciona primeiro item.
-        */
-
         aplicarFiltros();
 
-
-        /*
-           Gráficos somente depois
-           que o DOM terminar de
-           montar os canvases.
-        */
 
         requestAnimationFrame(
             () => {
@@ -3037,12 +3008,6 @@ scales:{
             return;
         }
 
-
-        /*
-           Mantém compatibilidade com
-           diferentes formas de expor
-           os dados no painel.
-        */
 
         const fonte =
 
