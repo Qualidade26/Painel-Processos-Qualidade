@@ -160,12 +160,12 @@
 .fornecedores-graficos{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
+    gap:14px;
 }
 
 .fornecedores-panel{
     min-width:0;
-    padding:14px 16px 12px;
+    padding:16px 20px 14px;
     border:1px solid var(--forn-linha);
     border-radius:10px;
     background:#fff;
@@ -173,7 +173,7 @@
 }
 
 .fornecedores-panel__titulo{
-    margin:0 0 8px;
+    margin:0 0 10px;
     color:var(--forn-azul-escuro);
     font-size:14px;
     font-weight:800;
@@ -184,12 +184,12 @@
 .fornecedores-chart-box{
     position:relative;
     width:100%;
-    height:245px;
-    min-height:0;
+    height:290px;
+    min-height:290px;
 }
 
 .fornecedores-chart-box--rosca{
-    height:260px;
+    height:290px;
 }
 
 .fornecedores-chart-box canvas{
