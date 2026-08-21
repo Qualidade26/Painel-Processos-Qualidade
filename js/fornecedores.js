@@ -2043,7 +2043,7 @@ function criarGraficoBarras(
                     }
                 }]
             },
-            plugins:[rotulosBarraFornecedores],
+            
             options:{
                 indexAxis:"y",
                 responsive:true,
