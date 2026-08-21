@@ -2132,23 +2132,25 @@ function criarGraficoBarras(
                                 weight:"700"
                             },
                             callback:function(value){
-                                const label = String(
-                                    this.getLabelForValue(value) ?? ""
-                                );
-                                if(label.length > 28){
-                                    return `${label.slice(0,28)}…`;
-                                }
-                                return label;
-                            }
-                        },
-                        afterFit(scale){
-                            scale.width = 160;
-                        }
-                    }
-                }
-            }
-        }
+    const label = String(
+        this.getLabelForValue(value) ?? ""
     );
+
+    if(label.length > 42){
+        return `${label.slice(0,42)}…`;
+    }
+
+    return label;
+}
+},
+afterFit(scale){
+    scale.width = 245;
+}
+}
+}
+}
+}
+);
     estado.graficos.set(
         idCanvas,
         grafico
