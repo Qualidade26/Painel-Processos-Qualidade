@@ -15,6 +15,7 @@
    ├── totalreclamacao
    ├── indicemedioavaliacao
    ├── indicadores
+   ├── origens
    ├── avaliados
    ├── ranking
    └── top10Rnc
@@ -39,6 +40,7 @@
         laranja:"#ff7a00",
         vermelho:"#f52f3e",
         vermelhoEscuro:"#b91c1c",
+        roxo:"#6d28d9",
 
         texto:"#1f2937",
         textoSecundario:"#64748b",
@@ -897,6 +899,30 @@
                 </svg>
             `,
 
+            importacao:`
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M28 7h8v8h8v8H20v-8h8V7Zm-14 20h36l-4 16H18l-4-16Zm-5 19c4 0 4 3 8 3s4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3 4-3 8-3v6c-4 0-4 3-8 3s-4-3-8-3-4 3-8 3-4-3-8-3-4 3-8 3-4-3-8-3v-3Z"/>
+                </svg>
+            `,
+
+            naoConformidade:`
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M29.1 7.7a3.4 3.4 0 0 1 5.8 0l25 43.2A3.4 3.4 0 0 1 57 56H7a3.4 3.4 0 0 1-2.9-5.1l25-43.2ZM29 22v17h6V22h-6Zm0 23v6h6v-6h-6Z"/>
+                </svg>
+            `,
+
+            reclamacao:`
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M32 7C16.5 7 4 17.5 4 30.5c0 7.4 4.1 14.1 10.6 18.4L11 58l11.8-5.5c2.9.9 6 1.5 9.2 1.5 15.5 0 28-10.5 28-23.5S47.5 7 32 7Zm-3 11h6v18h-6V18Zm0 23h6v6h-6v-6Z"/>
+                </svg>
+            `,
+
+            ocorrencias:`
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M15 7h25l11 11v17.2a17 17 0 0 0-6-1.1V22H36V13H21v38h12.2a17 17 0 0 0 3.1 6H15V7Zm30 31a13 13 0 1 1 0 26 13 13 0 0 1 0-26Zm-2 18.2 8.8-8.8-3.6-3.6-5.2 5.2-2.8-2.8-3.6 3.6 6.4 6.4Z"/>
+                </svg>
+            `,
+
             estrela:`
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="m12 2.5 2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.31l-5.8 3.05 1.11-6.46-4.7-4.58 6.49-.94L12 2.5Z"/>
@@ -981,11 +1007,36 @@
         const origens = estado.resumo?.origens || {};
 
         const itens = [
-            { chave:"importacao", label:"Importação", cor:CORES.azul },
-            { chave:"retrabalho", label:"Retrabalho", cor:CORES.laranja },
-            { chave:"naoConformidade", label:"Não conformidade", cor:CORES.amarelo },
-            { chave:"reclamacao", label:"Reclamação", cor:"#8b5cf6" },
-            { chave:"ocorrencias", label:"Ocorrências", cor:CORES.verde }
+            {
+                chave:"importacao",
+                label:"Importação",
+                cor:CORES.azul,
+                icone:"importacao"
+            },
+            {
+                chave:"retrabalho",
+                label:"Retrabalho",
+                cor:CORES.laranja,
+                icone:"ferramenta"
+            },
+            {
+                chave:"naoConformidade",
+                label:"Não conformidade",
+                cor:CORES.amarelo,
+                icone:"naoConformidade"
+            },
+            {
+                chave:"reclamacao",
+                label:"Reclamação",
+                cor:CORES.roxo,
+                icone:"reclamacao"
+            },
+            {
+                chave:"ocorrencias",
+                label:"Ocorrências",
+                cor:CORES.verde,
+                icone:"ocorrencias"
+            }
         ];
 
         const total = itens.reduce(
@@ -1001,15 +1052,20 @@
                 : 0;
 
             return `
-                <div class="fornecedores-origem-item">
-                    <div
-                        class="fornecedores-origem-item__topo"
-                        style="--origem-cor:${item.cor}"
-                    >
-                        <span class="fornecedores-origem-item__marcador"></span>
+                <div
+                    class="fornecedores-origem-item"
+                    style="--origem-cor:${item.cor}"
+                >
+                    <div class="fornecedores-origem-item__topo">
+
+                        <span class="fornecedores-origem-item__icone" aria-hidden="true">
+                            ${iconeSvg(item.icone)}
+                        </span>
+
                         <span class="fornecedores-origem-item__label">
                             ${item.label}
                         </span>
+
                     </div>
 
                     <strong class="fornecedores-origem-item__valor">
@@ -1027,7 +1083,7 @@
             <article class="fornecedores-panel fornecedores-panel--origem">
 
                 <h3 class="fornecedores-panel__titulo">
-                    DISTRIBUIÇÃO POR ORIGEM
+                    PROCESSOS POR TIPO
                 </h3>
 
                 <div class="fornecedores-origem-grid">
@@ -1035,7 +1091,7 @@
                 </div>
 
                 <div class="fornecedores-origem-total">
-                    Total de entradas:
+                    Total de processos:
                     <strong>${formatarInteiro(total)} (100%)</strong>
                 </div>
 
@@ -2123,7 +2179,7 @@
             const sufixo = options?.sufixo || "";
 
             ctx.save();
-            ctx.font = "700 11px Segoe UI, Arial, sans-serif";
+            ctx.font = "800 12px Segoe UI, Arial, sans-serif";
             ctx.fillStyle = "#172033";
             ctx.textBaseline = "middle";
             ctx.textAlign = "left";
@@ -2181,7 +2237,7 @@
             ctx.save();
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.font = "800 12px Segoe UI, Arial, sans-serif";
+            ctx.font = "800 13px Segoe UI, Arial, sans-serif";
             ctx.fillStyle = "#ffffff";
 
             meta.data.forEach((arco,indice) => {
@@ -2194,7 +2250,6 @@
 
                 const percentual = Math.round((valor / total) * 100);
 
-                // Evita poluir visualmente fatias muito pequenas.
                 if(percentual < 5){
                     return;
                 }
@@ -2208,10 +2263,35 @@
                 );
             });
 
+            const primeiroArco = meta.data.find(Boolean);
+
+            if(primeiroArco){
+
+                const centro = primeiroArco.getProps(
+                    ["x","y"],
+                    true
+                );
+
+                ctx.fillStyle = "#0f1b3d";
+                ctx.font = "800 30px Segoe UI, Arial, sans-serif";
+                ctx.fillText(
+                    "100%",
+                    centro.x,
+                    centro.y - 9
+                );
+
+                ctx.font = "800 15px Segoe UI, Arial, sans-serif";
+                ctx.fillText(
+                    "TOTAL",
+                    centro.x,
+                    centro.y + 19
+                );
+            }
+
             ctx.restore();
         },
 
-        afterDraw(chart,args,options){
+        afterDraw(chart){
 
             if(chart.config.type !== "doughnut"){
                 return;
@@ -2235,14 +2315,14 @@
             const ctx = chart.ctx;
             const x = legend.left + 2;
             const y = Math.min(
-                chart.height - 12,
-                legend.bottom + 18
+                chart.height - 10,
+                legend.bottom + 22
             );
 
             ctx.save();
             ctx.textAlign = "left";
             ctx.textBaseline = "middle";
-            ctx.font = "700 11px Segoe UI, Arial, sans-serif";
+            ctx.font = "800 12px Segoe UI, Arial, sans-serif";
             ctx.fillStyle = "#172033";
             ctx.fillText(
                 `Total de fornecedores: ${formatarInteiro(total)}`,
@@ -2379,8 +2459,8 @@
                         borderWidth:0,
                         borderRadius:1,
                         borderSkipped:false,
-                        barThickness:14,
-                        maxBarThickness:16,
+                        barThickness:16,
+                        maxBarThickness:18,
                         categoryPercentage:.72,
                         datalabels:{
                             display:false
@@ -2396,7 +2476,7 @@
                     indexAxis:"y",
                     responsive:true,
                     maintainAspectRatio:false,
-                    devicePixelRatio:2,
+                    devicePixelRatio:3,
 
                     animation:{
                         duration:650,
@@ -2406,7 +2486,7 @@
                     layout:{
                         padding:{
                             top:8,
-                            right:44,
+                            right:52,
                             bottom:2,
                             left:0
                         }
@@ -2460,7 +2540,7 @@
                                 font:{
                                     family:"Segoe UI",
                                     size:11,
-                                    weight:"600"
+                                    weight:"700"
                                 }
                             },
 
@@ -2481,8 +2561,8 @@
                                 padding:7,
                                 font:{
                                     family:"Segoe UI",
-                                    size:10,
-                                    weight:"500"
+                                    size:11,
+                                    weight:"600"
                                 }
                             }
                         },
@@ -2503,8 +2583,8 @@
 
                                 font:{
                                     family:"Segoe UI",
-                                    size:10,
-                                    weight:"500"
+                                    size:11,
+                                    weight:"700"
                                 },
 
                                 callback:function(value){
@@ -2648,9 +2728,9 @@
                 options:{
                     responsive:true,
                     maintainAspectRatio:false,
-                    devicePixelRatio:2,
-                    cutout:"58%",
-                    radius:"88%",
+                    devicePixelRatio:3,
+                    cutout:"54%",
+                    radius:"96%",
 
                     animation:{
                         duration:650,
@@ -2661,7 +2741,7 @@
                         padding:{
                             top:4,
                             right:4,
-                            bottom:24,
+                            bottom:28,
                             left:4
                         }
                     },
@@ -2679,14 +2759,14 @@
                             labels:{
                                 color:"#1f2937",
                                 usePointStyle:false,
-                                boxWidth:12,
-                                boxHeight:12,
-                                padding:14,
+                                boxWidth:13,
+                                boxHeight:13,
+                                padding:16,
 
                                 font:{
                                     family:"Segoe UI",
-                                    size:10,
-                                    weight:"600"
+                                    size:11,
+                                    weight:"700"
                                 },
 
                                 generateLabels(){
@@ -3049,4 +3129,3 @@
 
 
 })();
-
