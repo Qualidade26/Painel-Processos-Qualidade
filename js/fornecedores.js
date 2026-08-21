@@ -1937,7 +1937,7 @@
     }
 
     /* ======================================================
-       PLUGIN EXCLUSIVO — VALOR NO FINAL DA BARRA
+       PLUGINS EXCLUSIVOS DOS GRÁFICOS
     ====================================================== */
 
     const rotuloBarraFornecedores = {
@@ -1946,79 +1946,150 @@
 
         afterDatasetsDraw(chart,args,options){
 
-            if(chart.config.type !== "bar"){
+            if(
+                chart.config.type !== "bar" ||
+                chart.options.indexAxis !== "y"
+            ){
                 return;
             }
 
-            if(chart.options.indexAxis !== "y"){
-                return;
-            }
-
-
-            const dataset =
-                chart.data.datasets[0];
-
-
-            const meta =
-                chart.getDatasetMeta(0);
-
+            const dataset = chart.data.datasets[0];
+            const meta = chart.getDatasetMeta(0);
 
             if(!dataset || !meta){
                 return;
             }
 
-
-            const ctx =
-                chart.ctx;
-
-
-            const sufixo =
-                options?.sufixo || "";
-
+            const ctx = chart.ctx;
+            const sufixo = options?.sufixo || "";
 
             ctx.save();
+            ctx.font = "700 11px Segoe UI, Arial, sans-serif";
+            ctx.fillStyle = "#172033";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "left";
 
-            ctx.font =
-                "700 10px Segoe UI, Arial, sans-serif";
+            meta.data.forEach((barra,indice) => {
 
-            ctx.fillStyle =
-                "#111827";
+                const valor = numero(dataset.data[indice]);
 
-            ctx.textBaseline =
-                "middle";
+                const texto = sufixo === "%"
+                    ? `${Math.round(valor)}%`
+                    : formatarInteiro(valor);
 
-            ctx.textAlign =
-                "left";
+                const posicao = barra.tooltipPosition();
 
+                ctx.fillText(
+                    texto,
+                    posicao.x + 7,
+                    posicao.y
+                );
+            });
 
-            meta.data.forEach(
-                (barra,indice) => {
-
-                    const valor =
-                        numero(
-                            dataset.data[indice]
-                        );
-
-
-                    const texto =
-                        sufixo === "%"
-                            ? `${Math.round(valor)}%`
-                            : formatarInteiro(valor);
+            ctx.restore();
+        }
+    };
 
 
-                    const posicao =
-                        barra.tooltipPosition();
+    const rotuloRoscaFornecedores = {
 
+        id:"rotuloRoscaFornecedores",
 
-                    ctx.fillText(
-                        texto,
-                        posicao.x + 6,
-                        posicao.y
-                    );
-                }
+        afterDatasetsDraw(chart){
+
+            if(chart.config.type !== "doughnut"){
+                return;
+            }
+
+            const dataset = chart.data.datasets[0];
+            const meta = chart.getDatasetMeta(0);
+
+            if(!dataset || !meta){
+                return;
+            }
+
+            const total = dataset.data.reduce(
+                (soma,valor) => soma + numero(valor),
+                0
             );
 
+            if(!total){
+                return;
+            }
 
+            const ctx = chart.ctx;
+
+            ctx.save();
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.font = "800 12px Segoe UI, Arial, sans-serif";
+            ctx.fillStyle = "#ffffff";
+
+            meta.data.forEach((arco,indice) => {
+
+                const valor = numero(dataset.data[indice]);
+
+                if(!valor){
+                    return;
+                }
+
+                const percentual = Math.round((valor / total) * 100);
+
+                // Evita poluir visualmente fatias muito pequenas.
+                if(percentual < 5){
+                    return;
+                }
+
+                const ponto = arco.getCenterPoint();
+
+                ctx.fillText(
+                    `${percentual}%`,
+                    ponto.x,
+                    ponto.y
+                );
+            });
+
+            ctx.restore();
+        },
+
+        afterDraw(chart,args,options){
+
+            if(chart.config.type !== "doughnut"){
+                return;
+            }
+
+            const total = chart.data.datasets[0].data.reduce(
+                (soma,valor) => soma + numero(valor),
+                0
+            );
+
+            if(!total){
+                return;
+            }
+
+            const legend = chart.legend;
+
+            if(!legend){
+                return;
+            }
+
+            const ctx = chart.ctx;
+            const x = legend.left + 2;
+            const y = Math.min(
+                chart.height - 12,
+                legend.bottom + 18
+            );
+
+            ctx.save();
+            ctx.textAlign = "left";
+            ctx.textBaseline = "middle";
+            ctx.font = "700 11px Segoe UI, Arial, sans-serif";
+            ctx.fillStyle = "#172033";
+            ctx.fillText(
+                `Total de fornecedores: ${formatarInteiro(total)}`,
+                x,
+                y
+            );
             ctx.restore();
         }
     };
@@ -2032,11 +2103,7 @@
 
         destruirGraficosFornecedores();
 
-
-        if(
-            typeof window.Chart ===
-            "undefined"
-        ){
+        if(typeof window.Chart === "undefined"){
 
             mostrarAvisoGraficos(
                 "Chart.js não foi carregado."
@@ -2048,123 +2115,64 @@
 
         /* ==================================================
            RANKING DE AVALIAÇÃO
+           Mesmo enquadramento da imagem-modelo.
         ================================================== */
 
-        const ranking =
-            [...estado.fornecedores]
-
-            .filter(
-                item =>
-                    item.processos > 0
+        const ranking = [...estado.fornecedores]
+            .filter(item => item.processos > 0)
+            .sort((a,b) =>
+                b.indice - a.indice ||
+                b.processos - a.processos ||
+                b.produtos - a.produtos
             )
-
-            .sort(
-                (a,b) =>
-
-                    b.indice -
-                    a.indice ||
-
-                    b.processos -
-                    a.processos ||
-
-                    b.produtos -
-                    a.produtos
-            )
-
-            .slice(
-                0,
-                10
-            );
+            .slice(0,8);
 
 
         /* ==================================================
-           MAIS RNCs
+           FORNECEDORES COM MAIS RNCs
         ================================================== */
 
-        const maisRncs =
-            [...estado.fornecedores]
-
-            .filter(
-                item =>
-                    item.rncs > 0
+        const maisRncs = [...estado.fornecedores]
+            .filter(item => item.rncs > 0)
+            .sort((a,b) =>
+                b.rncs - a.rncs ||
+                b.processos - a.processos
             )
-
-            .sort(
-                (a,b) =>
-
-                    b.rncs -
-                    a.rncs ||
-
-                    b.processos -
-                    a.processos
-            )
-
-            .slice(
-                0,
-                10
-            );
+            .slice(0,5);
 
 
         /* ==================================================
-           MAIS PROCESSOS
+           PROCESSOS POR FORNECEDOR
         ================================================== */
 
-        const maisProcessos =
-            [...estado.fornecedores]
-
-            .filter(
-                item =>
-                    item.processos > 0
+        const maisProcessos = [...estado.fornecedores]
+            .filter(item => item.processos > 0)
+            .sort((a,b) =>
+                b.processos - a.processos ||
+                b.produtos - a.produtos
             )
-
-            .sort(
-                (a,b) =>
-
-                    b.processos -
-                    a.processos ||
-
-                    b.produtos -
-                    a.produtos
-            )
-
-            .slice(
-                0,
-                10
-            );
+            .slice(0,5);
 
 
         criarGraficoBarras(
-
             "grafico-fornecedores-ranking",
-
             ranking,
-
-            item =>
-                item.indice * 100,
-
-            ranking.map(
-                item =>
-                    item.classificacao.cor
-            ),
-
+            item => item.indice * 100,
+            ranking.map(item => item.classificacao.cor),
             "%",
-
-            105
+            100,
+            "Índice de Avaliação (%)"
         );
 
 
         criarGraficoBarras(
-
             "grafico-fornecedores-rncs",
-
             maisRncs,
-
-            item =>
-                item.rncs,
-
+            item => item.rncs,
             CORES.vermelho,
-
-            ""
+            "",
+            null,
+            "Quantidade de RNCs"
         );
 
 
@@ -2172,17 +2180,13 @@
 
 
         criarGraficoBarras(
-
             "grafico-fornecedores-processos",
-
             maisProcessos,
-
-            item =>
-                item.processos,
-
+            item => item.processos,
             CORES.azul,
-
-            ""
+            "",
+            null,
+            "Quantidade de Processos"
         );
     }
 
@@ -2197,19 +2201,17 @@
         obterValor,
         cor,
         sufixo,
-        maximo
+        maximo,
+        tituloEixoX = ""
     ){
 
-        const canvas =
-            estado.raiz.querySelector(
-                `#${idCanvas}`
-            );
-
+        const canvas = estado.raiz.querySelector(
+            `#${idCanvas}`
+        );
 
         if(!canvas){
             return;
         }
-
 
         if(!lista.length){
 
@@ -2221,304 +2223,179 @@
             return;
         }
 
+        const valores = lista.map(obterValor);
+        const maiorValor = Math.max(...valores,1);
 
-        const valores =
-            lista.map(
-                obterValor
-            );
+        const limiteX = maximo || Math.max(
+            1,
+            Math.ceil(maiorValor * 1.12)
+        );
 
+        const grafico = new window.Chart(
+            canvas,
+            {
+                type:"bar",
 
-        /*
-           Para gráficos sem máximo fixo,
-           cria espaço após a maior barra
-           para o rótulo.
-        */
+                data:{
+                    labels:lista.map(item => item.nome),
 
-        const maiorValor =
-            Math.max(
-                ...valores,
-                1
-            );
+                    datasets:[{
+                        data:valores,
+                        backgroundColor:cor,
+                        borderColor:cor,
+                        borderWidth:0,
+                        borderRadius:1,
+                        borderSkipped:false,
+                        barThickness:14,
+                        maxBarThickness:16,
+                        categoryPercentage:.72,
+                        datalabels:{
+                            display:false
+                        }
+                    }]
+                },
 
+                plugins:[
+                    rotuloBarraFornecedores
+                ],
 
-        const limiteX =
-            maximo ||
-            Math.ceil(
-                maiorValor * 1.18
-            );
+                options:{
+                    indexAxis:"y",
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    devicePixelRatio:2,
 
-
-        const grafico =
-            new window.Chart(
-                canvas,
-                {
-
-                    type:"bar",
-
-
-                    data:{
-
-                        labels:
-                            lista.map(
-                                item =>
-                                    item.nome
-                            ),
-
-
-                        datasets:[{
-
-                            data:
-                                valores,
-
-                            backgroundColor:
-                                cor,
-
-                            borderColor:
-                                cor,
-
-                            borderWidth:0,
-
-                            borderRadius:2,
-
-                            barPercentage:.68,
-
-                            categoryPercentage:.82,
-
-
-                            /*
-                               IMPORTANTE:
-                               ChartDataLabels desligado.
-                            */
-
-                            datalabels:{
-                                display:false
-                            }
-                        }]
+                    animation:{
+                        duration:650,
+                        easing:"easeOutQuart"
                     },
 
+                    layout:{
+                        padding:{
+                            top:8,
+                            right:44,
+                            bottom:2,
+                            left:0
+                        }
+                    },
 
-                    /*
-                       Apenas nosso plugin escreve
-                       os números das barras.
-                    */
-
-                    plugins:[
-                        rotuloBarraFornecedores
-                    ],
-
-
-                    options:{
-
-                        indexAxis:"y",
-
-                        responsive:true,
-
-                        maintainAspectRatio:false,
-
-
-                        animation:{
-
-                            duration:650,
-
-                            easing:
-                                "easeOutQuart"
+                    plugins:{
+                        legend:{
+                            display:false
                         },
 
-
-                        layout:{
-
-                            padding:{
-
-                                top:5,
-
-                                right:30,
-
-                                bottom:5,
-
-                                left:0
-                            }
+                        datalabels:{
+                            display:false
                         },
 
+                        rotuloBarraFornecedoresUnico:{
+                            sufixo:sufixo
+                        },
 
-                        plugins:{
+                        tooltip:{
+                            displayColors:false,
 
-                            legend:{
-                                display:false
-                            },
+                            callbacks:{
+                                title(context){
+                                    return context[0]?.label || "";
+                                },
 
+                                label(context){
 
-                            /*
-                               Também desliga explicitamente
-                               qualquer DataLabels global.
-                            */
-
-                            datalabels:{
-                                display:false
-                            },
-
-
-                            rotuloBarraFornecedoresUnico:{
-                                sufixo:sufixo
-                            },
-
-
-                            tooltip:{
-
-                                displayColors:false,
-
-                                callbacks:{
-
-                                    title(context){
-
-                                        return (
-                                            context[0]?.label ||
-                                            ""
-                                        );
-                                    },
-
-
-                                    label(context){
-
-                                        if(
-                                            sufixo === "%"
-                                        ){
-
-                                            return ` ${Math.round(
-                                                numero(
-                                                    context.raw
-                                                )
-                                            )}%`;
-                                        }
-
-
-                                        return ` ${formatarInteiro(
-                                            context.raw
-                                        )}`;
+                                    if(sufixo === "%"){
+                                        return ` ${Math.round(numero(context.raw))}%`;
                                     }
+
+                                    return ` ${formatarInteiro(context.raw)}`;
+                                }
+                            }
+                        }
+                    },
+
+                    scales:{
+                        x:{
+                            beginAtZero:true,
+                            max:limiteX,
+
+                            title:{
+                                display:Boolean(tituloEixoX),
+                                text:tituloEixoX,
+                                color:"#374151",
+                                padding:{
+                                    top:8
+                                },
+                                font:{
+                                    family:"Segoe UI",
+                                    size:11,
+                                    weight:"600"
+                                }
+                            },
+
+                            grid:{
+                                color:CORES.grade,
+                                drawTicks:false
+                            },
+
+                            border:{
+                                display:true,
+                                color:"#cfd6e3",
+                                width:1
+                            },
+
+                            ticks:{
+                                color:CORES.texto,
+                                precision:0,
+                                padding:7,
+                                font:{
+                                    family:"Segoe UI",
+                                    size:10,
+                                    weight:"500"
                                 }
                             }
                         },
 
+                        y:{
+                            grid:{
+                                display:false
+                            },
 
-                        scales:{
+                            border:{
+                                display:false
+                            },
 
-                            x:{
+                            ticks:{
+                                color:"#1f2937",
+                                autoSkip:false,
+                                padding:9,
 
-                                beginAtZero:true,
-
-                                max:
-                                    limiteX,
-
-
-                                grid:{
-
-                                    color:
-                                        CORES.grade,
-
-                                    drawBorder:false
+                                font:{
+                                    family:"Segoe UI",
+                                    size:10,
+                                    weight:"500"
                                 },
 
+                                callback:function(value){
 
-                                border:{
-                                    display:false
-                                },
+                                    const label = String(
+                                        this.getLabelForValue(value) ?? ""
+                                    );
 
-
-                                ticks:{
-
-                                    color:
-                                        CORES.texto,
-
-                                    precision:0,
-
-
-                                    font:{
-
-                                        family:
-                                            "Segoe UI",
-
-                                        size:9,
-
-                                        weight:"600"
+                                    if(label.length > 28){
+                                        return `${label.slice(0,28)}…`;
                                     }
+
+                                    return label;
                                 }
                             },
 
-
-                            y:{
-
-                                grid:{
-                                    display:false
-                                },
-
-
-                                border:{
-                                    display:false
-                                },
-
-
-                                ticks:{
-
-                                    color:
-                                        "#1f2937",
-
-                                    autoSkip:false,
-
-                                    padding:7,
-
-
-                                    font:{
-
-                                        family:
-                                            "Segoe UI",
-
-                                        size:9,
-
-                                        weight:"600"
-                                    },
-
-
-                                    callback:function(value){
-
-                                        const label =
-                                            String(
-                                                this.getLabelForValue(
-                                                    value
-                                                ) ?? ""
-                                            );
-
-
-                                        if(
-                                            label.length >
-                                            27
-                                        ){
-
-                                            return (
-                                                label.slice(
-                                                    0,
-                                                    27
-                                                ) +
-                                                "…"
-                                            );
-                                        }
-
-
-                                        return label;
-                                    }
-                                },
-
-
-                                afterFit(scale){
-
-                                    scale.width =
-                                        145;
-                                }
+                            afterFit(scale){
+                                scale.width = 175;
                             }
                         }
                     }
                 }
-            );
-
+            }
+        );
 
         estado.graficos.set(
             idCanvas,
@@ -2533,129 +2410,73 @@
 
     function criarGraficoClassificacoes(){
 
-        const canvas =
-            estado.raiz.querySelector(
-                "#grafico-fornecedores-classificacao"
-            );
-
+        const canvas = estado.raiz.querySelector(
+            "#grafico-fornecedores-classificacao"
+        );
 
         if(!canvas){
             return;
         }
 
-
         const totais = {
-
             excelente:0,
-
             "muito-bom":0,
-
             atencao:0,
-
             ruim:0,
-
             critico:0
         };
 
+        // A distribuição usa todos os fornecedores avaliados.
+        estado.fornecedores.forEach(item => {
 
-        /*
-           IMPORTANTE:
+            const slug = item.classificacao.slug;
 
-           Aqui entram TODOS os fornecedores
-           da lista "avaliados".
-
-           Não filtramos mais processos > 0.
-        */
-
-        estado.fornecedores.forEach(
-            item => {
-
-                const slug =
-                    item.classificacao.slug;
-
-
-                if(
-                    totais[slug] !==
-                    undefined
-                ){
-
-                    totais[slug] += 1;
-                }
+            if(totais[slug] !== undefined){
+                totais[slug] += 1;
             }
-        );
-
+        });
 
         const configuracoes = [
-
             {
                 slug:"excelente",
                 label:"Excelente",
                 faixa:"95% - 100%",
-                cor:
-                    CLASSIFICACOES
-                        .excelente
-                        .cor
+                cor:CLASSIFICACOES.excelente.cor
             },
-
             {
                 slug:"muito-bom",
                 label:"Muito bom",
                 faixa:"90% - 94%",
-                cor:
-                    CLASSIFICACOES
-                        .muitoBom
-                        .cor
+                cor:CLASSIFICACOES.muitoBom.cor
             },
-
             {
                 slug:"atencao",
                 label:"Atenção",
                 faixa:"80% - 89%",
-                cor:
-                    CLASSIFICACOES
-                        .atencao
-                        .cor
+                cor:CLASSIFICACOES.atencao.cor
             },
-
             {
                 slug:"ruim",
                 label:"Ruim",
                 faixa:"70% - 79%",
-                cor:
-                    CLASSIFICACOES
-                        .ruim
-                        .cor
+                cor:CLASSIFICACOES.ruim.cor
             },
-
             {
                 slug:"critico",
                 label:"Crítico",
                 faixa:"< 70%",
-                cor:
-                    CLASSIFICACOES
-                        .critico
-                        .cor
+                cor:CLASSIFICACOES.critico.cor
             }
         ];
 
+        const dados = configuracoes.map(
+            item => totais[item.slug]
+        );
 
-        const dados =
-            configuracoes.map(
-                item =>
-                    totais[
-                        item.slug
-                    ]
-            );
-
-
-        const total =
-            dados.reduce(
-                (soma,valor) =>
-                    soma +
-                    numero(valor),
-                0
-            );
-
+        const total = dados.reduce(
+            (soma,valor) => soma + numero(valor),
+            0
+        );
 
         if(!total){
 
@@ -2667,261 +2488,133 @@
             return;
         }
 
+        const grafico = new window.Chart(
+            canvas,
+            {
+                type:"doughnut",
 
-        const grafico =
-            new window.Chart(
-                canvas,
-                {
+                data:{
+                    labels:configuracoes.map(item => item.label),
 
-                    type:"doughnut",
+                    datasets:[{
+                        data:dados,
+                        backgroundColor:configuracoes.map(item => item.cor),
+                        borderColor:"#ffffff",
+                        borderWidth:2,
+                        hoverOffset:3,
+                        datalabels:{
+                            display:false
+                        }
+                    }]
+                },
 
+                plugins:[
+                    rotuloRoscaFornecedores
+                ],
 
-                    data:{
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    devicePixelRatio:2,
+                    cutout:"58%",
+                    radius:"88%",
 
-                        labels:
-                            configuracoes.map(
-                                item =>
-                                    item.label
-                            ),
-
-
-                        datasets:[{
-
-                            data:
-                                dados,
-
-                            backgroundColor:
-                                configuracoes.map(
-                                    item =>
-                                        item.cor
-                                ),
-
-                            borderColor:
-                                "#ffffff",
-
-                            borderWidth:2,
-
-                            hoverOffset:3,
-
-
-                            /*
-                               Nada escrito sobre
-                               a própria rosca.
-                            */
-
-                            datalabels:{
-                                display:false
-                            }
-                        }]
+                    animation:{
+                        duration:650,
+                        easing:"easeOutQuart"
                     },
 
+                    layout:{
+                        padding:{
+                            top:4,
+                            right:4,
+                            bottom:24,
+                            left:4
+                        }
+                    },
 
-                    options:{
-
-                        responsive:true,
-
-                        maintainAspectRatio:false,
-
-                        cutout:"58%",
-
-
-                        animation:{
-
-                            duration:650,
-
-                            easing:
-                                "easeOutQuart"
+                    plugins:{
+                        datalabels:{
+                            display:false
                         },
 
+                        legend:{
+                            display:true,
+                            position:"right",
+                            align:"center",
 
-                        layout:{
+                            labels:{
+                                color:"#1f2937",
+                                usePointStyle:false,
+                                boxWidth:12,
+                                boxHeight:12,
+                                padding:14,
 
-                            padding:{
-
-                                top:4,
-
-                                right:5,
-
-                                bottom:4,
-
-                                left:5
-                            }
-                        },
-
-
-                        plugins:{
-
-                            datalabels:{
-                                display:false
-                            },
-
-
-                            legend:{
-
-                                display:true,
-
-                                position:"right",
-
-                                align:"center",
-
-
-                                labels:{
-
-                                    color:"#1f2937",
-
-                                    usePointStyle:true,
-
-                                    pointStyle:"circle",
-
-                                    boxWidth:8,
-
-                                    boxHeight:8,
-
-                                    padding:10,
-
-
-                                    font:{
-
-                                        family:
-                                            "Segoe UI",
-
-                                        size:9,
-
-                                        weight:"600"
-                                    },
-
-
-                                    generateLabels(chart){
-
-                                        return configuracoes.map(
-                                            (
-                                                item,
-                                                indice
-                                            ) => {
-
-                                                const valor =
-                                                    dados[
-                                                        indice
-                                                    ];
-
-
-                                                const percentual =
-                                                    total
-                                                        ? Math.round(
-                                                            (
-                                                                valor /
-                                                                total
-                                                            ) *
-                                                            100
-                                                        )
-                                                        : 0;
-
-
-                                                return {
-
-                                                    text:
-                                                        `${item.label} (${item.faixa})  ${valor} (${percentual}%)`,
-
-                                                    fillStyle:
-                                                        item.cor,
-
-                                                    strokeStyle:
-                                                        item.cor,
-
-                                                    lineWidth:
-                                                        0,
-
-                                                    pointStyle:
-                                                        "circle",
-
-                                                    hidden:
-                                                        false,
-
-                                                    index:
-                                                        indice
-                                                };
-                                            }
-                                        );
-                                    }
+                                font:{
+                                    family:"Segoe UI",
+                                    size:10,
+                                    weight:"600"
                                 },
 
+                                generateLabels(){
 
-                                onClick(
-                                    evento,
-                                    item,
-                                    legend
-                                ){
+                                    return configuracoes.map((item,indice) => {
 
-                                    const indice =
-                                        item.index;
+                                        const valor = dados[indice];
+                                        const percentual = total
+                                            ? Math.round((valor / total) * 100)
+                                            : 0;
 
-
-                                    const chart =
-                                        legend.chart;
-
-
-                                    chart.toggleDataVisibility(
-                                        indice
-                                    );
-
-
-                                    chart.update();
+                                        return {
+                                            text:`${item.label} (${item.faixa})     ${valor} (${percentual}%)`,
+                                            fillStyle:item.cor,
+                                            strokeStyle:item.cor,
+                                            lineWidth:0,
+                                            hidden:false,
+                                            index:indice
+                                        };
+                                    });
                                 }
                             },
 
+                            onClick(evento,item,legend){
 
-                            tooltip:{
+                                const indice = item.index;
+                                const chart = legend.chart;
 
-                                callbacks:{
+                                chart.toggleDataVisibility(indice);
+                                chart.update();
+                            }
+                        },
 
-                                    label(context){
+                        tooltip:{
+                            displayColors:true,
 
-                                        const indice =
-                                            context.dataIndex;
+                            callbacks:{
+                                label(context){
 
+                                    const indice = context.dataIndex;
+                                    const valor = numero(context.raw);
+                                    const percentual = total
+                                        ? ((valor / total) * 100)
+                                            .toFixed(1)
+                                            .replace(".",",")
+                                        : "0";
 
-                                        const valor =
-                                            numero(
-                                                context.raw
-                                            );
+                                    const item = configuracoes[indice];
 
-
-                                        const percentual =
-                                            total
-                                                ? (
-                                                    (
-                                                        valor /
-                                                        total
-                                                    ) *
-                                                    100
-                                                )
-                                                    .toFixed(1)
-                                                    .replace(
-                                                        ".",
-                                                        ","
-                                                    )
-                                                : "0";
-
-
-                                        const item =
-                                            configuracoes[
-                                                indice
-                                            ];
-
-
-                                        return (
-                                            ` ${item.label}: ` +
-                                            `${valor} fornecedores ` +
-                                            `(${percentual}%)`
-                                        );
-                                    }
+                                    return (
+                                        ` ${item.label}: ` +
+                                        `${valor} fornecedores ` +
+                                        `(${percentual}%)`
+                                    );
                                 }
                             }
                         }
                     }
                 }
-            );
-
+            }
+        );
 
         estado.graficos.set(
             "grafico-fornecedores-classificacao",
@@ -3223,3 +2916,4 @@
 
 
 })();
+
