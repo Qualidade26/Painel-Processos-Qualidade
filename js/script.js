@@ -553,18 +553,25 @@ function abrirAba(aba, botao) {
             break;
 
 
-        case "fornecedores":
+       case "fornecedores":
 
-            if (
-                typeof renderFornecedores ===
-                "function"
-            ) {
+    if (
+        typeof renderizarFornecedores ===
+        "function"
+    ) {
 
-                renderFornecedores();
-            }
+        renderizarFornecedores(
+            dados.fornecedores
+        );
 
-            break;
+    } else {
 
+        console.error(
+            "A função renderizarFornecedores não foi encontrada."
+        );
+    }
+
+    break;
 
         case "informativo":
 
