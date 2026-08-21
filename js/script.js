@@ -553,7 +553,28 @@ function abrirAba(aba, botao) {
             break;
 
 
-            case "fornecedores":
+                  case "fornecedores": {
+
+            const conteudo =
+                document.getElementById("conteudo");
+
+            if (!conteudo) {
+
+                console.error(
+                    "Área principal #conteudo não encontrada."
+                );
+
+                break;
+            }
+
+
+            conteudo.innerHTML = `
+                <section
+                    id="pagina-fornecedores"
+                    class="pagina-fornecedores"
+                ></section>
+            `;
+
 
             if (
                 typeof renderizarFornecedores ===
@@ -561,7 +582,8 @@ function abrirAba(aba, botao) {
             ) {
 
                 renderizarFornecedores(
-                    dados.fornecedores
+                    dados.fornecedores,
+                    "#pagina-fornecedores"
                 );
 
             } else {
@@ -572,6 +594,7 @@ function abrirAba(aba, botao) {
             }
 
             break;
+        }
 
         case "informativo":
 
