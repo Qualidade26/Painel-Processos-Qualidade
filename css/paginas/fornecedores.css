@@ -620,3 +620,139 @@
         transition:none !important;
     }
 }
+
+/* ==========================================================
+   DISTRIBUIÇÃO POR ORIGEM
+========================================================== */
+
+.fornecedores-panel--origem{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+}
+
+.fornecedores-origem-grid{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    width:100%;
+    min-height:210px;
+    margin-top:8px;
+    border:1px solid var(--forn-linha);
+    border-radius:8px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.fornecedores-origem-item{
+    display:grid;
+    grid-template-rows:minmax(74px,auto) 1fr 1fr;
+    align-items:center;
+    min-width:0;
+    border-right:1px solid var(--forn-linha);
+    text-align:center;
+}
+
+.fornecedores-origem-item:last-child{
+    border-right:0;
+}
+
+.fornecedores-origem-item__topo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-width:0;
+    min-height:74px;
+    padding:10px 6px;
+    border-bottom:1px solid var(--forn-linha);
+    background:#f8fbff;
+}
+
+.fornecedores-origem-item__marcador{
+    display:block;
+    width:22px;
+    height:7px;
+    border-radius:999px;
+    background:var(--origem-cor,#1557d6);
+}
+
+.fornecedores-origem-item__label{
+    color:#172033;
+    font-size:11px;
+    font-weight:800;
+    line-height:1.15;
+}
+
+.fornecedores-origem-item__valor{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:62px;
+    padding:8px 4px;
+    border-bottom:1px solid var(--forn-linha);
+    color:#172033;
+    font-size:clamp(24px,2vw,34px);
+    font-weight:800;
+    line-height:1;
+}
+
+.fornecedores-origem-item__percentual{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:54px;
+    padding:8px 4px;
+    color:#f05a28;
+    font-size:clamp(20px,1.7vw,29px);
+    font-weight:800;
+    line-height:1;
+}
+
+.fornecedores-origem-total{
+    margin-top:12px;
+    color:#475569;
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+}
+
+.fornecedores-origem-total strong{
+    color:#f05a28;
+    font-size:13px;
+    font-weight:800;
+}
+
+@media (max-width:760px){
+    .fornecedores-origem-grid{
+        grid-template-columns:1fr;
+        min-height:0;
+    }
+
+    .fornecedores-origem-item{
+        grid-template-columns:minmax(130px,1fr) .65fr .65fr;
+        grid-template-rows:1fr;
+        border-right:0;
+        border-bottom:1px solid var(--forn-linha);
+    }
+
+    .fornecedores-origem-item:last-child{
+        border-bottom:0;
+    }
+
+    .fornecedores-origem-item__topo{
+        min-height:58px;
+        border-right:1px solid var(--forn-linha);
+        border-bottom:0;
+    }
+
+    .fornecedores-origem-item__valor{
+        min-height:58px;
+        border-right:1px solid var(--forn-linha);
+        border-bottom:0;
+    }
+
+    .fornecedores-origem-item__percentual{
+        min-height:58px;
+    }
+}
