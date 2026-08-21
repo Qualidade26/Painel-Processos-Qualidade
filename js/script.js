@@ -553,25 +553,25 @@ function abrirAba(aba, botao) {
             break;
 
 
-       case "fornecedores":
+            case "fornecedores":
 
-    if (
-        typeof renderizarFornecedores ===
-        "function"
-    ) {
+            if (
+                typeof renderizarFornecedores ===
+                "function"
+            ) {
 
-        renderizarFornecedores(
-            dados.fornecedores
-        );
+                renderizarFornecedores(
+                    dados.fornecedores
+                );
 
-    } else {
+            } else {
 
-        console.error(
-            "A função renderizarFornecedores não foi encontrada."
-        );
-    }
+                console.error(
+                    "A função renderizarFornecedores não foi encontrada."
+                );
+            }
 
-    break;
+            break;
 
         case "informativo":
 
@@ -606,7 +606,6 @@ function abrirAba(aba, botao) {
 /* ==========================================================
    DESTRUIÇÃO DOS GRÁFICOS
 ========================================================== */
-
 function destruirGrafico() {
 
     /*
@@ -634,6 +633,21 @@ function destruirGrafico() {
     ) {
 
         destruirGraficosImportacao();
+    }
+
+
+    /*
+    ----------------------------------------------------------
+    Gráficos específicos da página de Fornecedores
+    ----------------------------------------------------------
+    */
+
+    if (
+        typeof destruirGraficosFornecedores ===
+        "function"
+    ) {
+
+        destruirGraficosFornecedores();
     }
 }
 
