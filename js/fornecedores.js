@@ -2240,206 +2240,158 @@
                             }
                         },
 
+plugins:{
 
-                        plugins:{
+    legend:{
+        display:false
+    },
 
-                            legend:{
+    tooltip:{
 
-                                display:false
-                            },
+        displayColors:false,
 
+        callbacks:{
 
-                            /*
-                               DESATIVA DAT LABELS GLOBAL
-                               SOMENTE NESTES GRÁFICOS
-                            */
-                            tooltip:{
+            title(context){
 
-                                displayColors:false,
+                return (
+                    context[0]?.label ||
+                    ""
+                );
+            },
 
+            label(context){
 
-                                callbacks:{
+                if(sufixo === "%"){
 
-                                    title(
-                                        context
-                                    ){
+                    return ` ${formatarPercentual(
+                        context.raw
+                    )}`;
+                }
 
-                                        return (
-                                            context[0]
-                                                ?.label ||
-                                            ""
-                                        );
-                                    },
+                return ` ${formatarInteiro(
+                    context.raw
+                )}`;
+            }
+        }
+    }
 
+},
 
-                                    label(
-                                        context
-                                    ){
 
-                                        if(
-                                            sufixo === "%"
-                                        ){
+scales:{
 
-                                            return ` ${formatarPercentual(
-                                                context.raw
-                                            )}`;
-                                        }
+    x:{
 
+        beginAtZero:true,
 
-                                        return ` ${formatarInteiro(
-                                            context.raw
-                                        )}`;
-                                    }
-                                }
-                            },
+        suggestedMax:
+            maximo,
 
-                        scales:{
+        max:
+            maximo,
 
-                            x:{
+        grid:{
 
-                                beginAtZero:true,
+            color:
+                CORES.grade,
 
-                                suggestedMax:
-                                    maximo,
+            drawBorder:
+                false
+        },
 
-                                max:
-                                    maximo,
+        border:{
 
+            display:false
+        },
 
-                                grid:{
+        ticks:{
 
-                                    color:
-                                        CORES.grade,
+            color:
+                CORES.texto,
 
-                                    drawBorder:
-                                        false
-                                },
+            precision:0,
 
+            font:{
 
-                                border:{
+                family:
+                    "Segoe UI",
 
-                                    display:false
-                                },
+                size:10,
 
+                weight:
+                    "600"
+            }
+        }
+    },
 
-                                ticks:{
 
-                                    color:
-                                        CORES.texto,
+    y:{
 
-                                    precision:0,
+        grid:{
 
+            display:false,
 
-                                    font:{
+            drawBorder:
+                false
+        },
 
-                                        family:
-                                            "Segoe UI",
+        border:{
 
-                                        size:10,
+            display:false
+        },
 
-                                        weight:
-                                            "600"
-                                    }
-                                }
-                            },
+        ticks:{
 
+            color:
+                "#1f2937",
 
-                            y:{
+            autoSkip:false,
 
-                                grid:{
+            padding:8,
 
-                                    display:false,
+            font:{
 
-                                    drawBorder:
-                                        false
-                                },
+                family:
+                    "Segoe UI",
 
+                size:10,
 
-                                border:{
+                weight:
+                    "600"
+            },
 
-                                    display:false
-                                },
+            callback:function(value){
 
+                const label =
+                    String(
+                        this.getLabelForValue(
+                            value
+                        ) ?? ""
+                    );
 
-                                ticks:{
+                if(label.length > 30){
 
-                                    color:
-                                        "#1f2937",
+                    return (
+                        label.slice(
+                            0,
+                            30
+                        ) +
+                        "…"
+                    );
+                }
 
-                                    autoSkip:
-                                        false,
+                return label;
+            }
+        },
 
-                                    padding:
-                                        8,
+        afterFit(scale){
 
-
-                                    font:{
-
-                                        family:
-                                            "Segoe UI",
-
-                                        size:
-                                            10,
-
-                                        weight:
-                                            "600"
-                                    },
-
-
-                                    callback:
-                                        function(
-                                            value
-                                        ){
-
-                                            const label =
-                                                String(
-                                                    this.getLabelForValue(
-                                                        value
-                                                    ) ?? ""
-                                                );
-
-
-                                            /*
-                                               Mantém os nomes
-                                               legíveis sem
-                                               ocupar toda a
-                                               largura.
-                                            */
-
-                                            if(
-                                                label.length >
-                                                30
-                                            ){
-
-                                                return (
-                                                    label.slice(
-                                                        0,
-                                                        30
-                                                    ) +
-                                                    "…"
-                                                );
-                                            }
-
-
-                                            return label;
-                                        }
-                                },
-
-
-                                /*
-                                   Reserva espaço fixo
-                                   para os nomes.
-                                */
-
-                                afterFit(
-                                    scale
-                                ){
-
-                                    scale.width =
-                                        170;
-                                }
-                            }
-                        }
+            scale.width =
+                170;
+        }
+    }
+}
                     }
                 }
             );
