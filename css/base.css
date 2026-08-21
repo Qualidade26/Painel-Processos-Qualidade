@@ -1,9 +1,17 @@
 /* ==========================================================
+   BASE.CSS
+   Variáveis globais + reset
+   Ajustado para maior consistência visual e nitidez
+========================================================== */
+
+
+/* ==========================================================
    VARIÁVEIS GLOBAIS
 ========================================================== */
 
 :root{
     --bg:#dfeeff;
+
     --top1:#0f3cc9;
     --top2:#1d4eff;
 
@@ -25,6 +33,12 @@
     --red:#ef4444;
     --orange:#f97316;
     --cyan:#38bdf8;
+
+    /*
+       Fonte principal alinhada aos gráficos e ao painel
+       de fornecedores.
+    */
+    --font-ui:"Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 
@@ -32,12 +46,16 @@
    RESET
 ========================================================== */
 
-*{
+*,
+*::before,
+*::after{
     box-sizing:border-box;
 }
 
+
 html{
     width:100%;
+    min-width:0;
     min-height:100%;
 
     font-size:clamp(
@@ -50,6 +68,7 @@ html{
     -webkit-text-size-adjust:100%;
 
     text-rendering:optimizeLegibility;
+
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 }
@@ -57,15 +76,82 @@ html{
 
 body{
     width:100%;
+    min-width:0;
+
     min-height:100vh;
     min-height:100dvh;
 
     margin:0;
 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:var(--font-ui);
 
     background:var(--bg);
     color:var(--text);
 
     overflow-x:hidden;
+}
+
+
+/* ==========================================================
+   ELEMENTOS GERAIS
+========================================================== */
+
+button,
+input,
+select,
+textarea,
+table{
+    font-family:inherit;
+}
+
+
+button,
+input,
+select,
+textarea{
+    font-size:inherit;
+}
+
+
+img,
+svg,
+canvas{
+    max-width:100%;
+}
+
+
+img,
+svg{
+    display:block;
+}
+
+
+/*
+   Evita perda de nitidez causada por dimensionamento
+   fracionado desnecessário em elementos gráficos.
+*/
+canvas{
+    image-rendering:auto;
+}
+
+
+/* ==========================================================
+   SELEÇÃO DE TEXTO
+========================================================== */
+
+::selection{
+    background:rgba(29,78,255,.18);
+    color:var(--text);
+}
+
+
+/* ==========================================================
+   ACESSIBILIDADE / MOVIMENTO
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
 }
