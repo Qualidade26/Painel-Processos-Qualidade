@@ -1055,6 +1055,10 @@
                 <div
                     class="fornecedores-origem-item"
                     style="--origem-cor:${item.cor}"
+                    role="button"
+                    tabindex="0"
+                    data-origem="${item.chave}"
+                    title="Ver ${item.label}"
                 >
                     <div class="fornecedores-origem-item__topo">
 
@@ -1224,11 +1228,33 @@
                         "grafico-fornecedores-rncs"
                     )}
 
-                    ${criarPainelGrafico(
-                        "DISTRIBUIÇÃO POR CLASSIFICAÇÃO",
-                        "grafico-fornecedores-classificacao",
-                        true
-                    )}
+                    <article class="fornecedores-panel fornecedores-panel--classificacao">
+
+                        <h3 class="fornecedores-panel__titulo">
+                            DISTRIBUIÇÃO POR CLASSIFICAÇÃO
+                        </h3>
+
+                        <div class="fornecedores-chart-box fornecedores-chart-box--rosca">
+
+                            <canvas
+                                id="grafico-fornecedores-classificacao"
+                                role="img"
+                                aria-label="Distribuição por classificação"
+                            ></canvas>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="fornecedores-classificacao-total"
+                            id="fornecedores-classificacao-total"
+                            title="Abrir avaliação por fornecedor"
+                        >
+                            Total de fornecedores:
+                            <strong id="fornecedores-classificacao-total-valor">0</strong>
+                        </button>
+
+                    </article>
 
                     ${criarPainelDistribuicaoOrigem()}
 
@@ -1519,6 +1545,13 @@
                 resumo.indiceMedio
             )
         );
+
+        definirTexto(
+            "fornecedores-classificacao-total-valor",
+            formatarInteiro(
+                resumo.totalFornecedores
+            )
+        );
     }
 
 
@@ -1674,6 +1707,63 @@
                 aplicarFiltros();
             }
         );
+
+
+        const totalClassificacao =
+            estado.raiz.querySelector(
+                "#fornecedores-classificacao-total"
+            );
+
+        totalClassificacao?.addEventListener(
+            "click",
+            () => {
+                estado.filtroClassificacao = "todos";
+
+                const select =
+                    estado.raiz.querySelector(
+                        "#fornecedores-classificacao"
+                    );
+
+                if(select){
+                    select.value = "todos";
+                }
+
+                abrirAba("avaliacao");
+                aplicarFiltros();
+            }
+        );
+
+
+        estado.raiz
+            .querySelectorAll(
+                ".fornecedores-origem-item[data-origem]"
+            )
+            .forEach(item => {
+
+                const ativar = () => {
+                    item.classList.add("is-active");
+
+                    window.setTimeout(
+                        () => item.classList.remove("is-active"),
+                        180
+                    );
+                };
+
+                item.addEventListener("click", ativar);
+
+                item.addEventListener(
+                    "keydown",
+                    evento => {
+                        if(
+                            evento.key === "Enter" ||
+                            evento.key === " "
+                        ){
+                            evento.preventDefault();
+                            ativar();
+                        }
+                    }
+                );
+            });
 
 
         const corpo =
@@ -1833,6 +1923,63 @@
     ====================================================== */
 
     function renderizarTabela(lista){
+
+        const totalClassificacao =
+            estado.raiz.querySelector(
+                "#fornecedores-classificacao-total"
+            );
+
+        totalClassificacao?.addEventListener(
+            "click",
+            () => {
+                estado.filtroClassificacao = "todos";
+
+                const select =
+                    estado.raiz.querySelector(
+                        "#fornecedores-classificacao"
+                    );
+
+                if(select){
+                    select.value = "todos";
+                }
+
+                abrirAba("avaliacao");
+                aplicarFiltros();
+            }
+        );
+
+
+        estado.raiz
+            .querySelectorAll(
+                ".fornecedores-origem-item[data-origem]"
+            )
+            .forEach(item => {
+
+                const ativar = () => {
+                    item.classList.add("is-active");
+
+                    window.setTimeout(
+                        () => item.classList.remove("is-active"),
+                        180
+                    );
+                };
+
+                item.addEventListener("click", ativar);
+
+                item.addEventListener(
+                    "keydown",
+                    evento => {
+                        if(
+                            evento.key === "Enter" ||
+                            evento.key === " "
+                        ){
+                            evento.preventDefault();
+                            ativar();
+                        }
+                    }
+                );
+            });
+
 
         const corpo =
             estado.raiz.querySelector(
@@ -2459,8 +2606,8 @@
                         borderWidth:0,
                         borderRadius:1,
                         borderSkipped:false,
-                        barThickness:16,
-                        maxBarThickness:18,
+                        barThickness:14,
+                        maxBarThickness:16,
                         categoryPercentage:.72,
                         datalabels:{
                             display:false
@@ -2485,8 +2632,8 @@
 
                     layout:{
                         padding:{
-                            top:8,
-                            right:52,
+                            top:2,
+                            right:44,
                             bottom:2,
                             left:0
                         }
@@ -2539,7 +2686,7 @@
                                 },
                                 font:{
                                     family:"Segoe UI",
-                                    size:11,
+                                    size:10,
                                     weight:"700"
                                 }
                             },
@@ -2561,8 +2708,8 @@
                                 padding:7,
                                 font:{
                                     family:"Segoe UI",
-                                    size:11,
-                                    weight:"600"
+                                    size:10,
+                                    weight:"700"
                                 }
                             }
                         },
@@ -2583,7 +2730,7 @@
 
                                 font:{
                                     family:"Segoe UI",
-                                    size:11,
+                                    size:10,
                                     weight:"700"
                                 },
 
@@ -2602,7 +2749,7 @@
                             },
 
                             afterFit(scale){
-                                scale.width = 175;
+                                scale.width = 165;
                             }
                         }
                     }
@@ -2729,8 +2876,8 @@
                     responsive:true,
                     maintainAspectRatio:false,
                     devicePixelRatio:3,
-                    cutout:"54%",
-                    radius:"96%",
+                    cutout:"55%",
+                    radius:"94%",
 
                     animation:{
                         duration:650,
@@ -2741,7 +2888,7 @@
                         padding:{
                             top:4,
                             right:4,
-                            bottom:28,
+                            bottom:4,
                             left:4
                         }
                     },
@@ -2761,11 +2908,11 @@
                                 usePointStyle:false,
                                 boxWidth:13,
                                 boxHeight:13,
-                                padding:16,
+                                padding:11,
 
                                 font:{
                                     family:"Segoe UI",
-                                    size:11,
+                                    size:10,
                                     weight:"700"
                                 },
 
@@ -3129,3 +3276,4 @@
 
 
 })();
+
