@@ -743,17 +743,15 @@ function criarPainelClassificacao(){
             <h3 class="fornecedores-panel__titulo">
                 DISTRIBUIÇÃO POR CLASSIFICAÇÃO
             </h3>
+
             <div class="fornecedores-chart-box fornecedores-chart-box--rosca">
                 <canvas
                     id="grafico-fornecedores-classificacao"
                     role="img"
                     aria-label="Distribuição por classificação"
                 ></canvas>
-                <div class="fornecedores-rosca-centro" aria-hidden="true">
-                    <strong>100%</strong>
-                    <span>TOTAL</span>
-                </div>
             </div>
+
             <div class="fornecedores-classificacao-total">
                 Total de fornecedores:
                 <strong id="fornecedores-total-classificacao">0</strong>
