@@ -1880,23 +1880,7 @@ function criarGraficoClassificacoes(){
     );
 
     if(!canvas) return;
-
-    const box = canvas.parentElement;
-    const centro = box?.querySelector(
-        ".fornecedores-rosca-centro"
-    );
-
-    /* Garante que exista somente um 100% / TOTAL */
-    if(box){
-        const centros = box.querySelectorAll(
-            ".fornecedores-rosca-centro"
-        );
-
-        centros.forEach((elemento,indice)=>{
-            if(indice > 0) elemento.remove();
-        });
-    }
-
+   
     const totais = {
         excelente:0,
         "muito-bom":0,
@@ -1962,29 +1946,7 @@ function criarGraficoClassificacoes(){
         );
         return;
     }
-
-    /*
-       Posiciona 100% / TOTAL usando o centro REAL
-       calculado pelo Chart.js.
-    */
-   const centralizarTexto = {
-    id:"centralizarTextoFornecedores",
-
-    afterLayout(chart){
-        if(!centro) return;
-
-        const meta = chart.getDatasetMeta(0);
-        const arco = meta?.data?.[0];
-
-        if(!arco) return;
-
-        centro.style.left = `${arco.x}px`;
-        centro.style.top = `${arco.y}px`;
-        centro.style.transform =
-            "translate(-50%,-50%)";
-    }
-};
-
+   
     const grafico = new window.Chart(canvas,{
         type:"doughnut",
 
