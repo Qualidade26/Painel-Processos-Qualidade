@@ -420,8 +420,19 @@
     text-shadow:none;
     filter:none;
 }
+.pagina-fornecedores .fornecedores-rosca-centro strong{
+    display:block;
+    margin:0;
 
+    color:#0f1b3d;
 
+    font-size:24px;
+    font-weight:900;
+    line-height:1;
+
+    text-shadow:none;
+    filter:none;
+}
 .pagina-fornecedores .fornecedores-rosca-centro span{
     display:block;
     margin-top:4px;
@@ -435,20 +446,6 @@
     text-shadow:none;
 }
 
-
-.pagina-fornecedores .fornecedores-rosca-centro span{
-    display:block;
-
-    margin-top:4px;
-
-    color:#0f1b3d;
-
-    font-size:12px;
-    font-weight:900;
-    line-height:1;
-
-    text-shadow:none;
-}
 
 
 /* Total abaixo da legenda */
