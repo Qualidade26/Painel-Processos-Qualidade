@@ -750,6 +750,11 @@ function criarPainelClassificacao(){
                     role="img"
                     aria-label="Distribuição por classificação"
                 ></canvas>
+
+                <div class="fornecedores-rosca-centro" aria-hidden="true">
+                    <strong>100%</strong>
+                    <span>TOTAL</span>
+                </div>
             </div>
 
             <div class="fornecedores-classificacao-total">
@@ -1962,23 +1967,23 @@ function criarGraficoClassificacoes(){
        Posiciona 100% / TOTAL usando o centro REAL
        calculado pelo Chart.js.
     */
-    const centralizarTexto = {
-        id:"centralizarTextoFornecedores",
+   const centralizarTexto = {
+    id:"centralizarTextoFornecedores",
 
-        afterLayout(chart){
-            if(!centro) return;
+    afterLayout(chart){
+        if(!centro) return;
 
-            const meta = chart.getDatasetMeta(0);
-            const arco = meta?.data?.[0];
+        const meta = chart.getDatasetMeta(0);
+        const arco = meta?.data?.[0];
 
-            if(!arco) return;
+        if(!arco) return;
 
-            centro.style.left = `${arco.x}px`;
-            centro.style.top = `${arco.y}px`;
-            centro.style.transform =
-                "translate(-50%,-50%)";
-        }
-    };
+        centro.style.left = `${arco.x}px`;
+        centro.style.top = `${arco.y}px`;
+        centro.style.transform =
+            "translate(-50%,-50%)";
+    }
+};
 
     const grafico = new window.Chart(canvas,{
         type:"doughnut",
@@ -2002,10 +2007,9 @@ function criarGraficoClassificacoes(){
             }]
         },
 
-        plugins:[
-            rotulosRoscaFornecedores,
-            centralizarTexto
-        ],
+       plugins:[
+    rotulosRoscaFornecedores
+],
 
         options:{
             responsive:true,
