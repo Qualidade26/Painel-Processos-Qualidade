@@ -396,20 +396,24 @@
 */
 .pagina-fornecedores .fornecedores-rosca-centro{
     position:absolute;
-
     left:32%;
     top:50%;
-
     transform:translate(-50%,-50%);
 
-    z-index:3;
+    width:90px;
 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    z-index:3;
     pointer-events:none;
 
     color:#0f1b3d;
-
     text-align:center;
 
+    font-family:"Segoe UI",Arial,sans-serif;
     font-weight:900;
     line-height:1;
 
@@ -418,15 +422,14 @@
 }
 
 
-.pagina-fornecedores .fornecedores-rosca-centro strong{
+.pagina-fornecedores .fornecedores-rosca-centro span{
     display:block;
-
-    margin:0;
+    margin-top:4px;
 
     color:#0f1b3d;
 
-    font-size:24px;
-    font-weight:900;
+    font-size:11px;
+    font-weight:800;
     line-height:1;
 
     text-shadow:none;
@@ -1299,12 +1302,6 @@
 
         margin-bottom:8px;
     }
-
-
-    .pagina-fornecedores .fornecedores-rosca-centro{
-        left:35%;
-    }
-
 
     .pagina-fornecedores .fornecedores-avaliacao-grid{
         grid-template-columns:1fr;
