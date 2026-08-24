@@ -1384,12 +1384,13 @@ const valoresVisuaisPizza =
 
     conteudo.innerHTML = `
 
+    <section class="pagina-descarte">
+
         <div class="page-title">
 
             🗑 DESCARTE
 
         </div>
-
 
         <section class="cards descarte-indicadores">
 
@@ -1499,6 +1500,8 @@ const valoresVisuaisPizza =
 </div>
 
 </div>
+
+</section>
 
 </section>
 `;
