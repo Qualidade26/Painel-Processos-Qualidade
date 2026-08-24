@@ -1332,68 +1332,7 @@ function configurarEventos(){
     );
 
 
-    /* ==================================================
-       CLIQUE NA TABELA
-    ================================================== */
-
-    const corpo =
-        estado.raiz.querySelector(
-            "#fornecedores-tabela-corpo"
-        );
-
-    corpo?.addEventListener(
-        "click",
-        evento => {
-
-            const linha =
-                evento.target.closest(
-                    "tr[data-fornecedor-id]"
-                );
-
-            if(!linha){
-                return;
-            }
-
-            selecionarFornecedor(
-                linha.dataset.fornecedorId
-            );
-        }
-    );
-
-
-    /* ==================================================
-       ACESSIBILIDADE — ENTER / ESPAÇO
-    ================================================== */
-
-    corpo?.addEventListener(
-        "keydown",
-        evento => {
-
-            if(
-                evento.key !== "Enter" &&
-                evento.key !== " "
-            ){
-                return;
-            }
-
-            const linha =
-                evento.target.closest(
-                    "tr[data-fornecedor-id]"
-                );
-
-            if(!linha){
-                return;
-            }
-
-            evento.preventDefault();
-
-            selecionarFornecedor(
-                linha.dataset.fornecedorId
-            );
-        }
-    );
-
-
+   
     /* ==================================================
        FECHAR DETALHE DO FORNECEDOR
     ================================================== */
@@ -1527,7 +1466,6 @@ function renderizarTabela(lista){
         return;
     }
 
-
     corpo.innerHTML =
         lista.map(item => {
 
@@ -1596,8 +1534,55 @@ function renderizarTabela(lista){
         .join("");
 
 
+    /* ==================================================
+       EVENTOS DIRETOS NAS LINHAS
+    ================================================== */
+
+        corpo
+        .querySelectorAll(
+            "tr[data-fornecedor-id]"
+        )
+        .forEach(
+            linha => {
+
+                /* CLIQUE */
+                linha.addEventListener(
+                    "click",
+                    () => {
+
+                        selecionarFornecedor(
+                            linha.dataset.fornecedorId
+                        );
+                    }
+                );
+
+
+                /* ENTER / ESPAÇO */
+                linha.addEventListener(
+                    "keydown",
+                    evento => {
+
+                        if(
+                            evento.key !== "Enter" &&
+                            evento.key !== " "
+                        ){
+                            return;
+                        }
+
+                        evento.preventDefault();
+
+                        selecionarFornecedor(
+                            linha.dataset.fornecedorId
+                        );
+                    }
+                );
+            }
+        );
+
+
     destacarLinhaSelecionada();
 }
+    
 /* ======================================================
    SELEÇÃO
 ====================================================== */
