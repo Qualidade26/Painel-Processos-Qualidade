@@ -1605,74 +1605,67 @@ function destruirGraficosFornecedores(){
     estado.graficos.clear();
 }
 
-   const rotulosRoscaFornecedores={
-    id:"rotulosRoscaFornecedores",
+   const centroRoscaFornecedores={
+    id:"centroRoscaFornecedores",
 
-    afterDatasetsDraw(chart){
-        if(chart.config.type!=="doughnut") return;
+    afterDraw(chart){
+        if(chart.config.type!=="doughnut"){
+            return;
+        }
 
-        const dataset=chart.data.datasets[0];
         const meta=chart.getDatasetMeta(0);
 
-        if(!dataset||!meta) return;
+        if(
+            !meta ||
+            !meta.data ||
+            !meta.data.length
+        ){
+            return;
+        }
 
-        const total=dataset.data.reduce(
-            (s,v)=>s+numero(v),
-            0
+        const arco=meta.data[0];
+
+        const propriedades=arco.getProps(
+            ["x","y","innerRadius"],
+            true
         );
-
-        if(!total) return;
 
         const ctx=chart.ctx;
 
         ctx.save();
 
+        ctx.beginPath();
+
+        ctx.arc(
+            propriedades.x,
+            propriedades.y,
+            propriedades.innerRadius,
+            0,
+            Math.PI*2
+        );
+
         ctx.fillStyle="#ffffff";
-        ctx.font='800 10px "Segoe UI",Arial,sans-serif';
+        ctx.fill();
+
         ctx.textAlign="center";
         ctx.textBaseline="middle";
+        ctx.fillStyle="#0f1b3d";
 
-        meta.data.forEach((arco,i)=>{
-            const valor=numero(dataset.data[i]);
+        ctx.font='900 24px "Segoe UI",Arial,sans-serif';
 
-            if(
-                !valor ||
-                !chart.getDataVisibility(i)
-            ){
-                return;
-            }
+        ctx.fillText(
+            "100%",
+            propriedades.x,
+            propriedades.y-7
+        );
 
-            const percentual=
-                Math.round(
-                    (valor/total)*100
-                );
+        ctx.font='900 11px "Segoe UI",Arial,sans-serif';
 
-            if(percentual<5) return;
-
-            const angulo=
-                (arco.startAngle+arco.endAngle)/2;
-
-            const raio=
-                arco.innerRadius+
-                (
-                    (arco.outerRadius-arco.innerRadius)
-                    *0.62
-                );
-
-            const x=
-                arco.x+
-                Math.cos(angulo)*raio;
-
-            const y=
-                arco.y+
-                Math.sin(angulo)*raio;
-
-            ctx.fillText(
-                `${percentual}%`,
-                x,
-                y
-            );
-        });
+        ctx.fillText(
+            "TOTAL",
+            propriedades.x,
+            propriedades.y+15
+        );
 
         ctx.restore();
     }
@@ -1991,8 +1984,9 @@ function criarGraficoClassificacoes(){
             }]
         },
 
-       plugins:[
-    rotulosRoscaFornecedores
+  plugins:[
+    rotulosRoscaFornecedores,
+    centroRoscaFornecedores
 ],
 
         options:{
