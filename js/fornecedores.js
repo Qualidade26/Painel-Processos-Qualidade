@@ -1593,65 +1593,75 @@ function obterPosicaoRanking(id){
 /* ======================================================
    DESTRUIR GRÁFICOS
 ====================================================== */
-function destruirGraficosFornecedores(){
-    estado.graficos.forEach(
-        grafico => {
-            try{
-                grafico.destroy();
-            }catch(erro){
-                console.warn(
-                    "Não foi possível destruir gráfico de fornecedores.",
-                    erro
-                );
-            }
-        }
-    );
-    estado.graficos.clear();
-}
-const rotulosBarraFornecedores={
-    id:"rotulosBarraFornecedores",
-    afterDatasetsDraw(chart){
-        if(chart.config.type!=="bar"||chart.options.indexAxis!=="y") return;
-        const dataset=chart.data.datasets[0];
-        const meta=chart.getDatasetMeta(0);
-        if(!dataset||!meta) return;
-        const ctx=chart.ctx;
-        ctx.save();
-        ctx.fillStyle="#0f1b3d";
-        ctx.font='800 10px "Segoe UI",Arial,sans-serif';
-        ctx.textAlign="left";
-        ctx.textBaseline="middle";
-        meta.data.forEach((barra,i)=>{
-            const valor=numero(dataset.data[i]);
-            const pos=barra.tooltipPosition();
-            ctx.fillText(formatarInteiro(valor),pos.x+6,pos.y);
-        });
-        ctx.restore();
-    }
-};
 const rotulosRoscaFornecedores={
     id:"rotulosRoscaFornecedores",
+
     afterDatasetsDraw(chart){
         if(chart.config.type!=="doughnut") return;
+
         const dataset=chart.data.datasets[0];
         const meta=chart.getDatasetMeta(0);
+
         if(!dataset||!meta) return;
-        const total=dataset.data.reduce((s,v)=>s+numero(v),0);
+
+        const total=dataset.data.reduce(
+            (s,v)=>s+numero(v),
+            0
+        );
+
         if(!total) return;
+
         const ctx=chart.ctx;
+
         ctx.save();
+
         ctx.fillStyle="#ffffff";
         ctx.font='800 10px "Segoe UI",Arial,sans-serif';
         ctx.textAlign="center";
         ctx.textBaseline="middle";
+
         meta.data.forEach((arco,i)=>{
             const valor=numero(dataset.data[i]);
-            if(!valor||!chart.getDataVisibility(i)) return;
-            const percentual=Math.round((valor/total)*100);
+
+            if(
+                !valor ||
+                !chart.getDataVisibility(i)
+            ){
+                return;
+            }
+
+            const percentual=
+                Math.round(
+                    (valor/total)*100
+                );
+
             if(percentual<5) return;
-            const p=arco.getCenterPoint();
-            ctx.fillText(`${percentual}%`,p.x,p.y);
+
+            const angulo=
+                (arco.startAngle+arco.endAngle)/2;
+
+            const raio=
+                arco.innerRadius+
+                (
+                    (arco.outerRadius-arco.innerRadius)
+                    *0.62
+                );
+
+            const x=
+                arco.x+
+                Math.cos(angulo)*raio;
+
+            const y=
+                arco.y+
+                Math.sin(angulo)*raio;
+
+            ctx.fillText(
+                `${percentual}%`,
+                x,
+                y
+            );
         });
+
         ctx.restore();
     }
 };
