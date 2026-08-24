@@ -1469,3 +1469,48 @@
         animation:none !important;
     }
 }
+.pagina-fornecedores
+.fornecedores-tooltip-externo{
+    position:absolute;
+    z-index:20;
+
+    min-width:145px;
+    max-width:190px;
+
+    padding:8px 10px;
+
+    border:1px solid #6FA8FF;
+    border-radius:7px;
+
+    background:#fff;
+
+    color:#0f1b3d;
+
+    box-shadow:
+        0 4px 14px rgba(15,31,77,.16);
+
+    pointer-events:none;
+
+    opacity:0;
+
+    transition:opacity .12s ease;
+
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+.pagina-fornecedores
+.fornecedores-tooltip-externo strong{
+    display:block;
+    margin-bottom:4px;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+.pagina-fornecedores
+.fornecedores-tooltip-externo span{
+    display:block;
+
+    font-size:10px;
+    font-weight:700;
+}
