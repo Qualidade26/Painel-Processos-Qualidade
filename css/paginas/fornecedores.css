@@ -478,125 +478,248 @@
    PROCESSOS POR TIPO
 ========================================================== */
 
+/* PAINEL EXTERNO — IGUAL AOS OUTROS PAINÉIS */
 .pagina-fornecedores.pagina-fornecedores
 .fornecedores-panel--origem{
     display:grid;
-    grid-template-rows:auto minmax(0,1fr) auto;
-    padding:8px 10px 7px;
-    border:1px solid #0f2557;
-    border-radius:10px;
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr)
+        auto;
+
+    min-width:0;
+    min-height:0;
+
+    height:100%;
+
+    padding:7px 9px 6px;
+
+    border:1px solid var(--forn-linha);
+    border-radius:8px;
+
     background:#fff;
+
+    box-shadow:
+        0 2px 7px rgba(15,31,77,.04);
+
+    overflow:hidden;
 }
+
+
+/* ==========================================================
+   QUADRO INTERNO — AZUL-MARINHO
+========================================================== */
 
 .pagina-fornecedores.pagina-fornecedores
 .fornecedores-origem-grid{
     display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
+
+    grid-template-columns:
+        repeat(5,minmax(0,1fr));
+
     width:100%;
     height:100%;
+
     min-width:0;
     min-height:0;
+
     margin:4px 0 0;
+
     border:1.5px solid #0f2557;
     border-radius:8px;
+
     overflow:hidden;
+
     background:#fff;
 }
 
+
+/* ==========================================================
+   COLUNAS
+========================================================== */
+
 .pagina-fornecedores .fornecedores-origem-item{
     display:grid;
-    grid-template-rows:minmax(0,1fr) 42px 34px;
+
+    grid-template-rows:
+        minmax(0,1fr)
+        42px
+        34px;
+
     min-width:0;
     min-height:0;
+
     padding:0;
+
     border-right:1px solid #0f2557;
+
     background:#fff;
+
     text-align:center;
 }
+
 
 .pagina-fornecedores .fornecedores-origem-item:last-child{
     border-right:0;
 }
 
+
+/* ==========================================================
+   ÍCONE + NOME
+========================================================== */
+
 .pagina-fornecedores .fornecedores-origem-item__topo{
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
+
     gap:7px;
+
     min-width:0;
     min-height:0;
+
     padding:10px 5px 8px;
+
     border-bottom:1px solid #0f2557;
+
     background:#fff;
 }
 
+
 .pagina-fornecedores .fornecedores-origem-item__icone{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     width:38px;
     height:38px;
+
     color:var(--origem-cor);
 }
+
 
 .pagina-fornecedores .fornecedores-origem-item__icone svg{
     display:block;
+
     width:100%;
     height:100%;
+
     fill:currentColor;
 }
 
+
 .pagina-fornecedores .fornecedores-origem-item__label{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     width:100%;
     min-height:28px;
+
     padding:0 3px;
+
     color:#0f1b3d;
-    font:900 11px/1.12 "Segoe UI",Arial,sans-serif;
+
+    font:
+        900 11px/1.12
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     text-align:center;
 }
+
+
+/* ==========================================================
+   VALORES
+========================================================== */
 
 .pagina-fornecedores .fornecedores-origem-item__valor{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     width:100%;
     height:42px;
+
     padding:0;
+
     border:0;
     border-bottom:1px solid #dce8ff;
+
     color:#0f1b3d;
-    font:900 24px/1 "Segoe UI",Arial,sans-serif;
+
+    font:
+        900 24px/1
+        "Segoe UI",
+        Arial,
+        sans-serif;
 }
+
+
+/* ==========================================================
+   PERCENTUAIS
+========================================================== */
 
 .pagina-fornecedores .fornecedores-origem-item__percentual{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     width:100%;
     height:34px;
+
     padding:0;
+
     color:var(--origem-cor);
-    font:900 20px/1 "Segoe UI",Arial,sans-serif;
+
+    font:
+        900 20px/1
+        "Segoe UI",
+        Arial,
+        sans-serif;
 }
+
+
+/* ==========================================================
+   TOTAL
+========================================================== */
 
 .pagina-fornecedores .fornecedores-origem-total{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     gap:4px;
+
     min-height:24px;
+
     margin:4px 0 0;
+
     color:#0f1b3d;
-    font:900 12px/1 "Segoe UI",Arial,sans-serif;
+
+    font:
+        900 12px/1
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     text-align:center;
 }
 
+
 .pagina-fornecedores .fornecedores-origem-total strong{
     color:#ff5a16;
+
     font-weight:900;
 }
 
