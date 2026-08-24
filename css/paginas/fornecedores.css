@@ -330,7 +330,8 @@
 
 
 .pagina-fornecedores .fornecedores-panel__titulo{
-    margin:0 0 2px;
+    width:100%;
+    margin:0 0 4px;
 
     color:var(--forn-azul-escuro);
 
@@ -338,6 +339,7 @@
     font-weight:900;
     line-height:1.05;
 
+    text-align:center;
     text-transform:uppercase;
 }
 
