@@ -5,11 +5,15 @@
        "origens": [
 
          {"nome": "Avaria estoque", "valor":   3446.36},
-         {"nome": "Devolução avaria", "valor":   13891.58},
+         {"nome": "Devolução", "valor":   13891.58},
          {"nome": "Desvio de Qualidade", "valor":   150480.41},
          {"nome": "Vencido", "valor": 422973.14},
          {"nome": "Avaria Nacional", "valor":   186.78},
-         {"nome": "Destinado pela Empresa",   "valor": 405596.38}
+        {
+    "nome": "Avaria Importação",
+    "valor": 15824.35
+},
+         {"nome": "Certificados",   "valor": 405596.38}
  ],
 
 
