@@ -21,8 +21,8 @@
     --forn-texto:var(--text,#0f1f4d);
     --forn-texto-suave:var(--muted,#5c6c96);
 
-    --forn-linha:var(--line,#b8d1ff);
-    --forn-linha-suave:var(--line2,#dce8ff);
+   --forn-linha:#6FA8FF;
+--forn-linha-suave:#A9CAFF;
 
     --forn-fundo:#f8fbff;
 
@@ -1314,9 +1314,9 @@
 
 
     .pagina-fornecedores .fornecedores-origem-item__icone{
-        width:34px;
+    width:34px;
     height:34px;
-    }
+}
 
 
     .pagina-fornecedores .fornecedores-origem-item__valor{
