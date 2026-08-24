@@ -750,11 +750,6 @@ function criarPainelClassificacao(){
                     role="img"
                     aria-label="Distribuição por classificação"
                 ></canvas>
-
-                <div class="fornecedores-rosca-centro" aria-hidden="true">
-                    <strong>100%</strong>
-                    <span>TOTAL</span>
-                </div>
             </div>
 
             <div class="fornecedores-classificacao-total">
