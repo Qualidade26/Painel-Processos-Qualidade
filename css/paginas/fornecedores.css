@@ -750,18 +750,114 @@
 
 /* ==========================================================
    AVALIAÇÃO POR FORNECEDOR
+   FECHADO = TABELA 100%
+   ABERTO  = TABELA + DETALHE
 ========================================================== */
 
 .pagina-fornecedores .fornecedores-avaliacao-grid{
     display:grid;
 
-    grid-template-columns:
-        minmax(0,1fr)
-        minmax(280px,330px);
+    grid-template-columns:minmax(0,1fr);
+
+    width:100%;
+    min-width:0;
 
     gap:12px;
 
-    align-items:stretch;
+    align-items:start;
+}
+
+
+/* ==========================================================
+   QUANDO UM FORNECEDOR É SELECIONADO
+========================================================== */
+
+.pagina-fornecedores
+.fornecedores-avaliacao-grid.tem-detalhe{
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(285px,330px);
+}
+
+
+/* ==========================================================
+   PAINEL LATERAL
+========================================================== */
+
+.pagina-fornecedores .fornecedor-detalhe{
+    position:relative;
+
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:16px 13px 13px;
+
+    border:1px solid var(--forn-linha);
+    border-radius:9px;
+
+    background:#fff;
+
+    box-shadow:
+        0 3px 10px rgba(15,23,42,.04);
+}
+
+
+/* hidden precisa realmente esconder */
+.pagina-fornecedores .fornecedor-detalhe[hidden]{
+    display:none !important;
+}
+
+
+/* ==========================================================
+   BOTÃO X
+========================================================== */
+
+.pagina-fornecedores .fornecedor-detalhe__fechar{
+    position:absolute;
+
+    top:8px;
+    right:8px;
+
+    z-index:5;
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    border:1px solid var(--forn-linha);
+    border-radius:7px;
+
+    background:#fff;
+
+    color:var(--forn-azul-escuro);
+
+    font-family:"Segoe UI",Arial,sans-serif;
+    font-size:22px;
+    font-weight:900;
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:
+        background-color .15s ease,
+        color .15s ease,
+        border-color .15s ease;
+}
+
+
+.pagina-fornecedores .fornecedor-detalhe__fechar:hover{
+    background:#eef5ff;
+
+    border-color:var(--forn-azul);
+
+    color:var(--forn-azul);
 }
 
 
@@ -1033,16 +1129,6 @@
 /* ==========================================================
    DETALHAMENTO DO FORNECEDOR
 ========================================================== */
-
-.pagina-fornecedores .fornecedor-detalhe{
-    display:flex;
-
-    flex-direction:column;
-
-    padding:16px 13px 13px;
-}
-
-
 .pagina-fornecedores .fornecedor-detalhe__rotulo{
     margin:0 0 7px;
 
