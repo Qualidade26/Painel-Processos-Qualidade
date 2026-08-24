@@ -2014,15 +2014,13 @@ function criarGraficoClassificacoes(){
                 }
             },
 
-            plugins:{
-                datalabels:{
-                    display:false
-                },
+         plugins:{
+    datalabels:false,
 
-                legend:{
-                    display:true,
-                    position:"right",
-                    align:"center",
+    legend:{
+        display:true,
+        position:"right",
+        align:"center",
 
                     labels:{
                         color:"#1f2937",
