@@ -351,21 +351,31 @@ function normalizarFornecedor(
                 ],
                 0
             ),
-        produtos:
-            primeiroNumero(
-                item,
-                [
-                    "produtosfornecidos",
-                    "produtos",
-                    "totalProdutos",
-                    "skuano",
-                    "sku",
-                    "skus",
-                    "totalSku",
-                    "quantidadeProdutos"
-                ],
-                0
-            ),
+       produtos:
+    primeiroNumero(
+        item,
+        [
+            "produtosfornecidos",
+            "produtos",
+            "totalProdutos",
+            "quantidadeProdutos"
+        ],
+        0
+    ),
+
+skus:
+    primeiroNumero(
+        item,
+        [
+            "skuano",
+            "skuAno",
+            "sku",
+            "skus",
+            "totalSku",
+            "totalSkus"
+        ],
+        0
+    ),
         rncs:
             primeiroNumero(
                 item,
@@ -1028,8 +1038,11 @@ function montarEstrutura(raiz){
                                         Processos
                                     </th>
                                     <th>
-                                        Produtos/SKUs
+                                       Qtd Produtos
                                     </th>
+                                    <th>
+    SKUs
+</th>
                                     <th>
                                         RNCs
                                     </th>
@@ -1056,7 +1069,17 @@ function montarEstrutura(raiz){
                 <aside
                     class="fornecedor-detalhe"
                     aria-live="polite"
+                 hidden
                 >
+                <button
+    type="button"
+    class="fornecedor-detalhe__fechar"
+    id="fornecedor-detalhe-fechar"
+    aria-label="Fechar fornecedor selecionado"
+    title="Fechar"
+>
+    ×
+</button>
                     <p class="fornecedor-detalhe__rotulo">
                         Fornecedor selecionado
                     </p>
@@ -1087,44 +1110,51 @@ function montarEstrutura(raiz){
                             </span>
                         </div>
                     </div>
-                    <div class="fornecedor-detalhe__metricas">
-                        ${criarMetrica(
-                            "Processos",
-                            "processos",
-                            "azul",
-                            "forn-detalhe-processos"
-                        )}
-                        ${criarMetrica(
-                            "Produtos/SKUs",
-                            "processos",
-                            "azul",
-                            "forn-detalhe-produtos"
-                        )}
-                        ${criarMetrica(
-                            "RNCs",
-                            "alerta",
-                            "vermelho",
-                            "forn-detalhe-rncs"
-                        )}
-                        ${criarMetrica(
-                            "Retrabalhos",
-                            "ferramenta",
-                            "laranja",
-                            "forn-detalhe-retrabalhos"
-                        )}
-                        ${criarMetrica(
-                            "Reclamações",
-                            "alerta",
-                            "roxo",
-                            "forn-detalhe-reclamacoes"
-                        )}
-                        ${criarMetrica(
-                            "Posição no ranking",
-                            "estrela",
-                            "azul",
-                            "forn-detalhe-posicao"
-                        )}
-                    </div>
+                   <div class="fornecedor-detalhe__metricas">
+
+    ${criarMetrica(
+        "Produtos",
+        "processos",
+        "azul",
+        "forn-detalhe-produtos"
+    )}
+
+    ${criarMetrica(
+        "SKUs",
+        "processos",
+        "azul",
+        "forn-detalhe-skus"
+    )}
+
+    ${criarMetrica(
+        "RNCs",
+        "alerta",
+        "vermelho",
+        "forn-detalhe-rncs"
+    )}
+
+    ${criarMetrica(
+        "Retrabalhos",
+        "ferramenta",
+        "laranja",
+        "forn-detalhe-retrabalhos"
+    )}
+
+    ${criarMetrica(
+        "Reclamações",
+        "alerta",
+        "roxo",
+        "forn-detalhe-reclamacoes"
+    )}
+
+    ${criarMetrica(
+        "Posição no ranking",
+        "estrela",
+        "azul",
+        "forn-detalhe-posicao"
+    )}
+
+</div>
                 </aside>
             </div>
         </section>
@@ -1234,10 +1264,16 @@ function abrirAba(nome){
    EVENTOS
 ====================================================== */
 function configurarEventos(){
+
+    /* ==================================================
+       ABAS INTERNAS
+    ================================================== */
+
     const botoes =
         estado.raiz.querySelectorAll(
             "[data-fornecedores-aba]"
         );
+
     botoes.forEach(
         botao => {
             botao.addEventListener(
@@ -1250,69 +1286,127 @@ function configurarEventos(){
             );
         }
     );
+
+
+    /* ==================================================
+       PESQUISA
+    ================================================== */
+
     const pesquisa =
         estado.raiz.querySelector(
             "#fornecedores-pesquisa"
         );
+
     pesquisa?.addEventListener(
         "input",
         evento => {
             estado.termoBusca =
                 evento.target.value;
+
             aplicarFiltros();
         }
     );
+
+
+    /* ==================================================
+       FILTRO POR CLASSIFICAÇÃO
+    ================================================== */
+
     const filtro =
         estado.raiz.querySelector(
             "#fornecedores-classificacao"
         );
+
     filtro?.addEventListener(
         "change",
         evento => {
             estado.filtroClassificacao =
                 evento.target.value;
+
             aplicarFiltros();
         }
     );
+
+
+    /* ==================================================
+       CLIQUE NA TABELA
+    ================================================== */
+
     const corpo =
         estado.raiz.querySelector(
             "#fornecedores-tabela-corpo"
         );
+
     corpo?.addEventListener(
         "click",
         evento => {
+
             const linha =
                 evento.target.closest(
                     "tr[data-fornecedor-id]"
                 );
+
             if(!linha){
                 return;
             }
+
             selecionarFornecedor(
                 linha.dataset.fornecedorId
             );
         }
     );
+
+
+    /* ==================================================
+       ACESSIBILIDADE — ENTER / ESPAÇO
+    ================================================== */
+
     corpo?.addEventListener(
         "keydown",
         evento => {
+
             if(
                 evento.key !== "Enter" &&
                 evento.key !== " "
             ){
                 return;
             }
+
             const linha =
                 evento.target.closest(
                     "tr[data-fornecedor-id]"
                 );
+
             if(!linha){
                 return;
             }
+
             evento.preventDefault();
+
             selecionarFornecedor(
                 linha.dataset.fornecedorId
             );
+        }
+    );
+
+
+    /* ==================================================
+       FECHAR DETALHE DO FORNECEDOR
+    ================================================== */
+
+    const botaoFecharDetalhe =
+        estado.raiz.querySelector(
+            "#fornecedor-detalhe-fechar"
+        );
+
+    botaoFecharDetalhe?.addEventListener(
+        "click",
+        evento => {
+
+            evento.preventDefault();
+            evento.stopPropagation();
+
+            fecharDetalheFornecedor();
         }
     );
 }
@@ -1320,60 +1414,82 @@ function configurarEventos(){
    FILTROS
 ====================================================== */
 function aplicarFiltros(){
+
     const busca =
         normalizarTexto(
             estado.termoBusca
         );
+
     const classificacao =
         estado.filtroClassificacao;
+
     const filtrados =
         [...estado.fornecedores]
-        .filter(
-            item => {
-                if(!busca){
-                    return true;
-                }
-                return normalizarTexto(
-                    item.nome
-                ).includes(
-                    busca
-                );
+
+        .filter(item => {
+
+            if(!busca){
+                return true;
             }
-        )
-        .filter(
-            item => {
-                if(
-                    !classificacao ||
-                    classificacao === "todos"
-                ){
-                    return true;
-                }
-                return item.classificacao.slug === classificacao;
+
+            return normalizarTexto(
+                item.nome
+            ).includes(
+                busca
+            );
+        })
+
+        .filter(item => {
+
+            if(
+                !classificacao ||
+                classificacao === "todos"
+            ){
+                return true;
             }
-        )
+
+            return (
+                item.classificacao.slug ===
+                classificacao
+            );
+        })
+
         .sort(
             (a,b) =>
                 b.indice -
                 a.indice ||
+
                 b.processos -
                 a.processos ||
+
                 b.produtos -
                 a.produtos
         );
+
+
+    /* Atualiza a tabela */
     renderizarTabela(
         filtrados
     );
+
+
+    /* Verifica se o fornecedor selecionado
+       continua existindo depois do filtro */
     const selecionadoExiste =
         filtrados.some(
             item =>
                 item.id ===
                 estado.fornecedorSelecionado
         );
-    if(!selecionadoExiste){
-        selecionarFornecedor(
-            filtrados[0]?.id || null
-        );
-    }else{
+
+
+    if(
+        estado.fornecedorSelecionado &&
+        !selecionadoExiste
+    ){
+        fecharDetalheFornecedor();
+    }
+    else{
         destacarLinhaSelecionada();
     }
 }
@@ -1392,7 +1508,7 @@ function renderizarTabela(lista){
         corpo.innerHTML = `
             <tr>
                 <td
-                    colspan="8"
+                    colspan="9"
                     class="fornecedores-tabela-vazia"
                 >
                     Nenhum fornecedor encontrado.
@@ -1415,12 +1531,17 @@ function renderizarTabela(lista){
                         <td>
                             ${formatarInteiro(item.processos)}
                         </td>
-                        <td>
-                            ${formatarInteiro(item.produtos)}
-                        </td>
-                        <td>
-                            ${formatarInteiro(item.rncs)}
-                        </td>
+                       <td>
+    ${formatarInteiro(item.produtos)}
+</td>
+
+<td>
+    ${formatarInteiro(item.skus)}
+</td>
+
+<td>
+    ${formatarInteiro(item.rncs)}
+</td>
                         <td>
                             ${formatarInteiro(item.retrabalhos)}
                         </td>
@@ -1428,14 +1549,22 @@ function renderizarTabela(lista){
                             ${formatarInteiro(item.reclamacoes)}
                         </td>
                         <td>
-                            ${formatarPercentual(item.indice)}
-                        </td>
+    ${
+        item.indice > 0
+            ? formatarPercentual(item.indice)
+            : "—"
+    }
+</td>
                         <td>
-                            <span
-                                class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
-                            >
-                                ${item.classificacao.label}
-                            </span>
+    ${
+        item.classificacao.slug === "sem-avaliacao"
+            ? ""
+            : `
+                <span
+                    class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
+                >
+                    ${item.classificacao.label}
+                </span>
                         </td>
                     </tr>
                 `;
@@ -1448,16 +1577,62 @@ function renderizarTabela(lista){
    SELEÇÃO
 ====================================================== */
 function selecionarFornecedor(id){
-    estado.fornecedorSelecionado =
-        id;
+
     const fornecedor =
         estado.fornecedores.find(
-            item =>
-                item.id === id
+            item => item.id === id
         ) || null;
-    atualizarDetalhe(
-        fornecedor
-    );
+
+    if(!fornecedor){
+        fecharDetalheFornecedor();
+        return;
+    }
+
+    estado.fornecedorSelecionado =
+        fornecedor.id;
+
+    atualizarDetalhe(fornecedor);
+
+    const grid =
+        estado.raiz.querySelector(
+            ".fornecedores-avaliacao-grid"
+        );
+
+    const detalhe =
+        estado.raiz.querySelector(
+            ".fornecedor-detalhe"
+        );
+
+    grid?.classList.add("tem-detalhe");
+
+    if(detalhe){
+        detalhe.hidden = false;
+    }
+
+    destacarLinhaSelecionada();
+}
+
+
+function fecharDetalheFornecedor(){
+
+    estado.fornecedorSelecionado = null;
+
+    const grid =
+        estado.raiz.querySelector(
+            ".fornecedores-avaliacao-grid"
+        );
+
+    const detalhe =
+        estado.raiz.querySelector(
+            ".fornecedor-detalhe"
+        );
+
+    grid?.classList.remove("tem-detalhe");
+
+    if(detalhe){
+        detalhe.hidden = true;
+    }
+
     destacarLinhaSelecionada();
 }
 function destacarLinhaSelecionada(){
@@ -1521,18 +1696,18 @@ function atualizarDetalhe(
             classificacao.cor
         );
     }
-    definirTexto(
-        "forn-detalhe-processos",
-        formatarInteiro(
-            fornecedor?.processos || 0
-        )
-    );
-    definirTexto(
+   inirTexto(
         "forn-detalhe-produtos",
         formatarInteiro(
             fornecedor?.produtos || 0
         )
     );
+   definirTexto(
+    "forn-detalhe-skus",
+    formatarInteiro(
+        fornecedor?.skus || 0
+    )
+);
     definirTexto(
         "forn-detalhe-rncs",
         formatarInteiro(
