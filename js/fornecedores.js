@@ -1605,7 +1605,78 @@ function destruirGraficosFornecedores(){
 
     estado.graficos.clear();
 }
+const rotulosRoscaFornecedores={
+    id:"rotulosRoscaFornecedores",
 
+    afterDatasetsDraw(chart){
+        if(chart.config.type!=="doughnut") return;
+
+        const dataset=chart.data.datasets[0];
+        const meta=chart.getDatasetMeta(0);
+
+        if(!dataset||!meta) return;
+
+        const total=dataset.data.reduce(
+            (s,v)=>s+numero(v),
+            0
+        );
+
+        if(!total) return;
+
+        const ctx=chart.ctx;
+
+        ctx.save();
+
+        ctx.fillStyle="#ffffff";
+        ctx.font='800 10px "Segoe UI",Arial,sans-serif';
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+
+        meta.data.forEach((arco,i)=>{
+            const valor=numero(dataset.data[i]);
+
+            if(
+                !valor ||
+                !chart.getDataVisibility(i)
+            ){
+                return;
+            }
+
+            const percentual=
+                Math.round(
+                    (valor/total)*100
+                );
+
+            if(percentual<5) return;
+
+            const angulo=
+                (arco.startAngle+arco.endAngle)/2;
+
+            const raio=
+                arco.innerRadius+
+                (
+                    (arco.outerRadius-arco.innerRadius)
+                    *0.62
+                );
+
+            const x=
+                arco.x+
+                Math.cos(angulo)*raio;
+
+            const y=
+                arco.y+
+                Math.sin(angulo)*raio;
+
+            ctx.fillText(
+                `${percentual}%`,
+                x,
+                y
+            );
+        });
+
+        ctx.restore();
+    }
+};
    const centroRoscaFornecedores={
     id:"centroRoscaFornecedores",
 
