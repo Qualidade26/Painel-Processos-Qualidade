@@ -1854,7 +1854,7 @@ function criarGraficoBarras(
                 layout:{
                     padding:{
                         top:2,
-                        right:34,
+                        right:18,
                         bottom:2,
                         left:0
                     }
@@ -1926,7 +1926,7 @@ function criarGraficoBarras(
                        ticks:{
     color:"#1f2937",
     autoSkip:false,
-    padding:9,
+    padding:5,
 
     font:{
         family:"Segoe UI",
@@ -1953,7 +1953,7 @@ function criarGraficoBarras(
     }
 },
 afterFit(scale){
-    scale.width = 245;
+    scale.width = 145;
 }
 }
 }
