@@ -267,32 +267,36 @@ function media(lista){
    CLASSIFICAÇÃO
 ====================================================== */
 function obterClassificacao(indice){
+
     const percentual =
         normalizarIndice(indice) * 100;
+
+    /* SEM AVALIAÇÃO */
+    if(percentual <= 0){
+        return {
+            slug:"sem-avaliacao",
+            label:"Sem avaliação",
+            cor:"#94a3b8"
+        };
+    }
+
     if(percentual >= 95){
         return CLASSIFICACOES.excelente;
     }
+
     if(percentual >= 90){
         return CLASSIFICACOES.muitoBom;
     }
+
     if(percentual >= 80){
         return CLASSIFICACOES.atencao;
     }
+
     if(percentual >= 70){
         return CLASSIFICACOES.ruim;
     }
+
     return CLASSIFICACOES.critico;
-}
-function obterClassificacaoPorSlug(
-    slug
-){
-    return Object.values(
-        CLASSIFICACOES
-    )
-    .find(
-        item =>
-            item.slug === slug
-    ) || CLASSIFICACOES.critico;
 }
 /* ======================================================
    NORMALIZAÇÃO DO FORNECEDOR
@@ -1497,14 +1501,18 @@ function aplicarFiltros(){
    TABELA
 ====================================================== */
 function renderizarTabela(lista){
+
     const corpo =
         estado.raiz.querySelector(
             "#fornecedores-tabela-corpo"
         );
+
     if(!corpo){
         return;
     }
+
     if(!lista.length){
+
         corpo.innerHTML = `
             <tr>
                 <td
@@ -1515,62 +1523,79 @@ function renderizarTabela(lista){
                 </td>
             </tr>
         `;
+
         return;
     }
+
+
     corpo.innerHTML =
-        lista.map(
-            item => {
-                return `
-                    <tr
-                        data-fornecedor-id="${escaparHtml(item.id)}"
-                        tabindex="0"
-                    >
-                        <td>
-                            ${escaparHtml(item.nome)}
-                        </td>
-                        <td>
-                            ${formatarInteiro(item.processos)}
-                        </td>
-                       <td>
-    ${formatarInteiro(item.produtos)}
-</td>
+        lista.map(item => {
 
-<td>
-    ${formatarInteiro(item.skus)}
-</td>
+            const temAvaliacao =
+                numero(item.indice) > 0;
 
-<td>
-    ${formatarInteiro(item.rncs)}
-</td>
-                        <td>
-                            ${formatarInteiro(item.retrabalhos)}
-                        </td>
-                        <td>
-                            ${formatarInteiro(item.reclamacoes)}
-                        </td>
-                        <td>
-    ${
-        item.indice > 0
-            ? formatarPercentual(item.indice)
-            : "—"
-    }
-</td>
-                        <td>
-    ${
-        item.classificacao.slug === "sem-avaliacao"
-            ? ""
-            : `
-                <span
-                    class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
+            return `
+                <tr
+                    data-fornecedor-id="${escaparHtml(item.id)}"
+                    tabindex="0"
                 >
-                    ${item.classificacao.label}
-                </span>
-                        </td>
-                    </tr>
-                `;
-            }
-        )
+
+                    <td>
+                        ${escaparHtml(item.nome)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.processos)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.produtos)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.skus)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.rncs)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.retrabalhos)}
+                    </td>
+
+                    <td>
+                        ${formatarInteiro(item.reclamacoes)}
+                    </td>
+
+                    <td>
+                        ${
+                            temAvaliacao
+                                ? formatarPercentual(item.indice)
+                                : "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            temAvaliacao
+                                ? `
+                                    <span
+                                        class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
+                                    >
+                                        ${item.classificacao.label}
+                                    </span>
+                                `
+                                : ""
+                        }
+                    </td>
+
+                </tr>
+            `;
+        })
         .join("");
+
+
     destacarLinhaSelecionada();
 }
 /* ======================================================
@@ -1653,112 +1678,126 @@ function destacarLinhaSelecionada(){
 /* ======================================================
    DETALHE DO FORNECEDOR
 ====================================================== */
-function atualizarDetalhe(
-    fornecedor
-){
+function atualizarDetalhe(fornecedor){
+
     const nome =
         fornecedor?.nome ||
         "Nenhum fornecedor";
+
     const indice =
         fornecedor?.indice || 0;
+
+    const temAvaliacao =
+        numero(indice) > 0;
+
     const classificacao =
-        fornecedor?.classificacao ||
-        CLASSIFICACOES.critico;
+        fornecedor?.classificacao || {
+            slug:"sem-avaliacao",
+            label:"Sem avaliação",
+            cor:"#94a3b8"
+        };
+
+
     definirTexto(
         "fornecedor-detalhe-nome",
         nome
     );
+
+
     definirTexto(
         "fornecedor-gauge-valor",
-        formatarPercentual(
-            indice
-        )
-    );
-    definirTexto(
-        "fornecedor-gauge-classificacao",
-        fornecedor
-            ? classificacao.label
+        temAvaliacao
+            ? formatarPercentual(indice)
             : "—"
     );
+
+
+    definirTexto(
+        "fornecedor-gauge-classificacao",
+        temAvaliacao
+            ? classificacao.label
+            : "SEM AVALIAÇÃO"
+    );
+
+
     const gauge =
         estado.raiz.querySelector(
             "#fornecedor-gauge"
         );
+
+
     if(gauge){
+
         gauge.style.setProperty(
             "--gauge-valor",
-            String(
-                indice * 100
-            )
+            temAvaliacao
+                ? String(indice * 100)
+                : "0"
         );
+
         gauge.style.setProperty(
             "--gauge-cor",
-            classificacao.cor
+            temAvaliacao
+                ? classificacao.cor
+                : "#94a3b8"
         );
     }
-   inirTexto(
+
+
+    definirTexto(
         "forn-detalhe-produtos",
         formatarInteiro(
             fornecedor?.produtos || 0
         )
     );
-   definirTexto(
-    "forn-detalhe-skus",
-    formatarInteiro(
-        fornecedor?.skus || 0
-    )
-);
+
+
+    definirTexto(
+        "forn-detalhe-skus",
+        formatarInteiro(
+            fornecedor?.skus || 0
+        )
+    );
+
+
     definirTexto(
         "forn-detalhe-rncs",
         formatarInteiro(
             fornecedor?.rncs || 0
         )
     );
+
+
     definirTexto(
         "forn-detalhe-retrabalhos",
         formatarInteiro(
             fornecedor?.retrabalhos || 0
         )
     );
+
+
     definirTexto(
         "forn-detalhe-reclamacoes",
         formatarInteiro(
             fornecedor?.reclamacoes || 0
         )
     );
+
+
     const posicao =
         fornecedor
             ? obterPosicaoRanking(
                 fornecedor.id
             )
             : 0;
+
+
     definirTexto(
         "forn-detalhe-posicao",
-        posicao
+        temAvaliacao && posicao
             ? `${posicao}º`
             : "—"
     );
-}
-function obterPosicaoRanking(id){
-    const ranking =
-        [...estado.fornecedores]
-        .sort(
-            (a,b) =>
-                b.indice -
-                a.indice ||
-                b.processos -
-                a.processos ||
-                b.produtos -
-                a.produtos
-        );
-    const indice =
-        ranking.findIndex(
-            item =>
-                item.id === id
-        );
-    return indice >= 0
-        ? indice + 1
-        : 0;
 }
 /* ======================================================
    DESTRUIR GRÁFICOS
