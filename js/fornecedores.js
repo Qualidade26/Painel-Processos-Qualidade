@@ -1588,7 +1588,24 @@ function obterPosicaoRanking(id){
 /* ======================================================
    DESTRUIR GRÁFICOS
 ====================================================== */
-const rotulosRoscaFornecedores={
+function destruirGraficosFornecedores(){
+    estado.graficos.forEach(
+        grafico => {
+            try{
+                grafico.destroy();
+            }catch(erro){
+                console.warn(
+                    "Não foi possível destruir gráfico de fornecedores.",
+                    erro
+                );
+            }
+        }
+    );
+
+    estado.graficos.clear();
+}
+
+   const rotulosRoscaFornecedores={
     id:"rotulosRoscaFornecedores",
 
     afterDatasetsDraw(chart){
