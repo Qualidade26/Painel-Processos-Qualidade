@@ -481,175 +481,124 @@
 .pagina-fornecedores.pagina-fornecedores
 .fornecedores-panel--origem{
     display:grid;
-
-    grid-template-rows:
-        auto
-        minmax(0,1fr)
-        auto;
+    grid-template-rows:auto minmax(0,1fr) auto;
+    padding:8px 10px 7px;
+    border:1px solid #0f2557;
+    border-radius:10px;
+    background:#fff;
 }
-
 
 .pagina-fornecedores.pagina-fornecedores
 .fornecedores-origem-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(5,minmax(0,1fr));
-
+    grid-template-columns:repeat(5,minmax(0,1fr));
     width:100%;
     height:100%;
-
     min-width:0;
     min-height:0;
-
-    margin:0;
-
-    border:1px solid var(--forn-linha);
-    border-radius:6px;
-
+    margin:4px 0 0;
+    border:1.5px solid #0f2557;
+    border-radius:8px;
     overflow:hidden;
-
     background:#fff;
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item{
     display:grid;
-
-    grid-template-rows:
-        minmax(46px,1fr)
-        auto
-        auto;
-
-    align-items:center;
-    justify-items:center;
-
+    grid-template-rows:minmax(0,1fr) 42px 34px;
     min-width:0;
     min-height:0;
-
-    padding:4px 2px;
-
-    border-right:1px solid var(--forn-linha);
-
+    padding:0;
+    border-right:1px solid #0f2557;
     background:#fff;
-
     text-align:center;
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item:last-child{
     border-right:0;
 }
 
-
 .pagina-fornecedores .fornecedores-origem-item__topo{
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
     justify-content:center;
-
-    gap:2px;
-
+    gap:7px;
     min-width:0;
     min-height:0;
-
-    padding:0;
-
-    border:0;
-
-    background:transparent;
+    padding:10px 5px 8px;
+    border-bottom:1px solid #0f2557;
+    background:#fff;
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item__icone{
-    display:block;
-
-    width:27px;
-    height:27px;
-
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
     color:var(--origem-cor);
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item__icone svg{
     display:block;
-
     width:100%;
     height:100%;
-
     fill:currentColor;
 }
 
-
 .pagina-fornecedores .fornecedores-origem-item__label{
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    min-height:18px;
-
+    width:100%;
+    min-height:28px;
+    padding:0 3px;
     color:#0f1b3d;
-
-    font:800 9px/1.03 "Segoe UI",Arial,sans-serif;
-
+    font:900 11px/1.12 "Segoe UI",Arial,sans-serif;
     text-align:center;
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item__valor{
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     width:100%;
-
-    padding:4px 2px;
-
-    border-top:1px solid var(--forn-linha-suave);
-    border-bottom:1px solid var(--forn-linha-suave);
-
+    height:42px;
+    padding:0;
+    border:0;
+    border-bottom:1px solid #dce8ff;
     color:#0f1b3d;
-
-    font:900 22px/1 "Segoe UI",Arial,sans-serif;
+    font:900 24px/1 "Segoe UI",Arial,sans-serif;
 }
-
 
 .pagina-fornecedores .fornecedores-origem-item__percentual{
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     width:100%;
-
-    padding:4px 2px;
-
+    height:34px;
+    padding:0;
     color:var(--origem-cor);
-
-    font:900 17px/1 "Segoe UI",Arial,sans-serif;
+    font:900 20px/1 "Segoe UI",Arial,sans-serif;
 }
 
-
 .pagina-fornecedores .fornecedores-origem-total{
-    margin:2px 0 0;
-
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    min-height:24px;
+    margin:4px 0 0;
     color:#0f1b3d;
-
-    font:800 9px/1.05 "Segoe UI",Arial,sans-serif;
-
+    font:900 12px/1 "Segoe UI",Arial,sans-serif;
     text-align:center;
 }
 
-
 .pagina-fornecedores .fornecedores-origem-total strong{
-    color:#ff4b18;
+    color:#ff5a16;
     font-weight:900;
 }
-
 
 /* ==========================================================
    AVISO NOS GRÁFICOS
@@ -1243,18 +1192,18 @@
 
 
     .pagina-fornecedores .fornecedores-origem-item__icone{
-        width:23px;
-        height:23px;
+        width:34px;
+    height:34px;
     }
 
 
     .pagina-fornecedores .fornecedores-origem-item__valor{
-        font-size:20px;
+        font-size:22px;
     }
 
 
     .pagina-fornecedores .fornecedores-origem-item__percentual{
-        font-size:15px;
+        font-size:18px;
     }
 }
 
