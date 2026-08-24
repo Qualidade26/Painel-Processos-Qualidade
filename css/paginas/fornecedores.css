@@ -526,7 +526,7 @@
 
     margin:4px 0 0;
 
-    border:1.5px solid #0f2557;
+   border:1.5px solid #6FA8FF;
     border-radius:8px;
 
     overflow:hidden;
@@ -552,7 +552,7 @@
 
     padding:0;
 
-    border-right:1px solid #0f2557;
+  border-right:1px solid #6FA8FF;
 
     background:#fff;
 
@@ -584,8 +584,7 @@
 
     padding:10px 5px 8px;
 
-    border-bottom:1px solid #0f2557;
-
+   border-bottom:1px solid #6FA8FF;
     background:#fff;
 }
 
