@@ -2234,8 +2234,23 @@ tooltip:{
         tooltipEl.style.top =
             `${y}px`;
 
-        tooltipEl.style.opacity = "1";
+             tooltipEl.style.opacity = "1";
     }
+}
+
+            }
+        }
+    });
+
+    definirTexto(
+        "fornecedores-total-classificacao",
+        formatarInteiro(total)
+    );
+
+    estado.graficos.set(
+        "grafico-fornecedores-classificacao",
+        grafico
+    );
 }
               
 /* ======================================================
