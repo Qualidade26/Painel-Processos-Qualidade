@@ -1660,6 +1660,38 @@ function destacarLinhaSelecionada(){
             }
         );
 }
+   /* ======================================================
+   POSIÇÃO NO RANKING
+====================================================== */
+function obterPosicaoRanking(idFornecedor){
+
+    if(!idFornecedor){
+        return 0;
+    }
+
+    const ranking =
+        [...estado.fornecedores]
+        .filter(
+            item =>
+                numero(item.indice) > 0
+        )
+        .sort(
+            (a,b) =>
+                b.indice - a.indice ||
+                b.processos - a.processos ||
+                b.produtos - a.produtos
+        );
+
+    const indice =
+        ranking.findIndex(
+            item =>
+                item.id === idFornecedor
+        );
+
+    return indice >= 0
+        ? indice + 1
+        : 0;
+}
 /* ======================================================
    DETALHE DO FORNECEDOR
 ====================================================== */
