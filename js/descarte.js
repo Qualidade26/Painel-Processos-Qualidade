@@ -1404,9 +1404,9 @@ const valoresVisuaisPizza =
 
             ${card(
                 "📋",
-                "Último Descarte",
+                "Total Descartado",
                 moeda(d.ultimoDescarte),
-                "Última operação registrada"
+                "Últimas Operações Registrada"
             )}
 
         </section>
