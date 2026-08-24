@@ -1923,26 +1923,34 @@ function criarGraficoBarras(
                         border:{
                             display:false
                         },
-                        ticks:{
-                            color:"#1f2937",
-                            autoSkip:false,
-                            padding:9,
-                            font:{
-                                family:"Segoe UI",
-                                size:11,
-                                weight:"700"
-                            },
-                            callback:function(value){
-    const label = String(
-        this.getLabelForValue(value) ?? ""
-    );
+                       ticks:{
+    color:"#1f2937",
+    autoSkip:false,
+    padding:9,
 
-    if(label.length > 42){
-        return `${label.slice(0,42)}…`;
+    font:{
+        family:"Segoe UI",
+        size:11,
+        weight:"700"
+    },
+
+    callback:function(value){
+        const label = String(
+            this.getLabelForValue(value) ?? ""
+        ).trim();
+
+        if(!label){
+            return "";
+        }
+
+        const partes = label
+            .split(/\s+/)
+            .filter(Boolean);
+
+        return partes
+            .slice(0,2)
+            .join(" ");
     }
-
-    return label;
-}
 },
 afterFit(scale){
     scale.width = 245;
