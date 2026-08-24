@@ -2148,52 +2148,96 @@ function criarGraficoClassificacoes(){
                         chart.update();
                     }
                 },
+tooltip:{
+    enabled:false,
 
-                tooltip:{
-                    displayColors:true,
+    external(context){
+        const {chart,tooltip} = context;
 
-                    callbacks:{
-                        label(context){
-                            const indice =
-                                context.dataIndex;
+        let tooltipEl =
+            chart.canvas.parentNode.querySelector(
+                ".fornecedores-tooltip-externo"
+            );
 
-                            const valor =
-                                numero(context.raw);
+        if(!tooltipEl){
+            tooltipEl =
+                document.createElement("div");
 
-                            const percentual =
-                                total
-                                    ? (
-                                        (valor / total) * 100
-                                    )
-                                    .toFixed(1)
-                                    .replace(".",",")
-                                    : "0";
+            tooltipEl.className =
+                "fornecedores-tooltip-externo";
 
-                            const item =
-                                configuracoes[indice];
-
-                            return (
-                                ` ${item.label}: ` +
-                                `${valor} fornecedores ` +
-                                `(${percentual}%)`
-                            );
-                        }
-                    }
-                }
-            }
+            chart.canvas.parentNode.appendChild(
+                tooltipEl
+            );
         }
-    });
 
-    definirTexto(
-        "fornecedores-total-classificacao",
-        formatarInteiro(total)
-    );
+        if(tooltip.opacity === 0){
+            tooltipEl.style.opacity = "0";
+            return;
+        }
 
-    estado.graficos.set(
-        "grafico-fornecedores-classificacao",
-        grafico
-    );
+        const ponto =
+            tooltip.dataPoints?.[0];
+
+        if(!ponto){
+            tooltipEl.style.opacity = "0";
+            return;
+        }
+
+        const indice =
+            ponto.dataIndex;
+
+        const valor =
+            numero(ponto.raw);
+
+        const percentual =
+            total
+                ? (
+                    (valor / total) * 100
+                )
+                .toFixed(1)
+                .replace(".",",")
+                : "0";
+
+        const item =
+            configuracoes[indice];
+
+        tooltipEl.innerHTML = `
+            <strong>${item.label}</strong>
+            <span>
+                ${valor} fornecedores
+                (${percentual}%)
+            </span>
+        `;
+
+        const canvasRect =
+            chart.canvas.getBoundingClientRect();
+
+        const parentRect =
+            chart.canvas.parentNode.getBoundingClientRect();
+
+        const x =
+            canvasRect.left -
+            parentRect.left +
+            tooltip.caretX +
+            18;
+
+        const y =
+            canvasRect.top -
+            parentRect.top +
+            tooltip.caretY -
+            26;
+
+        tooltipEl.style.left =
+            `${x}px`;
+
+        tooltipEl.style.top =
+            `${y}px`;
+
+        tooltipEl.style.opacity = "1";
+    }
 }
+              
 /* ======================================================
    AVISOS NOS GRÁFICOS
 ====================================================== */
