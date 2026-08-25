@@ -721,24 +721,23 @@ const centroPizzaDescarte = {
         ctx.fillStyle =
             "#0f2557";
 
-        ctx.font =
-            "900 22px 'Segoe UI', Arial, sans-serif";
+       ctx.font =
+    "900 18px 'Segoe UI', Arial, sans-serif";
 
-        ctx.fillText(
-            "100%",
-            propriedades.x,
-            propriedades.y - 6
-        );
+ctx.fillText(
+    "100%",
+    propriedades.x,
+    propriedades.y - 5
+);
 
-        ctx.font =
-            "800 10px 'Segoe UI', Arial, sans-serif";
+ctx.font =
+    "800 9px 'Segoe UI', Arial, sans-serif";
 
-        ctx.fillText(
-            "Total",
-            propriedades.x,
-            propriedades.y + 14
-        );
-
+ctx.fillText(
+    "Total",
+    propriedades.x,
+    propriedades.y + 10
+);
         ctx.restore();
     }
 };
