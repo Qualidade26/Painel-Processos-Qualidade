@@ -164,8 +164,8 @@ body{
     padding:clamp(6px,.7vw,12px);
 
     display:grid;
-   grid-template-columns:
-    clamp(125px,9vw,155px)
+  grid-template-columns:
+    clamp(95px,7vw,120px)
     minmax(0,1fr);
 
     gap:clamp(6px,.7vw,12px);
@@ -246,10 +246,10 @@ body{
 
 .menu button{
     width:100%;
-    min-height:clamp(48px,6vh,60px);
+    min-height:clamp(44px,5.5vh,54px);
 
     margin-bottom:8px;
-    padding:8px 6px;
+      padding:6px 4px;
 
     border:1px solid var(--line2);
     border-radius:11px;
@@ -262,7 +262,7 @@ body{
 
     color:var(--text);
 
-    font-size:clamp(10px,.7vw,13px);
+    font-size:clamp(9px,.6vw,11px);
     font-weight:900;
     line-height:1.2;
 
@@ -315,7 +315,7 @@ body{
 ========================================================== */
 
 .main-wrap.menu-collapsed .menu{
-    padding:8px;
+    padding:6px;
 }
 
 
@@ -327,7 +327,7 @@ body{
 
 .main-wrap.menu-collapsed .menu button{
     min-height:45px;
-    padding:8px 4px;
+    padding:6px 4px;
 }
 
 
@@ -409,7 +409,7 @@ body{
 
     .main-wrap{
     grid-template-columns:
-        clamp(115px,11vw,140px)
+        clamp(90px,8vw,105px)
         minmax(0,1fr);
 }
 }
