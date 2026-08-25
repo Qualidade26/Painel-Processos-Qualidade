@@ -658,12 +658,10 @@ const centroPizzaDescarte = {
 
     id:"centroPizzaDescarte",
 
-
     afterDraw(chart){
 
         const meta =
             chart.getDatasetMeta(0);
-
 
         if(
             !meta ||
@@ -673,10 +671,8 @@ const centroPizzaDescarte = {
             return;
         }
 
-
         const arco =
             meta.data[0];
-
 
         const propriedades =
             arco.getProps(
@@ -688,13 +684,10 @@ const centroPizzaDescarte = {
                 true
             );
 
-
         const ctx =
             chart.ctx;
 
-
         ctx.save();
-
 
         /*
         Fundo sólido no centro.
@@ -702,7 +695,6 @@ const centroPizzaDescarte = {
         */
 
         ctx.beginPath();
-
 
         ctx.arc(
             propriedades.x,
@@ -715,47 +707,37 @@ const centroPizzaDescarte = {
             Math.PI * 2
         );
 
-
         ctx.fillStyle =
             "#ffffff";
 
-
         ctx.fill();
-
 
         ctx.textAlign =
             "center";
 
-
         ctx.textBaseline =
             "middle";
-
 
         ctx.fillStyle =
             "#0f2557";
 
-
         ctx.font =
-            "900 27px 'Segoe UI', Arial, sans-serif";
-
+            "900 22px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "100%",
             propriedades.x,
-            propriedades.y - 8
+            propriedades.y - 6
         );
 
-
         ctx.font =
-            "800 11px 'Segoe UI', Arial, sans-serif";
-
+            "800 10px 'Segoe UI', Arial, sans-serif";
 
         ctx.fillText(
             "Total",
             propriedades.x,
-            propriedades.y + 17
+            propriedades.y + 14
         );
-
 
         ctx.restore();
     }
