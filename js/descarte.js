@@ -1800,7 +1800,7 @@ window.graficoDescarteBarra =
         );
 }
 
-  /* ======================================================
+ /* ======================================================
    GRÁFICO DE PIZZA
 ====================================================== */
 
@@ -1809,6 +1809,7 @@ const canvasPizza =
         "graficoDescartePizza"
     );
 
+
 if(canvasPizza){
 
     if(
@@ -1816,74 +1817,116 @@ if(canvasPizza){
         typeof window.graficoDescartePizza.destroy ===
         "function"
     ){
+
         window.graficoDescartePizza.destroy();
 
         window.graficoDescartePizza =
             null;
     }
 
+
     window.graficoDescartePizza =
         new Chart(
             canvasPizza,
             {
-                type:"doughnut",
+
+                type:
+                    "doughnut",
+
+
+                /* ==========================================
+                   PLUGINS EXCLUSIVOS DESTA PIZZA
+                ========================================== */
 
                 plugins:[
                     rotulosExternosPizzaDescarte,
                     centroPizzaDescarte
                 ],
 
+
+                /* ==========================================
+                   DADOS
+                ========================================== */
+
                 data:{
 
                     labels:
                         nomesPizza,
+
 
                     datasets:[{
 
                         label:
                             "Percentual",
 
+
                         /*
-                        Estes valores controlam apenas
-                        o tamanho visual das fatias.
+                           Valores usados apenas para
+                           controlar visualmente as fatias.
                         */
 
                         data:
                             valoresVisuaisPizza,
 
+
                         /*
-                        Estes são os valores financeiros reais.
-                        São usados na legenda, tooltip
-                        e cálculo dos percentuais.
+                           Valores financeiros reais.
+                           Usados na legenda e tooltip.
                         */
 
                         valoresReais:
                             valoresPizza,
 
+
                         backgroundColor:
-                           coresPizza,
+                            coresPizza,
+
 
                         borderColor:
                             "#ffffff",
 
+
                         borderWidth:
                             2,
 
+
                         hoverOffset:
-                            4,
+                            3,
+
 
                         spacing:
-                            0
+                            0,
+
+
+                        /*
+                           BLOQUEIA DATLABELS
+                           DENTRO DA ROSCA
+                        */
+
+                        datalabels:{
+
+                            display:
+                                false
+                        }
+
                     }]
+
                 },
+
+
+                /* ==========================================
+                   OPÇÕES
+                ========================================== */
 
                 options:{
 
                     responsive:
                         true,
 
+
                     maintainAspectRatio:
                         false,
+
 
                     animation:{
 
@@ -1891,32 +1934,55 @@ if(canvasPizza){
                             350
                     },
 
+
+                    /*
+                       Aumenta o espaço branco central
+                       e reduz levemente a pizza.
+                    */
+
                     cutout:
-                        "48%",
+                        "56%",
+
 
                     radius:
-                        "90%",
+                        "84%",
+
 
                     layout:{
 
-    padding:{
+                        padding:{
 
-        top:15,
+                            top:
+                                15,
 
-        right:20,
+                            right:
+                                20,
 
-        bottom:15,
+                            bottom:
+                                15,
 
-        left:20
-    }
-},
+                            left:
+                                20
+                        }
+                    },
+
+
+                    /* ======================================
+                       PLUGINS
+                    ====================================== */
 
                     plugins:{
+
+
+                        /* ==================================
+                           REMOVE RÓTULOS AUTOMÁTICOS
+                        ================================== */
 
                         datalabels:{
 
                             display:
                                 false,
+
 
                             formatter(){
 
@@ -1924,45 +1990,61 @@ if(canvasPizza){
                             }
                         },
 
+
+                        /* ==================================
+                           LEGENDA
+                        ================================== */
+
                         legend:{
 
                             display:
                                 true,
 
+
                             position:
                                 "right",
 
+
                             align:
                                 "end",
+
 
                             labels:{
 
                                 usePointStyle:
                                     true,
 
+
                                 pointStyle:
                                     "circle",
+
 
                                 boxWidth:
                                     8,
 
+
                                 boxHeight:
                                     8,
+
 
                                 padding:
                                     8,
 
+
                                 color:
                                     "#0f2557",
+
 
                                 font:{
 
                                     size:
                                         9,
 
+
                                     weight:
                                         "700"
                                 },
+
 
                                 generateLabels(chart){
 
@@ -1970,12 +2052,14 @@ if(canvasPizza){
                                         chart.data
                                             .datasets[0];
 
+
                                     const valores =
                                         Array.isArray(
                                             dataset.valoresReais
                                         )
                                             ? dataset.valoresReais
                                             : dataset.data;
+
 
                                     const total =
                                         valores.reduce(
@@ -1990,11 +2074,13 @@ if(canvasPizza){
                                             0
                                         );
 
+
                                     return chart.data.labels.map(
                                         (
                                             label,
                                             indice
                                         ) => {
+
 
                                             const valor =
                                                 Number(
@@ -2003,11 +2089,13 @@ if(canvasPizza){
                                                     ] || 0
                                                 );
 
+
                                             const percentual =
                                                 calcularPercentualDescarte(
                                                     valor,
                                                     total
                                                 );
+
 
                                             const cores =
                                                 Array.isArray(
@@ -2016,12 +2104,14 @@ if(canvasPizza){
                                                     ? dataset.backgroundColor
                                                     : [];
 
+
                                             const cor =
                                                 cores[
                                                     indice %
                                                     cores.length
                                                 ] ||
                                                 "#64748b";
+
 
                                             return {
 
@@ -2032,23 +2122,29 @@ if(canvasPizza){
                                                         percentual
                                                     ),
 
+
                                                 fillStyle:
                                                     cor,
+
 
                                                 strokeStyle:
                                                     cor,
 
+
                                                 lineWidth:
                                                     0,
 
+
                                                 pointStyle:
                                                     "circle",
+
 
                                                 hidden:
                                                     !chart
                                                         .getDataVisibility(
                                                             indice
                                                         ),
+
 
                                                 index:
                                                     indice
@@ -2057,6 +2153,7 @@ if(canvasPizza){
                                     );
                                 }
                             },
+
 
                             onClick(
                                 evento,
@@ -2067,18 +2164,26 @@ if(canvasPizza){
                                 const chart =
                                     legenda.chart;
 
+
                                 chart.toggleDataVisibility(
                                     item.index
                                 );
+
 
                                 chart.update();
                             }
                         },
 
+
+                        /* ==================================
+                           TOOLTIP
+                        ================================== */
+
                         tooltip:{
 
                             displayColors:
                                 true,
+
 
                             callbacks:{
 
@@ -2087,6 +2192,7 @@ if(canvasPizza){
                                     const dataset =
                                         context.dataset;
 
+
                                     const valores =
                                         Array.isArray(
                                             dataset.valoresReais
@@ -2094,12 +2200,14 @@ if(canvasPizza){
                                             ? dataset.valoresReais
                                             : dataset.data;
 
+
                                     const valor =
                                         Number(
                                             valores[
                                                 context.dataIndex
                                             ] || 0
                                         );
+
 
                                     const total =
                                         valores.reduce(
@@ -2114,11 +2222,13 @@ if(canvasPizza){
                                             0
                                         );
 
+
                                     const percentual =
                                         calcularPercentualDescarte(
                                             valor,
                                             total
                                         );
+
 
                                     return (
                                         context.label +
@@ -2138,11 +2248,13 @@ if(canvasPizza){
         );
 }
 
-    graficoAtual =
-        window.graficoDescarteBarra;
-}
 
+/* ======================================================
+   GRÁFICO ATUAL
+====================================================== */
 
+graficoAtual =
+    window.graficoDescarteBarra;
 /* ==========================================================
    VALIDAR SENHA
 ========================================================== */
