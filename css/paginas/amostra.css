@@ -115,9 +115,8 @@
             #fbfdff 100%
         );
 
-    border:
-        1px solid
-        rgba(37,99,235,.14);
+    /* CONTORNO PADRÃO DO PAINEL */
+    border:1.5px solid #4f8cff;
 
     border-radius:18px;
 
@@ -131,15 +130,6 @@
         transform .25s ease,
         box-shadow .25s ease;
 }
-
-.amostra-indicador-card:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 14px 30px
-        rgba(15,37,87,.14);
-}
-
 
 /* ==========================================================
    BARRA SUPERIOR COLORIDA
