@@ -14,7 +14,8 @@
     min-width:0;
 
     background:linear-gradient(180deg,#fff,var(--card2));
-    border:1px solid var(--line);
+
+    border:1.5px solid var(--contorno-painel);
     border-radius:12px;
 
     box-shadow:0 4px 10px rgba(0,0,0,.05);
@@ -37,7 +38,7 @@
     background:var(--card);
     color:var(--primary);
 
-    border:1px solid var(--line);
+    border:1.5px solid #4f8cff;
     border-radius:12px;
 
     box-shadow:0 4px 10px rgba(0,0,0,.05);
