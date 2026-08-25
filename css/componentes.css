@@ -6,7 +6,6 @@
 /* ==========================================================
    CARDS E PAINÉIS
 ========================================================== */
-
 .card,
 .panel,
 .kpi-card,
@@ -15,12 +14,12 @@
 
     background:linear-gradient(180deg,#fff,var(--card2));
 
-    border:1.5px solid var(--contorno-painel);
+    /* CONTORNO GLOBAL AZUL */
+    border:1.5px solid #4f8cff;
     border-radius:12px;
 
     box-shadow:0 4px 10px rgba(0,0,0,.05);
 }
-
 .card,
 .panel{
     padding:10px;
@@ -38,6 +37,7 @@
     background:var(--card);
     color:var(--primary);
 
+    /* CONTORNO GLOBAL AZUL */
     border:1.5px solid #4f8cff;
     border-radius:12px;
 
