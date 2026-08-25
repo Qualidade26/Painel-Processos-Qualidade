@@ -652,7 +652,7 @@ if(indice === 1){
 
 /* ==========================================================
    TEXTO CENTRAL DA ROSCA
-   LIMPEZA TOTAL DO CENTRO
+   CENTRO 100% LIMPO
 ========================================================== */
 
 const centroPizzaDescarte = {
@@ -660,7 +660,7 @@ const centroPizzaDescarte = {
     id:"centroPizzaDescarte",
 
 
-    afterDraw(chart){
+    afterDatasetsDraw(chart){
 
         const meta =
             chart.getDatasetMeta(0);
@@ -710,33 +710,60 @@ const centroPizzaDescarte = {
 
 
         /* ==================================================
-           APAGA COMPLETAMENTE O CENTRO
+           1. LIMPA COMPLETAMENTE O CENTRO
         ================================================== */
 
         ctx.beginPath();
-
 
         ctx.arc(
             centroX,
             centroY,
             Math.max(
-                raioInterno - 1,
+                raioInterno - 2,
                 1
             ),
             0,
             Math.PI * 2
         );
 
-
         ctx.fillStyle =
             "#ffffff";
-
 
         ctx.fill();
 
 
         /* ==================================================
-           100%
+           2. CRIA UMA ÁREA DE SEGURANÇA BRANCA
+
+           Isso cobre qualquer número/rótulo que tente
+           aparecer por baixo do 100%.
+        ================================================== */
+
+        const raioProtecao =
+            Math.max(
+                raioInterno * 0.82,
+                1
+            );
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            centroX,
+            centroY,
+            raioProtecao,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.fill();
+
+
+        /* ==================================================
+           3. TEXTO 100%
         ================================================== */
 
         ctx.fillStyle =
@@ -763,7 +790,7 @@ const centroPizzaDescarte = {
 
 
         /* ==================================================
-           TOTAL
+           4. TEXTO TOTAL
         ================================================== */
 
         ctx.font =
@@ -1876,10 +1903,10 @@ if(canvasPizza){
                    PLUGINS EXCLUSIVOS DESTA PIZZA
                 ========================================== */
 
-                plugins:[
-                    rotulosExternosPizzaDescarte,
-                    centroPizzaDescarte
-                ],
+               plugins:[
+    centroPizzaDescarte,
+    rotulosExternosPizzaDescarte
+],
 
 
                 /* ==========================================
