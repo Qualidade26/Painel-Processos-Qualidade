@@ -2292,6 +2292,12 @@ radius:
 
 graficoAtual =
     window.graficoDescarteBarra;
+   graficoAtual =
+    window.graficoDescarteBarra;
+
+}
+
+
 /* ==========================================================
    VALIDAR SENHA
 ========================================================== */
