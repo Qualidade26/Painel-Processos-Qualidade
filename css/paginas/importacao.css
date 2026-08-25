@@ -684,89 +684,144 @@
    RANKING SKU — ABRIR / FECHAR
 ========================================================== */
 
-.importacao-ranking-container{
-    width:100%;
-    margin-top:8px;
+
+/* ==========================================================
+   EVOLUÇÃO MENSAL — ESTADO NORMAL / GRANDE
+========================================================== */
+
+.importacao-panel-mensal{
+    transition:
+        min-height .30s ease,
+        padding .30s ease;
+}
+
+
+/*
+   O Chart.js pega a altura deste container.
+   Quando o Ranking está fechado, ele fica maior.
+*/
+.importacao-evolucao-expandida
+.chart-box-importacao{
+    height:clamp(360px,48vh,500px);
 }
 
 
 /* ==========================================================
-   BARRA DO RANKING
+   EVOLUÇÃO MENSAL — RANKING ABERTO
+========================================================== */
+
+.importacao-evolucao-reduzida
+.chart-box-importacao{
+    height:285px;
+}
+
+
+/* ==========================================================
+   BARRA PARA ABRIR O RANKING
 ========================================================== */
 
 .importacao-ranking-toggle{
     width:100%;
     min-height:42px;
 
+    margin-top:8px;
     padding:8px 14px;
 
     display:flex;
     align-items:center;
     justify-content:center;
+
     gap:10px;
 
     border:1.5px solid var(--panel-border);
     border-radius:12px;
 
-    background:#fff;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fbff
+        );
+
     color:var(--primary);
 
+    font-family:inherit;
     font-size:13px;
     font-weight:900;
 
     cursor:pointer;
 
+    box-shadow:
+        0 4px 10px
+        rgba(0,0,0,.05);
+
     transition:
-        background .2s ease,
-        box-shadow .2s ease;
+        background .20s ease,
+        box-shadow .20s ease,
+        transform .20s ease;
 }
 
 
 .importacao-ranking-toggle:hover{
-    background:#f8fbff;
+    background:#f1f6ff;
 
     box-shadow:
-        0 4px 10px
-        rgba(29,78,255,.10);
+        0 5px 12px
+        rgba(29,78,255,.12);
 }
 
 
-.ranking-seta{
-    font-size:13px;
-
-    transition:
-        transform .25s ease;
+.importacao-ranking-toggle:active{
+    transform:translateY(1px);
 }
 
 
 /* ==========================================================
-   PAINEL DO RANKING
+   SETA
 ========================================================== */
 
-.importacao-ranking-panel{
+.importacao-ranking-seta{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+    line-height:1;
+}
+
+
+/* ==========================================================
+   PAINEL COMPLETO DO RANKING
+========================================================== */
+
+.importacao-ranking-completo{
     position:relative;
 
-    display:none;
-
     width:100%;
+    min-width:0;
 
     margin-top:8px;
+
+    overflow:hidden;
 }
 
 
-/* Quando estiver aberto */
+/* ==========================================================
+   RANKING FECHADO
+========================================================== */
 
-.importacao-ranking-container.aberto
-.importacao-ranking-panel{
-    display:flex;
+.importacao-ranking-oculto{
+    display:none !important;
 }
 
 
-/* Esconde a barrinha superior quando aberto */
+/* ==========================================================
+   RANKING ABERTO
+========================================================== */
 
-.importacao-ranking-container.aberto
-.importacao-ranking-toggle{
-    display:none;
+.importacao-ranking-visivel{
+    display:block !important;
 }
 
 
@@ -774,13 +829,13 @@
    BOTÃO X
 ========================================================== */
 
-.ranking-fechar{
+.importacao-ranking-fechar{
     position:absolute;
 
-    top:8px;
+    top:7px;
     right:10px;
 
-    z-index:10;
+    z-index:20;
 
     width:30px;
     height:30px;
@@ -791,45 +846,121 @@
     align-items:center;
     justify-content:center;
 
-    border:none;
+    border:0;
+    border-radius:50%;
 
     background:transparent;
-    color:var(--primary);
 
-    font-size:22px;
+    color:#64748b;
+
+    font-family:inherit;
+    font-size:18px;
     font-weight:900;
+    line-height:1;
 
     cursor:pointer;
-}
-
-
-/* ==========================================================
-   TAMANHO DO RANKING
-========================================================== */
-
-.importacao-chart-ranking{
-    height:250px;
-}
-
-
-/* ==========================================================
-   EVOLUÇÃO MENSAL
-========================================================== */
-
-.importacao-evolucao-panel{
-    height:calc(100vh - 300px);
-
-    min-height:400px;
 
     transition:
-        height .3s ease;
+        background .20s ease,
+        color .20s ease;
 }
 
 
-/* Ranking aberto = evolução menor */
+.importacao-ranking-fechar:hover{
+    background:#eef4ff;
+    color:var(--primary);
+}
 
-.pagina-importacao.ranking-aberto
-.importacao-evolucao-panel{
-    height:330px;
-    min-height:330px;
+
+/* ==========================================================
+   GRÁFICO DO RANKING
+========================================================== */
+
+.importacao-ranking-visivel
+.chart-box-sku-importacao{
+    height:275px;
+}
+
+
+/* ==========================================================
+   TÍTULO DO RANKING
+   deixa espaço para o X
+========================================================== */
+
+.importacao-ranking-visivel
+.importacao-panel-titulo{
+    padding-right:38px;
+}
+
+
+/* ==========================================================
+   ANIMAÇÃO DO GRÁFICO PRINCIPAL
+========================================================== */
+
+.chart-box-importacao{
+    transition:height .30s ease;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media(max-width:1050px){
+
+    .importacao-evolucao-expandida
+    .chart-box-importacao{
+        height:400px;
+    }
+
+    .importacao-evolucao-reduzida
+    .chart-box-importacao{
+        height:270px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .importacao-evolucao-expandida
+    .chart-box-importacao{
+        height:340px;
+    }
+
+    .importacao-evolucao-reduzida
+    .chart-box-importacao{
+        height:250px;
+    }
+
+    .importacao-ranking-toggle{
+        min-height:40px;
+        font-size:12px;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .importacao-evolucao-expandida
+    .chart-box-importacao{
+        height:300px;
+    }
+
+    .importacao-evolucao-reduzida
+    .chart-box-importacao{
+        height:240px;
+    }
+
+    .importacao-ranking-visivel
+    .chart-box-sku-importacao{
+        height:250px;
+    }
 }
