@@ -36,9 +36,6 @@
     width:100%;
     min-width:0;
 
-    height:690px;
-    min-height:690px;
-
     align-items:stretch;
 }
 
@@ -101,7 +98,7 @@
     min-width:0;
 
     height:100%;
-    min-height:385px;
+    min-height:0;
 
     overflow:hidden;
 }
@@ -453,8 +450,8 @@
     flex:1 1 auto;
 
     width:100%;
-    height:310px;
-    max-height:310px;
+    height:100%;
+max-height:none;
 
     min-width:0;
     min-height:0;
@@ -584,298 +581,7 @@
 }
 
 
-/* ==========================================================
-   TV / TELAS GRANDES
-========================================================== */
 
-@media (min-width:1600px) and (min-height:800px){
-
-    .descarte-grid{
-        grid-template-columns:
-            minmax(0,1.08fr)
-            minmax(0,.92fr);
-
-        height:calc(100vh - 225px);
-        min-height:690px;
-        max-height:900px;
-
-        gap:10px;
-    }
-
-    .descarte-indicadores{
-        gap:10px;
-        margin-bottom:10px;
-    }
-
-    .descarte-panel-origens,
-    .descarte-panel-pizza{
-        padding:12px;
-    }
-
-    .descarte-coluna-direita{
-        height:100%;
-        gap:10px;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.1;
-        min-height:0;
-    }
-
-    .descarte-panel-top10{
-        flex:.9;
-
-        width:100%;
-        min-width:0;
-        min-height:0;
-
-        padding:10px;
-
-        overflow:hidden;
-    }
-
-    .descarte-chart-barra,
-    .descarte-chart-pizza{
-        min-height:0;
-        height:100%;
-    }
-
-    .descarte-top10-scroll,
-    .descarte-top10-scroll .table-wrap,
-    .descarte-top10-scroll .table-scroll{
-        min-height:0;
-        height:100%;
-    }
-
-    .descarte-top10-scroll .table-scroll{
-        max-height:none;
-
-        overflow-y:auto;
-        overflow-x:auto;
-    }
-
-    .descarte-titulo-painel,
-    .descarte-titulo-top3{
-        font-size:14px;
-    }
-
-    .descarte-top3-card{
-        height:138px;
-        padding:12px 14px;
-    }
-
-    .descarte-top3-nome{
-        font-size:12px;
-    }
-
-    .descarte-top3-valor{
-        font-size:18px;
-    }
-
-    .descarte-top3-percentual{
-        font-size:14px;
-    }
-
-    .descarte-panel-top10 table{
-        min-width:0;
-        font-size:14px;
-    }
-
-    .descarte-panel-top10 th{
-        padding:10px 8px;
-    }
-
-    .descarte-panel-top10 td{
-        padding:8px 7px;
-    }
-}
-
-
-/* ==========================================================
-   TV FULL HD — 1920 × 1080 OU MAIOR
-========================================================== */
-
-@media (min-width:1900px) and (min-height:950px){
-
-    .descarte-grid{
-        height:calc(100vh - 235px);
-        min-height:780px;
-        max-height:980px;
-    }
-
-    .descarte-coluna-direita{
-        gap:12px;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.15;
-    }
-
-    .descarte-panel-top10{
-        flex:.85;
-    }
-
-    .descarte-top3-card{
-        height:148px;
-    }
-
-    .descarte-top3-valor{
-        font-size:20px;
-    }
-
-    .descarte-panel-top10 table{
-        font-size:15px;
-    }
-}
-
-
-/* ==========================================================
-   NOTEBOOK
-========================================================== */
-
-@media (min-width:1051px) and (max-width:1366px){
-
-    .descarte-grid{
-        grid-template-columns:
-            minmax(0,1fr)
-            minmax(0,1fr);
-
-        height:590px;
-        min-height:590px;
-    }
-
-    .descarte-chart-barra{
-        min-height:315px;
-    }
-
-    .descarte-top3-card{
-        height:108px;
-    }
-
-    .descarte-top3-valor{
-        font-size:14px;
-    }
-
-    .descarte-coluna-direita{
-        height:100%;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.05;
-    }
-
-    .descarte-panel-top10{
-        flex:.95;
-    }
-}
-
-
-/* ==========================================================
-   NOTEBOOK MENOR
-========================================================== */
-
-@media (max-width:1050px){
-
-    .descarte-grid{
-        grid-template-columns:1fr;
-
-        height:auto;
-        min-height:0;
-    }
-
-    .descarte-panel-origens{
-        height:560px;
-    }
-
-    .descarte-coluna-direita{
-        height:700px;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.15;
-    }
-
-    .descarte-panel-top10{
-        flex:.85;
-    }
-}
-
-
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media (max-width:800px){
-
-    .descarte-indicadores{
-        grid-template-columns:1fr;
-    }
-
-    .descarte-panel-origens{
-        height:auto;
-
-        grid-template-rows:
-            auto
-            350px
-            auto;
-    }
-
-    .descarte-top3-grid{
-        grid-template-columns:1fr;
-    }
-
-    .descarte-top3-card{
-        height:115px;
-    }
-
-    .descarte-coluna-direita{
-        height:760px;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.2;
-    }
-
-    .descarte-panel-top10{
-        flex:.8;
-    }
-}
-
-
-/* ==========================================================
-   CELULAR
-========================================================== */
-
-@media (max-width:520px){
-
-    .descarte-grid,
-    .descarte-coluna-direita{
-        gap:6px;
-    }
-
-    .descarte-panel-origens{
-        grid-template-rows:
-            auto
-            310px
-            auto;
-    }
-
-    .descarte-coluna-direita{
-        height:720px;
-    }
-
-    .descarte-panel-pizza{
-        flex:1.2;
-    }
-
-    .descarte-panel-top10{
-        flex:.8;
-    }
-
-    .descarte-panel-top10 table{
-        min-width:620px;
-    }
-}
 
 
 /* ==========================================================
@@ -905,45 +611,21 @@
     text-rendering:auto;
     font-kerning:normal;
 }
-/* ==========================================================
-   DESCARTE — ENQUADRAMENTO TOTAL DA TELA
-   TÍTULO + CARDS + PAINÉIS SEM ROLAGEM DA PÁGINA
-========================================================== */
-
 .pagina-descarte{
+    width:100%;
     height:calc(100dvh - 105px);
-}
     min-height:0;
 
     display:grid;
 
     grid-template-rows:
-        32px
-        68px
+        clamp(26px, 3.3vh, 32px)
+        clamp(56px, 7vh, 68px)
         minmax(0,1fr);
 
-    gap:7px;
+    gap:clamp(5px, .7vh, 8px);
 
     overflow:hidden;
-}
-
-
-/* ==========================================================
-   TÍTULO DA PÁGINA
-========================================================== */
-
-.pagina-descarte > .page-title{
-    width:100%;
-    height:32px;
-    min-height:0;
-
-    margin:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:0 10px;
 }
 
 
@@ -953,7 +635,7 @@
 
 .pagina-descarte .descarte-indicadores{
     width:100%;
-    height:68px;
+    height:100%;
 
     min-width:0;
     min-height:0;
@@ -961,16 +643,17 @@
     margin:0;
 
     display:grid;
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
 
-    gap:7px;
+    gap:clamp(5px,.7vw,8px);
 }
 
 
-/* Faz os cards respeitarem os 68px */
-.pagina-descarte .descarte-indicadores .card{
-    height:68px;
+.pagina-descarte .descarte-indicadores > .card{
+    width:100%;
+    height:100%;
+
+    min-width:0;
     min-height:0;
 
     margin:0;
@@ -980,7 +663,7 @@
 
 
 /* ==========================================================
-   GRADE PRINCIPAL
+   GRID PRINCIPAL
 ========================================================== */
 
 .pagina-descarte .descarte-grid{
@@ -998,15 +681,14 @@
         minmax(0,1.08fr)
         minmax(0,.92fr);
 
-    gap:7px;
+    gap:clamp(5px,.6vw,8px);
 
     overflow:hidden;
 }
 
 
 /* ==========================================================
-   PAINEL ESQUERDO
-   BARRAS + TOP 3
+   ESQUERDA
 ========================================================== */
 
 .pagina-descarte .descarte-panel-origens{
@@ -1021,18 +703,19 @@
     display:grid;
 
     grid-template-rows:
-        22px
-        minmax(0,0.82fr)
-        105px;
+        clamp(18px,2.3vh,22px)
+        minmax(0,1fr)
+        clamp(88px,12vh,112px);
 
-    padding:7px 9px 6px;
+    gap:4px;
+
+    padding:
+        clamp(5px,.8vh,9px)
+        clamp(7px,.7vw,11px);
 
     overflow:hidden;
 }
 
-/* ==========================================================
-   GRÁFICO DE BARRAS
-========================================================== */
 
 .pagina-descarte .descarte-chart-barra{
     position:relative;
@@ -1043,15 +726,18 @@
     min-width:0;
     min-height:0;
 
-    max-height:390px;
-
     overflow:hidden;
 }
+
+
 .pagina-descarte .descarte-chart-barra canvas{
     display:block;
 
     width:100% !important;
     height:100% !important;
+
+    max-width:100%;
+    max-height:100%;
 }
 
 
@@ -1061,7 +747,7 @@
 
 .pagina-descarte .descarte-top3-area{
     width:100%;
-    height:105px;
+    height:100%;
 
     min-width:0;
     min-height:0;
@@ -1073,16 +759,29 @@
 }
 
 
+.pagina-descarte .descarte-titulo-top3{
+    height:clamp(18px,2.5vh,24px);
+
+    margin:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:clamp(10px,1.15vh,13px);
+}
+
+
 .pagina-descarte .descarte-top3-grid{
     display:grid;
 
     grid-template-columns:
         repeat(3,minmax(0,1fr));
 
-    gap:6px;
+    gap:clamp(4px,.5vw,7px);
 
     width:100%;
-    height:78px;
+    height:calc(100% - clamp(18px,2.5vh,24px));
 
     min-width:0;
     min-height:0;
@@ -1090,14 +789,19 @@
 
 
 .pagina-descarte .descarte-top3-card{
-    height:78px;
+    width:100%;
+    height:100%;
 
+    min-width:0;
     min-height:0;
 
-    padding:5px 7px;
+    padding:
+        clamp(4px,.6vh,8px)
+        clamp(5px,.6vw,10px);
 
     overflow:hidden;
 }
+
 
 /* ==========================================================
    COLUNA DIREITA
@@ -1112,10 +816,11 @@
 
     display:grid;
 
-   grid-template-rows:
-    minmax(0,.92fr)
-    minmax(0,1fr);
-    gap:7px;
+    grid-template-rows:
+        minmax(0,.92fr)
+        minmax(0,1.08fr);
+
+    gap:clamp(5px,.7vh,8px);
 
     overflow:hidden;
 }
@@ -1137,10 +842,12 @@
     display:grid;
 
     grid-template-rows:
-        22px
+        clamp(18px,2.3vh,22px)
         minmax(0,1fr);
 
-    padding:7px 9px 6px;
+    padding:
+        clamp(5px,.8vh,9px)
+        clamp(7px,.7vw,11px);
 
     overflow:hidden;
 }
@@ -1164,6 +871,9 @@
 
     width:100% !important;
     height:100% !important;
+
+    max-width:100%;
+    max-height:100%;
 }
 
 
@@ -1183,10 +893,12 @@
     display:grid;
 
     grid-template-rows:
-        22px
+        clamp(18px,2.3vh,22px)
         minmax(0,1fr);
 
-    padding:7px 9px 6px;
+    padding:
+        clamp(5px,.8vh,9px)
+        clamp(7px,.7vw,11px);
 
     overflow:hidden;
 }
@@ -1205,9 +917,26 @@
 
 .pagina-descarte
 .descarte-top10-scroll
-.table-scroll{
+.table-wrap{
     width:100%;
-    height:100% !important;
+    height:100%;
+
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+.pagina-descarte
+.descarte-top10-scroll
+.table-scroll{
+    flex:1 1 auto;
+
+    width:100%;
+    height:auto !important;
     max-height:none !important;
 
     min-height:0;
@@ -1218,25 +947,44 @@
 
 
 /* ==========================================================
-   TÍTULOS
+   TÍTULOS RESPONSIVOS
 ========================================================== */
 
 .pagina-descarte .descarte-titulo-painel{
-    height:22px;
+    height:100%;
 
     margin:0;
+    padding:0;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    color:var(--primary-dark,#0f3cc9);
-
-    font-size:11px;
+    font-size:clamp(10px,1.15vh,13px);
     font-weight:900;
     line-height:1;
 
     text-align:center;
-    text-transform:uppercase;
 }
+@media (max-width:1050px){
 
+    .pagina-descarte{
+        height:auto;
+        min-height:calc(100dvh - 105px);
+        overflow:visible;
+    }
+
+    .pagina-descarte .descarte-grid{
+        grid-template-columns:1fr;
+        height:auto;
+        overflow:visible;
+    }
+
+    .pagina-descarte .descarte-panel-origens{
+        height:560px;
+    }
+
+    .pagina-descarte .descarte-coluna-direita{
+        height:700px;
+    }
+}
