@@ -23,8 +23,11 @@
 
     --line:#b8d1ff;
     --line2:#dce8ff;
-
-    --text:#0f1f4d;
+   
+    /* CONTORNO GLOBAL DOS PAINÉIS */
+    --panel-border:#4f8cff;
+    
+   --text:#0f1f4d;
     --muted:#5c6c96;
 
     --green:#22c55e;
