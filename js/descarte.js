@@ -652,16 +652,19 @@ if(indice === 1){
 
 /* ==========================================================
    TEXTO CENTRAL DA ROSCA
+   LIMPEZA TOTAL DO CENTRO
 ========================================================== */
 
 const centroPizzaDescarte = {
 
     id:"centroPizzaDescarte",
 
+
     afterDraw(chart){
 
         const meta =
             chart.getDatasetMeta(0);
+
 
         if(
             !meta ||
@@ -671,8 +674,10 @@ const centroPizzaDescarte = {
             return;
         }
 
+
         const arco =
             meta.data[0];
+
 
         const propriedades =
             arco.getProps(
@@ -684,64 +689,97 @@ const centroPizzaDescarte = {
                 true
             );
 
+
         const ctx =
             chart.ctx;
 
+
+        const centroX =
+            propriedades.x;
+
+
+        const centroY =
+            propriedades.y;
+
+
+        const raioInterno =
+            propriedades.innerRadius;
+
+
         ctx.save();
 
-        /*
-        Fundo sólido no centro.
-        Remove qualquer vestígio de rótulo global.
-        */
+
+        /* ==================================================
+           APAGA COMPLETAMENTE O CENTRO
+        ================================================== */
 
         ctx.beginPath();
 
+
         ctx.arc(
-            propriedades.x,
-            propriedades.y,
+            centroX,
+            centroY,
             Math.max(
-                propriedades.innerRadius - 3,
+                raioInterno - 1,
                 1
             ),
             0,
             Math.PI * 2
         );
 
+
         ctx.fillStyle =
             "#ffffff";
 
+
         ctx.fill();
 
-        ctx.textAlign =
-            "center";
 
-        ctx.textBaseline =
-            "middle";
+        /* ==================================================
+           100%
+        ================================================== */
 
         ctx.fillStyle =
             "#0f2557";
 
-       ctx.font =
-    "900 18px 'Segoe UI', Arial, sans-serif";
 
-ctx.fillText(
-    "100%",
-    propriedades.x,
-    propriedades.y - 5
-);
+        ctx.textAlign =
+            "center";
 
-ctx.font =
-    "800 9px 'Segoe UI', Arial, sans-serif";
 
-ctx.fillText(
-    "Total",
-    propriedades.x,
-    propriedades.y + 10
-);
+        ctx.textBaseline =
+            "middle";
+
+
+        ctx.font =
+            "900 17px 'Segoe UI', Arial, sans-serif";
+
+
+        ctx.fillText(
+            "100%",
+            centroX,
+            centroY - 4
+        );
+
+
+        /* ==================================================
+           TOTAL
+        ================================================== */
+
+        ctx.font =
+            "800 8px 'Segoe UI', Arial, sans-serif";
+
+
+        ctx.fillText(
+            "Total",
+            centroX,
+            centroY + 10
+        );
+
+
         ctx.restore();
     }
 };
-
 /* ==========================================================
    VALORES EXTERNOS DO GRÁFICO DE BARRAS
 ========================================================== */
@@ -1940,12 +1978,11 @@ if(canvasPizza){
                        e reduz levemente a pizza.
                     */
 
-                    cutout:
-                        "56%",
+                   cutout:
+    "60%",
 
-
-                    radius:
-                        "84%",
+radius:
+    "82%",
 
 
                     layout:{
