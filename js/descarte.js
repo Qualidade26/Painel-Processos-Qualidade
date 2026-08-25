@@ -1963,8 +1963,8 @@ if(canvasPizza){
                        e reduz levemente a pizza.
                     */
 
-                   cutout:
-    "60%",
+               cutout:
+    "64%",
 
 radius:
     "82%",
