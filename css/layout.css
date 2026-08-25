@@ -164,11 +164,9 @@ body{
     padding:clamp(6px,.7vw,12px);
 
     display:grid;
-
-    /* MENU LATERAL MAIS ESTREITO */
-    grid-template-columns:
-        clamp(80px,6vw,100px)
-        minmax(0,1fr);
+  grid-template-columns:
+    clamp(95px,7vw,120px)
+    minmax(0,1fr);
 
     gap:clamp(6px,.7vw,12px);
 
@@ -176,8 +174,17 @@ body{
 
     overflow:hidden;
 
-    transition:grid-template-columns .25s ease;
+    transition:
+        grid-template-columns .25s ease;
 }
+
+
+.main-wrap.menu-collapsed{
+    grid-template-columns:
+        clamp(58px,5vw,72px)
+        minmax(0,1fr);
+}
+
 
 /* ==========================================================
    MENU LATERAL
@@ -255,7 +262,7 @@ body{
 
     color:var(--text);
 
-      font-size:clamp(18px,1.3vw,23px);
+    font-size:clamp(9px,.6vw,11px);
     font-weight:900;
     line-height:1.2;
 
@@ -308,7 +315,7 @@ body{
 ========================================================== */
 
 .main-wrap.menu-collapsed .menu{
-    padding:5px;
+    padding:6px;
 }
 
 
@@ -320,7 +327,7 @@ body{
 
 .main-wrap.menu-collapsed .menu button{
     min-height:45px;
-    padding:6px 2px;
+    padding:6px 4px;
 }
 
 
