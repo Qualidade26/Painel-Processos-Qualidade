@@ -680,3 +680,156 @@
     justify-content:center;
     text-align:center;
 }
+/* ==========================================================
+   RANKING SKU — ABRIR / FECHAR
+========================================================== */
+
+.importacao-ranking-container{
+    width:100%;
+    margin-top:8px;
+}
+
+
+/* ==========================================================
+   BARRA DO RANKING
+========================================================== */
+
+.importacao-ranking-toggle{
+    width:100%;
+    min-height:42px;
+
+    padding:8px 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    border:1.5px solid var(--panel-border);
+    border-radius:12px;
+
+    background:#fff;
+    color:var(--primary);
+
+    font-size:13px;
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.importacao-ranking-toggle:hover{
+    background:#f8fbff;
+
+    box-shadow:
+        0 4px 10px
+        rgba(29,78,255,.10);
+}
+
+
+.ranking-seta{
+    font-size:13px;
+
+    transition:
+        transform .25s ease;
+}
+
+
+/* ==========================================================
+   PAINEL DO RANKING
+========================================================== */
+
+.importacao-ranking-panel{
+    position:relative;
+
+    display:none;
+
+    width:100%;
+
+    margin-top:8px;
+}
+
+
+/* Quando estiver aberto */
+
+.importacao-ranking-container.aberto
+.importacao-ranking-panel{
+    display:flex;
+}
+
+
+/* Esconde a barrinha superior quando aberto */
+
+.importacao-ranking-container.aberto
+.importacao-ranking-toggle{
+    display:none;
+}
+
+
+/* ==========================================================
+   BOTÃO X
+========================================================== */
+
+.ranking-fechar{
+    position:absolute;
+
+    top:8px;
+    right:10px;
+
+    z-index:10;
+
+    width:30px;
+    height:30px;
+
+    padding:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+
+    background:transparent;
+    color:var(--primary);
+
+    font-size:22px;
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* ==========================================================
+   TAMANHO DO RANKING
+========================================================== */
+
+.importacao-chart-ranking{
+    height:250px;
+}
+
+
+/* ==========================================================
+   EVOLUÇÃO MENSAL
+========================================================== */
+
+.importacao-evolucao-panel{
+    height:calc(100vh - 300px);
+
+    min-height:400px;
+
+    transition:
+        height .3s ease;
+}
+
+
+/* Ranking aberto = evolução menor */
+
+.pagina-importacao.ranking-aberto
+.importacao-evolucao-panel{
+    height:330px;
+    min-height:330px;
+}
