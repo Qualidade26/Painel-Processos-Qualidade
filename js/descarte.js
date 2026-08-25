@@ -656,8 +656,9 @@ if(indice === 1){
 
 /* ==========================================================
    TEXTO CENTRAL DA ROSCA
-   CENTRO 100% LIMPO
+   CENTRO TOTALMENTE LIMPO
 ========================================================== */
+
 const centroPizzaDescarte = {
 
     id:"centroPizzaDescarte",
@@ -675,71 +676,103 @@ const centroPizzaDescarte = {
             return;
         }
 
+
         const arco =
             meta.data[0];
+
 
         const propriedades =
             arco.getProps(
                 [
                     "x",
                     "y",
-                    "innerRadius"
+                    "innerRadius",
+                    "outerRadius"
                 ],
                 true
             );
 
+
         const ctx =
             chart.ctx;
+
 
         const centroX =
             propriedades.x;
 
+
         const centroY =
             propriedades.y;
+
 
         const raioInterno =
             propriedades.innerRadius;
 
+
+        const raioExterno =
+            propriedades.outerRadius;
+
+
         ctx.save();
 
-        /*
-           LIMPA TODO O CENTRO POR ÚLTIMO.
-        */
+
+        /* ==================================================
+           MÁSCARA BRANCA
+
+           Avança alguns pixels para dentro da própria rosca.
+           Isso cobre completamente qualquer número/rótulo
+           que esteja aparecendo atrás do 100%.
+        ================================================== */
+
+        const raioMascara =
+            Math.min(
+                raioInterno + 9,
+                raioExterno - 4
+            );
+
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
 
         ctx.beginPath();
+
 
         ctx.arc(
             centroX,
             centroY,
-            Math.max(
-                raioInterno - 1,
-                1
-            ),
+            raioMascara,
             0,
             Math.PI * 2
         );
 
+
         ctx.fillStyle =
             "#ffffff";
+
 
         ctx.fill();
 
 
-        /*
+        /* ==================================================
            100%
-        */
+        ================================================== */
 
         ctx.fillStyle =
             "#0f2557";
 
+
         ctx.textAlign =
             "center";
+
 
         ctx.textBaseline =
             "middle";
 
+
         ctx.font =
             "900 17px 'Segoe UI', Arial, sans-serif";
+
 
         ctx.fillText(
             "100%",
@@ -748,12 +781,13 @@ const centroPizzaDescarte = {
         );
 
 
-        /*
+        /* ==================================================
            TOTAL
-        */
+        ================================================== */
 
         ctx.font =
             "800 8px 'Segoe UI', Arial, sans-serif";
+
 
         ctx.fillText(
             "Total",
@@ -761,10 +795,10 @@ const centroPizzaDescarte = {
             centroY + 10
         );
 
+
         ctx.restore();
     }
 };
-
 /* ==========================================================
    VALORES EXTERNOS DO GRÁFICO DE BARRAS
 ========================================================== */
