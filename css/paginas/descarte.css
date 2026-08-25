@@ -17,10 +17,10 @@
 
     display:grid;
 
-   grid-template-rows:
-    clamp(24px,3.2vh,30px)
-    clamp(62px,7.5vh,72px)
-    minmax(0,1fr);
+    grid-template-rows:
+        clamp(24px,3.2vh,30px)
+        clamp(62px,7.5vh,72px)
+        minmax(0,1fr);
 
     gap:clamp(5px,.65vh,7px);
 
@@ -69,8 +69,14 @@
         repeat(2,minmax(0,1fr));
 
     gap:clamp(5px,.7vw,8px);
+
+    overflow:visible;
 }
 
+
+/* ==========================================================
+   CARD DOS INDICADORES
+========================================================== */
 
 .pagina-descarte .descarte-indicadores > .card{
     width:100%;
@@ -84,15 +90,14 @@
     display:flex;
     align-items:center;
 
-    padding-top:5px;
-    padding-bottom:5px;
+    padding:5px 10px;
 
     overflow:hidden;
 }
 
 
 /* ==========================================================
-   ÁREA INTERNA DOS CARDS
+   CONTEÚDO INTERNO DO CARD
 ========================================================== */
 
 .pagina-descarte
@@ -106,7 +111,7 @@
     flex-direction:column;
     justify-content:center;
 
-    overflow:visible;
+    overflow:hidden;
 }
 
 
@@ -119,37 +124,13 @@
     margin:0 0 2px;
 
     font-size:9px;
-    line-height:1.05;
+    font-weight:800;
+
+    line-height:1;
 
     white-space:nowrap;
 }
 
-
-.pagina-descarte .descarte-indicadores .card-value,
-.pagina-descarte .descarte-indicadores .card-valor{
-    margin:0;
-
-    font-size:18px;
-    font-weight:900;
-
-    line-height:1.05;
-
-    white-space:nowrap;
-}
-
-
-.pagina-descarte .descarte-indicadores .card-sub,
-.pagina-descarte .descarte-indicadores .card-subtitulo,
-.pagina-descarte .descarte-indicadores .card-desc{
-    margin-top:3px;
-
-    font-size:8px;
-    line-height:1.05;
-
-    white-space:nowrap;
-
-    overflow:visible;
-}
 
 /* ==========================================================
    VALOR PRINCIPAL DOS CARDS
@@ -159,7 +140,7 @@
 .pagina-descarte .descarte-indicadores .card-valor{
     margin:0;
 
-    font-size:clamp(16px,2vh,20px);
+    font-size:18px;
     font-weight:900;
 
     line-height:1;
@@ -178,9 +159,10 @@
 .pagina-descarte .descarte-indicadores .card-sub,
 .pagina-descarte .descarte-indicadores .card-subtitulo,
 .pagina-descarte .descarte-indicadores .card-desc{
-    margin-top:2px;
+    margin:3px 0 0;
 
-    font-size:clamp(7px,.75vh,8px);
+    font-size:8px;
+    font-weight:600;
 
     line-height:1;
 
@@ -254,7 +236,6 @@
 
 /* ==========================================================
    PAINEL ESQUERDO
-   GRÁFICO + TOP 3
 ========================================================== */
 
 .pagina-descarte .descarte-panel-origens{
@@ -767,6 +748,7 @@
     flex-direction:column;
 
     border:1px solid var(--line2);
+
     border-radius:10px;
 
     overflow:hidden;
@@ -882,6 +864,7 @@
     z-index:25;
 
     background:#eaf2ff;
+
     color:#0f2557;
 
     font-weight:900;
@@ -988,10 +971,10 @@
 and (max-height:700px){
 
     .pagina-descarte{
-       grid-template-rows:
-    24px
-    62px
-    minmax(0,1fr);
+        grid-template-rows:
+            24px
+            62px
+            minmax(0,1fr);
 
         gap:5px;
     }
@@ -1034,7 +1017,7 @@ and (min-height:800px){
     .pagina-descarte{
         grid-template-rows:
             clamp(27px,3.2vh,32px)
-            clamp(56px,6.7vh,66px)
+            clamp(64px,7.2vh,72px)
             minmax(0,1fr);
     }
 
@@ -1068,7 +1051,7 @@ and (min-height:900px){
 
         grid-template-rows:
             clamp(30px,3.3vh,36px)
-            clamp(62px,6.8vh,74px)
+            clamp(66px,7vh,76px)
             minmax(0,1fr);
 
         gap:clamp(7px,.7vh,10px);
@@ -1167,6 +1150,11 @@ and (min-height:900px){
     }
 
 
+    .pagina-descarte .descarte-indicadores > .card{
+        min-height:66px;
+    }
+
+
     .pagina-descarte .descarte-grid{
         grid-template-columns:1fr;
 
@@ -1206,6 +1194,11 @@ and (min-height:900px){
 
     .pagina-descarte .descarte-indicadores{
         grid-template-columns:1fr;
+    }
+
+
+    .pagina-descarte .descarte-indicadores > .card{
+        min-height:68px;
     }
 
 
