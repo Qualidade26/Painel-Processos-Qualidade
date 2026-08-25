@@ -17,10 +17,10 @@
 
     display:grid;
 
-    grid-template-rows:
-        clamp(24px,3.2vh,30px)
-        clamp(52px,6.8vh,62px)
-        minmax(0,1fr);
+   grid-template-rows:
+    clamp(24px,3.2vh,30px)
+    clamp(62px,7.5vh,72px)
+    minmax(0,1fr);
 
     gap:clamp(5px,.65vh,7px);
 
@@ -84,8 +84,8 @@
     display:flex;
     align-items:center;
 
-    padding-top:3px;
-    padding-bottom:3px;
+    padding-top:5px;
+    padding-bottom:5px;
 
     overflow:hidden;
 }
@@ -101,6 +101,12 @@
 > div{
     min-width:0;
     min-height:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    overflow:visible;
 }
 
 
@@ -110,15 +116,40 @@
 
 .pagina-descarte .descarte-indicadores .card-title,
 .pagina-descarte .descarte-indicadores .card-titulo{
-    margin:0 0 1px;
+    margin:0 0 2px;
 
-    font-size:clamp(8px,1vh,10px);
-
-    line-height:1;
+    font-size:9px;
+    line-height:1.05;
 
     white-space:nowrap;
 }
 
+
+.pagina-descarte .descarte-indicadores .card-value,
+.pagina-descarte .descarte-indicadores .card-valor{
+    margin:0;
+
+    font-size:18px;
+    font-weight:900;
+
+    line-height:1.05;
+
+    white-space:nowrap;
+}
+
+
+.pagina-descarte .descarte-indicadores .card-sub,
+.pagina-descarte .descarte-indicadores .card-subtitulo,
+.pagina-descarte .descarte-indicadores .card-desc{
+    margin-top:3px;
+
+    font-size:8px;
+    line-height:1.05;
+
+    white-space:nowrap;
+
+    overflow:visible;
+}
 
 /* ==========================================================
    VALOR PRINCIPAL DOS CARDS
@@ -957,10 +988,10 @@
 and (max-height:700px){
 
     .pagina-descarte{
-        grid-template-rows:
-            24px
-            50px
-            minmax(0,1fr);
+       grid-template-rows:
+    24px
+    62px
+    minmax(0,1fr);
 
         gap:5px;
     }
