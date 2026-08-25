@@ -308,57 +308,61 @@ const rotulosExternosPizzaDescarte = {
                     Math.cos(angulo);
 
                 const direcaoY =
-                    Math.sin(angulo);
+    Math.sin(angulo);
 
-                const item = {
 
-                    indice,
+/*
+   A linha deve começar FORA da rosquinha.
+   Nunca dentro do círculo central.
+*/
 
-                    percentual,
+const raioInicioLinha =
+    propriedades.outerRadius + 8;
 
-                    cor:
-                        cores[
-                            indice %
-                            cores.length
-                        ] || "#64748b",
 
-                    centroX:
-                        propriedades.x,
+const item = {
 
-                    centroY:
-                        propriedades.y,
+    indice,
 
-                    raio:
-                        propriedades.outerRadius,
+    percentual,
 
-                    direcaoX,
+    cor:
+        cores[
+            indice %
+            cores.length
+        ] || "#64748b",
 
-                    direcaoY,
+    centroX:
+        propriedades.x,
 
-                    inicioX:
-                        propriedades.x +
-                        direcaoX *
-                        (
-                            propriedades.outerRadius +
-                            2
-                        ),
+    centroY:
+        propriedades.y,
 
-                    inicioY:
-                        propriedades.y +
-                        direcaoY *
-                        (
-                            propriedades.outerRadius +
-                            2
-                        ),
+    raio:
+        propriedades.outerRadius,
 
-                    yDesejado:
-                        propriedades.y +
-                        direcaoY *
-                        (
-                            propriedades.outerRadius +
-                            18
-                        )
-                };
+    direcaoX,
+
+    direcaoY,
+
+    inicioX:
+        propriedades.x +
+        direcaoX *
+        raioInicioLinha,
+
+    inicioY:
+        propriedades.y +
+        direcaoY *
+        raioInicioLinha,
+
+    yDesejado:
+        propriedades.y +
+        direcaoY *
+        (
+            propriedades.outerRadius +
+            18
+        )
+};
 
                 /*
                 Os dois menores percentuais do topo ficam
@@ -654,17 +658,14 @@ if(indice === 1){
    TEXTO CENTRAL DA ROSCA
    CENTRO 100% LIMPO
 ========================================================== */
-
 const centroPizzaDescarte = {
 
     id:"centroPizzaDescarte",
 
-
-    afterDatasetsDraw(chart){
+    afterDraw(chart){
 
         const meta =
             chart.getDatasetMeta(0);
-
 
         if(
             !meta ||
@@ -674,10 +675,8 @@ const centroPizzaDescarte = {
             return;
         }
 
-
         const arco =
             meta.data[0];
-
 
         const propriedades =
             arco.getProps(
@@ -689,29 +688,23 @@ const centroPizzaDescarte = {
                 true
             );
 
-
         const ctx =
             chart.ctx;
-
 
         const centroX =
             propriedades.x;
 
-
         const centroY =
             propriedades.y;
-
 
         const raioInterno =
             propriedades.innerRadius;
 
-
         ctx.save();
 
-
-        /* ==================================================
-           1. LIMPA COMPLETAMENTE O CENTRO
-        ================================================== */
+        /*
+           LIMPA TODO O CENTRO POR ÚLTIMO.
+        */
 
         ctx.beginPath();
 
@@ -719,7 +712,7 @@ const centroPizzaDescarte = {
             centroX,
             centroY,
             Math.max(
-                raioInterno - 2,
+                raioInterno - 1,
                 1
             ),
             0,
@@ -732,55 +725,21 @@ const centroPizzaDescarte = {
         ctx.fill();
 
 
-        /* ==================================================
-           2. CRIA UMA ÁREA DE SEGURANÇA BRANCA
-
-           Isso cobre qualquer número/rótulo que tente
-           aparecer por baixo do 100%.
-        ================================================== */
-
-        const raioProtecao =
-            Math.max(
-                raioInterno * 0.82,
-                1
-            );
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            centroX,
-            centroY,
-            raioProtecao,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.fill();
-
-
-        /* ==================================================
-           3. TEXTO 100%
-        ================================================== */
+        /*
+           100%
+        */
 
         ctx.fillStyle =
             "#0f2557";
 
-
         ctx.textAlign =
             "center";
-
 
         ctx.textBaseline =
             "middle";
 
-
         ctx.font =
             "900 17px 'Segoe UI', Arial, sans-serif";
-
 
         ctx.fillText(
             "100%",
@@ -789,13 +748,12 @@ const centroPizzaDescarte = {
         );
 
 
-        /* ==================================================
-           4. TEXTO TOTAL
-        ================================================== */
+        /*
+           TOTAL
+        */
 
         ctx.font =
             "800 8px 'Segoe UI', Arial, sans-serif";
-
 
         ctx.fillText(
             "Total",
@@ -803,10 +761,10 @@ const centroPizzaDescarte = {
             centroY + 10
         );
 
-
         ctx.restore();
     }
 };
+
 /* ==========================================================
    VALORES EXTERNOS DO GRÁFICO DE BARRAS
 ========================================================== */
