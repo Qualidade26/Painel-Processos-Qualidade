@@ -1159,10 +1159,10 @@ small{
 
     display:grid;
 
-    grid-template-rows:
-        24px
-        minmax(0,1fr)
-        clamp(100px,13vh,120px);
+  grid-template-rows:
+    24px
+    minmax(0,1fr)
+    clamp(88px,11vh,105px);
 
     gap:4px;
 
@@ -1266,10 +1266,10 @@ small{
 
     display:grid;
 
-    grid-template-rows:
-        23px
-        minmax(0,1fr)
-        clamp(100px,13vh,120px);
+   grid-template-rows:
+    23px
+    minmax(0,1fr)
+    clamp(88px,11vh,105px);
 
     gap:4px;
 
@@ -1546,7 +1546,6 @@ tbody tr:last-child td{
     height:100%;
 }
 
-
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
@@ -1555,15 +1554,15 @@ tbody tr:last-child td{
 (min-width:1051px)
 and (max-height:750px){
 
-  .pagina-descarte{
-    grid-template-rows:
-        24px
-        62px
-        42px
-        minmax(0,1fr);
+    .pagina-descarte{
+        grid-template-rows:
+            24px
+            62px
+            42px
+            minmax(0,1fr);
 
-    gap:7px;
-}
+        gap:7px;
+    }
 
 
     .pagina-descarte .descarte-panel-atual,
@@ -1574,28 +1573,26 @@ and (max-height:750px){
         grid-template-rows:
             20px
             minmax(0,1fr)
-            92px;
+            84px;
     }
 
 
     .pagina-descarte
     .descarte-coluna-ano-direita{
 
-      grid-template-rows:
-    minmax(0,0.72fr)
-    150px;
+        grid-template-rows:
+            minmax(0,0.72fr)
+            150px;
     }
 
 
     .pagina-descarte .descarte-aba{
-
         padding:2px 8px;
     }
 
 
     .pagina-descarte
     .descarte-aba > span:first-child{
-
         font-size:15px;
     }
 }
@@ -1628,7 +1625,7 @@ and (min-height:850px){
         grid-template-rows:
             26px
             minmax(0,1fr)
-            135px;
+              105px;
     }
 
 
