@@ -15,12 +15,12 @@ const coresOrigemDescarte = {
     "Avaria de Importação": "#2855D9",   // azul
     "Devolução avaria": "#FF6FAE",       // rosa
     "Avaria estoque": "#55D98A",         // verde
-    "Avaria Nacional": "#8B6CFF",        // roxo
-    "Certificação": "#FF7A1A",           // laranja
+    "Avaria Nacional": "#FF7A1A",        // laranja
+    "Certificação":  "#8B6CFF",       // roxo
 
     // DUAS CORES ADICIONAIS
 
-    "Vencido": "#9F3D55",                // bordô
+    "Vencido": "#EF4444",                // vermelho vivo
     "Desvio de Qualidade": "#79BFF2"     // azul-bebê
 };
 /* ==========================================================
