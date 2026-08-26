@@ -1609,10 +1609,9 @@ and (min-height:900px){
        Ambiental menor.
     */
 
-    grid-template-rows:
-        minmax(0,1fr)
-        clamp(105px,14vh,130px);
-
+ grid-template-rows:
+    minmax(0,0.72fr)
+    minmax(170px,0.28fr);
     gap:7px;
 
     overflow:hidden;
@@ -1898,9 +1897,9 @@ and (max-height:750px){
     .pagina-descarte
     .descarte-coluna-ano-direita{
 
-        grid-template-rows:
-            minmax(0,1fr)
-            96px;
+      grid-template-rows:
+    minmax(0,0.72fr)
+    150px;
     }
 
 
@@ -1953,9 +1952,9 @@ and (min-height:850px){
     .pagina-descarte
     .descarte-coluna-ano-direita{
 
-        grid-template-rows:
-            minmax(0,1fr)
-            145px;
+      grid-template-rows:
+    minmax(0,0.72fr)
+    190px;
     }
 }
 
