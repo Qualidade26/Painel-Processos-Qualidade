@@ -1162,7 +1162,7 @@ small{
    grid-template-rows:
         24px
         minmax(0,1fr)
-        clamp(95px,12vh,110px);
+    clamp(100px,13vh,115px);
 
     gap:4px;
 
