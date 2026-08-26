@@ -1490,16 +1490,12 @@ tbody tr:last-child td{
 
 
 /* ==========================================================
-   TOP 3
+   TOP 3 - descarte 
 ========================================================== */
 
 .pagina-descarte
-.descarte-panel-atual
-.descarte-top3-area,
-
-.pagina-descarte
 .descarte-grid-ano
-.descarte-top3-area{
+.descarte-panel-origens{
 
     width:100%;
     height:100%;
@@ -1510,8 +1506,13 @@ tbody tr:last-child td{
     display:grid;
 
     grid-template-rows:
-        20px
-        minmax(0,1fr);
+        23px
+        minmax(0,1fr)
+        clamp(88px,11vh,105px);
+
+    gap:4px;
+
+    padding:7px 9px;
 
     overflow:hidden;
 }
@@ -1539,6 +1540,51 @@ tbody tr:last-child td{
 
     height:100%;
 }
+
+
+/* ==========================================================
+   TOP 3 — VALOR ATUAL
+========================================================== */
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-top3-card{
+
+    padding:8px 12px;
+}
+
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-top3-nome{
+
+    font-size:
+        clamp(12px,1.5vh,15px);
+}
+
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-top3-valor{
+
+    margin-top:5px;
+
+    font-size:
+        clamp(17px,2.1vh,21px);
+}
+
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-top3-percentual{
+
+    margin-top:4px;
+
+    font-size:
+        clamp(12px,1.5vh,15px);
+}
+
+
 
 /* ==========================================================
    NOTEBOOK
