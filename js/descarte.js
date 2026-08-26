@@ -1330,125 +1330,109 @@ function criarGraficoDescarteOrigemResumo(
 
     const rotuloPercentualValorDescarte = {
 
-        id:"rotuloPercentualValorDescarte",
+    id:"rotuloPercentualValorDescarte",
 
-        afterDatasetsDraw(chart){
+    afterDatasetsDraw(chart){
 
-            const dataset =
-                chart.data.datasets[0];
+        const dataset =
+            chart.data.datasets[0];
 
-            const meta =
-                chart.getDatasetMeta(0);
+        const meta =
+            chart.getDatasetMeta(0);
 
-            if(
-                !dataset ||
-                !meta ||
-                !Array.isArray(meta.data)
-            ){
-                return;
-            }
-
-
-            const ctx =
-                chart.ctx;
-
-
-            ctx.save();
-
-            ctx.font =
-                "900 11px 'Segoe UI', Arial, sans-serif";
-
-            ctx.textBaseline =
-                "middle";
-
-            ctx.fillStyle =
-                "#0f2557";
-
-
-            meta.data.forEach(
-                (barra,indice) => {
-
-                    const valor =
-                        Number(
-                            dataset.data[indice] || 0
-                        );
-
-
-                    if(valor <= 0){
-                        return;
-                    }
-
-
-                    const percentual =
-                        calcularPercentualDescarte(
-                            valor,
-                            total
-                        );
-
-
-                    const texto =
-                        formatarPercentualDescarte(
-                            percentual
-                        ) +
-                        "  |  " +
-                        moeda(valor);
-
-
-                    const propriedades =
-                        barra.getProps(
-                            [
-                                "x",
-                                "y"
-                            ],
-                            true
-                        );
-
-
-                    let x =
-                        propriedades.x + 9;
-
-
-                    /*
-                       Evita cortar o texto
-                       na borda direita.
-                    */
-
-                    const largura =
-                        ctx.measureText(texto).width;
-
-
-                    const limite =
-                        chart.width - 8;
-
-
-                    if(
-                        x + largura >
-                        limite
-                    ){
-
-                        x =
-                            limite -
-                            largura;
-                    }
-
-
-                    ctx.textAlign =
-                        "left";
-
-
-                    ctx.fillText(
-                        texto,
-                        x,
-                        propriedades.y
-                    );
-                }
-            );
-
-
-            ctx.restore();
+        if(
+            !dataset ||
+            !meta ||
+            !Array.isArray(meta.data)
+        ){
+            return;
         }
-    };
 
+        const ctx =
+            chart.ctx;
+
+        const area =
+            chart.chartArea;
+
+
+        ctx.save();
+
+        ctx.textBaseline =
+            "middle";
+
+        ctx.font =
+            "900 10px 'Segoe UI', Arial, sans-serif";
+
+
+        meta.data.forEach(
+            (barra, indice) => {
+
+                const valor =
+                    Number(
+                        dataset.data[indice] || 0
+                    );
+
+                if(valor <= 0){
+                    return;
+                }
+
+
+                const percentual =
+                    calcularPercentualDescarte(
+                        valor,
+                        total
+                    );
+
+
+                const propriedades =
+                    barra.getProps(
+                        ["y"],
+                        true
+                    );
+
+
+                /*
+                   COLUNA DO PERCENTUAL
+                */
+
+                ctx.textAlign =
+                    "right";
+
+                ctx.fillStyle =
+                    "#0f2557";
+
+                ctx.fillText(
+                    formatarPercentualDescarte(
+                        percentual
+                    ),
+                    area.right + 62,
+                    propriedades.y
+                );
+
+
+                /*
+                   COLUNA DO VALOR
+                */
+
+                ctx.textAlign =
+                    "right";
+
+                ctx.fillStyle =
+                    "#071a4b";
+
+                ctx.fillText(
+                    moeda(valor),
+                    chart.width - 8,
+                    propriedades.y
+                );
+
+            }
+        );
+
+
+        ctx.restore();
+    }
+};
 
     /* ======================================================
        CHART
@@ -1920,18 +1904,27 @@ function renderDescarte(){
 
 
     const origensDescartado =
-        Array.isArray(
-            blocoDescartado.origens
-        )
-            ? blocoDescartado.origens
-            : (
-                Array.isArray(
-                    d.origensDescartado
-                )
-                    ? d.origensDescartado
-                    : []
-            );
+    Array.isArray(
+        blocoDescartado.origens
+    ) &&
+    blocoDescartado.origens.length
 
+        ? blocoDescartado.origens
+
+        : (
+            Array.isArray(
+                d.origensDescartado
+            ) &&
+            d.origensDescartado.length
+
+                ? d.origensDescartado
+
+                : (
+                    Array.isArray(d.origens)
+                        ? d.origens
+                        : []
+                )
+        );
 
     const topDescartado =
         Array.isArray(
