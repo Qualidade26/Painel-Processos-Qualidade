@@ -514,8 +514,7 @@ font-size:20px;
    TOP 3 — PERCENTUAL
 ========================================================== */
 
-.pagina-descarte .descarte-top3-percentual{
-
+.pagina-descarte 
     margin-top:4px;
 
     font-size:
@@ -840,7 +839,6 @@ font-size:20px;
 .pagina-descarte .descarte-titulo-top3,
 .pagina-descarte .descarte-top3-nome,
 .pagina-descarte .descarte-top3-valor,
-.pagina-descarte .descarte-top3-percentual,
 .pagina-descarte .descarte-panel-top10 th,
 .pagina-descarte .descarte-panel-top10 td{
     -webkit-font-smoothing:auto;
@@ -1546,7 +1544,7 @@ tbody tr:last-child td{
 
 .pagina-descarte
 .descarte-panel-atual
-.descarte-top3-percentual{
+
 
     margin-top:4px;
 
