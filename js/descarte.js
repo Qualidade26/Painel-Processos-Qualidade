@@ -1212,10 +1212,599 @@ function iniciarScrollAutomaticoTop10Descarte(){
 }
 
 /* ==========================================================
+   ABA INTERNA — DESCARTE
+========================================================== */
+
+let abaInternaDescarte = "atual";
+
+
+/* ==========================================================
+   TROCAR ABA INTERNA
+========================================================== */
+
+function trocarAbaDescarte(aba){
+
+    if(
+        aba !== "atual" &&
+        aba !== "descartado"
+    ){
+        return;
+    }
+
+    abaInternaDescarte = aba;
+
+    renderDescarte();
+}
+
+
+/* ==========================================================
+   CRIAR GRÁFICO — DESCARTE POR ORIGEM
+   MOSTRA % + VALOR EM R$
+========================================================== */
+
+function criarGraficoDescarteOrigemResumo(
+    origens,
+    canvasId = "graficoDescarteOrigem"
+){
+
+    const canvas =
+        document.getElementById(canvasId);
+
+    if(!canvas){
+        return;
+    }
+
+
+    /*
+       Destrói gráfico anterior.
+    */
+
+    if(
+        window.graficoDescarteBarra &&
+        typeof window.graficoDescarteBarra.destroy ===
+        "function"
+    ){
+
+        window.graficoDescarteBarra.destroy();
+
+        window.graficoDescarteBarra = null;
+    }
+
+
+    const lista =
+        Array.isArray(origens)
+            ? [...origens]
+            : [];
+
+
+    /*
+       Ordena maior → menor.
+    */
+
+    lista.sort(
+        (a,b) =>
+            Number(b.valor || 0) -
+            Number(a.valor || 0)
+    );
+
+
+    const total =
+        lista.reduce(
+            (soma,item) =>
+                soma +
+                Number(item.valor || 0),
+            0
+        );
+
+
+    const labels =
+        lista.map(
+            item =>
+                item.nome ||
+                item.origem ||
+                "Sem origem"
+        );
+
+
+    const valores =
+        lista.map(
+            item =>
+                Number(item.valor || 0)
+        );
+
+
+    const cores =
+        lista.map(
+            (item,indice) =>
+                item.cor ||
+                coresDescarte[
+                    indice %
+                    coresDescarte.length
+                ]
+        );
+
+
+    /* ======================================================
+       PLUGIN — PERCENTUAL + VALOR
+    ====================================================== */
+
+    const rotuloPercentualValorDescarte = {
+
+        id:"rotuloPercentualValorDescarte",
+
+        afterDatasetsDraw(chart){
+
+            const dataset =
+                chart.data.datasets[0];
+
+            const meta =
+                chart.getDatasetMeta(0);
+
+            if(
+                !dataset ||
+                !meta ||
+                !Array.isArray(meta.data)
+            ){
+                return;
+            }
+
+
+            const ctx =
+                chart.ctx;
+
+
+            ctx.save();
+
+            ctx.font =
+                "900 11px 'Segoe UI', Arial, sans-serif";
+
+            ctx.textBaseline =
+                "middle";
+
+            ctx.fillStyle =
+                "#0f2557";
+
+
+            meta.data.forEach(
+                (barra,indice) => {
+
+                    const valor =
+                        Number(
+                            dataset.data[indice] || 0
+                        );
+
+
+                    if(valor <= 0){
+                        return;
+                    }
+
+
+                    const percentual =
+                        calcularPercentualDescarte(
+                            valor,
+                            total
+                        );
+
+
+                    const texto =
+                        formatarPercentualDescarte(
+                            percentual
+                        ) +
+                        "  |  " +
+                        moeda(valor);
+
+
+                    const propriedades =
+                        barra.getProps(
+                            [
+                                "x",
+                                "y"
+                            ],
+                            true
+                        );
+
+
+                    let x =
+                        propriedades.x + 9;
+
+
+                    /*
+                       Evita cortar o texto
+                       na borda direita.
+                    */
+
+                    const largura =
+                        ctx.measureText(texto).width;
+
+
+                    const limite =
+                        chart.width - 8;
+
+
+                    if(
+                        x + largura >
+                        limite
+                    ){
+
+                        x =
+                            limite -
+                            largura;
+                    }
+
+
+                    ctx.textAlign =
+                        "left";
+
+
+                    ctx.fillText(
+                        texto,
+                        x,
+                        propriedades.y
+                    );
+                }
+            );
+
+
+            ctx.restore();
+        }
+    };
+
+
+    /* ======================================================
+       CHART
+    ====================================================== */
+
+    window.graficoDescarteBarra =
+        new Chart(
+            canvas,
+            {
+
+                type:"bar",
+
+                plugins:[
+                    rotuloPercentualValorDescarte
+                ],
+
+                data:{
+
+                    labels,
+
+                    datasets:[{
+
+                        label:
+                            "Descarte por origem",
+
+                        data:
+                            valores,
+
+                        backgroundColor:
+                            cores,
+
+                        borderWidth:
+                            0,
+
+                        borderRadius:
+                            5,
+
+                        borderSkipped:
+                            false,
+
+                        barPercentage:
+                            .68,
+
+                        categoryPercentage:
+                            .74
+                    }]
+                },
+
+
+                options:{
+
+                    indexAxis:"y",
+
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+                    animation:{
+
+                        duration:300
+                    },
+
+
+                    layout:{
+
+                        padding:{
+
+                            top:8,
+
+                            right:190,
+
+                            bottom:4,
+
+                            left:4
+                        }
+                    },
+
+
+                    plugins:{
+
+                        datalabels:{
+
+                            display:false
+                        },
+
+
+                        legend:{
+
+                            display:false
+                        },
+
+
+                        tooltip:{
+
+                            displayColors:false,
+
+                            callbacks:{
+
+                                title(context){
+
+                                    return (
+                                        context[0]?.label ||
+                                        "Sem origem"
+                                    );
+                                },
+
+
+                                label(context){
+
+                                    const valor =
+                                        Number(
+                                            context.raw || 0
+                                        );
+
+
+                                    const percentual =
+                                        calcularPercentualDescarte(
+                                            valor,
+                                            total
+                                        );
+
+
+                                    return (
+                                        formatarPercentualDescarte(
+                                            percentual
+                                        ) +
+                                        " | " +
+                                        moeda(valor)
+                                    );
+                                }
+                            }
+                        }
+                    },
+
+
+                    scales:{
+
+                        x:{
+
+                            beginAtZero:true,
+
+                            grace:"8%",
+
+                            border:{
+
+                                display:false
+                            },
+
+                            grid:{
+
+                                color:
+                                    "rgba(15,37,87,.08)",
+
+                                drawBorder:false
+                            },
+
+                            ticks:{
+
+                                color:"#64748b",
+
+                                maxTicksLimit:6,
+
+                                font:{
+
+                                    size:10,
+
+                                    weight:"800"
+                                },
+
+
+                                callback(valor){
+
+                                    const numero =
+                                        Number(valor || 0);
+
+
+                                    if(
+                                        Math.abs(numero) >=
+                                        1000000
+                                    ){
+
+                                        return (
+                                            "R$ " +
+                                            (
+                                                numero /
+                                                1000000
+                                            )
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:1
+                                                }
+                                            ) +
+                                            " mi"
+                                        );
+                                    }
+
+
+                                    if(
+                                        Math.abs(numero) >=
+                                        1000
+                                    ){
+
+                                        return (
+                                            "R$ " +
+                                            (
+                                                numero /
+                                                1000
+                                            )
+                                            .toLocaleString(
+                                                "pt-BR",
+                                                {
+                                                    maximumFractionDigits:0
+                                                }
+                                            ) +
+                                            " mil"
+                                        );
+                                    }
+
+
+                                    return (
+                                        "R$ " +
+                                        numero.toLocaleString(
+                                            "pt-BR"
+                                        )
+                                    );
+                                }
+                            }
+                        },
+
+
+                        y:{
+
+                            border:{
+
+                                display:false
+                            },
+
+                            grid:{
+
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#0f2557",
+
+                                padding:8,
+
+                                autoSkip:false,
+
+                                font:{
+
+                                    size:11,
+
+                                    weight:"900"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+
+    graficoAtual =
+        window.graficoDescarteBarra;
+}
+
+
+/* ==========================================================
+   TABELA — GASTO AMBIENTAL
+========================================================== */
+
+function montarTabelaGastoAmbiental(){
+
+    return `
+
+        <div class="descarte-ambiental-tabela">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Período
+                        </th>
+
+                        <th>
+                            Valor
+                        </th>
+
+                        <th>
+                            Observação
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            1º Semestre
+                        </td>
+
+                        <td>
+                            R$ 10.000,00
+                        </td>
+
+                        <td>
+                            Maio
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            2º Semestre
+                        </td>
+
+                        <td>
+                            R$ 50.000,00
+                        </td>
+
+                        <td>
+                            Gasto ambiental
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
    RENDERIZAR PÁGINA
 ========================================================== */
 
 function renderDescarte(){
+
+    /* ======================================================
+       SENHA
+    ====================================================== */
 
     if(!senhaDescarteLiberada){
 
@@ -1266,1057 +1855,544 @@ function renderDescarte(){
     }
 
 
- /* ======================================================
-   DADOS
-====================================================== */
+    /* ======================================================
+       LIMPEZA
+    ====================================================== */
 
-const d =
-    dados.descarte || {
+    destruirGraficosDescarte();
 
-        total: 0,
-
-        ultimoDescarte: 0,
-
-        origens: [],
-
-        top10: []
-    };
+    pararScrollAutomaticoTop10Descarte();
 
 
-const origens =
-    Array.isArray(d.origens)
-        ? d.origens
-        : [];
+    /* ======================================================
+       DADOS GERAIS
+    ====================================================== */
+
+    const d =
+        dados.descarte || {};
 
 
-const top =
-    Array.isArray(d.top10)
-        ? [...d.top10]
-        : [];
+    /* ======================================================
+       VALOR ATUAL
+
+       Mantém compatibilidade com seu JSON atual.
+    ====================================================== */
+
+    const blocoAtual =
+        d.valorAtual &&
+        typeof d.valorAtual === "object"
+            ? d.valorAtual
+            : {};
 
 
-top.sort(
-    (a, b) =>
-        Number(b.valor || 0) -
-        Number(a.valor || 0)
-);
+    const origensAtual =
+        Array.isArray(blocoAtual.origens)
+            ? blocoAtual.origens
+            : (
+                Array.isArray(d.origens)
+                    ? d.origens
+                    : []
+            );
 
 
-/* ======================================================
-   DADOS ORIGINAIS — PIZZA
-   Mantém ordem e cores originais
-====================================================== */
-const origensPizza =
-    origens.map(
-        (item, indice) => ({
-
-            ...item,
-
-            corOriginal:
-                coresDescarte[
-                    indice % coresDescarte.length
-                ]
-        })
-    );
-
-const nomesPizza =
-    origensPizza.map(
-        item =>
-            item.nome ||
-            item.origem ||
-            "Sem origem"
-    );
+    const totalAtual =
+        Number(
+            blocoAtual.total ??
+            d.total ??
+            0
+        );
 
 
-const valoresPizza =
-    origensPizza.map(
-        item =>
-            Number(item.valor || 0)
-    );
+    /* ======================================================
+       DESCARTADO NO ANO
+
+       Já preparado para receber depois:
+       descartadoAno.origens
+       descartadoAno.top10
+       descartadoAno.total
+    ====================================================== */
+
+    const blocoDescartado =
+        d.descartadoAno &&
+        typeof d.descartadoAno === "object"
+            ? d.descartadoAno
+            : {};
 
 
-const coresPizza =
-    origensPizza.map(
-        item =>
-            item.corOriginal
-    );
+    const origensDescartado =
+        Array.isArray(
+            blocoDescartado.origens
+        )
+            ? blocoDescartado.origens
+            : (
+                Array.isArray(
+                    d.origensDescartado
+                )
+                    ? d.origensDescartado
+                    : []
+            );
 
 
-/* ======================================================
-   DADOS ORDENADOS — SOMENTE GRÁFICO DE BARRAS
-====================================================== */
+    const topDescartado =
+        Array.isArray(
+            blocoDescartado.top10
+        )
+            ? [...blocoDescartado.top10]
+            : (
+                Array.isArray(
+                    d.top10Descartado
+                )
+                    ? [...d.top10Descartado]
+                    : (
+                        Array.isArray(d.top10)
+                            ? [...d.top10]
+                            : []
+                    )
+            );
 
-const origensOrdenadas =
-    [...origensPizza].sort(
-        (a, b) =>
+
+    topDescartado.sort(
+        (a,b) =>
             Number(b.valor || 0) -
             Number(a.valor || 0)
     );
 
 
-const nomesOrigens =
-    origensOrdenadas.map(
-        item =>
-            item.nome ||
-            item.origem ||
-            "Sem origem"
-    );
+    const totalDescartado =
+        Number(
+            blocoDescartado.total ??
+            d.totalDescartado ??
+            d.ultimoDescarte ??
+            0
+        );
 
 
-const valoresOrigens =
-    origensOrdenadas.map(
-        item =>
-            Number(item.valor || 0)
-    );
-
-
-const coresOrigens =
-    origensOrdenadas.map(
-        item =>
-            item.corOriginal
-    );
-
-
-destruirGraficosDescarte();
-
-
-/* ======================================================
-   TAMANHO VISUAL MÍNIMO DA PIZZA
-====================================================== */
-
-/*
-Cria um tamanho visual mínimo para que todas as cores
-apareçam na rosquinha, sem alterar o percentual verdadeiro.
-*/
-
-const totalOrigensDescarte =
-    valoresPizza.reduce(
-        (soma, valor) =>
-            soma + Number(valor || 0),
-        0
-    );
-
-
-const tamanhoMinimoVisualDescarte =
-    totalOrigensDescarte > 0
-        ? totalOrigensDescarte * 0.006
-        : 1;
-
-
-const valoresVisuaisPizza =
-    valoresPizza.map(
-        valor => {
-
-            const numero =
-                Number(valor || 0);
-
-            return Math.max(
-                numero,
-                tamanhoMinimoVisualDescarte
-            );
-        }
-    );
     /* ======================================================
-       HTML
+       HTML PRINCIPAL
     ====================================================== */
 
     conteudo.innerHTML = `
 
-    <section class="pagina-descarte">
+        <section class="pagina-descarte">
 
-        <div class="page-title">
+            <div class="page-title">
 
-            🗑 DESCARTE
-
-        </div>
-
-        <section class="cards descarte-indicadores">
-
-            ${card(
-                "🗑",
-                "Valor Atual",
-                moeda(d.total),
-                "Financeiro impactado"
-            )}
-
-
-            ${card(
-                "📋",
-                "Total Descartado",
-                moeda(d.ultimoDescarte),
-                "Últimas Operações Registrada"
-            )}
-
-        </section>
-
-
-        <section class="descarte-grid">
-
-
-            <div class="panel descarte-panel-origens">
-
-
-                <h3 class="descarte-titulo-painel">
-
-                    📊 Descarte por Origem
-
-                </h3>
-
-
-                <div class="descarte-chart-barra">
-
-                    <canvas
-                        id="graficoDescarteOrigem"
-                    ></canvas>
-
-                </div>
-
-
-                <section class="descarte-top3-area">
-
-                    <h3 class="descarte-titulo-top3">
-
-                        Top 3 Origens de Destino
-
-                    </h3>
-
-
-                    ${montarTop3Descarte(origens)}
-
-                </section>
+                🗑 DESCARTE
 
             </div>
 
 
-            <div class="descarte-coluna-direita">
+            <!-- =============================================
+                 CARDS
+            ============================================== -->
+
+            <section
+                class="cards descarte-indicadores"
+            >
+
+                ${card(
+                    "🗑",
+                    "Valor Atual",
+                    moeda(totalAtual),
+                    "Aguardando destinação"
+                )}
 
 
-                <div class="panel descarte-panel-pizza">
+                ${card(
+                    "📋",
+                    "Descartado no Ano",
+                    moeda(totalDescartado),
+                    "Operações concluídas"
+                )}
+
+            </section>
 
 
-                    <h3 class="descarte-titulo-painel">
+            <!-- =============================================
+                 ABAS INTERNAS
+            ============================================== -->
 
-                        Descarte por Origem (%)
+            <section
+                class="descarte-abas"
+            >
 
-                    </h3>
-
-
-                    <div class="descarte-chart-pizza">
-
-                        <canvas
-                            id="graficoDescartePizza"
-                        ></canvas>
-
-                    </div>
-
-                </div>
-
-<div class="panel descarte-panel-top10">
-
-    <h3 class="descarte-titulo-painel descarte-top10-titulo">
-
-        Top 10 Descarte
-
-    </h3>
-
-    <div class="descarte-top10-scroll">
-
-        ${
-            tabelaFixa(
-                [
-                    "SKU",
-                    "Descrição",
-                    "Valor"
-                ],
-                montarLinhasTopDescarte(top),
-                true
-            )
-        }
-
-    </div>
-
-</div>
-
-</div>
-
-</section>
-
-</section>
-`;
-
-iniciarScrollAutomaticoTop10Descarte();
-
-/* ======================================================
-   GRÁFICO DE BARRAS
-====================================================== */
-
-const canvasBarra =
-    document.getElementById(
-        "graficoDescarteOrigem"
-    );
-
-if(canvasBarra){
-
-    if(
-        window.graficoDescarteBarra &&
-        typeof window.graficoDescarteBarra.destroy ===
-        "function"
-    ){
-        window.graficoDescarteBarra.destroy();
-
-        window.graficoDescarteBarra =
-            null;
-    }
-window.graficoDescarteBarra =
-    new Chart(
-        canvasBarra,
-        {
-            type:"bar",
-
-            plugins:[],
-
-            data:{
-
-                labels:
-                    nomesOrigens,
-
-                datasets:[{
-
-                    label:
-                        "Valor descartado",
-
-                    data:
-                        valoresOrigens,
-
-                    backgroundColor:
-                         coresOrigens,
-                        
-
-                    borderWidth:0,
-
-                    borderRadius:4,
-
-                    borderSkipped:false,
-
-                    barPercentage:.70,
-
-                    categoryPercentage:.76
-                }]
-            },
- 
-
-                options:{
-
-                    indexAxis:"y",
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    animation:{
-
-                        duration:350
-                    },
-
-                    layout:{
-
-                        padding:{
-
-                            top:8,
-
-                            right:110,
-
-                            bottom:5,
-
-                            left:5
+                <button
+                    type="button"
+                    class="
+                        descarte-aba
+                        ${
+                            abaInternaDescarte ===
+                            "atual"
+                                ? "ativa"
+                                : ""
                         }
-                    },
+                    "
+                    onclick="
+                        trocarAbaDescarte('atual')
+                    "
+                >
 
-                    plugins:{
+                    <span>
+                        🗑
+                    </span>
 
-                        /*
-                        Impede que o ChartDataLabels global
-                        desenhe valores sobre as barras.
-                        */
+                    <span>
 
-                        datalabels:{
+                        <strong>
+                            Valor Atual
+                        </strong>
 
-                            display:false,
+                        <small>
+                            Aguardando destinação
+                        </small>
 
-                            formatter(){
+                    </span>
 
-                                return "";
-                            }
-                        },
+                </button>
 
-                        legend:{
 
-                            display:false
-                        },
+                <button
+                    type="button"
+                    class="
+                        descarte-aba
+                        ${
+                            abaInternaDescarte ===
+                            "descartado"
+                                ? "ativa"
+                                : ""
+                        }
+                    "
+                    onclick="
+                        trocarAbaDescarte(
+                            'descartado'
+                        )
+                    "
+                >
 
-                        tooltip:{
+                    <span>
+                        📋
+                    </span>
 
-                            displayColors:false,
+                    <span>
 
-                            callbacks:{
+                        <strong>
+                            Descartado por Ano
+                        </strong>
 
-                                title(context){
+                        <small>
+                            Operações concluídas
+                        </small>
 
-                                    return (
-                                        context[0]?.label ||
-                                        "Sem origem"
-                                    );
-                                },
+                    </span>
 
-                                label(context){
+                </button>
 
-                                    return (
-                                        "Valor: " +
-                                        moeda(
-                                            Number(
-                                                context.raw || 0
-                                            )
-                                        )
-                                    );
+            </section>
+
+
+            <!-- =============================================
+                 CONTEÚDO DAS ABAS
+            ============================================== -->
+
+            <section
+                id="conteudoInternoDescarte"
+                class="descarte-conteudo-interno"
+            >
+
+                ${
+                    abaInternaDescarte ===
+                    "atual"
+
+                        ?
+
+                        `
+
+                        <!-- ===================================
+                             VALOR ATUAL
+                        ==================================== -->
+
+                        <div
+                            class="
+                                panel
+                                descarte-panel-origens
+                                descarte-panel-atual
+                            "
+                        >
+
+                            <h3
+                                class="
+                                    descarte-titulo-painel
+                                "
+                            >
+
+                                📊 Descarte por Origem
+
+                            </h3>
+
+
+                            <div
+                                class="
+                                    descarte-chart-barra
+                                    descarte-chart-barra-atual
+                                "
+                            >
+
+                                <canvas
+                                    id="graficoDescarteOrigem"
+                                ></canvas>
+
+                            </div>
+
+
+                            <section
+                                class="
+                                    descarte-top3-area
+                                "
+                            >
+
+                                <h3
+                                    class="
+                                        descarte-titulo-top3
+                                    "
+                                >
+
+                                    Top 3 Origens de Destino
+
+                                </h3>
+
+
+                                ${
+                                    montarTop3Descarte(
+                                        origensAtual
+                                    )
                                 }
-                            }
-                        }
-                    },
 
-                    scales:{
+                            </section>
 
-                        /*
-                        Eixo horizontal — valores financeiros
-                        */
+                        </div>
 
-                        x:{
+                        `
 
-                            beginAtZero:true,
+                        :
 
-                            grace:"5%",
+                        `
 
-                            border:{
+                        <!-- ===================================
+                             DESCARTADO NO ANO
+                        ==================================== -->
 
-                                display:false
-                            },
+                        <section
+                            class="
+                                descarte-grid-ano
+                            "
+                        >
 
-                            grid:{
 
-                                color:
-                                    "rgba(15,37,87,.08)",
+                            <!-- COLUNA ESQUERDA -->
 
-                                drawBorder:false
-                            },
+                            <div
+                                class="
+                                    descarte-coluna-ano
+                                "
+                            >
 
-                            title:{
+                                <div
+                                    class="
+                                        panel
+                                        descarte-panel-origens
+                                    "
+                                >
 
-                                display:false
-                            },
+                                    <h3
+                                        class="
+                                            descarte-titulo-painel
+                                        "
+                                    >
 
-                            ticks:{
+                                        📊 Descarte por Origem
 
-                                color:"#64748b",
+                                    </h3>
 
-                                padding:6,
 
-                                maxTicksLimit:6,
+                                    <div
+                                        class="
+                                            descarte-chart-barra
+                                        "
+                                    >
 
-                                font:{
+                                        <canvas
+                                            id="
+                                                graficoDescarteOrigem
+                                            "
+                                        ></canvas>
 
-                                    size:11,
+                                    </div>
 
-                                    weight:"900"
-                                },
 
-                                callback(valor){
+                                    <section
+                                        class="
+                                            descarte-top3-area
+                                        "
+                                    >
 
-                                    const numero =
-                                        Number(valor || 0);
+                                        <h3
+                                            class="
+                                                descarte-titulo-top3
+                                            "
+                                        >
 
-                                    if(
-                                        Math.abs(numero) >=
-                                        1000000
-                                    ){
-                                        return (
-                                            "R$ " +
-                                            (
-                                                numero /
-                                                1000000
+                                            Top 3 Origens de Destino
+
+                                        </h3>
+
+
+                                        ${
+                                            montarTop3Descarte(
+                                                origensDescartado
                                             )
-                                                .toLocaleString(
-                                                    "pt-BR",
-                                                    {
-                                                        maximumFractionDigits:1
-                                                    }
-                                                ) +
-                                            " mi"
-                                        );
-                                    }
-
-                                    if(
-                                        Math.abs(numero) >=
-                                        1000
-                                    ){
-                                        return (
-                                            "R$ " +
-                                            (
-                                                numero /
-                                                1000
-                                            )
-                                                .toLocaleString(
-                                                    "pt-BR",
-                                                    {
-                                                        maximumFractionDigits:0
-                                                    }
-                                                ) +
-                                            " mil"
-                                        );
-                                    }
-
-                                    return (
-                                        "R$ " +
-                                        numero.toLocaleString(
-                                            "pt-BR"
-                                        )
-                                    );
-                                }
-                            }
-                        },
-
-                        /*
-                        Eixo vertical — origens
-                        */
-
-                        y:{
-
-                            border:{
-
-                                display:false
-                            },
-
-                            grid:{
-
-                                display:false,
-
-                                drawBorder:false
-                            },
-
-                            ticks:{
-
-                                color:"#0f2557",
-
-                                padding:8,
-
-                                autoSkip:false,
-
-                                font:{
-
-                                    size:12,
-
-                                    weight:"900"
-                                },
-
-                                callback(
-                                    valor,
-                                    indice
-                                ){
-
-                                    const label =
-                                        this.getLabelForValue(
-                                            valor
-                                        );
-
-                                    const texto =
-                                        String(
-                                            label || "-"
-                                        );
-
-                                    const limite =
-                                        24;
-
-                                    if(
-                                        texto.length <=
-                                        limite
-                                    ){
-                                        return texto;
-                                    }
-
-                                    return (
-                                        texto.slice(
-                                            0,
-                                            limite
-                                        ) +
-                                        "…"
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        );
-}
-
- /* ======================================================
-   GRÁFICO DE PIZZA
-====================================================== */
-
-const canvasPizza =
-    document.getElementById(
-        "graficoDescartePizza"
-    );
-
-
-if(canvasPizza){
-
-    if(
-        window.graficoDescartePizza &&
-        typeof window.graficoDescartePizza.destroy ===
-        "function"
-    ){
-
-        window.graficoDescartePizza.destroy();
-
-        window.graficoDescartePizza =
-            null;
-    }
-
-
-    window.graficoDescartePizza =
-        new Chart(
-            canvasPizza,
-            {
-
-                type:
-                    "doughnut",
-
-
-                /* ==========================================
-                   PLUGINS EXCLUSIVOS DESTA PIZZA
-                ========================================== */
-
-               plugins:[
-    centroPizzaDescarte,
-    rotulosExternosPizzaDescarte
-],
-
-
-                /* ==========================================
-                   DADOS
-                ========================================== */
-
-                data:{
-
-                    labels:
-                        nomesPizza,
-
-
-                    datasets:[{
-
-                        label:
-                            "Percentual",
-
-
-                        /*
-                           Valores usados apenas para
-                           controlar visualmente as fatias.
-                        */
-
-                        data:
-                            valoresVisuaisPizza,
-
-
-                        /*
-                           Valores financeiros reais.
-                           Usados na legenda e tooltip.
-                        */
-
-                        valoresReais:
-                            valoresPizza,
-
-
-                        backgroundColor:
-                            coresPizza,
-
-
-                        borderColor:
-                            "#ffffff",
-
-
-                        borderWidth:
-                            2,
-
-
-                        hoverOffset:
-                            3,
-
-
-                        spacing:
-                            0,
-
-
-                        /*
-                           BLOQUEIA DATLABELS
-                           DENTRO DA ROSCA
-                        */
-
-                        datalabels:{
-
-                            display:
-                                false
-                        }
-
-                    }]
-
-                },
-
-
-                /* ==========================================
-                   OPÇÕES
-                ========================================== */
-
-                options:{
-
-                    responsive:
-                        true,
-
-
-                    maintainAspectRatio:
-                        false,
-
-
-                    animation:{
-
-                        duration:
-                            350
-                    },
-
-
-                    /*
-                       Aumenta o espaço branco central
-                       e reduz levemente a pizza.
-                    */
-
-               cutout:
-    "64%",
-
-radius:
-    "82%",
-
-
-                    layout:{
-
-                        padding:{
-
-                            top:
-                                15,
-
-                            right:
-                                20,
-
-                            bottom:
-                                15,
-
-                            left:
-                                20
-                        }
-                    },
-
-
-                    /* ======================================
-                       PLUGINS
-                    ====================================== */
-
-                    plugins:{
-
-
-                        /* ==================================
-                           REMOVE RÓTULOS AUTOMÁTICOS
-                        ================================== */
-
-                        datalabels:{
-
-                            display:
-                                false,
-
-
-                            formatter(){
-
-                                return "";
-                            }
-                        },
-
-
-                        /* ==================================
-                           LEGENDA
-                        ================================== */
-
-                        legend:{
-
-                            display:
-                                true,
-
-
-                            position:
-                                "right",
-
-
-                            align:
-                                "end",
-
-
-                            labels:{
-
-                                usePointStyle:
-                                    true,
-
-
-                                pointStyle:
-                                    "circle",
-
-
-                                boxWidth:
-                                    8,
-
-
-                                boxHeight:
-                                    8,
-
-
-                                padding:
-                                    8,
-
-
-                                color:
-                                    "#0f2557",
-
-
-                                font:{
-
-                                    size:
-                                        9,
-
-
-                                    weight:
-                                        "700"
-                                },
-
-
-                                generateLabels(chart){
-
-                                    const dataset =
-                                        chart.data
-                                            .datasets[0];
-
-
-                                    const valores =
-                                        Array.isArray(
-                                            dataset.valoresReais
-                                        )
-                                            ? dataset.valoresReais
-                                            : dataset.data;
-
-
-                                    const total =
-                                        valores.reduce(
-                                            (
-                                                soma,
-                                                valor
-                                            ) =>
-                                                soma +
-                                                Number(
-                                                    valor || 0
-                                                ),
-                                            0
-                                        );
-
-
-                                    return chart.data.labels.map(
-                                        (
-                                            label,
-                                            indice
-                                        ) => {
-
-
-                                            const valor =
-                                                Number(
-                                                    valores[
-                                                        indice
-                                                    ] || 0
-                                                );
-
-
-                                            const percentual =
-                                                calcularPercentualDescarte(
-                                                    valor,
-                                                    total
-                                                );
-
-
-                                            const cores =
-                                                Array.isArray(
-                                                    dataset.backgroundColor
-                                                )
-                                                    ? dataset.backgroundColor
-                                                    : [];
-
-
-                                            const cor =
-                                                cores[
-                                                    indice %
-                                                    cores.length
-                                                ] ||
-                                                "#64748b";
-
-
-                                            return {
-
-                                                text:
-                                                    label +
-                                                    " — " +
-                                                    formatarPercentualDescarte(
-                                                        percentual
-                                                    ),
-
-
-                                                fillStyle:
-                                                    cor,
-
-
-                                                strokeStyle:
-                                                    cor,
-
-
-                                                lineWidth:
-                                                    0,
-
-
-                                                pointStyle:
-                                                    "circle",
-
-
-                                                hidden:
-                                                    !chart
-                                                        .getDataVisibility(
-                                                            indice
-                                                        ),
-
-
-                                                index:
-                                                    indice
-                                            };
                                         }
-                                    );
-                                }
-                            },
+
+                                    </section>
+
+                                </div>
+
+                            </div>
 
 
-                            onClick(
-                                evento,
-                                item,
-                                legenda
-                            ){
+                            <!-- COLUNA DIREITA -->
 
-                                const chart =
-                                    legenda.chart;
-
-
-                                chart.toggleDataVisibility(
-                                    item.index
-                                );
+                            <div
+                                class="
+                                    descarte-coluna-ano
+                                    descarte-coluna-ano-direita
+                                "
+                            >
 
 
-                                chart.update();
-                            }
-                        },
+                                <!-- TOP 10 -->
+
+                                <div
+                                    class="
+                                        panel
+                                        descarte-panel-top10
+                                    "
+                                >
+
+                                    <h3
+                                        class="
+                                            descarte-titulo-painel
+                                            descarte-top10-titulo
+                                        "
+                                    >
+
+                                        Top 10 Descartados por Produto
+
+                                    </h3>
 
 
-                        /* ==================================
-                           TOOLTIP
-                        ================================== */
+                                    <div
+                                        class="
+                                            descarte-top10-scroll
+                                        "
+                                    >
 
-                        tooltip:{
+                                        ${
+                                            tabelaFixa(
+                                                [
+                                                    "SKU",
+                                                    "Descrição",
+                                                    "Valor"
+                                                ],
 
-                            displayColors:
-                                true,
-
-
-                            callbacks:{
-
-                                label(context){
-
-                                    const dataset =
-                                        context.dataset;
-
-
-                                    const valores =
-                                        Array.isArray(
-                                            dataset.valoresReais
-                                        )
-                                            ? dataset.valoresReais
-                                            : dataset.data;
-
-
-                                    const valor =
-                                        Number(
-                                            valores[
-                                                context.dataIndex
-                                            ] || 0
-                                        );
-
-
-                                    const total =
-                                        valores.reduce(
-                                            (
-                                                soma,
-                                                item
-                                            ) =>
-                                                soma +
-                                                Number(
-                                                    item || 0
+                                                montarLinhasTopDescarte(
+                                                    topDescartado
                                                 ),
-                                            0
-                                        );
+
+                                                true
+                                            )
+                                        }
+
+                                    </div>
+
+                                </div>
 
 
-                                    const percentual =
-                                        calcularPercentualDescarte(
-                                            valor,
-                                            total
-                                        );
+                                <!-- AMBIENTAL -->
+
+                                <div
+                                    class="
+                                        panel
+                                        descarte-panel-ambiental
+                                    "
+                                >
+
+                                    <h3
+                                        class="
+                                            descarte-titulo-painel
+                                        "
+                                    >
+
+                                        🌱 Gasto com Ambiental Semestral
+
+                                    </h3>
 
 
-                                    return (
-                                        context.label +
-                                        ": " +
-                                        moeda(valor) +
-                                        " — " +
-                                        formatarPercentualDescarte(
-                                            percentual
-                                        )
-                                    );
-                                }
-                            }
-                        }
-                    }
+                                    ${
+                                        montarTabelaGastoAmbiental()
+                                    }
+
+                                </div>
+
+
+                            </div>
+
+                        </section>
+
+                        `
                 }
-            }
+
+            </section>
+
+        </section>
+    `;
+
+
+    /* ======================================================
+       CRIAR GRÁFICO DA ABA ATIVA
+    ====================================================== */
+
+    if(
+        abaInternaDescarte ===
+        "atual"
+    ){
+
+        criarGraficoDescarteOrigemResumo(
+            origensAtual
         );
+
+        return;
+    }
+
+
+    criarGraficoDescarteOrigemResumo(
+        origensDescartado
+    );
+
+
+    /*
+       Scroll somente no
+       Descartado por Ano.
+    */
+
+    setTimeout(
+        () => {
+
+            iniciarScrollAutomaticoTop10Descarte();
+
+        },
+        80
+    );
 }
-
-
-/* ======================================================
-   GRÁFICO ATUAL
-====================================================== */
-
-graficoAtual =
-    window.graficoDescarteBarra;
-   graficoAtual =
-    window.graficoDescarteBarra;
-
-}
-
-
 /* ==========================================================
    VALIDAR SENHA
 ========================================================== */
