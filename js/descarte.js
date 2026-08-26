@@ -210,8 +210,8 @@ function destruirGraficosDescarte(){
 
         window.graficoDescarteBarra =
             null;
-    }
-
+       }
+}
 
 /* ==========================================================
    SCROLL INFINITO — ESTILO PAINEL DE AEROPORTO
@@ -986,12 +986,28 @@ function criarGraficoDescarteOrigemResumo(
         window.graficoDescarteBarra;
 }
 
-
 /* ==========================================================
    TABELA — GASTO AMBIENTAL
 ========================================================== */
 
-function montarTabelaGastoAmbiental(){
+function montarTabelaGastoAmbiental(custoAmbiental){
+
+    const dados =
+        custoAmbiental &&
+        typeof custoAmbiental === "object"
+            ? custoAmbiental
+            : {};
+
+    const primeiroSemestre =
+        Number(
+            dados.totalAcumuladoPrimeiro || 0
+        );
+
+    const segundoSemestre =
+        Number(
+            dados.totalAcumuladoSegundo || 0
+        );
+
 
     return `
 
@@ -1029,7 +1045,7 @@ function montarTabelaGastoAmbiental(){
                         </td>
 
                         <td>
-                            R$ 10.000,00
+                            ${moeda(primeiroSemestre)}
                         </td>
 
                         <td>
@@ -1046,11 +1062,15 @@ function montarTabelaGastoAmbiental(){
                         </td>
 
                         <td>
-                            R$ 50.000,00
+                            ${moeda(segundoSemestre)}
                         </td>
 
                         <td>
-                            Gasto ambiental
+                            ${
+                                segundoSemestre > 0
+                                    ? "Gasto ambiental"
+                                    : "-"
+                            }
                         </td>
 
                     </tr>
@@ -1062,8 +1082,6 @@ function montarTabelaGastoAmbiental(){
         </div>
     `;
 }
-
-
 /* ==========================================================
    RENDERIZAR PÁGINA
 ========================================================== */
