@@ -10,19 +10,18 @@
 
 const coresOrigemDescarte = {
 
-    "Vencido": "#E57373",   // vermelho suave
+    // CORES BASEADAS NO GRÁFICO DE IMPORTAÇÃO
 
-    "Certificação": "#9575CD",           // roxo
+    "Avaria de Importação": "#2855D9",   // azul
+    "Devolução avaria": "#FF6FAE",       // rosa
+    "Avaria estoque": "#55D98A",         // verde
+    "Avaria Nacional": "#8B6CFF",        // roxo
+    "Certificação": "#FF7A1A",           // laranja
 
-    "Desvio de Qualidade": "#6C83F7",    // azul lavanda
+    // DUAS CORES ADICIONAIS
 
-    "Avaria de Importação": "#3F6FE5",                // azul
-
-    "Devolução avaria": "#E6A15C",       // laranja suave
-
-    "Avaria estoque": "#5DB7A3",         // verde água
-
-    "Avaria Nacional": "#D97AB3"         // rosa suave
+    "Vencido": "#9F3D55",                // bordô
+    "Desvio de Qualidade": "#79BFF2"     // azul-bebê
 };
 /* ==========================================================
    FUNÇÕES AUXILIARES
