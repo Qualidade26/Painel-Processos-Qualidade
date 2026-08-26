@@ -2213,11 +2213,7 @@ function renderDescarte(){
                                         "
                                     >
 
-                                        <canvas
-                                            id="
-                                                graficoDescarteOrigem
-                                            "
-                                        ></canvas>
+                                       <canvas id="graficoDescarteOrigem"></canvas>
 
                                     </div>
 
