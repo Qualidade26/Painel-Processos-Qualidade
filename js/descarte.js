@@ -1857,107 +1857,73 @@ function renderDescarte(){
 
 
     /* ======================================================
-       VALOR ATUAL
+   VALOR ATUAL
+====================================================== */
 
-       Mantém compatibilidade com seu JSON atual.
-    ====================================================== */
+const origensAtual =
+    Array.isArray(d.origensAtual)
+        ? d.origensAtual
+        : [];
 
-    const blocoAtual =
-        d.valorAtual &&
-        typeof d.valorAtual === "object"
-            ? d.valorAtual
-            : {};
-
-
-    const origensAtual =
-        Array.isArray(blocoAtual.origens)
-            ? blocoAtual.origens
-            : (
-                Array.isArray(d.origens)
-                    ? d.origens
-                    : []
-            );
+const totalAtual =
+    Number(d.total || 0);
 
 
-    const totalAtual =
-        Number(
-            blocoAtual.total ??
-            d.total ??
-            0
-        );
+/* ======================================================
+   DESCARTADO NO ANO
+====================================================== */
+
+const origensDescartado =
+    Array.isArray(d.origensAcumulado)
+        ? d.origensAcumulado
+        : [];
+
+const topDescartado =
+    Array.isArray(d.top10)
+        ? [...d.top10]
+        : [];
+
+topDescartado.sort(
+    (a, b) =>
+        Number(b.valor || 0) -
+        Number(a.valor || 0)
+);
+
+const totalDescartado =
+    Number(d.totalAcumulado || 0);
 
 
-    /* ======================================================
-       DESCARTADO NO ANO
+/* ======================================================
+   CUSTO AMBIENTAL
+====================================================== */
 
-       Já preparado para receber depois:
-       descartadoAno.origens
-       descartadoAno.top10
-       descartadoAno.total
-    ====================================================== */
+const custoAmbiental =
+    d.custoAmbiental &&
+    typeof d.custoAmbiental === "object"
+        ? d.custoAmbiental
+        : {};
 
-    const blocoDescartado =
-        d.descartadoAno &&
-        typeof d.descartadoAno === "object"
-            ? d.descartadoAno
-            : {};
-
-
-    const origensDescartado =
-    Array.isArray(
-        blocoDescartado.origens
-    ) &&
-    blocoDescartado.origens.length
-
-        ? blocoDescartado.origens
-
-        : (
-            Array.isArray(
-                d.origensDescartado
-            ) &&
-            d.origensDescartado.length
-
-                ? d.origensDescartado
-
-                : (
-                    Array.isArray(d.origens)
-                        ? d.origens
-                        : []
-                )
-        );
-
-    const topDescartado =
-        Array.isArray(
-            blocoDescartado.top10
-        )
-            ? [...blocoDescartado.top10]
-            : (
-                Array.isArray(
-                    d.top10Descartado
-                )
-                    ? [...d.top10Descartado]
-                    : (
-                        Array.isArray(d.top10)
-                            ? [...d.top10]
-                            : []
-                    )
-            );
-
-
-    topDescartado.sort(
-        (a,b) =>
-            Number(b.valor || 0) -
-            Number(a.valor || 0)
+const totalAmbientalPrimeiro =
+    Number(
+        custoAmbiental.totalAcumuladoPrimeiro || 0
     );
 
+const totalAmbientalSegundo =
+    Number(
+        custoAmbiental.totalAcumuladoSegundo || 0
+    );
 
-    const totalDescartado =
-        Number(
-            blocoDescartado.total ??
-            d.totalDescartado ??
-            d.ultimoDescarte ??
-            0
-        );
+const primeiroSemestre =
+    custoAmbiental.periodos &&
+    typeof custoAmbiental.periodos === "object"
+        ? custoAmbiental.periodos
+        : {};
+
+const segundoSemestre =
+    custoAmbiental.segundoSemestre &&
+    typeof custoAmbiental.segundoSemestre === "object"
+        ? custoAmbiental.segundoSemestre
+        : {};
 
 
     /* ======================================================
