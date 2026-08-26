@@ -90,7 +90,7 @@
     display:flex;
     align-items:center;
 
-   padding:4px 12px;
+    padding:6px 12px;
 
     border-radius:12px;
 
@@ -108,7 +108,7 @@
     min-width:0;
     min-height:0;
 
-    height:100%;
+    height:auto;
 
     display:flex;
     flex-direction:column;
@@ -118,6 +118,8 @@
     line-height:1;
 
     overflow:hidden;
+
+   
 }
 
 
@@ -127,16 +129,13 @@
 
 .pagina-descarte .descarte-indicadores .card-title,
 .pagina-descarte .descarte-indicadores .card-titulo{
-
-    margin:0 0 4px;
-
+    margin:0 0 3px;
     font-size:10px;
     font-weight:900;
-
     line-height:1;
-
-    white-space:nowrap;
 }
+
+
 
 
 /* ==========================================================
@@ -577,7 +576,7 @@
 
 .pagina-descarte .descarte-coluna-direita{
     width:100%;
-    height:100%;
+    height:auto;
 
     min-width:0;
     min-height:0;
@@ -600,7 +599,7 @@
 
 .pagina-descarte .descarte-panel-pizza{
     width:100%;
-    height:100%;
+height:auto;
 
     min-width:0;
     min-height:0;
@@ -1279,7 +1278,7 @@ and (min-height:900px){
 
   grid-template-rows:
     clamp(24px,3vh,30px)
-   clamp(52px,6vh,58px)
+    clamp(56px,6.5vh,62px)
     clamp(40px,4.8vh,44px)
     minmax(0,1fr);
     gap:6px;
@@ -1874,10 +1873,9 @@ tbody tr:last-child td{
 and (max-height:750px){
 
     .pagina-descarte{
-
-       grid-template-rows:
+grid-template-rows:
     23px
-    52px
+    56px
     38px
     minmax(0,1fr);
 
