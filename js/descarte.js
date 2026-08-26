@@ -10,13 +10,13 @@
 
 const coresOrigemDescarte = {
 
-    "Vencido": "#E57373",                // azul
+    "Vencido": "#3F6FE5",                // azul
 
     "Certificação": "#9575CD",           // roxo
 
-    "Desvio de Qualidade": "#5C7CFA",    // azul lavanda
+    "Desvio de Qualidade": "#6C83F7",    // azul lavanda
 
-    "Avaria de Importação": "#3F6FE5"",   // vermelho suave
+    "Avaria de Importação": "#E57373",   // vermelho suave
 
     "Devolução avaria": "#E6A15C",       // laranja suave
 
@@ -24,7 +24,6 @@ const coresOrigemDescarte = {
 
     "Avaria Nacional": "#D97AB3"         // rosa suave
 };
-
 /* ==========================================================
    FUNÇÕES AUXILIARES
 ========================================================== */
@@ -1209,29 +1208,6 @@ const custoAmbiental =
         ? d.custoAmbiental
         : {};
 
-const totalAmbientalPrimeiro =
-    Number(
-        custoAmbiental.totalAcumuladoPrimeiro || 0
-    );
-
-const totalAmbientalSegundo =
-    Number(
-        custoAmbiental.totalAcumuladoSegundo || 0
-    );
-
-const primeiroSemestre =
-    custoAmbiental.periodos &&
-    typeof custoAmbiental.periodos === "object"
-        ? custoAmbiental.periodos
-        : {};
-
-const segundoSemestre =
-    custoAmbiental.segundoSemestre &&
-    typeof custoAmbiental.segundoSemestre === "object"
-        ? custoAmbiental.segundoSemestre
-        : {};
-
-
     /* ======================================================
        HTML PRINCIPAL
     ====================================================== */
@@ -1589,9 +1565,11 @@ const segundoSemestre =
                                     </h3>
 
 
-                                    ${
-                                        montarTabelaGastoAmbiental()
-                                    }
+                               ${
+    montarTabelaGastoAmbiental(
+        custoAmbiental
+    )
+}
 
                                 </div>
 
