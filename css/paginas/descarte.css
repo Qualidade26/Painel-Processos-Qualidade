@@ -90,28 +90,32 @@
     display:flex;
     align-items:center;
 
-padding:0 10px;
+    padding:6px 12px;
+
+    border-radius:12px;
 
     overflow:hidden;
 }
 
-
 /* ==========================================================
    CONTEÚDO INTERNO DO CARD
 ========================================================== */
-
 .pagina-descarte
 .descarte-indicadores
 > .card
 > div{
+
     min-width:0;
     min-height:0;
 
-    height:100%;
+    height:auto;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
+    align-items:flex-start;
+
+    line-height:1;
 
     overflow:hidden;
 }
@@ -123,10 +127,11 @@ padding:0 10px;
 
 .pagina-descarte .descarte-indicadores .card-title,
 .pagina-descarte .descarte-indicadores .card-titulo{
-    margin:0 0 2px;
 
-    font-size:9px;
-    font-weight:800;
+    margin:0 0 4px;
+
+    font-size:10px;
+    font-weight:900;
 
     line-height:1;
 
@@ -140,19 +145,16 @@ padding:0 10px;
 
 .pagina-descarte .descarte-indicadores .card-value,
 .pagina-descarte .descarte-indicadores .card-valor{
-    margin:0;
 
-    font-size:18px;
+    margin:0 0 4px;
+
+    font-size:20px;
     font-weight:900;
 
     line-height:1;
 
     white-space:nowrap;
-
-    overflow:hidden;
-    text-overflow:ellipsis;
 }
-
 
 /* ==========================================================
    SUBTÍTULO DOS CARDS
@@ -161,17 +163,15 @@ padding:0 10px;
 .pagina-descarte .descarte-indicadores .card-sub,
 .pagina-descarte .descarte-indicadores .card-subtitulo,
 .pagina-descarte .descarte-indicadores .card-desc{
-    margin:1px 0 0;
+
+    margin:0;
 
     font-size:8px;
-    font-weight:600;
+    font-weight:700;
 
     line-height:1;
 
     white-space:nowrap;
-
-    overflow:hidden;
-    text-overflow:ellipsis;
 }
 
 
