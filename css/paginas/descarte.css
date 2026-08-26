@@ -376,10 +376,9 @@ font-size:20px;
     flex-direction:column;
     justify-content:space-between;
 
-    padding:
-        clamp(4px,.5vh,7px)
-        clamp(6px,.55vw,9px);
-
+   padding:
+    clamp(6px,.7vh,9px)
+    clamp(8px,.7vw,12px);
     background:
         linear-gradient(
             145deg,
@@ -454,14 +453,15 @@ font-size:20px;
 ========================================================== */
 
 .pagina-descarte .descarte-top3-nome{
+
     min-width:0;
 
-    color:#0f2557;
+    font-size:
+        clamp(11px,1.35vh,14px);
 
-    font-size:clamp(9px,1.05vh,11px);
-    font-weight:800;
+    font-weight:900;
 
-    line-height:1.15;
+    line-height:1.1;
 
     overflow:hidden;
 
@@ -494,23 +494,19 @@ font-size:20px;
 ========================================================== */
 
 .pagina-descarte .descarte-top3-valor{
-    display:block;
 
-    margin-top:2px;
+    margin-top:4px;
 
-    color:#071a4b;
+    font-size:
+        clamp(15px,1.9vh,19px);
 
-    text-align:center;
-
-    font-size:clamp(12px,1.55vh,15px);
     font-weight:900;
 
-    line-height:1.05;
+    line-height:1;
 
-    white-space:nowrap;
+    color:#071b4a;
 
-    overflow:hidden;
-    text-overflow:ellipsis;
+    text-align:center;
 }
 
 
@@ -519,22 +515,20 @@ font-size:20px;
 ========================================================== */
 
 .pagina-descarte .descarte-top3-percentual{
-    display:block;
 
-    margin-top:1px;
+    margin-top:4px;
 
-    color:#0f2557;
+    font-size:
+        clamp(11px,1.35vh,14px);
 
-    text-align:center;
-
-    font-size:clamp(9px,1.15vh,11px);
     font-weight:900;
 
     line-height:1;
 
-    white-space:nowrap;
-}
+    color:#071b4a;
 
+    text-align:center;
+}
 
 /* ==========================================================
    TOP 3 — SEM DADOS
