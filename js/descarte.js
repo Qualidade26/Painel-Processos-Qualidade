@@ -10,13 +10,13 @@
 
 const coresOrigemDescarte = {
 
-    "Vencido": "#3F6FE5",                // azul
+    "Vencido": "#E57373",   // vermelho suave
 
     "Certificação": "#9575CD",           // roxo
 
     "Desvio de Qualidade": "#6C83F7",    // azul lavanda
 
-    "Avaria de Importação": "#E57373",   // vermelho suave
+    "Avaria de Importação": "#3F6FE5",                // azul
 
     "Devolução avaria": "#E6A15C",       // laranja suave
 
