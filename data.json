@@ -2,7 +2,7 @@
 "descarte": {
 "total":799.17,
 "Total Descarte":799.17,
-"origens": [
+"origensAtual": [
 {"nome": "Avaria de   Importação", "valor": 196.96},
 {"nome": "Avaria   estoque", "valor": 0.00},
 {"nome": "Devolução   avaria", "valor": 244.45},
@@ -11,8 +11,8 @@
 {"nome": "Avaria   Nacional", "valor": 74.96},
 {"nome": "Certificação   ", "valor": 0.00}
 ],
-"acumulado":1679244.30,
-"origens": [
+"totalAcumulado":1679244.30,
+"origensAcumulado": [
 {"nome": "Avaria de   Importação", "valor": 18209.45},
 {"nome": "Avaria   estoque", "valor": 4066.22},
 {"nome": "Devolução   avaria", "valor": 16317.40},
