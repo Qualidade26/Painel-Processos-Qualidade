@@ -82,15 +82,6 @@ function montarTop3Descarte(origens){
             : [];
 
 
-    const total =
-        lista.reduce(
-            (soma, item) =>
-                soma +
-                Number(item.valor || 0),
-            0
-        );
-
-
     const top3 =
         lista
             .sort(
@@ -130,16 +121,9 @@ function montarTop3Descarte(origens){
                     Number(item.valor || 0);
 
 
-                const percentual =
-                    calcularPercentualDescarte(
-                        valor,
-                        total
-                    );
-
-
-         const cor =
-    coresOrigemDescarte[nome] ||
-    "#94A3B8";
+                const cor =
+                    coresOrigemDescarte[nome] ||
+                    "#94A3B8";
 
 
                 return `
@@ -178,15 +162,6 @@ function montarTop3Descarte(origens){
 
                         </strong>
 
-
-                        <span class="descarte-top3-percentual">
-
-                            ${formatarPercentualDescarte(
-                                percentual
-                            )}
-
-                        </span>
-
                     </article>
                 `;
 
@@ -195,6 +170,7 @@ function montarTop3Descarte(origens){
         </div>
     `;
 }
+
 
 /* ==========================================================
    DESTRUIR GRÁFICOS
@@ -212,7 +188,7 @@ function destruirGraficosDescarte(){
 
         window.graficoDescarteBarra =
             null;
-       }
+    }
 }
 
 /* ==========================================================
