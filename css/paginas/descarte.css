@@ -1034,7 +1034,8 @@ gap:8px;
 .descarte-aba
 > span:first-child{
 
-    font-size:18px;
+    font-size:20px;
+
 
     flex-shrink:0;
 }
@@ -1073,7 +1074,7 @@ strong{
     color:inherit;
 
     font-size:
-        clamp(10px,1.15vh,13px);
+       clamp(13px,1.5vh,16px);
 
     font-weight:900;
 
@@ -1084,26 +1085,14 @@ strong{
 
 
 /* ==========================================================
-   SUBTÍTULO
+   SUBTÍTULO — OCULTO
 ========================================================== */
 
 .pagina-descarte
 .descarte-aba
 small{
-
-    margin-top:3px;
-
-    color:#64748b;
-
-    font-size:
-        clamp(7px,.85vh,9px);
-
-    font-weight:700;
-
-    white-space:nowrap;
+    display:none !important;
 }
-
-
 /* ==========================================================
    ABA ATIVA — PADRÃO ESFIG
 ========================================================== */
