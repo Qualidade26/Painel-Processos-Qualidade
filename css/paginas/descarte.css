@@ -1277,12 +1277,11 @@ and (min-height:900px){
        4 - conteúdo
     */
 
-   grid-template-rows:
+  grid-template-rows:
     clamp(24px,3vh,30px)
-    clamp(54px,6.5vh,62px)
-    clamp(36px,4.5vh,42px)
+    clamp(56px,6.5vh,62px)
+    clamp(40px,4.8vh,44px)
     minmax(0,1fr);
-
     gap:6px;
 
     overflow:hidden;
