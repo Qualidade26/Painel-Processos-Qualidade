@@ -8,18 +8,18 @@
    CORES
 ========================================================== */
 
-const coresDescarte = [
-    "#1d4eff",
-    "#0f3cc9",
-    "#6676f4",
-    "#eb37cf",
-    "#16a05d",
-    "#2db3e8",
-    "#8b5cf6",
-    "#f59e0b",
-    "#ef4444",
-    "#14b8a6"
-];
+const coresOrigemDescarte = {
+    "Avaria de Importação": "#E57373",   // vermelho suave
+    "Avaria estoque": "#EF9A9A",        // vermelho claro
+    "Avaria Nacional": "#F4A6A6",       // vermelho ainda mais leve
+    "Devolução avaria": "#E88989",       // vermelho rosado suave
+
+    "Certificação": "#9575CD",           // roxo delicado
+
+    "Desvio de Qualidade": "#5C7CFA",    // azul suave
+
+    "Vencido": "#3F6FE5"                 // azul um pouco mais forte
+};
 
 /* ==========================================================
    FUNÇÕES AUXILIARES
@@ -135,12 +135,9 @@ function montarTop3Descarte(origens){
                     );
 
 
-                const cor =
-                    [
-                        "#f51cae",
-                        "#1264ef",
-                        "#6559e9"
-                    ][indice];
+         const cor =
+    coresOrigemDescarte[nome] ||
+    "#94A3B8";
 
 
                 return `
@@ -1313,15 +1310,19 @@ function criarGraficoDescarteOrigemResumo(
         );
 
 
-    const cores =
-        lista.map(
-            (item,indice) =>
-                item.cor ||
-                coresDescarte[
-                    indice %
-                    coresDescarte.length
-                ]
+  const cores =
+    lista.map(item => {
+
+        const nome =
+            item.nome ||
+            item.origem ||
+            "";
+
+        return (
+            coresOrigemDescarte[nome] ||
+            "#94A3B8"
         );
+    });
 
 
     /* ======================================================
