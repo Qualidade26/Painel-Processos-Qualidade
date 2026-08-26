@@ -45,10 +45,9 @@
     margin:0;
 
     display:flex;
-
     align-items:center;
 
-    padding:6px 12px;
+    padding:4px 12px;
 
     overflow:hidden;
 }
@@ -64,16 +63,18 @@
 > div{
 
     min-width:0;
+    min-height:0;
+
+    height:100%;
 
     display:flex;
     flex-direction:column;
 
     justify-content:center;
+    align-items:flex-start;
 
     overflow:hidden;
 }
-
-
 /* ==========================================================
    TÍTULO
 ========================================================== */
@@ -86,7 +87,7 @@
 .descarte-indicadores
 .card-titulo{
 
-    margin:0 0 3px;
+ margin:0 0 2px;
 
     font-size:10px;
     font-weight:900;
@@ -111,9 +112,9 @@
 .descarte-indicadores
 .card-valor{
 
-    margin:0 0 4px;
+margin:0 0 2px;
 
-    font-size:20px;
+font-size:20px;
     font-weight:900;
 
     line-height:1;
