@@ -1249,3 +1249,838 @@ and (min-height:900px){
         overflow-x:auto;
     }
 }
+/* ==========================================================
+   DESCARTE — NOVO LAYOUT COM ABAS INTERNAS
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA PRINCIPAL
+========================================================== */
+
+.pagina-descarte{
+
+    width:100%;
+    height:calc(100dvh - 105px);
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    /*
+       1 - título
+       2 - indicadores
+       3 - abas
+       4 - conteúdo
+    */
+
+    grid-template-rows:
+        clamp(24px,3vh,30px)
+        clamp(58px,7vh,68px)
+        clamp(42px,5.2vh,50px)
+        minmax(0,1fr);
+
+    gap:6px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   ABAS INTERNAS
+========================================================== */
+
+.pagina-descarte .descarte-abas{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:7px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   BOTÃO DA ABA
+========================================================== */
+
+.pagina-descarte .descarte-aba{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    margin:0;
+
+    padding:
+        4px
+        12px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    border:
+        1px solid
+        rgba(29,78,255,.25);
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1f6ff
+        );
+
+    color:#0f2557;
+
+    cursor:pointer;
+
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        color .18s ease;
+
+    overflow:hidden;
+}
+
+
+.pagina-descarte .descarte-aba > span:first-child{
+
+    font-size:18px;
+
+    flex-shrink:0;
+}
+
+
+.pagina-descarte .descarte-aba > span:last-child{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    line-height:1;
+}
+
+
+.pagina-descarte .descarte-aba strong{
+
+    color:inherit;
+
+    font-size:
+        clamp(10px,1.15vh,13px);
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    white-space:nowrap;
+}
+
+
+.pagina-descarte .descarte-aba small{
+
+    margin-top:3px;
+
+    color:#64748b;
+
+    font-size:
+        clamp(7px,.85vh,9px);
+
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   ABA ATIVA
+========================================================== */
+
+.pagina-descarte .descarte-aba.ativa{
+
+    color:#ffffff;
+
+    border-color:#1d4eff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1743ce,
+            #2457ff
+        );
+
+    box-shadow:
+        0 4px 10px
+        rgba(29,78,255,.18);
+}
+
+
+.pagina-descarte .descarte-aba.ativa small{
+
+    color:
+        rgba(255,255,255,.82);
+}
+
+
+/* ==========================================================
+   CONTEÚDO INTERNO
+========================================================== */
+
+.pagina-descarte .descarte-conteudo-interno{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   VALOR ATUAL
+========================================================== */
+
+.pagina-descarte .descarte-panel-atual{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+        24px
+        minmax(0,1fr)
+        clamp(100px,13vh,120px);
+
+    gap:4px;
+
+    padding:7px 10px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   GRÁFICO — VALOR ATUAL
+========================================================== */
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-chart-barra{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-chart-barra canvas{
+
+    width:100% !important;
+    height:100% !important;
+
+    max-width:100%;
+    max-height:100%;
+}
+
+
+/* ==========================================================
+   DESCARTADO POR ANO
+========================================================== */
+
+.pagina-descarte .descarte-grid-ano{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    /*
+       gráfico + top3
+       |
+       top10 + ambiental
+    */
+
+    grid-template-columns:
+        minmax(0,1.08fr)
+        minmax(0,.92fr);
+
+    gap:7px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   COLUNAS DO DESCARTADO
+========================================================== */
+
+.pagina-descarte .descarte-coluna-ano{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   COLUNA ESQUERDA
+========================================================== */
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-panel-origens{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+        23px
+        minmax(0,1fr)
+        clamp(100px,13vh,120px);
+
+    gap:4px;
+
+    padding:7px 9px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   COLUNA DIREITA
+========================================================== */
+
+.pagina-descarte .descarte-coluna-ano-direita{
+
+    display:grid;
+
+    /*
+       Top 10 maior.
+       Ambiental menor.
+    */
+
+    grid-template-rows:
+        minmax(0,1fr)
+        clamp(105px,14vh,130px);
+
+    gap:7px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   TOP 10
+========================================================== */
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-panel-top10{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+        23px
+        minmax(0,1fr);
+
+    padding:7px 9px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   SCROLL TOP 10
+========================================================== */
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-top10-scroll{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+}
+
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-top10-scroll
+.table-wrap{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+}
+
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-top10-scroll
+.table-scroll{
+
+    width:100%;
+    height:100% !important;
+
+    min-width:0;
+    min-height:0;
+
+    max-height:none !important;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+
+/* ==========================================================
+   AMBIENTAL
+========================================================== */
+
+.pagina-descarte .descarte-panel-ambiental{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    margin:0;
+
+    display:grid;
+
+    grid-template-rows:
+        23px
+        minmax(0,1fr);
+
+    gap:3px;
+
+    padding:7px 9px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   TABELA AMBIENTAL
+========================================================== */
+
+.pagina-descarte .descarte-ambiental-tabela{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(29,78,255,.18);
+
+    border-radius:8px;
+}
+
+
+.pagina-descarte
+.descarte-ambiental-tabela table{
+
+    width:100%;
+    height:100%;
+
+    table-layout:fixed;
+
+    border-collapse:collapse;
+
+    font-size:
+        clamp(8px,.95vh,10px);
+}
+
+
+.pagina-descarte
+.descarte-ambiental-tabela th{
+
+    padding:4px 7px;
+
+    background:#eaf2ff;
+
+    color:#0f2557;
+
+    font-weight:900;
+
+    text-align:center;
+
+    border-bottom:
+        1px solid
+        rgba(29,78,255,.18);
+}
+
+
+.pagina-descarte
+.descarte-ambiental-tabela td{
+
+    padding:4px 7px;
+
+    color:#0f2557;
+
+    font-weight:800;
+
+    text-align:center;
+
+    border-bottom:
+        1px solid
+        rgba(29,78,255,.10);
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+.pagina-descarte
+.descarte-ambiental-tabela
+tbody tr:last-child td{
+
+    border-bottom:0;
+}
+
+
+/* ==========================================================
+   TOP 3
+========================================================== */
+
+.pagina-descarte
+.descarte-panel-atual
+.descarte-top3-area,
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-top3-area{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:grid;
+
+    grid-template-rows:
+        20px
+        minmax(0,1fr);
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   GARANTIR QUE OS CARDS TOP 3 NÃO ESTOUREM
+========================================================== */
+
+.pagina-descarte
+.descarte-top3-grid{
+
+    min-width:0;
+    min-height:0;
+
+    height:100%;
+}
+
+
+.pagina-descarte
+.descarte-top3-card{
+
+    min-width:0;
+    min-height:0;
+
+    height:100%;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media
+(min-width:1051px)
+and (max-height:750px){
+
+    .pagina-descarte{
+
+        grid-template-rows:
+            23px
+            56px
+            38px
+            minmax(0,1fr);
+
+        gap:4px;
+    }
+
+
+    .pagina-descarte .descarte-panel-atual,
+    .pagina-descarte
+    .descarte-grid-ano
+    .descarte-panel-origens{
+
+        grid-template-rows:
+            20px
+            minmax(0,1fr)
+            92px;
+    }
+
+
+    .pagina-descarte
+    .descarte-coluna-ano-direita{
+
+        grid-template-rows:
+            minmax(0,1fr)
+            96px;
+    }
+
+
+    .pagina-descarte .descarte-aba{
+
+        padding:2px 8px;
+    }
+
+
+    .pagina-descarte
+    .descarte-aba > span:first-child{
+
+        font-size:15px;
+    }
+}
+
+
+/* ==========================================================
+   FULL HD / TV
+========================================================== */
+
+@media
+(min-width:1600px)
+and (min-height:850px){
+
+    .pagina-descarte{
+
+        grid-template-rows:
+            30px
+            70px
+            50px
+            minmax(0,1fr);
+
+        gap:8px;
+    }
+
+
+    .pagina-descarte .descarte-panel-atual,
+    .pagina-descarte
+    .descarte-grid-ano
+    .descarte-panel-origens{
+
+        grid-template-rows:
+            26px
+            minmax(0,1fr)
+            135px;
+    }
+
+
+    .pagina-descarte
+    .descarte-coluna-ano-direita{
+
+        grid-template-rows:
+            minmax(0,1fr)
+            145px;
+    }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width:1050px){
+
+    .pagina-descarte{
+
+        height:auto;
+
+        min-height:
+            calc(100dvh - 105px);
+
+        display:block;
+
+        overflow:visible;
+    }
+
+
+    .pagina-descarte
+    .descarte-abas{
+
+        height:52px;
+
+        margin-bottom:8px;
+    }
+
+
+    .pagina-descarte
+    .descarte-conteudo-interno{
+
+        height:auto;
+
+        overflow:visible;
+    }
+
+
+    .pagina-descarte
+    .descarte-panel-atual{
+
+        height:560px;
+    }
+
+
+    .pagina-descarte
+    .descarte-grid-ano{
+
+        height:auto;
+
+        grid-template-columns:1fr;
+
+        overflow:visible;
+    }
+
+
+    .pagina-descarte
+    .descarte-grid-ano
+    .descarte-panel-origens{
+
+        height:560px;
+    }
+
+
+    .pagina-descarte
+    .descarte-coluna-ano-direita{
+
+        height:600px;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media (max-width:600px){
+
+    .pagina-descarte
+    .descarte-abas{
+
+        height:auto;
+
+        grid-template-columns:1fr;
+    }
+
+
+    .pagina-descarte
+    .descarte-aba{
+
+        min-height:50px;
+    }
+
+
+    .pagina-descarte
+    .descarte-panel-atual{
+
+        height:720px;
+
+        grid-template-rows:
+            22px
+            390px
+            auto;
+    }
+
+
+    .pagina-descarte
+    .descarte-grid-ano
+    .descarte-panel-origens{
+
+        height:720px;
+
+        grid-template-rows:
+            22px
+            390px
+            auto;
+    }
+
+
+    .pagina-descarte
+    .descarte-coluna-ano-direita{
+
+        height:700px;
+    }
+}
