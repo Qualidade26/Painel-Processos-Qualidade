@@ -1,59 +1,66 @@
 {
-"descarte": {
-"total":799.17,
-"Total Descarte":799.17,
-"origensAtual": [
-{"nome": "Avaria de   Importação", "valor": 196.96},
-{"nome": "Avaria   estoque", "valor": 0.00},
-{"nome": "Devolução   avaria", "valor": 244.45},
-{"nome": "Desvio de   Qualidade", "valor": 282.80},
-{"nome": "Vencido",   "valor": 0.00},
-{"nome": "Avaria   Nacional", "valor": 74.96},
-{"nome": "Certificação   ", "valor": 0.00}
-],
-"totalAcumulado":1679244.30,
-"origensAcumulado": [
-{"nome": "Avaria de   Importação", "valor": 18209.45},
-{"nome": "Avaria   estoque", "valor": 4066.22},
-{"nome": "Devolução   avaria", "valor": 16317.40},
-{"nome": "Desvio de   Qualidade", "valor": 166359.94},
-{"nome": "Vencido",   "valor": 1037240.23},
-{"nome": "Avaria   Nacional", "valor": 217.39},
-{"nome": "Certificação   ", "valor": 436833.67}
-],
-"custo ambiental": {
-"total   acumuladoprimeiro":9127.88,
-"total   acumuladosegundo":0,
-"periodos": {
-"janeiro":0,
-"fevereiro":0,
-"marco":0,
-"abril":0,
-"maio":9127.88,
-"junho":0
-},
-"segundo_semestre":   {
-"julho":0,
-"agosto":0,
-"setembro":0,
-"outubro":0,
-"novembro":0,
-"dezembro":0
-}
-},
-"top10": [
-{"sku":"521",   "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100",   "valor": 510857.83},
-{"sku":"518",   "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125   C/24", "valor": 147881.75},
-{"sku":"726",   "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140   C/24", "valor": 127851.84},
-{"sku":"724",   "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25   PROCAR", "valor": 122458.95},
-{"sku":"727",   "descricao":"PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25   PROCAR", "valor": 104237.43},
-{"sku":"516",   "descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25   PROCAR", "valor": 95117.65},
-{"sku":"50203",   "descricao":"PT-FIO AGULHADO SINTETIC ABS(PGA)-2040   C/24", "valor": 88272.56},
-{"sku":"725",   "descricao":"PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)",   "valor": 68844.66},
-{"sku":"50209",   "descricao":"PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25   PROCAR", "valor": 53978.70},
-{"sku":"Outros",   "descricao":"Outros", "valor": 359742.93}
-]
-},
+  "descarte": {
+
+    "total": 799.17,
+
+    "origensAtual": [
+      {"nome": "Avaria de Importação", "valor": 196.96},
+      {"nome": "Avaria estoque", "valor": 0.00},
+      {"nome": "Devolução avaria", "valor": 244.45},
+      {"nome": "Desvio de Qualidade", "valor": 282.80},
+      {"nome": "Vencido", "valor": 0.00},
+      {"nome": "Avaria Nacional", "valor": 74.96},
+      {"nome": "Certificação", "valor": 0.00}
+    ],
+
+    "totalAcumulado": 1679244.30,
+
+    "origensAcumulado": [
+      {"nome": "Avaria de Importação", "valor": 18209.45},
+      {"nome": "Avaria estoque", "valor": 4066.22},
+      {"nome": "Devolução avaria", "valor": 16317.40},
+      {"nome": "Desvio de Qualidade", "valor": 166359.94},
+      {"nome": "Vencido", "valor": 1037240.23},
+      {"nome": "Avaria Nacional", "valor": 217.39},
+      {"nome": "Certificação", "valor": 436833.67}
+    ],
+
+    "custoAmbiental": {
+      "totalAcumuladoPrimeiro": 9127.88,
+      "totalAcumuladoSegundo": 0,
+
+      "periodos": {
+        "janeiro": 0,
+        "fevereiro": 0,
+        "marco": 0,
+        "abril": 0,
+        "maio": 9127.88,
+        "junho": 0
+      },
+
+      "segundoSemestre": {
+        "julho": 0,
+        "agosto": 0,
+        "setembro": 0,
+        "outubro": 0,
+        "novembro": 0,
+        "dezembro": 0
+      }
+    },
+
+    "top10": [
+      {"sku":"521", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100", "valor":510857.83},
+      {"sku":"518", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24", "valor":147881.75},
+      {"sku":"726", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24", "valor":127851.84},
+      {"sku":"724", "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25 PROCAR", "valor":122458.95},
+      {"sku":"727", "descricao":"PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25 PROCAR", "valor":104237.43},
+      {"sku":"516", "descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR", "valor":95117.65},
+      {"sku":"50203", "descricao":"PT-FIO AGULHADO SINTETIC ABS(PGA)-2040 C/24", "valor":88272.56},
+      {"sku":"725", "descricao":"PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)", "valor":68844.66},
+      {"sku":"50209", "descricao":"PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR", "valor":53978.70},
+      {"sku":"Outros", "descricao":"Outros", "valor":359742.93}
+    ]
+  },
 "esfig": {
 "totalHoras":818,
 "totalGruInmetro":146951.87,
