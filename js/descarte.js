@@ -9,16 +9,20 @@
 ========================================================== */
 
 const coresOrigemDescarte = {
-    "Avaria de Importação": "#E57373",   // vermelho suave
-    "Avaria estoque": "#EF9A9A",        // vermelho claro
-    "Avaria Nacional": "#F4A6A6",       // vermelho ainda mais leve
-    "Devolução avaria": "#E88989",       // vermelho rosado suave
 
-    "Certificação": "#9575CD",           // roxo delicado
+    "Vencido": "#E57373",                // azul
 
-    "Desvio de Qualidade": "#5C7CFA",    // azul suave
+    "Certificação": "#9575CD",           // roxo
 
-    "Vencido": "#3F6FE5"                 // azul um pouco mais forte
+    "Desvio de Qualidade": "#5C7CFA",    // azul lavanda
+
+    "Avaria de Importação": "#3F6FE5"",   // vermelho suave
+
+    "Devolução avaria": "#E6A15C",       // laranja suave
+
+    "Avaria estoque": "#5DB7A3",         // verde água
+
+    "Avaria Nacional": "#D97AB3"         // rosa suave
 };
 
 /* ==========================================================
