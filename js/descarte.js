@@ -683,30 +683,6 @@ const rotuloPercentualValorDescarte = {
                         true
                     );
 
-
-                /* ==========================================
-                   VALOR NO FINAL DA BARRA
-                ========================================== */
-
-                ctx.font =
-                    "900 10px 'Segoe UI', Arial, sans-serif";
-
-                ctx.textBaseline =
-                    "middle";
-
-                ctx.textAlign =
-                    "left";
-
-                ctx.fillStyle =
-                    "#071a4b";
-
-                ctx.fillText(
-                    moeda(valor),
-                    propriedades.x + 7,
-                    propriedades.y
-                );
-
-
                 /* ==========================================
                    COLUNA DE PORCENTAGEM
                 ========================================== */
