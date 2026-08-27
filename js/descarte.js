@@ -586,15 +586,16 @@ function criarGraficoDescarteOrigemResumo(
     });
 
 
-    /* ======================================================
-       PLUGIN — PERCENTUAL + VALOR
-    ====================================================== */
+  /* ======================================================
+   PLUGIN — COLUNAS DE PORCENTAGEM E VALOR
+====================================================== */
 
-    const rotuloPercentualValorDescarte = {
+const rotuloPercentualValorDescarte = {
 
     id:"rotuloPercentualValorDescarte",
 
-    afterDatasetsDraw(chart){
+
+    afterDraw(chart){
 
         const dataset =
             chart.data.datasets[0];
@@ -610,6 +611,7 @@ function criarGraficoDescarteOrigemResumo(
             return;
         }
 
+
         const ctx =
             chart.ctx;
 
@@ -619,11 +621,65 @@ function criarGraficoDescarteOrigemResumo(
 
         ctx.save();
 
+
+        /* ==================================================
+           POSIÇÕES DAS COLUNAS
+        ================================================== */
+
+        const colunaPercentual =
+            area.right + 68;
+
+        const colunaValor =
+            chart.width - 10;
+
+
+        /* ==================================================
+           CABEÇALHO DAS COLUNAS
+        ================================================== */
+
         ctx.textBaseline =
             "middle";
 
         ctx.font =
             "900 10px 'Segoe UI', Arial, sans-serif";
+
+        ctx.fillStyle =
+            "#0647f5";
+
+
+        /* PORCENTAGEM */
+
+        ctx.textAlign =
+            "right";
+
+        ctx.fillText(
+            "PORCENTAGEM",
+            colunaPercentual,
+            area.top - 13
+        );
+
+
+        /* VALOR */
+
+        ctx.textAlign =
+            "right";
+
+        ctx.fillText(
+            "VALOR",
+            colunaValor,
+            area.top - 13
+        );
+
+
+        /* ==================================================
+           DADOS DAS COLUNAS
+        ================================================== */
+
+        ctx.font =
+            "900 10px 'Segoe UI', Arial, sans-serif";
+
+        ctx.textBaseline =
+            "middle";
 
 
         meta.data.forEach(
@@ -633,6 +689,7 @@ function criarGraficoDescarteOrigemResumo(
                     Number(
                         dataset.data[indice] || 0
                     );
+
 
                 if(valor <= 0){
                     return;
@@ -653,9 +710,9 @@ function criarGraficoDescarteOrigemResumo(
                     );
 
 
-                /*
-                   COLUNA DO PERCENTUAL
-                */
+                /* ==========================================
+                   PORCENTAGEM
+                ========================================== */
 
                 ctx.textAlign =
                     "right";
@@ -667,14 +724,14 @@ function criarGraficoDescarteOrigemResumo(
                     formatarPercentualDescarte(
                         percentual
                     ),
-                    area.right + 62,
+                    colunaPercentual,
                     propriedades.y
                 );
 
 
-                /*
-                   COLUNA DO VALOR
-                */
+                /* ==========================================
+                   VALOR
+                ========================================== */
 
                 ctx.textAlign =
                     "right";
@@ -684,10 +741,9 @@ function criarGraficoDescarteOrigemResumo(
 
                 ctx.fillText(
                     moeda(valor),
-                    chart.width - 8,
+                    colunaValor,
                     propriedades.y
                 );
-
             }
         );
 
@@ -695,7 +751,6 @@ function criarGraficoDescarteOrigemResumo(
         ctx.restore();
     }
 };
-
     /* ======================================================
        CHART
     ====================================================== */
@@ -760,16 +815,12 @@ function criarGraficoDescarteOrigemResumo(
 
                     layout:{
 
-                        padding:{
-
-                            top:8,
-
-                            right:190,
-
-                            bottom:4,
-
-                            left:4
-                        }
+                        ppadding:{
+    top:26,
+    right:190,
+    bottom:4,
+    left:4
+}
                     },
 
 
