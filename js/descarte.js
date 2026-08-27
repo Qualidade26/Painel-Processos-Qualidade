@@ -823,20 +823,19 @@ const colunaValor =
 }
                     },
 
+plugins:{
 
-                    plugins:{
+    datalabels:{
+        display:false
+    },
 
-                        datalabels:{
+    rotulosExternos:{
+        display:false
+    },
 
-                            display:false
-                        },
-
-
-                        legend:{
-
-                            display:false
-                        },
-
+    legend:{
+        display:false
+    },
 
                         tooltip:{
 
