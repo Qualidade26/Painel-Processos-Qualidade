@@ -587,13 +587,12 @@ function criarGraficoDescarteOrigemResumo(
 
 
   /* ======================================================
-   PLUGIN — COLUNAS DE PORCENTAGEM E VALOR
+   PLUGIN — PORCENTAGEM + VALOR NO FINAL DA BARRA
 ====================================================== */
 
 const rotuloPercentualValorDescarte = {
 
     id:"rotuloPercentualValorDescarte",
-
 
     afterDraw(chart){
 
@@ -623,15 +622,15 @@ const rotuloPercentualValorDescarte = {
 
 
         /* ==================================================
-           POSIÇÕES DAS COLUNAS
+           POSIÇÃO DA COLUNA DE PORCENTAGEM
         ================================================== */
 
-       const colunaPercentual =
-    area.right + 68;
+        const colunaPercentual =
+            area.right + 68;
 
 
         /* ==================================================
-           CABEÇALHO DAS COLUNAS
+           CABEÇALHO
         ================================================== */
 
         ctx.textBaseline =
@@ -642,9 +641,6 @@ const rotuloPercentualValorDescarte = {
 
         ctx.fillStyle =
             "#0647f5";
-
-
-        /* PORCENTAGEM */
 
         ctx.textAlign =
             "right";
@@ -657,15 +653,8 @@ const rotuloPercentualValorDescarte = {
 
 
         /* ==================================================
-           DADOS DAS COLUNAS
+           DADOS
         ================================================== */
-
-        ctx.font =
-            "900 10px 'Segoe UI', Arial, sans-serif";
-
-        ctx.textBaseline =
-            "middle";
-
 
         meta.data.forEach(
             (barra, indice) => {
@@ -690,13 +679,36 @@ const rotuloPercentualValorDescarte = {
 
                 const propriedades =
                     barra.getProps(
-                        ["y"],
+                        ["x","y"],
                         true
                     );
 
 
                 /* ==========================================
-                   PORCENTAGEM
+                   VALOR NO FINAL DA BARRA
+                ========================================== */
+
+                ctx.font =
+                    "900 10px 'Segoe UI', Arial, sans-serif";
+
+                ctx.textBaseline =
+                    "middle";
+
+                ctx.textAlign =
+                    "left";
+
+                ctx.fillStyle =
+                    "#071a4b";
+
+                ctx.fillText(
+                    moeda(valor),
+                    propriedades.x + 7,
+                    propriedades.y
+                );
+
+
+                /* ==========================================
+                   COLUNA DE PORCENTAGEM
                 ========================================== */
 
                 ctx.textAlign =
@@ -712,6 +724,9 @@ const rotuloPercentualValorDescarte = {
                     colunaPercentual,
                     propriedades.y
                 );
+            }
+        );
+
 
         ctx.restore();
     }
@@ -781,9 +796,9 @@ const rotuloPercentualValorDescarte = {
 
                     layout:{
 
-                        padding:{
+                       padding:{
     top:26,
-    right:190,
+    right:120,
     bottom:4,
     left:4
 }
