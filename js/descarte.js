@@ -629,9 +629,6 @@ const rotuloPercentualValorDescarte = {
        const colunaPercentual =
     area.right + 68;
 
-const colunaValor =
-    chart.width - 10;
-
 
         /* ==================================================
            CABEÇALHO DAS COLUNAS
@@ -655,18 +652,6 @@ const colunaValor =
         ctx.fillText(
             "PORCENTAGEM",
             colunaPercentual,
-            area.top - 13
-        );
-
-
-        /* VALOR */
-
-        ctx.textAlign =
-            "right";
-
-        ctx.fillText(
-            "VALOR",
-            colunaValor,
             area.top - 13
         );
 
@@ -728,29 +713,10 @@ const colunaValor =
                     propriedades.y
                 );
 
-
-                /* ==========================================
-                   VALOR
-                ========================================== */
-
-                ctx.textAlign =
-                    "right";
-
-                ctx.fillStyle =
-                    "#071a4b";
-
-                ctx.fillText(
-                    moeda(valor),
-                    colunaValor,
-                    propriedades.y
-                );
-            }
-        );
-
-
         ctx.restore();
     }
 };
+   
     /* ======================================================
        CHART
     ====================================================== */
