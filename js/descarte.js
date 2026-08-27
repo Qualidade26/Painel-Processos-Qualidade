@@ -626,11 +626,11 @@ const rotuloPercentualValorDescarte = {
            POSIÇÕES DAS COLUNAS
         ================================================== */
 
-        const colunaPercentual =
-            area.right + 68;
+       const colunaPercentual =
+    area.right + 68;
 
-        const colunaValor =
-            chart.width - 10;
+const colunaValor =
+    chart.width - 10;
 
 
         /* ==================================================
@@ -815,7 +815,7 @@ const rotuloPercentualValorDescarte = {
 
                     layout:{
 
-                        ppadding:{
+                        padding:{
     top:26,
     right:190,
     bottom:4,
