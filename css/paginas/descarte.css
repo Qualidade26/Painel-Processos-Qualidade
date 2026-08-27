@@ -1433,7 +1433,7 @@ small{
     border-collapse:collapse;
 
     font-size:
-        clamp(8px,.95vh,10px);
+      clamp(10px,1.15vh,12px);
 }
 
 
