@@ -821,12 +821,7 @@ function criarPainelDistribuicaoOrigem(){
             cor:CORES.amarelo,
             icone:"naoConformidade"
         },
-        {
-            chave:"reclamacao",
-            label:"Reclamação",
-            cor:CORES.roxo,
-            icone:"reclamacao"
-        },
+      
         {
             chave:"ocorrencias",
             label:"Ocorrências",
@@ -1054,7 +1049,7 @@ function montarEstrutura(raiz){
                                         Retrabalhos
                                     </th>
                                     <th>
-                                        Reclamações
+                                       Ocorrências
                                     </th>
                                     <th>
                                         Índice
@@ -1144,12 +1139,12 @@ function montarEstrutura(raiz){
         "forn-detalhe-retrabalhos"
     )}
 
-    ${criarMetrica(
-        "Reclamações",
-        "alerta",
-        "roxo",
-        "forn-detalhe-reclamacoes"
-    )}
+   ${criarMetrica(
+    "Ocorrências",
+    "ocorrencias",
+    "verde",
+    "forn-detalhe-ocorrencias"
+)}
 
     ${criarMetrica(
         "Posição no ranking",
@@ -1503,7 +1498,7 @@ function renderizarTabela(lista){
                     </td>
 
                     <td>
-                        ${formatarInteiro(item.reclamacoes)}
+                      ${formatarInteiro(item.ocorrencias)}
                     </td>
 
                     <td>
