@@ -1123,15 +1123,25 @@ const pluginsGrafico = [
 
                     ]
                 },
-                               options:{
+                              options:{
 
-                    responsive:
-                        true,
+    responsive:
+        true,
 
-                    maintainAspectRatio:
-                        false,
+    maintainAspectRatio:
+        false,
 
-                    plugins:{
+    plugins:{
+
+        /* ==========================
+           DESATIVA RÓTULO GLOBAL
+           EVITA DUPLICIDADE
+        ========================== */
+
+        valorFlutuante:
+            false,
+
+        
 
                         /* ==========================
                            LEGENDA
