@@ -1131,42 +1131,15 @@ const totalReprovado =
 
                     ]
                 },
+                               options:{
 
-options:{
+                    responsive:
+                        true,
 
-    responsive:
-        true,
+                    maintainAspectRatio:
+                        false,
 
-    maintainAspectRatio:
-        false,
-
-    layout:{
-
-        padding:{
-
-            top:
-                5,
-
-            right:
-                45,
-
-            bottom:
-                8,
-
-            left:
-                8
-        }
-    },
-
-
-    interaction:{
-
-        mode:
-            "index",
-
-        intersect:
-            false
-    },
+                    plugins:{
 
                         /* ==========================
                            LEGENDA
@@ -1576,85 +1549,84 @@ legend:{
                                 }
                             }
                         },
-
-
                         /* ==========================
                            EIXO DO PERCENTUAL
                         ========================== */
 
                         y1:{
 
-    beginAtZero:
-        true,
+                            beginAtZero:
+                                true,
 
-    min:
-        0,
+                            min:
+                                0,
 
-    max:
-        100,
+                            max:
+                                100,
 
-    position:
-        "right",
+                            position:
+                                "right",
 
-    afterFit:function(scale){
+                            afterFit:function(scale){
 
-        scale.width += 28;
+                                scale.width += 28;
+                            },
 
-    },
+                            grid:{
 
-    grid:{
+                                drawOnChartArea:
+                                    false
+                            },
 
-        drawOnChartArea:
-            false
-    },
+                            border:{
 
-    border:{
+                                display:
+                                    false
+                            },
 
-        display:
-            false
-    },
+                            title:{
 
-    title:{
+                                display:
+                                    true,
 
-        display:
-            true,
+                                text:
+                                    "% Acumulado",
 
-        text:
-            "% Acumulado",
+                                color:
+                                    "#40506b",
 
-        color:
-            "#40506b",
+                                font:{
 
-        font:{
+                                    size:
+                                        12,
 
-            size:
-                12,
+                                    weight:
+                                        "600"
+                                }
+                            },
 
-            weight:
-                "600"
-        }
-    },
+                            ticks:{
 
-    ticks:{
+                                stepSize:
+                                    20,
 
-        stepSize:
-            20,
+                                color:
+                                    "#536078",
 
-        color:
-            "#536078",
+                                callback:function(valor){
 
-        callback:function(valor){
+                                    return `${valor}%`;
+                                }
+                            }
+                        }
 
-            return `${valor}%`;
-        }
-    }
-}
                     }
                 }
             }
         );
 }
 
+                    
 
 /* ==========================================================
    CONTROLE DAS ABAS INTERNAS DO ESFIG
