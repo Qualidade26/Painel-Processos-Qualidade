@@ -937,38 +937,26 @@ const totalReprovado =
     };
 
 
-    /* ======================================================
-       PLUGINS DISPONÍVEIS
-    ====================================================== */
+   /* ======================================================
+   PLUGINS DISPONÍVEIS
+====================================================== */
 
-    if(
-        typeof ChartDataLabels !==
-        "undefined"
-    ){
+if(
+    typeof ChartDataLabels !==
+    "undefined"
+){
 
-        Chart.unregister(
-            ChartDataLabels
-        );
-    }
-
-
-    const pluginsGrafico = [
-
-        linhaMetaPareto
-
-    ];
+    Chart.register(
+        ChartDataLabels
+    );
+}
 
 
-    if(
-        typeof ChartDataLabels !==
-        "undefined"
-    ){
+const pluginsGrafico = [
 
-        pluginsGrafico.push(
-            ChartDataLabels
-        );
-    }
+    linhaMetaPareto
 
+];
 
     /* ======================================================
        CRIAÇÃO DO GRÁFICO DE PARETO
