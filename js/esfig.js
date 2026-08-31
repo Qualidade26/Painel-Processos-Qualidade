@@ -937,7 +937,7 @@ const totalReprovado =
     };
 
 
-   /* ======================================================
+  /* ======================================================
    PLUGINS DISPONÍVEIS
 ====================================================== */
 
@@ -945,6 +945,10 @@ if(
     typeof ChartDataLabels !==
     "undefined"
 ){
+
+    Chart.unregister(
+        ChartDataLabels
+    );
 
     Chart.register(
         ChartDataLabels
