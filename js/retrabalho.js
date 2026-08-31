@@ -235,9 +235,18 @@ function renderRetrabalhoNormal(){
                                     "Horas",
                                     "Motivo"
                                 ],
-                                montarLinhasRetrabalho(
-                                    r.fabricantes || []
-                                ),
+                               montarLinhasRetrabalho(
+    (
+        Array.isArray(r.fabricantes)
+            ? [...r.fabricantes]
+            : []
+    )
+    .sort(
+        (a,b) =>
+            Number(b.quantidade || 0) -
+            Number(a.quantidade || 0)
+    )
+),
                                 true
                             )
                         }
