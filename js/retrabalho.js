@@ -272,30 +272,54 @@ function atualizarGraficoRetrabalho(){
         return;
     }
 
+
+    /* ======================================================
+       DADOS
+    ====================================================== */
+
     const r =
         dados.retrabalho || {
             fabricantes:[]
         };
 
-    const pesquisa = String(
-        document
-        .getElementById("buscaFabricante")
-        ?.value || ""
-    )
-    .trim()
-    .toLowerCase();
+
+    /* ======================================================
+       PESQUISA
+    ====================================================== */
+
+    const pesquisa =
+        String(
+            document
+                .getElementById(
+                    "buscaFabricante"
+                )
+                ?.value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /* ======================================================
+       FABRICANTES
+       - Remove quantidade zero
+       - Aplica pesquisa
+       - Ordena da maior para a menor quantidade
+    ====================================================== */
 
     const fabricantes =
-        (Array.isArray(r.fabricantes)
-            ? [...r.fabricantes]
-            : []
+        (
+            Array.isArray(r.fabricantes)
+                ? [...r.fabricantes]
+                : []
         )
+
         .filter(
             fabricante =>
                 Number(
                     fabricante.quantidade || 0
                 ) > 0
         )
+
         .filter(
             fabricante =>
                 String(
@@ -304,126 +328,160 @@ function atualizarGraficoRetrabalho(){
                 .toLowerCase()
                 .includes(pesquisa)
         )
+
         .sort(
             (a,b) =>
-                Number(b.quantidade || 0) -
-                Number(a.quantidade || 0)
+                Number(
+                    b.quantidade || 0
+                ) -
+                Number(
+                    a.quantidade || 0
+                )
         );
 
-    const cores = [
-        "#1d4eff",
-        "#0f3cc9",
-        "#6b7cff",
-        "#4f7cff",
-        "#2d62ff",
-        "#5b88ff"
-    ];
 
-    graficoAtual = new Chart(
-        canvas,
-        {
+  /* ======================================================
+   CORES — PADRÃO IMPORTAÇÃO
+====================================================== */
 
-            type:"bar",
+const cores = [
+    "#1d4eff",
+    "#2563eb",
+    "#3b82f6",
+    "#4f7cff",
+    "#60a5fa",
+    "#93c5fd"
+];
 
-            data:{
+    /* ======================================================
+       CRIAR GRÁFICO
+    ====================================================== */
 
-                labels:
-                    fabricantes.map(
-                        fabricante =>
-                            fabricante.fabricante
-                    ),
+    graficoAtual =
+        new Chart(
+            canvas,
+            {
 
-                datasets:[{
+                type:"bar",
 
-                    label:
-                        "Quantidade Retrabalhada",
+                data:{
 
-                    data:
+                    labels:
                         fabricantes.map(
                             fabricante =>
-                                Number(
-                                    fabricante.quantidade || 0
-                                )
+                                fabricante.fabricante
                         ),
 
-                    backgroundColor:
-                        fabricantes.map(
-                            (_,indice) =>
-                                cores[
-                                    indice % cores.length
-                                ]
-                        ),
+                    datasets:[{
 
-                    borderWidth:0,
+                        label:
+                            "Quantidade Retrabalhada",
 
-                    borderRadius:4,
+                        data:
+                            fabricantes.map(
+                                fabricante =>
+                                    Number(
+                                        fabricante.quantidade || 0
+                                    )
+                            ),
 
-                    _ocultarZero:true
+                        backgroundColor:
+                            fabricantes.map(
+                                (_,indice) =>
+                                    cores[
+                                        indice % cores.length
+                                    ]
+                            ),
 
-                }]
+                        borderWidth:0,
 
-            },
+                        borderRadius:4,
 
-            options:{
+                        _ocultarZero:true
 
-                ...baseOptions(),
+                    }]
 
-                indexAxis:"y",
-
-                layout:{
-
-                    padding:{
-
-                        top:20,
-                        right:45,
-                        left:8,
-                        bottom:4
-                    }
                 },
 
-                plugins:{
 
-                    legend:{
-                        display:false
+                /* ==================================================
+                   OPÇÕES
+                ================================================== */
+
+                options:{
+
+                    ...baseOptions(),
+
+                    indexAxis:"y",
+
+                    layout:{
+
+                        padding:{
+
+                            top:20,
+                            right:45,
+                            left:8,
+                            bottom:4
+
+                        }
+
                     },
 
-                    datalabels:{
-                        display:false
-                    }
-                },
 
-                onClick:(evento,elementos)=>{
+                    /* ==============================================
+                       PLUGINS
+                    ============================================== */
 
-                    if(!elementos.length){
-                        return;
-                    }
+                    plugins:{
 
-                    const indice =
-                        elementos[0].index;
+                        legend:{
+                            display:false
+                        },
 
-                    const fabricante =
-                        fabricantes[indice];
+                        datalabels:{
+                            display:false
+                        }
 
-                    const corpoTabela =
-                        document.querySelector(
-                            "#tabelaDetalhamentoRetrabalho .table-wrap tbody"
-                        );
+                    },
 
-                    if(corpoTabela){
 
-                        corpoTabela.innerHTML =
-                            montarLinhasRetrabalho(
-                                [fabricante]
+                    /* ==============================================
+                       CLIQUE NO FABRICANTE
+                    ============================================== */
+
+                    onClick:(evento,elementos)=>{
+
+                        if(!elementos.length){
+                            return;
+                        }
+
+                        const indice =
+                            elementos[0].index;
+
+                        const fabricante =
+                            fabricantes[indice];
+
+                        const corpoTabela =
+                            document.querySelector(
+                                "#tabelaDetalhamentoRetrabalho .table-wrap tbody"
                             );
+
+                        if(corpoTabela){
+
+                            corpoTabela.innerHTML =
+                                montarLinhasRetrabalho(
+                                    [fabricante]
+                                );
+
+                        }
+
                     }
+
                 }
 
             }
-
-        }
-    );
+        );
 }
-
 
 /* ==========================================================
    ABA — ADEQUAÇÃO DE CAIXA
@@ -772,7 +830,11 @@ function montarLinhasAdequacao(fabricantes){
 
     const lista =
         Array.isArray(fabricantes)
-            ? fabricantes
+            ? [...fabricantes].sort(
+                (a, b) =>
+                    Number(b.quantidade || 0) -
+                    Number(a.quantidade || 0)
+            )
             : [];
 
     if(!lista.length){
