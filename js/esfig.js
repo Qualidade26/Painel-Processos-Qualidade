@@ -1142,22 +1142,23 @@ options:{
 
     layout:{
 
-        padding:{
+       layout:{
 
-            top:
-                25,
+    padding:{
 
-            right:
-                45,
+        top:
+            8,
 
-            bottom:
-                8,
+        right:
+            45,
 
-            left:
-                8
-        }
-    },
+        bottom:
+            8,
 
+        left:
+            8
+    }
+},
                     interaction:{
 
                         mode:
