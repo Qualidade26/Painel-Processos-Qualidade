@@ -1305,7 +1305,7 @@ legend:{
 
 
                             color:
-                                "#15224a",
+                                "#16a34a",
 
 
                             anchor:function(context){
