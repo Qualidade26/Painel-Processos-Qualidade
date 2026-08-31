@@ -1186,49 +1186,50 @@ options:{
                         /* ==========================
                            LEGENDA
                         ========================== */
+legend:{
 
-                        legend:{
+    display:
+        true,
 
-                            display:
-                                true,
+    position:
+        "top",
 
-
-                            position:
-                                "top",
-
-
-                            align:
-                                "center",
+    align:
+        "center",
 
 
-                            labels:{
+    /* ESPAÇO ENTRE A LEGENDA E O GRÁFICO */
+    afterFit:function(legend){
 
-                                boxWidth:
-                                    28,
+        legend.height += 15;
 
-
-                                boxHeight:
-                                    10,
+    },
 
 
-                                padding:
-                                    20,
+    labels:{
 
+        boxWidth:
+            28,
 
-                                usePointStyle:
-                                    false,
+        boxHeight:
+            10,
 
+        padding:
+            8,
 
-                                font:{
+        usePointStyle:
+            false,
 
-                                    size:
-                                        12,
+        font:{
 
-                                    weight:
-                                        "600"
-                                }
-                            }
-                        },
+            size:
+                12,
+
+            weight:
+                "600"
+        }
+    }
+},
 
 
                         /* ==========================
