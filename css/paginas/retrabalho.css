@@ -1444,19 +1444,20 @@
     }
 }
 /* ==========================================================
-   CONTORNO AZUL — ADEQUAÇÃO DE CAIXA
+   CONTORNO — TODOS OS PAINÉIS DA ADEQUAÇÃO DE CAIXA
 ========================================================== */
 
-.pagina-retrabalho .panel {
+.pagina-retrabalho .adequacao-panel,
+.pagina-retrabalho .adequacao-panel-bom-avaria,
+.pagina-retrabalho .adequacao-panel-motivos,
+.pagina-retrabalho .adequacao-panel-tabela{
 
-    border: 1px solid #1d4eff;
+    border:
+        1px solid
+        var(--line) !important;
 
-    border-radius: 10px;
+    border-radius:10px;
 
-    background: #ffffff;
-
-    box-shadow:
-        0 2px 8px
-        rgba(29, 78, 255, 0.08);
+    background:#ffffff;
 
 }
