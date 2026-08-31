@@ -1132,35 +1132,31 @@ const totalReprovado =
                     ]
                 },
 
+options:{
 
-                options:{
+    responsive:
+        true,
 
-                    responsive:
-                        true,
+    maintainAspectRatio:
+        false,
 
+    layout:{
 
-                    maintainAspectRatio:
-                        false,
+        padding:{
 
+            top:
+                25,
 
-                    layout:{
+            right:
+                45,
 
-                        padding:{
+            bottom:
+                8,
 
-                            top:
-                                25,
-
-                            right:
-                                18,
-
-                            bottom:
-                                8,
-
-                            left:
-                                8
-                        }
-                    },
-
+            left:
+                8
+        }
+    },
 
                     interaction:{
 
