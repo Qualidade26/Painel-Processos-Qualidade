@@ -1163,7 +1163,7 @@ legend:{
 
     afterFit:function(legend){
 
-        legend.height += 20;
+        legend.height += 28;
 
     },
 
@@ -1326,21 +1326,36 @@ legend:{
                             },
 
 
-                            align:function(context){
+                           anchor:function(context){
 
     if(
         context.dataset.label ===
-            "% Acumulado" &&
-        context.dataIndex ===
-            context.dataset.data.length - 1
+            "% Acumulado"
     ){
 
-        return "left";
+        return "center";
     }
 
-    return "top";
+    return "end";
 },
 
+
+align:
+    "top",
+
+
+offset:function(context){
+
+    if(
+        context.dataset.label ===
+            "% Acumulado"
+    ){
+
+        return 7;
+    }
+
+    return 3;
+},
 
                             offset:function(context){
 
@@ -1564,7 +1579,7 @@ legend:{
                                 0,
 
                             max:
-                                100,
+                                108,
 
                             position:
                                 "right",
@@ -1609,17 +1624,22 @@ legend:{
 
                             ticks:{
 
-                                stepSize:
-                                    20,
+    stepSize:
+        20,
 
-                                color:
-                                    "#536078",
+    color:
+        "#536078",
 
-                                callback:function(valor){
+    callback:function(valor){
 
-                                    return `${valor}%`;
-                                }
-                            }
+        if(valor > 100){
+
+            return "";
+        }
+
+        return `${valor}%`;
+    }
+}
                         }
 
                     }
