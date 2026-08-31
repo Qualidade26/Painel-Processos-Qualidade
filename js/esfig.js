@@ -1065,19 +1065,16 @@ const pluginsGrafico = [
 
 
                             borderColor:
-                                "#ef2bb3",
+    "#16a34a",
 
+backgroundColor:
+    "#16a34a",
 
-                            backgroundColor:
-                                "#ef2bb3",
+pointBackgroundColor:
+    "#16a34a",
 
-
-                            pointBackgroundColor:
-                                "#ef2bb3",
-
-
-                            pointBorderColor:
-                                "#ffffff",
+pointBorderColor:
+    "#ffffff",
 
 
                             pointBorderWidth:
