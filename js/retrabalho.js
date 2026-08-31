@@ -1460,7 +1460,7 @@ const textoCentroAdequacao = {
         );
 }
 /* ==========================================================
-   GRÁFICO — MOTIVOS
+   GRÁFICO — ADEQUAÇÃO POR MOTIVO
 ========================================================== */
 
 function criarGraficoAdequacaoMotivos(a){
@@ -1497,16 +1497,19 @@ function criarGraficoAdequacaoMotivos(a){
 
 
     /* ======================================================
-       CORES — MESMA BASE DO RETRABALHO / IMPORTAÇÃO
+       CORES — PADRÃO COLORIDO DO PAINEL
     ====================================================== */
 
     const cores = [
-        "#1d4eff",
-        "#2563eb",
-        "#3b82f6",
-        "#4f7cff",
-        "#60a5fa",
-        "#93c5fd"
+
+        "#1d4eff", // Azul
+        "#f04dd8", // Rosa
+        "#22c55e", // Verde
+        "#f59e0b", // Laranja
+        "#8b5cf6", // Roxo
+        "#38bdf8", // Azul claro
+        "#ef4444"  // Vermelho
+
     ];
 
 
@@ -1541,6 +1544,11 @@ function criarGraficoAdequacaoMotivos(a){
                                     )
                             ),
 
+
+                        /* ==========================================
+                           COR INDIVIDUAL POR MOTIVO
+                        ========================================== */
+
                         backgroundColor:
                             motivos.map(
                                 (_,indice) =>
@@ -1559,7 +1567,9 @@ function criarGraficoAdequacaoMotivos(a){
 
                         borderWidth:0,
 
-                        borderRadius:4
+                        borderRadius:4,
+
+                        borderSkipped:false
 
                     }]
 
@@ -1575,6 +1585,15 @@ function criarGraficoAdequacaoMotivos(a){
                     ...baseOptions(),
 
                     indexAxis:"y",
+
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+
+                    /* ==============================================
+                       ESPAÇAMENTO
+                    ============================================== */
 
                     layout:{
 
@@ -1606,6 +1625,8 @@ function criarGraficoAdequacaoMotivos(a){
 
                         tooltip:{
 
+                            displayColors:true,
+
                             callbacks:{
 
                                 label(context){
@@ -1616,7 +1637,9 @@ function criarGraficoAdequacaoMotivos(a){
                                         ];
 
                                     return (
-                                        moeda(context.raw) +
+                                        moeda(
+                                            context.raw
+                                        ) +
                                         " - " +
                                         formatarPercentualAdequacao(
                                             motivo.percentual
@@ -1638,13 +1661,20 @@ function criarGraficoAdequacaoMotivos(a){
 
                     scales:{
 
+
+                        /* ==========================================
+                           EIXO X — VALORES
+                        ========================================== */
+
                         x:{
 
                             beginAtZero:true,
 
                             grid:{
+
                                 color:
                                     "rgba(148,163,184,.22)"
+
                             },
 
                             border:{
@@ -1653,15 +1683,29 @@ function criarGraficoAdequacaoMotivos(a){
 
                             ticks:{
 
+                                color:"#334155",
+
+                                font:{
+
+                                    size:10,
+                                    weight:"600"
+
+                                },
+
                                 callback:value =>
                                     Number(value)
-                                    .toLocaleString(
-                                        "pt-BR"
-                                    )
+                                        .toLocaleString(
+                                            "pt-BR"
+                                        )
 
                             }
 
                         },
+
+
+                        /* ==========================================
+                           EIXO Y — MOTIVOS
+                        ========================================== */
 
                         y:{
 
@@ -1675,9 +1719,15 @@ function criarGraficoAdequacaoMotivos(a){
 
                             ticks:{
 
+                                color:"#334155",
+
+                                padding:6,
+
                                 font:{
+
                                     size:10,
                                     weight:"700"
+
                                 }
 
                             }
@@ -1691,8 +1741,6 @@ function criarGraficoAdequacaoMotivos(a){
             }
         );
 }
-
-
 /* ==========================================================
    COMPATIBILIDADE COM FUNÇÃO ANTIGA
 ========================================================== */
