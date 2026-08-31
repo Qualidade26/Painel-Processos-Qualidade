@@ -421,80 +421,162 @@ const totalReprovado =
                 aria-labelledby="botaoEsfigAfericoes"
             >
 
+<section
+    class="panel esfig-painel-afericoes"
+    id="esfigPainelAfericoes"
+>
 
-                <section class="panel">
+    <div class="esfig-area-pareto">
 
-                    <h3>
+        <div class="esfig-pareto-cabecalho">
 
-                        📊 Aferições Anuais por SKU
+            <h3>
+                📊 Aferições Anuais por SKU
+            </h3>
 
-                    </h3>
+            <button
+                type="button"
+                id="esfigResumoAbrir"
+                class="esfig-resumo-abrir"
+                onclick="alternarResumoAfericoesEsfig(true)"
+                title="Abrir resumo das aferições"
+                aria-label="Abrir resumo das aferições"
+            >
+                ❯
+            </button>
+
+        </div>
 
 
-                    <div
-                        class="chart-box chart-box-esfig esfig-pareto-grande"
-                    >
+        <div
+            class="chart-box chart-box-esfig esfig-pareto-grande"
+        >
 
-                        <canvas
-                            id="grafico"
-                        ></canvas>
+            <canvas
+                id="grafico"
+            ></canvas>
+
+        </div>
+
+
+        ${
+            dadosPareto.length
+                ? `
+
+                    <div class="esfig-pareto-resumo">
+
+                        <div class="esfig-pareto-resumo-icone">
+
+                            ℹ
+
+                        </div>
+
+
+                        <div class="esfig-pareto-resumo-texto">
+
+                            <strong>
+                                Análise de Pareto
+                            </strong>
+
+
+                            <p>
+
+                                Aproximadamente
+
+                                <b>
+                                    ${percentualLimite80}%
+                                </b>
+
+                                das aferições estão concentradas
+                                nos primeiros
+
+                                <b>
+                                    ${quantidadeSkus80} SKU(s)
+                                </b>.
+
+                            </p>
+
+                        </div>
 
                     </div>
 
+                `
+                : ""
+        }
 
-                    ${
-                        dadosPareto.length
-                            ? `
-
-                                <div class="esfig-pareto-resumo">
-
-
-                                    <div class="esfig-pareto-resumo-icone">
-
-                                        ℹ
-
-                                    </div>
+    </div>
 
 
-                                    <div class="esfig-pareto-resumo-texto">
+    <!-- ==============================================
+         RESUMO LATERAL
+    =============================================== -->
 
-                                        <strong>
+    <aside
+        class="esfig-resumo-lateral"
+        id="esfigResumoLateral"
+        aria-hidden="true"
+    >
 
-                                            Análise de Pareto
+        <div class="esfig-resumo-cabecalho">
 
-                                        </strong>
+            <strong>
+                📋 Resumo das Aferições
+            </strong>
 
+            <button
+                type="button"
+                class="esfig-resumo-fechar"
+                onclick="alternarResumoAfericoesEsfig(false)"
+                title="Fechar resumo"
+                aria-label="Fechar resumo"
+            >
+                ×
+            </button>
 
-                                        <p>
-
-                                            Aproximadamente
-
-                                            <b>
-                                                ${percentualLimite80}%
-                                            </b>
-
-                                            das aferições estão concentradas
-                                            nos primeiros
-
-                                            <b>
-                                                ${quantidadeSkus80} SKU(s)
-                                            </b>.
-
-                                        </p>
-
-                                    </div>
-
-
-                                </div>
-
-                            `
-                            : ""
-                    }
+        </div>
 
 
-                </section>
+        <div class="esfig-resumo-card total">
+
+            <span>
+                Total Aferido
+            </span>
+
+            <strong>
+                ${numero(totalAferido)}
+            </strong>
+
+        </div>
 
 
+        <div class="esfig-resumo-card aprovado">
+
+            <span>
+                Total Aprovado
+            </span>
+
+            <strong>
+                ${numero(totalAprovado)}
+            </strong>
+
+        </div>
+
+
+        <div class="esfig-resumo-card reprovado">
+
+            <span>
+                Total Reprovado
+            </span>
+
+            <strong>
+                ${numero(totalReprovado)}
+            </strong>
+
+        </div>
+
+    </aside>
+
+</section>
             </div>
 
 
