@@ -1444,12 +1444,10 @@
     }
 }
 /* ==========================================================
-   CONTORNO AZUL — PAINÉIS ADEQUAÇÃO DE CAIXA
+   CONTORNO AZUL — ADEQUAÇÃO DE CAIXA
 ========================================================== */
 
-.pagina-retrabalho .adequacao-panel-pizza,
-.pagina-retrabalho .adequacao-panel-motivos,
-.pagina-retrabalho .adequacao-panel-tabela {
+.pagina-retrabalho .panel {
 
     border: 1px solid #1d4eff;
 
