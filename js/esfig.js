@@ -1365,8 +1365,20 @@ options:{
                             },
 
 
-                            align:
-                                "top",
+                            align:function(context){
+
+    if(
+        context.dataset.label ===
+            "% Acumulado" &&
+        context.dataIndex ===
+            context.dataset.data.length - 1
+    ){
+
+        return "left";
+    }
+
+    return "top";
+},
 
 
                             offset:function(context){
@@ -1586,77 +1598,71 @@ options:{
 
                         y1:{
 
-                            beginAtZero:
-                                true,
+    beginAtZero:
+        true,
 
+    min:
+        0,
 
-                            min:
-                                0,
+    max:
+        100,
 
+    position:
+        "right",
 
-                            max:
-                                100,
+    afterFit:function(scale){
 
+        scale.width += 28;
 
-                            position:
-                                "right",
+    },
 
+    grid:{
 
-                            grid:{
+        drawOnChartArea:
+            false
+    },
 
-                                drawOnChartArea:
-                                    false
-                            },
+    border:{
 
+        display:
+            false
+    },
 
-                            border:{
+    title:{
 
-                                display:
-                                    false
-                            },
+        display:
+            true,
 
+        text:
+            "% Acumulado",
 
-                            title:{
+        color:
+            "#40506b",
 
-                                display:
-                                    true,
+        font:{
 
+            size:
+                12,
 
-                                text:
-                                    "% Acumulado",
+            weight:
+                "600"
+        }
+    },
 
+    ticks:{
 
-                                color:
-                                    "#40506b",
+        stepSize:
+            20,
 
+        color:
+            "#536078",
 
-                                font:{
+        callback:function(valor){
 
-                                    size:
-                                        12,
-
-                                    weight:
-                                        "600"
-                                }
-                            },
-
-
-                            ticks:{
-
-                                stepSize:
-                                    20,
-
-
-                                color:
-                                    "#536078",
-
-
-                                callback:function(valor){
-
-                                    return `${valor}%`;
-                                }
-                            }
-                        }
+            return `${valor}%`;
+        }
+    }
+}
                     }
                 }
             }
