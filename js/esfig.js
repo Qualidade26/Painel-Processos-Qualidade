@@ -8,7 +8,27 @@ function renderEsfig(){
     const esfig =
         dados.esfig || {};
 
+/* ======================================================
+   RESUMO DAS AFERIÇÕES
+====================================================== */
 
+const resumoAfericoes =
+    esfig.resumoAfericoes || {};
+
+const totalAferido =
+    Number(
+        resumoAfericoes.totalAferido || 0
+    );
+
+const totalAprovado =
+    Number(
+        resumoAfericoes.totalAprovado || 0
+    );
+
+const totalReprovado =
+    Number(
+        resumoAfericoes.totalReprovado || 0
+    );
     /* ======================================================
        PRODUTOS
        ORDENA NUMERICAMENTE PELO SKU
