@@ -373,3 +373,338 @@
         font-size:10px;
     }
 }
+/* ==========================================================
+   PAINEL LATERAL — RESUMO DAS AFERIÇÕES
+========================================================== */
+
+.esfig-painel-afericoes{
+    position:relative;
+
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+
+    gap:10px;
+
+    width:100%;
+    min-width:0;
+
+    overflow:hidden;
+
+    transition:
+        grid-template-columns .25s ease;
+}
+
+
+/* ==========================================================
+   ÁREA PRINCIPAL DO PARETO
+========================================================== */
+
+.esfig-area-pareto{
+    min-width:0;
+}
+
+
+/* ==========================================================
+   CABEÇALHO DO PARETO
+========================================================== */
+
+.esfig-pareto-cabecalho{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    width:100%;
+    min-width:0;
+
+    margin-bottom:4px;
+}
+
+
+.esfig-pareto-cabecalho h3{
+    margin:0;
+}
+
+
+/* ==========================================================
+   BOTÃO — ABRIR RESUMO
+========================================================== */
+
+.esfig-resumo-abrir{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:34px;
+    height:34px;
+
+    flex:0 0 34px;
+
+    padding:0;
+
+    border:
+        1.5px solid
+        var(--panel-border);
+
+    border-radius:9px;
+
+    background:#ffffff;
+    color:var(--primary);
+
+    font-size:20px;
+    font-weight:900;
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.esfig-resumo-abrir:hover{
+    background:var(--primary);
+    color:#ffffff;
+
+    transform:translateX(2px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(29,78,255,.18);
+}
+
+
+/* ==========================================================
+   PAINEL LATERAL — FECHADO
+========================================================== */
+
+.esfig-resumo-lateral{
+    display:none;
+
+    min-width:0;
+
+    padding:10px;
+
+    border:
+        1.5px solid
+        var(--panel-border);
+
+    border-radius:10px;
+
+    background:#ffffff;
+}
+
+
+/* ==========================================================
+   PAINEL ABERTO
+========================================================== */
+
+.esfig-painel-afericoes.resumo-aberto{
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(250px,320px);
+}
+
+
+.esfig-painel-afericoes.resumo-aberto
+.esfig-resumo-lateral{
+    display:block;
+}
+
+
+/* ==========================================================
+   CABEÇALHO DO RESUMO
+========================================================== */
+
+.esfig-resumo-cabecalho{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    margin-bottom:10px;
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:800;
+}
+
+
+/* ==========================================================
+   BOTÃO — FECHAR
+========================================================== */
+
+.esfig-resumo-fechar{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:30px;
+    height:30px;
+
+    padding:0;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:8px;
+
+    background:#ffffff;
+    color:var(--red);
+
+    font-size:20px;
+    font-weight:900;
+    line-height:1;
+
+    cursor:pointer;
+}
+
+
+.esfig-resumo-fechar:hover{
+    background:#fff5f5;
+    border-color:var(--red);
+}
+
+
+/* ==========================================================
+   CARDS DO RESUMO
+========================================================== */
+
+.esfig-resumo-card{
+    display:flex;
+    flex-direction:column;
+
+    gap:4px;
+
+    width:100%;
+
+    margin-bottom:8px;
+    padding:12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:9px;
+
+    background:var(--card);
+}
+
+
+.esfig-resumo-card:last-child{
+    margin-bottom:0;
+}
+
+
+.esfig-resumo-card span{
+    font-size:11px;
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    color:var(--muted);
+}
+
+
+.esfig-resumo-card strong{
+    font-size:24px;
+    font-weight:900;
+
+    color:var(--text);
+}
+
+
+/* ==========================================================
+   CORES DOS INDICADORES
+========================================================== */
+
+.esfig-resumo-card.total{
+    border-left:
+        4px solid
+        var(--primary);
+}
+
+
+.esfig-resumo-card.aprovado{
+    border-left:
+        4px solid
+        var(--green);
+}
+
+
+.esfig-resumo-card.reprovado{
+    border-left:
+        4px solid
+        var(--red);
+}
+
+
+.esfig-resumo-card.aprovado strong{
+    color:var(--green);
+}
+
+
+.esfig-resumo-card.reprovado strong{
+    color:var(--red);
+}
+
+
+/* ==========================================================
+   NOTEBOOK / TABLET
+========================================================== */
+
+@media(max-width:1050px){
+
+    .esfig-painel-afericoes.resumo-aberto{
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(220px,280px);
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:800px){
+
+    .esfig-painel-afericoes.resumo-aberto{
+        grid-template-columns:1fr;
+    }
+
+    .esfig-resumo-lateral{
+        margin-top:4px;
+    }
+
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media(max-width:520px){
+
+    .esfig-resumo-abrir{
+        width:30px;
+        height:30px;
+
+        flex-basis:30px;
+
+        font-size:17px;
+    }
+
+    .esfig-resumo-card strong{
+        font-size:20px;
+    }
+
+}
