@@ -1142,46 +1142,31 @@ options:{
 
     layout:{
 
-       layout:{
+        padding:{
 
-    padding:{
+            top:
+                5,
 
-        top:
-            8,
+            right:
+                45,
 
-        right:
-            45,
+            bottom:
+                8,
 
-        bottom:
-            8,
-
-        left:
-            8
-    }
-},
-                    interaction:{
-
-                        mode:
-                            "index",
-
-                        intersect:
-                            false
-                    },
+            left:
+                8
+        }
+    },
 
 
-                    animation:{
+    interaction:{
 
-                        duration:
-                            650
-                    },
+        mode:
+            "index",
 
-
-                    plugins:{
-
-
-                        valorFlutuante:
-                            false,
-
+        intersect:
+            false
+    },
 
                         /* ==========================
                            LEGENDA
@@ -1197,14 +1182,15 @@ legend:{
     align:
         "center",
 
+    /* ==========================================
+       ESPAÇO ENTRE LEGENDA E GRÁFICO
+    ========================================== */
 
-    /* ESPAÇO ENTRE A LEGENDA E O GRÁFICO */
     afterFit:function(legend){
 
-        legend.height += 15;
+        legend.height += 20;
 
     },
-
 
     labels:{
 
@@ -1230,8 +1216,6 @@ legend:{
         }
     }
 },
-
-
                         /* ==========================
                            TOOLTIP
                         ========================== */
