@@ -352,14 +352,13 @@ function atualizarGraficoRetrabalho(){
   /* ======================================================
    CORES — PADRÃO IMPORTAÇÃO
 ====================================================== */
-
 const cores = [
     "#1d4eff",
     "#2563eb",
     "#3b82f6",
-    "#4f7cff",
     "#60a5fa",
-    "#93c5fd"
+    "#93c5fd",
+    "#bfdbfe"
 ];
 
     /* ======================================================
@@ -1462,6 +1461,7 @@ const textoCentroAdequacao = {
 /* ==========================================================
    GRÁFICO — MOTIVOS
 ========================================================== */
+
 function criarGraficoAdequacaoMotivos(a){
 
     const canvas =
@@ -1473,16 +1473,45 @@ function criarGraficoAdequacaoMotivos(a){
         return;
     }
 
+
+    /* ======================================================
+       DADOS
+    ====================================================== */
+
     const motivos =
         Array.isArray(a.motivos)
             ? [...a.motivos]
             : [];
+
+
+    /* ======================================================
+       ORDENAR — MAIOR PARA MENOR
+    ====================================================== */
 
     motivos.sort(
         (a,b) =>
             Number(b.valor || 0) -
             Number(a.valor || 0)
     );
+
+
+    /* ======================================================
+       CORES — MESMA BASE DO RETRABALHO / IMPORTAÇÃO
+    ====================================================== */
+
+    const cores = [
+        "#1d4eff",
+        "#2563eb",
+        "#3b82f6",
+        "#4f7cff",
+        "#60a5fa",
+        "#93c5fd"
+    ];
+
+
+    /* ======================================================
+       CRIAR GRÁFICO
+    ====================================================== */
 
     graficoAdequacaoMotivos =
         new Chart(
@@ -1511,13 +1540,34 @@ function criarGraficoAdequacaoMotivos(a){
                                     )
                             ),
 
-                        backgroundColor:"#2453d4",
+                        backgroundColor:
+                            motivos.map(
+                                (_,indice) =>
+                                    cores[
+                                        indice % cores.length
+                                    ]
+                            ),
+
+                        borderColor:
+                            motivos.map(
+                                (_,indice) =>
+                                    cores[
+                                        indice % cores.length
+                                    ]
+                            ),
 
                         borderWidth:0,
 
                         borderRadius:4
+
                     }]
+
                 },
+
+
+                /* ==================================================
+                   OPÇÕES
+                ================================================== */
 
                 options:{
 
@@ -1528,12 +1578,20 @@ function criarGraficoAdequacaoMotivos(a){
                     layout:{
 
                         padding:{
+
                             top:8,
                             right:65,
                             left:5,
                             bottom:5
+
                         }
+
                     },
+
+
+                    /* ==============================================
+                       PLUGINS
+                    ============================================== */
 
                     plugins:{
 
@@ -1563,10 +1621,19 @@ function criarGraficoAdequacaoMotivos(a){
                                             motivo.percentual
                                         )
                                     );
+
                                 }
+
                             }
+
                         }
+
                     },
+
+
+                    /* ==============================================
+                       ESCALAS
+                    ============================================== */
 
                     scales:{
 
@@ -1575,7 +1642,8 @@ function criarGraficoAdequacaoMotivos(a){
                             beginAtZero:true,
 
                             grid:{
-                                color:"rgba(148,163,184,.22)"
+                                color:
+                                    "rgba(148,163,184,.22)"
                             },
 
                             border:{
@@ -1589,7 +1657,9 @@ function criarGraficoAdequacaoMotivos(a){
                                     .toLocaleString(
                                         "pt-BR"
                                     )
+
                             }
+
                         },
 
                         y:{
@@ -1608,10 +1678,15 @@ function criarGraficoAdequacaoMotivos(a){
                                     size:10,
                                     weight:"700"
                                 }
+
                             }
+
                         }
+
                     }
+
                 }
+
             }
         );
 }
