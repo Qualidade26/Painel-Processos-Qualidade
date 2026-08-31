@@ -1771,3 +1771,93 @@ function abrirAbaInternaEsfig(
         },50);
     }
 }
+/* ==========================================================
+   ABRIR / FECHAR — RESUMO DAS AFERIÇÕES
+========================================================== */
+
+function alternarResumoAfericoesEsfig(abrir){
+
+    const painel =
+        document.getElementById(
+            "esfigPainelAfericoes"
+        );
+
+    const resumo =
+        document.getElementById(
+            "esfigResumoLateral"
+        );
+
+    const botaoAbrir =
+        document.getElementById(
+            "esfigResumoAbrir"
+        );
+
+
+    if(
+        !painel ||
+        !resumo
+    ){
+        return;
+    }
+
+
+    if(abrir){
+
+        painel.classList.add(
+            "resumo-aberto"
+        );
+
+        resumo.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+        if(botaoAbrir){
+
+            botaoAbrir.style.display =
+                "none";
+
+        }
+
+    }else{
+
+        painel.classList.remove(
+            "resumo-aberto"
+        );
+
+        resumo.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+        if(botaoAbrir){
+
+            botaoAbrir.style.display =
+                "";
+
+        }
+
+    }
+
+
+    /* ======================================================
+       REAJUSTAR O GRÁFICO
+    ====================================================== */
+
+    if(
+        typeof graficoAtual !== "undefined" &&
+        graficoAtual
+    ){
+
+        setTimeout(
+            () => {
+
+                graficoAtual.resize();
+
+            },
+            250
+        );
+
+    }
+
+}
