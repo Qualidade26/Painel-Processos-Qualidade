@@ -1443,3 +1443,22 @@
         font-size:11px;
     }
 }
+/* ==========================================================
+   CONTORNO AZUL — PAINÉIS ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+.pagina-retrabalho .adequacao-panel-pizza,
+.pagina-retrabalho .adequacao-panel-motivos,
+.pagina-retrabalho .adequacao-panel-tabela {
+
+    border: 1px solid #1d4eff;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 2px 8px
+        rgba(29, 78, 255, 0.08);
+
+}
