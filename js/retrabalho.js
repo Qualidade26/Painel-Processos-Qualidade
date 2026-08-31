@@ -354,10 +354,10 @@ function atualizarGraficoRetrabalho(){
 
 const cores = [
     "#1d4eff", // azul
-    "#0f3cc9", // azul escuro
+   "#22c55e", // verde
     "#6b7cff", // violeta azulado
     "#f04dd8", // rosa
-    "#22c55e", // verde
+     "#0f3cc9", // azul escuro
     "#38bdf8", // azul claro
     "#8b5cf6"  // roxo
 ];
