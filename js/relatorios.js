@@ -345,9 +345,8 @@ async function gerarRelatorioSelecionado(){
             tipoRelatorioAtual ===
             "mensal"
         ){
-
-            const caminhoCongelado =
-                `Fechamento/${ano}/${mes}.json`;
+const caminhoCongelado =
+    `Fechamento/fechamento-${ano}/${mes}.json`;
 
 
             const [
