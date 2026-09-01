@@ -426,7 +426,28 @@
     margin:0;
 }
 
+/* ==========================================================
+   CENTRALIZAR TÍTULO — AFERIÇÕES ANUAIS POR SKU
+========================================================== */
 
+.esfig-pareto-cabecalho{
+    position:relative;
+}
+
+.esfig-pareto-cabecalho h3{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+
+    margin:0;
+
+    text-align:center;
+    white-space:nowrap;
+}
+
+.esfig-resumo-abrir{
+    margin-left:auto;
+}
 /* ==========================================================
    BOTÃO — ABRIR RESUMO
 ========================================================== */
