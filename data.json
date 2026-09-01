@@ -1302,7 +1302,13 @@
         "skuano": 13,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 4,
+        "produtosFornecidos": 8385000,
+        "skuAno": 13,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Biomed   Healthcare",
@@ -1315,7 +1321,13 @@
         "skuano": 16,
         "horas": 0,
         "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 4,
+        "produtosFornecidos": 8942500,
+        "skuAno": 16,
+        "indiceAvaliacao": 0.65,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Accumax",
@@ -1328,7 +1340,13 @@
         "skuano": 1,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 15000,
+        "skuAno": 1,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Shanxian   Huayu Suture Product Co,.   Ltd",
@@ -1341,7 +1359,13 @@
         "skuano": 16,
         "horas": 4,
         "indiceavaliacao": 0.92,
-        "avaliacao": "🟢   Muito bom"
+        "avaliacao": "🟢   Muito bom",
+        "processosAno": 7,
+        "produtosFornecidos": 5605440,
+        "skuAno": 16,
+        "indiceAvaliacao": 0.92,
+        "retrabalho": 1,
+        "reclamacao": 0
       },
       {
         "fabricante": "Shandong   Aosaite",
@@ -1354,7 +1378,13 @@
         "skuano": 7,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 1778400,
+        "skuAno": 7,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Shanghai   SA   Medical",
@@ -1367,7 +1397,13 @@
         "skuano": 7,
         "horas": 0,
         "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 2,
+        "produtosFornecidos": 904500,
+        "skuAno": 7,
+        "indiceAvaliacao": 0.83,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Shandong   Weigao",
@@ -1380,7 +1416,13 @@
         "skuano": 11,
         "horas": 11,
         "indiceavaliacao": 0.74,
-        "avaliacao": "🟠   Ruim"
+        "avaliacao": "🟠   Ruim",
+        "processosAno": 10,
+        "produtosFornecidos": 15467700,
+        "skuAno": 11,
+        "indiceAvaliacao": 0.74,
+        "retrabalho": 1,
+        "reclamacao": 0
       },
       {
         "fabricante": "Ayset   Plastik",
@@ -1393,7 +1435,13 @@
         "skuano": 9,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 9506482,
+        "skuAno": 9,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Medico   Electroude",
@@ -1406,7 +1454,13 @@
         "skuano": 1,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 8,
+        "produtosFornecidos": 55080000,
+        "skuAno": 1,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Huaian   Tianda   Medical",
@@ -1419,7 +1473,13 @@
         "skuano": 2,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 260000,
+        "skuAno": 2,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Medico   (Huaian) CO.,   LTDA",
@@ -1432,7 +1492,13 @@
         "skuano": 41,
         "horas": 0,
         "indiceavaliacao": 0.75,
-        "avaliacao": "🟠   Ruim"
+        "avaliacao": "🟠   Ruim",
+        "processosAno": 7,
+        "produtosFornecidos": 4420080,
+        "skuAno": 41,
+        "indiceAvaliacao": 0.75,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Well   Lead medical co.,   ltd.",
@@ -1445,7 +1511,13 @@
         "skuano": 21,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 2,
+        "produtosFornecidos": 645000,
+        "skuAno": 21,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Polymed   Medicure",
@@ -1458,7 +1530,13 @@
         "skuano": 4,
         "horas": 0,
         "indiceavaliacao": 0.88,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 3,
+        "produtosFornecidos": 2193690,
+        "skuAno": 4,
+        "indiceAvaliacao": 0.88,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Phoenix   Innovative   HealtCare",
@@ -1471,7 +1549,13 @@
         "skuano": 1,
         "horas": 0,
         "indiceavaliacao": 0.81,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 5,
+        "produtosFornecidos": 145496000,
+        "skuAno": 1,
+        "indiceAvaliacao": 0.81,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Yangzhou   Medline   Industry",
@@ -1484,7 +1568,13 @@
         "skuano": 13,
         "horas": 255,
         "indiceavaliacao": 0.58,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 3,
+        "produtosFornecidos": 6640000,
+        "skuAno": 13,
+        "indiceAvaliacao": 0.58,
+        "retrabalho": 1,
+        "reclamacao": 0
       },
       {
         "fabricante": "Jiangsu   Webest Medical   ",
@@ -1497,7 +1587,13 @@
         "skuano": 2,
         "horas": 0,
         "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 2,
+        "produtosFornecidos": 3900000,
+        "skuAno": 2,
+        "indiceAvaliacao": 0.83,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Honsun   Nantong",
@@ -1510,7 +1606,13 @@
         "skuano": 15,
         "horas": 0,
         "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 4,
+        "produtosFornecidos": 60100,
+        "skuAno": 15,
+        "indiceAvaliacao": 0.83,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Nanjing   Jiangnan   Novel",
@@ -1523,7 +1625,13 @@
         "skuano": 6,
         "horas": 54,
         "indiceavaliacao": 0.63,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 2,
+        "produtosFornecidos": 843,
+        "skuAno": 6,
+        "indiceAvaliacao": 0.63,
+        "retrabalho": 2,
+        "reclamacao": 0
       },
       {
         "fabricante": "Vitromed   Healthcare",
@@ -1536,7 +1644,13 @@
         "skuano": 7,
         "horas": 0,
         "indiceavaliacao": 0.91,
-        "avaliacao": "🟢   Muito bom"
+        "avaliacao": "🟢   Muito bom",
+        "processosAno": 7,
+        "produtosFornecidos": 12050000,
+        "skuAno": 7,
+        "indiceAvaliacao": 0.91,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Jiangsu   Kangjian",
@@ -1549,7 +1663,13 @@
         "skuano": 4,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 133,
+        "skuAno": 4,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Xiantao   Xingrong   Protective",
@@ -1562,7 +1682,13 @@
         "skuano": 1,
         "horas": 0,
         "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 1,
+        "produtosFornecidos": 750000,
+        "skuAno": 1,
+        "indiceAvaliacao": 0.65,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Jiangxi   Hongda Medical   ",
@@ -1575,7 +1701,13 @@
         "skuano": 3,
         "horas": 0,
         "indiceavaliacao": 0.88,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 3,
+        "produtosFornecidos": 10332000,
+        "skuAno": 3,
+        "indiceAvaliacao": 0.88,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Dailymag   Magnetic",
@@ -1588,7 +1720,13 @@
         "skuano": 2,
         "horas": 0,
         "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 2,
+        "produtosFornecidos": 12000,
+        "skuAno": 2,
+        "indiceAvaliacao": 0.83,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Yancheng   Tiandi",
@@ -1601,7 +1739,13 @@
         "skuano": 6,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 1300000,
+        "skuAno": 6,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Dfi   ",
@@ -1614,7 +1758,13 @@
         "skuano": 1,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 1,
+        "produtosFornecidos": 600000,
+        "skuAno": 1,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Pharmaplast   AS   ",
@@ -1627,7 +1777,13 @@
         "skuano": 3,
         "horas": 34,
         "indiceavaliacao": 0.45,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 1,
+        "produtosFornecidos": 18481400,
+        "skuAno": 3,
+        "indiceAvaliacao": 0.45,
+        "retrabalho": 2,
+        "reclamacao": 0
       },
       {
         "fabricante": "Jiangsu   Huida   Medical",
@@ -1640,7 +1796,13 @@
         "skuano": 9,
         "horas": 0,
         "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico"
+        "avaliacao": "🔴   Crítico",
+        "processosAno": 2,
+        "produtosFornecidos": 887210,
+        "skuAno": 9,
+        "indiceAvaliacao": 0.65,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Guangzhou   Improve Medical   ",
@@ -1653,7 +1815,13 @@
         "skuano": 6,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 2,
+        "produtosFornecidos": 2272000,
+        "skuAno": 6,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Anhui   Easyway   Medical",
@@ -1666,7 +1834,13 @@
         "skuano": 21,
         "horas": 0,
         "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 13,
+        "produtosFornecidos": 116788000,
+        "skuAno": 21,
+        "indiceAvaliacao": 0.83,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "SR   Produtos para la salud   S.A",
@@ -1679,7 +1853,13 @@
         "skuano": 6,
         "horas": 0,
         "indiceavaliacao": 0.84,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 6,
+        "produtosFornecidos": 12982000,
+        "skuAno": 6,
+        "indiceAvaliacao": 0.84,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Bonrre   Medical co   ltda",
@@ -1692,7 +1872,13 @@
         "skuano": 52,
         "horas": 0,
         "indiceavaliacao": 0.86,
-        "avaliacao": "🟡   Atenção"
+        "avaliacao": "🟡   Atenção",
+        "processosAno": 5,
+        "produtosFornecidos": 5507700,
+        "skuAno": 52,
+        "indiceAvaliacao": 0.86,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "AB   Medical",
@@ -1705,7 +1891,13 @@
         "skuano": 8,
         "horas": 0,
         "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente"
+        "avaliacao": "🟢   Excelente",
+        "processosAno": 2,
+        "produtosFornecidos": 6261600,
+        "skuAno": 8,
+        "indiceAvaliacao": 1.0,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "All   Lab   Comercial",
@@ -1718,7 +1910,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Wellspring   Medical",
@@ -1731,7 +1929,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Shangai   Kindly   ",
@@ -1744,7 +1948,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Garware   Bestretch",
@@ -1757,7 +1967,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Nantong   Renon   ",
@@ -1770,7 +1986,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Jiangsu   Kangjian Medical   ",
@@ -1783,7 +2005,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Blue",
@@ -1796,7 +2024,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Hangzhou   Rollmed",
@@ -1809,7 +2043,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Dalian   GoodWood",
@@ -1822,7 +2062,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Anhui   hongyu",
@@ -1835,7 +2081,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       },
       {
         "fabricante": "Alphaven   ",
@@ -1848,7 +2100,13 @@
         "skuano": 0,
         "horas": 0,
         "indiceavaliacao": null,
-        "avaliacao": ""
+        "avaliacao": "",
+        "processosAno": 0,
+        "produtosFornecidos": 0,
+        "skuAno": 0,
+        "indiceAvaliacao": null,
+        "retrabalho": 0,
+        "reclamacao": 0
       }
     ],
     "ranking": [
@@ -1949,6 +2207,15 @@
         "fabricante": "Jiangsu   Huida Medical",
         "rnc": 2
       }
-    ]
+    ],
+    "resumo": {
+      "totalFornecedores": 43,
+      "processos": 114,
+      "rncs": 45,
+      "retrabalhos": 7,
+      "reclamacoes": 0,
+      "ocorrencias": 6,
+      "indiceMedio": 0.85
+    }
   }
 }
