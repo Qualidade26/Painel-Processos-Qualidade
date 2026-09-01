@@ -716,7 +716,469 @@
     overflow-wrap:anywhere;
 }
 
+/* ==========================================================
+   COMPARAÇÃO - VISÃO GERAL
+========================================================== */
 
+.relatorio-comparacao-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0,1fr)
+        );
+
+    gap:7px;
+}
+
+
+.relatorio-comparacao-card{
+
+    min-width:0;
+
+    padding:8px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:5px;
+
+    border:
+        1px solid
+        rgba(29,78,255,.16);
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f5f8ff
+        );
+}
+
+
+.relatorio-comparacao-titulo{
+
+    display:block;
+
+    padding-bottom:5px;
+
+    border-bottom:
+        1px solid
+        rgba(29,78,255,.12);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size:10px;
+
+    font-weight:900;
+
+    text-align:center;
+}
+
+
+.relatorio-comparacao-card > div{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:5px;
+}
+
+
+.relatorio-comparacao-card small{
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+
+.relatorio-comparacao-card strong{
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size:10px;
+
+    font-weight:900;
+
+    text-align:right;
+}
+
+
+/* ==========================================================
+   TABELA FECHAMENTO X ATUAL X VARIAÇÃO
+========================================================== */
+
+.relatorio-tabela-wrap{
+
+    width:100%;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(29,78,255,.15);
+
+    border-radius:8px;
+
+    background:#ffffff;
+}
+
+
+.relatorio-tabela-comparacao{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    table-layout:fixed;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+.relatorio-tabela-comparacao th{
+
+    padding:
+        7px
+        9px;
+
+    border-bottom:
+        1px solid
+        rgba(29,78,255,.18);
+
+    background:
+        linear-gradient(
+            180deg,
+            #eef4ff,
+            #f7faff
+        );
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size:9px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:.2px;
+
+    text-align:center;
+}
+
+
+.relatorio-tabela-comparacao th:first-child{
+
+    width:40%;
+
+    text-align:left;
+}
+
+
+.relatorio-tabela-comparacao th:nth-child(2),
+.relatorio-tabela-comparacao th:nth-child(3),
+.relatorio-tabela-comparacao th:nth-child(4){
+
+    width:20%;
+}
+
+
+.relatorio-tabela-comparacao td{
+
+    padding:
+        6px
+        9px;
+
+    border-bottom:
+        1px solid
+        rgba(15,37,87,.08);
+
+    color:
+        var(--cor-texto);
+
+    font-size:10px;
+
+    font-weight:700;
+
+    vertical-align:middle;
+}
+
+
+.relatorio-tabela-comparacao tbody tr:last-child td{
+
+    border-bottom:0;
+}
+
+
+.relatorio-tabela-comparacao tbody tr:nth-child(even){
+
+    background:
+        #fafcff;
+}
+
+
+.relatorio-tabela-comparacao tbody tr:hover{
+
+    background:
+        #f3f7ff;
+}
+
+
+.relatorio-tabela-comparacao td:first-child{
+
+    color:
+        #25385f;
+
+    font-weight:800;
+
+    text-align:left;
+}
+
+
+.relatorio-tabela-comparacao td:nth-child(2),
+.relatorio-tabela-comparacao td:nth-child(3),
+.relatorio-tabela-comparacao td:nth-child(4){
+
+    text-align:center;
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+
+.relatorio-tabela-comparacao td:nth-child(2){
+
+    color:
+        #64748b;
+}
+
+
+.relatorio-tabela-comparacao td:nth-child(3){
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-weight:900;
+}
+
+
+.relatorio-tabela-comparacao td:nth-child(4){
+
+    color:
+        #0f766e;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   POSIÇÃO / INFORMAÇÕES COMPLEMENTARES
+========================================================== */
+
+.relatorio-posicao{
+
+    margin-top:7px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    gap:7px;
+}
+
+
+.relatorio-posicao span{
+
+    min-width:0;
+
+    padding:
+        6px
+        8px;
+
+    border:
+        1px solid
+        rgba(29,78,255,.12);
+
+    border-radius:7px;
+
+    background:
+        #f8fbff;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    text-align:center;
+}
+
+
+.relatorio-posicao strong{
+
+    margin-left:3px;
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   AJUSTE DO DOCUMENTO COMPARATIVO
+========================================================== */
+
+.relatorio-corpo .relatorio-secao{
+
+    box-shadow:
+        0
+        1px
+        3px
+        rgba(15,37,87,.025);
+}
+
+
+.relatorio-corpo
+.relatorio-secao
++ .relatorio-secao{
+
+    margin-top:0;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE DA COMPARAÇÃO
+========================================================== */
+
+@media(
+    max-width:1100px
+){
+
+    .relatorio-comparacao-grid{
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0,1fr)
+            );
+    }
+}
+
+
+@media(
+    max-width:700px
+){
+
+    .relatorio-comparacao-grid{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-posicao{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-tabela-wrap{
+
+        overflow-x:auto;
+    }
+
+
+    .relatorio-tabela-comparacao{
+
+        min-width:560px;
+    }
+}
+
+
+/* ==========================================================
+   IMPRESSÃO DA COMPARAÇÃO
+========================================================== */
+
+@media print{
+
+    .relatorio-comparacao-grid{
+
+        grid-template-columns:
+            repeat(
+                5,
+                minmax(0,1fr)
+            );
+
+        gap:5px;
+    }
+
+
+    .relatorio-comparacao-card{
+
+        padding:6px;
+    }
+
+
+    .relatorio-tabela-comparacao th{
+
+        padding:
+            5px
+            7px;
+
+        font-size:8px;
+    }
+
+
+    .relatorio-tabela-comparacao td{
+
+        padding:
+            5px
+            7px;
+
+        font-size:9px;
+    }
+
+
+    .relatorio-secao{
+
+        margin-bottom:6px;
+
+        padding:8px;
+    }
+
+
+    .relatorio-corpo{
+
+        gap:6px;
+
+        padding:8px;
+    }
+}
 /* ==========================================================
    RODAPÉ
 ========================================================== */
