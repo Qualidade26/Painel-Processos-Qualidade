@@ -36,6 +36,56 @@ const coresOrigemDescarte = {
     "Desvio": "#79BFF2"
 };
 /* ==========================================================
+   COR POR DESCRIÇÃO — DESCARTE
+========================================================== */
+
+function obterCorOrigemDescarte(descricao){
+
+    const nome =
+        String(descricao || "")
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLowerCase();
+
+    const mapaCores = {
+
+        "vencido":
+            "#EF4444",
+
+        "desvio de qualidade":
+            "#79BFF2",
+
+        "desvio":
+            "#79BFF2",
+
+        "devolução avaria":
+            "#FF6FAE",
+
+        "avaria de importação":
+            "#2855D9",
+
+        "avaria importação":
+            "#2855D9",
+
+        "avaria nacional":
+            "#FF7A1A",
+
+        "avaria de transporte nacional":
+            "#FF7A1A",
+
+        "avaria estoque":
+            "#55D98A",
+
+        "certificação":
+            "#8B6CFF"
+    };
+
+    return (
+        mapaCores[nome] ||
+        "#2855D9"
+    );
+}
+/* ==========================================================
    FUNÇÕES AUXILIARES
 ========================================================== */
 
