@@ -146,8 +146,8 @@
     "proximaAfericao": "Aguardando",
     "resumoAfericoes": {
       "totalAferido": 35900,
-      "totalAprovado": 25,
-      "totalReprovado": 35375
+      "totalAprovado": 35375,
+      "totalReprovado": 25
     },
     "produtos": [
       {
