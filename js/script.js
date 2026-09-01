@@ -608,7 +608,23 @@ function abrirAba(aba, botao) {
 
             break;
 
+case "relatorios":
 
+    if (
+        typeof renderRelatorios ===
+        "function"
+    ) {
+
+        renderRelatorios();
+
+    } else {
+
+        console.error(
+            "A função renderRelatorios não foi encontrada."
+        );
+    }
+
+    break;
         default:
 
             console.warn(
