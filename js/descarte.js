@@ -984,14 +984,14 @@ function montarTabelaGastoAmbiental(custoAmbiental){
             : {};
 
     const primeiroSemestre =
-        Number(
-            dados.totalAcumuladoPrimeiro || 0
-        );
+    Number(
+        dados.totalPrimeiroSemestre || 0
+    );
 
-    const segundoSemestre =
-        Number(
-            dados.totalAcumuladoSegundo || 0
-        );
+const segundoSemestre =
+    Number(
+        dados.totalSegundoSemestre || 0
+    );
 
 
     return `
@@ -1210,15 +1210,6 @@ const primeiroSemestre =
 
 const segundoSemestre =
     custoAmbiental.segundoSemestre || {};
-/* ======================================================
-   CUSTO AMBIENTAL
-====================================================== */
-
-const custoAmbiental =
-    d.custoAmbiental &&
-    typeof d.custoAmbiental === "object"
-        ? d.custoAmbiental
-        : {};
 
     /* ======================================================
        HTML PRINCIPAL
