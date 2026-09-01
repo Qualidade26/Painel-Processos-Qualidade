@@ -796,85 +796,7 @@ function criarMetrica(
         </div>
     `;
 }
-/* ======================================================
-   DISTRIBUIÇÃO POR ORIGEM
-   Usa os próprios totais já recebidos em dados.fornecedores.
-====================================================== */
-function criarPainelDistribuicaoOrigem(){
-    const origens = estado.resumo?.origens || {};
-    const itens = [
-        {
-            chave:"importacao",
-            label:"Importação",
-            cor:CORES.azul,
-            icone:"importacao"
-        },
-        {
-            chave:"retrabalho",
-            label:"Retrabalho",
-            cor:CORES.laranja,
-            icone:"ferramenta"
-        },
-        {
-            chave:"naoConformidade",
-            label:"Não conformidade",
-            cor:CORES.amarelo,
-            icone:"naoConformidade"
-        },
-      
-        {
-            chave:"ocorrencias",
-            label:"Ocorrências",
-            cor:CORES.verde,
-            icone:"ocorrencias"
-        }
-    ];
-    const total = itens.reduce(
-        (soma,item) => soma + numero(origens[item.chave]),
-        0
-    );
-    const colunas = itens.map(item => {
-        const valor = numero(origens[item.chave]);
-        const percentual = total
-            ? Math.round((valor / total) * 100)
-            : 0;
-        return `
-            <div
-                class="fornecedores-origem-item"
-                style="--origem-cor:${item.cor}"
-            >
-                <div class="fornecedores-origem-item__topo">
-                    <span class="fornecedores-origem-item__icone" aria-hidden="true">
-                        ${iconeSvg(item.icone)}
-                    </span>
-                    <span class="fornecedores-origem-item__label">
-                        ${item.label}
-                    </span>
-                </div>
-                <strong class="fornecedores-origem-item__valor">
-                    ${formatarInteiro(valor)}
-                </strong>
-                <span class="fornecedores-origem-item__percentual">
-                    ${percentual}%
-                </span>
-            </div>
-        `;
-    }).join("");
-    return `
-        <article class="fornecedores-panel fornecedores-panel--origem">
-            <h3 class="fornecedores-panel__titulo">
-                PROCESSOS POR TIPO
-            </h3>
-            <div class="fornecedores-origem-grid">
-                ${colunas}
-            </div>
-            <div class="fornecedores-origem-total">
-                Total de processos:
-                <strong>${formatarInteiro(total)} (100%)</strong>
-            </div>
-        </article>
-    `;
-}
+
 /* ======================================================
    CRIAÇÃO DOS KPIs
 ====================================================== */
@@ -972,7 +894,10 @@ function montarEstrutura(raiz){
                     "grafico-fornecedores-rncs"
                 )}
                 ${criarPainelClassificacao()}
-                ${criarPainelDistribuicaoOrigem()}
+                ${criarPainelGrafico(
+    "RETRABALHOS X HORAS DE IMPACTO",
+    "grafico-fornecedores-retrabalhos-horas"
+)}
                 ${criarPainelGrafico(
                     "PROCESSOS POR FORNECEDOR",
                     "grafico-fornecedores-processos"
@@ -1967,6 +1892,651 @@ const rotulosRoscaFornecedores={
         ctx.restore();
     }
 };
+   /* ======================================================
+   RETRABALHOS X HORAS DE IMPACTO
+====================================================== */
+
+function criarGraficoRetrabalhosHoras(){
+
+    const canvas =
+        estado.raiz.querySelector(
+            "#grafico-fornecedores-retrabalhos-horas"
+        );
+
+    if(!canvas){
+        return;
+    }
+
+
+    /* ==================================================
+       DADOS
+    ================================================== */
+
+    const lista =
+        [...estado.fornecedores]
+
+        .filter(
+            item =>
+                numero(item.retrabalhos) > 0 ||
+                numero(item.horas) > 0
+        )
+
+        .sort(
+            (a,b) =>
+
+                numero(b.retrabalhos) -
+                numero(a.retrabalhos) ||
+
+                numero(b.horas) -
+                numero(a.horas)
+        )
+
+        .slice(0,5);
+
+
+    if(!lista.length){
+
+        mostrarAvisoCanvas(
+            canvas,
+            "Sem dados para exibir."
+        );
+
+        return;
+    }
+
+
+    const retrabalhos =
+        lista.map(
+            item =>
+                numero(item.retrabalhos)
+        );
+
+
+    const horas =
+        lista.map(
+            item =>
+                numero(item.horas)
+        );
+
+
+    /* ==================================================
+       RÓTULOS DOS FORNECEDORES
+    ================================================== */
+
+    const labels =
+        lista.map(
+            item => {
+
+                const partes =
+                    String(item.nome || "")
+                        .split(/\s+/)
+                        .filter(Boolean);
+
+
+                if(partes.length <= 2){
+
+                    return partes;
+                }
+
+
+                return [
+                    partes.slice(0,2).join(" "),
+                    partes.slice(2,4).join(" ")
+                ];
+            }
+        );
+
+
+    /* ==================================================
+       PLUGIN — VALORES
+    ================================================== */
+
+    const rotulosRetrabalhosHoras = {
+
+        id:
+            "rotulosRetrabalhosHoras",
+
+
+        afterDatasetsDraw(chart){
+
+            const ctx =
+                chart.ctx;
+
+
+            chart.data.datasets
+                .forEach(
+                    (dataset,datasetIndex) => {
+
+                        const meta =
+                            chart.getDatasetMeta(
+                                datasetIndex
+                            );
+
+
+                        if(meta.hidden){
+                            return;
+                        }
+
+
+                        meta.data.forEach(
+                            (elemento,indice) => {
+
+                                const valor =
+                                    numero(
+                                        dataset.data[indice]
+                                    );
+
+
+                                if(valor <= 0){
+                                    return;
+                                }
+
+
+                                const pos =
+                                    elemento.tooltipPosition();
+
+
+                                ctx.save();
+
+                                ctx.textAlign =
+                                    "center";
+
+                                ctx.textBaseline =
+                                    "bottom";
+
+                                ctx.font =
+                                    '900 10px "Segoe UI",Arial,sans-serif';
+
+
+                                if(
+                                    dataset.label ===
+                                    "Horas"
+                                ){
+
+                                    ctx.fillStyle =
+                                        CORES.laranja;
+
+                                    ctx.fillText(
+                                        formatarInteiro(valor),
+                                        pos.x,
+                                        pos.y - 7
+                                    );
+
+                                }else{
+
+                                    ctx.fillStyle =
+                                        "#0f1b3d";
+
+                                    ctx.fillText(
+                                        formatarInteiro(valor),
+                                        pos.x,
+                                        pos.y - 4
+                                    );
+                                }
+
+
+                                ctx.restore();
+                            }
+                        );
+                    }
+                );
+        }
+    };
+
+
+    /* ==================================================
+       GRÁFICO
+    ================================================== */
+
+    const grafico =
+        new window.Chart(
+            canvas,
+            {
+
+                data:{
+
+                    labels,
+
+                    datasets:[
+
+
+                        /* ==============================
+                           RETRABALHOS — BARRAS
+                        ============================== */
+
+                        {
+                            type:
+                                "bar",
+
+                            label:
+                                "Retrabalhos",
+
+                            data:
+                                retrabalhos,
+
+                            backgroundColor:
+                                CORES.azul,
+
+                            borderColor:
+                                CORES.azulEscuro,
+
+                            borderWidth:
+                                0,
+
+                            borderRadius:
+                                2,
+
+                            borderSkipped:
+                                false,
+
+                            barPercentage:
+                                .56,
+
+                            categoryPercentage:
+                                .72,
+
+                            maxBarThickness:
+                                36,
+
+                            yAxisID:
+                                "y",
+
+                            order:
+                                2
+                        },
+
+
+                        /* ==============================
+                           HORAS — LINHA
+                        ============================== */
+
+                        {
+                            type:
+                                "line",
+
+                            label:
+                                "Horas",
+
+                            data:
+                                horas,
+
+                            borderColor:
+                                CORES.laranja,
+
+                            backgroundColor:
+                                CORES.laranja,
+
+                            pointBackgroundColor:
+                                CORES.laranja,
+
+                            pointBorderColor:
+                                "#ffffff",
+
+                            pointBorderWidth:
+                                2,
+
+                            pointRadius:
+                                4,
+
+                            pointHoverRadius:
+                                6,
+
+                            borderWidth:
+                                2,
+
+                            tension:
+                                .22,
+
+                            fill:
+                                false,
+
+                            yAxisID:
+                                "y1",
+
+                            order:
+                                1
+                        }
+
+                    ]
+                },
+
+
+                plugins:[
+                    rotulosRetrabalhosHoras
+                ],
+
+
+                options:{
+
+                    responsive:
+                        true,
+
+                    maintainAspectRatio:
+                        false,
+
+                    devicePixelRatio:
+                        2,
+
+                    animation:
+                        false,
+
+
+                    layout:{
+
+                        padding:{
+
+                            top:
+                                8,
+
+                            right:
+                                4,
+
+                            bottom:
+                                0,
+
+                            left:
+                                0
+                        }
+                    },
+
+
+                    plugins:{
+
+                        legend:{
+
+                            display:
+                                true,
+
+                            position:
+                                "top",
+
+                            align:
+                                "center",
+
+                            labels:{
+
+                                boxWidth:
+                                    20,
+
+                                boxHeight:
+                                    8,
+
+                                padding:
+                                    12,
+
+                                color:
+                                    "#172033",
+
+                                font:{
+
+                                    family:
+                                        "Segoe UI",
+
+                                    size:
+                                        10,
+
+                                    weight:
+                                        "700"
+                                }
+                            }
+                        },
+
+
+                        tooltip:{
+
+                            displayColors:
+                                true,
+
+                            callbacks:{
+
+                                title(context){
+
+                                    return (
+                                        lista[
+                                            context[0]?.dataIndex
+                                        ]?.nome ||
+                                        ""
+                                    );
+                                },
+
+
+                                label(context){
+
+                                    if(
+                                        context.dataset.label ===
+                                        "Horas"
+                                    ){
+
+                                        return (
+                                            " Horas: " +
+                                            formatarInteiro(
+                                                context.raw
+                                            )
+                                        );
+                                    }
+
+
+                                    return (
+                                        " Retrabalhos: " +
+                                        formatarInteiro(
+                                            context.raw
+                                        )
+                                    );
+                                }
+                            }
+                        },
+
+
+                        datalabels:{
+
+                            display:
+                                false
+                        }
+                    },
+
+
+                    scales:{
+
+
+                        /* ==========================
+                           FORNECEDORES
+                        ========================== */
+
+                        x:{
+
+                            offset:
+                                true,
+
+                            grid:{
+
+                                display:
+                                    false
+                            },
+
+                            border:{
+
+                                color:
+                                    "#cfd6e3"
+                            },
+
+                            ticks:{
+
+                                autoSkip:
+                                    false,
+
+                                color:
+                                    "#1f2937",
+
+                                maxRotation:
+                                    0,
+
+                                minRotation:
+                                    0,
+
+                                padding:
+                                    4,
+
+                                font:{
+
+                                    family:
+                                        "Segoe UI",
+
+                                    size:
+                                        9,
+
+                                    weight:
+                                        "700"
+                                }
+                            }
+                        },
+
+
+                        /* ==========================
+                           RETRABALHOS
+                        ========================== */
+
+                        y:{
+
+                            beginAtZero:
+                                true,
+
+                            position:
+                                "left",
+
+                            grace:
+                                "20%",
+
+                            title:{
+
+                                display:
+                                    true,
+
+                                text:
+                                    "Retrabalhos",
+
+                                color:
+                                    CORES.azulEscuro,
+
+                                font:{
+
+                                    family:
+                                        "Segoe UI",
+
+                                    size:
+                                        10,
+
+                                    weight:
+                                        "700"
+                                }
+                            },
+
+                            ticks:{
+
+                                precision:
+                                    0,
+
+                                color:
+                                    "#536078",
+
+                                font:{
+
+                                    size:
+                                        9
+                                }
+                            },
+
+                            grid:{
+
+                                color:
+                                    CORES.grade
+                            },
+
+                            border:{
+
+                                display:
+                                    false
+                            }
+                        },
+
+
+                        /* ==========================
+                           HORAS
+                        ========================== */
+
+                        y1:{
+
+                            beginAtZero:
+                                true,
+
+                            position:
+                                "right",
+
+                            grace:
+                                "20%",
+
+                            title:{
+
+                                display:
+                                    true,
+
+                                text:
+                                    "Horas",
+
+                                color:
+                                    CORES.laranja,
+
+                                font:{
+
+                                    family:
+                                        "Segoe UI",
+
+                                    size:
+                                        10,
+
+                                    weight:
+                                        "700"
+                                }
+                            },
+
+                            ticks:{
+
+                                precision:
+                                    0,
+
+                                color:
+                                    CORES.laranja,
+
+                                font:{
+
+                                    size:
+                                        9
+                                }
+                            },
+
+                            grid:{
+
+                                drawOnChartArea:
+                                    false
+                            },
+
+                            border:{
+
+                                display:
+                                    false
+                            }
+                        }
+
+                    }
+                }
+            }
+        );
+
+
+    estado.graficos.set(
+        "grafico-fornecedores-retrabalhos-horas",
+        grafico
+    );
+}
 /* ======================================================
    PREPARAR DADOS DOS GRÁFICOS
 ====================================================== */
@@ -2007,16 +2577,25 @@ function criarGraficos(){
         null,
         "Quantidade de RNCs"
     );
-    criarGraficoClassificacoes();
-    criarGraficoBarras(
-        "grafico-fornecedores-processos",
-        maisProcessos,
-        item => item.processos,
-        CORES.azul,
-        "",
-        null,
-        "Quantidade de Processos"
-    );
+   criarGraficoClassificacoes();
+
+
+/* RETRABALHOS X HORAS */
+
+criarGraficoRetrabalhosHoras();
+
+
+/* PROCESSOS POR FORNECEDOR */
+
+criarGraficoBarras(
+    "grafico-fornecedores-processos",
+    maisProcessos,
+    item => item.processos,
+    CORES.azul,
+    "",
+    null,
+    "Quantidade de Processos"
+);
 }
 /* ======================================================
    GRÁFICO DE BARRAS
