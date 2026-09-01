@@ -2544,120 +2544,294 @@ function encontrarRaiz(
 /* ======================================================
    RENDERIZAÇÃO PRINCIPAL
 ====================================================== */
+
 function renderizarFornecedores(
     entrada,
     alvo
 ){
+
     const raiz =
         encontrarRaiz(
             alvo
         );
+
     if(!raiz){
+
         console.warn(
             "Área da página de fornecedores não encontrada."
         );
+
         return false;
     }
-    destruirGraficosFornecedores();   
+
+
+    /* ======================================================
+       PRESERVA ESTADO ATUAL
+    ====================================================== */
+
+    const abaAnterior =
+        estado.abaAtual ||
+        "geral";
+
+    const termoBuscaAnterior =
+        estado.termoBusca ||
+        "";
+
+    const filtroAnterior =
+        estado.filtroClassificacao ||
+        "todos";
+
+    const fornecedorAnterior =
+        estado.fornecedorSelecionado;
+
+
+    /* ======================================================
+       DESTRÓI GRÁFICOS
+    ====================================================== */
+
+    destruirGraficosFornecedores();
+
+
+    /* ======================================================
+       NORMALIZA DADOS
+    ====================================================== */
+
     const normalizado =
         normalizarEntrada(
             entrada
         );
+
+
     estado.raiz =
         raiz;
+
     estado.dados =
         normalizado.raizDados;
+
     estado.resumo =
         normalizado.resumo;
+
     estado.fornecedores =
         normalizado.lista;
+
+
+    /* ======================================================
+       RESTAURA ESTADO
+    ====================================================== */
+
     estado.abaAtual =
-        "geral";
+        abaAnterior;
+
     estado.termoBusca =
-        "";
+        termoBuscaAnterior;
+
     estado.filtroClassificacao =
-        "todos";
+        filtroAnterior;
+
     estado.fornecedorSelecionado =
-        null;
+        fornecedorAnterior;
+
+
+    /* ======================================================
+       MONTA ESTRUTURA
+    ====================================================== */
+
     montarEstrutura(
         raiz
     );
+
     preencherIndicadores();
+
     configurarEventos();
+
+
+    /* ======================================================
+       RESTAURA PESQUISA
+    ====================================================== */
+
+    const pesquisa =
+        raiz.querySelector(
+            "#fornecedores-pesquisa"
+        );
+
+    if(pesquisa){
+
+        pesquisa.value =
+            estado.termoBusca;
+    }
+
+
+    /* ======================================================
+       RESTAURA FILTRO
+    ====================================================== */
+
+    const filtro =
+        raiz.querySelector(
+            "#fornecedores-classificacao"
+        );
+
+    if(filtro){
+
+        filtro.value =
+            estado.filtroClassificacao;
+    }
+
+
+    /* ======================================================
+       ATUALIZA TABELA
+    ====================================================== */
+
     aplicarFiltros();
+
+
+    /* ======================================================
+       RESTAURA ABA
+    ====================================================== */
+
+    abrirAba(
+        abaAnterior
+    );
+
+
+    /* ======================================================
+       RESTAURA FORNECEDOR SELECIONADO
+    ====================================================== */
+
+    if(
+        fornecedorAnterior &&
+        abaAnterior === "avaliacao"
+    ){
+
+        const existe =
+            estado.fornecedores.some(
+                item =>
+                    item.id ===
+                    fornecedorAnterior
+            );
+
+        if(existe){
+
+            selecionarFornecedor(
+                fornecedorAnterior
+            );
+        }
+    }
+
+
+    /* ======================================================
+       CRIA GRÁFICOS
+    ====================================================== */
+
     requestAnimationFrame(
         () => {
+
             criarGraficos();
         }
     );
+
+
     raiz.dataset
         .fornecedoresInicializado =
         "true";
+
+
     return true;
 }
+
+
 /* ======================================================
    ATUALIZAÇÃO DOS DADOS
 ====================================================== */
+
 function atualizarFornecedores(
     novosDados
 ){
+
     if(!estado.raiz){
+
         return renderizarFornecedores(
             novosDados
         );
     }
+
+
     return renderizarFornecedores(
         novosDados,
         estado.raiz
     );
 }
+
+
 /* ======================================================
    INICIALIZAÇÃO AUTOMÁTICA
 ====================================================== */
+
 function tentarInicializacaoAutomatica(){
+
     const raiz =
         encontrarRaiz();
+
+
     if(
         !raiz ||
         raiz.dataset
             .fornecedoresInicializado ===
             "true"
     ){
+
         return;
     }
+
+
     const fonte =
         window.dadosFornecedores ||
+
         window.dadosPainel
             ?.fornecedores ||
+
         window.dados
             ?.fornecedores;
+
+
     if(fonte){
+
         renderizarFornecedores(
             fonte,
             raiz
         );
     }
 }
+
+
 /* ======================================================
    FUNÇÕES PÚBLICAS
 ====================================================== */
+
 window.renderizarFornecedores =
     renderizarFornecedores;
+
 window.inicializarFornecedores =
     renderizarFornecedores;
+
 window.carregarFornecedores =
     renderizarFornecedores;
+
 window.atualizarFornecedores =
     atualizarFornecedores;
+
 window.destruirGraficosFornecedores =
     destruirGraficosFornecedores;
+
+
 /* ======================================================
    BOOT
 ====================================================== */
+
 if(
     document.readyState ===
     "loading"
 ){
+
     document.addEventListener(
         "DOMContentLoaded",
         tentarInicializacaoAutomatica,
@@ -2665,7 +2839,10 @@ if(
             once:true
         }
     );
+
 }else{
+
     tentarInicializacaoAutomatica();
 }
+
 })();
