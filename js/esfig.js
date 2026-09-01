@@ -434,16 +434,22 @@ const totalReprovado =
                 📊 Aferições Anuais por SKU
             </h3>
 
-            <button
-                type="button"
-                id="esfigResumoAbrir"
-                class="esfig-resumo-abrir"
-                onclick="alternarResumoAfericoesEsfig(true)"
-                title="Abrir resumo das aferições"
-                aria-label="Abrir resumo das aferições"
-            >
-                ❯
-            </button>
+          <button
+    type="button"
+    id="esfigResumoAbrir"
+    class="esfig-resumo-abrir"
+    onclick="alternarResumoAfericoesEsfig(true)"
+    title="Abrir resumo das aferições"
+    aria-label="Abrir resumo das aferições"
+>
+    <span class="esfig-resumo-abrir-texto">
+        Resumo das Aferições
+    </span>
+
+    <span class="esfig-resumo-abrir-seta">
+        ❯
+    </span>
+</button>
 
         </div>
 
