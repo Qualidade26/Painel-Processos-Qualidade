@@ -10,13 +10,13 @@
 
 const coresOrigemDescarte = {
 
-    "Avaria de Importação": "#2855D9",
+   
     "Avaria Importação": "#2855D9",
 
-    "Devolução avaria": "#FF6FAE",
+    
     "Devolução Avaria": "#FF6FAE",
 
-    "Avaria estoque": "#55D98A",
+  
     "Avaria Estoque": "#55D98A",
 
     "Avaria Nacional": "#FF7A1A",
@@ -25,7 +25,7 @@ const coresOrigemDescarte = {
 
     "Vencido": "#EF4444",
 
-    "Desvio de Qualidade": "#79BFF2",
+    
     "Desvio": "#79BFF2"
 };
 /* ==========================================================
