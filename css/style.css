@@ -10,6 +10,42 @@
 @import url("./paginas/retrabalho.css");
 @import url("./paginas/fornecedores.css");
 @import url("./paginas/informativo.css");
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./componentes.css");
+@import url("./responsivo.css");
+
+@import url("paginas/importacao.css?v=26");
+@import url("./paginas/esfig.css");
+@import url("./paginas/descarte.css");
+@import url("./paginas/amostra.css");
+@import url("./paginas/retrabalho.css");
+@import url("./paginas/fornecedores.css");
+@import url("./paginas/informativo.css");
+/* ==========================================================
+   COMPATIBILIDADE ENTRE OS NOMES DAS VARIÁVEIS
+========================================================== */
+
+:root{
+    --cor-primaria:var(--primary);
+    --cor-primaria-escura:var(--primary-dark);
+
+    --cor-fundo:var(--bg);
+    --cor-card:var(--card);
+
+    --cor-texto:var(--text);
+    --cor-texto-secundario:var(--muted);
+
+    --cor-borda:var(--line);
+
+    --raio-card:12px;
+    --raio-botao:10px;
+
+    --espacamento-padrao:10px;
+    --padding-card:10px;
+
+    --sombra-card:0 4px 10px rgba(0,0,0,.05);
+}
 /* ==========================================================
    COMPATIBILIDADE ENTRE OS NOMES DAS VARIÁVEIS
 ========================================================== */
