@@ -1135,39 +1135,45 @@ function renderDescarte(){
     pararScrollAutomaticoTop10Descarte();
 
 
-    /* ======================================================
-       DADOS GERAIS
-    ====================================================== */
+  /* ======================================================
+   DADOS GERAIS
+====================================================== */
 
-    const d =
-        dados.descarte || {};
+const d =
+    dados.descarte || {};
 
 
-    /* ======================================================
+/* ======================================================
    VALOR ATUAL
 ====================================================== */
 
+const valorAtual =
+    d.valorAtual || {};
+
 const origensAtual =
-    Array.isArray(d.origensAtual)
-        ? d.origensAtual
+    Array.isArray(valorAtual.origens)
+        ? valorAtual.origens
         : [];
 
 const totalAtual =
-    Number(d.total || 0);
+    Number(valorAtual.total || 0);
 
 
 /* ======================================================
    DESCARTADO NO ANO
 ====================================================== */
 
+const descartadoAno =
+    d.descartadoAno || {};
+
 const origensDescartado =
-    Array.isArray(d.origensAcumulado)
-        ? d.origensAcumulado
+    Array.isArray(descartadoAno.origens)
+        ? descartadoAno.origens
         : [];
 
 const topDescartado =
-    Array.isArray(d.top10)
-        ? [...d.top10]
+    Array.isArray(descartadoAno.top10)
+        ? [...descartadoAno.top10]
         : [];
 
 topDescartado.sort(
@@ -1177,9 +1183,33 @@ topDescartado.sort(
 );
 
 const totalDescartado =
-    Number(d.totalAcumulado || 0);
+    Number(
+        descartadoAno.total || 0
+    );
 
 
+/* ======================================================
+   CUSTO AMBIENTAL
+====================================================== */
+
+const custoAmbiental =
+    descartadoAno.custoAmbiental || {};
+
+const totalPrimeiroSemestre =
+    Number(
+        custoAmbiental.totalPrimeiroSemestre || 0
+    );
+
+const totalSegundoSemestre =
+    Number(
+        custoAmbiental.totalSegundoSemestre || 0
+    );
+
+const primeiroSemestre =
+    custoAmbiental.primeiroSemestre || {};
+
+const segundoSemestre =
+    custoAmbiental.segundoSemestre || {};
 /* ======================================================
    CUSTO AMBIENTAL
 ====================================================== */
