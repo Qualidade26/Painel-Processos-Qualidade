@@ -2241,6 +2241,7 @@ function criarGraficoRetrabalhosHoras(){
 
 
                     plugins:{
+                       valorFlutuante:false,
 
                         legend:{
 
