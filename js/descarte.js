@@ -8,24 +8,36 @@
    CORES
 ========================================================== */
 
+c/* ==========================================================
+   CORES — DESCARTE
+========================================================== */
+
 const coresOrigemDescarte = {
 
-   
+    /* AZUL */
+    "Avaria de Importação": "#2855D9",
     "Avaria Importação": "#2855D9",
 
-    
+    /* ROSA */
+    "Devolução avaria": "#FF6FAE",
     "Devolução Avaria": "#FF6FAE",
 
-  
+    /* VERDE */
+    "Avaria estoque": "#55D98A",
     "Avaria Estoque": "#55D98A",
 
+    /* LARANJA */
     "Avaria Nacional": "#FF7A1A",
+    "Avaria de Transporte Nacional": "#FF7A1A",
 
+    /* ROXO */
     "Certificação": "#8B6CFF",
 
+    /* VERMELHO */
     "Vencido": "#EF4444",
 
-    
+    /* AZUL CLARO */
+    "Desvio de Qualidade": "#79BFF2",
     "Desvio": "#79BFF2"
 };
 /* ==========================================================
