@@ -293,7 +293,6 @@ function iniciarEventosRelatorios(){
 /* ==========================================================
    GERAR RELATÓRIO
 ========================================================== */
-
 async function gerarRelatorioSelecionado(){
 
     const ano =
@@ -331,70 +330,134 @@ async function gerarRelatorioSelecionado(){
     if(aviso){
 
         aviso.innerHTML =
-            "Carregando relatório...";
+            "Carregando e comparando os dados...";
     }
 
 
     try{
 
-        let caminho;
-
+        /* ==================================================
+           RELATÓRIO MENSAL
+           CONGELADO X ATUAL
+        ================================================== */
 
         if(
             tipoRelatorioAtual ===
             "mensal"
         ){
 
-            caminho =
+            const caminhoCongelado =
                 `Fechamento/${ano}/${mes}.json`;
 
-        }else{
 
-            caminho =
-                `Relatorio-Anual/${ano}.json`;
-        }
+            const [
+                respostaCongelado,
+                respostaAtual
+            ] =
+                await Promise.all([
+
+                    fetch(
+                        caminhoCongelado,
+                        {
+                            cache:"no-store"
+                        }
+                    ),
+
+                    fetch(
+                        "data.json",
+                        {
+                            cache:"no-store"
+                        }
+                    )
+
+                ]);
 
 
-        const resposta =
-            await fetch(
-                caminho,
+            if(!respostaCongelado.ok){
+
+                throw new Error(
+                    `Fechamento não encontrado: ${caminhoCongelado}`
+                );
+            }
+
+
+            if(!respostaAtual.ok){
+
+                throw new Error(
+                    "Não foi possível carregar data.json"
+                );
+            }
+
+
+            const dadosCongelados =
+                await respostaCongelado.json();
+
+
+            const dadosAtuais =
+                await respostaAtual.json();
+
+
+            montarPreviewRelatorio(
+                dadosCongelados,
                 {
-                    cache:"no-store"
+                    tipo:"mensal",
+                    ano,
+                    mes,
+                    escopo,
+                    dadosAtuais
                 }
             );
 
 
-        if(!resposta.ok){
+        /* ==================================================
+           RELATÓRIO ANUAL
+        ================================================== */
 
-            throw new Error(
-                `Arquivo não encontrado: ${caminho}`
+        }else{
+
+            const caminhoAnual =
+                `Relatorio-Anual/${ano}.json`;
+
+
+            const resposta =
+                await fetch(
+                    caminhoAnual,
+                    {
+                        cache:"no-store"
+                    }
+                );
+
+
+            if(!resposta.ok){
+
+                throw new Error(
+                    `Relatório anual não encontrado: ${caminhoAnual}`
+                );
+            }
+
+
+            const dadosAnuais =
+                await resposta.json();
+
+
+            montarPreviewRelatorio(
+                dadosAnuais,
+                {
+                    tipo:"anual",
+                    ano,
+                    mes:null,
+                    escopo,
+                    dadosAtuais:null
+                }
             );
         }
-
-
-        const dadosRelatorio =
-            await resposta.json();
-
-
-        montarPreviewRelatorio(
-            dadosRelatorio,
-            {
-                tipo:
-                    tipoRelatorioAtual,
-
-                ano,
-
-                mes,
-
-                escopo
-            }
-        );
 
 
         if(aviso){
 
             aviso.innerHTML = "";
         }
+
 
     }catch(erro){
 
@@ -411,10 +474,10 @@ async function gerarRelatorioSelecionado(){
 
             aviso.innerHTML = `
                 <strong>
-                    Não foi possível carregar o relatório.
+                    Não foi possível gerar o relatório.
                 </strong>
                 <br>
-                Verifique se o arquivo de fechamento existe.
+                ${erro.message}
             `;
         }
     }
@@ -528,15 +591,28 @@ function montarPreviewRelatorio(
     `;
 }
 
-
 /* ==========================================================
    CONTEÚDO POR ESCOPO
 ========================================================== */
 
 function gerarConteudoRelatorio(
-    dadosRelatorio,
+    dadosCongelados,
     configuracao
 ){
+
+    const dadosAtuais =
+        configuracao.dadosAtuais ||
+        dadosCongelados;
+
+
+    /* ==================================================
+       RELATÓRIO ANUAL
+       Não compara com data.json
+    ================================================== */
+
+    const comparar =
+        configuracao.tipo === "mensal";
+
 
     if(
         configuracao.escopo ===
@@ -544,13 +620,69 @@ function gerarConteudoRelatorio(
     ){
 
         return `
-            ${gerarResumoGeral(dadosRelatorio)}
-            ${gerarBlocoImportacao(dadosRelatorio)}
-            ${gerarBlocoEsfig(dadosRelatorio)}
-            ${gerarBlocoDescarte(dadosRelatorio)}
-            ${gerarBlocoAmostras(dadosRelatorio)}
-            ${gerarBlocoRetrabalho(dadosRelatorio)}
-            ${gerarBlocoFornecedores(dadosRelatorio)}
+            ${
+                gerarResumoGeral(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoImportacao(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoEsfig(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoDescarte(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoAmostras(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoRetrabalho(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoAdequacaoCaixa(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
+
+            ${
+                gerarBlocoFornecedores(
+                    dadosCongelados,
+                    dadosAtuais,
+                    comparar
+                )
+            }
         `;
     }
 
@@ -560,38 +692,65 @@ function gerarConteudoRelatorio(
     ){
 
         case "importacao":
+
             return gerarBlocoImportacao(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
+
 
         case "esfig":
+
             return gerarBlocoEsfig(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
+
 
         case "descarte":
+
             return gerarBlocoDescarte(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
+
 
         case "amostras":
+
             return gerarBlocoAmostras(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
+
 
         case "retrabalho":
+
             return gerarBlocoRetrabalho(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
+
 
         case "fornecedores":
+
             return gerarBlocoFornecedores(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
 
+
         default:
+
             return gerarResumoGeral(
-                dadosRelatorio
+                dadosCongelados,
+                dadosAtuais,
+                comparar
             );
     }
 }
@@ -601,84 +760,71 @@ function gerarConteudoRelatorio(
    RESUMO GERAL
 ========================================================== */
 
-function gerarResumoGeral(d){
+function gerarResumoGeral(
+    congelado,
+    atual,
+    comparar
+){
 
     return `
 
         <section class="relatorio-secao">
 
             <h2>
-                Visão Geral SGQ
+                📊 Visão Geral SGQ
             </h2>
 
-            <div class="relatorio-cards">
+            <div class="relatorio-comparacao-grid">
 
-                ${cardRelatorio(
-                    "Importação",
-                    extrairValor(
-                        d,
-                        [
-                            "importacao.processosAno",
-                            "importacao.totalProcessos"
-                        ]
+                ${
+                    linhaComparacao(
+                        "Importação",
+                        congelado.importacao?.processosAno,
+                        atual.importacao?.processosAno,
+                        "numero",
+                        comparar
                     )
-                )}
+                }
 
-                ${cardRelatorio(
-                    "ESFIG",
-                    extrairValor(
-                        d,
-                        [
-                            "esfig.totalHoras"
-                        ]
-                    ),
-                    " h"
-                )}
-
-                ${cardRelatorio(
-                    "Descarte",
-                    extrairValor(
-                        d,
-                        [
-                            "descarte.total",
-                            "descarte.descartadoAno.total"
-                        ]
-                    ),
-                    "",
-                    true
-                )}
-
-                ${cardRelatorio(
-                    "Amostras",
-                    extrairValor(
-                        d,
-                        [
-                            "amostras.total",
-                            "amostra.total"
-                        ]
+                ${
+                    linhaComparacao(
+                        "ESFIG - Horas",
+                        congelado.esfig?.totalHoras,
+                        atual.esfig?.totalHoras,
+                        "horas",
+                        comparar
                     )
-                )}
+                }
 
-                ${cardRelatorio(
-                    "Retrabalho",
-                    extrairValor(
-                        d,
-                        [
-                            "retrabalho.totalUnidades",
-                            "retrabalho.totalRetrabalhado"
-                        ]
+                ${
+                    linhaComparacao(
+                        "Descarte",
+                        congelado.descarte?.descartadoAno?.total,
+                        atual.descarte?.descartadoAno?.total,
+                        "moeda",
+                        comparar
                     )
-                )}
+                }
 
-               ${cardRelatorio(
-    "Fornecedores",
-    extrairValor(
-        d,
-        [
-            "fornecedores.totalfornecedores"
-        ]
-    )
-)}
+                ${
+                    linhaComparacao(
+                        "Retrabalho",
+                        congelado.retrabalho?.totalUnidades,
+                        atual.retrabalho?.totalUnidades,
+                        "numero",
+                        comparar
+                    )
+                }
+
+                ${
+                    linhaComparacao(
+                        "RNC Fornecedores",
+                        congelado.fornecedores?.totalrncano,
+                        atual.fornecedores?.totalrncano,
+                        "numero",
+                        comparar
+                    )
+                }
 
             </div>
 
@@ -691,47 +837,68 @@ function gerarResumoGeral(d){
    IMPORTAÇÃO
 ========================================================== */
 
-function gerarBlocoImportacao(d){
+function gerarBlocoImportacao(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.importacao || {};
+    const anterior =
+        congelado.importacao || {};
+
+    const corrente =
+        atual.importacao || {};
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
-                📦 Importação
+                📦 Inspeção de Importação
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Processos",
+                            anterior:anterior.processosAno,
+                            atual:corrente.processosAno,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Processos",
-                    item.processosAno
-                )}
+                        {
+                            titulo:"SKUs acumulados",
+                            anterior:anterior.totalSku,
+                            atual:corrente.totalSku,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "SKUs",
-                    item.totalSku
-                )}
+                        {
+                            titulo:"Lotes",
+                            anterior:anterior.totalLotes,
+                            atual:corrente.totalLotes,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Lotes",
-                    item.totalLotes
-                )}
+                        {
+                            titulo:"Laudos emitidos",
+                            anterior:anterior.laudosEmitidos,
+                            atual:corrente.laudosEmitidos,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Laudos",
-                    item.laudosEmitidos
-                )}
-
-                ${cardRelatorio(
-                    "Horas",
-                    item.totalHoras,
-                    " h"
-                )}
-
-            </div>
+                        {
+                            titulo:"Horas",
+                            anterior:anterior.totalHoras,
+                            atual:corrente.totalHoras,
+                            tipo:"horas"
+                        }
+                    ],
+                    comparar
+                )
+            }
 
         </section>
     `;
@@ -742,42 +909,103 @@ function gerarBlocoImportacao(d){
    ESFIG
 ========================================================== */
 
-function gerarBlocoEsfig(d){
+function gerarBlocoEsfig(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.esfig || {};
+    const anterior =
+        congelado.esfig || {};
+
+    const corrente =
+        atual.esfig || {};
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
-                ⏱ ESFIG
+                ⏱ Esfigmomanômetro
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Horas",
+                            anterior:anterior.totalHoras,
+                            atual:corrente.totalHoras,
+                            tipo:"horas"
+                        },
 
-                ${cardRelatorio(
-                    "Horas",
-                    item.totalHoras,
-                    " h"
-                )}
+                        {
+                            titulo:"GRU Inmetro",
+                            anterior:anterior.totalGruInmetro,
+                            atual:corrente.totalGruInmetro,
+                            tipo:"moeda"
+                        },
 
-                ${cardRelatorio(
-                    "GRU Inmetro",
-                    item.totalGruInmetro,
-                    "",
-                    true
-                )}
+                        {
+                            titulo:"Total aferido",
+                            anterior:
+                                anterior.resumoAfericoes
+                                    ?.totalAferido,
 
-                ${cardRelatorio(
-                    "Última aferição",
-                    item.ultimaAfericao
-                )}
+                            atual:
+                                corrente.resumoAfericoes
+                                    ?.totalAferido,
 
-                ${cardRelatorio(
-                    "Próxima aferição",
-                    item.proximaAfericao
-                )}
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Total aprovado",
+                            anterior:
+                                anterior.resumoAfericoes
+                                    ?.totalAprovado,
+
+                            atual:
+                                corrente.resumoAfericoes
+                                    ?.totalAprovado,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Total reprovado",
+                            anterior:
+                                anterior.resumoAfericoes
+                                    ?.totalReprovado,
+
+                            atual:
+                                corrente.resumoAfericoes
+                                    ?.totalReprovado,
+
+                            tipo:"numero"
+                        }
+                    ],
+                    comparar
+                )
+            }
+
+
+            <div class="relatorio-posicao">
+
+                <span>
+                    Última aferição:
+                    <strong>
+                        ${corrente.ultimaAfericao || "-"}
+                    </strong>
+                </span>
+
+                <span>
+                    Próxima aferição:
+                    <strong>
+                        ${corrente.proximaAfericao || "-"}
+                    </strong>
+                </span>
 
             </div>
 
@@ -790,33 +1018,82 @@ function gerarBlocoEsfig(d){
    DESCARTE
 ========================================================== */
 
-function gerarBlocoDescarte(d){
+function gerarBlocoDescarte(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.descarte || {};
+    const anterior =
+        congelado.descarte || {};
 
-    const total =
-        item.descartadoAno?.total ??
-        item.total ??
-        0;
+    const corrente =
+        atual.descarte || {};
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
                 🗑 Descarte
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Valor atual",
+                            anterior:
+                                anterior.valorAtual?.total,
 
-                ${cardRelatorio(
-                    "Total",
-                    total,
-                    "",
-                    true
-                )}
+                            atual:
+                                corrente.valorAtual?.total,
 
-            </div>
+                            tipo:"moeda",
+                            subtrair:false
+                        },
+
+                        {
+                            titulo:"Total descartado no ano",
+                            anterior:
+                                anterior.descartadoAno?.total,
+
+                            atual:
+                                corrente.descartadoAno?.total,
+
+                            tipo:"moeda"
+                        },
+
+                        {
+                            titulo:"Custo ambiental - 1º semestre",
+                            anterior:
+                                anterior.custoAmbiental
+                                    ?.totalPrimeiroSemestre,
+
+                            atual:
+                                corrente.custoAmbiental
+                                    ?.totalPrimeiroSemestre,
+
+                            tipo:"moeda"
+                        },
+
+                        {
+                            titulo:"Custo ambiental - 2º semestre",
+                            anterior:
+                                anterior.custoAmbiental
+                                    ?.totalSegundoSemestre,
+
+                            atual:
+                                corrente.custoAmbiental
+                                    ?.totalSegundoSemestre,
+
+                            tipo:"moeda"
+                        }
+                    ],
+                    comparar
+                )
+            }
 
         </section>
     `;
@@ -827,34 +1104,59 @@ function gerarBlocoDescarte(d){
    AMOSTRAS
 ========================================================== */
 
-function gerarBlocoAmostras(d){
+function gerarBlocoAmostras(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.amostras ||
-        d.amostra ||
-        {};
+    const anterior =
+        congelado.amostras || {};
+
+    const corrente =
+        atual.amostras || {};
+
+
+    const totalAnterior =
+        somarAmostras(
+            anterior.mensal
+        );
+
+
+    const totalAtual =
+        somarAmostras(
+            corrente.mensal
+        );
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
                 📦 Amostras
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Quantidade acumulada",
+                            anterior:totalAnterior,
+                            atual:totalAtual,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Total",
-                    item.total
-                )}
-
-                ${cardRelatorio(
-                    "Horas",
-                    item.totalHoras,
-                    " h"
-                )}
-
-            </div>
+                        {
+                            titulo:"Horas",
+                            anterior:anterior.totalHoras,
+                            atual:corrente.totalHoras,
+                            tipo:"horas"
+                        }
+                    ],
+                    comparar
+                )
+            }
 
         </section>
     `;
@@ -865,92 +1167,695 @@ function gerarBlocoAmostras(d){
    RETRABALHO
 ========================================================== */
 
-function gerarBlocoRetrabalho(d){
+function gerarBlocoRetrabalho(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.retrabalho || {};
+    const anterior =
+        congelado.retrabalho || {};
+
+    const corrente =
+        atual.retrabalho || {};
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
                 🔄 Retrabalho
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Processos",
+                            anterior:anterior.processos,
+                            atual:corrente.processos,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Processos",
-                    item.processos
-                )}
+                        {
+                            titulo:"Unidades retrabalhadas",
+                            anterior:anterior.totalUnidades,
+                            atual:corrente.totalUnidades,
+                            tipo:"numero"
+                        },
 
-                ${cardRelatorio(
-                    "Unidades",
-                    item.totalUnidades
-                )}
-
-                ${cardRelatorio(
-                    "Horas",
-                    item.totalHoras,
-                    " h"
-                )}
-
-            </div>
+                        {
+                            titulo:"Horas",
+                            anterior:anterior.totalHoras,
+                            atual:corrente.totalHoras,
+                            tipo:"horas"
+                        }
+                    ],
+                    comparar
+                )
+            }
 
         </section>
     `;
 }
 
+
+/* ==========================================================
+   ADEQUAÇÃO DE CAIXA
+========================================================== */
+
+function gerarBlocoAdequacaoCaixa(
+    congelado,
+    atual,
+    comparar
+){
+
+    const anterior =
+        congelado.adequacaocaixa || {};
+
+    const corrente =
+        atual.adequacaocaixa || {};
+
+
+    return `
+
+        <section class="relatorio-secao">
+
+            <h2>
+                📦 Adequação de Caixa
+            </h2>
+
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Ocorrências",
+                            anterior:
+                                anterior.totalocorrenciasano,
+
+                            atual:
+                                corrente.totalocorrenciasano,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Quantidade retrabalhada",
+                            anterior:
+                                anterior.quantidaderetrabalhada,
+
+                            atual:
+                                corrente.quantidaderetrabalhada,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Horas",
+                            anterior:
+                                anterior.totalhoras,
+
+                            atual:
+                                corrente.totalhoras,
+
+                            tipo:"horas"
+                        },
+
+                        {
+                            titulo:"Valor bom",
+                            anterior:
+                                anterior.indicadores
+                                    ?.bom?.valor,
+
+                            atual:
+                                corrente.indicadores
+                                    ?.bom?.valor,
+
+                            tipo:"moeda",
+                            subtrair:false
+                        },
+
+                        {
+                            titulo:"Valor avaria",
+                            anterior:
+                                anterior.indicadores
+                                    ?.avaria?.valor,
+
+                            atual:
+                                corrente.indicadores
+                                    ?.avaria?.valor,
+
+                            tipo:"moeda",
+                            subtrair:false
+                        }
+                    ],
+                    comparar
+                )
+            }
+
+        </section>
+    `;
+}
+
+
 /* ==========================================================
    FORNECEDORES
 ========================================================== */
 
-function gerarBlocoFornecedores(d){
+function gerarBlocoFornecedores(
+    congelado,
+    atual,
+    comparar
+){
 
-    const item =
-        d.fornecedores || {};
+    const anterior =
+        congelado.fornecedores || {};
+
+    const corrente =
+        atual.fornecedores || {};
+
 
     return `
+
         <section class="relatorio-secao">
 
             <h2>
                 🏭 Fornecedores
             </h2>
 
-            <div class="relatorio-cards">
+            ${
+                tabelaComparacao(
+                    [
+                        {
+                            titulo:"Fornecedores",
+                            anterior:
+                                anterior.totalfornecedores,
 
-                ${cardRelatorio(
-                    "Fornecedores",
-                    item.totalfornecedores
-                )}
+                            atual:
+                                corrente.totalfornecedores,
 
-                ${cardRelatorio(
-                    "Processos",
-                    item.totalprocessos
-                )}
+                            tipo:"numero",
+                            subtrair:false
+                        },
 
-                ${cardRelatorio(
-                    "RNC",
-                    item.totalrncano
-                )}
+                        {
+                            titulo:"Processos",
+                            anterior:
+                                anterior.totalprocessos,
 
-                ${cardRelatorio(
-                    "Retrabalhos",
-                    item.totalretrabalho
-                )}
+                            atual:
+                                corrente.totalprocessos,
 
-                ${cardRelatorio(
-                    "Índice médio",
-                    item.indicemedioavaliacao,
-                    "%"
-                )}
+                            tipo:"numero"
+                        },
 
-            </div>
+                        {
+                            titulo:"RNC",
+                            anterior:
+                                anterior.totalrncano,
+
+                            atual:
+                                corrente.totalrncano,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Retrabalhos",
+                            anterior:
+                                anterior.totalretrabalho,
+
+                            atual:
+                                corrente.totalretrabalho,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Reclamações",
+                            anterior:
+                                anterior.totalreclamacao,
+
+                            atual:
+                                corrente.totalreclamacao,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Índice médio",
+                            anterior:
+                                anterior.indicemedioavaliacao,
+
+                            atual:
+                                corrente.indicemedioavaliacao,
+
+                            tipo:"percentual",
+                            subtrair:false
+                        }
+                    ],
+                    comparar
+                )
+            }
 
         </section>
     `;
 }
 
+
+/* ==========================================================
+   TABELA DE COMPARAÇÃO
+========================================================== */
+
+function tabelaComparacao(
+    indicadores,
+    comparar = true
+){
+
+    const linhas =
+        indicadores
+            .map(
+                indicador => {
+
+                    const anterior =
+                        indicador.anterior;
+
+                    const atual =
+                        indicador.atual;
+
+
+                    const subtrair =
+                        indicador.subtrair !== false;
+
+
+                    let variacao = "-";
+
+
+                    if(
+                        comparar &&
+                        subtrair &&
+                        numeroValido(anterior) &&
+                        numeroValido(atual)
+                    ){
+
+                        variacao =
+                            formatarValorRelatorio(
+                                Number(atual) -
+                                Number(anterior),
+                                indicador.tipo,
+                                true
+                            );
+                    }
+
+
+                    if(
+                        comparar &&
+                        !subtrair
+                    ){
+
+                        variacao =
+                            "Posição";
+                    }
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${indicador.titulo}
+                            </td>
+
+                            <td>
+                                ${
+                                    formatarValorRelatorio(
+                                        anterior,
+                                        indicador.tipo
+                                    )
+                                }
+                            </td>
+
+                            <td>
+                                ${
+                                    comparar
+                                        ? formatarValorRelatorio(
+                                            atual,
+                                            indicador.tipo
+                                        )
+                                        : "-"
+                                }
+                            </td>
+
+                            <td>
+                                ${
+                                    comparar
+                                        ? variacao
+                                        : "-"
+                                }
+                            </td>
+
+                        </tr>
+                    `;
+                }
+            )
+            .join("");
+
+
+    return `
+
+        <div class="relatorio-tabela-wrap">
+
+            <table class="relatorio-tabela-comparacao">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Indicador
+                        </th>
+
+                        <th>
+                            Fechamento
+                        </th>
+
+                        <th>
+                            Atual
+                        </th>
+
+                        <th>
+                            Variação
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    ${linhas}
+                </tbody>
+
+            </table>
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   LINHA RESUMIDA
+========================================================== */
+
+function linhaComparacao(
+    titulo,
+    anterior,
+    atual,
+    tipo,
+    comparar
+){
+
+    let variacao =
+        "-";
+
+
+    if(
+        comparar &&
+        numeroValido(anterior) &&
+        numeroValido(atual)
+    ){
+
+        variacao =
+            formatarValorRelatorio(
+                Number(atual) -
+                Number(anterior),
+                tipo,
+                true
+            );
+    }
+
+
+    return `
+
+        <div class="relatorio-comparacao-card">
+
+            <span class="relatorio-comparacao-titulo">
+                ${titulo}
+            </span>
+
+            <div>
+
+                <small>
+                    Fechamento
+                </small>
+
+                <strong>
+                    ${
+                        formatarValorRelatorio(
+                            anterior,
+                            tipo
+                        )
+                    }
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    Atual
+                </small>
+
+                <strong>
+                    ${
+                        comparar
+                            ? formatarValorRelatorio(
+                                atual,
+                                tipo
+                            )
+                            : "-"
+                    }
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    Variação
+                </small>
+
+                <strong>
+                    ${variacao}
+                </strong>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   FORMATAÇÃO
+========================================================== */
+
+function formatarValorRelatorio(
+    valor,
+    tipo = "numero",
+    mostrarSinal = false
+){
+
+    if(
+        valor === undefined ||
+        valor === null ||
+        valor === ""
+    ){
+
+        return "-";
+    }
+
+
+    if(
+        tipo === "moeda"
+    ){
+
+        const numero =
+            Number(valor);
+
+
+        if(
+            !Number.isFinite(numero)
+        ){
+
+            return "-";
+        }
+
+
+        const sinal =
+            mostrarSinal &&
+            numero > 0
+                ? "+"
+                : "";
+
+
+        return (
+            sinal +
+            numero.toLocaleString(
+                "pt-BR",
+                {
+                    style:"currency",
+                    currency:"BRL"
+                }
+            )
+        );
+    }
+
+
+    if(
+        tipo === "horas"
+    ){
+
+        const numero =
+            Number(valor);
+
+
+        if(
+            !Number.isFinite(numero)
+        ){
+
+            return "-";
+        }
+
+
+        const sinal =
+            mostrarSinal &&
+            numero > 0
+                ? "+"
+                : "";
+
+
+        return (
+            sinal +
+            numero.toLocaleString(
+                "pt-BR",
+                {
+                    minimumFractionDigits:0,
+                    maximumFractionDigits:2
+                }
+            ) +
+            " h"
+        );
+    }
+
+
+    if(
+        tipo === "percentual"
+    ){
+
+        const numero =
+            Number(valor);
+
+
+        if(
+            !Number.isFinite(numero)
+        ){
+
+            return "-";
+        }
+
+
+        return (
+            numero * 100
+        )
+            .toLocaleString(
+                "pt-BR",
+                {
+                    maximumFractionDigits:1
+                }
+            ) +
+            "%";
+    }
+
+
+    if(
+        numeroValido(valor)
+    ){
+
+        const numero =
+            Number(valor);
+
+
+        const sinal =
+            mostrarSinal &&
+            numero > 0
+                ? "+"
+                : "";
+
+
+        return (
+            sinal +
+            numero.toLocaleString(
+                "pt-BR",
+                {
+                    maximumFractionDigits:2
+                }
+            )
+        );
+    }
+
+
+    return String(valor);
+}
+
+
+/* ==========================================================
+   NÚMERO VÁLIDO
+========================================================== */
+
+function numeroValido(valor){
+
+    return (
+        valor !== null &&
+        valor !== undefined &&
+        valor !== "" &&
+        Number.isFinite(
+            Number(valor)
+        )
+    );
+}
+
+
+/* ==========================================================
+   SOMAR AMOSTRAS
+========================================================== */
+
+function somarAmostras(lista){
+
+    if(
+        !Array.isArray(lista)
+    ){
+
+        return 0;
+    }
+
+
+    return lista.reduce(
+        (
+            soma,
+            item
+        ) =>
+
+            soma +
+            Number(
+                item.valor || 0
+            ),
+
+        0
+    );
+}
 /* ==========================================================
    CARD
 ========================================================== */
