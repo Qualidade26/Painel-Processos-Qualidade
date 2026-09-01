@@ -582,17 +582,45 @@ function criarGraficoDescarteOrigemResumo(
                 Number(item.valor || 0)
         );
 
-
-  const cores =
+const cores =
     lista.map(item => {
 
         const nome =
-            item.nome ||
-            item.origem ||
-            "";
+            String(
+                item.nome ||
+                item.origem ||
+                ""
+            ).trim();
+
+        const mapaCores = {
+
+            "Vencido":
+                "#EF4444",
+
+            "Desvio de Qualidade":
+                "#79BFF2",
+
+            "Devolução avaria":
+                "#FF6FAE",
+
+            "Avaria de Importação":
+                "#2855D9",
+
+            "Avaria Importação":
+                "#2855D9",
+
+            "Avaria Nacional":
+                "#FF7A1A",
+
+            "Avaria estoque":
+                "#55D98A",
+
+            "Certificação":
+                "#8B6CFF"
+        };
 
         return (
-            coresOrigemDescarte[nome] ||
+            mapaCores[nome] ||
             "#94A3B8"
         );
     });
