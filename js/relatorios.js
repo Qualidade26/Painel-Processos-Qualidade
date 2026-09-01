@@ -670,16 +670,15 @@ function gerarResumoGeral(d){
                     )
                 )}
 
-                ${cardRelatorio(
-                    "Fornecedores",
-                    extrairValor(
-                        d,
-                        [
-                            "fornecedores.resumo.totalFornecedores",
-                            "fornecedores.totalFornecedores"
-                        ]
-                    )
-                )}
+               ${cardRelatorio(
+    "Fornecedores",
+    extrairValor(
+        d,
+        [
+            "fornecedores.totalfornecedores"
+        ]
+    )
+)}
 
             </div>
 
@@ -902,7 +901,6 @@ function gerarBlocoRetrabalho(d){
     `;
 }
 
-
 /* ==========================================================
    FORNECEDORES
 ========================================================== */
@@ -911,9 +909,6 @@ function gerarBlocoFornecedores(d){
 
     const item =
         d.fornecedores || {};
-
-    const resumo =
-        item.resumo || {};
 
     return `
         <section class="relatorio-secao">
@@ -926,27 +921,27 @@ function gerarBlocoFornecedores(d){
 
                 ${cardRelatorio(
                     "Fornecedores",
-                    resumo.totalFornecedores
+                    item.totalfornecedores
                 )}
 
                 ${cardRelatorio(
                     "Processos",
-                    resumo.processos
+                    item.totalprocessos
                 )}
 
                 ${cardRelatorio(
                     "RNC",
-                    resumo.rncs
+                    item.totalrncano
                 )}
 
                 ${cardRelatorio(
                     "Retrabalhos",
-                    resumo.retrabalhos
+                    item.totalretrabalho
                 )}
 
                 ${cardRelatorio(
                     "Índice médio",
-                    resumo.indiceMedio,
+                    item.indicemedioavaliacao,
                     "%"
                 )}
 
@@ -955,7 +950,6 @@ function gerarBlocoFornecedores(d){
         </section>
     `;
 }
-
 
 /* ==========================================================
    CARD
