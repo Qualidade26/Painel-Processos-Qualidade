@@ -457,12 +457,20 @@
     align-items:center;
     justify-content:center;
 
-    width:34px;
+    gap:7px;
+
+    width:auto;
     height:34px;
 
-    flex:0 0 34px;
+    flex:0 0 auto;
 
-    padding:0;
+    padding:
+        0
+        10px
+        0
+        12px;
+
+    margin-left:auto;
 
     border:
         1.5px solid
@@ -473,9 +481,7 @@
     background:#ffffff;
     color:var(--primary);
 
-    font-size:20px;
-    font-weight:900;
-    line-height:1;
+    font-family:inherit;
 
     cursor:pointer;
 
@@ -487,6 +493,33 @@
 }
 
 
+/* TEXTO */
+
+.esfig-resumo-abrir-texto{
+    font-size:11px;
+    font-weight:800;
+
+    line-height:1;
+
+    white-space:nowrap;
+}
+
+
+/* SETA */
+
+.esfig-resumo-abrir-seta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+    font-weight:900;
+    line-height:1;
+}
+
+
+/* HOVER */
+
 .esfig-resumo-abrir:hover{
     background:var(--primary);
     color:#ffffff;
@@ -497,7 +530,6 @@
         0 4px 10px
         rgba(29,78,255,.18);
 }
-
 
 /* ==========================================================
    PAINEL LATERAL — FECHADO
