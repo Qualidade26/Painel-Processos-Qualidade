@@ -761,3 +761,82 @@
     }
 
 }
+/* ==========================================================
+   AJUSTE DO TÍTULO QUANDO RESUMO ESTIVER ABERTO
+========================================================== */
+
+.esfig-pareto-cabecalho{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    min-width:0;
+    min-height:36px;
+}
+
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.esfig-pareto-cabecalho h3{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    margin:0;
+
+    width:max-content;
+    max-width:none;
+
+    white-space:nowrap;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:900;
+
+    line-height:1.2;
+
+    color:var(--primary);
+}
+
+
+/* ==========================================================
+   BOTÃO RESUMO À DIREITA
+========================================================== */
+
+.esfig-resumo-abrir{
+    margin-left:auto;
+    flex-shrink:0;
+}
+
+
+/* ==========================================================
+   QUANDO O RESUMO ESTIVER ABERTO
+========================================================== */
+
+.esfig-painel-afericoes.resumo-aberto
+.esfig-pareto-cabecalho{
+
+    min-height:40px;
+}
+
+
+.esfig-painel-afericoes.resumo-aberto
+.esfig-pareto-cabecalho h3{
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    width:max-content;
+
+    max-width:none;
+}
