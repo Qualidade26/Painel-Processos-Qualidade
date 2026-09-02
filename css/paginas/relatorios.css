@@ -1779,9 +1779,7 @@
         margin:0 !important;
 
         border:0 !important;
-
         border-radius:0 !important;
-
         box-shadow:none !important;
 
         overflow:visible !important;
@@ -1800,18 +1798,18 @@
 
     .relatorio-executivo-topo{
 
-        min-height:52px !important;
+        min-height:64px !important;
 
         grid-template-columns:
-            130px
+            145px
             1fr
-            130px !important;
+            145px !important;
 
         padding:
-            5px
-            8px !important;
+            7px
+            10px !important;
 
-        gap:6px !important;
+        gap:8px !important;
 
         border-bottom:
             2px solid
@@ -1821,7 +1819,7 @@
 
     .relatorio-marca strong{
 
-        font-size:16px !important;
+        font-size:18px !important;
     }
 
 
@@ -1829,13 +1827,13 @@
 
         margin-top:2px !important;
 
-        font-size:6px !important;
+        font-size:6.5px !important;
     }
 
 
     .relatorio-executivo-titulo h1{
 
-        font-size:11px !important;
+        font-size:12px !important;
     }
 
 
@@ -1843,15 +1841,15 @@
 
         margin-top:2px !important;
 
-        font-size:11px !important;
+        font-size:12px !important;
     }
 
 
     .relatorio-periodo-base{
 
-        margin-top:3px !important;
+        margin-top:4px !important;
 
-        gap:5px !important;
+        gap:7px !important;
     }
 
 
@@ -1859,9 +1857,9 @@
 
         padding:
             2px
-            4px !important;
+            5px !important;
 
-        font-size:6px !important;
+        font-size:6.5px !important;
     }
 
 
@@ -1871,9 +1869,9 @@
 
     .relatorio-executivo-corpo{
 
-        padding:4px !important;
+        padding:5px !important;
 
-        gap:4px !important;
+        gap:5px !important;
 
         background:#ffffff !important;
     }
@@ -1891,60 +1889,60 @@
                 minmax(0,1fr)
             ) !important;
 
-        gap:3px !important;
+        gap:4px !important;
     }
 
 
     .relatorio-kpi-executivo{
 
-        min-height:42px !important;
+        min-height:52px !important;
 
         grid-template-columns:
-            20px
+            24px
             1fr !important;
 
-        gap:3px !important;
+        gap:4px !important;
 
         padding:
-            3px
-            4px !important;
+            4px
+            5px !important;
 
-        border-radius:5px !important;
+        border-radius:6px !important;
     }
 
 
     .relatorio-kpi-icone{
 
-        width:18px !important;
-        height:18px !important;
+        width:22px !important;
+        height:22px !important;
 
-        border-radius:4px !important;
+        border-radius:5px !important;
 
-        font-size:9px !important;
+        font-size:11px !important;
     }
 
 
     .relatorio-kpi-conteudo{
 
-        gap:0 !important;
+        gap:1px !important;
     }
 
 
     .relatorio-kpi-conteudo span{
 
-        font-size:5.5px !important;
+        font-size:6.5px !important;
     }
 
 
     .relatorio-kpi-conteudo strong{
 
-        font-size:8px !important;
+        font-size:10px !important;
     }
 
 
     .relatorio-kpi-conteudo small{
 
-        font-size:5.5px !important;
+        font-size:6px !important;
     }
 
 
@@ -1962,7 +1960,7 @@
                 minmax(0,1fr)
             ) !important;
 
-        gap:4px !important;
+        gap:5px !important;
 
         align-items:start !important;
     }
@@ -1974,27 +1972,26 @@
 
     .relatorio-painel-executivo{
 
-        padding:4px !important;
+        padding:6px !important;
 
-        border-radius:5px !important;
+        border-radius:6px !important;
 
         box-shadow:none !important;
 
         break-inside:avoid !important;
-
         page-break-inside:avoid !important;
     }
 
 
     .relatorio-painel-titulo{
 
-        min-height:16px !important;
+        min-height:20px !important;
 
-        margin-bottom:3px !important;
+        margin-bottom:4px !important;
 
-        padding-bottom:2px !important;
+        padding-bottom:3px !important;
 
-        gap:3px !important;
+        gap:4px !important;
 
         border-bottom:
             1px solid
@@ -2004,13 +2001,13 @@
 
     .relatorio-painel-titulo span{
 
-        font-size:8px !important;
+        font-size:9px !important;
     }
 
 
     .relatorio-painel-titulo strong{
 
-        font-size:7px !important;
+        font-size:8px !important;
     }
 
 
@@ -2022,9 +2019,9 @@
 
         grid-template-columns:
             minmax(0,1fr)
-            minmax(120px,.8fr) !important;
+            minmax(145px,.85fr) !important;
 
-        gap:4px !important;
+        gap:5px !important;
     }
 
 
@@ -2035,20 +2032,20 @@
     .relatorio-tabela-executiva th{
 
         padding:
-            2px
-            3px !important;
+            3px
+            4px !important;
 
-        font-size:5.5px !important;
+        font-size:6.5px !important;
     }
 
 
     .relatorio-tabela-executiva td{
 
         padding:
-            2px
-            3px !important;
+            3px
+            4px !important;
 
-        font-size:6px !important;
+        font-size:7px !important;
     }
 
 
@@ -2056,9 +2053,9 @@
 
         padding:
             1px
-            3px !important;
+            4px !important;
 
-        font-size:5px !important;
+        font-size:5.5px !important;
     }
 
 
@@ -2068,19 +2065,18 @@
 
     .relatorio-grafico-box{
 
-        height:72px !important;
+        height:95px !important;
+        min-height:95px !important;
 
-        min-height:72px !important;
+        padding:3px !important;
 
-        padding:2px !important;
-
-        border-radius:4px !important;
+        border-radius:5px !important;
     }
 
 
     .relatorio-grafico-box canvas{
 
-        max-height:72px !important;
+        max-height:95px !important;
     }
 
 
@@ -2090,49 +2086,49 @@
 
     .relatorio-indicadores-esfig{
 
-        gap:3px !important;
+        gap:4px !important;
     }
 
 
     .relatorio-mini-indicador{
 
         padding:
-            3px
-            2px !important;
+            4px
+            3px !important;
 
-        border-radius:4px !important;
+        border-radius:5px !important;
     }
 
 
     .relatorio-mini-indicador span{
 
-        font-size:5px !important;
+        font-size:5.5px !important;
     }
 
 
     .relatorio-mini-indicador strong{
 
-        margin-top:1px !important;
+        margin-top:2px !important;
 
-        font-size:7px !important;
+        font-size:8px !important;
     }
 
 
     .relatorio-info-faixa{
 
-        margin-top:3px !important;
+        margin-top:4px !important;
 
-        gap:3px !important;
+        gap:4px !important;
     }
 
 
     .relatorio-info-faixa span{
 
         padding:
-            2px
-            3px !important;
+            3px
+            4px !important;
 
-        font-size:5.5px !important;
+        font-size:6px !important;
     }
 
 
@@ -2142,27 +2138,27 @@
 
     .relatorio-descarte-resumo{
 
-        gap:2px !important;
+        gap:3px !important;
     }
 
 
     .relatorio-legenda-executiva{
 
-        margin-top:1px !important;
+        margin-top:2px !important;
 
         padding:
-            3px
-            4px !important;
+            4px
+            5px !important;
 
-        border-radius:4px !important;
+        border-radius:5px !important;
     }
 
 
     .relatorio-legenda-executiva > strong{
 
-        margin-bottom:2px !important;
+        margin-bottom:3px !important;
 
-        font-size:5.5px !important;
+        font-size:6px !important;
     }
 
 
@@ -2172,7 +2168,7 @@
             1px
             0 !important;
 
-        font-size:5px !important;
+        font-size:5.5px !important;
     }
 
 
@@ -2183,76 +2179,76 @@
     .relatorio-fornecedores-layout{
 
         grid-template-columns:
-            minmax(0,1.5fr)
-            minmax(70px,.5fr) !important;
+            minmax(0,1.45fr)
+            minmax(85px,.55fr) !important;
 
-        gap:4px !important;
+        gap:5px !important;
     }
 
 
     .relatorio-indice-fornecedor{
 
-        min-height:55px !important;
+        min-height:72px !important;
 
-        padding:3px !important;
+        padding:4px !important;
 
-        border-radius:5px !important;
+        border-radius:6px !important;
     }
 
 
     .relatorio-indice-fornecedor span{
 
-        font-size:5px !important;
+        font-size:5.5px !important;
     }
 
 
     .relatorio-indice-fornecedor strong{
 
-        margin-top:1px !important;
+        margin-top:2px !important;
 
-        font-size:13px !important;
+        font-size:16px !important;
     }
 
 
     .relatorio-indice-fornecedor small{
 
-        margin-top:1px !important;
-
-        font-size:5px !important;
-    }
-
-
-    .relatorio-fornecedores-atencao{
-
-        margin-top:3px !important;
-
-        padding:
-            3px
-            4px !important;
-    }
-
-
-    .relatorio-fornecedores-atencao > strong{
-
-        margin-bottom:2px !important;
+        margin-top:2px !important;
 
         font-size:5.5px !important;
     }
 
 
+    .relatorio-fornecedores-atencao{
+
+        margin-top:4px !important;
+
+        padding:
+            4px
+            5px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao > strong{
+
+        margin-bottom:3px !important;
+
+        font-size:6px !important;
+    }
+
+
     .relatorio-fornecedores-atencao > div{
 
-        gap:2px !important;
+        gap:3px !important;
     }
 
 
     .relatorio-fornecedores-atencao span{
 
         padding:
-            2px
-            3px !important;
+            3px
+            4px !important;
 
-        font-size:5px !important;
+        font-size:6px !important;
     }
 
 
@@ -2262,7 +2258,7 @@
 
     .relatorio-resumo-executivo{
 
-        gap:3px !important;
+        gap:4px !important;
     }
 
 
@@ -2270,10 +2266,10 @@
     .relatorio-atencoes{
 
         padding:
-            3px
-            4px !important;
+            4px
+            5px !important;
 
-        border-radius:4px !important;
+        border-radius:5px !important;
     }
 
 
@@ -2282,31 +2278,31 @@
         margin:
             0
             0
-            2px !important;
+            3px !important;
 
-        font-size:6px !important;
+        font-size:7px !important;
     }
 
 
     .relatorio-resumo-executivo ul{
 
-        padding-left:10px !important;
+        padding-left:11px !important;
     }
 
 
     .relatorio-resumo-executivo li{
 
-        margin-bottom:1px !important;
+        margin-bottom:2px !important;
 
-        font-size:5px !important;
+        font-size:6px !important;
 
-        line-height:1.15 !important;
+        line-height:1.25 !important;
     }
 
 
     .relatorio-resumo-executivo p{
 
-        font-size:5px !important;
+        font-size:6px !important;
     }
 
 
@@ -2317,10 +2313,10 @@
     .relatorio-executivo-rodape{
 
         padding:
-            3px
-            5px !important;
+            4px
+            6px !important;
 
-        font-size:5px !important;
+        font-size:6px !important;
     }
 
 
@@ -2332,7 +2328,6 @@
 
         size:A4 landscape;
 
-        margin:4mm;
+        margin:6mm;
     }
 }
-
