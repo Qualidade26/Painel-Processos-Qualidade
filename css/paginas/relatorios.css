@@ -1734,15 +1734,20 @@
         align-items:center;
     }
 }
-
-
 /* ==========================================================
-   IMPRESSÃO / PDF
+   IMPRESSÃO / PDF - EXECUTIVO
 ========================================================== */
 
 @media print{
 
+    html,
     body{
+
+        width:100%;
+        height:auto;
+
+        margin:0 !important;
+        padding:0 !important;
 
         background:#ffffff !important;
     }
@@ -1768,17 +1773,18 @@
         left:0;
         top:0;
 
-        width:100%;
+        width:100% !important;
+        max-width:none !important;
 
-        max-width:none;
+        margin:0 !important;
 
-        margin:0;
+        border:0 !important;
 
-        border:0;
+        border-radius:0 !important;
 
-        border-radius:0;
+        box-shadow:none !important;
 
-        box-shadow:none;
+        overflow:visible !important;
     }
 
 
@@ -1788,25 +1794,94 @@
     }
 
 
-    .relatorio-executivo-corpo{
-
-        padding:6px;
-
-        gap:6px;
-
-        background:#ffffff;
-    }
-
+    /* ======================================================
+       CABEÇALHO
+    ====================================================== */
 
     .relatorio-executivo-topo{
 
-        min-height:70px;
+        min-height:52px !important;
+
+        grid-template-columns:
+            130px
+            1fr
+            130px !important;
 
         padding:
-            8px
-            12px;
+            5px
+            8px !important;
+
+        gap:6px !important;
+
+        border-bottom:
+            2px solid
+            #1d4eff !important;
     }
 
+
+    .relatorio-marca strong{
+
+        font-size:16px !important;
+    }
+
+
+    .relatorio-marca span{
+
+        margin-top:2px !important;
+
+        font-size:6px !important;
+    }
+
+
+    .relatorio-executivo-titulo h1{
+
+        font-size:11px !important;
+    }
+
+
+    .relatorio-periodo-principal{
+
+        margin-top:2px !important;
+
+        font-size:11px !important;
+    }
+
+
+    .relatorio-periodo-base{
+
+        margin-top:3px !important;
+
+        gap:5px !important;
+    }
+
+
+    .relatorio-periodo-base span{
+
+        padding:
+            2px
+            4px !important;
+
+        font-size:6px !important;
+    }
+
+
+    /* ======================================================
+       CORPO
+    ====================================================== */
+
+    .relatorio-executivo-corpo{
+
+        padding:4px !important;
+
+        gap:4px !important;
+
+        background:#ffffff !important;
+    }
+
+
+    /* ======================================================
+       KPIs
+    ====================================================== */
 
     .relatorio-kpis-executivos{
 
@@ -1814,121 +1889,450 @@
             repeat(
                 6,
                 minmax(0,1fr)
-            );
+            ) !important;
 
-        gap:5px;
+        gap:3px !important;
     }
 
 
     .relatorio-kpi-executivo{
 
-        min-height:58px;
-
-        padding:5px;
+        min-height:42px !important;
 
         grid-template-columns:
-            27px
-            1fr;
+            20px
+            1fr !important;
+
+        gap:3px !important;
+
+        padding:
+            3px
+            4px !important;
+
+        border-radius:5px !important;
     }
 
 
     .relatorio-kpi-icone{
 
-        width:25px;
-        height:25px;
+        width:18px !important;
+        height:18px !important;
 
-        font-size:13px;
+        border-radius:4px !important;
+
+        font-size:9px !important;
+    }
+
+
+    .relatorio-kpi-conteudo{
+
+        gap:0 !important;
+    }
+
+
+    .relatorio-kpi-conteudo span{
+
+        font-size:5.5px !important;
     }
 
 
     .relatorio-kpi-conteudo strong{
 
-        font-size:11px;
+        font-size:8px !important;
     }
 
 
+    .relatorio-kpi-conteudo small{
+
+        font-size:5.5px !important;
+    }
+
+
+    /* ======================================================
+       GRID PRINCIPAL
+    ====================================================== */
+
     .relatorio-grid-executivo{
+
+        display:grid !important;
 
         grid-template-columns:
             repeat(
                 2,
                 minmax(0,1fr)
-            );
+            ) !important;
 
-        gap:6px;
+        gap:4px !important;
+
+        align-items:start !important;
     }
 
+
+    /* ======================================================
+       PAINÉIS
+    ====================================================== */
 
     .relatorio-painel-executivo{
 
-        padding:6px;
+        padding:4px !important;
 
-        break-inside:avoid;
+        border-radius:5px !important;
 
-        page-break-inside:avoid;
+        box-shadow:none !important;
+
+        break-inside:avoid !important;
+
+        page-break-inside:avoid !important;
     }
 
 
-    .relatorio-grafico-box{
+    .relatorio-painel-titulo{
 
-        height:105px;
+        min-height:16px !important;
 
-        min-height:105px;
+        margin-bottom:3px !important;
+
+        padding-bottom:2px !important;
+
+        gap:3px !important;
+
+        border-bottom:
+            1px solid
+            #dce8ff !important;
     }
 
+
+    .relatorio-painel-titulo span{
+
+        font-size:8px !important;
+    }
+
+
+    .relatorio-painel-titulo strong{
+
+        font-size:7px !important;
+    }
+
+
+    /* ======================================================
+       PAINEL DUPLO
+    ====================================================== */
+
+    .relatorio-painel-duplo{
+
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(120px,.8fr) !important;
+
+        gap:4px !important;
+    }
+
+
+    /* ======================================================
+       TABELAS
+    ====================================================== */
 
     .relatorio-tabela-executiva th{
 
         padding:
-            4px
-            5px;
+            2px
+            3px !important;
 
-        font-size:7px;
+        font-size:5.5px !important;
     }
 
 
     .relatorio-tabela-executiva td{
 
         padding:
-            4px
-            5px;
+            2px
+            3px !important;
 
-        font-size:7.5px;
+        font-size:6px !important;
     }
 
 
-    .relatorio-painel-titulo{
+    .relatorio-revisao{
 
-        min-height:22px;
+        padding:
+            1px
+            3px !important;
 
-        margin-bottom:5px;
-
-        padding-bottom:4px;
+        font-size:5px !important;
     }
 
 
-    .relatorio-painel-titulo strong{
+    /* ======================================================
+       GRÁFICOS
+    ====================================================== */
 
-        font-size:9px;
+    .relatorio-grafico-box{
+
+        height:72px !important;
+
+        min-height:72px !important;
+
+        padding:2px !important;
+
+        border-radius:4px !important;
+    }
+
+
+    .relatorio-grafico-box canvas{
+
+        max-height:72px !important;
+    }
+
+
+    /* ======================================================
+       ESFIG
+    ====================================================== */
+
+    .relatorio-indicadores-esfig{
+
+        gap:3px !important;
+    }
+
+
+    .relatorio-mini-indicador{
+
+        padding:
+            3px
+            2px !important;
+
+        border-radius:4px !important;
+    }
+
+
+    .relatorio-mini-indicador span{
+
+        font-size:5px !important;
+    }
+
+
+    .relatorio-mini-indicador strong{
+
+        margin-top:1px !important;
+
+        font-size:7px !important;
+    }
+
+
+    .relatorio-info-faixa{
+
+        margin-top:3px !important;
+
+        gap:3px !important;
+    }
+
+
+    .relatorio-info-faixa span{
+
+        padding:
+            2px
+            3px !important;
+
+        font-size:5.5px !important;
+    }
+
+
+    /* ======================================================
+       DESCARTE
+    ====================================================== */
+
+    .relatorio-descarte-resumo{
+
+        gap:2px !important;
+    }
+
+
+    .relatorio-legenda-executiva{
+
+        margin-top:1px !important;
+
+        padding:
+            3px
+            4px !important;
+
+        border-radius:4px !important;
+    }
+
+
+    .relatorio-legenda-executiva > strong{
+
+        margin-bottom:2px !important;
+
+        font-size:5.5px !important;
+    }
+
+
+    .relatorio-legenda-executiva li{
+
+        padding:
+            1px
+            0 !important;
+
+        font-size:5px !important;
+    }
+
+
+    /* ======================================================
+       FORNECEDORES
+    ====================================================== */
+
+    .relatorio-fornecedores-layout{
+
+        grid-template-columns:
+            minmax(0,1.5fr)
+            minmax(70px,.5fr) !important;
+
+        gap:4px !important;
     }
 
 
     .relatorio-indice-fornecedor{
 
-        min-height:95px;
+        min-height:55px !important;
+
+        padding:3px !important;
+
+        border-radius:5px !important;
+    }
+
+
+    .relatorio-indice-fornecedor span{
+
+        font-size:5px !important;
     }
 
 
     .relatorio-indice-fornecedor strong{
 
-        font-size:20px;
+        margin-top:1px !important;
+
+        font-size:13px !important;
     }
 
+
+    .relatorio-indice-fornecedor small{
+
+        margin-top:1px !important;
+
+        font-size:5px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao{
+
+        margin-top:3px !important;
+
+        padding:
+            3px
+            4px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao > strong{
+
+        margin-bottom:2px !important;
+
+        font-size:5.5px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao > div{
+
+        gap:2px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao span{
+
+        padding:
+            2px
+            3px !important;
+
+        font-size:5px !important;
+    }
+
+
+    /* ======================================================
+       RESUMO EXECUTIVO
+    ====================================================== */
+
+    .relatorio-resumo-executivo{
+
+        gap:3px !important;
+    }
+
+
+    .relatorio-destaques,
+    .relatorio-atencoes{
+
+        padding:
+            3px
+            4px !important;
+
+        border-radius:4px !important;
+    }
+
+
+    .relatorio-resumo-executivo h3{
+
+        margin:
+            0
+            0
+            2px !important;
+
+        font-size:6px !important;
+    }
+
+
+    .relatorio-resumo-executivo ul{
+
+        padding-left:10px !important;
+    }
+
+
+    .relatorio-resumo-executivo li{
+
+        margin-bottom:1px !important;
+
+        font-size:5px !important;
+
+        line-height:1.15 !important;
+    }
+
+
+    .relatorio-resumo-executivo p{
+
+        font-size:5px !important;
+    }
+
+
+    /* ======================================================
+       RODAPÉ
+    ====================================================== */
+
+    .relatorio-executivo-rodape{
+
+        padding:
+            3px
+            5px !important;
+
+        font-size:5px !important;
+    }
+
+
+    /* ======================================================
+       PÁGINA
+    ====================================================== */
 
     @page{
 
         size:A4 landscape;
 
-        margin:7mm;
+        margin:4mm;
     }
 }
+
