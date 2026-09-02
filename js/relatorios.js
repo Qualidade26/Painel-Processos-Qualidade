@@ -2290,9 +2290,11 @@ function criarGraficosRelatorio(
     }
 
 
-    criarGraficoImportacaoRelatorio(
-        atual.importacao
-    );
+  criarGraficoImportacaoRelatorio(
+    congelado.importacao,
+    atual.importacao,
+    configuracao
+);
 
 
     criarGraficoDescarteRelatorio(
@@ -2309,14 +2311,15 @@ function criarGraficosRelatorio(
         atual.retrabalho
     );
 }
-
-
 /* ==========================================================
    GRÁFICO IMPORTAÇÃO
+   HISTÓRICO CONGELADO + MOVIMENTO ATUAL
 ========================================================== */
 
 function criarGraficoImportacaoRelatorio(
-    dados
+    congelado,
+    atual,
+    configuracao
 ){
 
     const canvas =
@@ -2325,25 +2328,93 @@ function criarGraficoImportacaoRelatorio(
         );
 
 
-    if(
-        !canvas ||
-        !Array.isArray(
-            dados?.mensal
-        )
-    ){
-
+    if(!canvas){
         return;
     }
 
 
+    const mensalCongelado =
+        Array.isArray(
+            congelado?.mensal
+        )
+            ? congelado.mensal
+            : [];
+
+
+    if(!mensalCongelado.length){
+        return;
+    }
+
+
+    /* ==================================================
+       COPIA O HISTÓRICO DO FECHAMENTO
+    ================================================== */
+
     const lista =
-        dados.mensal;
+        mensalCongelado.map(
+            item => ({
+                mes:item.mes || "",
+                processos:
+                    Number(
+                        item.processos || 0
+                    )
+            })
+        );
+
+
+    /* ==================================================
+       CALCULA O MÊS POSTERIOR AO CONGELAMENTO
+    ================================================== */
+
+    const periodoAtual =
+        obterMesSeguinte(
+            configuracao.mes,
+            configuracao.ano
+        );
+
+
+    const nomeMesAtual =
+        obterNomeMes(
+            periodoAtual.mes
+        );
+
+
+    const diferencaProcessos =
+        calcularVariacao(
+            congelado?.processosAno,
+            atual?.processosAno
+        );
+
+
+    /* ==================================================
+       INSERE O MOVIMENTO ATUAL
+    ================================================== */
+
+    const itemPeriodo =
+        lista.find(
+            item =>
+                item.mes === nomeMesAtual
+        );
+
+
+    if(itemPeriodo){
+
+        itemPeriodo.processos =
+            diferencaProcessos !== null &&
+            diferencaProcessos > 0
+
+                ? diferencaProcessos
+
+                : 0;
+    }
 
 
     const labels =
         lista.map(
             item =>
-                item.mes || ""
+                abreviarMesRelatorio(
+                    item.mes
+                )
         );
 
 
@@ -2363,21 +2434,121 @@ function criarGraficoImportacaoRelatorio(
                 type:"bar",
 
                 data:{
+
                     labels,
 
                     datasets:[
                         {
                             label:"Processos",
+
                             data:valores,
+
                             backgroundColor:
                                 "#1d4eff",
-                            borderRadius:4
+
+                            borderColor:
+                                "#0f3cc9",
+
+                            borderWidth:1,
+
+                            borderRadius:4,
+
+                            _ocultarZero:true
                         }
                     ]
                 },
 
-                options:
-                    opcoesGraficoRelatorio()
+
+                options:{
+
+                    ...opcoesGraficoRelatorio(),
+
+                    plugins:{
+
+                        ...opcoesGraficoRelatorio()
+                            .plugins,
+
+                        /*
+                        Impede o plugin global do painel
+                        de escrever números fora do lugar.
+                        */
+                        valorFlutuante:false,
+
+                        legend:{
+                            display:false
+                        },
+
+                        datalabels:{
+                            display:true,
+
+                            color:"#0f2557",
+
+                            anchor:"end",
+
+                            align:"top",
+
+                            offset:1,
+
+                            formatter(valor){
+
+                                return Number(valor) > 0
+                                    ? valor
+                                    : "";
+                            },
+
+                            font:{
+                                size:8,
+                                weight:"bold"
+                            }
+                        }
+                    },
+
+
+                    scales:{
+
+                        x:{
+
+                            grid:{
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7,
+                                    weight:"600"
+                                }
+                            }
+                        },
+
+
+                        y:{
+
+                            beginAtZero:true,
+
+                            grace:"15%",
+
+                            grid:{
+
+                                color:
+                                    "rgba(15,37,87,.06)"
+                            },
+
+                            ticks:{
+
+                                precision:0,
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7
+                                }
+                            }
+                        }
+                    }
+                }
             }
         );
 
@@ -2386,7 +2557,6 @@ function criarGraficoImportacaoRelatorio(
         grafico
     );
 }
-
 
 /* ==========================================================
    GRÁFICO DESCARTE
@@ -2459,6 +2629,7 @@ function criarGraficoDescarteRelatorio(
                 },
 
                 options:{
+
                     responsive:true,
 
                     maintainAspectRatio:false,
@@ -2467,12 +2638,41 @@ function criarGraficoDescarteRelatorio(
 
                     plugins:{
 
+                        /*
+                        Desliga o plugin global
+                        que estava escrevendo números
+                        sobre a rosca.
+                        */
+                        valorFlutuante:false,
+
+
                         legend:{
                             display:false
                         },
 
+
                         datalabels:{
                             display:false
+                        },
+
+
+                        tooltip:{
+
+                            enabled:true,
+
+                            callbacks:{
+
+                                label(context){
+
+                                    return (
+                                        context.label +
+                                        ": " +
+                                        formatarMoeda(
+                                            context.raw
+                                        )
+                                    );
+                                }
+                            }
                         }
                     }
                 }
@@ -3239,7 +3439,33 @@ function obterMesSeguinte(
     };
 }
 
+/* ==========================================================
+   ABREVIAR MÊS
+========================================================== */
 
+function abreviarMesRelatorio(
+    mes
+){
+
+    const mapa = {
+
+        "Janeiro":"Jan",
+        "Fevereiro":"Fev",
+        "Março":"Mar",
+        "Abril":"Abr",
+        "Maio":"Mai",
+        "Junho":"Jun",
+        "Julho":"Jul",
+        "Agosto":"Ago",
+        "Setembro":"Set",
+        "Outubro":"Out",
+        "Novembro":"Nov",
+        "Dezembro":"Dez"
+    };
+
+
+    return mapa[mes] || mes;
+}
 /* ==========================================================
    NOME DO MÊS
 ========================================================== */
