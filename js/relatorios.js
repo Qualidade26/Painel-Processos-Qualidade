@@ -482,13 +482,12 @@ const caminhoCongelado =
     }
 }
 
-
 /* ==========================================================
-   PREVIEW
+   PREVIEW EXECUTIVO DO RELATÓRIO
 ========================================================== */
 
 function montarPreviewRelatorio(
-    dadosRelatorio,
+    dadosCongelados,
     configuracao
 ){
 
@@ -502,16 +501,49 @@ function montarPreviewRelatorio(
     }
 
 
-    const nomeMes =
+    destruirGraficosRelatorio();
+
+
+    const dadosAtuais =
+        configuracao.dadosAtuais ||
+        dadosCongelados;
+
+
+    const mensal =
+        configuracao.tipo === "mensal";
+
+
+    const nomeMesBase =
         obterNomeMes(
             configuracao.mes
         );
 
 
-    const tituloPeriodo =
-        configuracao.tipo === "mensal"
-            ? `${nomeMes} / ${configuracao.ano}`
-            : `Ano ${configuracao.ano}`;
+    const periodo =
+        mensal
+            ? obterMesSeguinte(
+                configuracao.mes,
+                configuracao.ano
+            )
+            : {
+                mes:"",
+                ano:configuracao.ano
+            };
+
+
+    const nomeMesRelatorio =
+        mensal
+            ? obterNomeMes(
+                periodo.mes
+            )
+            : "";
+
+
+    const dataAtual =
+        new Date()
+            .toLocaleDateString(
+                "pt-BR"
+            );
 
 
     preview.innerHTML = `
@@ -530,12 +562,16 @@ function montarPreviewRelatorio(
 
         <article
             id="relatorioDocumento"
-            class="relatorio-documento"
+            class="relatorio-documento relatorio-executivo"
         >
 
-            <header class="relatorio-documento-topo">
+            <!-- ==========================================
+                 CABEÇALHO
+            =========================================== -->
 
-                <div>
+            <header class="relatorio-executivo-topo">
+
+                <div class="relatorio-marca">
 
                     <strong>
                         LABOR
@@ -548,31 +584,75 @@ function montarPreviewRelatorio(
                 </div>
 
 
-                <div>
+                <div class="relatorio-executivo-titulo">
 
                     <h1>
+
                         ${
-                            configuracao.tipo ===
-                            "mensal"
-                                ? "RELATÓRIO DE FECHAMENTO SGQ"
-                                : "RELATÓRIO ANUAL SGQ"
+                            mensal
+                                ? "RELATÓRIO DE FECHAMENTO MENSAL – SGQ"
+                                : "RELATÓRIO ANUAL – SGQ"
                         }
+
                     </h1>
 
-                    <p>
-                        ${tituloPeriodo}
-                    </p>
+                    <strong class="relatorio-periodo-principal">
+
+                        ${
+                            mensal
+                                ? `${nomeMesRelatorio.toUpperCase()} / ${periodo.ano}`
+                                : configuracao.ano
+                        }
+
+                    </strong>
+
+
+                    <div class="relatorio-periodo-base">
+
+                        ${
+                            mensal
+                                ? `
+                                    <span>
+                                        Base congelada:
+                                        <strong>
+                                            ${nomeMesBase}/${configuracao.ano}
+                                        </strong>
+                                    </span>
+
+                                    <span>
+                                        Posição atual:
+                                        <strong>
+                                            ${dataAtual}
+                                        </strong>
+                                    </span>
+                                `
+                                : `
+                                    <span>
+                                        Fechamento anual:
+                                        <strong>
+                                            ${configuracao.ano}
+                                        </strong>
+                                    </span>
+                                `
+                        }
+
+                    </div>
 
                 </div>
 
             </header>
 
 
-            <div class="relatorio-corpo">
+            <!-- ==========================================
+                 CONTEÚDO
+            =========================================== -->
+
+            <div class="relatorio-executivo-corpo">
 
                 ${
-                    gerarConteudoRelatorio(
-                        dadosRelatorio,
+                    gerarConteudoExecutivo(
+                        dadosCongelados,
+                        dadosAtuais,
                         configuracao
                     )
                 }
@@ -580,111 +660,49 @@ function montarPreviewRelatorio(
             </div>
 
 
-            <footer class="relatorio-rodape">
+            <!-- ==========================================
+                 RODAPÉ
+            =========================================== -->
 
-                Painel de Processos SGQ
+            <footer class="relatorio-executivo-rodape">
+
+                <span>
+                    Dados consolidados do período selecionado.
+                </span>
+
+                <span>
+                    Relatório gerado automaticamente pelo
+                    Painel de Processos SGQ.
+                </span>
 
             </footer>
 
         </article>
     `;
+
+
+    requestAnimationFrame(
+        () => {
+
+            criarGraficosRelatorio(
+                dadosCongelados,
+                dadosAtuais,
+                configuracao
+            );
+        }
+    );
 }
 
+
 /* ==========================================================
-   CONTEÚDO POR ESCOPO
+   CONTEÚDO EXECUTIVO
 ========================================================== */
 
-function gerarConteudoRelatorio(
-    dadosCongelados,
+function gerarConteudoExecutivo(
+    congelado,
+    atual,
     configuracao
 ){
-
-    const dadosAtuais =
-        configuracao.dadosAtuais ||
-        dadosCongelados;
-
-
-    /* ==================================================
-       RELATÓRIO ANUAL
-       Não compara com data.json
-    ================================================== */
-
-    const comparar =
-        configuracao.tipo === "mensal";
-
-
-    if(
-        configuracao.escopo ===
-        "geral"
-    ){
-
-        return `
-            ${
-                gerarResumoGeral(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoImportacao(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoEsfig(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoDescarte(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoAmostras(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoRetrabalho(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoAdequacaoCaixa(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-
-            ${
-                gerarBlocoFornecedores(
-                    dadosCongelados,
-                    dadosAtuais,
-                    comparar
-                )
-            }
-        `;
-    }
-
 
     switch(
         configuracao.escopo
@@ -692,142 +710,296 @@ function gerarConteudoRelatorio(
 
         case "importacao":
 
-            return gerarBlocoImportacao(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelImportacao(congelado,atual,true)}
+            `;
 
 
         case "esfig":
 
-            return gerarBlocoEsfig(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelEsfig(congelado,atual,true)}
+            `;
 
 
         case "descarte":
 
-            return gerarBlocoDescarte(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelDescarte(congelado,atual,true)}
+            `;
 
 
         case "amostras":
 
-            return gerarBlocoAmostras(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelAmostras(congelado,atual,true)}
+            `;
 
 
         case "retrabalho":
 
-            return gerarBlocoRetrabalho(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelRetrabalho(congelado,atual,true)}
+                ${gerarPainelAdequacao(congelado,atual,true)}
+            `;
 
 
         case "fornecedores":
 
-            return gerarBlocoFornecedores(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+                ${gerarKpisExecutivos(congelado,atual)}
+                ${gerarPainelFornecedores(congelado,atual,true)}
+            `;
 
 
+        case "geral":
         default:
 
-            return gerarResumoGeral(
-                dadosCongelados,
-                dadosAtuais,
-                comparar
-            );
+            return `
+
+                ${gerarKpisExecutivos(congelado,atual)}
+
+                <div class="relatorio-grid-executivo">
+
+                    ${gerarPainelImportacao(congelado,atual)}
+
+                    ${gerarPainelDescarte(congelado,atual)}
+
+                    ${gerarPainelAmostras(congelado,atual)}
+
+                    ${gerarPainelRetrabalho(congelado,atual)}
+
+                    ${gerarPainelFornecedores(congelado,atual)}
+
+                    ${
+                        gerarResumoExecutivo(
+                            congelado,
+                            atual
+                        )
+                    }
+
+                </div>
+
+            `;
     }
 }
 
 
 /* ==========================================================
-   RESUMO GERAL
+   KPIs SUPERIORES
 ========================================================== */
 
-function gerarResumoGeral(
+function gerarKpisExecutivos(
     congelado,
-    atual,
-    comparar
+    atual
+){
+
+    const importacaoAnterior =
+        congelado.importacao || {};
+
+    const importacaoAtual =
+        atual.importacao || {};
+
+
+    const esfigAtual =
+        atual.esfig || {};
+
+
+    const descarteAnterior =
+        congelado.descarte || {};
+
+    const descarteAtual =
+        atual.descarte || {};
+
+
+    const amostrasAnterior =
+        congelado.amostras || {};
+
+    const amostrasAtual =
+        atual.amostras || {};
+
+
+    const retrabalhoAnterior =
+        congelado.retrabalho || {};
+
+    const retrabalhoAtual =
+        atual.retrabalho || {};
+
+
+    const fornecedoresAtual =
+        atual.fornecedores || {};
+
+
+    const variacaoProcessos =
+        calcularVariacao(
+            importacaoAnterior.processosAno,
+            importacaoAtual.processosAno
+        );
+
+
+    const variacaoDescarte =
+        calcularVariacao(
+            descarteAnterior.descartadoAno?.total,
+            descarteAtual.descartadoAno?.total
+        );
+
+
+    const variacaoAmostras =
+        calcularVariacao(
+            somarQuantidadeAmostras(
+                amostrasAnterior.mensal
+            ),
+            somarQuantidadeAmostras(
+                amostrasAtual.mensal
+            )
+        );
+
+
+    const variacaoRetrabalho =
+        calcularVariacao(
+            retrabalhoAnterior.totalUnidades,
+            retrabalhoAtual.totalUnidades
+        );
+
+
+    return `
+
+        <section class="relatorio-kpis-executivos">
+
+            ${
+                cardKpiExecutivo(
+                    "📦",
+                    "Importação",
+                    formatarNumero(
+                        importacaoAtual.processosAno
+                    ),
+                    textoMovimento(
+                        variacaoProcessos,
+                        "processos"
+                    )
+                )
+            }
+
+
+            ${
+                cardKpiExecutivo(
+                    "⏱",
+                    "ESFIG",
+                    formatarHoras(
+                        esfigAtual.totalHoras
+                    ),
+                    "Posição atual"
+                )
+            }
+
+
+            ${
+                cardKpiExecutivo(
+                    "🗑",
+                    "Descarte",
+                    formatarMoeda(
+                        descarteAtual.valorAtual?.total
+                    ),
+                    textoMovimentoMoeda(
+                        variacaoDescarte
+                    )
+                )
+            }
+
+
+            ${
+                cardKpiExecutivo(
+                    "📦",
+                    "Amostras",
+                    formatarNumero(
+                        somarQuantidadeAmostras(
+                            amostrasAtual.mensal
+                        )
+                    ),
+                    textoMovimento(
+                        variacaoAmostras,
+                        "no período"
+                    )
+                )
+            }
+
+
+            ${
+                cardKpiExecutivo(
+                    "🔄",
+                    "Retrabalho",
+                    formatarNumero(
+                        retrabalhoAtual.totalUnidades
+                    ),
+                    textoMovimento(
+                        variacaoRetrabalho,
+                        "unidades"
+                    )
+                )
+            }
+
+
+            ${
+                cardKpiExecutivo(
+                    "🏭",
+                    "Fornecedores",
+                    formatarNumero(
+                        fornecedoresAtual.totalfornecedores
+                    ),
+                    `Índice médio ${
+                        formatarPercentual(
+                            fornecedoresAtual.indicemedioavaliacao
+                        )
+                    }`
+                )
+            }
+
+        </section>
+    `;
+}
+
+
+/* ==========================================================
+   CARD KPI
+========================================================== */
+
+function cardKpiExecutivo(
+    icone,
+    titulo,
+    valor,
+    detalhe
 ){
 
     return `
 
-        <section class="relatorio-secao">
+        <div class="relatorio-kpi-executivo">
 
-            <h2>
-                📊 Visão Geral SGQ
-            </h2>
+            <div class="relatorio-kpi-icone">
+                ${icone}
+            </div>
 
-            <div class="relatorio-comparacao-grid">
+            <div class="relatorio-kpi-conteudo">
 
-                ${
-                    linhaComparacao(
-                        "Importação",
-                        congelado.importacao?.processosAno,
-                        atual.importacao?.processosAno,
-                        "numero",
-                        comparar
-                    )
-                }
+                <span>
+                    ${titulo}
+                </span>
 
-                ${
-                    linhaComparacao(
-                        "ESFIG - Horas",
-                        congelado.esfig?.totalHoras,
-                        atual.esfig?.totalHoras,
-                        "horas",
-                        comparar
-                    )
-                }
+                <strong>
+                    ${valor}
+                </strong>
 
-                ${
-                    linhaComparacao(
-                        "Descarte",
-                        congelado.descarte?.descartadoAno?.total,
-                        atual.descarte?.descartadoAno?.total,
-                        "moeda",
-                        comparar
-                    )
-                }
-
-                ${
-                    linhaComparacao(
-                        "Retrabalho",
-                        congelado.retrabalho?.totalUnidades,
-                        atual.retrabalho?.totalUnidades,
-                        "numero",
-                        comparar
-                    )
-                }
-
-                ${
-                    linhaComparacao(
-                        "RNC Fornecedores",
-                        congelado.fornecedores?.totalrncano,
-                        atual.fornecedores?.totalrncano,
-                        "numero",
-                        comparar
-                    )
-                }
+                <small>
+                    ${detalhe}
+                </small>
 
             </div>
 
-        </section>
+        </div>
     `;
 }
 
@@ -836,10 +1008,10 @@ function gerarResumoGeral(
    IMPORTAÇÃO
 ========================================================== */
 
-function gerarBlocoImportacao(
+function gerarPainelImportacao(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -851,53 +1023,76 @@ function gerarBlocoImportacao(
 
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                📦 Inspeção de Importação
-            </h2>
+            ${tituloPainelExecutivo(
+                "📦",
+                "Importação"
+            )}
 
-            ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Processos",
-                            anterior:anterior.processosAno,
-                            atual:corrente.processosAno,
-                            tipo:"numero"
-                        },
 
-                        {
-                            titulo:"SKUs acumulados",
-                            anterior:anterior.totalSku,
-                            atual:corrente.totalSku,
-                            tipo:"numero"
-                        },
+            <div class="relatorio-painel-duplo">
 
-                        {
-                            titulo:"Lotes",
-                            anterior:anterior.totalLotes,
-                            atual:corrente.totalLotes,
-                            tipo:"numero"
-                        },
+                <div>
 
-                        {
-                            titulo:"Laudos emitidos",
-                            anterior:anterior.laudosEmitidos,
-                            atual:corrente.laudosEmitidos,
-                            tipo:"numero"
-                        },
+                    ${
+                        gerarTabelaPeriodoAcumulado(
+                            [
+                                {
+                                    titulo:"Processos",
+                                    anterior:anterior.processosAno,
+                                    atual:corrente.processosAno,
+                                    tipo:"numero"
+                                },
 
-                        {
-                            titulo:"Horas",
-                            anterior:anterior.totalHoras,
-                            atual:corrente.totalHoras,
-                            tipo:"horas"
-                        }
-                    ],
-                    comparar
-                )
-            }
+                                {
+                                    titulo:"SKUs",
+                                    anterior:anterior.totalSku,
+                                    atual:corrente.totalSku,
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Lotes",
+                                    anterior:anterior.totalLotes,
+                                    atual:corrente.totalLotes,
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Laudos",
+                                    anterior:anterior.laudosEmitidos,
+                                    atual:corrente.laudosEmitidos,
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Horas",
+                                    anterior:anterior.totalHoras,
+                                    atual:corrente.totalHoras,
+                                    tipo:"horas"
+                                }
+                            ]
+                        )
+                    }
+
+                </div>
+
+
+                <div class="relatorio-grafico-box">
+
+                    <canvas
+                        id="relatorioGraficoImportacao"
+                    ></canvas>
+
+                </div>
+
+            </div>
 
         </section>
     `;
@@ -908,10 +1103,10 @@ function gerarBlocoImportacao(
    ESFIG
 ========================================================== */
 
-function gerarBlocoEsfig(
+function gerarPainelEsfig(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -923,74 +1118,73 @@ function gerarBlocoEsfig(
 
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                ⏱ Esfigmomanômetro
-            </h2>
-
-            ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Horas",
-                            anterior:anterior.totalHoras,
-                            atual:corrente.totalHoras,
-                            tipo:"horas"
-                        },
-
-                        {
-                            titulo:"GRU Inmetro",
-                            anterior:anterior.totalGruInmetro,
-                            atual:corrente.totalGruInmetro,
-                            tipo:"moeda"
-                        },
-
-                        {
-                            titulo:"Total aferido",
-                            anterior:
-                                anterior.resumoAfericoes
-                                    ?.totalAferido,
-
-                            atual:
-                                corrente.resumoAfericoes
-                                    ?.totalAferido,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"Total aprovado",
-                            anterior:
-                                anterior.resumoAfericoes
-                                    ?.totalAprovado,
-
-                            atual:
-                                corrente.resumoAfericoes
-                                    ?.totalAprovado,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"Total reprovado",
-                            anterior:
-                                anterior.resumoAfericoes
-                                    ?.totalReprovado,
-
-                            atual:
-                                corrente.resumoAfericoes
-                                    ?.totalReprovado,
-
-                            tipo:"numero"
-                        }
-                    ],
-                    comparar
-                )
-            }
+            ${tituloPainelExecutivo(
+                "⏱",
+                "Esfigmomanômetro"
+            )}
 
 
-            <div class="relatorio-posicao">
+            <div class="relatorio-indicadores-esfig">
+
+                ${
+                    miniIndicador(
+                        "Horas",
+                        formatarHoras(
+                            corrente.totalHoras
+                        )
+                    )
+                }
+
+                ${
+                    miniIndicador(
+                        "GRU Inmetro",
+                        formatarMoeda(
+                            corrente.totalGruInmetro
+                        )
+                    )
+                }
+
+                ${
+                    miniIndicador(
+                        "Total aferido",
+                        formatarNumero(
+                            corrente.resumoAfericoes
+                                ?.totalAferido
+                        )
+                    )
+                }
+
+                ${
+                    miniIndicador(
+                        "Aprovado",
+                        formatarNumero(
+                            corrente.resumoAfericoes
+                                ?.totalAprovado
+                        )
+                    )
+                }
+
+                ${
+                    miniIndicador(
+                        "Reprovado",
+                        formatarNumero(
+                            corrente.resumoAfericoes
+                                ?.totalReprovado
+                        )
+                    )
+                }
+
+            </div>
+
+
+            <div class="relatorio-info-faixa">
 
                 <span>
                     Última aferição:
@@ -1017,10 +1211,10 @@ function gerarBlocoEsfig(
    DESCARTE
 ========================================================== */
 
-function gerarBlocoDescarte(
+function gerarPainelDescarte(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -1030,69 +1224,86 @@ function gerarBlocoDescarte(
         atual.descarte || {};
 
 
+    const movimento =
+        calcularVariacao(
+            anterior.descartadoAno?.total,
+            corrente.descartadoAno?.total
+        );
+
+
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                🗑 Descarte
-            </h2>
+            ${tituloPainelExecutivo(
+                "🗑",
+                "Descarte"
+            )}
 
-            ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Valor atual",
-                            anterior:
-                                anterior.valorAtual?.total,
 
-                            atual:
-                                corrente.valorAtual?.total,
+            <div class="relatorio-painel-duplo">
 
-                            tipo:"moeda",
-                            subtrair:false
-                        },
+                <div class="relatorio-descarte-resumo">
 
-                        {
-                            titulo:"Total descartado no ano",
-                            anterior:
-                                anterior.descartadoAno?.total,
+                    ${
+                        miniIndicador(
+                            "Valor no período",
+                            formatarMovimentoMoeda(
+                                movimento
+                            )
+                        )
+                    }
 
-                            atual:
-                                corrente.descartadoAno?.total,
+                    ${
+                        miniIndicador(
+                            "Acumulado no ano",
+                            formatarMoeda(
+                                corrente.descartadoAno?.total
+                            )
+                        )
+                    }
 
-                            tipo:"moeda"
-                        },
+                    ${
+                        miniIndicador(
+                            "Valor atual",
+                            formatarMoeda(
+                                corrente.valorAtual?.total
+                            )
+                        )
+                    }
 
-                        {
-                            titulo:"Custo ambiental - 1º semestre",
-                            anterior:
-                                anterior.custoAmbiental
-                                    ?.totalPrimeiroSemestre,
 
-                            atual:
-                                corrente.custoAmbiental
-                                    ?.totalPrimeiroSemestre,
+                    <div class="relatorio-legenda-executiva">
 
-                            tipo:"moeda"
-                        },
+                        <strong>
+                            Principais origens
+                        </strong>
 
-                        {
-                            titulo:"Custo ambiental - 2º semestre",
-                            anterior:
-                                anterior.custoAmbiental
-                                    ?.totalSegundoSemestre,
-
-                            atual:
-                                corrente.custoAmbiental
-                                    ?.totalSegundoSemestre,
-
-                            tipo:"moeda"
+                        ${
+                            gerarListaOrigensDescarte(
+                                corrente
+                            )
                         }
-                    ],
-                    comparar
-                )
-            }
+
+                    </div>
+
+                </div>
+
+
+                <div class="relatorio-grafico-box">
+
+                    <canvas
+                        id="relatorioGraficoDescarte"
+                    ></canvas>
+
+                </div>
+
+            </div>
 
         </section>
     `;
@@ -1103,10 +1314,10 @@ function gerarBlocoDescarte(
    AMOSTRAS
 ========================================================== */
 
-function gerarBlocoAmostras(
+function gerarPainelAmostras(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -1116,46 +1327,65 @@ function gerarBlocoAmostras(
         atual.amostras || {};
 
 
-    const totalAnterior =
-        somarAmostras(
-            anterior.mensal
-        );
-
-
-    const totalAtual =
-        somarAmostras(
-            corrente.mensal
-        );
-
-
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                📦 Amostras
-            </h2>
+            ${tituloPainelExecutivo(
+                "📦",
+                "Amostras"
+            )}
 
-            ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Quantidade acumulada",
-                            anterior:totalAnterior,
-                            atual:totalAtual,
-                            tipo:"numero"
-                        },
 
-                        {
-                            titulo:"Horas",
-                            anterior:anterior.totalHoras,
-                            atual:corrente.totalHoras,
-                            tipo:"horas"
-                        }
-                    ],
-                    comparar
-                )
-            }
+            <div class="relatorio-painel-duplo">
+
+                <div>
+
+                    ${
+                        gerarTabelaPeriodoAcumulado(
+                            [
+                                {
+                                    titulo:"Quantidade",
+                                    anterior:
+                                        somarQuantidadeAmostras(
+                                            anterior.mensal
+                                        ),
+
+                                    atual:
+                                        somarQuantidadeAmostras(
+                                            corrente.mensal
+                                        ),
+
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Horas",
+                                    anterior:anterior.totalHoras,
+                                    atual:corrente.totalHoras,
+                                    tipo:"horas"
+                                }
+                            ]
+                        )
+                    }
+
+                </div>
+
+
+                <div class="relatorio-grafico-box">
+
+                    <canvas
+                        id="relatorioGraficoAmostras"
+                    ></canvas>
+
+                </div>
+
+            </div>
 
         </section>
     `;
@@ -1166,10 +1396,10 @@ function gerarBlocoAmostras(
    RETRABALHO
 ========================================================== */
 
-function gerarBlocoRetrabalho(
+function gerarPainelRetrabalho(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -1181,39 +1411,62 @@ function gerarBlocoRetrabalho(
 
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                🔄 Retrabalho
-            </h2>
+            ${tituloPainelExecutivo(
+                "🔄",
+                "Retrabalho"
+            )}
 
-            ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Processos",
-                            anterior:anterior.processos,
-                            atual:corrente.processos,
-                            tipo:"numero"
-                        },
 
-                        {
-                            titulo:"Unidades retrabalhadas",
-                            anterior:anterior.totalUnidades,
-                            atual:corrente.totalUnidades,
-                            tipo:"numero"
-                        },
+            <div class="relatorio-painel-duplo">
 
-                        {
-                            titulo:"Horas",
-                            anterior:anterior.totalHoras,
-                            atual:corrente.totalHoras,
-                            tipo:"horas"
-                        }
-                    ],
-                    comparar
-                )
-            }
+                <div>
+
+                    ${
+                        gerarTabelaPeriodoAcumulado(
+                            [
+                                {
+                                    titulo:"Processos",
+                                    anterior:anterior.processos,
+                                    atual:corrente.processos,
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Unidades",
+                                    anterior:anterior.totalUnidades,
+                                    atual:corrente.totalUnidades,
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Horas",
+                                    anterior:anterior.totalHoras,
+                                    atual:corrente.totalHoras,
+                                    tipo:"horas"
+                                }
+                            ]
+                        )
+                    }
+
+                </div>
+
+
+                <div class="relatorio-grafico-box">
+
+                    <canvas
+                        id="relatorioGraficoRetrabalho"
+                    ></canvas>
+
+                </div>
+
+            </div>
 
         </section>
     `;
@@ -1224,10 +1477,10 @@ function gerarBlocoRetrabalho(
    ADEQUAÇÃO DE CAIXA
 ========================================================== */
 
-function gerarBlocoAdequacaoCaixa(
+function gerarPainelAdequacao(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -1239,14 +1492,21 @@ function gerarBlocoAdequacaoCaixa(
 
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                📦 Adequação de Caixa
-            </h2>
+            ${tituloPainelExecutivo(
+                "📦",
+                "Adequação de Caixa"
+            )}
+
 
             ${
-                tabelaComparacao(
+                gerarTabelaPeriodoAcumulado(
                     [
                         {
                             titulo:"Ocorrências",
@@ -1279,37 +1539,8 @@ function gerarBlocoAdequacaoCaixa(
                                 corrente.totalhoras,
 
                             tipo:"horas"
-                        },
-
-                        {
-                            titulo:"Valor bom",
-                            anterior:
-                                anterior.indicadores
-                                    ?.bom?.valor,
-
-                            atual:
-                                corrente.indicadores
-                                    ?.bom?.valor,
-
-                            tipo:"moeda",
-                            subtrair:false
-                        },
-
-                        {
-                            titulo:"Valor avaria",
-                            anterior:
-                                anterior.indicadores
-                                    ?.avaria?.valor,
-
-                            atual:
-                                corrente.indicadores
-                                    ?.avaria?.valor,
-
-                            tipo:"moeda",
-                            subtrair:false
                         }
-                    ],
-                    comparar
+                    ]
                 )
             }
 
@@ -1322,10 +1553,10 @@ function gerarBlocoAdequacaoCaixa(
    FORNECEDORES
 ========================================================== */
 
-function gerarBlocoFornecedores(
+function gerarPainelFornecedores(
     congelado,
     atual,
-    comparar
+    larguraTotal = false
 ){
 
     const anterior =
@@ -1335,86 +1566,114 @@ function gerarBlocoFornecedores(
         atual.fornecedores || {};
 
 
+    const indice =
+        Number(
+            corrente.indicemedioavaliacao || 0
+        );
+
+
     return `
 
-        <section class="relatorio-secao">
+        <section
+            class="
+                relatorio-painel-executivo
+                ${larguraTotal ? "relatorio-painel-total" : ""}
+            "
+        >
 
-            <h2>
-                🏭 Fornecedores
-            </h2>
+            ${tituloPainelExecutivo(
+                "🏭",
+                "Fornecedores"
+            )}
+
+
+            <div class="relatorio-fornecedores-layout">
+
+                <div>
+
+                    ${
+                        gerarTabelaPeriodoAcumulado(
+                            [
+                                {
+                                    titulo:"Processos",
+                                    anterior:
+                                        anterior.totalprocessos,
+
+                                    atual:
+                                        corrente.totalprocessos,
+
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"RNC",
+                                    anterior:
+                                        anterior.totalrncano,
+
+                                    atual:
+                                        corrente.totalrncano,
+
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Retrabalhos",
+                                    anterior:
+                                        anterior.totalretrabalho,
+
+                                    atual:
+                                        corrente.totalretrabalho,
+
+                                    tipo:"numero"
+                                },
+
+                                {
+                                    titulo:"Ocorrências",
+                                    anterior:
+                                        anterior.indicadores
+                                            ?.ocorrencias
+                                            ?.quantidade,
+
+                                    atual:
+                                        corrente.indicadores
+                                            ?.ocorrencias
+                                            ?.quantidade,
+
+                                    tipo:"numero"
+                                }
+                            ]
+                        )
+                    }
+
+                </div>
+
+
+                <div class="relatorio-indice-fornecedor">
+
+                    <span>
+                        Índice médio
+                    </span>
+
+                    <strong>
+                        ${formatarPercentual(indice)}
+                    </strong>
+
+                    <small>
+                        ${
+                            classificacaoIndice(
+                                indice
+                            )
+                        }
+                    </small>
+
+                </div>
+
+            </div>
+
 
             ${
-                tabelaComparacao(
-                    [
-                        {
-                            titulo:"Fornecedores",
-                            anterior:
-                                anterior.totalfornecedores,
-
-                            atual:
-                                corrente.totalfornecedores,
-
-                            tipo:"numero",
-                            subtrair:false
-                        },
-
-                        {
-                            titulo:"Processos",
-                            anterior:
-                                anterior.totalprocessos,
-
-                            atual:
-                                corrente.totalprocessos,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"RNC",
-                            anterior:
-                                anterior.totalrncano,
-
-                            atual:
-                                corrente.totalrncano,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"Retrabalhos",
-                            anterior:
-                                anterior.totalretrabalho,
-
-                            atual:
-                                corrente.totalretrabalho,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"Reclamações",
-                            anterior:
-                                anterior.totalreclamacao,
-
-                            atual:
-                                corrente.totalreclamacao,
-
-                            tipo:"numero"
-                        },
-
-                        {
-                            titulo:"Índice médio",
-                            anterior:
-                                anterior.indicemedioavaliacao,
-
-                            atual:
-                                corrente.indicemedioavaliacao,
-
-                            tipo:"percentual",
-                            subtrair:false
-                        }
-                    ],
-                    comparar
+                gerarFornecedoresAtencao(
+                    corrente.avaliados
                 )
             }
 
@@ -1424,12 +1683,252 @@ function gerarBlocoFornecedores(
 
 
 /* ==========================================================
-   TABELA DE COMPARAÇÃO
+   RESUMO EXECUTIVO
 ========================================================== */
 
-function tabelaComparacao(
-    indicadores,
-    comparar = true
+function gerarResumoExecutivo(
+    congelado,
+    atual
+){
+
+    const destaques = [];
+    const atencoes = [];
+
+
+    const diffProcessos =
+        calcularVariacao(
+            congelado.importacao?.processosAno,
+            atual.importacao?.processosAno
+        );
+
+
+    const diffHorasImportacao =
+        calcularVariacao(
+            congelado.importacao?.totalHoras,
+            atual.importacao?.totalHoras
+        );
+
+
+    const diffRnc =
+        calcularVariacao(
+            congelado.fornecedores?.totalrncano,
+            atual.fornecedores?.totalrncano
+        );
+
+
+    const diffRetrabalho =
+        calcularVariacao(
+            congelado.retrabalho?.totalUnidades,
+            atual.retrabalho?.totalUnidades
+        );
+
+
+    const indiceFornecedor =
+        Number(
+            atual.fornecedores
+                ?.indicemedioavaliacao || 0
+        );
+
+
+    if(
+        numeroValido(diffProcessos) &&
+        diffProcessos > 0
+    ){
+
+        destaques.push(
+            `${formatarNumero(diffProcessos)} novo(s) processo(s) de importação no período.`
+        );
+    }
+
+
+    if(
+        numeroValido(diffHorasImportacao) &&
+        diffHorasImportacao > 0
+    ){
+
+        destaques.push(
+            `${formatarHoras(diffHorasImportacao)} dedicadas à inspeção de importação.`
+        );
+    }
+
+
+    if(
+        diffRnc === 0
+    ){
+
+        destaques.push(
+            "Sem aumento de RNC no período."
+        );
+    }
+
+
+    if(
+        diffRetrabalho === 0
+    ){
+
+        destaques.push(
+            "Sem aumento de unidades retrabalhadas."
+        );
+    }
+
+
+    if(
+        numeroValido(diffRnc) &&
+        diffRnc > 0
+    ){
+
+        atencoes.push(
+            `${formatarNumero(diffRnc)} nova(s) RNC registrada(s).`
+        );
+    }
+
+
+    if(
+        numeroValido(diffRetrabalho) &&
+        diffRetrabalho > 0
+    ){
+
+        atencoes.push(
+            `${formatarNumero(diffRetrabalho)} unidade(s) adicionadas ao retrabalho.`
+        );
+    }
+
+
+    if(
+        indiceFornecedor > 0 &&
+        indiceFornecedor < 0.90
+    ){
+
+        atencoes.push(
+            `Índice médio de fornecedores em ${formatarPercentual(indiceFornecedor)}.`
+        );
+    }
+
+
+    identificarRevisao(
+        congelado.importacao?.totalLotes,
+        atual.importacao?.totalLotes,
+        "Lotes de importação",
+        atencoes
+    );
+
+
+    identificarRevisao(
+        congelado.importacao?.laudosEmitidos,
+        atual.importacao?.laudosEmitidos,
+        "Laudos emitidos",
+        atencoes
+    );
+
+
+    return `
+
+        <section class="relatorio-painel-executivo">
+
+            ${tituloPainelExecutivo(
+                "📋",
+                "Resumo Executivo"
+            )}
+
+
+            <div class="relatorio-resumo-executivo">
+
+                <div class="relatorio-destaques">
+
+                    <h3>
+                        ✅ Destaques
+                    </h3>
+
+                    ${
+                        gerarListaResumo(
+                            destaques,
+                            "Sem destaques automáticos no período."
+                        )
+                    }
+
+                </div>
+
+
+                <div class="relatorio-atencoes">
+
+                    <h3>
+                        ⚠ Pontos de atenção
+                    </h3>
+
+                    ${
+                        gerarListaResumo(
+                            atencoes,
+                            "Nenhum ponto crítico identificado automaticamente."
+                        )
+                    }
+
+                </div>
+
+            </div>
+
+        </section>
+    `;
+}
+
+
+/* ==========================================================
+   TÍTULO DOS PAINÉIS
+========================================================== */
+
+function tituloPainelExecutivo(
+    icone,
+    titulo
+){
+
+    return `
+
+        <div class="relatorio-painel-titulo">
+
+            <span>
+                ${icone}
+            </span>
+
+            <strong>
+                ${titulo}
+            </strong>
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   MINI INDICADOR
+========================================================== */
+
+function miniIndicador(
+    titulo,
+    valor
+){
+
+    return `
+
+        <div class="relatorio-mini-indicador">
+
+            <span>
+                ${titulo}
+            </span>
+
+            <strong>
+                ${valor}
+            </strong>
+
+        </div>
+    `;
+}
+
+
+/* ==========================================================
+   TABELA PERÍODO X ACUMULADO
+========================================================== */
+
+function gerarTabelaPeriodoAcumulado(
+    indicadores
 ){
 
     const linhas =
@@ -1437,45 +1936,11 @@ function tabelaComparacao(
             .map(
                 indicador => {
 
-                    const anterior =
-                        indicador.anterior;
-
-                    const atual =
-                        indicador.atual;
-
-
-                    const subtrair =
-                        indicador.subtrair !== false;
-
-
-                    let variacao = "-";
-
-
-                    if(
-                        comparar &&
-                        subtrair &&
-                        numeroValido(anterior) &&
-                        numeroValido(atual)
-                    ){
-
-                        variacao =
-                            formatarValorRelatorio(
-                                Number(atual) -
-                                Number(anterior),
-                                indicador.tipo,
-                                true
-                            );
-                    }
-
-
-                    if(
-                        comparar &&
-                        !subtrair
-                    ){
-
-                        variacao =
-                            "Posição";
-                    }
+                    const movimento =
+                        calcularVariacao(
+                            indicador.anterior,
+                            indicador.atual
+                        );
 
 
                     return `
@@ -1488,8 +1953,8 @@ function tabelaComparacao(
 
                             <td>
                                 ${
-                                    formatarValorRelatorio(
-                                        anterior,
+                                    formatarMovimentoExecutivo(
+                                        movimento,
                                         indicador.tipo
                                     )
                                 }
@@ -1497,20 +1962,10 @@ function tabelaComparacao(
 
                             <td>
                                 ${
-                                    comparar
-                                        ? formatarValorRelatorio(
-                                            atual,
-                                            indicador.tipo
-                                        )
-                                        : "-"
-                                }
-                            </td>
-
-                            <td>
-                                ${
-                                    comparar
-                                        ? variacao
-                                        : "-"
+                                    formatarValorExecutivo(
+                                        indicador.atual,
+                                        indicador.tipo
+                                    )
                                 }
                             </td>
 
@@ -1523,9 +1978,9 @@ function tabelaComparacao(
 
     return `
 
-        <div class="relatorio-tabela-wrap">
+        <div class="relatorio-tabela-executiva-wrap">
 
-            <table class="relatorio-tabela-comparacao">
+            <table class="relatorio-tabela-executiva">
 
                 <thead>
 
@@ -1536,15 +1991,11 @@ function tabelaComparacao(
                         </th>
 
                         <th>
-                            Fechamento
+                            No período
                         </th>
 
                         <th>
-                            Atual
-                        </th>
-
-                        <th>
-                            Variação
+                            Acumulado
                         </th>
 
                     </tr>
@@ -1563,92 +2014,138 @@ function tabelaComparacao(
 
 
 /* ==========================================================
-   LINHA RESUMIDA
+   LISTA DE ORIGENS DO DESCARTE
 ========================================================== */
 
-function linhaComparacao(
-    titulo,
-    anterior,
-    atual,
-    tipo,
-    comparar
+function gerarListaOrigensDescarte(
+    descarte
 ){
 
-    let variacao =
-        "-";
+    const lista =
+        obterOrigensDescarte(
+            descarte
+        )
+        .slice(0,3);
 
 
-    if(
-        comparar &&
-        numeroValido(anterior) &&
-        numeroValido(atual)
-    ){
+    if(!lista.length){
 
-        variacao =
-            formatarValorRelatorio(
-                Number(atual) -
-                Number(anterior),
-                tipo,
-                true
-            );
+        return `
+            <span class="relatorio-sem-dados">
+                Sem dados de origem.
+            </span>
+        `;
     }
 
 
     return `
 
-        <div class="relatorio-comparacao-card">
+        <ul>
 
-            <span class="relatorio-comparacao-titulo">
-                ${titulo}
-            </span>
+            ${
+                lista
+                    .map(
+                        item => `
+
+                            <li>
+
+                                <span>
+                                    ${item.nome}
+                                </span>
+
+                                <strong>
+                                    ${
+                                        formatarMoeda(
+                                            item.valor
+                                        )
+                                    }
+                                </strong>
+
+                            </li>
+                        `
+                    )
+                    .join("")
+            }
+
+        </ul>
+    `;
+}
+
+
+/* ==========================================================
+   FORNECEDORES EM ATENÇÃO
+========================================================== */
+
+function gerarFornecedoresAtencao(
+    lista
+){
+
+    if(
+        !Array.isArray(lista)
+    ){
+
+        return "";
+    }
+
+
+    const fornecedores =
+        lista
+            .filter(
+                item =>
+                    Number(
+                        item.indiceavaliacao || 0
+                    ) > 0
+            )
+            .sort(
+                (a,b) =>
+                    Number(
+                        a.indiceavaliacao || 0
+                    ) -
+                    Number(
+                        b.indiceavaliacao || 0
+                    )
+            )
+            .slice(0,3);
+
+
+    if(!fornecedores.length){
+
+        return "";
+    }
+
+
+    return `
+
+        <div class="relatorio-fornecedores-atencao">
+
+            <strong>
+                Fornecedores que exigem acompanhamento
+            </strong>
 
             <div>
 
-                <small>
-                    Fechamento
-                </small>
+                ${
+                    fornecedores
+                        .map(
+                            item => `
 
-                <strong>
-                    ${
-                        formatarValorRelatorio(
-                            anterior,
-                            tipo
+                                <span>
+
+                                    ${item.fabricante}
+
+                                    <b>
+                                        ${
+                                            formatarPercentual(
+                                                item.indiceavaliacao
+                                            )
+                                        }
+                                    </b>
+
+                                </span>
+                            `
                         )
-                    }
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <small>
-                    Atual
-                </small>
-
-                <strong>
-                    ${
-                        comparar
-                            ? formatarValorRelatorio(
-                                atual,
-                                tipo
-                            )
-                            : "-"
-                    }
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <small>
-                    Variação
-                </small>
-
-                <strong>
-                    ${variacao}
-                </strong>
+                        .join("")
+                }
 
             </div>
 
@@ -1658,172 +2155,636 @@ function linhaComparacao(
 
 
 /* ==========================================================
-   FORMATAÇÃO
+   RESUMO - LISTAS
 ========================================================== */
 
-function formatarValorRelatorio(
-    valor,
-    tipo = "numero",
-    mostrarSinal = false
+function gerarListaResumo(
+    lista,
+    vazio
 ){
 
-    if(
-        valor === undefined ||
-        valor === null ||
-        valor === ""
-    ){
+    if(!lista.length){
 
-        return "-";
+        return `
+            <p>
+                ${vazio}
+            </p>
+        `;
     }
 
 
-    if(
-        tipo === "moeda"
-    ){
+    return `
 
-        const numero =
-            Number(valor);
+        <ul>
 
+            ${
+                lista
+                    .map(
+                        item => `
+                            <li>
+                                ${item}
+                            </li>
+                        `
+                    )
+                    .join("")
+            }
 
-        if(
-            !Number.isFinite(numero)
-        ){
-
-            return "-";
-        }
-
-
-        const sinal =
-            mostrarSinal &&
-            numero > 0
-                ? "+"
-                : "";
-
-
-        return (
-            sinal +
-            numero.toLocaleString(
-                "pt-BR",
-                {
-                    style:"currency",
-                    currency:"BRL"
-                }
-            )
-        );
-    }
-
-
-    if(
-        tipo === "horas"
-    ){
-
-        const numero =
-            Number(valor);
-
-
-        if(
-            !Number.isFinite(numero)
-        ){
-
-            return "-";
-        }
-
-
-        const sinal =
-            mostrarSinal &&
-            numero > 0
-                ? "+"
-                : "";
-
-
-        return (
-            sinal +
-            numero.toLocaleString(
-                "pt-BR",
-                {
-                    minimumFractionDigits:0,
-                    maximumFractionDigits:2
-                }
-            ) +
-            " h"
-        );
-    }
-
-
-    if(
-        tipo === "percentual"
-    ){
-
-        const numero =
-            Number(valor);
-
-
-        if(
-            !Number.isFinite(numero)
-        ){
-
-            return "-";
-        }
-
-
-        return (
-            numero * 100
-        )
-            .toLocaleString(
-                "pt-BR",
-                {
-                    maximumFractionDigits:1
-                }
-            ) +
-            "%";
-    }
-
-
-    if(
-        numeroValido(valor)
-    ){
-
-        const numero =
-            Number(valor);
-
-
-        const sinal =
-            mostrarSinal &&
-            numero > 0
-                ? "+"
-                : "";
-
-
-        return (
-            sinal +
-            numero.toLocaleString(
-                "pt-BR",
-                {
-                    maximumFractionDigits:2
-                }
-            )
-        );
-    }
-
-
-    return String(valor);
+        </ul>
+    `;
 }
 
 
 /* ==========================================================
-   NÚMERO VÁLIDO
+   IDENTIFICAR REVISÃO DE BASE
 ========================================================== */
 
-function numeroValido(valor){
+function identificarRevisao(
+    anterior,
+    atual,
+    titulo,
+    lista
+){
 
-    return (
-        valor !== null &&
-        valor !== undefined &&
-        valor !== "" &&
-        Number.isFinite(
-            Number(valor)
+    if(
+        !numeroValido(anterior) ||
+        !numeroValido(atual)
+    ){
+
+        return;
+    }
+
+
+    const diferenca =
+        Number(atual) -
+        Number(anterior);
+
+
+    if(diferenca < 0){
+
+        lista.push(
+            `${titulo}: revisão de base identificada (${formatarNumero(diferenca)}).`
+        );
+    }
+}
+
+
+/* ==========================================================
+   CRIAÇÃO DOS GRÁFICOS
+========================================================== */
+
+window.graficosRelatorio =
+    window.graficosRelatorio || [];
+
+
+function destruirGraficosRelatorio(){
+
+    if(
+        !Array.isArray(
+            window.graficosRelatorio
         )
+    ){
+
+        window.graficosRelatorio = [];
+        return;
+    }
+
+
+    window.graficosRelatorio
+        .forEach(
+            grafico => {
+
+                try{
+
+                    grafico.destroy();
+
+                }catch(erro){
+
+                    console.warn(
+                        "Não foi possível destruir gráfico do relatório.",
+                        erro
+                    );
+                }
+            }
+        );
+
+
+    window.graficosRelatorio = [];
+}
+
+
+/* ==========================================================
+   INICIALIZAR GRÁFICOS
+========================================================== */
+
+function criarGraficosRelatorio(
+    congelado,
+    atual,
+    configuracao
+){
+
+    if(
+        typeof Chart === "undefined"
+    ){
+
+        return;
+    }
+
+
+    criarGraficoImportacaoRelatorio(
+        atual.importacao
     );
+
+
+    criarGraficoDescarteRelatorio(
+        atual.descarte
+    );
+
+
+    criarGraficoAmostrasRelatorio(
+        atual.amostras
+    );
+
+
+    criarGraficoRetrabalhoRelatorio(
+        atual.retrabalho
+    );
+}
+
+
+/* ==========================================================
+   GRÁFICO IMPORTAÇÃO
+========================================================== */
+
+function criarGraficoImportacaoRelatorio(
+    dados
+){
+
+    const canvas =
+        document.getElementById(
+            "relatorioGraficoImportacao"
+        );
+
+
+    if(
+        !canvas ||
+        !Array.isArray(
+            dados?.mensal
+        )
+    ){
+
+        return;
+    }
+
+
+    const lista =
+        dados.mensal;
+
+
+    const labels =
+        lista.map(
+            item =>
+                item.mes || ""
+        );
+
+
+    const valores =
+        lista.map(
+            item =>
+                Number(
+                    item.processos || 0
+                )
+        );
+
+
+    const grafico =
+        new Chart(
+            canvas,
+            {
+                type:"bar",
+
+                data:{
+                    labels,
+
+                    datasets:[
+                        {
+                            label:"Processos",
+                            data:valores,
+                            backgroundColor:
+                                "#1d4eff",
+                            borderRadius:4
+                        }
+                    ]
+                },
+
+                options:
+                    opcoesGraficoRelatorio()
+            }
+        );
+
+
+    window.graficosRelatorio.push(
+        grafico
+    );
+}
+
+
+/* ==========================================================
+   GRÁFICO DESCARTE
+========================================================== */
+
+function criarGraficoDescarteRelatorio(
+    dados
+){
+
+    const canvas =
+        document.getElementById(
+            "relatorioGraficoDescarte"
+        );
+
+
+    if(!canvas){
+        return;
+    }
+
+
+    const lista =
+        obterOrigensDescarte(
+            dados
+        )
+        .slice(0,5);
+
+
+    if(!lista.length){
+        return;
+    }
+
+
+    const grafico =
+        new Chart(
+            canvas,
+            {
+                type:"doughnut",
+
+                data:{
+
+                    labels:
+                        lista.map(
+                            item =>
+                                item.nome
+                        ),
+
+                    datasets:[
+                        {
+                            data:
+                                lista.map(
+                                    item =>
+                                        Number(
+                                            item.valor || 0
+                                        )
+                                ),
+
+                            backgroundColor:[
+                                "#1d4eff",
+                                "#2563eb",
+                                "#3b82f6",
+                                "#60a5fa",
+                                "#93c5fd"
+                            ],
+
+                            borderWidth:1,
+
+                            borderColor:"#ffffff"
+                        }
+                    ]
+                },
+
+                options:{
+                    responsive:true,
+
+                    maintainAspectRatio:false,
+
+                    cutout:"62%",
+
+                    plugins:{
+
+                        legend:{
+                            display:false
+                        },
+
+                        datalabels:{
+                            display:false
+                        }
+                    }
+                }
+            }
+        );
+
+
+    window.graficosRelatorio.push(
+        grafico
+    );
+}
+
+
+/* ==========================================================
+   GRÁFICO AMOSTRAS
+========================================================== */
+
+function criarGraficoAmostrasRelatorio(
+    dados
+){
+
+    const canvas =
+        document.getElementById(
+            "relatorioGraficoAmostras"
+        );
+
+
+    if(
+        !canvas ||
+        !Array.isArray(
+            dados?.mensal
+        )
+    ){
+
+        return;
+    }
+
+
+    const labels =
+        dados.mensal.map(
+            item =>
+                item.mes || ""
+        );
+
+
+    const valores =
+        dados.mensal.map(
+            item =>
+                obterQuantidadeAmostra(
+                    item
+                )
+        );
+
+
+    const grafico =
+        new Chart(
+            canvas,
+            {
+                type:"bar",
+
+                data:{
+                    labels,
+
+                    datasets:[
+                        {
+                            label:"Amostras",
+                            data:valores,
+                            backgroundColor:
+                                "#3b82f6",
+                            borderRadius:4
+                        }
+                    ]
+                },
+
+                options:
+                    opcoesGraficoRelatorio()
+            }
+        );
+
+
+    window.graficosRelatorio.push(
+        grafico
+    );
+}
+
+
+/* ==========================================================
+   GRÁFICO RETRABALHO
+========================================================== */
+
+function criarGraficoRetrabalhoRelatorio(
+    dados
+){
+
+    const canvas =
+        document.getElementById(
+            "relatorioGraficoRetrabalho"
+        );
+
+
+    if(
+        !canvas ||
+        !Array.isArray(
+            dados?.fabricantes
+        )
+    ){
+
+        return;
+    }
+
+
+    const lista =
+        dados.fabricantes
+
+            .filter(
+                item =>
+                    Number(
+                        item.quantidade || 0
+                    ) > 0
+            )
+
+            .sort(
+                (a,b) =>
+                    Number(
+                        b.quantidade || 0
+                    ) -
+                    Number(
+                        a.quantidade || 0
+                    )
+            )
+
+            .slice(0,4);
+
+
+    if(!lista.length){
+        return;
+    }
+
+
+    const grafico =
+        new Chart(
+            canvas,
+            {
+                type:"bar",
+
+                data:{
+
+                    labels:
+                        lista.map(
+                            item =>
+                                item.fabricante
+                        ),
+
+                    datasets:[
+                        {
+                            label:"Unidades",
+
+                            data:
+                                lista.map(
+                                    item =>
+                                        Number(
+                                            item.quantidade || 0
+                                        )
+                                ),
+
+                            backgroundColor:
+                                "#2563eb",
+
+                            borderRadius:4
+                        }
+                    ]
+                },
+
+                options:{
+                    ...opcoesGraficoRelatorio(),
+
+                    indexAxis:"y"
+                }
+            }
+        );
+
+
+    window.graficosRelatorio.push(
+        grafico
+    );
+}
+
+
+/* ==========================================================
+   OPÇÕES PADRÃO DOS GRÁFICOS
+========================================================== */
+
+function opcoesGraficoRelatorio(){
+
+    return {
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        animation:false,
+
+        plugins:{
+
+            legend:{
+                display:false
+            },
+
+            datalabels:{
+                display:false
+            },
+
+            tooltip:{
+                enabled:true
+            }
+        },
+
+        scales:{
+
+            x:{
+
+                beginAtZero:true,
+
+                grid:{
+                    display:false
+                },
+
+                ticks:{
+                    font:{
+                        size:8
+                    }
+                }
+            },
+
+            y:{
+
+                beginAtZero:true,
+
+                grid:{
+                    color:
+                        "rgba(15,37,87,.06)"
+                },
+
+                ticks:{
+                    font:{
+                        size:8
+                    }
+                }
+            }
+        }
+    };
+}
+
+
+/* ==========================================================
+   ORIGENS DO DESCARTE
+========================================================== */
+
+function obterOrigensDescarte(
+    dados
+){
+
+    const possibilidades = [
+
+        dados?.valorAtual?.origens,
+
+        dados?.origensAtual,
+
+        dados?.descartadoAno?.origens,
+
+        dados?.origensAcumulado
+
+    ];
+
+
+    const lista =
+        possibilidades.find(
+            item =>
+                Array.isArray(item)
+        ) || [];
+
+
+    return lista
+
+        .map(
+            item => ({
+
+                nome:
+                    item.nome ||
+                    item.origem ||
+                    item.descricao ||
+                    "Origem",
+
+                valor:
+                    Number(
+                        item.valor ||
+                        item.total ||
+                        0
+                    )
+            })
+        )
+
+        .filter(
+            item =>
+                item.valor > 0
+        )
+
+        .sort(
+            (a,b) =>
+                b.valor -
+                a.valor
+        );
 }
 
 
@@ -1831,7 +2792,9 @@ function numeroValido(valor){
    SOMAR AMOSTRAS
 ========================================================== */
 
-function somarAmostras(lista){
+function somarQuantidadeAmostras(
+    lista
+){
 
     if(
         !Array.isArray(lista)
@@ -1848,136 +2811,432 @@ function somarAmostras(lista){
         ) =>
 
             soma +
-            Number(
-                item.valor || 0
+            obterQuantidadeAmostra(
+                item
             ),
 
         0
     );
 }
-/* ==========================================================
-   CARD
-========================================================== */
 
-function cardRelatorio(
-    titulo,
-    valor,
-    sufixo = "",
-    moeda = false
+
+function obterQuantidadeAmostra(
+    item
 ){
 
-    let valorExibido = "-";
+    return Number(
 
+        item?.quantidade ??
+        item?.valor ??
+        item?.total ??
+        item?.amostras ??
+        0
 
-    if(
-        valor !== undefined &&
-        valor !== null &&
-        valor !== ""
-    ){
-
-        if(
-            moeda &&
-            !isNaN(Number(valor))
-        ){
-
-            valorExibido =
-                Number(valor)
-                    .toLocaleString(
-                        "pt-BR",
-                        {
-                            style:"currency",
-                            currency:"BRL"
-                        }
-                    );
-
-        }else if(
-            typeof valor === "number"
-        ){
-
-            valorExibido =
-                valor.toLocaleString(
-                    "pt-BR",
-                    {
-                        maximumFractionDigits:2
-                    }
-                ) + sufixo;
-
-        }else{
-
-            valorExibido =
-                `${valor}${sufixo}`;
-        }
-    }
-
-
-    return `
-
-        <div class="relatorio-card">
-
-            <span>
-                ${titulo}
-            </span>
-
-            <strong>
-                ${valorExibido}
-            </strong>
-
-        </div>
-    `;
+    );
 }
 
 
 /* ==========================================================
-   BUSCA SEGURA
+   VARIAÇÃO
 ========================================================== */
 
-function extrairValor(
-    objeto,
-    caminhos
+function calcularVariacao(
+    anterior,
+    atual
 ){
 
-    for(
-        const caminho of caminhos
+    if(
+        !numeroValido(anterior) ||
+        !numeroValido(atual)
     ){
 
-        const partes =
-            caminho.split(".");
-
-        let atual =
-            objeto;
-
-
-        for(
-            const parte of partes
-        ){
-
-            if(
-                atual === null ||
-                atual === undefined
-            ){
-
-                atual =
-                    undefined;
-
-                break;
-            }
-
-            atual =
-                atual[parte];
-        }
-
-
-        if(
-            atual !== undefined &&
-            atual !== null
-        ){
-
-            return atual;
-        }
+        return null;
     }
 
 
-    return null;
+    return (
+        Number(atual) -
+        Number(anterior)
+    );
+}
+
+
+/* ==========================================================
+   MOVIMENTO EXECUTIVO
+========================================================== */
+
+function formatarMovimentoExecutivo(
+    valor,
+    tipo
+){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "-";
+    }
+
+
+    if(valor < 0){
+
+        return `
+            <span class="relatorio-revisao">
+                Revisão
+            </span>
+        `;
+    }
+
+
+    if(tipo === "moeda"){
+
+        return formatarMoeda(
+            valor
+        );
+    }
+
+
+    if(tipo === "horas"){
+
+        return formatarHoras(
+            valor
+        );
+    }
+
+
+    return formatarNumero(
+        valor
+    );
+}
+
+
+/* ==========================================================
+   VALOR EXECUTIVO
+========================================================== */
+
+function formatarValorExecutivo(
+    valor,
+    tipo
+){
+
+    if(tipo === "moeda"){
+
+        return formatarMoeda(
+            valor
+        );
+    }
+
+
+    if(tipo === "horas"){
+
+        return formatarHoras(
+            valor
+        );
+    }
+
+
+    if(tipo === "percentual"){
+
+        return formatarPercentual(
+            valor
+        );
+    }
+
+
+    return formatarNumero(
+        valor
+    );
+}
+
+
+/* ==========================================================
+   FORMATAÇÕES
+========================================================== */
+
+function formatarNumero(
+    valor
+){
+
+    const numero =
+        Number(valor);
+
+
+    if(
+        !Number.isFinite(numero)
+    ){
+
+        return "-";
+    }
+
+
+    return numero
+        .toLocaleString(
+            "pt-BR",
+            {
+                maximumFractionDigits:2
+            }
+        );
+}
+
+
+function formatarHoras(
+    valor
+){
+
+    const numero =
+        Number(valor);
+
+
+    if(
+        !Number.isFinite(numero)
+    ){
+
+        return "-";
+    }
+
+
+    return (
+        numero
+            .toLocaleString(
+                "pt-BR",
+                {
+                    maximumFractionDigits:2
+                }
+            ) +
+        " h"
+    );
+}
+
+
+function formatarMoeda(
+    valor
+){
+
+    const numero =
+        Number(valor);
+
+
+    if(
+        !Number.isFinite(numero)
+    ){
+
+        return "-";
+    }
+
+
+    return numero
+        .toLocaleString(
+            "pt-BR",
+            {
+                style:"currency",
+                currency:"BRL"
+            }
+        );
+}
+
+
+function formatarPercentual(
+    valor
+){
+
+    const numero =
+        Number(valor);
+
+
+    if(
+        !Number.isFinite(numero)
+    ){
+
+        return "-";
+    }
+
+
+    return (
+        numero * 100
+    )
+        .toLocaleString(
+            "pt-BR",
+            {
+                maximumFractionDigits:1
+            }
+        ) +
+        "%";
+}
+
+
+/* ==========================================================
+   TEXTO DOS KPIs
+========================================================== */
+
+function textoMovimento(
+    valor,
+    complemento = ""
+){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "Sem comparação";
+    }
+
+
+    if(valor < 0){
+
+        return "Revisão de base";
+    }
+
+
+    if(valor === 0){
+
+        return "Sem alteração";
+    }
+
+
+    return `+${formatarNumero(valor)} ${complemento}`;
+}
+
+
+function textoMovimentoMoeda(
+    valor
+){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "Sem comparação";
+    }
+
+
+    if(valor < 0){
+
+        return "Revisão de base";
+    }
+
+
+    if(valor === 0){
+
+        return "Sem alteração";
+    }
+
+
+    return `+${formatarMoeda(valor)} no período`;
+}
+
+
+function formatarMovimentoMoeda(
+    valor
+){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "-";
+    }
+
+
+    if(valor < 0){
+
+        return "Revisão de base";
+    }
+
+
+    return formatarMoeda(
+        valor
+    );
+}
+
+
+/* ==========================================================
+   CLASSIFICAÇÃO DO ÍNDICE
+========================================================== */
+
+function classificacaoIndice(
+    indice
+){
+
+    const percentual =
+        Number(indice) * 100;
+
+
+    if(!Number.isFinite(percentual)){
+
+        return "-";
+    }
+
+
+    if(percentual >= 95){
+
+        return "Excelente";
+    }
+
+
+    if(percentual >= 90){
+
+        return "Muito bom";
+    }
+
+
+    if(percentual >= 80){
+
+        return "Atenção";
+    }
+
+
+    if(percentual >= 70){
+
+        return "Ruim";
+    }
+
+
+    return "Crítico";
+}
+
+
+/* ==========================================================
+   MÊS SEGUINTE
+========================================================== */
+
+function obterMesSeguinte(
+    mes,
+    ano
+){
+
+    let numeroMes =
+        Number(mes);
+
+    let numeroAno =
+        Number(ano);
+
+
+    numeroMes++;
+
+
+    if(numeroMes > 12){
+
+        numeroMes = 1;
+        numeroAno++;
+    }
+
+
+    return {
+
+        mes:
+            String(numeroMes)
+                .padStart(
+                    2,
+                    "0"
+                ),
+
+        ano:
+            String(numeroAno)
+    };
 }
 
 
@@ -1985,7 +3244,9 @@ function extrairValor(
    NOME DO MÊS
 ========================================================== */
 
-function obterNomeMes(mes){
+function obterNomeMes(
+    mes
+){
 
     const meses = {
 
@@ -2010,15 +3271,42 @@ function obterNomeMes(mes){
 
 
 /* ==========================================================
+   NÚMERO VÁLIDO
+========================================================== */
+
+function numeroValido(
+    valor
+){
+
+    return (
+
+        valor !== null &&
+
+        valor !== undefined &&
+
+        valor !== "" &&
+
+        Number.isFinite(
+            Number(valor)
+        )
+    );
+}
+
+
+/* ==========================================================
    LIMPAR PREVIEW
 ========================================================== */
 
 function limparPreviewRelatorio(){
 
+    destruirGraficosRelatorio();
+
+
     const preview =
         document.getElementById(
             "relatorioPreview"
         );
+
 
     const aviso =
         document.getElementById(
@@ -2042,3 +3330,4 @@ function limparPreviewRelatorio(){
         `;
     }
 }
+
