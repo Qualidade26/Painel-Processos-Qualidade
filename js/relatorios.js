@@ -2195,7 +2195,7 @@ function gerarListaResumo(
 
 
 /* ==========================================================
-   IDENTIFICAR REVISÃO DE BASE
+   IDENTIFICAR AJUSTE DE BASE
 ========================================================== */
 
 function identificarRevisao(
@@ -2222,12 +2222,12 @@ function identificarRevisao(
     if(diferenca < 0){
 
         lista.push(
-            `${titulo}: revisão de base identificada (${formatarNumero(diferenca)}).`
+            `${titulo}: ajuste de ${formatarNumero(
+                Math.abs(diferenca)
+            )} registro(s) na posição acumulada.`
         );
     }
 }
-
-
 /* ==========================================================
    CRIAÇÃO DOS GRÁFICOS
 ========================================================== */
