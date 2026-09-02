@@ -3079,15 +3079,25 @@ function formatarMovimentoExecutivo(
     }
 
 
+    /* ======================================================
+       VALOR NEGATIVO
+       Não trata automaticamente como erro.
+       Exibe apenas a posição de ajuste.
+    ====================================================== */
+
     if(valor < 0){
 
         return `
-            <span class="relatorio-revisao">
-                Revisão
+            <span class="relatorio-ajuste">
+                Ajuste
             </span>
         `;
     }
 
+
+    /* ======================================================
+       MOEDA
+    ====================================================== */
 
     if(tipo === "moeda"){
 
@@ -3097,6 +3107,10 @@ function formatarMovimentoExecutivo(
     }
 
 
+    /* ======================================================
+       HORAS
+    ====================================================== */
+
     if(tipo === "horas"){
 
         return formatarHoras(
@@ -3105,12 +3119,14 @@ function formatarMovimentoExecutivo(
     }
 
 
+    /* ======================================================
+       NÚMERO
+    ====================================================== */
+
     return formatarNumero(
         valor
     );
 }
-
-
 /* ==========================================================
    VALOR EXECUTIVO
 ========================================================== */
