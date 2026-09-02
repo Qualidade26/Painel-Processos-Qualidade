@@ -3301,7 +3301,7 @@ function textoMovimento(
 
     if(valor < 0){
 
-        return "Revisão de base";
+        return "Ajuste de base";
     }
 
 
@@ -3330,7 +3330,7 @@ function textoMovimentoMoeda(
 
     if(valor < 0){
 
-        return "Revisão de base";
+        return "Ajuste de base";
     }
 
 
@@ -3359,7 +3359,7 @@ function formatarMovimentoMoeda(
 
     if(valor < 0){
 
-        return "Revisão de base";
+        return "Ajuste de base";
     }
 
 
@@ -3367,7 +3367,6 @@ function formatarMovimentoMoeda(
         valor
     );
 }
-
 
 /* ==========================================================
    CLASSIFICAÇÃO DO ÍNDICE
