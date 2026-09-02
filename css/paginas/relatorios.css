@@ -442,139 +442,199 @@
         #f5f8ff;
 }
 
-
 /* ==========================================================
-   DOCUMENTO
+   DOCUMENTO EXECUTIVO
 ========================================================== */
 
 .relatorio-documento{
 
     width:100%;
-
-    max-width:1120px;
+    max-width:1180px;
 
     margin:
         0
         auto;
 
-    overflow:hidden;
+    background:#ffffff;
 
     border:
         1px solid
-        var(--cor-borda);
+        #b8d1ff;
 
-    border-radius:
-        var(--raio-card);
+    border-radius:12px;
 
-    background:#ffffff;
+    overflow:hidden;
 
     box-shadow:
-        var(--sombra-card);
+        0
+        5px
+        16px
+        rgba(15,37,87,.08);
+}
+
+
+.relatorio-executivo{
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:#0f1f4d;
 }
 
 
 /* ==========================================================
-   TOPO DO DOCUMENTO
+   CABEÇALHO DO RELATÓRIO
 ========================================================== */
 
-.relatorio-documento-topo{
+.relatorio-executivo-topo{
+
+    min-height:92px;
 
     display:grid;
 
     grid-template-columns:
-        180px
-        1fr;
+        190px
+        1fr
+        190px;
 
     align-items:center;
 
     gap:12px;
 
     padding:
-        12px
-        16px;
-
-    border-bottom:
-        2px solid
-        var(--cor-primaria);
+        14px
+        18px;
 
     background:
         linear-gradient(
             180deg,
             #ffffff,
-            #f7faff
+            #f4f8ff
         );
+
+    border-bottom:
+        3px solid
+        #1d4eff;
 }
 
 
-.relatorio-documento-topo > div:first-child{
+.relatorio-marca{
 
     display:flex;
     flex-direction:column;
+
+    justify-content:center;
 
     line-height:1;
 }
 
 
-.relatorio-documento-topo > div:first-child strong{
+.relatorio-marca strong{
 
-    color:
-        var(--cor-primaria-escura);
+    color:#0f3cc9;
 
-    font-size:20px;
+    font-size:25px;
 
     font-weight:900;
 
-    letter-spacing:.4px;
+    letter-spacing:.5px;
 }
 
 
-.relatorio-documento-topo > div:first-child span{
+.relatorio-marca span{
 
-    margin-top:3px;
+    margin-top:5px;
 
-    color:
-        var(--cor-texto-secundario);
+    color:#5c6c96;
 
     font-size:9px;
 
     font-weight:800;
 
-    letter-spacing:1.1px;
+    letter-spacing:1.4px;
 }
 
 
-.relatorio-documento-topo > div:last-child{
+.relatorio-executivo-titulo{
+
+    grid-column:2;
 
     text-align:center;
 }
 
 
-.relatorio-documento-topo h1{
+.relatorio-executivo-titulo h1{
 
     margin:0;
 
-    color:
-        var(--cor-primaria-escura);
+    color:#0f3cc9;
 
-    font-size:16px;
+    font-size:17px;
+
+    font-weight:900;
+
+    line-height:1.15;
+}
+
+
+.relatorio-periodo-principal{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#1d4eff;
+
+    font-size:18px;
 
     font-weight:900;
 }
 
 
-.relatorio-documento-topo p{
+.relatorio-periodo-base{
 
-    margin:
-        3px
-        0
-        0;
+    margin-top:7px;
 
-    color:
-        var(--cor-texto-secundario);
+    display:flex;
 
-    font-size:11px;
+    align-items:center;
+    justify-content:center;
+
+    gap:16px;
+
+    flex-wrap:wrap;
+}
+
+
+.relatorio-periodo-base span{
+
+    padding:
+        4px
+        8px;
+
+    border:
+        1px solid
+        rgba(29,78,255,.14);
+
+    border-radius:6px;
+
+    background:#ffffff;
+
+    color:#5c6c96;
+
+    font-size:9px;
 
     font-weight:700;
+}
+
+
+.relatorio-periodo-base strong{
+
+    color:#0f3cc9;
+
+    font-weight:900;
 }
 
 
@@ -582,7 +642,7 @@
    CORPO
 ========================================================== */
 
-.relatorio-corpo{
+.relatorio-executivo-corpo{
 
     display:flex;
     flex-direction:column;
@@ -590,107 +650,111 @@
     gap:10px;
 
     padding:12px;
+
+    background:#f7faff;
 }
 
 
 /* ==========================================================
-   SEÇÃO
+   KPIs EXECUTIVOS
 ========================================================== */
 
-.relatorio-secao{
-
-    break-inside:avoid;
-
-    page-break-inside:avoid;
-
-    padding:10px;
-
-    border:
-        1px solid
-        var(--cor-borda);
-
-    border-radius:10px;
-
-    background:
-        #ffffff;
-}
-
-
-.relatorio-secao h2{
-
-    margin:
-        0
-        0
-        8px;
-
-    padding-bottom:6px;
-
-    border-bottom:
-        1px solid
-        var(--cor-borda);
-
-    color:
-        var(--cor-primaria-escura);
-
-    font-size:13px;
-
-    font-weight:900;
-}
-
-
-/* ==========================================================
-   CARDS DO RELATÓRIO
-========================================================== */
-
-.relatorio-cards{
+.relatorio-kpis-executivos{
 
     display:grid;
 
     grid-template-columns:
         repeat(
-            5,
+            6,
             minmax(0,1fr)
         );
 
-    gap:7px;
+    gap:8px;
 }
 
 
-.relatorio-card{
+.relatorio-kpi-executivo{
 
     min-width:0;
 
+    min-height:78px;
+
+    display:grid;
+
+    grid-template-columns:
+        40px
+        1fr;
+
+    align-items:center;
+
+    gap:7px;
+
     padding:
-        8px
-        9px;
+        9px
+        10px;
 
     border:
         1px solid
-        rgba(29,78,255,.15);
+        #b8d1ff;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eef5ff
+        );
+
+    box-shadow:
+        0
+        2px
+        6px
+        rgba(15,37,87,.05);
+}
+
+
+.relatorio-kpi-icone{
+
+    width:36px;
+    height:36px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
 
     border-radius:9px;
 
     background:
         linear-gradient(
             145deg,
-            #ffffff,
-            #f5f8ff
+            #e6efff,
+            #dce8ff
         );
 
-    text-align:center;
+    font-size:18px;
 }
 
 
-.relatorio-card span{
+.relatorio-kpi-conteudo{
 
-    display:block;
+    min-width:0;
 
-    color:
-        var(--cor-texto-secundario);
+    display:flex;
+    flex-direction:column;
 
-    font-size:9px;
+    gap:2px;
+}
 
-    font-weight:800;
+
+.relatorio-kpi-conteudo span{
+
+    color:#5c6c96;
+
+    font-size:8px;
+
+    font-weight:900;
 
     text-transform:uppercase;
 
@@ -698,14 +762,9 @@
 }
 
 
-.relatorio-card strong{
+.relatorio-kpi-conteudo strong{
 
-    display:block;
-
-    margin-top:4px;
-
-    color:
-        var(--cor-primaria-escura);
+    color:#0f3cc9;
 
     font-size:15px;
 
@@ -716,88 +775,10 @@
     overflow-wrap:anywhere;
 }
 
-/* ==========================================================
-   COMPARAÇÃO - VISÃO GERAL
-========================================================== */
 
-.relatorio-comparacao-grid{
+.relatorio-kpi-conteudo small{
 
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            5,
-            minmax(0,1fr)
-        );
-
-    gap:7px;
-}
-
-
-.relatorio-comparacao-card{
-
-    min-width:0;
-
-    padding:8px;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr;
-
-    gap:5px;
-
-    border:
-        1px solid
-        rgba(29,78,255,.16);
-
-    border-radius:9px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f5f8ff
-        );
-}
-
-
-.relatorio-comparacao-titulo{
-
-    display:block;
-
-    padding-bottom:5px;
-
-    border-bottom:
-        1px solid
-        rgba(29,78,255,.12);
-
-    color:
-        var(--cor-primaria-escura);
-
-    font-size:10px;
-
-    font-weight:900;
-
-    text-align:center;
-}
-
-
-.relatorio-comparacao-card > div{
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    gap:5px;
-}
-
-
-.relatorio-comparacao-card small{
-
-    color:
-        var(--cor-texto-secundario);
+    color:#5c6c96;
 
     font-size:8px;
 
@@ -805,24 +786,124 @@
 }
 
 
-.relatorio-comparacao-card strong{
+/* ==========================================================
+   GRID EXECUTIVO
+========================================================== */
 
-    color:
-        var(--cor-primaria-escura);
+.relatorio-grid-executivo{
 
-    font-size:10px;
+    display:grid;
 
-    font-weight:900;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
 
-    text-align:right;
+    gap:10px;
 }
 
 
 /* ==========================================================
-   TABELA FECHAMENTO X ATUAL X VARIAÇÃO
+   PAINÉIS EXECUTIVOS
 ========================================================== */
 
-.relatorio-tabela-wrap{
+.relatorio-painel-executivo{
+
+    min-width:0;
+
+    padding:10px;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:10px;
+
+    background:#ffffff;
+
+    box-shadow:
+        0
+        2px
+        7px
+        rgba(15,37,87,.04);
+
+    break-inside:avoid;
+
+    page-break-inside:avoid;
+}
+
+
+.relatorio-painel-total{
+
+    grid-column:
+        1 / -1;
+}
+
+
+.relatorio-painel-titulo{
+
+    min-height:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-bottom:8px;
+
+    padding-bottom:7px;
+
+    border-bottom:
+        2px solid
+        #dce8ff;
+}
+
+
+.relatorio-painel-titulo span{
+
+    font-size:15px;
+}
+
+
+.relatorio-painel-titulo strong{
+
+    color:#0f3cc9;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:.2px;
+}
+
+
+/* ==========================================================
+   LAYOUT DUPLO DENTRO DOS PAINÉIS
+========================================================== */
+
+.relatorio-painel-duplo{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(210px,.9fr);
+
+    gap:10px;
+
+    align-items:stretch;
+}
+
+
+/* ==========================================================
+   TABELA EXECUTIVA
+========================================================== */
+
+.relatorio-tabela-executiva-wrap{
 
     width:100%;
 
@@ -830,7 +911,7 @@
 
     border:
         1px solid
-        rgba(29,78,255,.15);
+        #dce8ff;
 
     border-radius:8px;
 
@@ -838,42 +919,36 @@
 }
 
 
-.relatorio-tabela-comparacao{
+.relatorio-tabela-executiva{
 
     width:100%;
 
     border-collapse:collapse;
 
     table-layout:fixed;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
 }
 
 
-.relatorio-tabela-comparacao th{
+.relatorio-tabela-executiva th{
 
     padding:
-        7px
-        9px;
-
-    border-bottom:
-        1px solid
-        rgba(29,78,255,.18);
+        6px
+        8px;
 
     background:
         linear-gradient(
             180deg,
-            #eef4ff,
+            #edf4ff,
             #f7faff
         );
 
-    color:
-        var(--cor-primaria-escura);
+    border-bottom:
+        1px solid
+        #b8d1ff;
 
-    font-size:9px;
+    color:#0f3cc9;
+
+    font-size:8px;
 
     font-weight:900;
 
@@ -885,67 +960,52 @@
 }
 
 
-.relatorio-tabela-comparacao th:first-child{
+.relatorio-tabela-executiva th:first-child{
 
-    width:40%;
+    width:42%;
 
     text-align:left;
 }
 
 
-.relatorio-tabela-comparacao th:nth-child(2),
-.relatorio-tabela-comparacao th:nth-child(3),
-.relatorio-tabela-comparacao th:nth-child(4){
+.relatorio-tabela-executiva th:nth-child(2),
+.relatorio-tabela-executiva th:nth-child(3){
 
-    width:20%;
+    width:29%;
 }
 
 
-.relatorio-tabela-comparacao td{
+.relatorio-tabela-executiva td{
 
     padding:
         6px
-        9px;
+        8px;
 
     border-bottom:
         1px solid
-        rgba(15,37,87,.08);
+        rgba(15,37,87,.07);
 
-    color:
-        var(--cor-texto);
+    color:#25385f;
 
-    font-size:10px;
+    font-size:9px;
 
     font-weight:700;
-
-    vertical-align:middle;
 }
 
 
-.relatorio-tabela-comparacao tbody tr:last-child td{
+.relatorio-tabela-executiva tbody tr:last-child td{
 
     border-bottom:0;
 }
 
 
-.relatorio-tabela-comparacao tbody tr:nth-child(even){
+.relatorio-tabela-executiva tbody tr:nth-child(even){
 
-    background:
-        #fafcff;
+    background:#fafcff;
 }
 
 
-.relatorio-tabela-comparacao tbody tr:hover{
-
-    background:
-        #f3f7ff;
-}
-
-
-.relatorio-tabela-comparacao td:first-child{
-
-    color:
-        #25385f;
+.relatorio-tabela-executiva td:first-child{
 
     font-weight:800;
 
@@ -953,49 +1013,164 @@
 }
 
 
-.relatorio-tabela-comparacao td:nth-child(2),
-.relatorio-tabela-comparacao td:nth-child(3),
-.relatorio-tabela-comparacao td:nth-child(4){
+.relatorio-tabela-executiva td:nth-child(2){
 
-    text-align:center;
-
-    font-variant-numeric:
-        tabular-nums;
-}
-
-
-.relatorio-tabela-comparacao td:nth-child(2){
-
-    color:
-        #64748b;
-}
-
-
-.relatorio-tabela-comparacao td:nth-child(3){
-
-    color:
-        var(--cor-primaria-escura);
+    color:#0f766e;
 
     font-weight:900;
+
+    text-align:center;
 }
 
 
-.relatorio-tabela-comparacao td:nth-child(4){
+.relatorio-tabela-executiva td:nth-child(3){
 
-    color:
-        #0f766e;
+    color:#0f3cc9;
+
+    font-weight:900;
+
+    text-align:center;
+}
+
+
+/* ==========================================================
+   REVISÃO DE BASE
+========================================================== */
+
+.relatorio-revisao{
+
+    display:inline-block;
+
+    padding:
+        2px
+        6px;
+
+    border-radius:10px;
+
+    background:#fff4dc;
+
+    color:#9a6700;
+
+    font-size:8px;
 
     font-weight:900;
 }
 
 
 /* ==========================================================
-   POSIÇÃO / INFORMAÇÕES COMPLEMENTARES
+   ÁREA DO GRÁFICO
 ========================================================== */
 
-.relatorio-posicao{
+.relatorio-grafico-box{
 
-    margin-top:7px;
+    position:relative;
+
+    width:100%;
+
+    min-width:0;
+
+    min-height:150px;
+
+    height:150px;
+
+    padding:5px;
+
+    border:
+        1px solid
+        #dce8ff;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fbff
+        );
+}
+
+
+.relatorio-grafico-box canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+}
+
+
+/* ==========================================================
+   MINI INDICADORES
+========================================================== */
+
+.relatorio-indicadores-esfig{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0,1fr)
+        );
+
+    gap:7px;
+}
+
+
+.relatorio-mini-indicador{
+
+    min-width:0;
+
+    padding:
+        8px
+        7px;
+
+    border:
+        1px solid
+        #dce8ff;
+
+    border-radius:8px;
+
+    background:#f8fbff;
+
+    text-align:center;
+}
+
+
+.relatorio-mini-indicador span{
+
+    display:block;
+
+    color:#5c6c96;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+
+.relatorio-mini-indicador strong{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#0f3cc9;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   INFORMAÇÕES ESFIG
+========================================================== */
+
+.relatorio-info-faixa{
+
+    margin-top:8px;
 
     display:grid;
 
@@ -1009,25 +1184,21 @@
 }
 
 
-.relatorio-posicao span{
-
-    min-width:0;
+.relatorio-info-faixa span{
 
     padding:
-        6px
-        8px;
+        7px
+        9px;
 
     border:
         1px solid
-        rgba(29,78,255,.12);
+        #dce8ff;
 
     border-radius:7px;
 
-    background:
-        #f8fbff;
+    background:#f8fbff;
 
-    color:
-        var(--cor-texto-secundario);
+    color:#5c6c96;
 
     font-size:9px;
 
@@ -1037,153 +1208,417 @@
 }
 
 
-.relatorio-posicao strong{
+.relatorio-info-faixa strong{
 
-    margin-left:3px;
+    color:#0f3cc9;
+}
 
-    color:
-        var(--cor-primaria-escura);
+
+/* ==========================================================
+   DESCARTE
+========================================================== */
+
+.relatorio-descarte-resumo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+
+.relatorio-legenda-executiva{
+
+    margin-top:2px;
+
+    padding:
+        7px
+        8px;
+
+    border:
+        1px solid
+        #dce8ff;
+
+    border-radius:8px;
+
+    background:#f8fbff;
+}
+
+
+.relatorio-legenda-executiva > strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#0f3cc9;
+
+    font-size:9px;
+
+    font-weight:900;
+}
+
+
+.relatorio-legenda-executiva ul{
+
+    margin:0;
+
+    padding:0;
+
+    list-style:none;
+}
+
+
+.relatorio-legenda-executiva li{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    padding:
+        3px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(15,37,87,.06);
+
+    color:#5c6c96;
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+
+.relatorio-legenda-executiva li:last-child{
+
+    border-bottom:0;
+}
+
+
+.relatorio-legenda-executiva li strong{
+
+    color:#0f3cc9;
 
     font-weight:900;
 }
 
 
 /* ==========================================================
-   AJUSTE DO DOCUMENTO COMPARATIVO
+   FORNECEDORES
 ========================================================== */
 
-.relatorio-corpo .relatorio-secao{
+.relatorio-fornecedores-layout{
 
-    box-shadow:
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(120px,.65fr);
+
+    gap:10px;
+}
+
+
+.relatorio-indice-fornecedor{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:125px;
+
+    padding:10px;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:10px;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #eef5ff 100%
+        );
+
+    text-align:center;
+}
+
+
+.relatorio-indice-fornecedor span{
+
+    color:#5c6c96;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+
+.relatorio-indice-fornecedor strong{
+
+    margin-top:5px;
+
+    color:#0f3cc9;
+
+    font-size:27px;
+
+    font-weight:900;
+}
+
+
+.relatorio-indice-fornecedor small{
+
+    margin-top:3px;
+
+    color:#5c6c96;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+
+/* ==========================================================
+   FORNECEDORES EM ATENÇÃO
+========================================================== */
+
+.relatorio-fornecedores-atencao{
+
+    margin-top:8px;
+
+    padding:
+        7px
+        8px;
+
+    border:
+        1px solid
+        #dce8ff;
+
+    border-radius:8px;
+
+    background:#f8fbff;
+}
+
+
+.relatorio-fornecedores-atencao > strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#0f3cc9;
+
+    font-size:9px;
+
+    font-weight:900;
+}
+
+
+.relatorio-fornecedores-atencao > div{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    gap:5px;
+}
+
+
+.relatorio-fornecedores-atencao span{
+
+    min-width:0;
+
+    padding:
+        5px
+        6px;
+
+    border:
+        1px solid
+        rgba(29,78,255,.12);
+
+    border-radius:6px;
+
+    background:#ffffff;
+
+    color:#25385f;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+
+.relatorio-fornecedores-atencao b{
+
+    display:block;
+
+    margin-top:2px;
+
+    color:#0f3cc9;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   RESUMO EXECUTIVO
+========================================================== */
+
+.relatorio-resumo-executivo{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    gap:8px;
+}
+
+
+.relatorio-destaques,
+.relatorio-atencoes{
+
+    min-width:0;
+
+    padding:
+        8px
+        9px;
+
+    border-radius:8px;
+}
+
+
+.relatorio-destaques{
+
+    border:
+        1px solid
+        rgba(34,197,94,.25);
+
+    background:#f2fff7;
+}
+
+
+.relatorio-atencoes{
+
+    border:
+        1px solid
+        rgba(245,158,11,.28);
+
+    background:#fffaf0;
+}
+
+
+.relatorio-resumo-executivo h3{
+
+    margin:
         0
-        1px
-        3px
-        rgba(15,37,87,.025);
+        0
+        6px;
+
+    font-size:10px;
+
+    font-weight:900;
 }
 
 
-.relatorio-corpo
-.relatorio-secao
-+ .relatorio-secao{
+.relatorio-destaques h3{
 
-    margin-top:0;
+    color:#15803d;
 }
 
 
-/* ==========================================================
-   RESPONSIVIDADE DA COMPARAÇÃO
-========================================================== */
+.relatorio-atencoes h3{
 
-@media(
-    max-width:1100px
-){
-
-    .relatorio-comparacao-grid{
-
-        grid-template-columns:
-            repeat(
-                3,
-                minmax(0,1fr)
-            );
-    }
+    color:#b45309;
 }
 
 
-@media(
-    max-width:700px
-){
+.relatorio-resumo-executivo ul{
 
-    .relatorio-comparacao-grid{
+    margin:0;
 
-        grid-template-columns:
-            1fr;
-    }
+    padding-left:16px;
+}
 
 
-    .relatorio-posicao{
+.relatorio-resumo-executivo li{
 
-        grid-template-columns:
-            1fr;
-    }
+    margin-bottom:4px;
+
+    color:#25385f;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    line-height:1.3;
+}
 
 
-    .relatorio-tabela-wrap{
+.relatorio-resumo-executivo p{
 
-        overflow-x:auto;
-    }
+    margin:0;
 
+    color:#5c6c96;
 
-    .relatorio-tabela-comparacao{
+    font-size:8px;
 
-        min-width:560px;
-    }
+    font-weight:700;
 }
 
 
 /* ==========================================================
-   IMPRESSÃO DA COMPARAÇÃO
+   SEM DADOS
 ========================================================== */
 
-@media print{
+.relatorio-sem-dados{
 
-    .relatorio-comparacao-grid{
+    color:#5c6c96;
 
-        grid-template-columns:
-            repeat(
-                5,
-                minmax(0,1fr)
-            );
+    font-size:8px;
 
-        gap:5px;
-    }
-
-
-    .relatorio-comparacao-card{
-
-        padding:6px;
-    }
-
-
-    .relatorio-tabela-comparacao th{
-
-        padding:
-            5px
-            7px;
-
-        font-size:8px;
-    }
-
-
-    .relatorio-tabela-comparacao td{
-
-        padding:
-            5px
-            7px;
-
-        font-size:9px;
-    }
-
-
-    .relatorio-secao{
-
-        margin-bottom:6px;
-
-        padding:8px;
-    }
-
-
-    .relatorio-corpo{
-
-        gap:6px;
-
-        padding:8px;
-    }
+    font-weight:700;
 }
+
+
 /* ==========================================================
-   RODAPÉ
+   RODAPÉ EXECUTIVO
 ========================================================== */
 
-.relatorio-rodape{
+.relatorio-executivo-rodape{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
 
     padding:
         7px
@@ -1191,17 +1626,13 @@
 
     border-top:
         1px solid
-        var(--cor-borda);
+        #dce8ff;
 
-    background:
-        #f8fbff;
+    background:#f8fbff;
 
-    color:
-        var(--cor-texto-secundario);
+    color:#5c6c96;
 
-    text-align:center;
-
-    font-size:9px;
+    font-size:8px;
 
     font-weight:700;
 }
@@ -1215,23 +1646,20 @@
     max-width:1100px
 ){
 
-    .relatorios-filtros{
-
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0,1fr)
-            );
-    }
-
-
-    .relatorio-cards{
+    .relatorio-kpis-executivos{
 
         grid-template-columns:
             repeat(
                 3,
                 minmax(0,1fr)
             );
+    }
+
+
+    .relatorio-grid-executivo{
+
+        grid-template-columns:
+            1fr;
     }
 }
 
@@ -1240,49 +1668,70 @@
     max-width:700px
 ){
 
-    .pagina-relatorios{
-
-        padding:7px;
-    }
-
-
-    .relatorios-tipo{
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .relatorios-filtros{
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .relatorio-documento-topo{
-
-        grid-template-columns:
-            1fr;
-
-        text-align:center;
-    }
-
-
-    .relatorio-documento-topo
-    > div:first-child{
-
-        align-items:center;
-    }
-
-
-    .relatorio-cards{
+    .relatorio-kpis-executivos{
 
         grid-template-columns:
             repeat(
                 2,
                 minmax(0,1fr)
             );
+    }
+
+
+    .relatorio-painel-duplo{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-indicadores-esfig{
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+
+    .relatorio-fornecedores-layout{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-fornecedores-atencao > div{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-resumo-executivo{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-executivo-topo{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorio-executivo-titulo{
+
+        grid-column:auto;
+    }
+
+
+    .relatorio-marca{
+
+        align-items:center;
     }
 }
 
@@ -1320,6 +1769,7 @@
         top:0;
 
         width:100%;
+
         max-width:none;
 
         margin:0;
@@ -1338,15 +1788,80 @@
     }
 
 
-    .relatorio-documento-topo{
+    .relatorio-executivo-corpo{
 
-        break-after:avoid;
+        padding:6px;
 
-        page-break-after:avoid;
+        gap:6px;
+
+        background:#ffffff;
     }
 
 
-    .relatorio-secao{
+    .relatorio-executivo-topo{
+
+        min-height:70px;
+
+        padding:
+            8px
+            12px;
+    }
+
+
+    .relatorio-kpis-executivos{
+
+        grid-template-columns:
+            repeat(
+                6,
+                minmax(0,1fr)
+            );
+
+        gap:5px;
+    }
+
+
+    .relatorio-kpi-executivo{
+
+        min-height:58px;
+
+        padding:5px;
+
+        grid-template-columns:
+            27px
+            1fr;
+    }
+
+
+    .relatorio-kpi-icone{
+
+        width:25px;
+        height:25px;
+
+        font-size:13px;
+    }
+
+
+    .relatorio-kpi-conteudo strong{
+
+        font-size:11px;
+    }
+
+
+    .relatorio-grid-executivo{
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+
+        gap:6px;
+    }
+
+
+    .relatorio-painel-executivo{
+
+        padding:6px;
 
         break-inside:avoid;
 
@@ -1354,10 +1869,66 @@
     }
 
 
+    .relatorio-grafico-box{
+
+        height:105px;
+
+        min-height:105px;
+    }
+
+
+    .relatorio-tabela-executiva th{
+
+        padding:
+            4px
+            5px;
+
+        font-size:7px;
+    }
+
+
+    .relatorio-tabela-executiva td{
+
+        padding:
+            4px
+            5px;
+
+        font-size:7.5px;
+    }
+
+
+    .relatorio-painel-titulo{
+
+        min-height:22px;
+
+        margin-bottom:5px;
+
+        padding-bottom:4px;
+    }
+
+
+    .relatorio-painel-titulo strong{
+
+        font-size:9px;
+    }
+
+
+    .relatorio-indice-fornecedor{
+
+        min-height:95px;
+    }
+
+
+    .relatorio-indice-fornecedor strong{
+
+        font-size:20px;
+    }
+
+
     @page{
 
         size:A4 landscape;
 
-        margin:8mm;
+        margin:7mm;
     }
 }
