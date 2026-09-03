@@ -804,9 +804,6 @@ default:
             ${gerarBlocoInstitucionalRelatorio()}
 
         </div>
-            </div>
-
-        </div>
 
     `;
     }
