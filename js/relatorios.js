@@ -756,36 +756,37 @@ function gerarConteudoExecutivo(
                 ${gerarPainelFornecedores(congelado,atual,true)}
             `;
 
+case "geral":
+default:
 
-        case "geral":
-        default:
+    return `
 
-            return `
+        ${gerarKpisExecutivos(congelado,atual)}
 
-                ${gerarKpisExecutivos(congelado,atual)}
+        <div class="relatorio-grid-executivo">
 
-                <div class="relatorio-grid-executivo">
+            ${gerarPainelImportacao(congelado,atual)}
 
-                    ${gerarPainelImportacao(congelado,atual)}
+            ${gerarPainelDescarte(congelado,atual)}
 
-                    ${gerarPainelDescarte(congelado,atual)}
+            ${gerarPainelAmostras(congelado,atual)}
 
-                    ${gerarPainelAmostras(congelado,atual)}
+            ${gerarPainelEsfig(congelado,atual)}
 
-                    ${gerarPainelRetrabalho(congelado,atual)}
+            ${gerarPainelRetrabalho(congelado,atual)}
 
-                    ${gerarPainelFornecedores(congelado,atual)}
+            ${gerarPainelFornecedores(congelado,atual)}
 
-                    ${
-                        gerarResumoExecutivo(
-                            congelado,
-                            atual
-                        )
-                    }
+            ${
+                gerarResumoExecutivo(
+                    congelado,
+                    atual
+                )
+            }
 
-                </div>
+        </div>
 
-            `;
+    `;
     }
 }
 
