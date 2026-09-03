@@ -765,24 +765,37 @@ default:
 
         <div class="relatorio-grid-executivo">
 
+            <!-- LINHA 1 -->
+
             ${gerarPainelImportacao(congelado,atual)}
 
             ${gerarPainelDescarte(congelado,atual)}
 
+
+            <!-- LINHA 2 -->
+
             ${gerarPainelAmostras(congelado,atual)}
-
-            ${gerarPainelEsfig(congelado,atual)}
-
-            ${gerarPainelRetrabalho(congelado,atual)}
 
             ${gerarPainelFornecedores(congelado,atual)}
 
-            ${
-                gerarResumoExecutivo(
-                    congelado,
-                    atual
-                )
-            }
+
+            <!-- LINHA 3 -->
+
+            ${gerarPainelRetrabalho(congelado,atual)}
+
+
+            <div class="relatorio-coluna-final">
+
+                ${gerarPainelEsfig(congelado,atual)}
+
+                ${
+                    gerarResumoExecutivo(
+                        congelado,
+                        atual
+                    )
+                }
+
+            </div>
 
         </div>
 
