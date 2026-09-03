@@ -836,6 +836,35 @@
     margin:0;
 }
 /* ==========================================================
+   NOVO GRID PRINCIPAL - RELATÓRIO MENSAL
+   3 COLUNAS
+========================================================== */
+
+.relatorio-grid-principal{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
+
+    gap:10px;
+
+    align-items:stretch;
+}
+
+
+.relatorio-grid-principal > .relatorio-painel-executivo{
+
+    min-width:0;
+
+    width:100%;
+
+    height:100%;
+}
+/* ==========================================================
    PAINÉIS EXECUTIVOS
 ========================================================== */
 
@@ -921,10 +950,10 @@
     display:grid;
 
     grid-template-columns:
-        minmax(0,1fr)
-        minmax(210px,.9fr);
+        minmax(115px,.82fr)
+        minmax(0,1.18fr);
 
-    gap:10px;
+    gap:8px;
 
     align-items:stretch;
 }
@@ -1649,7 +1678,24 @@
     font-weight:700;
 }
 
+/* ==========================================================
+   FAIXA INFERIOR EXECUTIVA
+========================================================== */
 
+.relatorio-faixa-final{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.05fr)
+        minmax(0,1.15fr);
+
+    gap:10px;
+
+    align-items:stretch;
+
+    min-width:0;
+}
 /* ==========================================================
    SEM DADOS
 ========================================================== */
@@ -2356,59 +2402,195 @@
 
 
     /* ======================================================
-       RESUMO EXECUTIVO
-    ====================================================== */
+   RESUMO EXECUTIVO
+====================================================== */
 
-    .relatorio-resumo-executivo{
+.relatorio-resumo-executivo{
 
-        gap:4px !important;
-    }
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
 
-
-    .relatorio-destaques,
-    .relatorio-atencoes{
-
-        padding:
-            4px
-            5px !important;
-
-        border-radius:5px !important;
-    }
+    gap:4px !important;
+}
 
 
-    .relatorio-resumo-executivo h3{
+.relatorio-destaques,
+.relatorio-atencoes,
+.relatorio-compromisso{
 
-        margin:
-            0
-            0
-            3px !important;
+    min-width:0 !important;
 
-        font-size:7px !important;
-    }
+    padding:
+        4px
+        5px !important;
 
-
-    .relatorio-resumo-executivo ul{
-
-        padding-left:11px !important;
-    }
+    border-radius:5px !important;
+}
 
 
-    .relatorio-resumo-executivo li{
+.relatorio-compromisso{
 
-        margin-bottom:2px !important;
+    border:
+        1px solid
+        rgba(29,78,255,.24) !important;
 
-        font-size:6px !important;
-
-        line-height:1.25 !important;
-    }
-
-
-    .relatorio-resumo-executivo p{
-
-        font-size:6px !important;
-    }
+    background:#f5f8ff !important;
+}
 
 
+.relatorio-resumo-executivo h3,
+.relatorio-compromisso h3{
+
+    margin:
+        0
+        0
+        3px !important;
+
+    font-size:7px !important;
+}
+
+
+.relatorio-resumo-executivo ul{
+
+    padding-left:11px !important;
+}
+
+
+.relatorio-resumo-executivo li{
+
+    margin-bottom:2px !important;
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+
+
+.relatorio-resumo-executivo p,
+.relatorio-compromisso p{
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+
+
+.relatorio-compromisso strong{
+
+    display:block;
+
+    margin-top:4px !important;
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+
+/* ==========================================================
+   IMAGEM INSTITUCIONAL - QUALIDADE
+========================================================== */
+
+.relatorio-institucional{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(150px,.55fr)
+        minmax(0,1.45fr);
+
+    gap:10px;
+
+    padding:10px;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eef5ff
+        );
+
+    overflow:hidden;
+}
+
+
+.relatorio-institucional-texto{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:0;
+}
+
+
+.relatorio-institucional-texto h3{
+
+    margin:0;
+
+    color:#0f3cc9;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    line-height:1.25;
+}
+
+
+.relatorio-institucional-texto p{
+
+    margin:
+        8px
+        0
+        0;
+
+    color:#25385f;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    line-height:1.4;
+}
+
+
+.relatorio-institucional-imagem{
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.relatorio-institucional-imagem img{
+
+    display:block;
+
+    width:100%;
+
+    height:150px;
+
+    object-fit:contain;
+
+    object-position:center;
+}
     /* ======================================================
        RODAPÉ
     ====================================================== */
