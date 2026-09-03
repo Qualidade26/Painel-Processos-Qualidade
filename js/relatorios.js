@@ -1112,7 +1112,6 @@ function gerarPainelImportacao(
     `;
 }
 
-
 /* ==========================================================
    ESFIG
 ========================================================== */
@@ -1130,11 +1129,19 @@ function gerarPainelEsfig(
         atual.esfig || {};
 
 
+    const resumoAnterior =
+        anterior.resumoAfericoes || {};
+
+    const resumoAtual =
+        corrente.resumoAfericoes || {};
+
+
     return `
 
         <section
             class="
                 relatorio-painel-executivo
+                relatorio-painel-esfig
                 ${larguraTotal ? "relatorio-painel-total" : ""}
             "
         >
@@ -1145,73 +1152,94 @@ function gerarPainelEsfig(
             )}
 
 
-            <div class="relatorio-indicadores-esfig">
+            ${
+                gerarTabelaPeriodoAcumulado(
+                    [
+                        {
+                            titulo:"Total aferido",
 
-                ${
-                    miniIndicador(
-                        "Horas",
-                        formatarHoras(
-                            corrente.totalHoras
-                        )
-                    )
-                }
+                            anterior:
+                                resumoAnterior.totalAferido,
 
-                ${
-                    miniIndicador(
-                        "GRU Inmetro",
-                        formatarMoeda(
-                            corrente.totalGruInmetro
-                        )
-                    )
-                }
+                            atual:
+                                resumoAtual.totalAferido,
 
-                ${
-                    miniIndicador(
-                        "Total aferido",
-                        formatarNumero(
-                            corrente.resumoAfericoes
-                                ?.totalAferido
-                        )
-                    )
-                }
+                            tipo:"numero"
+                        },
 
-                ${
-                    miniIndicador(
-                        "Aprovado",
-                        formatarNumero(
-                            corrente.resumoAfericoes
-                                ?.totalAprovado
-                        )
-                    )
-                }
+                        {
+                            titulo:"Aprovado",
 
-                ${
-                    miniIndicador(
-                        "Reprovado",
-                        formatarNumero(
-                            corrente.resumoAfericoes
-                                ?.totalReprovado
-                        )
-                    )
-                }
+                            anterior:
+                                resumoAnterior.totalAprovado,
 
-            </div>
+                            atual:
+                                resumoAtual.totalAprovado,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Reprovado",
+
+                            anterior:
+                                resumoAnterior.totalReprovado,
+
+                            atual:
+                                resumoAtual.totalReprovado,
+
+                            tipo:"numero"
+                        },
+
+                        {
+                            titulo:"Horas",
+
+                            anterior:
+                                anterior.totalHoras,
+
+                            atual:
+                                corrente.totalHoras,
+
+                            tipo:"horas"
+                        },
+
+                        {
+                            titulo:"GRU Inmetro",
+
+                            anterior:
+                                anterior.totalGruInmetro,
+
+                            atual:
+                                corrente.totalGruInmetro,
+
+                            tipo:"moeda"
+                        }
+                    ]
+                )
+            }
 
 
             <div class="relatorio-info-faixa">
 
                 <span>
+
                     Última aferição:
+
                     <strong>
                         ${corrente.ultimaAfericao || "-"}
                     </strong>
+
                 </span>
 
+
                 <span>
+
                     Próxima aferição:
+
                     <strong>
                         ${corrente.proximaAfericao || "-"}
                     </strong>
+
                 </span>
 
             </div>
@@ -1219,8 +1247,6 @@ function gerarPainelEsfig(
         </section>
     `;
 }
-
-
 /* ==========================================================
    DESCARTE
 ========================================================== */
