@@ -2036,8 +2036,14 @@
 
     align-content:start !important;
 
+    align-self:start !important;
+
     min-width:0 !important;
-    }
+
+    height:auto !important;
+
+    overflow:visible !important;
+}
 
 
 .relatorio-coluna-final > .relatorio-painel-executivo{
@@ -2063,7 +2069,16 @@
     break-inside:avoid !important;
     page-break-inside:avoid !important;
 }
+/* ======================================================
+   RESUMO EXECUTIVO - MANTER NA PÁGINA PRINCIPAL
+====================================================== */
 
+.relatorio-coluna-final .relatorio-painel-executivo:last-child{
+
+    break-inside:auto !important;
+
+    page-break-inside:auto !important;
+}
     .relatorio-painel-titulo{
 
         min-height:20px !important;
