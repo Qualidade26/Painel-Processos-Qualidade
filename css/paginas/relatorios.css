@@ -803,7 +803,38 @@
     gap:10px;
 }
 
+/* ==========================================================
+   COLUNA FINAL
+   ESFIG + RESUMO EXECUTIVO
+========================================================== */
 
+.relatorio-coluna-final{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr;
+
+    grid-template-rows:
+        auto
+        auto;
+
+    gap:10px;
+
+    align-content:start;
+}
+
+
+.relatorio-coluna-final > .relatorio-painel-executivo{
+
+    width:100%;
+
+    min-width:0;
+
+    margin:0;
+}
 /* ==========================================================
    PAINÉIS EXECUTIVOS
 ========================================================== */
@@ -1965,26 +1996,62 @@
 }
 
 
-    /* ======================================================
-       GRID PRINCIPAL
-    ====================================================== */
+   /* ======================================================
+   GRID PRINCIPAL
+====================================================== */
 
-    .relatorio-grid-executivo{
+.relatorio-grid-executivo{
 
-        display:grid !important;
+    display:grid !important;
 
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0,1fr)
-            ) !important;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        ) !important;
 
-        gap:5px !important;
+    gap:5px !important;
 
-        align-items:start !important;
-    }
+    align-items:start !important;
+}
 
 
+/* ======================================================
+   COLUNA FINAL
+   ESFIG + RESUMO EXECUTIVO
+====================================================== */
+
+.relatorio-coluna-final{
+
+    display:grid !important;
+
+    grid-template-columns:
+        1fr !important;
+
+    grid-template-rows:
+        auto
+        auto !important;
+
+    gap:5px !important;
+
+    align-content:start !important;
+
+    min-width:0 !important;
+
+    break-inside:avoid !important;
+
+    page-break-inside:avoid !important;
+}
+
+
+.relatorio-coluna-final > .relatorio-painel-executivo{
+
+    width:100% !important;
+
+    min-width:0 !important;
+
+    margin:0 !important;
+}
     /* ======================================================
        PAINÉIS
     ====================================================== */
