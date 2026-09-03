@@ -2037,11 +2037,7 @@
     align-content:start !important;
 
     min-width:0 !important;
-
-    break-inside:avoid !important;
-
-    page-break-inside:avoid !important;
-}
+    }
 
 
 .relatorio-coluna-final > .relatorio-painel-executivo{
