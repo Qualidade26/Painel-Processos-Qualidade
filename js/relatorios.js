@@ -755,7 +755,6 @@ function gerarConteudoExecutivo(
                 ${gerarKpisExecutivos(congelado,atual)}
                 ${gerarPainelFornecedores(congelado,atual,true)}
             `;
-
 case "geral":
 default:
 
@@ -763,40 +762,48 @@ default:
 
         ${gerarKpisExecutivos(congelado,atual)}
 
-        <div class="relatorio-grid-executivo">
+        <div class="relatorio-grid-principal">
 
-           <!-- LINHA 1 -->
+            <!-- =================================================
+                 LINHA 1
+            ================================================== -->
 
-${gerarPainelImportacao(congelado,atual)}
+            ${gerarPainelImportacao(congelado,atual)}
 
-${gerarPainelDescarte(congelado,atual)}
+            ${gerarPainelDescarte(congelado,atual)}
 
-
-<!-- LINHA 2 -->
-
-${gerarPainelAmostras(congelado,atual)}
-
-${gerarPainelRetrabalho(congelado,atual)}
+            ${gerarPainelAmostras(congelado,atual)}
 
 
-<!-- LINHA 3 -->
+            <!-- =================================================
+                 LINHA 2
+            ================================================== -->
 
-${gerarPainelFornecedores(congelado,atual)}
+            ${gerarPainelRetrabalho(congelado,atual)}
+
+            ${gerarPainelFornecedores(congelado,atual)}
+
+            ${gerarPainelEsfig(congelado,atual)}
+
+        </div>
 
 
-<div class="relatorio-coluna-final">
+        <!-- =====================================================
+             FAIXA EXECUTIVA FINAL
+        ====================================================== -->
 
-    ${gerarPainelEsfig(congelado,atual)}
+        <div class="relatorio-faixa-final">
 
-    ${
-        gerarResumoExecutivo(
-            congelado,
-            atual
-        )
-    }
+            ${
+                gerarResumoExecutivo(
+                    congelado,
+                    atual
+                )
+            }
 
-</div>
+            ${gerarBlocoInstitucionalRelatorio()}
 
+        </div>
             </div>
 
         </div>
@@ -1863,50 +1870,81 @@ function gerarResumoExecutivo(
     );
 
 
-    return `
+   return `
 
-        <section class="relatorio-painel-executivo">
+    <section
+        class="
+            relatorio-painel-executivo
+            relatorio-painel-resumo
+        "
+    >
 
-            ${tituloPainelExecutivo(
-                "📋",
-                "Resumo Executivo"
-            )}
-
-
-            <div class="relatorio-resumo-executivo">
-
-                <div class="relatorio-destaques">
-
-                    <h3>
-                        ✅ Destaques
-                    </h3>
-
-                    ${
-                        gerarListaResumo(
-                            destaques,
-                            "Sem destaques automáticos no período."
-                        )
-                    }
-
-                </div>
+        ${tituloPainelExecutivo(
+            "📋",
+            "Resumo Executivo"
+        )}
 
 
-                <div class="relatorio-atencoes">
+        <div class="relatorio-resumo-executivo">
 
-                    <h3>
-                        ⚠ Pontos de atenção
-                    </h3>
+            <div class="relatorio-destaques">
 
-                    ${
-                        gerarListaResumo(
-                            atencoes,
-                            "Nenhum ponto crítico identificado automaticamente."
-                        )
-                    }
+                <h3>
+                    ✅ Destaques
+                </h3>
 
-                </div>
+                ${
+                    gerarListaResumo(
+                        destaques,
+                        "Sem destaques automáticos no período."
+                    )
+                }
 
             </div>
+
+
+            <div class="relatorio-atencoes">
+
+                <h3>
+                    ⚠ Pontos de atenção
+                </h3>
+
+                ${
+                    gerarListaResumo(
+                        atencoes,
+                        "Nenhum ponto crítico identificado automaticamente."
+                    )
+                }
+
+            </div>
+
+
+            <div class="relatorio-compromisso">
+
+                <h3>
+                    🛡 Nosso compromisso
+                </h3>
+
+                <p>
+                    Gestão da Qualidade que assegura
+                    segurança, rastreabilidade e
+                    conformidade em cada etapa.
+                </p>
+
+                <p>
+                    Do recebimento à entrega,
+                    cuidamos da qualidade para
+                    proteger vidas.
+                </p>
+
+                <strong>
+                    QUALIDADE É NOSSO CONTROLE.
+                    SEGURANÇA É NOSSA ENTREGA.
+                </strong>
+
+            </div>
+
+        </div>
 
         </section>
     `;
@@ -3613,4 +3651,42 @@ function limparPreviewRelatorio(){
         `;
     }
 }
+/* ==========================================================
+   BLOCO INSTITUCIONAL DO RELATÓRIO
+========================================================== */
 
+function gerarBlocoInstitucionalRelatorio(){
+
+    return `
+
+        <section class="relatorio-institucional">
+
+            <div class="relatorio-institucional-texto">
+
+                <h3>
+                    EXCELÊNCIA EM CADA DETALHE.
+                    <br>
+                    SEGURANÇA EM CADA ENTREGA.
+                </h3>
+
+                <p>
+                    Medicamentos e suprimentos hospitalares
+                    com Qualidade, Segurança e Conformidade.
+                </p>
+
+            </div>
+
+
+            <div class="relatorio-institucional-imagem">
+
+                <img
+                    src="img/relatorio-qualidade.png"
+                    alt="Equipamentos hospitalares e instrumentos de qualidade"
+                >
+
+            </div>
+
+        </section>
+
+    `;
+}
