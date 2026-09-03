@@ -1893,15 +1893,14 @@
        CORPO
     ====================================================== */
 
-    .relatorio-executivo-corpo{
+   .relatorio-executivo-corpo{
 
-        padding:5px !important;
+    padding:7px !important;
 
-        gap:5px !important;
+    gap:7px !important;
 
-        background:#ffffff !important;
-    }
-
+    background:#ffffff !important;
+}
 
     /* ======================================================
        KPIs
@@ -1921,17 +1920,16 @@
 
     .relatorio-kpi-executivo{
 
-        min-height:52px !important;
-
+       min-height:64px !important;
         grid-template-columns:
             24px
             1fr !important;
 
         gap:4px !important;
 
-        padding:
-            4px
-            5px !important;
+      padding:
+    6px
+    7px !important;
 
         border-radius:6px !important;
     }
@@ -1955,21 +1953,16 @@
 
 
     .relatorio-kpi-conteudo span{
+    font-size:7px !important;
+}
 
-        font-size:6.5px !important;
-    }
+.relatorio-kpi-conteudo strong{
+    font-size:12px !important;
+}
 
-
-    .relatorio-kpi-conteudo strong{
-
-        font-size:10px !important;
-    }
-
-
-    .relatorio-kpi-conteudo small{
-
-        font-size:6px !important;
-    }
+.relatorio-kpi-conteudo small{
+    font-size:6.5px !important;
+}
 
 
     /* ======================================================
@@ -1996,18 +1989,17 @@
        PAINÉIS
     ====================================================== */
 
-    .relatorio-painel-executivo{
+  .relatorio-painel-executivo{
 
-        padding:6px !important;
+    padding:7px !important;
 
-        border-radius:6px !important;
+    border-radius:6px !important;
 
-        box-shadow:none !important;
+    box-shadow:none !important;
 
-        break-inside:avoid !important;
-        page-break-inside:avoid !important;
-    }
-
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+}
 
     .relatorio-painel-titulo{
 
@@ -2096,21 +2088,21 @@
        GRÁFICOS
     ====================================================== */
 
-    .relatorio-grafico-box{
+   .relatorio-grafico-box{
 
-        height:95px !important;
-        min-height:95px !important;
+    height:125px !important;
+    min-height:125px !important;
 
-        padding:3px !important;
+    padding:4px !important;
 
-        border-radius:5px !important;
-    }
+    border-radius:5px !important;
+}
 
 
-    .relatorio-grafico-box canvas{
+.relatorio-grafico-box canvas{
 
-        max-height:95px !important;
-    }
+    max-height:125px !important;
+}
 
 
     /* ======================================================
