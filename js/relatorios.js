@@ -2093,48 +2093,63 @@ function obterCorOrigemDescarte(nome){
 
     const chave =
         String(nome || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g,"")
             .trim()
             .toLowerCase();
 
 
-    const cores = {
-
-        "vencido":
-            "#ef4444",
-
-        "certificação":
-            "#8b5cf6",
-
-        "certificacao":
-            "#8b5cf6",
-
-        "desvio de qualidade":
-            "#f59e0b",
-
-        "desvio qualidade":
-            "#f59e0b",
-
-        "avaria importação":
-            "#2563eb",
-
-        "avaria importacao":
-            "#2563eb",
-
-        "devolução avaria":
-            "#22c55e",
-
-        "devolucao avaria":
-            "#22c55e",
-
-        "avaria estoque":
-            "#06b6d4",
-
-        "avaria nacional":
-            "#ec4899"
-    };
+    if(chave.includes("vencid")){
+        return "#ef4444"; // vermelho
+    }
 
 
-    return cores[chave] || "#94a3b8";
+    if(chave.includes("certific")){
+        return "#8b5cf6"; // roxo
+    }
+
+
+    if(
+        chave.includes("desvio") &&
+        chave.includes("qualidade")
+    ){
+        return "#f59e0b"; // laranja
+    }
+
+
+    if(
+        chave.includes("avaria") &&
+        chave.includes("import")
+    ){
+        return "#2563eb"; // azul
+    }
+
+
+    if(
+        chave.includes("devol") &&
+        chave.includes("avaria")
+    ){
+        return "#22c55e"; // verde
+    }
+
+
+    if(
+        chave.includes("avaria") &&
+        chave.includes("estoque")
+    ){
+        return "#06b6d4"; // ciano
+    }
+
+
+    if(
+        chave.includes("avaria") &&
+        chave.includes("nacional")
+    ){
+        return "#ec4899"; // rosa
+    }
+
+
+    return "#94a3b8";
 }
 
 /* ==========================================================
