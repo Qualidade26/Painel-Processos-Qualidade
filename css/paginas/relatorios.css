@@ -949,11 +949,9 @@
 
     display:grid;
 
-    grid-template-columns:1fr;
-
-    grid-template-rows:
-        auto
-        auto;
+    grid-template-columns:
+        minmax(115px,.82fr)
+        minmax(0,1.18fr);
 
     gap:8px;
 
@@ -985,9 +983,8 @@
 
     height:100%;
 
-    min-height:190px;
-
-    max-height:230px;
+   min-height:210px;
+max-height:250px;
 }
 /* ==========================================================
    TABELA EXECUTIVA
