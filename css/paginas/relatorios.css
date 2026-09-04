@@ -1568,7 +1568,6 @@
     font-weight:900;
 }
 
-
 /* ==========================================================
    RESUMO EXECUTIVO
 ========================================================== */
@@ -1579,18 +1578,23 @@
 
     grid-template-columns:
         repeat(
-            2,
+            3,
             minmax(0,1fr)
         );
 
     gap:8px;
+
+    align-items:stretch;
 }
 
 
 .relatorio-destaques,
-.relatorio-atencoes{
+.relatorio-atencoes,
+.relatorio-compromisso{
 
     min-width:0;
+
+    height:100%;
 
     padding:
         8px
@@ -1599,6 +1603,10 @@
     border-radius:8px;
 }
 
+
+/* ==========================================================
+   DESTAQUES
+========================================================== */
 
 .relatorio-destaques{
 
@@ -1610,6 +1618,10 @@
 }
 
 
+/* ==========================================================
+   PONTOS DE ATENÇÃO
+========================================================== */
+
 .relatorio-atencoes{
 
     border:
@@ -1619,6 +1631,24 @@
     background:#fffaf0;
 }
 
+
+/* ==========================================================
+   NOSSO COMPROMISSO
+========================================================== */
+
+.relatorio-compromisso{
+
+    border:
+        1px solid
+        rgba(29,78,255,.24);
+
+    background:#f5f8ff;
+}
+
+
+/* ==========================================================
+   TÍTULOS
+========================================================== */
 
 .relatorio-resumo-executivo h3{
 
@@ -1645,6 +1675,16 @@
 }
 
 
+.relatorio-compromisso h3{
+
+    color:#0f3cc9;
+}
+
+
+/* ==========================================================
+   LISTAS
+========================================================== */
+
 .relatorio-resumo-executivo ul{
 
     margin:0;
@@ -1667,17 +1707,41 @@
 }
 
 
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
 .relatorio-resumo-executivo p{
 
-    margin:0;
+    margin:
+        0
+        0
+        6px;
 
     color:#5c6c96;
 
     font-size:8px;
 
     font-weight:700;
+
+    line-height:1.35;
 }
 
+
+.relatorio-compromisso strong{
+
+    display:block;
+
+    margin-top:7px;
+
+    color:#0f3cc9;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    line-height:1.35;
+}
 /* ==========================================================
    FAIXA INFERIOR EXECUTIVA
 ========================================================== */
@@ -1687,14 +1751,22 @@
     display:grid;
 
     grid-template-columns:
-        minmax(0,1.05fr)
-        minmax(0,1.15fr);
+        minmax(0,1.25fr)
+        minmax(0,1.75fr);
 
     gap:10px;
 
     align-items:stretch;
 
     min-width:0;
+}
+
+
+.relatorio-faixa-final > *{
+
+    min-width:0;
+
+    height:100%;
 }
 /* ==========================================================
    SEM DADOS
