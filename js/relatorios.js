@@ -1,3 +1,5 @@
+
+
 /* ==========================================================
    RELATÓRIOS SGQ
 ========================================================== */
@@ -2087,7 +2089,21 @@ function gerarTabelaPeriodoAcumulado(
     `;
 }
 
+function obterCorOrigemDescarte(nome){
 
+    const cores = {
+
+        "Vencido":"#ef4444",
+        "Certificação":"#8b5cf6",
+        "Desvio Qualidade":"#f59e0b",
+        "Avaria Importação":"#2563eb",
+        "Devolução avaria":"#22c55e",
+        "Avaria estoque":"#06b6d4",
+        "Avaria Nacional":"#ec4899"
+    };
+
+    return cores[nome] || "#94a3b8";
+}
 /* ==========================================================
    LISTA DE ORIGENS DO DESCARTE
 ========================================================== */
@@ -2696,29 +2712,31 @@ const grafico =
                     ),
 
                 datasets:[
-                    {
-                        data:
-                            lista.map(
-                                item =>
-                                    Number(
-                                        item.valor || 0
-                                    )
-                            ),
+    {
+        data:
+            lista.map(
+                item =>
+                    Number(
+                        item.valor || 0
+                    )
+            ),
 
-                        backgroundColor:
-                            lista.map(
-                                item =>
-                                    coresPorOrigem[item.nome] ||
-                                    "#94a3b8"
-                            ),
+        backgroundColor:
+            lista.map(
+                item =>
+                    obterCorOrigemDescarte(
+                        item.nome
+                    )
+            ),
 
-                        borderWidth:2,
+        borderWidth:2,
 
-                        borderColor:"#ffffff"
-                    }
-                ]
-            },
-                options:{
+        borderColor:"#ffffff"
+    }
+]
+},
+
+options:{
 
                     responsive:true,
 
