@@ -2776,7 +2776,7 @@ function criarGraficoDescarteRelatorio(
                         },
 
                         datalabels:false,
-                        },
+                        
 
                         tooltip:{
 
