@@ -1290,8 +1290,7 @@ function gerarPainelDescarte(
                 "Descarte"
             )}
 
-
-            <div class="relatorio-painel-duplo">
+<div class="relatorio-descarte-layout">
 
                 <div class="relatorio-descarte-resumo">
 
