@@ -1055,8 +1055,7 @@ function gerarPainelImportacao(
                 "Importação"
             )}
 
-
-            <div class="relatorio-painel-duplo">
+<div class="relatorio-importacao-layout">
 
                 <div>
 
