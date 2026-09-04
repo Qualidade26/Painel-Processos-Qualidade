@@ -2089,24 +2089,52 @@ function gerarTabelaPeriodoAcumulado(
     `;
 }
 
-/* ==========================================================
-   CORES DAS ORIGENS - DESCARTE
-========================================================== */
-
 function obterCorOrigemDescarte(nome){
+
+    const chave =
+        String(nome || "")
+            .trim()
+            .toLowerCase();
+
 
     const cores = {
 
-        "Vencido":"#ef4444",
-        "Certificação":"#8b5cf6",
-        "Desvio Qualidade":"#f59e0b",
-        "Avaria Importação":"#2563eb",
-        "Devolução avaria":"#22c55e",
-        "Avaria estoque":"#06b6d4",
-        "Avaria Nacional":"#ec4899"
+        "vencido":
+            "#ef4444",
+
+        "certificação":
+            "#8b5cf6",
+
+        "certificacao":
+            "#8b5cf6",
+
+        "desvio de qualidade":
+            "#f59e0b",
+
+        "desvio qualidade":
+            "#f59e0b",
+
+        "avaria importação":
+            "#2563eb",
+
+        "avaria importacao":
+            "#2563eb",
+
+        "devolução avaria":
+            "#22c55e",
+
+        "devolucao avaria":
+            "#22c55e",
+
+        "avaria estoque":
+            "#06b6d4",
+
+        "avaria nacional":
+            "#ec4899"
     };
 
-    return cores[nome] || "#94a3b8";
+
+    return cores[chave] || "#94a3b8";
 }
 
 /* ==========================================================
@@ -2747,8 +2775,7 @@ function criarGraficoDescarteRelatorio(
                             display:false
                         },
 
-                        datalabels:{
-                            display:false
+                        datalabels:false,
                         },
 
                         tooltip:{
