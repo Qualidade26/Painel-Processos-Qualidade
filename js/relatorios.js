@@ -2121,22 +2121,28 @@ function gerarListaOrigensDescarte(
                 lista
                     .map(
                         item => `
+<li>
 
-                            <li>
+    <span class="relatorio-origem-nome">
 
-                                <span>
-                                    ${item.nome}
-                                </span>
+        <i
+            class="relatorio-origem-cor"
+            style="background:${obterCorOrigemDescarte(item.nome)}"
+        ></i>
 
-                                <strong>
-                                    ${
-                                        formatarMoeda(
-                                            item.valor
-                                        )
-                                    }
-                                </strong>
+        ${item.nome}
 
-                            </li>
+    </span>
+
+    <strong>
+        ${
+            formatarMoeda(
+                item.valor
+            )
+        }
+    </strong>
+
+</li>
                         `
                     )
                     .join("")
