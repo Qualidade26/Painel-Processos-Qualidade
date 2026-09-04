@@ -987,6 +987,50 @@
 max-height:250px;
 }
 /* ==========================================================
+   DESCARTE - LAYOUT ESPECÍFICO
+========================================================== */
+
+.relatorio-descarte-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(160px,.85fr);
+
+    gap:10px;
+
+    align-items:stretch;
+
+    min-width:0;
+
+    height:100%;
+}
+
+
+/* ==========================================================
+   DESCARTE - GRÁFICO
+========================================================== */
+
+.relatorio-descarte-layout .relatorio-grafico-box{
+
+    height:100%;
+
+    min-height:210px;
+
+    max-height:250px;
+}
+
+
+.relatorio-descarte-layout .relatorio-grafico-box canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+    max-height:none !important;
+}
+/* ==========================================================
    TABELA EXECUTIVA
 ========================================================== */
 
