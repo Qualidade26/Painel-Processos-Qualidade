@@ -994,11 +994,13 @@ max-height:250px;
 
     display:grid;
 
-    grid-template-columns:
-        minmax(0,1.15fr)
-        minmax(160px,.85fr);
+    grid-template-columns:1fr;
 
-    gap:10px;
+    grid-template-rows:
+        auto
+        1fr;
+
+    gap:8px;
 
     align-items:stretch;
 
@@ -1007,18 +1009,19 @@ max-height:250px;
     height:100%;
 }
 
-
 /* ==========================================================
    DESCARTE - GRÁFICO
 ========================================================== */
 
 .relatorio-descarte-layout .relatorio-grafico-box{
 
-    height:100%;
+    width:100%;
+
+    height:210px;
 
     min-height:210px;
 
-    max-height:250px;
+    max-height:230px;
 }
 
 
