@@ -2663,46 +2663,55 @@ function criarGraficoDescarteRelatorio(
         return;
     }
 
+const coresPorOrigem = {
 
-    const grafico =
-        new Chart(
-            canvas,
-            {
-                type:"doughnut",
+    "Vencido":"#ef4444",
+    "Certificação":"#8b5cf6",
+    "Desvio Qualidade":"#f59e0b",
+    "Avaria Importação":"#2563eb",
+    "Devolução avaria":"#22c55e",
+    "Avaria estoque":"#06b6d4",
+    "Avaria Nacional":"#ec4899"
+};
 
-                data:{
 
-                    labels:
-                        lista.map(
-                            item =>
-                                item.nome
-                        ),
+const grafico =
+    new Chart(
+        canvas,
+        {
+            type:"doughnut",
 
-                    datasets:[
-                        {
-                            data:
-                                lista.map(
-                                    item =>
-                                        Number(
-                                            item.valor || 0
-                                        )
-                                ),
+            data:{
 
-                            backgroundColor:[
-                                "#1d4eff",
-                                "#2563eb",
-                                "#3b82f6",
-                                "#60a5fa",
-                                "#93c5fd"
-                            ],
+                labels:
+                    lista.map(
+                        item =>
+                            item.nome
+                    ),
 
-                            borderWidth:1,
+                datasets:[
+                    {
+                        data:
+                            lista.map(
+                                item =>
+                                    Number(
+                                        item.valor || 0
+                                    )
+                            ),
 
-                            borderColor:"#ffffff"
-                        }
-                    ]
-                },
+                        backgroundColor:
+                            lista.map(
+                                item =>
+                                    coresPorOrigem[item.nome] ||
+                                    "#94a3b8"
+                            ),
 
+                        borderWidth:2,
+
+                        borderColor:"#ffffff"
+                    }
+                ]
+            },
                 options:{
 
                     responsive:true,
