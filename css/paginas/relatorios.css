@@ -949,15 +949,16 @@
 
     display:grid;
 
-    grid-template-columns:
-        minmax(115px,.82fr)
-        minmax(0,1.18fr);
+    grid-template-columns:1fr;
+
+    grid-template-rows:
+        auto
+        auto;
 
     gap:8px;
 
     align-items:stretch;
 }
-
 
 /* ==========================================================
    TABELA EXECUTIVA
