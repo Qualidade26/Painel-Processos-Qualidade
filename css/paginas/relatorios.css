@@ -1031,6 +1031,36 @@ max-height:250px;
     max-height:none !important;
 }
 /* ==========================================================
+   DESCARTE - IDENTIFICAÇÃO DAS ORIGENS
+========================================================== */
+
+.relatorio-origem-nome{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    min-width:0;
+}
+
+
+.relatorio-origem-cor{
+
+    display:inline-block;
+
+    width:8px;
+
+    height:8px;
+
+    min-width:8px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+}
+/* ==========================================================
    TABELA EXECUTIVA
 ========================================================== */
 
