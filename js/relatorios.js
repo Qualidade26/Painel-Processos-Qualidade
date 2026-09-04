@@ -3658,22 +3658,6 @@ function gerarBlocoInstitucionalRelatorio(){
 
         <section class="relatorio-institucional">
 
-            <div class="relatorio-institucional-texto">
-
-                <h3>
-                    EXCELÊNCIA EM CADA DETALHE.
-                    <br>
-                    SEGURANÇA EM CADA ENTREGA.
-                </h3>
-
-                <p>
-                    Medicamentos e suprimentos hospitalares
-                    com Qualidade, Segurança e Conformidade.
-                </p>
-
-            </div>
-
-
             <div class="relatorio-institucional-imagem">
 
                 <img
