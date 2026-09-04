@@ -2560,7 +2560,6 @@
 
     line-height:1.25 !important;
 }
-
 /* ==========================================================
    IMAGEM INSTITUCIONAL - QUALIDADE
 ========================================================== */
@@ -2569,15 +2568,13 @@
 
     min-width:0;
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        minmax(150px,.55fr)
-        minmax(0,1.45fr);
+    align-items:center;
 
-    gap:10px;
+    justify-content:center;
 
-    padding:10px;
+    padding:8px;
 
     border:
         1px solid
@@ -2596,50 +2593,9 @@
 }
 
 
-.relatorio-institucional-texto{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    min-width:0;
-}
-
-
-.relatorio-institucional-texto h3{
-
-    margin:0;
-
-    color:#0f3cc9;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    line-height:1.25;
-}
-
-
-.relatorio-institucional-texto p{
-
-    margin:
-        8px
-        0
-        0;
-
-    color:#25385f;
-
-    font-size:8px;
-
-    font-weight:700;
-
-    line-height:1.4;
-}
-
-
 .relatorio-institucional-imagem{
+
+    width:100%;
 
     min-width:0;
 
@@ -2657,11 +2613,13 @@
 
     width:100%;
 
-    height:150px;
+    height:190px;
 
     object-fit:contain;
 
     object-position:center;
+
+    border-radius:7px;
 }
     /* ======================================================
        RODAPÉ
