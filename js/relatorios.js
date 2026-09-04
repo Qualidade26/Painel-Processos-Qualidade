@@ -2089,6 +2089,10 @@ function gerarTabelaPeriodoAcumulado(
     `;
 }
 
+/* ==========================================================
+   CORES DAS ORIGENS - DESCARTE
+========================================================== */
+
 function obterCorOrigemDescarte(nome){
 
     const cores = {
@@ -2104,6 +2108,7 @@ function obterCorOrigemDescarte(nome){
 
     return cores[nome] || "#94a3b8";
 }
+
 /* ==========================================================
    LISTA DE ORIGENS DO DESCARTE
 ========================================================== */
@@ -2685,58 +2690,48 @@ function criarGraficoDescarteRelatorio(
         return;
     }
 
-const coresPorOrigem = {
 
-    "Vencido":"#ef4444",
-    "Certificação":"#8b5cf6",
-    "Desvio Qualidade":"#f59e0b",
-    "Avaria Importação":"#2563eb",
-    "Devolução avaria":"#22c55e",
-    "Avaria estoque":"#06b6d4",
-    "Avaria Nacional":"#ec4899"
-};
+    const grafico =
+        new Chart(
+            canvas,
+            {
+                type:"doughnut",
+
+                data:{
+
+                    labels:
+                        lista.map(
+                            item =>
+                                item.nome
+                        ),
+
+                    datasets:[
+                        {
+                            data:
+                                lista.map(
+                                    item =>
+                                        Number(
+                                            item.valor || 0
+                                        )
+                                ),
+
+                            backgroundColor:
+                                lista.map(
+                                    item =>
+                                        obterCorOrigemDescarte(
+                                            item.nome
+                                        )
+                                ),
+
+                            borderWidth:2,
+
+                            borderColor:"#ffffff"
+                        }
+                    ]
+                },
 
 
-const grafico =
-    new Chart(
-        canvas,
-        {
-            type:"doughnut",
-
-            data:{
-
-                labels:
-                    lista.map(
-                        item =>
-                            item.nome
-                    ),
-
-                datasets:[
-    {
-        data:
-            lista.map(
-                item =>
-                    Number(
-                        item.valor || 0
-                    )
-            ),
-
-        backgroundColor:
-            lista.map(
-                item =>
-                    obterCorOrigemDescarte(
-                        item.nome
-                    )
-            ),
-
-        borderWidth:2,
-
-        borderColor:"#ffffff"
-    }
-]
-},
-
-options:{
+                options:{
 
                     responsive:true,
 
@@ -2746,23 +2741,15 @@ options:{
 
                     plugins:{
 
-                        /*
-                        Desliga o plugin global
-                        que estava escrevendo números
-                        sobre a rosca.
-                        */
                         valorFlutuante:false,
-
 
                         legend:{
                             display:false
                         },
 
-
                         datalabels:{
                             display:false
                         },
-
 
                         tooltip:{
 
@@ -2792,7 +2779,6 @@ options:{
         grafico
     );
 }
-
 
 /* ==========================================================
    GRÁFICO AMOSTRAS
@@ -2865,7 +2851,6 @@ function criarGraficoAmostrasRelatorio(
         grafico
     );
 }
-
 
 /* ==========================================================
    GRÁFICO RETRABALHO
