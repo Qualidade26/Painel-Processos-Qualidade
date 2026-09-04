@@ -959,7 +959,36 @@
 
     align-items:stretch;
 }
+/* ==========================================================
+   IMPORTAÇÃO - ENQUADRAMENTO
+========================================================== */
 
+.relatorio-importacao-layout{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:
+        auto
+        1fr;
+
+    gap:8px;
+
+    min-width:0;
+
+    height:100%;
+}
+
+
+.relatorio-importacao-layout .relatorio-grafico-box{
+
+    height:100%;
+
+    min-height:190px;
+
+    max-height:230px;
+}
 /* ==========================================================
    TABELA EXECUTIVA
 ========================================================== */
@@ -1183,7 +1212,14 @@
 
     height:100% !important;
 }
+.relatorio-importacao-layout .relatorio-grafico-box canvas{
 
+    width:100% !important;
+
+    height:100% !important;
+
+    max-height:none !important;
+}
 
 /* ==========================================================
    MINI INDICADORES
