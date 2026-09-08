@@ -785,56 +785,6 @@
     font-weight:700;
 }
 
-
-/* ==========================================================
-   GRID EXECUTIVO
-========================================================== */
-
-.relatorio-grid-executivo{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        );
-
-    gap:10px;
-}
-
-/* ==========================================================
-   COLUNA FINAL
-   ESFIG + RESUMO EXECUTIVO
-========================================================== */
-
-.relatorio-coluna-final{
-
-    min-width:0;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr;
-
-    grid-template-rows:
-        auto
-        auto;
-
-    gap:10px;
-
-    align-content:start;
-}
-
-
-.relatorio-coluna-final > .relatorio-painel-executivo{
-
-    width:100%;
-
-    min-width:0;
-
-    margin:0;
-}
 /* ==========================================================
    NOVO GRID PRINCIPAL - RELATÓRIO MENSAL
    3 COLUNAS
@@ -969,23 +919,6 @@
     letter-spacing:.2px;
 }
 
-
-/* ==========================================================
-   LAYOUT DUPLO DENTRO DOS PAINÉIS
-========================================================== */
-
-.relatorio-painel-duplo{
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(115px,.82fr)
-        minmax(0,1.18fr);
-
-    gap:8px;
-
-    align-items:stretch;
-}
 /* ==========================================================
    IMPORTAÇÃO - ENQUADRAMENTO
 ========================================================== */
@@ -1951,13 +1884,6 @@
                 minmax(0,1fr)
             );
     }
-
-
-    .relatorio-grid-executivo{
-
-        grid-template-columns:
-            1fr;
-    }
 }
 
 
@@ -1972,13 +1898,6 @@
                 2,
                 minmax(0,1fr)
             );
-    }
-
-
-    .relatorio-painel-duplo{
-
-        grid-template-columns:
-            1fr;
     }
 
 
@@ -2239,66 +2158,6 @@
 .relatorio-kpi-conteudo small{
     font-size:6.5px !important;
 }
-
-
-   /* ======================================================
-   GRID PRINCIPAL
-====================================================== */
-
-.relatorio-grid-executivo{
-
-    display:grid !important;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        ) !important;
-
-    gap:5px !important;
-
-    align-items:start !important;
-}
-
-
-/* ======================================================
-   COLUNA FINAL
-   ESFIG + RESUMO EXECUTIVO
-====================================================== */
-
-.relatorio-coluna-final{
-
-    display:grid !important;
-
-    grid-template-columns:
-        1fr !important;
-
-    grid-template-rows:
-        auto
-        auto !important;
-
-    gap:5px !important;
-
-    align-content:start !important;
-
-    align-self:start !important;
-
-    min-width:0 !important;
-
-    height:auto !important;
-
-    overflow:visible !important;
-}
-
-
-.relatorio-coluna-final > .relatorio-painel-executivo{
-
-    width:100% !important;
-
-    min-width:0 !important;
-
-    margin:0 !important;
-}
     /* ======================================================
        PAINÉIS
     ====================================================== */
@@ -2315,15 +2174,8 @@
     page-break-inside:avoid !important;
 }
 /* ======================================================
-   RESUMO EXECUTIVO - MANTER NA PÁGINA PRINCIPAL
+   TÍTULOS DOS PAINÉIS - IMPRESSÃO
 ====================================================== */
-
-.relatorio-coluna-final .relatorio-painel-executivo:last-child{
-
-    break-inside:auto !important;
-
-    page-break-inside:auto !important;
-}
     .relatorio-painel-titulo{
 
         min-height:20px !important;
@@ -2350,21 +2202,6 @@
 
         font-size:8px !important;
     }
-
-
-    /* ======================================================
-       PAINEL DUPLO
-    ====================================================== */
-
-    .relatorio-painel-duplo{
-
-        grid-template-columns:
-            minmax(0,1fr)
-            minmax(145px,.85fr) !important;
-
-        gap:5px !important;
-    }
-
 
     /* ======================================================
        TABELAS
