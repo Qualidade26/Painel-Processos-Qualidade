@@ -3143,16 +3143,15 @@ function criarGraficoRetrabalhoRelatorio(
                                     "rgba(15,37,87,.06)"
                             },
 
-                            ticks:{
+                          ticks:{
 
-                                precision:0,
+    color:"#5c6c96",
 
-                                color:"#5c6c96",
-
-                                font:{
-                                    size:7
-                                }
-                            }
+    font:{
+        size:7,
+        weight:"bold"
+    }
+}
                         },
 
 
