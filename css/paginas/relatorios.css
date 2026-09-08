@@ -981,12 +981,22 @@
 
 .relatorio-importacao-layout .relatorio-grafico-box{
 
+    width:100%;
+
     height:100%;
 
-   min-height:210px;
-max-height:250px;
-}
+    min-height:230px;
 
+    max-height:none;
+}
+.relatorio-importacao-layout{
+
+    grid-template-rows:
+        auto
+        minmax(230px,1fr);
+
+    height:100%;
+}
 /* ==========================================================
    DESCARTE - MINI GRÁFICO HORIZONTAL
 ========================================================== */
@@ -1093,9 +1103,9 @@ max-height:250px;
 
     grid-template-columns:1fr;
 
-    grid-template-rows:
-        auto
-        1fr;
+   grid-template-rows:
+    auto
+    minmax(230px,1fr);
 
     gap:8px;
 
@@ -1107,11 +1117,13 @@ max-height:250px;
 
 .relatorio-amostras-layout .relatorio-grafico-box{
 
+    width:100%;
+
     height:100%;
 
-    min-height:210px;
+    min-height:230px;
 
-    max-height:250px;
+    max-height:none;
 }
 
 
@@ -2894,27 +2906,6 @@ max-height:250px;
 .relatorio-tabela-executiva td{
     padding:2px 3px !important;
     font-size:6.5px !important;
-}
-
-/* GRÁFICOS */
-
-.relatorio-grafico-box,
-.relatorio-importacao-layout .relatorio-grafico-box,
-.relatorio-amostras-layout .relatorio-grafico-box,
-.relatorio-retrabalho-layout .relatorio-grafico-box{
-
-    height:88px !important;
-    min-height:88px !important;
-    max-height:88px !important;
-}
-
-.relatorio-grafico-box canvas,
-.relatorio-importacao-layout .relatorio-grafico-box canvas,
-.relatorio-amostras-layout .relatorio-grafico-box canvas,
-.relatorio-retrabalho-layout .relatorio-grafico-box canvas{
-
-    height:88px !important;
-    max-height:88px !important;
 }
 
 /* FAIXA FINAL */
