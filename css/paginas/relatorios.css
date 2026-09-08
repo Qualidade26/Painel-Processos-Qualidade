@@ -2767,19 +2767,33 @@ max-height:250px;
 }
 
 
-/* MINI GRÁFICO */
+/* MINI GRÁFICO - DESCARTE */
+
+.relatorio-descarte-layout{
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr) !important;
+
+    height:100% !important;
+}
+
 
 .relatorio-descarte-grafico-mini{
 
-    height:105px !important;
+    width:100% !important;
 
-    min-height:105px !important;
+    height:145px !important;
 
-    max-height:105px !important;
+    min-height:145px !important;
+
+    max-height:145px !important;
 
     padding:
-        2px
-        3px !important;
+        6px
+        6px !important;
+
+    box-sizing:border-box !important;
 }
 
 
@@ -2787,9 +2801,9 @@ max-height:250px;
 
     width:100% !important;
 
-    height:105px !important;
+    height:100% !important;
 
-    max-height:105px !important;
+    max-height:none !important;
 }
     /* ======================================================
        PÁGINA
