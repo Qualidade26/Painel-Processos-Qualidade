@@ -3093,93 +3093,86 @@ function criarGraficoRetrabalhoRelatorio(
 
                     indexAxis:"y",
 
-                    plugins:{
+                  plugins:{
 
-                        ...opcoesGraficoRelatorio()
-                            .plugins,
+    ...opcoesGraficoRelatorio()
+        .plugins,
 
-                        valorFlutuante:false,
+    valorFlutuante:false,
 
-                        legend:{
-                            display:false
-                        },
-
-                        datalabels:{
-
-                            display:true,
-
-                            color:"#0f2557",
-
-                            anchor:"end",
-
-                            align:"right",
-
-                            offset:3,
-
-                            formatter(valor){
-
-                                return Number(valor) > 0
-                                    ? valor
-                                    : "";
-                            },
-
-                            font:{
-                                size:8,
-                                weight:"bold"
-                            }
-                        }
-                    },
-
-
-                   x:{
-
-    beginAtZero:true,
-
-    grace:"12%",
-
-    grid:{
-        color:"rgba(15,37,87,.05)",
-        lineWidth:0.5,
-        tickLength:3
+    legend:{
+        display:false
     },
 
-                          ticks:{
+    datalabels:{
 
-    color:"#5c6c96",
+        display:true,
 
-    font:{
-        size:7,
-        weight:"bold"
+        color:"#0f2557",
+
+        anchor:"end",
+
+        align:"right",
+
+        offset:3,
+
+        formatter(valor){
+
+            return Number(valor) > 0
+                ? valor
+                : "";
+        },
+
+        font:{
+            size:8,
+            weight:"bold"
+        }
     }
-}
-                        },
+},
 
 
-                        y:{
+scales:{
 
-                            grid:{
-                                display:false
-                            },
+    x:{
 
-                            ticks:{
+        beginAtZero:true,
 
-                                color:"#5c6c96",
+        grace:"12%",
 
-                                font:{
-                                    size:7,
-                                    weight:"600"
-                                }
-                            }
-                        }
-                    }
-                }
+        grid:{
+            color:"rgba(15,37,87,.05)",
+            lineWidth:0.5,
+            tickLength:3
+        },
+
+        ticks:{
+
+            color:"#5c6c96",
+
+            font:{
+                size:7,
+                weight:"bold"
             }
-        );
+        }
+    },
 
 
-    window.graficosRelatorio.push(
-        grafico
-    );
+    y:{
+
+        grid:{
+            display:false
+        },
+
+        ticks:{
+
+            color:"#5c6c96",
+
+            font:{
+                size:7,
+                weight:"bold"
+            }
+        }
+    }
 }
 
 /* ==========================================================
