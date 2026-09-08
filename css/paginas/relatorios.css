@@ -852,7 +852,7 @@
 
     gap:10px;
 
-    align-items:start;
+    align-items:stretch;
 }
 
 
@@ -862,7 +862,18 @@
 
     width:100%;
 
-    height:auto;
+    height:100%;
+}
+/* ==========================================================
+   ALINHAMENTO INTERNO DOS PAINÉIS
+========================================================== */
+
+.relatorio-importacao-layout,
+.relatorio-retrabalho-layout,
+.relatorio-amostras-layout,
+.relatorio-descarte-layout{
+
+    height:100%;
 }
 /* ==========================================================
    ORDEM DOS PAINÉIS - RELATÓRIO MENSAL
