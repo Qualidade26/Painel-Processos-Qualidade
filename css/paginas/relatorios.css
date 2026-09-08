@@ -1174,6 +1174,46 @@ max-height:250px;
     max-height:none !important;
 }
 /* ==========================================================
+   RETRABALHO - LAYOUT ESPECÍFICO
+========================================================== */
+
+.relatorio-retrabalho-layout{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:
+        auto
+        1fr;
+
+    gap:8px;
+
+    min-width:0;
+
+    height:100%;
+}
+
+
+.relatorio-retrabalho-layout .relatorio-grafico-box{
+
+    height:100%;
+
+    min-height:210px;
+
+    max-height:250px;
+}
+
+
+.relatorio-retrabalho-layout .relatorio-grafico-box canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+    max-height:none !important;
+}
+/* ==========================================================
    TABELA EXECUTIVA
 ========================================================== */
 
