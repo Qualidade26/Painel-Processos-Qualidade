@@ -2824,6 +2824,7 @@ function criarGraficoDescarteRelatorio(
 
 /* ==========================================================
    GRÁFICO AMOSTRAS
+   MODELO IGUAL À IMPORTAÇÃO
 ========================================================== */
 
 function criarGraficoAmostrasRelatorio(
@@ -2842,7 +2843,6 @@ function criarGraficoAmostrasRelatorio(
             dados?.mensal
         )
     ){
-
         return;
     }
 
@@ -2850,7 +2850,9 @@ function criarGraficoAmostrasRelatorio(
     const labels =
         dados.mensal.map(
             item =>
-                item.mes || ""
+                abreviarMesRelatorio(
+                    item.mes || ""
+                )
         );
 
 
@@ -2870,21 +2872,118 @@ function criarGraficoAmostrasRelatorio(
                 type:"bar",
 
                 data:{
+
                     labels,
 
                     datasets:[
                         {
                             label:"Amostras",
+
                             data:valores,
+
                             backgroundColor:
-                                "#3b82f6",
-                            borderRadius:4
+                                "#1d4eff",
+
+                            borderColor:
+                                "#0f3cc9",
+
+                            borderWidth:1,
+
+                            borderRadius:4,
+
+                            _ocultarZero:true
                         }
                     ]
                 },
 
-                options:
-                    opcoesGraficoRelatorio()
+
+                options:{
+
+                    ...opcoesGraficoRelatorio(),
+
+                    plugins:{
+
+                        ...opcoesGraficoRelatorio()
+                            .plugins,
+
+                        valorFlutuante:false,
+
+                        legend:{
+                            display:false
+                        },
+
+                        datalabels:{
+
+                            display:true,
+
+                            color:"#0f2557",
+
+                            anchor:"end",
+
+                            align:"top",
+
+                            offset:1,
+
+                            formatter(valor){
+
+                                return Number(valor) > 0
+                                    ? valor
+                                    : "";
+                            },
+
+                            font:{
+                                size:8,
+                                weight:"bold"
+                            }
+                        }
+                    },
+
+
+                    scales:{
+
+                        x:{
+
+                            grid:{
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7,
+                                    weight:"600"
+                                }
+                            }
+                        },
+
+
+                        y:{
+
+                            beginAtZero:true,
+
+                            grace:"15%",
+
+                            grid:{
+
+                                color:
+                                    "rgba(15,37,87,.06)"
+                            },
+
+                            ticks:{
+
+                                precision:0,
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7
+                                }
+                            }
+                        }
+                    }
+                }
             }
         );
 
