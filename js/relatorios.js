@@ -1470,7 +1470,7 @@ function gerarPainelRetrabalho(
             )}
 
 
-            <div class="relatorio-painel-duplo">
+            <div class="relatorio-retrabalho-layout">
 
                 <div>
 
@@ -3013,21 +3013,18 @@ function criarGraficoRetrabalhoRelatorio(
             dados?.fabricantes
         )
     ){
-
         return;
     }
 
 
     const lista =
         dados.fabricantes
-
             .filter(
                 item =>
                     Number(
                         item.quantidade || 0
                     ) > 0
             )
-
             .sort(
                 (a,b) =>
                     Number(
@@ -3037,7 +3034,6 @@ function criarGraficoRetrabalhoRelatorio(
                         a.quantidade || 0
                     )
             )
-
             .slice(0,4);
 
 
@@ -3054,11 +3050,15 @@ function criarGraficoRetrabalhoRelatorio(
 
                 data:{
 
-                    labels:
-                        lista.map(
-                            item =>
-                                item.fabricante
-                        ),
+                   labels:
+    lista.map(
+        item =>
+            String(item.fabricante || "")
+                .trim()
+                .split(/\s+/)
+                .slice(0,2)
+                .join(" ")
+    ),
 
                     datasets:[
                         {
@@ -3073,17 +3073,106 @@ function criarGraficoRetrabalhoRelatorio(
                                 ),
 
                             backgroundColor:
-                                "#2563eb",
+                                "#1d4eff",
+
+                            borderColor:
+                                "#0f3cc9",
+
+                            borderWidth:1,
 
                             borderRadius:4
                         }
                     ]
                 },
 
+
                 options:{
+
                     ...opcoesGraficoRelatorio(),
 
-                    indexAxis:"y"
+                    indexAxis:"y",
+
+                    plugins:{
+
+                        ...opcoesGraficoRelatorio()
+                            .plugins,
+
+                        valorFlutuante:false,
+
+                        legend:{
+                            display:false
+                        },
+
+                        datalabels:{
+
+                            display:true,
+
+                            color:"#0f2557",
+
+                            anchor:"end",
+
+                            align:"right",
+
+                            offset:3,
+
+                            formatter(valor){
+
+                                return Number(valor) > 0
+                                    ? valor
+                                    : "";
+                            },
+
+                            font:{
+                                size:8,
+                                weight:"bold"
+                            }
+                        }
+                    },
+
+
+                    scales:{
+
+                        x:{
+
+                            beginAtZero:true,
+
+                            grace:"12%",
+
+                            grid:{
+                                color:
+                                    "rgba(15,37,87,.06)"
+                            },
+
+                            ticks:{
+
+                                precision:0,
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7
+                                }
+                            }
+                        },
+
+
+                        y:{
+
+                            grid:{
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:7,
+                                    weight:"600"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         );
@@ -3093,7 +3182,6 @@ function criarGraficoRetrabalhoRelatorio(
         grafico
     );
 }
-
 
 /* ==========================================================
    OPÇÕES PADRÃO DOS GRÁFICOS
