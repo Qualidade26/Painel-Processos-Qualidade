@@ -1104,34 +1104,99 @@ max-height:250px;
 }
 
 /* ==========================================================
-   DESCARTE - IDENTIFICAÇÃO DAS ORIGENS
+   DESCARTE - MINI GRÁFICO HORIZONTAL
 ========================================================== */
 
-.relatorio-origem-nome{
+.relatorio-descarte-layout{
 
-    display:flex;
+    display:grid;
 
-    align-items:center;
+    grid-template-columns:1fr;
 
-    gap:5px;
+    grid-template-rows:
+        auto
+        1fr;
+
+    gap:6px;
 
     min-width:0;
+
+    height:100%;
 }
 
 
-.relatorio-origem-cor{
+/* ==========================================================
+   3 VALORES LADO A LADO
+========================================================== */
 
-    display:inline-block;
+.relatorio-descarte-resumo{
 
-    width:8px;
+    display:grid;
 
-    height:8px;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        );
 
-    min-width:8px;
+    gap:5px;
+}
 
-    border-radius:50%;
 
-    flex-shrink:0;
+.relatorio-descarte-resumo
+.relatorio-mini-indicador{
+
+    min-height:42px;
+
+    padding:
+        5px
+        6px;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador span{
+
+    font-size:6.5px;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador strong{
+
+    margin-top:3px;
+
+    font-size:9px;
+}
+
+
+/* ==========================================================
+   MINI GRÁFICO
+========================================================== */
+
+.relatorio-descarte-grafico-mini{
+
+    width:100%;
+
+    height:210px;
+
+    min-height:210px;
+
+    max-height:210px;
+
+    padding:
+        5px
+        6px;
+}
+
+
+.relatorio-descarte-grafico-mini canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+    max-height:none !important;
 }
 /* ==========================================================
    AMOSTRAS - MODELO IGUAL À IMPORTAÇÃO
@@ -2900,7 +2965,81 @@ max-height:250px;
         font-size:6px !important;
     }
 
+/* ==========================================================
+   DESCARTE - IMPRESSÃO COMPACTA
+========================================================== */
 
+.relatorio-descarte-layout{
+
+    gap:3px !important;
+
+    height:auto !important;
+}
+
+
+.relatorio-descarte-resumo{
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
+
+    gap:3px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador{
+
+    min-height:27px !important;
+
+    padding:
+        2px
+        3px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador span{
+
+    font-size:5px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador strong{
+
+    margin-top:1px !important;
+
+    font-size:6.5px !important;
+}
+
+
+/* MINI GRÁFICO */
+
+.relatorio-descarte-grafico-mini{
+
+    height:105px !important;
+
+    min-height:105px !important;
+
+    max-height:105px !important;
+
+    padding:
+        2px
+        3px !important;
+}
+
+
+.relatorio-descarte-grafico-mini canvas{
+
+    width:100% !important;
+
+    height:105px !important;
+
+    max-height:105px !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
