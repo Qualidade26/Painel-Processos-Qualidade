@@ -1388,7 +1388,7 @@ function gerarPainelAmostras(
             )}
 
 
-            <div class="relatorio-painel-duplo">
+   <div class="relatorio-amostras-layout">
 
                 <div>
 
