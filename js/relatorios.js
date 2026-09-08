@@ -2659,13 +2659,13 @@ function criarGraficoImportacaoRelatorio(
 
                             ticks:{
 
-                                color:"#5c6c96",
+    color:"#5c6c96",
 
-                                font:{
-                                    size:7,
-                                    weight:"600"
-                                }
-                            }
+    font:{
+        size:7,
+        weight:"bold"
+    }
+}
                         },
 
 
