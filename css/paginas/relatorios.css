@@ -918,7 +918,17 @@
 
     letter-spacing:.2px;
 }
+/* ==========================================================
+   IMPORTAÇÃO - TABELA MAIS COMPACTA
+========================================================== */
 
+.relatorio-importacao-layout .relatorio-tabela-executiva th,
+.relatorio-importacao-layout .relatorio-tabela-executiva td{
+
+    padding:
+        4px
+        6px;
+}
 /* ==========================================================
    IMPORTAÇÃO - ENQUADRAMENTO
 ========================================================== */
