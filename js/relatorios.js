@@ -1292,7 +1292,13 @@ function gerarPainelDescarte(
                 "Descarte"
             )}
 
-<div class="relatorio-descarte-layout">
+
+            <div class="relatorio-descarte-layout">
+
+
+                <!-- ==============================
+                     VALORES
+                =============================== -->
 
                 <div class="relatorio-descarte-resumo">
 
@@ -1305,14 +1311,6 @@ function gerarPainelDescarte(
                         )
                     }
 
-                    ${
-                        miniIndicador(
-                            "Acumulado no ano",
-                            formatarMoeda(
-                                corrente.descartadoAno?.total
-                            )
-                        )
-                    }
 
                     ${
                         miniIndicador(
@@ -1324,24 +1322,28 @@ function gerarPainelDescarte(
                     }
 
 
-                    <div class="relatorio-legenda-executiva">
-
-                        <strong>
-                            Principais origens
-                        </strong>
-
-                        ${
-                            gerarListaOrigensDescarte(
-                                corrente
+                    ${
+                        miniIndicador(
+                            "Acumulado no ano",
+                            formatarMoeda(
+                                corrente.descartadoAno?.total
                             )
-                        }
-
-                    </div>
+                        )
+                    }
 
                 </div>
 
 
-                <div class="relatorio-grafico-box">
+                <!-- ==============================
+                     GRÁFICO POR ORIGEM
+                =============================== -->
+
+                <div
+                    class="
+                        relatorio-grafico-box
+                        relatorio-descarte-grafico-mini
+                    "
+                >
 
                     <canvas
                         id="relatorioGraficoDescarte"
@@ -2722,11 +2724,20 @@ function criarGraficoDescarteRelatorio(
     }
 
 
+    /* ==================================================
+       SOMENTE ORIGENS COM VALOR
+    ================================================== */
+
     const lista =
         obterOrigensDescarte(
             dados
         )
-        .slice(0,5);
+        .filter(
+            item =>
+                Number(
+                    item.valor || 0
+                ) > 0
+        );
 
 
     if(!lista.length){
@@ -2738,7 +2749,9 @@ function criarGraficoDescarteRelatorio(
         new Chart(
             canvas,
             {
-                type:"doughnut",
+
+                type:"bar",
+
 
                 data:{
 
@@ -2748,8 +2761,12 @@ function criarGraficoDescarteRelatorio(
                                 item.nome
                         ),
 
+
                     datasets:[
                         {
+
+                            label:"Valor",
+
                             data:
                                 lista.map(
                                     item =>
@@ -2757,6 +2774,9 @@ function criarGraficoDescarteRelatorio(
                                             item.valor || 0
                                         )
                                 ),
+
+
+                            /* CORES POR ORIGEM */
 
                             backgroundColor:
                                 lista.map(
@@ -2766,9 +2786,24 @@ function criarGraficoDescarteRelatorio(
                                         )
                                 ),
 
-                            borderWidth:2,
 
-                            borderColor:"#ffffff"
+                            borderColor:
+                                lista.map(
+                                    item =>
+                                        obterCorOrigemDescarte(
+                                            item.nome
+                                        )
+                                ),
+
+
+                            borderWidth:0,
+
+                            borderRadius:4,
+
+                            barThickness:8,
+
+                            maxBarThickness:8
+
                         }
                     ]
                 },
@@ -2776,22 +2811,64 @@ function criarGraficoDescarteRelatorio(
 
                 options:{
 
-                    responsive:true,
+                    ...opcoesGraficoRelatorio(),
 
-                    maintainAspectRatio:false,
+                    indexAxis:"y",
 
-                    cutout:"62%",
+
+                    layout:{
+
+                        padding:{
+                            right:42
+                        }
+
+                    },
+
 
                     plugins:{
 
+                        ...opcoesGraficoRelatorio()
+                            .plugins,
+
                         valorFlutuante:false,
+
 
                         legend:{
                             display:false
                         },
 
-                        datalabels:false,
-                        
+
+                        datalabels:{
+
+                            display:true,
+
+                            color:"#0f2557",
+
+                            anchor:"end",
+
+                            align:"right",
+
+                            offset:3,
+
+                            clamp:true,
+
+
+                            formatter(valor){
+
+                                return formatarMoeda(
+                                    valor
+                                );
+
+                            },
+
+
+                            font:{
+                                size:7,
+                                weight:"bold"
+                            }
+
+                        },
+
 
                         tooltip:{
 
@@ -2801,18 +2878,111 @@ function criarGraficoDescarteRelatorio(
 
                                 label(context){
 
-                                    return (
-                                        context.label +
-                                        ": " +
-                                        formatarMoeda(
-                                            context.raw
-                                        )
+                                    return formatarMoeda(
+                                        context.raw
                                     );
+
                                 }
+
                             }
+
                         }
+
+                    },
+
+
+                    scales:{
+
+
+                        /* VALORES */
+
+                        x:{
+
+                            beginAtZero:true,
+
+                            grace:"15%",
+
+                            border:{
+                                display:false
+                            },
+
+                            grid:{
+
+                                color:
+                                    "rgba(15,37,87,.06)",
+
+                                lineWidth:.5
+
+                            },
+
+                            ticks:{
+
+                                color:"#5c6c96",
+
+                                font:{
+                                    size:6
+                                },
+
+
+                                callback(valor){
+
+                                    if(
+                                        Number(valor) >=
+                                        1000
+                                    ){
+
+                                        return (
+                                            "R$ " +
+                                            Math.round(
+                                                Number(valor) /
+                                                1000
+                                            ) +
+                                            " mil"
+                                        );
+
+                                    }
+
+
+                                    return "R$ " + valor;
+
+                                }
+
+                            }
+
+                        },
+
+
+                        /* ORIGENS */
+
+                        y:{
+
+                            border:{
+                                display:false
+                            },
+
+                            grid:{
+                                display:false
+                            },
+
+                            ticks:{
+
+                                color:"#0f2557",
+
+                                autoSkip:false,
+
+                                font:{
+                                    size:7,
+                                    weight:"bold"
+                                }
+
+                            }
+
+                        }
+
                     }
+
                 }
+
             }
         );
 
