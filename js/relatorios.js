@@ -3130,18 +3130,17 @@ function criarGraficoRetrabalhoRelatorio(
                     },
 
 
-                    scales:{
+                   x:{
 
-                        x:{
+    beginAtZero:true,
 
-                            beginAtZero:true,
+    grace:"12%",
 
-                            grace:"12%",
-
-                            grid:{
-                                color:
-                                    "rgba(15,37,87,.06)"
-                            },
+    grid:{
+        color:"rgba(15,37,87,.05)",
+        lineWidth:0.5,
+        tickLength:3
+    },
 
                           ticks:{
 
