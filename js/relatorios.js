@@ -2896,16 +2896,23 @@ function criarGraficoDescarteRelatorio(
 
                         /* VALORES */
 
-                        x:{
+                      x:{
 
-                            beginAtZero:true,
+    beginAtZero:true,
 
-                            grace:"15%",
+    suggestedMax:
+        Math.max(
+            ...lista.map(
+                item =>
+                    Number(
+                        item.valor || 0
+                    )
+            )
+        ) * 1.18,
 
-                            border:{
-                                display:false
-                            },
-
+    border:{
+        display:false
+    },
                             grid:{
 
                                 color:
