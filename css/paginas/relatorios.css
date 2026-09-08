@@ -999,9 +999,9 @@ max-height:250px;
 
     grid-template-rows:
         auto
-        1fr;
+        minmax(0,1fr);
 
-    gap:6px;
+    gap:5px;
 
     min-width:0;
 
@@ -1062,15 +1062,17 @@ max-height:250px;
 
     width:100%;
 
-    height:260px;
+    height:100%;
 
-    min-height:260px;
+    min-height:210px;
 
-    max-height:260px;
+    max-height:none;
 
     padding:
-        8px
-        10px;
+        6px
+        8px;
+
+    box-sizing:border-box;
 }
 
 .relatorio-descarte-grafico-mini canvas{
@@ -2880,14 +2882,12 @@ max-height:250px;
     font-size:6.5px !important;
 }
 
-
 /* GRÁFICOS */
 
 .relatorio-grafico-box,
 .relatorio-importacao-layout .relatorio-grafico-box,
 .relatorio-amostras-layout .relatorio-grafico-box,
-.relatorio-retrabalho-layout .relatorio-grafico-box,
-.relatorio-descarte-layout .relatorio-grafico-box{
+.relatorio-retrabalho-layout .relatorio-grafico-box{
 
     height:88px !important;
     min-height:88px !important;
@@ -2897,13 +2897,11 @@ max-height:250px;
 .relatorio-grafico-box canvas,
 .relatorio-importacao-layout .relatorio-grafico-box canvas,
 .relatorio-amostras-layout .relatorio-grafico-box canvas,
-.relatorio-retrabalho-layout .relatorio-grafico-box canvas,
-.relatorio-descarte-layout .relatorio-grafico-box canvas{
+.relatorio-retrabalho-layout .relatorio-grafico-box canvas{
 
     height:88px !important;
     max-height:88px !important;
 }
-
 
 /* FAIXA FINAL */
 
