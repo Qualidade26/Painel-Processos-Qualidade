@@ -2158,6 +2158,24 @@
 .relatorio-kpi-conteudo small{
     font-size:6.5px !important;
 }
+   /* ======================================================
+   GRID PRINCIPAL - IMPRESSÃO
+====================================================== */
+
+.relatorio-grid-principal{
+
+    display:grid !important;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
+
+    gap:5px !important;
+
+    align-items:stretch !important;
+}
     /* ======================================================
        PAINÉIS
     ====================================================== */
