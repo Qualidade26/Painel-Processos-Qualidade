@@ -2954,30 +2954,32 @@ function criarGraficoDescarteRelatorio(
 
                         /* ORIGENS */
 
-                        y:{
+                    y:{
 
-                            border:{
-                                display:false
-                            },
+    border:{
+        display:false
+    },
 
-                            grid:{
-                                display:false
-                            },
+    grid:{
+        display:false
+    },
 
-                            ticks:{
+    ticks:{
 
-                                color:"#0f2557",
+        color:"#0f2557",
 
-                                autoSkip:false,
+        autoSkip:false,
 
-                                font:{
-                                    size:7,
-                                    weight:"bold"
-                                }
+        padding:6,
 
-                            }
+        font:{
+            size:8,
+            weight:"bold"
+        }
 
-                        }
+    }
+
+}
 
                     }
 
