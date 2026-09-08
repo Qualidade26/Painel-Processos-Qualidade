@@ -2762,50 +2762,54 @@ function criarGraficoDescarteRelatorio(
                         ),
 
 
-                    datasets:[
-                        {
+                   datasets:[
+    {
 
-                            label:"Valor",
+        label:"Valor",
 
-                            data:
-                                lista.map(
-                                    item =>
-                                        Number(
-                                            item.valor || 0
-                                        )
-                                ),
-
-
-                            /* CORES POR ORIGEM */
-
-                            backgroundColor:
-                                lista.map(
-                                    item =>
-                                        obterCorOrigemDescarte(
-                                            item.nome
-                                        )
-                                ),
+        data:
+            lista.map(
+                item =>
+                    Number(
+                        item.valor || 0
+                    )
+            ),
 
 
-                            borderColor:
-                                lista.map(
-                                    item =>
-                                        obterCorOrigemDescarte(
-                                            item.nome
-                                        )
-                                ),
+        /* CORES POR ORIGEM */
+
+        backgroundColor:
+            lista.map(
+                item =>
+                    obterCorOrigemDescarte(
+                        item.nome
+                    )
+            ),
 
 
-                            borderWidth:0,
+        borderColor:
+            lista.map(
+                item =>
+                    obterCorOrigemDescarte(
+                        item.nome
+                    )
+            ),
 
-                            borderRadius:4,
 
-                            barThickness:8,
+        borderWidth:0,
 
-                            maxBarThickness:8
+        borderRadius:4,
 
-                        }
-                    ]
+        barThickness:10,
+
+        maxBarThickness:10,
+
+        categoryPercentage:0.72,
+
+        barPercentage:0.78
+
+    }
+]
                 },
 
 
