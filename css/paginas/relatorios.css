@@ -2912,3 +2912,147 @@ max-height:250px;
         margin:6mm;
     }
 }
+/* ==========================================================
+   ENQUADRAMENTO FINAL - RELATÓRIO EM UMA ÚNICA PÁGINA
+========================================================== */
+
+#relatorioDocumento{
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+}
+
+
+/* CORPO */
+
+.relatorio-executivo-corpo{
+    padding:5px !important;
+    gap:5px !important;
+}
+
+
+/* KPIs */
+
+.relatorio-kpis-executivos{
+    gap:4px !important;
+}
+
+.relatorio-kpi-executivo{
+    min-height:48px !important;
+    padding:4px 6px !important;
+}
+
+
+/* GRID PRINCIPAL - 3 COLUNAS */
+
+.relatorio-grid-executivo,
+.relatorio-grid-principal{
+    display:grid !important;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr)) !important;
+
+    gap:5px !important;
+
+    align-items:stretch !important;
+}
+
+
+/* PAINÉIS */
+
+.relatorio-painel-executivo{
+    padding:5px !important;
+    margin:0 !important;
+
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+}
+
+
+/* TÍTULOS */
+
+.relatorio-painel-titulo{
+    min-height:17px !important;
+
+    margin-bottom:3px !important;
+    padding-bottom:2px !important;
+}
+
+
+/* TABELAS */
+
+.relatorio-tabela-executiva th{
+    padding:2px 3px !important;
+    font-size:6px !important;
+}
+
+.relatorio-tabela-executiva td{
+    padding:2px 3px !important;
+    font-size:6.5px !important;
+}
+
+
+/* GRÁFICOS */
+
+.relatorio-grafico-box,
+.relatorio-importacao-layout .relatorio-grafico-box,
+.relatorio-amostras-layout .relatorio-grafico-box,
+.relatorio-retrabalho-layout .relatorio-grafico-box,
+.relatorio-descarte-layout .relatorio-grafico-box{
+
+    height:88px !important;
+    min-height:88px !important;
+    max-height:88px !important;
+}
+
+.relatorio-grafico-box canvas,
+.relatorio-importacao-layout .relatorio-grafico-box canvas,
+.relatorio-amostras-layout .relatorio-grafico-box canvas,
+.relatorio-retrabalho-layout .relatorio-grafico-box canvas,
+.relatorio-descarte-layout .relatorio-grafico-box canvas{
+
+    height:88px !important;
+    max-height:88px !important;
+}
+
+
+/* FAIXA FINAL */
+
+.relatorio-faixa-final{
+    gap:5px !important;
+}
+
+
+/* RESUMO EXECUTIVO */
+
+.relatorio-resumo-executivo{
+    gap:3px !important;
+}
+
+
+/* IMAGEM INSTITUCIONAL */
+
+.relatorio-institucional{
+    padding:4px !important;
+}
+
+.relatorio-institucional-imagem img{
+    height:92px !important;
+    max-height:92px !important;
+}
+
+
+/* RODAPÉ */
+
+.relatorio-executivo-rodape{
+    padding:3px 6px !important;
+}
+/* ======================================================
+   PÁGINA
+====================================================== */
+
+@page{
+    size:A4 landscape;
+    margin:4mm;
+}
