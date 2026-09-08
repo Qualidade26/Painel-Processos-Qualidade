@@ -865,6 +865,34 @@
     height:auto;
 }
 /* ==========================================================
+   ORDEM DOS PAINÉIS - RELATÓRIO MENSAL
+========================================================== */
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(1){
+    order:1;
+}
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(2){
+    order:4;
+}
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(3){
+    order:3;
+}
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(4){
+    order:2;
+}
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(5){
+    order:5;
+}
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(6){
+    order:6;
+}
+
+/* ==========================================================
    PAINÉIS EXECUTIVOS
 ========================================================== */
 
