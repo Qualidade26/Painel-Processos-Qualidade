@@ -3289,7 +3289,7 @@ function criarGraficoRetrabalhoRelatorio(
 
     datalabels:{
 
-        display:true,
+       display:false,
 
         color:"#0f2557",
 
