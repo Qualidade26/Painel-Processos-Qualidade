@@ -1101,7 +1101,6 @@
    AMOSTRAS - MODELO IGUAL À IMPORTAÇÃO
 ========================================================== */
 .relatorio-amostras-layout{
-
     display:grid;
 
     grid-template-columns:1fr;
