@@ -1100,16 +1100,15 @@
 /* ==========================================================
    AMOSTRAS - MODELO IGUAL À IMPORTAÇÃO
 ========================================================== */
-
 .relatorio-amostras-layout{
 
     display:grid;
 
     grid-template-columns:1fr;
 
-   grid-template-rows:
-    auto
-    minmax(230px,1fr);
+    grid-template-rows:
+        auto
+        minmax(230px,1fr);
 
     gap:8px;
 
@@ -1129,7 +1128,6 @@
 
     max-height:none;
 }
-
 
 .relatorio-amostras-layout .relatorio-grafico-box canvas{
 
