@@ -863,6 +863,7 @@
 .relatorio-grid-principal > .relatorio-painel-executivo:nth-child(6){
 
     height:auto;
+    align-self:start;
 }
 /* ==========================================================
    PAINÉIS EXECUTIVOS
