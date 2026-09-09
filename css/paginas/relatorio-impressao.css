@@ -589,47 +589,47 @@ height:20px !important;
     line-height:1.25 !important;
 }
 /* ==========================================================
-   IMAGEM INSTITUCIONAL - QUALIDADE
+   IMAGEM INSTITUCIONAL - PREENCHER TODO O PAINEL
 ========================================================== */
 
 .relatorio-institucional{
 
-    min-width:0;
+    min-width:0 !important;
+    min-height:0 !important;
 
-    display:flex;
+    display:flex !important;
 
-    align-items:center;
+    align-items:stretch !important;
+    justify-content:stretch !important;
 
-    justify-content:center;
-
-   padding:6px !important;
+    padding:3px !important;
 
     border:
         1px solid
-        #b8d1ff;
+        #b8d1ff !important;
 
-    border-radius:10px;
+    border-radius:10px !important;
 
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #eef5ff
-        );
+    background:#ffffff !important;
 
-    overflow:hidden;
+    overflow:hidden !important;
 }
 
 
 .relatorio-institucional-imagem{
 
     width:100% !important;
-    height:auto !important;
+    height:100% !important;
+
+    min-width:0 !important;
+    min-height:0 !important;
 
     display:flex !important;
 
-    align-items:flex-start !important;
-    justify-content:center !important;
+    align-items:stretch !important;
+    justify-content:stretch !important;
+
+    overflow:hidden !important;
 }
 
 
@@ -638,13 +638,14 @@ height:20px !important;
     display:block !important;
 
     width:100% !important;
-    height:auto !important;
+    height:100% !important;
 
-    max-height:90px !important;
+    max-width:none !important;
+    max-height:none !important;
 
-    object-fit:contain !important;
+    object-fit:fill !important;
 
-    border-radius:7px;
+    border-radius:7px !important;
 }
     /* ======================================================
        RODAPÉ
