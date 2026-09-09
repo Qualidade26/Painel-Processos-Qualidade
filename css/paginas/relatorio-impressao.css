@@ -827,8 +827,33 @@ max-height:110px !important;
     min-height:0 !important;
 }
     /* ======================================================
-       PÁGINA
-    ====================================================== */
+   CONTORNO AZUL - FAIXA FINAL
+====================================================== */
+
+/* CARDS DO RESUMO EXECUTIVO */
+
+.relatorio-destaques,
+.relatorio-atencoes,
+.relatorio-compromisso{
+
+    border:
+        1px solid
+        #1d4eff !important;
+
+    border-radius:6px !important;
+}
+
+
+/* PAINEL DA IMAGEM */
+
+.relatorio-institucional{
+
+    border:
+        1px solid
+        #1d4eff !important;
+
+    border-radius:6px !important;
+}
  /* ======================================================
    PÁGINA
 ====================================================== */
