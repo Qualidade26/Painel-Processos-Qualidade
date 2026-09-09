@@ -523,7 +523,9 @@
             minmax(0,1fr)
         ) !important;
 
-    gap:4px !important;
+    gap:3px !important;
+
+    align-items:start !important;
 }
 
 
@@ -533,10 +535,9 @@
 
     min-width:0 !important;
 
-    padding:
-        4px
-        5px !important;
-
+   padding:
+    3px
+    4px !important;
     border-radius:5px !important;
 }
 
