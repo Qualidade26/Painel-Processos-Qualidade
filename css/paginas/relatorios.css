@@ -979,9 +979,9 @@
 
     grid-template-columns:1fr;
 
-  grid-template-rows:
+grid-template-rows:
     auto
-    minmax(270px,1fr);
+    minmax(280px,1fr);
 
     gap:6px;
 
@@ -1046,7 +1046,7 @@
 
     height:100%;
 
-    min-height:270px;
+    min-height:280px;
 
     max-height:none;
 
