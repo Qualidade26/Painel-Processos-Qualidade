@@ -795,10 +795,9 @@
     display:grid;
 
     grid-template-columns:
-        repeat(
-            3,
-            minmax(0,1fr)
-        );
+        repeat(3,minmax(0,1fr));
+
+    grid-auto-rows:1fr;
 
     gap:10px;
 
@@ -855,15 +854,16 @@
 
 
 /* ==========================================================
-   ALTURA DOS PAINÉIS - LINHA INFERIOR
+   PAINÉIS - LINHA INFERIOR
+   MESMA ALTURA DA LINHA SUPERIOR
 ========================================================== */
 
 .relatorio-grid-principal > .relatorio-painel-executivo:nth-child(2),
 .relatorio-grid-principal > .relatorio-painel-executivo:nth-child(5),
 .relatorio-grid-principal > .relatorio-painel-executivo:nth-child(6){
 
-    height:auto;
-    align-self:start;
+    height:100%;
+    align-self:stretch;
 }
 /* ==========================================================
    PAINÉIS EXECUTIVOS
