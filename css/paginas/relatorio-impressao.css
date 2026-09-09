@@ -619,10 +619,10 @@ height:20px !important;
 .relatorio-institucional-imagem{
 
     width:100% !important;
-    height:100% !important;
 
-    min-width:0 !important;
-    min-height:0 !important;
+    height:82px !important;
+    min-height:82px !important;
+    max-height:82px !important;
 
     display:flex !important;
 
@@ -638,10 +638,9 @@ height:20px !important;
     display:block !important;
 
     width:100% !important;
-    height:100% !important;
 
-    max-width:none !important;
-    max-height:none !important;
+    height:82px !important;
+    max-height:82px !important;
 
     object-fit:fill !important;
 
@@ -792,8 +791,19 @@ max-height:110px !important;
 
 .relatorio-resumo-executivo,
 .relatorio-institucional{
-    margin-top:0 !important;
-    margin-bottom:0 !important;
+
+    min-width:0 !important;
+    min-height:0 !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    padding:3px !important;
+
+    overflow:hidden !important;
+}
 }/* ======================================================
    FORÇAR RELATÓRIO EM UMA ÚNICA PÁGINA
 ====================================================== */
