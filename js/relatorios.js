@@ -550,20 +550,13 @@ function montarPreviewRelatorio(
 
     preview.innerHTML = `
 
-            <div class="relatorio-acoes nao-imprimir">
+           <div class="relatorio-acoes nao-imprimir">
 
     <button
         type="button"
-        onclick="imprimirRelatorio('paisagem')"
+        onclick="imprimirRelatorio()"
     >
-        🖨 Imprimir Paisagem
-    </button>
-
-    <button
-        type="button"
-        onclick="imprimirRelatorio('retrato')"
-    >
-        🖨 Imprimir Retrato
+        🖨 Imprimir / PDF
     </button>
 
 </div>
@@ -705,7 +698,7 @@ function montarPreviewRelatorio(
    IMPRESSÃO DO RELATÓRIO
    GERAL SGQ X INDIVIDUAL
 ========================================================== */
-function imprimirRelatorio(orientacao = "paisagem"){
+function imprimirRelatorio(){
 
     const escopo =
         document.getElementById(
@@ -717,13 +710,11 @@ function imprimirRelatorio(orientacao = "paisagem"){
 
     document.body.classList.remove(
         "impressao-sgq",
-        "impressao-individual",
-        "impressao-paisagem",
-        "impressao-retrato"
+        "impressao-individual"
     );
 
 
-    /* DEFINE O ESCOPO */
+    /* DEFINE O MODO */
 
     if(escopo === "geral"){
 
@@ -739,22 +730,6 @@ function imprimirRelatorio(orientacao = "paisagem"){
     }
 
 
-    /* DEFINE A ORIENTAÇÃO */
-
-    if(orientacao === "retrato"){
-
-        document.body.classList.add(
-            "impressao-retrato"
-        );
-
-    }else{
-
-        document.body.classList.add(
-            "impressao-paisagem"
-        );
-    }
-
-
     /* ABRE A IMPRESSÃO */
 
     window.print();
@@ -764,9 +739,7 @@ function imprimirRelatorio(orientacao = "paisagem"){
 
     document.body.classList.remove(
         "impressao-sgq",
-        "impressao-individual",
-        "impressao-paisagem",
-        "impressao-retrato"
+        "impressao-individual"
     );
 }
 
