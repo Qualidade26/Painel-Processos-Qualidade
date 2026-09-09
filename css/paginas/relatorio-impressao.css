@@ -789,6 +789,29 @@ max-height:110px !important;
 .relatorio-institucional{
     margin-top:0 !important;
     margin-bottom:0 !important;
+}/* ======================================================
+   FORÇAR RELATÓRIO EM UMA ÚNICA PÁGINA
+====================================================== */
+
+#relatorioDocumento{
+    height:auto !important;
+    min-height:0 !important;
+}
+
+.relatorio-executivo-corpo{
+    margin-bottom:0 !important;
+    padding-bottom:3px !important;
+}
+
+.relatorio-faixa-final{
+    margin-bottom:0 !important;
+    padding-bottom:0 !important;
+}
+
+.relatorio-executivo-rodape{
+    margin:0 !important;
+    padding:2px 6px !important;
+    line-height:1 !important;
 }
     /* ======================================================
        PÁGINA
