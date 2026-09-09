@@ -622,24 +622,27 @@ height:20px !important;
 
 
 .relatorio-institucional-imagem{
+
     width:100% !important;
-    height:100% !important;
+    height:auto !important;
 
     display:flex !important;
 
-    align-items:stretch !important;
-    justify-content:stretch !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
 }
+
 
 .relatorio-institucional-imagem img{
 
     display:block !important;
 
     width:100% !important;
-    height:90px !important;
+    height:auto !important;
+
+    max-height:90px !important;
 
     object-fit:contain !important;
-    object-position:center !important;
 
     border-radius:7px;
 }
