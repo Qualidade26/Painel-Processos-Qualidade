@@ -817,10 +817,8 @@ max-height:110px !important;
        PÁGINA
     ====================================================== */
 
-    @page{
-
-        size:A4 landscape;
-
-        margin:6mm;
-    }
+   @page{
+    size:A4 landscape;
+    margin:4mm;
+}
 }
