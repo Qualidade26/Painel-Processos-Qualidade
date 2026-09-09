@@ -979,9 +979,9 @@
 
     grid-template-columns:1fr;
 
-    grid-template-rows:
-        auto
-        minmax(255px,1fr);
+  grid-template-rows:
+    auto
+    minmax(270px,1fr);
 
     gap:6px;
 
