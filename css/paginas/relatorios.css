@@ -457,10 +457,7 @@
 
     background:#ffffff;
 
-    border:
-        2px solid
-        #1d4eff;
-
+   border:none;
     border-radius:12px;
 
     overflow:hidden;
@@ -878,9 +875,9 @@
 
     padding:10px;
 
-    border:
-        1px solid
-        #b8d1ff;
+   border:
+    1px solid
+    #1d4eff;
 
     border-radius:10px;
 
