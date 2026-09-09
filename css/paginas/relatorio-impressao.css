@@ -555,29 +555,16 @@
 
 .relatorio-resumo-executivo h3,
 .relatorio-compromisso h3{
+    font-size:8px !important;
+    font-weight:900 !important;
+}
 
-    margin:
-        0
-        0
-        3px !important;
-
+.relatorio-resumo-executivo li,
+.relatorio-resumo-executivo p,
+.relatorio-compromisso p{
     font-size:7px !important;
-}
-
-
-.relatorio-resumo-executivo ul{
-
-    padding-left:11px !important;
-}
-
-
-.relatorio-resumo-executivo li{
-
-    margin-bottom:1px !important;
-
-    font-size:6px !important;
-
-    line-height:1.15 !important;
+    font-weight:600 !important;
+    line-height:1.2 !important;
 }
 
 
@@ -751,6 +738,49 @@ max-height:110px !important;
     height:100% !important;
 
     max-height:none !important;
+}
+   /* ======================================================
+   LEGIBILIDADE - PDF A4
+====================================================== */
+
+/* KPIs */
+.relatorio-kpi-conteudo span{
+    font-size:8px !important;
+    font-weight:700 !important;
+}
+
+.relatorio-kpi-conteudo strong{
+    font-size:14px !important;
+    font-weight:900 !important;
+}
+
+.relatorio-kpi-conteudo small{
+    font-size:7px !important;
+    font-weight:600 !important;
+}
+
+
+/* TÍTULOS DOS PAINÉIS */
+.relatorio-painel-titulo span{
+    font-size:10px !important;
+    font-weight:900 !important;
+}
+
+.relatorio-painel-titulo strong{
+    font-size:9px !important;
+    font-weight:900 !important;
+}
+
+
+/* TABELAS */
+.relatorio-tabela-executiva th{
+    font-size:7.5px !important;
+    font-weight:900 !important;
+}
+
+.relatorio-tabela-executiva td{
+    font-size:8px !important;
+    font-weight:700 !important;
 }
     /* ======================================================
        PÁGINA
