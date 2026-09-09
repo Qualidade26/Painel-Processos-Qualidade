@@ -640,10 +640,9 @@
 
     width:100%;
 
-    height:150px !important;
+    height:90px !important;
 
     object-fit:contain;
-
     object-position:center;
 
     border-radius:7px;
@@ -781,6 +780,20 @@ max-height:110px !important;
 .relatorio-tabela-executiva td{
     font-size:8px !important;
     font-weight:700 !important;
+}
+   /* ======================================================
+   FAIXA FINAL - CABER NA PÁGINA 1
+====================================================== */
+
+.relatorio-faixa-final{
+    gap:4px !important;
+    margin-top:0 !important;
+}
+
+.relatorio-resumo-executivo,
+.relatorio-institucional{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
 }
     /* ======================================================
        PÁGINA
