@@ -238,6 +238,19 @@
 
     align-items:stretch !important;
 }
+   /* ======================================================
+   ORDEM DOS PAINÉIS - PDF
+====================================================== */
+
+.relatorio-grid-principal
+> .relatorio-painel-executivo:nth-child(2){
+    order:3 !important; /* DESCARTE */
+}
+
+.relatorio-grid-principal
+> .relatorio-painel-executivo:nth-child(3){
+    order:4 !important; /* AMOSTRAS */
+}
     /* ======================================================
        PAINÉIS
     ====================================================== */
