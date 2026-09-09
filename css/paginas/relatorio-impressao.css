@@ -636,9 +636,9 @@ height:20px !important;
     display:block !important;
 
     width:100% !important;
-    height:100px !important;
+    height:90px !important;
 
-    object-fit:cover !important;
+    object-fit:contain !important;
     object-position:center !important;
 
     border-radius:7px;
@@ -801,9 +801,8 @@ max-height:110px !important;
 
 .relatorio-executivo-corpo{
     margin-bottom:0 !important;
-    padding-bottom:3px !important;
+    padding-bottom:0 !important;
 }
-
 .relatorio-faixa-final{
     margin-bottom:0 !important;
     padding-bottom:0 !important;
@@ -811,8 +810,9 @@ max-height:110px !important;
 
 .relatorio-executivo-rodape{
     margin:0 !important;
-    padding:2px 6px !important;
+    padding:1px 6px !important;
     line-height:1 !important;
+    min-height:0 !important;
 }
     /* ======================================================
        PÁGINA
