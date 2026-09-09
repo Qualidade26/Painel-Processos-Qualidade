@@ -619,9 +619,9 @@ height:20px !important;
 .relatorio-institucional-imagem{
 
     width:100% !important;
-height:92px !important;
-    min-height:92px !important;
-    max-height:92px !important;
+height:95px !important;
+    min-height:95px !important;
+    max-height:95px !important;
 
     display:flex !important;
 
@@ -638,8 +638,8 @@ height:92px !important;
 
     width:100% !important;
 
-  height:92px !important;
-    max-height:92px !important;
+  height:95px !important;
+    max-height:95px !important;
 
     object-fit:fill !important;
 
