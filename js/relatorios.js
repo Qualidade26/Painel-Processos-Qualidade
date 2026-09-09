@@ -554,7 +554,7 @@ function montarPreviewRelatorio(
 
             <button
                 type="button"
-                onclick="window.print()"
+               onclick="imprimirRelatorio()"
             >
                 🖨 Imprimir / PDF
             </button>
@@ -694,7 +694,55 @@ function montarPreviewRelatorio(
         }
     );
 }
+/* ==========================================================
+   IMPRESSÃO DO RELATÓRIO
+   GERAL SGQ X INDIVIDUAL
+========================================================== */
 
+function imprimirRelatorio(){
+
+    const escopo =
+        document.getElementById(
+            "relatorioEscopo"
+        )?.value || "geral";
+
+
+    /* LIMPA MODOS ANTERIORES */
+
+    document.body.classList.remove(
+        "impressao-sgq",
+        "impressao-individual"
+    );
+
+
+    /* DEFINE O MODO */
+
+    if(escopo === "geral"){
+
+        document.body.classList.add(
+            "impressao-sgq"
+        );
+
+    }else{
+
+        document.body.classList.add(
+            "impressao-individual"
+        );
+    }
+
+
+    /* ABRE A IMPRESSÃO */
+
+    window.print();
+
+
+    /* LIMPA APÓS IMPRIMIR */
+
+    document.body.classList.remove(
+        "impressao-sgq",
+        "impressao-individual"
+    );
+}
 
 /* ==========================================================
    CONTEÚDO EXECUTIVO
