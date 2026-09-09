@@ -842,7 +842,28 @@
 .relatorio-grid-principal > .relatorio-painel-executivo:nth-child(6){
     order:6;
 }
+ /* ==========================================================
+   ALTURA DOS PAINÉIS - LINHA SUPERIOR
+========================================================== */
 
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(1),
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(3),
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(4){
+
+    height:100%;
+}
+
+
+/* ==========================================================
+   ALTURA DOS PAINÉIS - LINHA INFERIOR
+========================================================== */
+
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(2),
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(5),
+.relatorio-grid-principal > .relatorio-painel-executivo:nth-child(6){
+
+    height:auto;
+}
 /* ==========================================================
    PAINÉIS EXECUTIVOS
 ========================================================== */
