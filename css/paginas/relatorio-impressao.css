@@ -4,7 +4,7 @@
 
 @media print{
 
-    html,.relatorio-institucional-imagem{
+    html,
     body{
 
         width:100% !important;
@@ -789,7 +789,6 @@ max-height:110px !important;
     margin-top:0 !important;
 }
 
-.relatorio-resumo-executivo,
 .relatorio-institucional{
 
     min-width:0 !important;
