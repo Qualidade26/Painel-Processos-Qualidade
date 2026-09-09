@@ -1,1 +1,718 @@
+/* ==========================================================
+   IMPRESSÃO / PDF - EXECUTIVO
+========================================================== */
 
+@media print{
+
+    html,
+    body{
+
+        width:100%;
+        height:100% !important;
+
+        margin:0 !important;
+        padding:0 !important;
+
+        background:#ffffff !important;
+
+        overflow:hidden !important;
+    }
+
+
+    body *{
+
+        visibility:hidden;
+    }
+
+
+    #relatorioDocumento,
+    #relatorioDocumento *{
+
+        visibility:visible;
+    }
+
+
+    #relatorioDocumento{
+
+        position:absolute;
+
+        left:0;
+        top:0;
+
+        width:100% !important;
+        max-width:none !important;
+
+        margin:0 !important;
+        padding:0 !important;
+
+        border:0 !important;
+        border-radius:0 !important;
+        box-shadow:none !important;
+
+        overflow:hidden !important;
+
+        box-sizing:border-box !important;
+    }
+
+
+    .nao-imprimir{
+
+        display:none !important;
+    }
+
+
+    /* ======================================================
+       CABEÇALHO
+    ====================================================== */
+
+    .relatorio-executivo-topo{
+
+        min-height:64px !important;
+
+        grid-template-columns:
+            145px
+            1fr
+            145px !important;
+
+        padding:
+            7px
+            10px !important;
+
+        gap:8px !important;
+
+        border-bottom:
+            2px solid
+            #1d4eff !important;
+    }
+
+
+    .relatorio-marca strong{
+
+        font-size:18px !important;
+    }
+
+
+    .relatorio-marca span{
+
+        margin-top:2px !important;
+
+        font-size:6.5px !important;
+    }
+
+
+    .relatorio-executivo-titulo h1{
+
+        font-size:12px !important;
+    }
+
+
+    .relatorio-periodo-principal{
+
+        margin-top:2px !important;
+
+        font-size:12px !important;
+    }
+
+
+    .relatorio-periodo-base{
+
+        margin-top:4px !important;
+
+        gap:7px !important;
+    }
+
+
+    .relatorio-periodo-base span{
+
+        padding:
+            2px
+            5px !important;
+
+        font-size:6.5px !important;
+    }
+
+
+    /* ======================================================
+       CORPO
+    ====================================================== */
+
+   .relatorio-executivo-corpo{
+
+    padding:7px !important;
+
+    gap:7px !important;
+
+    background:#ffffff !important;
+}
+
+    /* ======================================================
+       KPIs
+    ====================================================== */
+
+    .relatorio-kpis-executivos{
+
+        grid-template-columns:
+            repeat(
+                6,
+                minmax(0,1fr)
+            ) !important;
+
+        gap:4px !important;
+    }
+
+
+    .relatorio-kpi-executivo{
+
+       min-height:64px !important;
+        grid-template-columns:
+            24px
+            1fr !important;
+
+        gap:4px !important;
+
+      padding:
+    6px
+    7px !important;
+
+        border-radius:6px !important;
+    }
+
+
+    .relatorio-kpi-icone{
+
+        width:22px !important;
+        height:22px !important;
+
+        border-radius:5px !important;
+
+        font-size:11px !important;
+    }
+
+
+    .relatorio-kpi-conteudo{
+
+        gap:1px !important;
+    }
+
+
+    .relatorio-kpi-conteudo span{
+    font-size:7px !important;
+}
+
+.relatorio-kpi-conteudo strong{
+    font-size:12px !important;
+}
+
+.relatorio-kpi-conteudo small{
+    font-size:6.5px !important;
+}
+   /* ======================================================
+   GRID PRINCIPAL - IMPRESSÃO
+====================================================== */
+
+.relatorio-grid-principal{
+
+    display:grid !important;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
+
+    gap:5px !important;
+
+    align-items:stretch !important;
+}
+    /* ======================================================
+       PAINÉIS
+    ====================================================== */
+
+  .relatorio-painel-executivo{
+
+    padding:7px !important;
+
+    border-radius:6px !important;
+
+    box-shadow:none !important;
+
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+}
+/* ======================================================
+   TÍTULOS DOS PAINÉIS - IMPRESSÃO
+====================================================== */
+    .relatorio-painel-titulo{
+
+        min-height:20px !important;
+
+        margin-bottom:4px !important;
+
+        padding-bottom:3px !important;
+
+        gap:4px !important;
+
+        border-bottom:
+            1px solid
+            #dce8ff !important;
+    }
+
+
+    .relatorio-painel-titulo span{
+
+        font-size:9px !important;
+    }
+
+
+    .relatorio-painel-titulo strong{
+
+        font-size:8px !important;
+    }
+
+    /* ======================================================
+       TABELAS
+    ====================================================== */
+
+    .relatorio-tabela-executiva th{
+
+        padding:
+            3px
+            4px !important;
+
+        font-size:6.5px !important;
+    }
+
+
+    .relatorio-tabela-executiva td{
+
+        padding:
+            3px
+            4px !important;
+
+        font-size:7px !important;
+    }
+
+
+    .relatorio-revisao{
+
+        padding:
+            1px
+            4px !important;
+
+        font-size:5.5px !important;
+    }
+.relatorio-ajuste{
+
+    padding:
+        1px
+        4px !important;
+
+    font-size:5.5px !important;
+}
+
+    /* ======================================================
+       GRÁFICOS
+    ====================================================== */
+
+   .relatorio-grafico-box{
+
+    height:125px !important;
+    min-height:125px !important;
+
+    padding:4px !important;
+
+    border-radius:5px !important;
+}
+
+
+.relatorio-grafico-box canvas{
+
+    max-height:125px !important;
+}
+
+
+    /* ======================================================
+       ESFIG
+    ====================================================== */
+
+    .relatorio-indicadores-esfig{
+
+        gap:4px !important;
+    }
+
+
+    .relatorio-mini-indicador{
+
+        padding:
+            4px
+            3px !important;
+
+        border-radius:5px !important;
+    }
+
+
+    .relatorio-mini-indicador span{
+
+        font-size:5.5px !important;
+    }
+
+
+    .relatorio-mini-indicador strong{
+
+        margin-top:2px !important;
+
+        font-size:8px !important;
+    }
+
+
+    .relatorio-info-faixa{
+
+        margin-top:4px !important;
+
+        gap:4px !important;
+    }
+
+
+    .relatorio-info-faixa span{
+
+        padding:
+            3px
+            4px !important;
+
+        font-size:6px !important;
+    }
+
+
+  
+    /* ======================================================
+       FORNECEDORES
+    ====================================================== */
+
+    .relatorio-fornecedores-layout{
+
+        grid-template-columns:
+            minmax(0,1.45fr)
+            minmax(85px,.55fr) !important;
+
+        gap:5px !important;
+    }
+
+
+    .relatorio-indice-fornecedor{
+
+        min-height:72px !important;
+
+        padding:4px !important;
+
+        border-radius:6px !important;
+    }
+
+
+    .relatorio-indice-fornecedor span{
+
+        font-size:5.5px !important;
+    }
+
+
+    .relatorio-indice-fornecedor strong{
+
+        margin-top:2px !important;
+
+        font-size:16px !important;
+    }
+
+
+    .relatorio-indice-fornecedor small{
+
+        margin-top:2px !important;
+
+        font-size:5.5px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao{
+
+        margin-top:4px !important;
+
+        padding:
+            4px
+            5px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao > strong{
+
+        margin-bottom:3px !important;
+
+        font-size:6px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao > div{
+
+        gap:3px !important;
+    }
+
+
+    .relatorio-fornecedores-atencao span{
+
+        padding:
+            3px
+            4px !important;
+
+        font-size:6px !important;
+    }
+
+
+    /* ======================================================
+   RESUMO EXECUTIVO
+====================================================== */
+
+.relatorio-resumo-executivo{
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
+
+    gap:4px !important;
+}
+
+
+.relatorio-destaques,
+.relatorio-atencoes,
+.relatorio-compromisso{
+
+    min-width:0 !important;
+
+    padding:
+        4px
+        5px !important;
+
+    border-radius:5px !important;
+}
+
+
+.relatorio-compromisso{
+
+    border:
+        1px solid
+        rgba(29,78,255,.24) !important;
+
+    background:#f5f8ff !important;
+}
+
+
+.relatorio-resumo-executivo h3,
+.relatorio-compromisso h3{
+
+    margin:
+        0
+        0
+        3px !important;
+
+    font-size:7px !important;
+}
+
+
+.relatorio-resumo-executivo ul{
+
+    padding-left:11px !important;
+}
+
+
+.relatorio-resumo-executivo li{
+
+    margin-bottom:2px !important;
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+
+
+.relatorio-resumo-executivo p,
+.relatorio-compromisso p{
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+
+
+.relatorio-compromisso strong{
+
+    display:block;
+
+    margin-top:4px !important;
+
+    font-size:6px !important;
+
+    line-height:1.25 !important;
+}
+/* ==========================================================
+   IMAGEM INSTITUCIONAL - QUALIDADE
+========================================================== */
+
+.relatorio-institucional{
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+   padding:6px !important;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eef5ff
+        );
+
+    overflow:hidden;
+}
+
+
+.relatorio-institucional-imagem{
+
+    width:100%;
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.relatorio-institucional-imagem img{
+
+    display:block;
+
+    width:100%;
+
+    height:150px !important;
+
+    object-fit:contain;
+
+    object-position:center;
+
+    border-radius:7px;
+}
+    /* ======================================================
+       RODAPÉ
+    ====================================================== */
+
+    .relatorio-executivo-rodape{
+
+        padding:
+            4px
+            6px !important;
+
+        font-size:6px !important;
+    }
+
+/* ==========================================================
+   DESCARTE - IMPRESSÃO COMPACTA
+========================================================== */
+.relatorio-descarte-resumo{
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0,1fr)
+        ) !important;
+
+    gap:3px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador{
+
+    min-height:27px !important;
+
+    padding:
+        2px
+        3px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador span{
+
+    font-size:5px !important;
+}
+
+
+.relatorio-descarte-resumo
+.relatorio-mini-indicador strong{
+
+    margin-top:1px !important;
+
+    font-size:6.5px !important;
+}
+
+
+/* MINI GRÁFICO - DESCARTE */
+
+.relatorio-descarte-layout{
+
+    grid-template-rows:
+        auto
+        minmax(0,1fr) !important;
+
+    height:100% !important;
+}
+
+
+.relatorio-descarte-grafico-mini{
+
+    width:100% !important;
+
+    height:145px !important;
+
+    min-height:145px !important;
+
+    max-height:145px !important;
+
+    padding:
+        6px
+        6px !important;
+
+    box-sizing:border-box !important;
+}
+
+
+.relatorio-descarte-grafico-mini canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+    max-height:none !important;
+}
+    /* ======================================================
+       PÁGINA
+    ====================================================== */
+
+    @page{
+
+        size:A4 landscape;
+
+        margin:6mm;
+    }
+}
