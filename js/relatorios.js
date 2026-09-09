@@ -2689,8 +2689,9 @@ function criarGraficoImportacaoRelatorio(
 
                                 color:"#5c6c96",
 
-                                font:{
-                                    size:7
+                               font:{
+        size:7,
+        weight:"bold"
                                 }
                             }
                         }
@@ -3136,7 +3137,7 @@ function criarGraficoAmostrasRelatorio(
 
                                 font:{
                                     size:7,
-                                    weight:"600"
+                                     weight:"bold"
                                 }
                             }
                         },
@@ -3289,7 +3290,7 @@ function criarGraficoRetrabalhoRelatorio(
 
     datalabels:{
 
-       display:false,
+    display:true,
 
         color:"#0f2557",
 
