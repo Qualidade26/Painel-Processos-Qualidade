@@ -253,6 +253,19 @@
     break-inside:avoid !important;
     page-break-inside:avoid !important;
 }
+   /* ======================================================
+   AJUSTE DE ALTURA DOS 6 PAINÉIS - PDF
+====================================================== */
+
+.relatorio-grid-principal
+> .relatorio-painel-executivo{
+
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    align-self:stretch !important;
+}
 /* ======================================================
    TÍTULOS DOS PAINÉIS - IMPRESSÃO
 ====================================================== */
