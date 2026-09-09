@@ -732,11 +732,9 @@
 
     width:100% !important;
 
-    height:145px !important;
-
-    min-height:145px !important;
-
-    max-height:145px !important;
+   height:110px !important;
+min-height:110px !important;
+max-height:110px !important;
 
     padding:
         6px
