@@ -749,6 +749,32 @@ max-height:110px !important;
 
     max-height:none !important;
 }
+  /* ==========================================================
+   DESCARTE - SOMENTE RELATÓRIO INDIVIDUAL
+========================================================== */
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte){
+
+    align-self:start !important;
+
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+}
+
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-layout{
+
+    height:auto !important;
+
+    grid-template-rows:
+        auto
+        auto !important;
+}
+   
    /* ======================================================
    LEGIBILIDADE - PDF A4
 ====================================================== */
