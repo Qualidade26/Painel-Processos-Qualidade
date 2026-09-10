@@ -2691,7 +2691,7 @@ function criarGraficoImportacaoRelatorio(
                             },
 
                             font:{
-                                size:8,
+                                size:11,
                                 weight:"bold"
                             }
                         }
@@ -2706,12 +2706,11 @@ function criarGraficoImportacaoRelatorio(
                                 display:false
                             },
 
-                            ticks:{
-
-    color:"#5c6c96",
+                           ticks:{
+    color:"#0f2557",
 
     font:{
-        size:7,
+        size:9,
         weight:"bold"
     }
 }
@@ -2734,12 +2733,12 @@ function criarGraficoImportacaoRelatorio(
 
                                 precision:0,
 
-                                color:"#5c6c96",
+                               color:"#0f2557",
 
                                font:{
-        size:7,
-        weight:"bold"
-                                }
+    size:9,
+    weight:"bold"
+}
                             }
                         }
                     }
@@ -3163,7 +3162,7 @@ function criarGraficoAmostrasRelatorio(
                             },
 
                             font:{
-                                size:8,
+                                size:11,
                                 weight:"bold"
                             }
                         }
@@ -3202,16 +3201,16 @@ function criarGraficoAmostrasRelatorio(
                                     "rgba(15,37,87,.06)"
                             },
 
-                           ticks:{
-
+                        ticks:{
     precision:0,
 
-    color:"#5c6c96",
+    color:"#0f2557",
 
     font:{
-        size:7,
+        size:9,
         weight:"bold"
     }
+}
 }
                         }
                     }
@@ -3355,7 +3354,7 @@ function criarGraficoRetrabalhoRelatorio(
         },
 
         font:{
-            size:8,
+            size:12,
             weight:"bold"
         }
     }
@@ -3378,10 +3377,10 @@ scales:{
 
         ticks:{
 
-            color:"#5c6c96",
+            color:"#0f2557",
 
             font:{
-                size:7,
+                size:9,
                 weight:"bold"
             }
         }
