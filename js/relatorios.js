@@ -2584,41 +2584,49 @@ function criarGraficoImportacaoRelatorio(
        INSERE O MOVIMENTO ATUAL
     ================================================== */
 
-    const itemPeriodo =
-        lista.find(
-            item =>
-                item.mes === nomeMesAtual
-        );
+ const itemPeriodo =
+    lista.find(
+        item =>
+            item.mes === nomeMesAtual
+    );
 
 
-    if(itemPeriodo){
+if(itemPeriodo){
 
-        itemPeriodo.processos =
-            diferencaProcessos !== null &&
-            diferencaProcessos > 0
+    itemPeriodo.processos =
+        diferencaProcessos !== null &&
+        diferencaProcessos > 0
 
-                ? diferencaProcessos
+            ? diferencaProcessos
 
-                : 0;
-    }
-
-
-    const labels =
-        lista.map(
-            item =>
-                abreviarMesRelatorio(
-                    item.mes
-                )
-        );
+            : 0;
+}
 
 
-    const valores =
-        lista.map(
-            item =>
-                Number(
-                    item.processos || 0
-                )
-        );
+const listaExibicao =
+    lista.filter(
+        item =>
+            Number(item.processos || 0) > 0 ||
+            item.mes === nomeMesAtual
+    );
+
+
+const labels =
+    listaExibicao.map(
+        item =>
+            abreviarMesRelatorio(
+                item.mes
+            )
+    );
+
+
+const valores =
+    listaExibicao.map(
+        item =>
+            Number(
+                item.processos || 0
+            )
+    );
 
 
     const grafico =
