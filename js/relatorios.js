@@ -2496,9 +2496,10 @@ function criarGraficosRelatorio(
     );
 
 
-    criarGraficoAmostrasRelatorio(
-        atual.amostras
-    );
+   criarGraficoAmostrasRelatorio(
+    atual.amostras,
+    configuracao
+);
 
 
     criarGraficoRetrabalhoRelatorio(
@@ -3065,7 +3066,8 @@ function criarGraficoDescarteRelatorio(
 ========================================================== */
 
 function criarGraficoAmostrasRelatorio(
-    dados
+    dados,
+    configuracao
 ){
 
     const canvas =
@@ -3084,8 +3086,64 @@ function criarGraficoAmostrasRelatorio(
     }
 
 
+    /* ==================================================
+       MÊS ATUAL DO RELATÓRIO
+    ================================================== */
+
+    const periodoAtual =
+        obterMesSeguinte(
+            configuracao.mes,
+            configuracao.ano
+        );
+
+
+    const nomeMesAtual =
+        obterNomeMes(
+            periodoAtual.mes
+        );
+
+
+    /* ==================================================
+       SOMENTE MESES COM DADOS + MÊS ATUAL
+    ================================================== */
+
+    const listaExibicao =
+        dados.mensal.filter(
+            item => {
+
+                const quantidade =
+                    obterQuantidadeAmostra(
+                        item
+                    );
+
+
+                const mesmoMes =
+                    String(
+                        item.mes || ""
+                    )
+                    .trim()
+                    .toLowerCase() ===
+                    String(
+                        nomeMesAtual || ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                return (
+                    quantidade > 0 ||
+                    mesmoMes
+                );
+            }
+        );
+
+
+    /* ==================================================
+       LABELS
+    ================================================== */
+
     const labels =
-        dados.mensal.map(
+        listaExibicao.map(
             item =>
                 abreviarMesRelatorio(
                     item.mes || ""
@@ -3093,14 +3151,17 @@ function criarGraficoAmostrasRelatorio(
         );
 
 
+    /* ==================================================
+       VALORES
+    ================================================== */
+
     const valores =
-        dados.mensal.map(
+        listaExibicao.map(
             item =>
                 obterQuantidadeAmostra(
                     item
                 )
         );
-
 
     const grafico =
         new Chart(
