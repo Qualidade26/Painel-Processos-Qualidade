@@ -15,7 +15,7 @@
 
         background:#ffffff !important;
 
-        overflow:visible !important;
+       overflow:hidden !important;
     }
 
 
@@ -61,7 +61,7 @@
         border-radius:0 !important;
         box-shadow:none !important;
 
-        overflow:visible !important;
+        overflow:hidden !important;
 
         box-sizing:border-box !important;
     }
@@ -815,7 +815,8 @@ max-height:110px !important;
 
     overflow:hidden !important;
 }
-}/* ======================================================
+   
+/* ======================================================
    FORÇAR RELATÓRIO EM UMA ÚNICA PÁGINA
 ====================================================== */
 
@@ -912,4 +913,5 @@ max-height:110px !important;
     size:A4 landscape;
     margin:4mm;
 }
+   
 }
