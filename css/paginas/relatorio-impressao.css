@@ -835,8 +835,8 @@ body.impressao-individual
 #relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte){
 
-    width:90% !important;
-    max-width:250mm !important;
+    width:94% !important;
+max-width:265mm !important;
 
     height:auto !important;
     min-height:0 !important;
@@ -863,7 +863,7 @@ body.impressao-individual
 
     grid-template-rows:
         auto
-        260px !important;
+         285px !important;
 
     gap:8px !important;
 }
@@ -916,9 +916,9 @@ body.impressao-individual
 
     width:100% !important;
 
-    height:260px !important;
-    min-height:260px !important;
-    max-height:260px !important;
+   height:285px !important;
+min-height:285px !important;
+max-height:285px !important;
 
     padding:
         10px
