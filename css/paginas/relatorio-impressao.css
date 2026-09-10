@@ -774,6 +774,27 @@ body.impressao-individual
         auto
         auto !important;
 }
+   /* ==========================================================
+   DESCARTE INDIVIDUAL - GRÁFICO MAIOR
+========================================================== */
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-grafico-mini{
+
+    height:190px !important;
+    min-height:190px !important;
+    max-height:190px !important;
+}
+
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-grafico-mini canvas{
+
+    height:190px !important;
+    max-height:190px !important;
+}
    
    /* ======================================================
    LEGIBILIDADE - PDF A4
