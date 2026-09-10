@@ -757,53 +757,47 @@ function gerarConteudoExecutivo(
         configuracao.escopo
     ){
 
-        case "importacao":
+     case "importacao":
 
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelImportacao(congelado,atual,true)}
-            `;
-
-
-        case "esfig":
-
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelEsfig(congelado,atual,true)}
-            `;
+    return `
+        ${gerarPainelImportacao(congelado,atual,true)}
+    `;
 
 
-        case "descarte":
+case "esfig":
 
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelDescarte(congelado,atual,true)}
-            `;
-
-
-        case "amostras":
-
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelAmostras(congelado,atual,true)}
-            `;
+    return `
+        ${gerarPainelEsfig(congelado,atual,true)}
+    `;
 
 
-        case "retrabalho":
+case "descarte":
 
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelRetrabalho(congelado,atual,true)}
-                ${gerarPainelAdequacao(congelado,atual,true)}
-            `;
+    return `
+        ${gerarPainelDescarte(congelado,atual,true)}
+    `;
 
 
-        case "fornecedores":
+case "amostras":
 
-            return `
-                ${gerarKpisExecutivos(congelado,atual)}
-                ${gerarPainelFornecedores(congelado,atual,true)}
-            `;
+    return `
+        ${gerarPainelAmostras(congelado,atual,true)}
+    `;
+
+
+case "retrabalho":
+
+    return `
+        ${gerarPainelRetrabalho(congelado,atual,true)}
+        ${gerarPainelAdequacao(congelado,atual,true)}
+    `;
+
+
+case "fornecedores":
+
+    return `
+        ${gerarPainelFornecedores(congelado,atual,true)}
+    `;
 case "geral":
 default:
 
