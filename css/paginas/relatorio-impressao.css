@@ -443,6 +443,31 @@ height:20px !important;
     height:100% !important;
     max-height:85px !important;
 }
+ /* ==========================================================
+   GRÁFICOS - TODOS OS RELATÓRIOS INDIVIDUAIS
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-grafico-box{
+
+    height:220px !important;
+    min-height:220px !important;
+    max-height:220px !important;
+
+    padding:6px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-grafico-box canvas{
+
+    width:100% !important;
+    height:100% !important;
+
+    max-height:none !important;
+}
     /* ======================================================
        ESFIG
     ====================================================== */
