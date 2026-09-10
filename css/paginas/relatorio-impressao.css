@@ -825,22 +825,37 @@ max-height:110px !important;
 
     max-height:none !important;
 }
-  /* ==========================================================
-   DESCARTE - SOMENTE RELATÓRIO INDIVIDUAL
+/* ==========================================================
+   DESCARTE - RELATÓRIO INDIVIDUAL
 ========================================================== */
 
+/* PAINEL */
+
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte){
 
-    align-self:start !important;
+    width:90% !important;
+    max-width:250mm !important;
 
     height:auto !important;
     min-height:0 !important;
     max-height:none !important;
+
+    margin:auto !important;
+
+    align-self:center !important;
+
+    padding:10px !important;
+
+    box-sizing:border-box !important;
 }
 
 
+/* CONTEÚDO */
+
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-layout{
 
@@ -848,28 +863,30 @@ body.impressao-individual
 
     grid-template-rows:
         auto
-        auto !important;
-}
-   /* ==========================================================
-   DESCARTE INDIVIDUAL - CARDS E GRÁFICO MAIORES
-========================================================== */
+        260px !important;
 
-/* CARDS */
+    gap:8px !important;
+}
+
+
+/* 3 CARDS */
 
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-resumo
 .relatorio-mini-indicador{
 
-    min-height:45px !important;
+    min-height:48px !important;
 
     padding:
-        5px
-        6px !important;
+        6px
+        8px !important;
 }
 
 
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-resumo
 .relatorio-mini-indicador span{
@@ -879,6 +896,7 @@ body.impressao-individual
 
 
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-resumo
 .relatorio-mini-indicador strong{
@@ -892,24 +910,32 @@ body.impressao-individual
 /* GRÁFICO */
 
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-grafico-mini{
 
-    height:220px !important;
-    min-height:220px !important;
-    max-height:220px !important;
+    width:100% !important;
+
+    height:260px !important;
+    min-height:260px !important;
+    max-height:260px !important;
 
     padding:
-        8px
-        8px !important;
+        10px
+        12px !important;
+
+    box-sizing:border-box !important;
 }
 
 
 body.impressao-individual
+#relatorioDocumento
 .relatorio-painel-total:has(#relatorioGraficoDescarte)
 .relatorio-descarte-grafico-mini canvas{
 
+    width:100% !important;
     height:100% !important;
+
     max-height:none !important;
 }
    /* ======================================================
