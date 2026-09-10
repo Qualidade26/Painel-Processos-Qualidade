@@ -795,7 +795,68 @@ body.impressao-individual
     height:190px !important;
     max-height:190px !important;
 }
-   
+   /* ==========================================================
+   DESCARTE INDIVIDUAL - CARDS E GRÁFICO MAIORES
+========================================================== */
+
+/* CARDS */
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-resumo
+.relatorio-mini-indicador{
+
+    min-height:45px !important;
+
+    padding:
+        5px
+        6px !important;
+}
+
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-resumo
+.relatorio-mini-indicador span{
+
+    font-size:7px !important;
+}
+
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-resumo
+.relatorio-mini-indicador strong{
+
+    margin-top:3px !important;
+
+    font-size:10px !important;
+}
+
+
+/* GRÁFICO */
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-grafico-mini{
+
+    height:220px !important;
+    min-height:220px !important;
+    max-height:220px !important;
+
+    padding:
+        8px
+        8px !important;
+}
+
+
+body.impressao-individual
+.relatorio-painel-total:has(#relatorioGraficoDescarte)
+.relatorio-descarte-grafico-mini canvas{
+
+    height:100% !important;
+    max-height:none !important;
+}
    /* ======================================================
    LEGIBILIDADE - PDF A4
 ====================================================== */
