@@ -3209,13 +3209,11 @@ function criarGraficoAmostrasRelatorio(
         weight:"bold"
     }
 }
-}
                         }
                     }
                 }
             }
         );
-
 
     window.graficosRelatorio.push(
         grafico
