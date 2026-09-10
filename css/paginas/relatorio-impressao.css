@@ -174,7 +174,16 @@
         gap:4px !important;
     }
 
+/* ==========================================================
+   RELATÓRIOS INDIVIDUAIS - REMOVER KPIs GERAIS
+========================================================== */
 
+body.impressao-individual
+.relatorio-kpis-executivos{
+
+    display:none !important;
+}
+   
    .relatorio-kpi-executivo{
 
     min-height:48px !important;
