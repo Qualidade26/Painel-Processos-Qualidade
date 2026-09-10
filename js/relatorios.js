@@ -2914,7 +2914,7 @@ function criarGraficoDescarteRelatorio(
 
 
                             font:{
-                                size:7,
+                                size:9,
                                 weight:"bold"
                             }
 
@@ -2973,15 +2973,14 @@ function criarGraficoDescarteRelatorio(
 
                             },
 
-                            ticks:{
+                        ticks:{
 
-                                color:"#5c6c96",
+    color:"#0f2557",
 
-                                font:{
-                                    size:6
-                                },
-
-
+    font:{
+        size:8,
+        weight:"bold"
+    },
                                 callback(valor){
 
                                     if(
@@ -3177,15 +3176,14 @@ function criarGraficoAmostrasRelatorio(
                                 display:false
                             },
 
-                            ticks:{
+                           ticks:{
+    color:"#0f2557",
 
-                                color:"#5c6c96",
-
-                                font:{
-                                    size:7,
-                                     weight:"bold"
-                                }
-                            }
+    font:{
+        size:9,
+        weight:"bold"
+    }
+}
                         },
 
 
@@ -3394,14 +3392,13 @@ scales:{
         },
 
         ticks:{
+    color:"#0f2557",
 
-            color:"#5c6c96",
-
-            font:{
-                size:7,
-                weight:"bold"
-            }
-        }
+    font:{
+        size:8,
+        weight:"bold"
+    }
+}
     }
 }
 
