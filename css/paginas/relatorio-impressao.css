@@ -175,15 +175,53 @@
     }
 
 /* ==========================================================
-   RELATÓRIOS INDIVIDUAIS - REMOVER KPIs GERAIS
+   TODOS OS RELATÓRIOS INDIVIDUAIS
+   - REMOVER KPIs GERAIS
+   - CENTRALIZAR CONTEÚDO
 ========================================================== */
 
+/* ESCONDER OS 6 CARDS GERAIS */
+
 body.impressao-individual
+#relatorioDocumento
 .relatorio-kpis-executivos{
 
     display:none !important;
 }
-   
+
+
+/* CENTRALIZAR A ÁREA DO RELATÓRIO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-corpo{
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    align-items:center !important;
+
+    width:100% !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* CENTRALIZAR OS PAINÉIS INDIVIDUAIS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-executivo{
+
+    width:80% !important;
+    max-width:900px !important;
+
+    margin-left:auto !important;
+    margin-right:auto !important;
+
+    box-sizing:border-box !important;
+}
+ 
    .relatorio-kpi-executivo{
 
     min-height:48px !important;
