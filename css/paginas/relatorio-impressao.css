@@ -173,7 +173,6 @@
 
         gap:4px !important;
     }
-
 /* ==========================================================
    TODOS OS RELATÓRIOS INDIVIDUAIS
    - REMOVER KPIs GERAIS
@@ -190,7 +189,7 @@ body.impressao-individual
 }
 
 
-/* CENTRALIZAR A ÁREA DO RELATÓRIO */
+/* CENTRALIZAR CONTEÚDO NA ÁREA ÚTIL */
 
 body.impressao-individual
 #relatorioDocumento
@@ -200,44 +199,42 @@ body.impressao-individual
     flex-direction:column !important;
 
     align-items:center !important;
+    justify-content:center !important;
 
     width:100% !important;
+
+    min-height:145mm !important;
+
+    padding:
+        5mm
+        6mm !important;
 
     box-sizing:border-box !important;
 }
 
 
-/* CENTRALIZAR OS PAINÉIS INDIVIDUAIS */
+/* PAINEL INDIVIDUAL */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-painel-executivo{
 
-    width:80% !important;
-    max-width:900px !important;
+    width:86% !important;
+    max-width:240mm !important;
 
-    margin-left:auto !important;
-    margin-right:auto !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    margin:auto !important;
 
     box-sizing:border-box !important;
 }
- 
-   .relatorio-kpi-executivo{
 
-    min-height:48px !important;
 
-    grid-template-columns:
-        22px
-        1fr !important;
-
-    gap:3px !important;
-
-    padding:
-        3px
-        5px !important;
-
-    border-radius:6px !important;
-}
+/* ==========================================================
+   CARDS KPI - RELATÓRIO GERAL
+========================================================== */
 
 .relatorio-kpi-executivo{
 
@@ -256,32 +253,39 @@ body.impressao-individual
     border:1px solid #1d4eff !important;
     border-radius:6px !important;
 }
-    .relatorio-kpi-icone{
-
-       width:20px !important;
-height:20px !important;
-
-        border-radius:5px !important;
-
-        font-size:11px !important;
-    }
 
 
-    .relatorio-kpi-conteudo{
+.relatorio-kpi-icone{
 
-        gap:1px !important;
-    }
+    width:20px !important;
+    height:20px !important;
+
+    border-radius:5px !important;
+
+    font-size:11px !important;
+}
 
 
-    .relatorio-kpi-conteudo span{
+.relatorio-kpi-conteudo{
+
+    gap:1px !important;
+}
+
+
+.relatorio-kpi-conteudo span{
+
     font-size:7px !important;
 }
 
+
 .relatorio-kpi-conteudo strong{
+
     font-size:12px !important;
 }
 
+
 .relatorio-kpi-conteudo small{
+
     font-size:6.5px !important;
 }
    /* ======================================================
