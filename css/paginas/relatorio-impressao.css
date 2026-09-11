@@ -668,67 +668,6 @@
         font-size:6px !important;
     }
 
-/* ==========================================================
-   TODOS OS RELATÓRIOS INDIVIDUAIS
-   Cabeçalho em cima
-   Conteúdo centralizado
-   Rodapé embaixo
-========================================================== */
-body.impressao-individual
-#relatorioDocumento{
-
-    height:202mm !important;
-    min-height:202mm !important;
-    max-height:202mm !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-}
-
-/* CABEÇALHO */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-executivo-topo{
-
-    flex:0 0 auto !important;
-
-    margin:0 !important;
-}
-
-
-/* ÁREA DOS DADOS */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-executivo-corpo{
-
-    flex:1 1 auto !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-
-    justify-content:center !important;
-
-    min-height:0 !important;
-
-    margin:0 !important;
-}
-
-
-/* RODAPÉ */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-executivo-rodape{
-
-    flex:0 0 auto !important;
-
-    margin-top:auto !important;
-    margin-bottom:0 !important;
-}
-
-
     /* ======================================================
        IMPORTAÇÃO - RELATÓRIO INDIVIDUAL
     ====================================================== */
@@ -1295,22 +1234,94 @@ body.impressao-individual
     min-height:250px !important;
     max-height:250px !important;
 }
+   /* ==========================================================
+   RELATÓRIOS INDIVIDUAIS - ESTRUTURA GERAL DA PÁGINA
+   Cabeçalho em cima / conteúdo no meio / rodapé embaixo
+========================================================== */
 
-/* CORPO DO ESFIG USA TODA A ÁREA ENTRE CABEÇALHO E RODAPÉ */
+body.impressao-individual
+#relatorioDocumento{
+
+    height:202mm !important;
+    min-height:202mm !important;
+    max-height:202mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* CONTÊINER PRINCIPAL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo{
+
+    width:100% !important;
+
+    height:100% !important;
+    min-height:100% !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* CABEÇALHO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-topo{
+
+    flex:0 0 auto !important;
+}
+
+
+/* ÁREA DOS DADOS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-corpo{
+
+    flex:1 1 0 !important;
+
+    min-height:0 !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* RODAPÉ */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-rodape{
+
+    flex:0 0 auto !important;
+
+    margin-top:0 !important;
+}
+  /* ==========================================================
+   ESFIG INDIVIDUAL - PREENCHER A ÁREA CENTRAL
+========================================================== */
+
+/* ÁREA CENTRAL SOMENTE DO ESFIG */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-executivo-corpo{
 
-    flex:1 1 auto !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-
     justify-content:stretch !important;
-    align-items:center !important;
-
-    min-height:0 !important;
 
     padding:
         5mm
@@ -1318,7 +1329,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* QUADRO DO ESFIG CRESCE ATÉ PREENCHER ESSA ÁREA */
+/* QUADRO PRINCIPAL */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1327,11 +1338,11 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     width:96% !important;
     max-width:none !important;
 
+    flex:1 1 0 !important;
+
     height:auto !important;
     min-height:0 !important;
     max-height:none !important;
-
-    flex:1 1 auto !important;
 
     margin:0 auto !important;
 
@@ -1344,22 +1355,24 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* CONTEÚDO INTERNO TAMBÉM CRESCE */
+/* CONTEÚDO INTERNO */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig{
 
-    flex:1 1 auto !important;
+    flex:1 1 0 !important;
+
+    min-height:0 !important;
 
     display:flex !important;
     flex-direction:column !important;
 
-    min-height:0 !important;
+    gap:10px !important;
 }
 
 
-/* TABELA OCUPA O ESPAÇO PRINCIPAL */
+/* TABELA */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1368,7 +1381,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:100% !important;
 
-    flex:1 1 auto !important;
+    flex:1 1 0 !important;
 
     height:100% !important;
 
@@ -1383,10 +1396,10 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva th{
 
-    height:45px !important;
+    height:44px !important;
 
     padding:
-        10px
+        9px
         12px !important;
 
     font-size:12px !important;
@@ -1396,14 +1409,12 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* LINHAS DOS DADOS */
+/* DADOS */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva td{
-
-    height:60px !important;
 
     padding:
         10px
@@ -1425,6 +1436,8 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     flex:0 0 auto !important;
 
     margin-top:10px !important;
+
+    gap:8px !important;
 }
 
 
@@ -1434,9 +1447,17 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     min-height:55px !important;
 
+    padding:
+        10px
+        12px !important;
+
     font-size:12px !important;
     font-weight:700 !important;
-}
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+} 
     /* ======================================================
        PÁGINA
     ====================================================== */
