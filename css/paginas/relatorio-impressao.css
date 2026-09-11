@@ -938,45 +938,49 @@ body.impressao-individual
 
     max-height:none !important;
 }
-   /* ======================================================
-   LEGIBILIDADE - PDF A4
+/* ======================================================
+   LEGIBILIDADE - SOMENTE RELATÓRIO GERAL
 ====================================================== */
 
-/* KPIs */
+body.impressao-sgq
 .relatorio-kpi-conteudo span{
     font-size:8px !important;
     font-weight:700 !important;
 }
 
+body.impressao-sgq
 .relatorio-kpi-conteudo strong{
     font-size:14px !important;
     font-weight:900 !important;
 }
 
+body.impressao-sgq
 .relatorio-kpi-conteudo small{
     font-size:7px !important;
     font-weight:600 !important;
 }
 
 
-/* TÍTULOS DOS PAINÉIS */
+body.impressao-sgq
 .relatorio-painel-titulo span{
     font-size:10px !important;
     font-weight:900 !important;
 }
 
+body.impressao-sgq
 .relatorio-painel-titulo strong{
     font-size:9px !important;
     font-weight:900 !important;
 }
 
 
-/* TABELAS */
+body.impressao-sgq
 .relatorio-tabela-executiva th{
     font-size:7.5px !important;
     font-weight:900 !important;
 }
 
+body.impressao-sgq
 .relatorio-tabela-executiva td{
     font-size:8px !important;
     font-weight:700 !important;
