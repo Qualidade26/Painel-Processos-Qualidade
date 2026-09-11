@@ -533,8 +533,8 @@ body.impressao-individual
 #relatorioDocumento
 .relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
-    width:94% !important;
-    max-width:265mm !important;
+   width:98% !important;
+max-width:275mm !important;
 
     height:auto !important;
     min-height:0 !important;
@@ -556,10 +556,10 @@ body.impressao-individual
 .relatorio-tabela-executiva th{
 
     padding:
-        6px
-        8px !important;
+        9px
+        10px !important;
 
-    font-size:9px !important;
+    font-size:11px !important;
     font-weight:900 !important;
 }
 
@@ -570,10 +570,10 @@ body.impressao-individual
 .relatorio-tabela-executiva td{
 
     padding:
-        7px
-        8px !important;
+        10px
+        10px !important;
 
-    font-size:10px !important;
+    font-size:12px !important;
     font-weight:700 !important;
 }
 
@@ -596,11 +596,11 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-mini-indicador{
 
-    min-height:58px !important;
+    min-height:90px !important;
 
     padding:
-        7px
-        8px !important;
+        10px
+        10px !important;
 
     border-radius:6px !important;
 }
@@ -611,7 +611,7 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-mini-indicador span{
 
-    font-size:8px !important;
+    font-size:10px !important;
     font-weight:800 !important;
 }
 
@@ -623,7 +623,7 @@ body.impressao-individual
 
     margin-top:4px !important;
 
-    font-size:12px !important;
+    font-size:16px !important;
     font-weight:900 !important;
 }
 
@@ -646,13 +646,13 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-    min-height:32px !important;
+   min-height:55px !important;
 
     padding:
         7px
         8px !important;
 
-    font-size:9px !important;
+    font-size:11px !important;
     font-weight:700 !important;
 
     display:flex !important;
