@@ -806,10 +806,10 @@ body.impressao-individual
         width:98% !important;
         max-width:275mm !important;
 
-        height:115mm !important;
-        min-height:115mm !important;
-        max-height:115mm !important;
-
+       height:auto !important;
+min-height:125mm !important;
+max-height:none !important;
+       
         margin:auto !important;
 
         display:flex !important;
@@ -1222,7 +1222,198 @@ body.impressao-individual
         min-height:0 !important;
     }
 
+/* ==========================================================
+   INDIVIDUAIS - PREENCHER A ÁREA ENTRE CABEÇALHO E RODAPÉ
+   Importação | Amostras | ESFIG | Retrabalho
+========================================================== */
 
+
+/* IMPORTAÇÃO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao){
+
+    width:96% !important;
+
+    min-height:125mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:space-between !important;
+}
+
+
+/* AMOSTRAS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoAmostras){
+
+    width:96% !important;
+
+    min-height:125mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:space-between !important;
+}
+
+
+/* RETRABALHO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho){
+
+    width:96% !important;
+
+    min-height:125mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:space-between !important;
+}
+
+
+/* ESFIG */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:96% !important;
+
+    min-height:125mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:space-between !important;
+}/* ==========================================================
+   GRÁFICOS DOS INDIVIDUAIS - APROVEITAR ESPAÇO VERTICAL
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-grafico-box,
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoAmostras)
+.relatorio-grafico-box,
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-grafico-box{
+
+    flex:1 1 auto !important;
+
+    height:auto !important;
+    min-height:260px !important;
+    max-height:none !important;
+
+    margin-top:8px !important;
+}
+
+
+/* CANVAS ACOMPANHA O ESPAÇO DISPONÍVEL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-grafico-box canvas,
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoAmostras)
+.relatorio-grafico-box canvas,
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-grafico-box canvas{
+
+    width:100% !important;
+    height:100% !important;
+
+    max-height:none !important;
+}
+   /* ==========================================================
+   ESFIG INDIVIDUAL - APROVEITAR ESPAÇO VERTICAL
+========================================================== */
+
+
+/* CONTEÚDO DO ESFIG */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-indicadores-esfig{
+
+    flex:1 1 auto !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+}
+
+
+/* TABELA PREENCHE O ESPAÇO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva{
+
+    width:100% !important;
+
+    flex:1 1 auto !important;
+}
+
+
+/* LINHAS MAIORES */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
+
+    height:38px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td{
+
+    height:48px !important;
+}
+
+
+/* ÚLTIMA / PRÓXIMA AFERIÇÃO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa{
+
+    margin-top:10px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa span{
+
+    min-height:60px !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
