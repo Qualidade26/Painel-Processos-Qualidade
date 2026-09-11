@@ -523,7 +523,142 @@ body.impressao-individual
         font-size:6px !important;
     }
 
+/* ==========================================================
+   ESFIG - RELATÓRIO INDIVIDUAL
+========================================================== */
 
+/* PAINEL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:94% !important;
+    max-width:265mm !important;
+
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    margin:auto !important;
+
+    padding:10px !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* TABELA PRINCIPAL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
+
+    padding:
+        6px
+        8px !important;
+
+    font-size:9px !important;
+    font-weight:900 !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td{
+
+    padding:
+        7px
+        8px !important;
+
+    font-size:10px !important;
+    font-weight:700 !important;
+}
+
+
+/* INDICADORES ESFIG */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-indicadores-esfig{
+
+    gap:8px !important;
+}
+
+
+/* CARDS / MINI INDICADORES */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-mini-indicador{
+
+    min-height:58px !important;
+
+    padding:
+        7px
+        8px !important;
+
+    border-radius:6px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-mini-indicador span{
+
+    font-size:8px !important;
+    font-weight:800 !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-mini-indicador strong{
+
+    margin-top:4px !important;
+
+    font-size:12px !important;
+    font-weight:900 !important;
+}
+
+
+/* ÚLTIMA / PRÓXIMA AFERIÇÃO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa{
+
+    margin-top:10px !important;
+
+    gap:8px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa span{
+
+    min-height:32px !important;
+
+    padding:
+        7px
+        8px !important;
+
+    font-size:9px !important;
+    font-weight:700 !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
   
     /* ======================================================
        FORNECEDORES
@@ -603,7 +738,146 @@ body.impressao-individual
 
         font-size:6px !important;
     }
+/* ==========================================================
+   FORNECEDORES - RELATÓRIO INDIVIDUAL
+========================================================== */
 
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout){
+
+    width:94% !important;
+    max-width:265mm !important;
+
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:auto !important;
+
+    padding:10px !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* LAYOUT PRINCIPAL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-fornecedores-layout{
+
+    grid-template-columns:
+        minmax(0,1.55fr)
+        minmax(150px,.45fr) !important;
+
+    gap:10px !important;
+}
+
+
+/* TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-tabela-executiva th{
+
+    padding:
+        6px
+        8px !important;
+
+    font-size:9px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-tabela-executiva td{
+
+    padding:
+        6px
+        8px !important;
+
+    font-size:10px !important;
+}
+
+
+/* ÍNDICE MÉDIO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-indice-fornecedor{
+
+    min-height:125px !important;
+
+    padding:12px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-indice-fornecedor span{
+
+    font-size:8px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-indice-fornecedor strong{
+
+    font-size:28px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-indice-fornecedor small{
+
+    font-size:8px !important;
+}
+
+
+/* FORNECEDORES EM ACOMPANHAMENTO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-fornecedores-atencao{
+
+    margin-top:10px !important;
+
+    padding:
+        9px
+        10px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-fornecedores-atencao > strong{
+
+    font-size:9px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-fornecedores-layout)
+.relatorio-fornecedores-atencao span{
+
+    padding:
+        7px
+        8px !important;
+
+    font-size:9px !important;
+}
 
     /* ======================================================
    RESUMO EXECUTIVO
@@ -1010,23 +1284,34 @@ body.impressao-sgq
 }
    
 /* ======================================================
-   FORÇAR RELATÓRIO EM UMA ÚNICA PÁGINA
+   RELATÓRIO GERAL - FORÇAR UMA ÚNICA PÁGINA
 ====================================================== */
 
+body.impressao-sgq
 #relatorioDocumento{
     height:auto !important;
     min-height:0 !important;
 }
 
+
+body.impressao-sgq
+#relatorioDocumento
 .relatorio-executivo-corpo{
     margin-bottom:0 !important;
     padding-bottom:0 !important;
 }
+
+
+body.impressao-sgq
+#relatorioDocumento
 .relatorio-faixa-final{
     margin-bottom:0 !important;
     padding-bottom:0 !important;
 }
 
+
+body.impressao-sgq
+#relatorioDocumento
 .relatorio-executivo-rodape{
     margin:0 !important;
     padding:1px 6px !important;
