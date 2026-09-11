@@ -1366,76 +1366,7 @@ body.impressao-individual
 
     max-height:none !important;
 }
-   /* ==========================================================
-   ESFIG INDIVIDUAL - APROVEITAR ESPAÇO VERTICAL
-========================================================== */
 
-
-/* CONTEÚDO DO ESFIG */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-indicadores-esfig{
-
-    flex:1 1 auto !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-}
-
-
-/* TABELA PREENCHE O ESPAÇO */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-tabela-executiva{
-
-    width:100% !important;
-
-    flex:1 1 auto !important;
-}
-
-
-/* LINHAS MAIORES */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-tabela-executiva th{
-
-    height:38px !important;
-}
-
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-tabela-executiva td{
-
-    height:48px !important;
-}
-
-
-/* ÚLTIMA / PRÓXIMA AFERIÇÃO */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-info-faixa{
-
-    margin-top:10px !important;
-}
-
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-info-faixa span{
-
-    min-height:60px !important;
-}
    /* ==========================================================
    RETRABALHO INDIVIDUAL - AUMENTAR TABELA
    Não altera o gráfico
@@ -1477,10 +1408,63 @@ body.impressao-individual
 
     vertical-align:middle !important;
 }
-   /* ==========================================================
-   ESFIG INDIVIDUAL - TABELA GRANDE
-   Aproveitar melhor a área da página
+  /* ==========================================================
+   ESFIG INDIVIDUAL - TAMANHO FINAL
+   Painel e tabela ocupando a área central
 ========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:96% !important;
+    max-width:275mm !important;
+
+    height:140mm !important;
+    min-height:140mm !important;
+    max-height:140mm !important;
+
+    margin:auto !important;
+
+    padding:12px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* CONTEÚDO INTERNO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-indicadores-esfig{
+
+    flex:1 1 auto !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    gap:10px !important;
+}
+
+
+/* TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva{
+
+    width:100% !important;
+
+    flex:1 1 auto !important;
+
+    table-layout:fixed !important;
+}
+
 
 /* CABEÇALHO DA TABELA */
 
@@ -1491,9 +1475,7 @@ body.impressao-individual
 
     height:42px !important;
 
-    padding:
-        10px
-        12px !important;
+    padding:10px 12px !important;
 
     font-size:12px !important;
     font-weight:900 !important;
@@ -1509,11 +1491,9 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td{
 
-    height:58px !important;
+    height:62px !important;
 
-    padding:
-        12px
-        12px !important;
+    padding:12px !important;
 
     font-size:13px !important;
     font-weight:700 !important;
@@ -1522,34 +1502,32 @@ body.impressao-individual
 }
 
 
-/* DEIXAR A TABELA OCUPAR A LARGURA TODA */
+/* ÚLTIMA / PRÓXIMA AFERIÇÃO */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
-.relatorio-tabela-executiva{
+.relatorio-info-faixa{
 
-    width:100% !important;
+    margin-top:10px !important;
+    gap:8px !important;
 }
 
-
-/* ÚLTIMA E PRÓXIMA AFERIÇÃO TAMBÉM MAIORES */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-    min-height:58px !important;
+    min-height:60px !important;
 
-    padding:
-        10px
-        12px !important;
+    padding:10px 12px !important;
 
     font-size:11px !important;
     font-weight:700 !important;
 
     display:flex !important;
+
     align-items:center !important;
     justify-content:center !important;
 }
