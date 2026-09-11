@@ -1277,6 +1277,27 @@ body.impressao-individual
 
     justify-content:space-between !important;
 }
+/* ==========================================================
+   RETRABALHO - ALINHAR OS DOIS PAINÉIS
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho),
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo{
+
+    width:96% !important;
+    max-width:none !important;
+
+    margin-left:auto !important;
+    margin-right:auto !important;
+
+    box-sizing:border-box !important;
+}
 
 
 /* ESFIG */
@@ -1293,7 +1314,8 @@ body.impressao-individual
     flex-direction:column !important;
 
     justify-content:space-between !important;
-}/* ==========================================================
+}
+   /* ==========================================================
    GRÁFICOS DOS INDIVIDUAIS - APROVEITAR ESPAÇO VERTICAL
 ========================================================== */
 
