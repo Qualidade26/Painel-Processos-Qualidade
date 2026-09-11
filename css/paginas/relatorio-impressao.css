@@ -1,23 +1,23 @@
 /* ==========================================================
    IMPRESSÃO / PDF - BASE
 ========================================================== */
-
 @media print{
 
     html,
     body{
 
         width:100% !important;
-        height:auto !important;
+
+        height:100% !important;
+        min-height:0 !important;
 
         margin:0 !important;
         padding:0 !important;
 
         background:#ffffff !important;
 
-       overflow:hidden !important;
+        overflow:hidden !important;
     }
-
 
     /* ======================================================
        ESCONDE TODO O PAINEL
@@ -203,11 +203,11 @@ body.impressao-individual
 
     width:100% !important;
 
-    min-height:145mm !important;
+   min-height:0 !important;
 
-    padding:
-        5mm
-        6mm !important;
+padding:
+    3mm
+    5mm !important;
 
     box-sizing:border-box !important;
 }
