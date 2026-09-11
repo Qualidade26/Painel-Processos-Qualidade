@@ -1002,11 +1002,13 @@
     }
 
 
-    body.impressao-sgq
-    .relatorio-tabela-executiva td{
-        font-size:8px !important;
-        font-weight:700 !important;
-    }
+   body.impressao-sgq
+#relatorioDocumento
+.relatorio-executivo-corpo{
+
+    margin-bottom:0 !important;
+    padding-bottom:0 !important;
+}
 
 
     /* ======================================================
@@ -1022,7 +1024,7 @@
 
     body.impressao-sgq
     #relatorioDocumento
-    .relatorio-executivo-corpo{
+    
         margin-bottom:0 !important;
         padding-bottom:0 !important;
     }
@@ -1243,8 +1245,8 @@ body.impressao-individual
 #relatorioDocumento{
 
     height:202mm !important;
-    min-height:202mm !important;
-    max-height:202mm !important;
+min-height:202mm !important;
+max-height:none !important;
 
     display:flex !important;
     flex-direction:column !important;
@@ -1300,7 +1302,6 @@ body.impressao-individual
     box-sizing:border-box !important;
 }
 
-
 /* RODAPÉ */
 
 body.impressao-individual
@@ -1321,11 +1322,22 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-executivo-corpo{
 
+    flex:1 1 0 !important;
+
+    width:100% !important;
+    min-height:0 !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    align-items:stretch !important;
     justify-content:stretch !important;
 
     padding:
         5mm
         5mm !important;
+
+    box-sizing:border-box !important;
 }
 
 
@@ -1457,7 +1469,52 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-} 
+} /* ==========================================================
+   ESFIG - LIBERAR O GRID QUE ESTAVA TRAVANDO A ALTURA
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-grid-principal{
+
+    width:100% !important;
+
+    flex:1 1 0 !important;
+
+    height:100% !important;
+    min-height:0 !important;
+
+    display:grid !important;
+
+    grid-template-columns:
+        minmax(0,1fr) !important;
+
+    grid-template-rows:
+        minmax(0,1fr) !important;
+
+    align-items:stretch !important;
+
+    box-sizing:border-box !important;
+}
+   /* PAINEL ESFIG OCUPA TODA A LINHA DO GRID */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-grid-principal
+> .relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:96% !important;
+
+    height:100% !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    align-self:stretch !important;
+
+    margin:
+        0
+        auto !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
