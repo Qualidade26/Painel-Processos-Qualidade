@@ -669,155 +669,64 @@
     }
 
 /* ==========================================================
-   RELATÓRIOS INDIVIDUAIS - PADRÃO DE PÁGINA
-   Cabeçalho no topo
+   TODOS OS RELATÓRIOS INDIVIDUAIS
+   Cabeçalho em cima
    Conteúdo centralizado
-   Rodapé no final
+   Rodapé embaixo
 ========================================================== */
-
-/* DOCUMENTO */
 
 body.impressao-individual
 #relatorioDocumento{
 
-    width:100% !important;
+    min-height:190mm !important;
 
-    height:202mm !important;
-    min-height:202mm !important;
-    max-height:202mm !important;
-
-    margin:0 !important;
-    padding:0 !important;
-
-    overflow:hidden !important;
-
-    box-sizing:border-box !important;
+    display:flex !important;
+    flex-direction:column !important;
 }
 
 
-/* ESTRUTURA DA PÁGINA */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-executivo{
-
-    width:100% !important;
-    height:100% !important;
-
-    display:grid !important;
-
-    grid-template-rows:
-        auto
-        minmax(0,1fr)
-        auto !important;
-
-    box-sizing:border-box !important;
-}
-
-
-/* CABEÇALHO SEMPRE NO TOPO */
+/* CABEÇALHO */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-executivo-topo{
 
-    width:100% !important;
-
-    grid-row:1 !important;
+    flex:0 0 auto !important;
 
     margin:0 !important;
-
-    align-self:start !important;
 }
 
 
-/* REMOVE OS 6 CARDS DO RELATÓRIO GERAL */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-kpis-executivos{
-
-    display:none !important;
-}
-
-
-/* ÁREA CENTRAL DO RELATÓRIO */
+/* ÁREA DOS DADOS */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-executivo-corpo{
 
-    width:100% !important;
-    height:100% !important;
-
-    min-height:0 !important;
-
-    grid-row:2 !important;
+    flex:1 1 auto !important;
 
     display:flex !important;
     flex-direction:column !important;
 
-    align-items:center !important;
     justify-content:center !important;
 
-    margin:0 !important;
-
-    padding:
-        4mm
-        5mm !important;
-
-    overflow:hidden !important;
-
-    box-sizing:border-box !important;
-}
-
-
-/* PAINEL CENTRAL */
-
-body.impressao-individual
-#relatorioDocumento
-.relatorio-painel-executivo{
-
-    width:96% !important;
-    max-width:275mm !important;
-
-    height:auto !important;
     min-height:0 !important;
-    max-height:100% !important;
 
-    margin:auto !important;
-
-    flex:none !important;
-
-    box-sizing:border-box !important;
+    margin:0 !important;
 }
 
 
-/* RODAPÉ SEMPRE EMBAIXO */
+/* RODAPÉ */
 
 body.impressao-individual
 #relatorioDocumento
 .relatorio-executivo-rodape{
 
-    width:100% !important;
+    flex:0 0 auto !important;
 
-    grid-row:3 !important;
-
-    margin:0 !important;
-
-    padding:
-        2px
-        6px !important;
-
-    min-height:0 !important;
-
-    align-self:end !important;
-
-    line-height:1 !important;
-
-    box-sizing:border-box !important;
+    margin-top:auto !important;
+    margin-bottom:0 !important;
 }
-  
 
 
     /* ======================================================
