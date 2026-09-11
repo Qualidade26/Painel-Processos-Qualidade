@@ -668,73 +668,156 @@
         font-size:6px !important;
     }
 
+/* ==========================================================
+   RELATÓRIOS INDIVIDUAIS - PADRÃO DE PÁGINA
+   Cabeçalho no topo
+   Conteúdo centralizado
+   Rodapé no final
+========================================================== */
 
-    /* ======================================================
-       RELATÓRIOS INDIVIDUAIS - BASE
-    ====================================================== */
+/* DOCUMENTO */
 
-    body.impressao-individual
-    #relatorioDocumento
-    .relatorio-kpis-executivos{
-        display:none !important;
-    }
+body.impressao-individual
+#relatorioDocumento{
 
+    width:100% !important;
 
-    body.impressao-individual
-    #relatorioDocumento
-    .relatorio-executivo-corpo{
-        display:flex !important;
-        flex-direction:column !important;
+    height:202mm !important;
+    min-height:202mm !important;
+    max-height:202mm !important;
 
-        align-items:center !important;
-        justify-content:center !important;
+    margin:0 !important;
+    padding:0 !important;
 
-        width:100% !important;
-        min-height:0 !important;
+    overflow:hidden !important;
 
-        padding:
-            3mm
-            5mm !important;
-
-        box-sizing:border-box !important;
-    }
+    box-sizing:border-box !important;
+}
 
 
-    body.impressao-individual
-    #relatorioDocumento
-    .relatorio-painel-executivo{
-        width:86% !important;
-        max-width:240mm !important;
+/* ESTRUTURA DA PÁGINA */
 
-        height:auto !important;
-        min-height:0 !important;
-        max-height:none !important;
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo{
 
-        margin:auto !important;
+    width:100% !important;
+    height:100% !important;
 
-        box-sizing:border-box !important;
-    }
+    display:grid !important;
 
+    grid-template-rows:
+        auto
+        minmax(0,1fr)
+        auto !important;
 
-    body.impressao-individual
-    #relatorioDocumento
-    .relatorio-grafico-box{
-        height:220px !important;
-        min-height:220px !important;
-        max-height:220px !important;
-
-        padding:6px !important;
-    }
+    box-sizing:border-box !important;
+}
 
 
-    body.impressao-individual
-    #relatorioDocumento
-    .relatorio-grafico-box canvas{
-        width:100% !important;
-        height:100% !important;
+/* CABEÇALHO SEMPRE NO TOPO */
 
-        max-height:none !important;
-    }
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-topo{
+
+    width:100% !important;
+
+    grid-row:1 !important;
+
+    margin:0 !important;
+
+    align-self:start !important;
+}
+
+
+/* REMOVE OS 6 CARDS DO RELATÓRIO GERAL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-kpis-executivos{
+
+    display:none !important;
+}
+
+
+/* ÁREA CENTRAL DO RELATÓRIO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-corpo{
+
+    width:100% !important;
+    height:100% !important;
+
+    min-height:0 !important;
+
+    grid-row:2 !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    margin:0 !important;
+
+    padding:
+        4mm
+        5mm !important;
+
+    overflow:hidden !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* PAINEL CENTRAL */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-executivo{
+
+    width:96% !important;
+    max-width:275mm !important;
+
+    height:auto !important;
+    min-height:0 !important;
+    max-height:100% !important;
+
+    margin:auto !important;
+
+    flex:none !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* RODAPÉ SEMPRE EMBAIXO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-executivo-rodape{
+
+    width:100% !important;
+
+    grid-row:3 !important;
+
+    margin:0 !important;
+
+    padding:
+        2px
+        6px !important;
+
+    min-height:0 !important;
+
+    align-self:end !important;
+
+    line-height:1 !important;
+
+    box-sizing:border-box !important;
+}
+  
 
 
     /* ======================================================
