@@ -527,26 +527,20 @@ body.impressao-individual
    ESFIG - RELATÓRIO INDIVIDUAL
 ========================================================== */
 
-/* PAINEL */
-
 body.impressao-individual
 #relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig){
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
 
-   width:98% !important;
-max-width:275mm !important;
+    height:34px !important;
 
-    height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
+    padding:
+        8px
+        10px !important;
 
-    margin:auto !important;
-
-    padding:10px !important;
-
-    box-sizing:border-box !important;
+    font-size:11px !important;
+    font-weight:900 !important;
 }
-
 
 /* TABELA PRINCIPAL */
 
@@ -569,14 +563,17 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td{
 
+    height:38px !important;
+
     padding:
-        10px
+        9px
         10px !important;
 
     font-size:12px !important;
     font-weight:700 !important;
-}
 
+    vertical-align:middle !important;
+}
 
 /* INDICADORES ESFIG */
 
@@ -646,7 +643,7 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-   min-height:55px !important;
+   min-height:65px !important;
 
     padding:
         7px
