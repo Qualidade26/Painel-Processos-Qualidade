@@ -1436,6 +1436,47 @@ body.impressao-individual
 
     min-height:60px !important;
 }
+   /* ==========================================================
+   RETRABALHO INDIVIDUAL - AUMENTAR TABELA
+   Não altera o gráfico
+========================================================== */
+
+/* CABEÇALHO DA TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-tabela-executiva th{
+
+    height:34px !important;
+
+    padding:
+        7px
+        10px !important;
+
+    font-size:10px !important;
+    font-weight:900 !important;
+}
+
+
+/* LINHAS DA TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-tabela-executiva td{
+
+    height:38px !important;
+
+    padding:
+        8px
+        10px !important;
+
+    font-size:11px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
