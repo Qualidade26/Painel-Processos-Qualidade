@@ -1477,6 +1477,82 @@ body.impressao-individual
 
     vertical-align:middle !important;
 }
+   /* ==========================================================
+   ESFIG INDIVIDUAL - TABELA GRANDE
+   Aproveitar melhor a área da página
+========================================================== */
+
+/* CABEÇALHO DA TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
+
+    height:42px !important;
+
+    padding:
+        10px
+        12px !important;
+
+    font-size:12px !important;
+    font-weight:900 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* LINHAS DA TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td{
+
+    height:58px !important;
+
+    padding:
+        12px
+        12px !important;
+
+    font-size:13px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* DEIXAR A TABELA OCUPAR A LARGURA TODA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva{
+
+    width:100% !important;
+}
+
+
+/* ÚLTIMA E PRÓXIMA AFERIÇÃO TAMBÉM MAIORES */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa span{
+
+    min-height:58px !important;
+
+    padding:
+        10px
+        12px !important;
+
+    font-size:11px !important;
+    font-weight:700 !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
