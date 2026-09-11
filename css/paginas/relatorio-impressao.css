@@ -1424,8 +1424,7 @@ body.impressao-individual
     max-height:250px !important;
 }
   /* ==========================================================
-   ESFIG INDIVIDUAL - TAMANHO FINAL
-   Painel e tabela ocupando a área central
+   ESFIG INDIVIDUAL - MAIOR E MAIS LEGÍVEL
 ========================================================== */
 
 body.impressao-individual
@@ -1435,13 +1434,13 @@ body.impressao-individual
     width:96% !important;
     max-width:275mm !important;
 
-    height:140mm !important;
-    min-height:140mm !important;
-    max-height:140mm !important;
+    height:150mm !important;
+    min-height:150mm !important;
+    max-height:150mm !important;
 
     margin:auto !important;
 
-    padding:12px !important;
+    padding:14px !important;
 
     display:flex !important;
     flex-direction:column !important;
@@ -1462,7 +1461,7 @@ body.impressao-individual
     display:flex !important;
     flex-direction:column !important;
 
-    gap:10px !important;
+    gap:12px !important;
 }
 
 
@@ -1488,11 +1487,13 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva th{
 
-    height:42px !important;
+    height:46px !important;
 
-    padding:10px 12px !important;
+    padding:
+        11px
+        14px !important;
 
-    font-size:12px !important;
+    font-size:13px !important;
     font-weight:900 !important;
 
     vertical-align:middle !important;
@@ -1506,11 +1507,13 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td{
 
-    height:62px !important;
+    height:66px !important;
 
-    padding:12px !important;
+    padding:
+        13px
+        14px !important;
 
-    font-size:13px !important;
+    font-size:14px !important;
     font-weight:700 !important;
 
     vertical-align:middle !important;
@@ -1524,8 +1527,8 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa{
 
-    margin-top:10px !important;
-    gap:8px !important;
+    margin-top:12px !important;
+    gap:10px !important;
 }
 
 
@@ -1534,11 +1537,13 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-    min-height:60px !important;
+    min-height:68px !important;
 
-    padding:10px 12px !important;
+    padding:
+        12px
+        14px !important;
 
-    font-size:11px !important;
+    font-size:12px !important;
     font-weight:700 !important;
 
     display:flex !important;
