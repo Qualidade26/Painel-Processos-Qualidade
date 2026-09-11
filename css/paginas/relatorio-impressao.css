@@ -656,7 +656,100 @@ body.impressao-individual
     align-items:center !important;
     justify-content:center !important;
 }
-  
+   
+  /* ==========================================================
+   ESFIG INDIVIDUAL - OCUPAR MELHOR A ALTURA DA FOLHA
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:98% !important;
+    max-width:275mm !important;
+
+    min-height:115mm !important;
+    height:115mm !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    padding:12px !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* ÁREA DE CONTEÚDO DO ESFIG */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-indicadores-esfig{
+
+    flex:1 !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    gap:10px !important;
+}
+
+
+/* TABELA OCUPA A MAIOR PARTE */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva{
+
+    flex:1 !important;
+
+    height:100% !important;
+}
+
+
+/* LINHAS MAIS ALTAS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td{
+
+    height:42px !important;
+
+    font-size:12px !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* CABEÇALHO DA TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
+
+    height:34px !important;
+
+    font-size:11px !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* ÚLTIMA / PRÓXIMA AFERIÇÃO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-info-faixa span{
+
+    min-height:55px !important;
+
+    font-size:11px !important;
+}
     /* ======================================================
        FORNECEDORES
     ====================================================== */
