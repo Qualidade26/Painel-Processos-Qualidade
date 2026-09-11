@@ -472,6 +472,86 @@ body.impressao-individual
 
     max-height:none !important;
 }
+   /* ==========================================================
+   IMPORTAÇÃO - RELATÓRIO INDIVIDUAL
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao){
+
+    width:98% !important;
+    max-width:275mm !important;
+
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+
+    margin:auto !important;
+
+    padding:10px !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* TABELA */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-tabela-executiva th{
+
+    height:30px !important;
+
+    padding:7px 10px !important;
+
+    font-size:10px !important;
+    font-weight:900 !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-tabela-executiva td{
+
+    height:32px !important;
+
+    padding:7px 10px !important;
+
+    font-size:11px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* GRÁFICO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-grafico-box{
+
+    height:280px !important;
+    min-height:280px !important;
+    max-height:280px !important;
+
+    padding:8px !important;
+}
+
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoImportacao)
+.relatorio-grafico-box canvas{
+
+    width:100% !important;
+    height:100% !important;
+
+    max-height:none !important;
+}
     /* ======================================================
        ESFIG
     ====================================================== */
