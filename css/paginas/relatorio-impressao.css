@@ -1002,14 +1002,12 @@
     }
 
 
-   body.impressao-sgq
+ body.impressao-sgq
 #relatorioDocumento
-.relatorio-executivo-corpo{
-
+    
     margin-bottom:0 !important;
     padding-bottom:0 !important;
 }
-
 
     /* ======================================================
        RELATÓRIO GERAL - UMA ÚNICA PÁGINA
