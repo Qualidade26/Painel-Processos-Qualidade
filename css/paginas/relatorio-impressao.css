@@ -1319,23 +1319,6 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     box-sizing:border-box !important;
 }
 
-/* CONTEÚDO INTERNO */
-
-body.impressao-individual:has(.relatorio-indicadores-esfig)
-#relatorioDocumento
-.relatorio-indicadores-esfig{
-
-    flex:0 0 auto !important;
-
-    min-height:0 !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-
-    gap:10px !important;
-}
-
-
 /* ==========================================================
    ESFIG INDIVIDUAL - AUMENTAR TABELA DE INDICADORES
 ========================================================== */
@@ -1346,7 +1329,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva{
     width:100% !important;
 
-    flex:0 0 auto !important;
+    flex:1 1 auto !important;
     height:auto !important;
 
     table-layout:fixed !important;
