@@ -1310,7 +1310,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     flex-direction:column !important;
 
     align-items:stretch !important;
-    justify-content:stretch !important;
+   justify-content:flex-start !important;
 
     padding:
         5mm
@@ -1458,7 +1458,8 @@ font-size:8px !important;
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-} /* ==========================================================
+} 
+   * ==========================================================
    ESFIG - LIBERAR O GRID QUE ESTAVA TRAVANDO A ALTURA
 ========================================================== */
 
@@ -1468,9 +1469,9 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:100% !important;
 
-    flex:1 1 0 !important;
+    flex:0 0 auto !important;
 
-    height:100% !important;
+    height:auto !important;
     min-height:0 !important;
 
     display:grid !important;
@@ -1479,9 +1480,10 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
         minmax(0,1fr) !important;
 
     grid-template-rows:
-        minmax(0,1fr) !important;
+        auto !important;
 
-    align-items:stretch !important;
+    align-items:start !important;
+    align-content:start !important;
 
     box-sizing:border-box !important;
 }
@@ -1489,7 +1491,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
-.relatorio-grid-principal
+
 > .relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
     width:96% !important;
@@ -1498,7 +1500,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     min-height:0 !important;
     max-height:none !important;
 
-    align-self:stretch !important;
+align-self:start !important;
 
     margin:
         0
