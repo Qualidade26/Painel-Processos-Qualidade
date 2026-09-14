@@ -75,32 +75,29 @@ const totalReprovado =
        TOTAIS DO FLUXO OPERACIONAL
     ====================================================== */
 
-    const totalAguardando =
-        produtos.reduce(
-            (soma,item) =>
-                soma +
-                Number(item.aguardando || 0),
-            0
-        );
+   const totalAguardando =
+    produtosFluxo.reduce(
+        (soma,item) =>
+            soma +
+            Number(item.aguardando || 0),
+        0
+    );
 
+const totalDesmontado =
+    produtosFluxo.reduce(
+        (soma,item) =>
+            soma +
+            Number(item.desmontado || 0),
+        0
+    );
 
-    const totalDesmontado =
-        produtos.reduce(
-            (soma,item) =>
-                soma +
-                Number(item.desmontado || 0),
-            0
-        );
-
-
-    const totalAferidos =
-        produtos.reduce(
-            (soma,item) =>
-                soma +
-                Number(item.aferidos || 0),
-            0
-        );
-
+const totalAferidos =
+    produtosFluxo.reduce(
+        (soma,item) =>
+            soma +
+            Number(item.aferidos || 0),
+        0
+    );
 
     /* ======================================================
        PERCENTUAL DE PROCESSAMENTO
