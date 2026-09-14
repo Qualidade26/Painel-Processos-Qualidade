@@ -1184,6 +1184,117 @@ function gerarPainelEsfig(
         corrente.resumoAfericoes || {};
 
 
+    /* ======================================================
+       PRODUTOS DO FLUXO
+       Mostra somente SKU que teve entrada no ano
+    ====================================================== */
+
+    const produtosFluxo =
+        Array.isArray(corrente.produtos)
+            ? corrente.produtos.filter(
+                item =>
+                    Number(
+                        item.totalAnualSku || 0
+                    ) > 0
+            )
+            : [];
+
+
+    /* ======================================================
+       TOTAIS DO FLUXO
+    ====================================================== */
+
+    const totalAguardando =
+        produtosFluxo.reduce(
+            (soma,item) =>
+                soma +
+                Number(item.aguardando || 0),
+            0
+        );
+
+
+    const totalDesmontado =
+        produtosFluxo.reduce(
+            (soma,item) =>
+                soma +
+                Number(item.desmontado || 0),
+            0
+        );
+
+
+    const totalAferidos =
+        produtosFluxo.reduce(
+            (soma,item) =>
+                soma +
+                Number(item.aferidos || 0),
+            0
+        );
+
+
+    /* ======================================================
+       PROCESSAMENTO OPERACIONAL
+    ====================================================== */
+
+    const totalFluxo =
+        totalAguardando +
+        totalDesmontado +
+        totalAferidos;
+
+
+    const percentualOperacional =
+        totalFluxo > 0
+            ? Number(
+                (
+                    totalAferidos /
+                    totalFluxo *
+                    100
+                ).toFixed(1)
+            )
+            : 0;
+
+
+    /* ======================================================
+       LINHAS DA TABELA DO FLUXO
+    ====================================================== */
+
+    const linhasFluxo =
+        produtosFluxo
+            .map(
+                item => `
+                    <tr>
+
+                        <td>
+                            ${item.sku || "-"}
+                        </td>
+
+                        <td>
+                            ${item.descricao || "-"}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(
+                                item.totalAnualSku
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(
+                                item.aferidos
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(
+                                item.aguardando
+                            )}
+                        </td>
+
+                    </tr>
+                `
+            )
+            .join("");
+
+
     return `
 
         <section
@@ -1291,6 +1402,164 @@ function gerarPainelEsfig(
                 </span>
 
             </div>
+
+
+            ${
+                larguraTotal && produtosFluxo.length
+                    ? `
+
+                        <div class="relatorio-esfig-fluxo">
+
+                            <div class="relatorio-esfig-fluxo-titulo">
+
+                                <span>
+                                    🔄
+                                </span>
+
+                                <strong>
+                                    Fluxo Operacional
+                                </strong>
+
+                            </div>
+
+
+                            <table class="relatorio-esfig-fluxo-tabela">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>Código</th>
+
+                                        <th>Descrição</th>
+
+                                        <th>Total anual</th>
+
+                                        <th>Já aferido</th>
+
+                                        <th>Aguardando</th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+                                    ${linhasFluxo}
+
+                                </tbody>
+
+
+                                <tfoot>
+
+                                    <tr>
+
+                                        <td colspan="2">
+                                            TOTAL
+                                        </td>
+
+                                        <td>
+                                            ${formatarNumero(
+                                                produtosFluxo.reduce(
+                                                    (soma,item) =>
+                                                        soma +
+                                                        Number(
+                                                            item.totalAnualSku || 0
+                                                        ),
+                                                    0
+                                                )
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${formatarNumero(
+                                                totalAferidos
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${formatarNumero(
+                                                totalAguardando
+                                            )}
+                                        </td>
+
+                                    </tr>
+
+                                </tfoot>
+
+                            </table>
+
+
+                            <div class="relatorio-esfig-processamento">
+
+                                <div class="relatorio-esfig-processamento-barra">
+
+                                    <strong>
+                                        Processamento operacional
+                                    </strong>
+
+
+                                    <div class="relatorio-esfig-barra">
+
+                                        <span
+                                            style="
+                                                width:${Math.min(
+                                                    percentualOperacional,
+                                                    100
+                                                )}%
+                                            "
+                                        ></span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <strong class="relatorio-esfig-percentual">
+
+                                    ${percentualOperacional
+                                        .toLocaleString(
+                                            "pt-BR",
+                                            {
+                                                minimumFractionDigits:1,
+                                                maximumFractionDigits:1
+                                            }
+                                        )
+                                    }%
+
+                                </strong>
+
+
+                                <div class="relatorio-esfig-aguardando">
+
+                                    <span>
+                                        ⏱
+                                    </span>
+
+                                    <div>
+
+                                        <small>
+                                            Itens aguardando aferição
+                                        </small>
+
+                                        <strong>
+                                            ${formatarNumero(
+                                                totalAguardando
+                                            )}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `
+                    : ""
+            }
 
         </section>
     `;
