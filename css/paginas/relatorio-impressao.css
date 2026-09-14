@@ -1352,7 +1352,75 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     table-layout:fixed !important;
 }
 
+/* ==========================================================
+   ESFIG INDIVIDUAL - AUMENTAR TABELA DE INDICADORES
+========================================================== */
 
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig
+.relatorio-tabela-executiva{
+    width:100% !important;
+
+    flex:0 0 auto !important;
+    height:auto !important;
+
+    table-layout:fixed !important;
+}
+
+
+/* CABEÇALHO */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig
+.relatorio-tabela-executiva th{
+    height:34px !important;
+
+    padding:
+        8px
+        12px !important;
+
+    font-size:11px !important;
+    font-weight:900 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* LINHAS DOS INDICADORES */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig
+.relatorio-tabela-executiva td{
+    height:36px !important;
+
+    padding:
+        8px
+        12px !important;
+
+    font-size:11px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* VALORES NO PERÍODO / ACUMULADO */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig
+.relatorio-tabela-executiva td:nth-child(2),
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig
+.relatorio-tabela-executiva td:nth-child(3){
+    font-size:12px !important;
+    font-weight:900 !important;
+}
 /* CABEÇALHO DA TABELA */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
