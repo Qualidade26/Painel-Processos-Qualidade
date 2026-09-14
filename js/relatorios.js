@@ -394,9 +394,13 @@ const caminhoCongelado =
                 await respostaCongelado.json();
 
 
-            const dadosAtuais =
-                await respostaAtual.json();
+           const textoAtual =
+    await respostaAtual.text();
 
+const dadosAtuais =
+    interpretarJsonSeguro(
+        textoAtual
+    );
 
             montarPreviewRelatorio(
                 dadosCongelados,
