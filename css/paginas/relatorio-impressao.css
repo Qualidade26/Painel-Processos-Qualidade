@@ -1377,19 +1377,24 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
-.relatorio-indicadores-esfig
-.relatorio-tabela-executiva td{
+.relatorio-esfig-fluxo-tabela td{
+
+    height:38px !important;
 
     padding:
-        10px
-        12px !important;
+        8px
+        10px !important;
 
-    font-size:14px !important;
+    font-size:11px !important;
     font-weight:700 !important;
 
+    text-align:center !important;
     vertical-align:middle !important;
-}
 
+    border:
+        1px solid
+        #dce8ff !important;
+}
 
 /* ÚLTIMA / PRÓXIMA AFERIÇÃO */
 
@@ -1552,20 +1557,23 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* CABEÇALHO */
+/* CABEÇALHO - FLUXO OPERACIONAL MAIOR */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela th{
 
-    padding:
-        6px
-        8px !important;
+    height:36px !important;
 
-    font-size:9px !important;
+    padding:
+        8px
+        10px !important;
+
+    font-size:11px !important;
     font-weight:900 !important;
 
     text-align:center !important;
+    vertical-align:middle !important;
 
     color:#ffffff !important;
 
@@ -1575,7 +1583,6 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
         1px solid
         #60a5fa !important;
 }
-
 
 /* DADOS */
 
@@ -1609,7 +1616,6 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     text-align:left !important;
 }
 
-
 /* ==========================================================
    LINHA TOTAL
 ========================================================== */
@@ -1618,7 +1624,13 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela tfoot td{
 
-    font-size:10px !important;
+    height:40px !important;
+
+    padding:
+        8px
+        10px !important;
+
+    font-size:12px !important;
     font-weight:900 !important;
 
     color:#0f3cc9 !important;
