@@ -1000,55 +1000,37 @@
         font-size:7.5px !important;
         font-weight:900 !important;
     }
+    /* ======================================================
+   RELATÓRIO GERAL - UMA ÚNICA PÁGINA
+====================================================== */
+
+body.impressao-sgq
+#relatorioDocumento{
+    height:auto !important;
+    min-height:0 !important;
+}
 
 
- body.impressao-sgq
+body.impressao-sgq
 #relatorioDocumento
-    
+.relatorio-faixa-final{
     margin-bottom:0 !important;
     padding-bottom:0 !important;
 }
 
-    /* ======================================================
-       RELATÓRIO GERAL - UMA ÚNICA PÁGINA
-    ====================================================== */
 
-    body.impressao-sgq
-    #relatorioDocumento{
-        height:auto !important;
-        min-height:0 !important;
-    }
+body.impressao-sgq
+#relatorioDocumento
+.relatorio-executivo-rodape{
+    margin:0 !important;
 
+    padding:
+        1px
+        6px !important;
 
-    body.impressao-sgq
-    #relatorioDocumento
-    
-        margin-bottom:0 !important;
-        padding-bottom:0 !important;
-    }
-
-
-    body.impressao-sgq
-    #relatorioDocumento
-    .relatorio-faixa-final{
-        margin-bottom:0 !important;
-        padding-bottom:0 !important;
-    }
-
-
-    body.impressao-sgq
-    #relatorioDocumento
-    .relatorio-executivo-rodape{
-        margin:0 !important;
-
-        padding:
-            1px
-            6px !important;
-
-        line-height:1 !important;
-        min-height:0 !important;
-    }
-
+    line-height:1 !important;
+    min-height:0 !important;
+}
 /* ==========================================================
    INDIVIDUAIS - PREENCHER A ÁREA ENTRE CABEÇALHO E RODAPÉ
    Importação | Amostras | ESFIG | Retrabalho
@@ -1311,10 +1293,8 @@ body.impressao-individual
     margin-top:0 !important;
 }
   /* ==========================================================
-   ESFIG INDIVIDUAL - PREENCHER A ÁREA CENTRAL
+   ESFIG - LIBERAR TODA A ÁREA ENTRE CABEÇALHO E RODAPÉ
 ========================================================== */
-
-/* ÁREA CENTRAL SOMENTE DO ESFIG */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1337,33 +1317,31 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     box-sizing:border-box !important;
 }
-
-
-/* QUADRO PRINCIPAL */
+ /* ==========================================================
+   ESFIG - LIBERAR TODA A ÁREA ENTRE CABEÇALHO E RODAPÉ
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
-.relatorio-painel-total:has(.relatorio-indicadores-esfig){
-
-    width:96% !important;
-    max-width:none !important;
+.relatorio-executivo-corpo{
 
     flex:1 1 0 !important;
 
-    height:auto !important;
+    width:100% !important;
     min-height:0 !important;
-    max-height:none !important;
-
-    margin:0 auto !important;
 
     display:flex !important;
     flex-direction:column !important;
 
-    padding:12px !important;
+    align-items:stretch !important;
+    justify-content:stretch !important;
+
+    padding:
+        5mm
+        5mm !important;
 
     box-sizing:border-box !important;
 }
-
 
 /* CONTEÚDO INTERNO */
 
