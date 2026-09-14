@@ -1292,31 +1292,7 @@ body.impressao-individual
 
     margin-top:0 !important;
 }
-  /* ==========================================================
-   ESFIG - LIBERAR TODA A ÁREA ENTRE CABEÇALHO E RODAPÉ
-========================================================== */
-
-body.impressao-individual:has(.relatorio-indicadores-esfig)
-#relatorioDocumento
-.relatorio-executivo-corpo{
-
-    flex:1 1 0 !important;
-
-    width:100% !important;
-    min-height:0 !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-
-    align-items:stretch !important;
-    justify-content:stretch !important;
-
-    padding:
-        5mm
-        5mm !important;
-
-    box-sizing:border-box !important;
-}
+  
  /* ==========================================================
    ESFIG - LIBERAR TODA A ÁREA ENTRE CABEÇALHO E RODAPÉ
 ========================================================== */
@@ -1490,6 +1466,325 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     margin:
         0
         auto !important;
+}
+   /* ==========================================================
+   ESFIG INDIVIDUAL - FLUXO OPERACIONAL
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo{
+
+    width:96% !important;
+
+    margin:
+        10px
+        auto
+        0 !important;
+
+    padding:8px !important;
+
+    border:
+        1px solid
+        #1d4eff !important;
+
+    border-radius:7px !important;
+
+    background:#ffffff !important;
+
+    box-sizing:border-box !important;
+
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+}
+
+
+/* ==========================================================
+   TÍTULO - FLUXO OPERACIONAL
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-titulo{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    gap:7px !important;
+
+    margin-bottom:7px !important;
+
+    color:#0f3cc9 !important;
+}
+
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-titulo span{
+
+    font-size:15px !important;
+}
+
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-titulo strong{
+
+    font-size:12px !important;
+    font-weight:900 !important;
+}
+
+
+/* ==========================================================
+   TABELA DO FLUXO
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-tabela{
+
+    width:100% !important;
+
+    border-collapse:collapse !important;
+
+    table-layout:fixed !important;
+}
+
+
+/* CABEÇALHO */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-tabela th{
+
+    padding:
+        6px
+        8px !important;
+
+    font-size:9px !important;
+    font-weight:900 !important;
+
+    text-align:center !important;
+
+    color:#ffffff !important;
+
+    background:#0f3cc9 !important;
+
+    border:
+        1px solid
+        #60a5fa !important;
+}
+
+
+/* DADOS */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-tabela td{
+
+    height:26px !important;
+
+    padding:
+        5px
+        8px !important;
+
+    font-size:9px !important;
+    font-weight:700 !important;
+
+    text-align:center !important;
+
+    border:
+        1px solid
+        #dce8ff !important;
+}
+
+
+/* DESCRIÇÃO ALINHADA À ESQUERDA */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-tabela td:nth-child(2){
+
+    text-align:left !important;
+}
+
+
+/* ==========================================================
+   LINHA TOTAL
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo-tabela tfoot td{
+
+    font-size:10px !important;
+    font-weight:900 !important;
+
+    color:#0f3cc9 !important;
+
+    background:#eaf3ff !important;
+}
+
+
+/* ==========================================================
+   PROCESSAMENTO OPERACIONAL
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-processamento{
+
+    width:100% !important;
+
+    display:grid !important;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        65px
+        150px !important;
+
+    align-items:end !important;
+
+    gap:10px !important;
+
+    margin-top:8px !important;
+}
+
+
+/* TÍTULO DA BARRA */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-processamento-barra > strong{
+
+    display:block !important;
+
+    margin-bottom:4px !important;
+
+    font-size:8px !important;
+    font-weight:900 !important;
+
+    color:#0f2557 !important;
+}
+
+
+/* BARRA CINZA */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-barra{
+
+    width:100% !important;
+    height:16px !important;
+
+    background:#dbe2ea !important;
+
+    border-radius:8px !important;
+
+    overflow:hidden !important;
+}
+
+
+/* PARTE AZUL DA BARRA */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-barra span{
+
+    display:block !important;
+
+    height:100% !important;
+
+    background:#1d4eff !important;
+
+    border-radius:8px !important;
+}
+
+
+/* PERCENTUAL */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-percentual{
+
+    font-size:18px !important;
+    font-weight:900 !important;
+
+    color:#0f3cc9 !important;
+
+    text-align:center !important;
+}
+
+
+/* ==========================================================
+   AGUARDANDO
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-aguardando{
+
+    min-height:42px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+
+    gap:7px !important;
+
+    padding:
+        5px
+        8px !important;
+
+    border:
+        1px solid
+        #f59e0b !important;
+
+    border-radius:7px !important;
+
+    background:#fff7ed !important;
+
+    box-sizing:border-box !important;
+}
+
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-aguardando > span{
+
+    font-size:18px !important;
+
+    color:#f97316 !important;
+}
+
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-aguardando small{
+
+    display:block !important;
+
+    font-size:6.5px !important;
+    font-weight:700 !important;
+
+    color:#c2410c !important;
+}
+
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-aguardando strong{
+
+    display:block !important;
+
+    margin-top:1px !important;
+
+    font-size:14px !important;
+    font-weight:900 !important;
+
+    color:#ea580c !important;
 }
     /* ======================================================
        PÁGINA
