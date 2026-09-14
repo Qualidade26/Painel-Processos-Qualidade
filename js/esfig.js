@@ -69,7 +69,18 @@ const totalReprovado =
 
                 return skuA - skuB;
             });
+/* ======================================================
+   PRODUTOS DO FLUXO OPERACIONAL
+   Exibe somente SKU que teve entrada no ano
+====================================================== */
 
+const produtosFluxo =
+    produtos.filter(
+        item =>
+            Number(
+                item.totalAnualSku || 0
+            ) > 0
+    );
 
     /* ======================================================
        TOTAIS DO FLUXO OPERACIONAL
@@ -688,7 +699,7 @@ const totalAferidos =
 
                         <div class="progress-title">
 
-                            Processamento geral
+                            Processamento operacional
 
                         </div>
 
@@ -735,9 +746,9 @@ const totalAferidos =
                                     "Afer.",
                                     "Status"
                                 ],
-                                montarLinhasEsfig(
-                                    produtos
-                                ),
+                               montarLinhasEsfig(
+    produtosFluxo
+),
                                 true
                             )
                         }
