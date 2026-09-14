@@ -1831,6 +1831,75 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     font-weight:900 !important;
 
     color:#ea580c !important;
+}/* ==========================================================
+   ESFIG INDIVIDUAL - PROPORÇÃO FINAL DOS DOIS QUADROS
+========================================================== */
+
+
+/* QUADRO SUPERIOR - INDICADORES */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-grid-principal
+> .relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+    width:96% !important;
+
+    height:62mm !important;
+    min-height:62mm !important;
+    max-height:62mm !important;
+
+    flex:0 0 62mm !important;
+
+    margin:
+        0
+        auto !important;
+
+    align-self:start !important;
+
+    box-sizing:border-box !important;
+}
+
+
+/* CONTEÚDO DO QUADRO SUPERIOR */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-indicadores-esfig{
+
+    height:100% !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    justify-content:flex-start !important;
+
+    gap:5px !important;
+}
+
+
+/* QUADRO INFERIOR - FLUXO OPERACIONAL */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-esfig-fluxo{
+
+    width:96% !important;
+
+    height:98mm !important;
+    min-height:98mm !important;
+    max-height:98mm !important;
+
+    flex:0 0 98mm !important;
+
+    margin:
+        6mm
+        auto
+        0 !important;
+
+    padding:8px !important;
+
+    box-sizing:border-box !important;
 }
     /* ======================================================
        PÁGINA
