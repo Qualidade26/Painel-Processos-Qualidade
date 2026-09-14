@@ -1884,6 +1884,68 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     box-sizing:border-box !important;
 }
+   /* ==========================================================
+   ESFIG - CORREÇÃO DEFINITIVA DA TABELA DE INDICADORES
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva{
+    width:100% !important;
+    height:auto !important;
+    table-layout:fixed !important;
+}
+
+
+/* CABEÇALHO */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva th{
+    height:42px !important;
+
+    padding:8px 10px !important;
+
+    font-size:11px !important;
+    font-weight:900 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* LINHAS */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td{
+    height:42px !important;
+
+    padding:8px 10px !important;
+
+    font-size:11px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* VALORES */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td:nth-child(2),
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
+#relatorioDocumento
+.relatorio-painel-total:has(.relatorio-indicadores-esfig)
+.relatorio-tabela-executiva td:nth-child(3){
+    font-size:12px !important;
+    font-weight:900 !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
