@@ -1325,7 +1325,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig{
 
-    flex:1 1 0 !important;
+    flex:0 0 auto !important;
 
     min-height:0 !important;
 
@@ -1359,13 +1359,13 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva th{
-    height:44px !important;
+   height:30px !important;
 
-    padding:
-        8px
-        12px !important;
+padding:
+    4px
+    8px !important;
 
-    font-size:11px !important;
+font-size:9px !important;
     font-weight:900 !important;
 
     vertical-align:middle !important;
@@ -1378,13 +1378,13 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva td{
-    height:36px !important;
+    height:27px !important;
 
-    padding:
-        8px
-        12px !important;
+padding:
+    4px
+    8px !important;
 
-    font-size:11px !important;
+font-size:9px !important;
     font-weight:700 !important;
 
     vertical-align:middle !important;
@@ -1402,7 +1402,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva td:nth-child(3){
-    font-size:12px !important;
+    font-size:10px !important;
     font-weight:900 !important;
 }
 /* DADOS */
@@ -1436,7 +1436,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     flex:0 0 auto !important;
 
-    margin-top:10px !important;
+  margin-top:5px !important;
 
     gap:8px !important;
 }
@@ -1446,13 +1446,13 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-info-faixa span{
 
-    min-height:55px !important;
+   min-height:28px !important;
 
-    padding:
-        10px
-        12px !important;
+padding:
+    4px
+    8px !important;
 
-    font-size:12px !important;
+font-size:8px !important;
     font-weight:700 !important;
 
     display:flex !important;
@@ -1494,7 +1494,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:96% !important;
 
-    height:100% !important;
+  height:auto !important;
     min-height:0 !important;
     max-height:none !important;
 
