@@ -1,2221 +1,683 @@
 {
   "descarte": {
-    "valorAtual": {
-      "total": 27206.47,
-      "origens": [
-        {
-          "nome": "Avaria de   Importação",
-          "valor": 196.96
-        },
-        {
-          "nome": "Avaria   estoque",
-          "valor": 26.92
-        },
-        {
-          "nome": "Devolução   avaria",
-          "valor": 244.45
-        },
-        {
-          "nome": "Desvio de   Qualidade",
-          "valor": 282.8
-        },
-        {
-          "nome": "Vencido",
-          "valor": 26380.38
-        },
-        {
-          "nome": "Avaria   Nacional",
-          "valor": 74.96
-        },
-        {
-          "nome": "Certificação   ",
-          "valor": 0.0
-        }
-      ]
-    },
-    "descartadoAno": {
-      "total": 1679244.3,
-      "origens": [
-        {
-          "nome": "Avaria de   Importação",
-          "valor": 18209.45
-        },
-        {
-          "nome": "Avaria   estoque",
-          "valor": 4066.22
-        },
-        {
-          "nome": "Devolução   avaria",
-          "valor": 16317.4
-        },
-        {
-          "nome": "Desvio de   Qualidade",
-          "valor": 166359.94
-        },
-        {
-          "nome": "Vencido",
-          "valor": 1037240.23
-        },
-        {
-          "nome": "Avaria   Nacional",
-          "valor": 217.39
-        },
-        {
-          "nome": "Certificação   ",
-          "valor": 436833.67
-        }
-      ],
-      "top10": [
-        {
-          "sku": "50148N",
-          "descricao": "PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100",
-          "valor": 510857.83
-        },
-        {
-          "sku": "521",
-          "descricao": "PT-FIO AGULHADO SINTETIC ABS.(PGA)-125   C/24",
-          "valor": 147881.75
-        },
-        {
-          "sku": "518",
-          "descricao": "PT-FIO AGULHADO SINTETIC ABS.(PGA)-140   C/24",
-          "valor": 127851.84
-        },
-        {
-          "sku": "726",
-          "descricao": "PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25   PROCAR",
-          "valor": 122458.95
-        },
-        {
-          "sku": "724",
-          "descricao": "PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25   PROCAR",
-          "valor": 104237.43
-        },
-        {
-          "sku": "727",
-          "descricao": "PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25   PROCAR",
-          "valor": 95117.65
-        },
-        {
-          "sku": "516",
-          "descricao": "PT-FIO AGULHADO SINTETIC ABS(PGA)-2040   C/24",
-          "valor": 88272.56
-        },
-        {
-          "sku": "50203",
-          "descricao": "PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)",
-          "valor": 68844.66
-        },
-        {
-          "sku": "725",
-          "descricao": "PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25   PROCAR",
-          "valor": 53978.7
-        },
-        {
-          "sku": "50209",
-          "descricao": "PT-TUBO VERMELHO SILIC 4ML PLAST C/100   (PM)",
-          "valor": 36003.83
-        }
-      ],
-      "custoAmbiental": {
-        "totalPrimeiroSemestre": 9127.88,
-        "totalSegundoSemestre": 0.0,
-        "primeiroSemestre": {
-          "janeiro": 0.0,
-          "fevereiro": 0.0,
-          "marco": 0.0,
-          "abril": 0.0,
-          "maio": 9127.88,
-          "junho": 0.0
-        },
-        "segundoSemestre": {
-          "julho": 0.0,
-          "agosto": 0.0,
-          "setembro": 0.0,
-          "outubro": 0.0,
-          "novembro": 0.0,
-          "dezembro": 0.0
-        }
-      }
-    }
-  },
-  "esfig": {
-    "totalHoras": 818,
-    "totalGruInmetro": 146951.87,
-    "ultimaAfericao": "08/07/2026",
-    "proximaAfericao": "Aguardando",
-    "resumoAfericoes": {
-      "totalAferido": 35900,
-      "totalAprovado": 35375,
-      "totalReprovado": 25
-    },
-    "produtos": [
-      {
-        "sku": "267",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 17000
-      },
-      {
-        "sku": "268",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 2000
-      },
-      {
-        "sku": "558",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 9000
-      },
-      {
-        "sku": "560",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 2500
-      },
-      {
-        "sku": "308",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 3500
-      },
-      {
-        "sku": "721",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 1100
-      },
-      {
-        "sku": "722",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 800
-      },
-      {
-        "sku": "719",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 0
-      },
-      {
-        "sku": "720",
-        "descricao": "",
-        "aguardando": 0,
-        "desmontado": 0,
-        "aferidos": 0,
-        "ultimaAfericao": "",
-        "totalAnualSku": 0
-      }
-    ]
-  },
-  "amostras": {
-    "totalHoras": 70.95,
-    "mensal": [
-      {
-        "mes": "Janeiro",
-        "valor": 26,
-        "horas": 7.92
-      },
-      {
-        "mes": "Fevereiro",
-        "valor": 25,
-        "horas": 8.67
-      },
-      {
-        "mes": "Março",
-        "valor": 33,
-        "horas": 12.33
-      },
-      {
-        "mes": "Abril",
-        "valor": 30,
-        "horas": 8.67
-      },
-      {
-        "mes": "Maio",
-        "valor": 30,
-        "horas": 8.08
-      },
-      {
-        "mes": "Junho",
-        "valor": 22,
-        "horas": 6.67
-      },
-      {
-        "mes": "Julho",
-        "valor": 35,
-        "horas": 9.17
-      },
-      {
-        "mes": "Agosto",
-        "valor": 39,
-        "horas": 9.45
-      },
-      {
-        "mes": "Setembro",
-        "valor": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Outubro",
-        "valor": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Novembro",
-        "valor": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Dezembro",
-        "valor": 0,
-        "horas": 0.0
-      }
+"valorAtual": {
+ "total": 116245.83,
+    "origens": [
+
+      {"nome": "Avaria de Importação", "valor": 1029.94},
+      {"nome": "Avaria estoque", "valor": 26.92},
+      {"nome": "Devolução avaria", "valor": 5667.18},
+      {"nome": "Desvio de Qualidade", "valor": 304.47},
+      {"nome": "Vencido", "valor": 109142.36},
+      {"nome": "Avaria Nacional", "valor": 74.96},
+      {"nome": "Certificação ", "valor": 0.00}
+]
+},
+    "descartadoAno":{
+"total":1678234.49,
+    "origens": [
+      {"nome": "Avaria de Importação", "valor": 18209.45},
+      {"nome": "Avaria estoque", "valor": 4066.22},
+      {"nome": "Devolução avaria", "valor": 16317.40},
+      {"nome": "Desvio de Qualidade", "valor": 166359.94},
+      {"nome": "Vencido", "valor": 1036230.42},
+      {"nome": "Avaria Nacional", "valor": 217.39},
+      {"nome": "Certificação ", "valor": 436833.67}
     ],
     "top10": [
-      {
-        "sku": "AM5468",
-        "descricao": "",
-        "quantidade": 424
-      },
-      {
-        "sku": "AM3942",
-        "descricao": "",
-        "quantidade": 188
-      },
-      {
-        "sku": "AM3941",
-        "descricao": "",
-        "quantidade": 140
-      },
-      {
-        "sku": "AM86003",
-        "descricao": "",
-        "quantidade": 120
-      },
-      {
-        "sku": "AM3940",
-        "descricao": "",
-        "quantidade": 120
-      },
-      {
-        "sku": "AM4259",
-        "descricao": "",
-        "quantidade": 116
-      },
-      {
-        "sku": "AM3938",
-        "descricao": "",
-        "quantidade": 104
-      },
-      {
-        "sku": "AM50039",
-        "descricao": "",
-        "quantidade": 103
-      },
-      {
-        "sku": "AM3932",
-        "descricao": "",
-        "quantidade": 100
-      },
-      {
-        "sku": "AM3931",
-        "descricao": "",
-        "quantidade": 100
-      }
-    ]
-  },
-  "importacao": {
-    "processosAno": 125,
-    "totalSku": 326,
-    "totalLotes": 1002,
-    "laudosEmitidos": 601,
-    "totalHoras": 415.65,
-    "mensal": [
-      {
-        "mes": "Janeiro",
-        "processos": null,
-        "sku": 64,
-        "lotes": 95,
-        "laudos": 95,
-        "horas": 54.0
-      },
-      {
-        "mes": "Fevereiro",
-        "processos": null,
-        "sku": 66,
-        "lotes": 104,
-        "laudos": 104,
-        "horas": 86.0
-      },
-      {
-        "mes": "Março",
-        "processos": null,
-        "sku": 116,
-        "lotes": 132,
-        "laudos": 132,
-        "horas": 70.0
-      },
-      {
-        "mes": "Abril",
-        "processos": null,
-        "sku": 87,
-        "lotes": 178,
-        "laudos": 178,
-        "horas": 91.0
-      },
-      {
-        "mes": "Maio",
-        "processos": null,
-        "sku": 81,
-        "lotes": 141,
-        "laudos": 54,
-        "horas": 68.4
-      },
-      {
-        "mes": "Junho",
-        "processos": null,
-        "sku": 21,
-        "lotes": 48,
-        "laudos": 8,
-        "horas": 6.42
-      },
-      {
-        "mes": "Julho",
-        "processos": null,
-        "sku": 73,
-        "lotes": 202,
-        "laudos": 17,
-        "horas": 20.08
-      },
-      {
-        "mes": "Agosto",
-        "processos": null,
-        "sku": 42,
-        "lotes": 102,
-        "laudos": 13,
-        "horas": 19.75
-      },
-      {
-        "mes": "Setembro",
-        "processos": null,
-        "sku": 1,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Outubro",
-        "processos": null,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Novembro",
-        "processos": null,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      },
-      {
-        "mes": "Dezembro",
-        "processos": null,
-        "sku": 0,
-        "lotes": 0,
-        "laudos": 0,
-        "horas": 0.0
-      }
-    ],
-    "fluxo": [
-      {
-        "po": "2026I123   - 2603-MEQ",
-        "sku": 487,
-        "descricao": "CX-EQUIPO   P/TRANSFUS.DE SANG. LAMEDID   C/100",
-        "lote": "79126051",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "2026I123   - 2603-MEQ",
-        "sku": 487,
-        "descricao": "CX-EQUIPO   P/TRANSFUS.DE SANG. LAMEDID   C/100",
-        "lote": "79226051",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "2026I123   - 2603-MEQ",
-        "sku": 487,
-        "descricao": "CX-EQUIPO   P/TRANSFUS.DE SANG. LAMEDID   C/100",
-        "lote": "79326051",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 341,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 25X7   C/100",
-        "lote": "53126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 342,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 25X8   C/100",
-        "lote": "54126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 343,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 30X7   C/100",
-        "lote": "55126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 344,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 30X8   C/100",
-        "lote": "56126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 344,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 30X8   C/100",
-        "lote": "56226042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 345,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 40X12   C/100",
-        "lote": "57126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 345,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 40X12   C/100",
-        "lote": "57226042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 345,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 40X12   C/100",
-        "lote": "57326042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 346,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 13X4,5   C/100",
-        "lote": "50126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 346,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 13X4,5   C/100",
-        "lote": "50226042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 365,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 20 X5,5   C/100",
-        "lote": "52126042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03   MAGU2 B",
-        "sku": 365,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 20 X5,5   C/100",
-        "lote": "52226042",
-        "status": "Aguardando   Entrega",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03-MEQ-2",
-        "sku": 582,
-        "descricao": "CX-EQUIPO   MACRO GOTAS FOTOSS. LAMEDID   C/100",
-        "lote": "70126051",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "26.03-MEQ-2",
-        "sku": 345,
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 40X12   C/100",
-        "lote": "57126051",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006201",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006202",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006203",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006204",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006205",
-        "status": "0",
-        "observacao": "0"
-      },
-      {
-        "po": "IMP000062-POLY",
-        "sku": 4950,
-        "descricao": "UN-BOLSA   COLET DE URINA 2000ML   POLY-URO",
-        "lote": "IMP0006206",
-        "status": "0",
-        "observacao": "0"
-      }
-    ],
-    "graficoSku": [
-      {
-        "sku": "86003",
-        "descricao": "PT-ALCOOL SWAB C/100 (PH)",
-        "quantidade": 145496000
-      },
-      {
-        "sku": "5468",
-        "descricao": "PT-ELETRODO ECG   SOLIDOR ADUL/INFANTIL C/500",
-        "quantidade": 55080000
-      },
-      {
-        "sku": "345",
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 40X12 C/100",
-        "quantidade": 39470000
-      },
-      {
-        "sku": "341",
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 25X7 C/100",
-        "quantidade": 18720000
-      },
-      {
-        "sku": "60006",
-        "descricao": "PT-CURATIVO CURE AID COR DA PELE   C/500",
-        "quantidade": 16131000
-      },
-      {
-        "sku": "80093",
-        "descricao": "PT-AGULHA LI SIMPLES 20X5.5 C/100   (WEIGAO)",
-        "quantidade": 13180000
-      },
-      {
-        "sku": "5401",
-        "descricao": "PT-EQUIPO MACRO   GOTAS LI  L2 (COMPLETO)C/25",
-        "quantidade": 12538500
-      },
-      {
-        "sku": "344",
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 30X8 C/100",
-        "quantidade": 11000000
-      },
-      {
-        "sku": "365",
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 20 X5,5 C/100",
-        "quantidade": 10500000
-      },
-      {
-        "sku": "342",
-        "descricao": "PT-AGULHA   HIPODERMICA SOLIDOR 25X8 C/100",
-        "quantidade": 10185000
-      }
-    ]
-  },
-  "retrabalho": {
-    "processos": 7,
-    "totalUnidades": 54428,
-    "totalHoras": 324,
-    "fabricantes": [
-      {
-        "fabricante": "Bonrre   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "AB   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "All   Lab   Comercial",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "SteriLance   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Biomed   Healthcare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Accumax",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shanxian   Huayu Suture Product Co,.   Ltd",
-        "quantidade": 625,
-        "horas": 4,
-        "motivo": "Nome   da Responsável Tecnica antiga"
-      },
-      {
-        "fabricante": "Shandong   Aosaite",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shangai   Kindly",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shanghai   SA   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Ayset   Plastik",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Medico   Electroude",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Anhui   Easyway   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Huaian   Tianda   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Medico   (Huaian) CO.,   LTDA",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Well   Lead medical co.,   ltd.",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Polymed   Medicure",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Phoenix   Innovative   HealtCare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Wellspring   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Yangzhou   Medline   Industry",
-        "quantidade": 50500,
-        "horas": 255,
-        "motivo": "Nome   da Responsável Tecnica antiga,Código errado na embalagem blister."
-      },
-      {
-        "fabricante": "Jiangsu   Webest   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Honsun   (Nantong)",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shandong   Weigao",
-        "quantidade": 2460,
-        "horas": 11,
-        "motivo": "Nome   da Responsável Tecnica antiga"
-      },
-      {
-        "fabricante": "Nanjing   Jiangnan   Novel",
-        "quantidade": 843,
-        "horas": 54,
-        "motivo": "Nome   da Responsável Tecnica antiga"
-      },
-      {
-        "fabricante": "Vitromed   Healthcare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Garware   Bestretch",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Xiantao   Xingrong",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Nantong   Renon",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangxi   Hongda   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Huaian   Tianda   Medica",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dailymag   Magnetic",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Yancheng   Tiandi",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dfi",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Pharmaplast   AS",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Blue",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Huida   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Guangzhou   Improve   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Hangzhou   Rollmed",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dalian   GoodWood",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Anhui   hongyu",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Alphaven",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "SR   Produtos para la salud   S.A",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      }
-    ]
-  },
-  "adequacaocaixa": {
-    "totalocorrenciasano": 7,
-    "quantidaderetrabalhada": 489,
-    "totalhoras": 32,
-    "indicadores": {
-      "bom": {
-        "valor": 35754.55,
-        "percentual": 0.96
-      },
-      "avaria": {
-        "valor": 1346.05,
-        "percentual": 0.04
-      }
-    },
-    "motivos": [
-      {
-        "nome": "Devolução",
-        "valor": 30014.23,
-        "percentual": 0.82
-      },
-      {
-        "nome": "Avaria   de Transporte   Importação",
-        "valor": 5738.06,
-        "percentual": 0.16
-      },
-      {
-        "nome": "Avaria   de Transporte   Nacional",
-        "valor": 1068.24,
-        "percentual": 0.03
-      },
-      {
-        "nome": "Outros",
-        "valor": 0.0,
-        "percentual": 0.0
-      }
-    ],
-    "fabricantes": [
-      {
-        "fabricante": "SteriLance Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Biomed   Healthcare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Accumax",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shanxian   Huayu Suture Product Co,. Ltd",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shandong   Aosaite",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shanghai   SA Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shandong   Weigao",
-        "quantidade": 260,
-        "horas": 3,
-        "motivo": "Avaria de transporte   Importação"
-      },
-      {
-        "fabricante": "Ayset   Plastik",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Medico   Electroude",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Huaian   Tianda Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Medico   (Huaian) CO., LTDA",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Well   Lead medical co., ltd.",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Polymed   Medicure",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Phoenix   Innovative HealtCare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Yangzhou   Medline Industry",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Webest Medical ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Honsun   (Nantong) ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Nanjing   Jiangnan Novel",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Vitromed   Healthcare",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Xiantao   Xingrong Protective",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangxi   Hongda Medical ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dailymag   Magnetic",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Yancheng   Tiandi",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dfi   ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Pharmaplast   AS ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Huida Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Guangzhou   Improve Medical ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Anhui Easyway Medical",
-        "quantidade": 19,
-        "horas": 19,
-        "motivo": "Devolução, Avaria de transporte Importação"
-      },
-      {
-        "fabricante": "SR   Produtos para la salud S.A",
-        "quantidade": 57,
-        "horas": 10,
-        "motivo": "Avaria de transporte   Nacional"
-      },
-      {
-        "fabricante": "Bonrre   Medical co ltda",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "AB   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "All   Lab Comercial",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Wellspring   Medical",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Shangai   Kindly ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Garware   Bestretch",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Nantong   Renon ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian Medical ",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Blue",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Hangzhou   Rollmed",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Dalian   GoodWood",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Anhui   hongyu",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      },
-      {
-        "fabricante": "Alphaven",
-        "quantidade": 0,
-        "horas": 0,
-        "motivo": ""
-      }
-    ]
-  },
-  "fornecedores": {
-    "totalrncano": 45,
-    "totalfornecedores": 43,
-    "totalprocessos": 114,
-    "totalretrabalho": 7,
-    "totalreclamacao": 0,
-    "indicemedioavaliacao": 0.85,
-    "indicadores": {
-      "importacao": {
-        "quantidade": 114,
-        "percentual": 0.66
-      },
-      "retrabalho": {
-        "quantidade": 7,
-        "percentual": 0.04
-      },
+      {"sku":"50148N", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100", "valor": 510857.83},
+      {"sku":"521", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24", "valor": 147881.75},
+      {"sku":"518", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24", "valor": 127851.84},
+      {"sku":"726", "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25 PROCAR", "valor": 122458.95},
+      {"sku":"724", "descricao":"PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25 PROCAR", "valor": 104237.43},
+      {"sku":"727", "descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR", "valor": 95117.65},
+      {"sku":"516", "descricao":"PT-FIO AGULHADO SINTETIC ABS(PGA)-2040 C/24", "valor": 88272.56},
+      {"sku":"50203", "descricao":"PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)", "valor": 68844.66},
+      {"sku":"725", "descricao":"PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR", "valor": 53978.70},
+      {"sku":"50209", "descricao":"PT-TUBO VERMELHO SILIC 4ML PLAST C/100 (PM)", "valor": 36003.83}
+
+],
+
+"custoAmbiental": {
+"totalPrimeiroSemestre":9127.88,
+"totalSegundoSemestre":7737.06,
+"primeiroSemestre": {
+"janeiro":0.00,
+"fevereiro":0.00,
+"marco":0.00,
+"abril":0.00,
+"maio":9127.88,
+"junho":0.00
+},
+"segundoSemestre": {
+"julho":0.00,
+"agosto":7737.06,
+"setembro":0.00,
+"outubro":0.00,
+"novembro":0.00,
+"dezembro":0.00
+}
+}
+}
+},
+"esfig": {
+"totalHoras":818,
+"totalGruInmetro":146951.87,
+"ultimaAfericao":"08/07/2026",
+"proximaAfericao":"Aguardando",
+"resumoAfericoes":{   
+"totalAferido":35900,
+"totalAprovado": 35875,
+"totalReprovado":25},
+"produtos":[
+
+  {"sku":"267",  "descricao":"ESFIGM VELCRO",   "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":17000},
+  {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2000},
+  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":5000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":9000},
+  {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2500},
+  {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
+  {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":1100},
+  {"sku":"722",  "descricao":"ESFIG PRETO METAL",  "aguardando":1000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":800},
+  {"sku":"719",  "descricao":"ESFIG RED VELCRO ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0},
+  {"sku":"720",  "descricao":"ESFIG RED METAL ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0}
+
+
+]
+},
+ "amostras":{
+"totalHoras":73.93,
+"mensal":[
+
+      {"mes":"Janeiro", "valor": 26,"horas":7.92},
+      {"mes":"Fevereiro", "valor": 25,"horas":8.67},
+      {"mes":"Março", "valor": 33,"horas":12.33},
+      {"mes":"Abril", "valor": 30,"horas":8.67},
+      {"mes":"Maio", "valor": 30,"horas":8.08},
+      {"mes":"Junho", "valor": 22,"horas":6.67},
+      {"mes":"Julho", "valor": 35,"horas":9.17},
+      {"mes":"Agosto", "valor": 39,"horas":9.45},
+      {"mes":"Setembro", "valor": 10,"horas":2.98},
+      {"mes":"Outubro", "valor": 0,"horas":0.00},
+      {"mes":"Novembro", "valor": 0,"horas":0.00},
+      {"mes":"Dezembro", "valor": 0,"horas":0.00}
+
+],
+
+"top10":[
+
+
+      {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":524  }, 
+      {"sku":"AM3942",  "descricao":"CATETER INTRA PUR SEG 24G (PM)", "quantidade":214  }, 
+      {"sku":"AM3941",  "descricao":"CATETER INTRA PUR SEG 22G (PM)", "quantidade":160  }, 
+      {"sku":"AM86003",  "descricao":"ALCOOL SWAB SACHE (PH)", "quantidade":140  }, 
+      {"sku":"AM3940",  "descricao":"CATETER INTRA PUR SEG 20G PM", "quantidade":120  }, 
+      {"sku":"AM4259",  "descricao":"SCALP INFUSAO SEG 25G PGC (ML)", "quantidade":116  }, 
+      {"sku":"AM3938",  "descricao":"CATETER INTRA PUR SEG 16G (PM)", "quantidade":104  }, 
+      {"sku":"AM50039",  "descricao":"AGULHA A VACUO 25X8 (SW)", "quantidade":104  }, 
+      {"sku":"AM3932",  "descricao":"LAMINULA 24X50 0 (YA)", "quantidade":100  }, 
+      {"sku":"AM3931",  "descricao":"LAMINULA 24X32 0 (YA)", "quantidade":100  }
+
+
+]
+},
+
+"importacao":{
+"processosAno":132,
+"totalSku":328,
+"totalLotes":1035,
+"laudosEmitidos":623,
+"totalHoras":416.98,
+
+"mensal":[
+
+      {"mes": "Janeiro","processos":12,"sku":64,"lotes":94,"laudos":94,"horas":53.00 }, 
+      {"mes": "Fevereiro","processos":15,"sku":66,"lotes":104,"laudos":104,"horas":86.00 }, 
+      {"mes": "Março","processos":16,"sku":121,"lotes":144,"laudos":144,"horas":71.00 }, 
+      {"mes": "Abril","processos":20,"sku":87,"lotes":180,"laudos":180,"horas":91.00 }, 
+      {"mes": "Maio","processos":20,"sku":87,"lotes":147,"laudos":55,"horas":69.40 }, 
+      {"mes": "Junho","processos":9,"sku":21,"lotes":48,"laudos":8,"horas":6.42 }, 
+      {"mes": "Julho","processos":18,"sku":73,"lotes":202,"laudos":17,"horas":20.08 }, 
+      {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
+      {"mes": "Setembro","processos":7,"sku":14,"lotes":14,"laudos":6,"horas":2.67 }, 
+      {"mes": "Outubro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Dezembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }
+],
+"fluxo":[
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"Aguardando Entrega","observacao":"0"}
+],
+"graficoSku":[
+      {"sku":"86003",  "descricao":"PT-ALCOOL SWAB C/100 (PH)", "quantidade":127348000  }, 
+      {"sku":"5468",  "descricao":"PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500", "quantidade":55080000  }, 
+      {"sku":"345",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100", "quantidade":39470000  }, 
+      {"sku":"341",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100", "quantidade":18720000  }, 
+      {"sku":"60006",  "descricao":"CURATIVO CURE AID COR DA PELE C/500", "quantidade":16131000  }, 
+      {"sku":"80093",  "descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)", "quantidade":13180000  }, 
+      {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":12538500  }, 
+      {"sku":"344",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100", "quantidade":11000000  }, 
+      {"sku":"365",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100", "quantidade":10500000  }, 
+      {"sku":"342",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 25X8 C/100", "quantidade":10185000  }
+
+]
+},
+
+"retrabalho": {
+"processos":7,
+"totalUnidades":54428,
+"totalHoras":324,
+"fabricantes":[
+{"fabricante":"Bonrre Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"AB Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"All Lab Comercial","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"SteriLance Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Biomed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Accumax","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade":625,"horas":4,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Shandong Aosaite","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shangai Kindly","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shanghai SA Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Ayset Plastik","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Medico Electroude","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Anhui Easyway Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Huaian Tianda Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Medico (Huaian) CO., LTDA","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Well Lead medical co., ltd.","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Polymed Medicure","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Phoenix Innovative HealtCare","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Wellspring Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Yangzhou Medline Industry","quantidade":50500,"horas":255,"motivo":"Nome da Responsável Tecnica antiga,Código errado na embalagem blister." }, 
+{"fabricante":"Jiangsu Webest Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Honsun (Nantong)","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Shandong Weigao","quantidade":2460,"horas":11,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Nanjing Jiangnan Novel","quantidade":843,"horas":54,"motivo":"Nome da Responsável Tecnica antiga" }, 
+{"fabricante":"Vitromed Healthcare","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Jiangsu Kangjian","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Garware Bestretch","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Xiantao Xingrong","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Nantong Renon","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Jiangxi Hongda Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Huaian Tianda Medica","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Jiangsu Kangjian Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Dailymag Magnetic","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Yancheng Tiandi","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Dfi","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Pharmaplast AS","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Blue","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Jiangsu Huida Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Guangzhou Improve Medical","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Hangzhou Rollmed","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Dalian GoodWood","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Anhui hongyu","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"Alphaven","quantidade":0,"horas":0,"motivo":"" }, 
+{"fabricante":"SR Produtos para la salud S.A","quantidade":0,"horas":0,"motivo":"" }
+
+      ]
+},
+"adequacaocaixa":{
+"totalocorrenciasano":7,
+"quantidaderetrabalhada":489,
+"totalhoras":32,
+"indicadores":{
+"bom":{
+"valor":35754.55,"percentual":0.96},
+"avaria":{
+"valor":1346.05,"percentual":0.04}
+},
+"motivos":[
+{"nome":"Devolução","valor":30014.23,"percentual":0.81},
+{"nome":"Avaria de Transporte Importação","valor":6018.13,"percentual":0.16},
+{"nome":"Avaria de Transporte Nacional","valor":1068.24,"percentual":0.03},
+{"nome":"Outros","valor":0.00,"percentual":0.00}
+],
+"fabricantes":[
+{"fabricante":"SteriLance Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Biomed Healthcare","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Accumax","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shandong Aosaite","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shanghai SA Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shandong Weigao","quantidade": 260,"horas":3,"motivo":"Avaria de transporte Importação"},
+{"fabricante":"Ayset Plastik","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Medico Electroude","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Huaian Tianda Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Medico (Huaian) CO., LTDA","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Well Lead medical co., ltd.","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Polymed Medicure","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Phoenix Innovative HealtCare","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Yangzhou Medline Industry","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Jiangsu Webest Medical ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Honsun (Nantong) ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Nanjing Jiangnan Novel","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Vitromed Healthcare","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Jiangsu Kangjian","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Xiantao Xingrong Protective","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Jiangxi Hongda Medical ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Dailymag Magnetic","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Yancheng Tiandi","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Dfi ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Pharmaplast AS ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Jiangsu Huida Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Guangzhou Improve Medical ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Anhui Easyway Medical","quantidade": 172,"horas":19,"motivo":"Devolução,Avaria de transporte Importação"},
+{"fabricante":"SR Produtos para la salud S.A","quantidade": 57,"horas":10,"motivo":"Avaria de transporte Nacional"},
+{"fabricante":"Bonrre Medical co ltda","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"AB Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"All Lab Comercial","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Wellspring Medical","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shangai Kindly ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Garware Bestretch","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Nantong Renon ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Jiangsu Kangjian Medical ","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Blue","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Hangzhou Rollmed","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Dalian GoodWood","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Anhui hongyu","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Alphaven","quantidade": 0,"horas":0,"motivo":""}
+]
+},
+
+"fornecedores": {
+"totalrncano": 45,
+"totalfornecedores": 44,
+"totalprocessos":119,
+"totalretrabalho": 7,
+"totalreclamacao": 0,
+"indicemedioavaliacao":0.90,
+"indicadores": {
+"importacao": {
+"quantidade":119,
+"percentual":0.68},
+"retrabalho": {
+"quantidade":7,
+"percentual":0.04},
       "naoconformidade": {
-        "quantidade": 45,
-        "percentual": 0.26
-      },
+"quantidade":42,
+"percentual":0.24},
       "reclamacao": {
-        "quantidade": 0,
-        "percentual": 0.0
-      },
+"quantidade":0,
+"percentual":0.00},
       "ocorrencias": {
-        "quantidade": 6,
-        "percentual": 0.03
-      }
-    },
-    "avaliados": [
-      {
-        "fabricante": "SteriLance   Medical",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 4,
-        "produtosfornecidos": 8385000,
-        "skuano": 13,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 4,
-        "produtosFornecidos": 8385000,
-        "skuAno": 13,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Biomed   Healthcare",
-        "rnc": 5,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 4,
-        "produtosfornecidos": 8942500,
-        "skuano": 16,
-        "horas": 0,
-        "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 4,
-        "produtosFornecidos": 8942500,
-        "skuAno": 16,
-        "indiceAvaliacao": 0.65,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Accumax",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 15000,
-        "skuano": 1,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 15000,
-        "skuAno": 1,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Shanxian   Huayu Suture Product Co,.   Ltd",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 1,
-        "reclamacoes": 0,
-        "processosano": 7,
-        "produtosfornecidos": 5605440,
-        "skuano": 16,
-        "horas": 4,
-        "indiceavaliacao": 0.92,
-        "avaliacao": "🟢   Muito bom",
-        "processosAno": 7,
-        "produtosFornecidos": 5605440,
-        "skuAno": 16,
-        "indiceAvaliacao": 0.92,
-        "retrabalho": 1,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Shandong   Aosaite",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 1778400,
-        "skuano": 7,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 1778400,
-        "skuAno": 7,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Shanghai   SA   Medical",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 904500,
-        "skuano": 7,
-        "horas": 0,
-        "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 2,
-        "produtosFornecidos": 904500,
-        "skuAno": 7,
-        "indiceAvaliacao": 0.83,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Shandong   Weigao",
-        "rnc": 7,
-        "ocorrencias": 0,
-        "retrabalhos": 1,
-        "reclamacoes": 0,
-        "processosano": 10,
-        "produtosfornecidos": 15467700,
-        "skuano": 11,
-        "horas": 11,
-        "indiceavaliacao": 0.74,
-        "avaliacao": "🟠   Ruim",
-        "processosAno": 10,
-        "produtosFornecidos": 15467700,
-        "skuAno": 11,
-        "indiceAvaliacao": 0.74,
-        "retrabalho": 1,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Ayset   Plastik",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 9506482,
-        "skuano": 9,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 9506482,
-        "skuAno": 9,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Medico   Electroude",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 8,
-        "produtosfornecidos": 55080000,
-        "skuano": 1,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 8,
-        "produtosFornecidos": 55080000,
-        "skuAno": 1,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Huaian   Tianda   Medical",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 260000,
-        "skuano": 2,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 260000,
-        "skuAno": 2,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Medico   (Huaian) CO.,   LTDA",
-        "rnc": 5,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 7,
-        "produtosfornecidos": 4420080,
-        "skuano": 41,
-        "horas": 0,
-        "indiceavaliacao": 0.75,
-        "avaliacao": "🟠   Ruim",
-        "processosAno": 7,
-        "produtosFornecidos": 4420080,
-        "skuAno": 41,
-        "indiceAvaliacao": 0.75,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Well   Lead medical co.,   ltd.",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 645000,
-        "skuano": 21,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 2,
-        "produtosFornecidos": 645000,
-        "skuAno": 21,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Polymed   Medicure",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 3,
-        "produtosfornecidos": 2193690,
-        "skuano": 4,
-        "horas": 0,
-        "indiceavaliacao": 0.88,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 3,
-        "produtosFornecidos": 2193690,
-        "skuAno": 4,
-        "indiceAvaliacao": 0.88,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Phoenix   Innovative   HealtCare",
-        "rnc": 2,
-        "ocorrencias": 1,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 5,
-        "produtosfornecidos": 145496000,
-        "skuano": 1,
-        "horas": 0,
-        "indiceavaliacao": 0.81,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 5,
-        "produtosFornecidos": 145496000,
-        "skuAno": 1,
-        "indiceAvaliacao": 0.81,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Yangzhou   Medline   Industry",
-        "rnc": 3,
-        "ocorrencias": 0,
-        "retrabalhos": 2,
-        "reclamacoes": 0,
-        "processosano": 3,
-        "produtosfornecidos": 6640000,
-        "skuano": 13,
-        "horas": 255,
-        "indiceavaliacao": 0.58,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 3,
-        "produtosFornecidos": 6640000,
-        "skuAno": 13,
-        "indiceAvaliacao": 0.58,
-        "retrabalho": 1,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Jiangsu   Webest Medical   ",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 3900000,
-        "skuano": 2,
-        "horas": 0,
-        "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 2,
-        "produtosFornecidos": 3900000,
-        "skuAno": 2,
-        "indiceAvaliacao": 0.83,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Honsun   Nantong",
-        "rnc": 2,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 4,
-        "produtosfornecidos": 60100,
-        "skuano": 15,
-        "horas": 0,
-        "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 4,
-        "produtosFornecidos": 60100,
-        "skuAno": 15,
-        "indiceAvaliacao": 0.83,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Nanjing   Jiangnan   Novel",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 2,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 843,
-        "skuano": 6,
-        "horas": 54,
-        "indiceavaliacao": 0.63,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 2,
-        "produtosFornecidos": 843,
-        "skuAno": 6,
-        "indiceAvaliacao": 0.63,
-        "retrabalho": 2,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Vitromed   Healthcare",
-        "rnc": 1,
-        "ocorrencias": 1,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 7,
-        "produtosfornecidos": 12050000,
-        "skuano": 7,
-        "horas": 0,
-        "indiceavaliacao": 0.91,
-        "avaliacao": "🟢   Muito bom",
-        "processosAno": 7,
-        "produtosFornecidos": 12050000,
-        "skuAno": 7,
-        "indiceAvaliacao": 0.91,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 133,
-        "skuano": 4,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 133,
-        "skuAno": 4,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Xiantao   Xingrong   Protective",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 750000,
-        "skuano": 1,
-        "horas": 0,
-        "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 1,
-        "produtosFornecidos": 750000,
-        "skuAno": 1,
-        "indiceAvaliacao": 0.65,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Jiangxi   Hongda Medical   ",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 3,
-        "produtosfornecidos": 10332000,
-        "skuano": 3,
-        "horas": 0,
-        "indiceavaliacao": 0.88,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 3,
-        "produtosFornecidos": 10332000,
-        "skuAno": 3,
-        "indiceAvaliacao": 0.88,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Dailymag   Magnetic",
-        "rnc": 1,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 12000,
-        "skuano": 2,
-        "horas": 0,
-        "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 2,
-        "produtosFornecidos": 12000,
-        "skuAno": 2,
-        "indiceAvaliacao": 0.83,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Yancheng   Tiandi",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 1300000,
-        "skuano": 6,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 1300000,
-        "skuAno": 6,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Dfi   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 600000,
-        "skuano": 1,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 1,
-        "produtosFornecidos": 600000,
-        "skuAno": 1,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Pharmaplast   AS   ",
-        "rnc": 2,
-        "ocorrencias": 0,
-        "retrabalhos": 2,
-        "reclamacoes": 0,
-        "processosano": 1,
-        "produtosfornecidos": 18481400,
-        "skuano": 3,
-        "horas": 34,
-        "indiceavaliacao": 0.45,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 1,
-        "produtosFornecidos": 18481400,
-        "skuAno": 3,
-        "indiceAvaliacao": 0.45,
-        "retrabalho": 2,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Jiangsu   Huida   Medical",
-        "rnc": 2,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 887210,
-        "skuano": 9,
-        "horas": 0,
-        "indiceavaliacao": 0.65,
-        "avaliacao": "🔴   Crítico",
-        "processosAno": 2,
-        "produtosFornecidos": 887210,
-        "skuAno": 9,
-        "indiceAvaliacao": 0.65,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Guangzhou   Improve Medical   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 2272000,
-        "skuano": 6,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 2,
-        "produtosFornecidos": 2272000,
-        "skuAno": 6,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Anhui   Easyway   Medical",
-        "rnc": 4,
-        "ocorrencias": 3,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 13,
-        "produtosfornecidos": 116788000,
-        "skuano": 21,
-        "horas": 0,
-        "indiceavaliacao": 0.83,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 13,
-        "produtosFornecidos": 116788000,
-        "skuAno": 21,
-        "indiceAvaliacao": 0.83,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "SR   Produtos para la salud   S.A",
-        "rnc": 2,
-        "ocorrencias": 1,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 6,
-        "produtosfornecidos": 12982000,
-        "skuano": 6,
-        "horas": 0,
-        "indiceavaliacao": 0.84,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 6,
-        "produtosFornecidos": 12982000,
-        "skuAno": 6,
-        "indiceAvaliacao": 0.84,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Bonrre   Medical co   ltda",
-        "rnc": 2,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 5,
-        "produtosfornecidos": 5507700,
-        "skuano": 52,
-        "horas": 0,
-        "indiceavaliacao": 0.86,
-        "avaliacao": "🟡   Atenção",
-        "processosAno": 5,
-        "produtosFornecidos": 5507700,
-        "skuAno": 52,
-        "indiceAvaliacao": 0.86,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "AB   Medical",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 2,
-        "produtosfornecidos": 6261600,
-        "skuano": 8,
-        "horas": 0,
-        "indiceavaliacao": 1.0,
-        "avaliacao": "🟢   Excelente",
-        "processosAno": 2,
-        "produtosFornecidos": 6261600,
-        "skuAno": 8,
-        "indiceAvaliacao": 1.0,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "All   Lab   Comercial",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Wellspring   Medical",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Shangai   Kindly   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Garware   Bestretch",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Nantong   Renon   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Jiangsu   Kangjian Medical   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Blue",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Hangzhou   Rollmed",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Dalian   GoodWood",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Anhui   hongyu",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      },
-      {
-        "fabricante": "Alphaven   ",
-        "rnc": 0,
-        "ocorrencias": 0,
-        "retrabalhos": 0,
-        "reclamacoes": 0,
-        "processosano": 0,
-        "produtosfornecidos": 0,
-        "skuano": 0,
-        "horas": 0,
-        "indiceavaliacao": null,
-        "avaliacao": "",
-        "processosAno": 0,
-        "produtosFornecidos": 0,
-        "skuAno": 0,
-        "indiceAvaliacao": null,
-        "retrabalho": 0,
-        "reclamacao": 0
-      }
-    ],
-    "ranking": [
-      {
-        "posicao": 1,
-        "fabricante": "Medico   Electroude",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 2,
-        "fabricante": "SteriLance   Medical",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 3,
-        "fabricante": "AB   Medical",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 4,
-        "fabricante": "Guangzhou   Improve Medical ",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 5,
-        "fabricante": "Well   Lead medical co., ltd.",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 6,
-        "fabricante": "Ayset   Plastik",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 7,
-        "fabricante": "Shandong   Aosaite",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 8,
-        "fabricante": "Yancheng   Tiandi",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 9,
-        "fabricante": "Dfi   ",
-        "indiceAvaliacao": 1.0
-      },
-      {
-        "posicao": 10,
-        "fabricante": "Huaian   Tianda Medical",
-        "indiceAvaliacao": 1.0
-      }
+"quantidade":6,
+"percentual":0.03}
+  },
+"avaliados":[
+
+{"fabricante":"SteriLance Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":8385000,"skuano":13,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Biomed Healthcare","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":8942500,"skuano":16,"horas":0,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
+{"fabricante":"Accumax","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":15000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":7,"produtosfornecidos":5605440,"skuano":16,"horas":4,"indiceavaliacao":0.94,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Shandong Aosaite","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1778400,"skuano":7,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Shanghai SA Medical","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":1894500,"skuano":8,"horas":0,"indiceavaliacao":0.85,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":10,"produtosfornecidos":15877700,"skuano":11,"horas":11,"indiceavaliacao":0.78,"avaliacao":"🟠 Ruim" },
+{"fabricante":"Ayset Plastik","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":14859682,"skuano":9,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Medico Electroude","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":8,"produtosfornecidos":55080000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Huaian Tianda Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":3410000,"skuano":2,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Medico (Huaian) CO., LTDA","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":4420080,"skuano":41,"horas":0,"indiceavaliacao":0.79,"avaliacao":"🟠 Ruim" },
+{"fabricante":"Well Lead medical co., ltd.","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":645000,"skuano":21,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Polymed Medicure","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1840800,"skuano":3,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Phoenix Innovative HealtCare","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":127348000,"skuano":1,"horas":0,"indiceavaliacao":0.84,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Yangzhou Medline Industry","rnc":3,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":3,"produtosfornecidos":7140000,"skuano":14,"horas":255,"indiceavaliacao":0.65,"avaliacao":"🔴 Crítico" },
+{"fabricante":"Jiangsu Webest Medical ","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3900000,"skuano":2,"horas":0,"indiceavaliacao":0.85,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Honsun (Nantong) ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":18000,"skuano":12,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Nanjing Jiangnan Novel","rnc":1,"ocorrencias":0,"retrabalhos":2,"reclamacoes":0,"processosano":2,"produtosfornecidos":843,"skuano":6,"horas":54,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
+{"fabricante":"Vitromed Healthcare","rnc":1,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":12050000,"skuano":7,"horas":0,"indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Jiangsu Kangjian","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":133,"skuano":4,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Xiantao Xingrong Protective","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1350000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangxi Hongda Medical ","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":10332000,"skuano":3,"horas":0,"indiceavaliacao":0.90,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Dailymag Magnetic","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":12000,"skuano":2,"horas":0,"indiceavaliacao":0.85,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Yancheng Tiandi","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1300000,"skuano":6,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Dfi ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":600000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Pharmaplast AS ","rnc":2,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":2,"produtosfornecidos":19071800,"skuano":4,"horas":10,"indiceavaliacao":0.63,"avaliacao":"🔴 Crítico" },
+{"fabricante":"Jiangsu Huida Medical","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":887210,"skuano":9,"horas":0,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
+{"fabricante":"Guangzhou Improve Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":2272000,"skuano":6,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Anhui Easyway Medical","rnc":4,"ocorrencias":3,"retrabalhos":0,"reclamacoes":0,"processosano":13,"produtosfornecidos":116788045,"skuano":22,"horas":0,"indiceavaliacao":0.86,"avaliacao":"🟡 Atenção" },
+{"fabricante":"SR Produtos para la salud S.A","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":12982000,"skuano":6,"horas":0,"indiceavaliacao":0.87,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Bonrre Medical co ltda","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":5902700,"skuano":52,"horas":0,"indiceavaliacao":0.88,"avaliacao":"🟡 Atenção" },
+{"fabricante":"AB Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":6261600,"skuano":8,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Poly Medicure","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":3811850,"skuano":7,"horas":0,"indiceavaliacao":0.96,"avaliacao":"🟢 Excelente" },
+{"fabricante":"GoodWood medical care Dalian","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":730000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
+{"fabricante":"Shangai Kindly ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Garware Bestretch","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Nantong Renon ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Jiangsu Kangjian Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Blue Cross Bio-Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":1,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Hangzhou Rollmed","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Dalian GoodWood","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Wellspring Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" },
+{"fabricante":"Alphaven ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"0" }
+
+],
+"ranking":[
+{"posicao":1,"fabricante":"Medico Electroude","indiceAvaliacao":1.00},
+{"posicao":2,"fabricante":"SteriLance Medical","indiceAvaliacao":1.00},
+{"posicao":3,"fabricante":"AB Medical","indiceAvaliacao":1.00},
+{"posicao":4,"fabricante":"Guangzhou Improve Medical ","indiceAvaliacao":1.00},
+{"posicao":5,"fabricante":"Well Lead medical co., ltd.","indiceAvaliacao":1.00},
+{"posicao":6,"fabricante":"Honsun (Nantong) ","indiceAvaliacao":1.00},
+{"posicao":7,"fabricante":"Ayset Plastik","indiceAvaliacao":1.00},
+{"posicao":8,"fabricante":"Huaian Tianda Medical","indiceAvaliacao":1.00},
+{"posicao":9,"fabricante":"Polymed Medicure","indiceAvaliacao":1.00},
+{"posicao":10,"fabricante":"Shandong Aosaite","indiceAvaliacao":1.00}
     ],
     "top10Rnc": [
-      {
-        "posicao": 1,
-        "fabricante": "Shandong   Weigao",
-        "rnc": 7
-      },
-      {
-        "posicao": 2,
-        "fabricante": "Biomed   Healthcare",
-        "rnc": 5
-      },
-      {
-        "posicao": 3,
-        "fabricante": "Medico   (Huaian) CO., LTDA",
-        "rnc": 5
-      },
-      {
-        "posicao": 4,
-        "fabricante": "Anhui   Easyway Medical",
-        "rnc": 4
-      },
-      {
-        "posicao": 5,
-        "fabricante": "Yangzhou   Medline Industry",
-        "rnc": 3
-      },
-      {
-        "posicao": 6,
-        "fabricante": "Phoenix   Innovative HealtCare",
-        "rnc": 2
-      },
-      {
-        "posicao": 7,
-        "fabricante": "Honsun   Nantong",
-        "rnc": 2
-      },
-      {
-        "posicao": 8,
-        "fabricante": "Pharmaplast   AS ",
-        "rnc": 2
-      },
-      {
-        "posicao": 9,
-        "fabricante": "Jiangsu   Huida Medical",
-        "rnc": 2
-      }
-    ],
-    "resumo": {
-      "totalFornecedores": 43,
-      "processos": 114,
-      "rncs": 45,
-      "retrabalhos": 7,
-      "reclamacoes": 0,
-      "ocorrencias": 6,
-      "indiceMedio": 0.85
-    }
+
+{"posicao":1,"fabricante":"Shandong Weigao","rnc":7},
+{"posicao":2,"fabricante":"Biomed Healthcare","rnc":5},
+{"posicao":3,"fabricante":"Medico (Huaian) CO., LTDA","rnc":5},
+{"posicao":4,"fabricante":"Anhui Easyway Medical","rnc":4},
+{"posicao":5,"fabricante":"Yangzhou Medline Industry","rnc":3},
+{"posicao":6,"fabricante":"Phoenix Innovative HealtCare","rnc":2},
+{"posicao":7,"fabricante":"Pharmaplast AS ","rnc":2},
+{"posicao":8,"fabricante":"Jiangsu Huida Medical","rnc":2},
+{"posicao":9,"fabricante":"SR Produtos para la salud S.A","rnc":2}
+
+
+
+    ]
+  },
+"Pós-venda":{
+"resumo": {
+"eminvestigacao":0,
+"lotesreclamacaoinconclusiva":4,
+"lotesreclamadosimprocedentes":2,
+"lotesreclamadosprocedentes":8,
+"indicemedioavaliacao":0.96,
+"totalreclamacaolotes":14
+},
+"semestres": {
+"primeiro":{
+"periodo":{
+"inicio": "2026-01-01",
+"fim": "2026-06-30"
+},
+"total":92,
+"meses":{
+"Janeiro":13,
+"Fevereiro":13,
+"Março":17,
+"Abril":17,
+"Maio":17,
+"Junho":15
+}
+},
+"segundo":{
+"periodo":{
+"inicio": "2026-07-01",
+"fim": "2026-12-31"
+},
+"total":39,
+"meses":{
+"Julho":15,
+"Agosto":24,
+"Setembro":0,
+"Outubro":0,
+"Novembro":0,
+"Dezembro":0
+}
+}
+},
+"fornecedores":[
+{"fabricante":"SteriLance Medical","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Biomed Healthcare","reclamacoes_2026":8,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Accumax","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Shandong Aosaite","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Shanghai SA Medical","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Shandong Weigao","reclamacoes_2026":6,"total_lotes_reclamados_importacao_2026":3,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":1,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.04,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
+{"fabricante":"Ayset Plastik","reclamacoes_2026":17,"total_lotes_reclamados_importacao_2026":2,"skus_reclamados_importacao_2026":2,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.04,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
+{"fabricante":"Medico Electroude","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Huaian Tianda Medical","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":1,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Medico (Huaian) CO., LTDA","reclamacoes_2026":8,"total_lotes_reclamados_importacao_2026":2,"skus_reclamados_importacao_2026":2,"lotes_reclamacao_procedente":1,"lotes_reclamacao_improcedente":1,"lotes_reclamacao_inconclusiva":1,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.02,"reincidencia":"Ocorrência pontual","indice_medio_avaliacao":"0%","avaliacao":"🟡 Atenção" },
+{"fabricante":"Well Lead medical co., ltd.","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":1,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Polymed Medicure","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Phoenix Innovative HealtCare","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Yangzhou Medline Industry","reclamacoes_2026":4,"total_lotes_reclamados_importacao_2026":1,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangsu Webest Medical ","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Honsun (Nantong) ","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Nanjing Jiangnan Novel","reclamacoes_2026":5,"total_lotes_reclamados_importacao_2026":1,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":1,"lotes_reclamacao_improcedente":1,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.09,"reincidencia":"Ocorrência pontual","indice_medio_avaliacao":"0%","avaliacao":"🟡 Atenção" },
+{"fabricante":"Vitromed Healthcare","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangsu Kangjian","reclamacoes_2026":4,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Xiantao Xingrong Protective","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangxi Hongda Medical ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Dailymag Magnetic","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Yancheng Tiandi","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Dfi ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Pharmaplast AS ","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangsu Huida Medical","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Guangzhou Improve Medical ","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Anhui Easyway Medical","reclamacoes_2026":11,"total_lotes_reclamados_importacao_2026":5,"skus_reclamados_importacao_2026":2,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":2,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.02,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
+{"fabricante":"SR Produtos para la salud S.A","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Bonrre Medical co ltda","reclamacoes_2026":8,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"AB Medical","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Poly Medicure","reclamacoes_2026":5,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"GoodWood medical care Dalian","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Shangai Kindly ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Garware Bestretch","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Nantong Renon ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Jiangsu Kangjian Medical ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Hangzhou Rollmed","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Dalian GoodWood","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Wellspring Medical","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Alphaven ","reclamacoes_2026":5,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"All Lab Comercial","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
+{"fabricante":"Blue Cross Bio-Medical ","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" }
+
+  ],
+"resolucoes":[
+{"nome": "Orientação","quantidade":12},
+{"nome": "Sem resposta","quantidade":49},
+{"nome": "Reposição","quantidade":2},
+{"nome": "Devolução","quantidade":12},
+{"nome": "Relatorio de Teste","quantidade":1},
+{"nome": "Resposta","quantidade":2},
+{"nome": "Fora da validade","quantidade":1},
+{"nome": "Carta resposta","quantidade":5},
+{"nome": "Devolução cancelada","quantidade":1},
+{"nome": "Crédito","quantidade":2},
+{"nome": "Desistências","quantidade":1},
+{"nome": "Bonificação","quantidade":1},
+{"nome": "Falta de evidência","quantidade":1},
+{"nome": "Sem reposta ","quantidade":1},
+{"nome": "encerrado pelo cliente","quantidade":5},
+{"nome": "Desistencia pelo reclamante","quantidade":1},
+{"nome": "Desistência","quantidade":1},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0},
+{"nome": "0","quantidade":0}
+
+],
+"produtosReclamados":[
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "448", "quantidade":1,"descricao":"PT-TUBO TRAQUEOSTOMIA 8.5C/B C/10 SOLI (BO)"},
+{"fabricante": "Anhui Easyway Medical","sku": "487", "quantidade":5,"descricao":"CX-EQUIPO P/TRANSFUS.DE SANG. LAMEDID C/100"},
+{"fabricante": "SR Produtos para la salud S.A","sku": "6038", "quantidade":1,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)"},
+{"fabricante": "Biomed Healthcare","sku": "585A", "quantidade":1,"descricao":"PT-CATETER INTRA FEP 18G C/ 50 SOLIDOR (BM)"},
+{"fabricante": "Biomed Healthcare","sku": "587A", "quantidade":3,"descricao":"PT-CATETER INTRA FEP 22G C/ 50 SOLIDOR (BM)"},
+{"fabricante": "Honsun (Nantong)","sku": "267", "quantidade":1,"descricao":"ESFIGM VELCRO"},
+{"fabricante": "Ayset Plastik","sku": "50153N", "quantidade":1,"descricao":"PT-TUBO FLUO + OXAL 4ML LABOR III PLT.C/100"},
+{"fabricante": "AB Medical","sku": "50214", "quantidade":1,"descricao":"PT-TUBO AMARELO GEL 3,5ML C/100 (AB)"},
+{"fabricante": "Jiangsu Kangjian","sku": "4429", "quantidade":2,"descricao":"PT-TUBO EDTA K3 S/VACUO 4ML C/100"},
+{"fabricante": "0","sku": "60017", "quantidade":1,"descricao":"PT-ADESIVO PHARMAPORE 6X7CM PROCARE C/100"},
+{"fabricante": "New Prov","sku": "9048", "quantidade":1,"descricao":"UN-INSTANT PROV CORANTE RAPIDO NEWPROV"},
+{"fabricante": "Nanjing Jiangnan Novel","sku": "2607a", "quantidade":3,"descricao":"MICROSCOPIO PLANO TRINOCULAR L2000T (LI)"},
+{"fabricante": "Não informado","sku": "Não informado", "quantidade":9,"descricao":""},
+{"fabricante": "Poly Medicure","sku": "3940", "quantidade":2,"descricao":"PT-CATETER SEG. PUR POLYMED 20G C/ 100"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "77", "quantidade":1,"descricao":"PT-TUBO ENDOTRAQUEAL 8.5 S/BALAO C/10"},
+{"fabricante": "Ayset Plastik","sku": "5465", "quantidade":7,"descricao":"Blood Collection Tube Gel+Clot Activator 3.5ML"},
+{"fabricante": "Biomed Healthcare","sku": "374", "quantidade":3,"descricao":"PT-TORNEIRA 3 VIA SOL.LUER LOCK C/TRAV C/50"},
+{"fabricante": "Não informado","sku": "5380", "quantidade":1,"descricao":""},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "643", "quantidade":1,"descricao":"PT-TUBO ENDOTRAQUEAL 5.0 C/BAL C/10 SOL(BO)"},
+{"fabricante": "Ayset Plastik","sku": "50148N", "quantidade":3,"descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100"},
+{"fabricante": "Polymed Medicure","sku": "50200", "quantidade":1,"descricao":"PT-TUBO AZUL CITRATO 3,6ML PLT C/100 (PM)"},
+{"fabricante": "Yancheng Tiandi","sku": "3911", "quantidade":1,"descricao":"PT-LAMINA FOSCA LI 26X76MM C/50 UNDS"},
+{"fabricante": "Medico Electroude","sku": "99", "quantidade":2,"descricao":"PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "442", "quantidade":1,"descricao":"PT-TUBO ENDO ARAMADO 8.0 C/BAL C/10 SOL(BO)"},
+{"fabricante": "Shandong Weigao ","sku": "50039", "quantidade":1,"descricao":"PT-AGULHA LI VACUO 25X8 C/100"},
+{"fabricante": "Shandong Weigao","sku": "5401", "quantidade":4,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25"},
+{"fabricante": "Yangzhou Medline Industry","sku": "484", "quantidade":1,"descricao":"CX-COL. DE URINA SIST.FECH.SOL S/FILT C/100"},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "236", "quantidade":1,"descricao":"PT-FIO AGULHADO NYLON - 4030 C/24"},
+{"fabricante": "Poly Medicure","sku": "4950", "quantidade":2,"descricao":"UN-BOLSA COLET DE URINA 2000ML POLY-URO"},
+{"fabricante": "Shandong Weigao ","sku": "50040", "quantidade":1,"descricao":"PT-AGULHA LI VACUO 25X7 C/100"},
+{"fabricante": "Jiangsu Kangjian","sku": "3607", "quantidade":1,"descricao":"UN-AGITADOR KLINE LI 110V"},
+{"fabricante": "Medico (Huaian) CO., LTDA","sku": "110", "quantidade":1,"descricao":"PT-AGULHA P/SUTURA PROCARE B4 C/120"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "639", "quantidade":1,"descricao":"PT-TUBO ENDOTRAQUEAL 3.0 C/BAL C/10 SOL(BO)"},
+{"fabricante": "Não informado","sku": "5688", "quantidade":1,"descricao":""},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "284", "quantidade":1,"descricao":"PT-FIO AGULHADO SEDA-SK14017MM1/2 ODON C/24"},
+{"fabricante": "Não informado","sku": "6006", "quantidade":1,"descricao":""},
+{"fabricante": "Jiangsu Webest Medical ","sku": "286", "quantidade":1,"descricao":"PT-AGULHA GENGIVAL PROCARE 27G -LONGA C/100"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "444", "quantidade":1,"descricao":"PT-TUBO TRAQUEOSTOMIA 6.5C/B C/10 SOLI (BO)"},
+{"fabricante": "Ayset Plastik","sku": "5467", "quantidade":1,"descricao":"Blood Collection Tube Gel+Clot Activator 8ML"},
+{"fabricante": "Nanjing Jiangnan Novel ","sku": "10010", "quantidade":1,"descricao":"UN-FONTE ALIM BIVOLT L3000 (LI)"},
+{"fabricante": "Pharmaplast AS ","sku": "60007", "quantidade":1,"descricao":"CURATIVO CURE AID INFANTIL C/500"},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "490", "quantidade":1,"descricao":"PT-FIO AGULHADO POLIPROPILENO - 040 C/24"},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "519", "quantidade":1,"descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-035 C/24"},
+{"fabricante": "Não informado","sku": "5464", "quantidade":1,"descricao":""},
+{"fabricante": "Anhui Easyway Medical","sku": "365", "quantidade":2,"descricao":"PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100"},
+{"fabricante": "Ayset Plastik","sku": "5466", "quantidade":1,"descricao":"Blood Collection Tube Gel+Clot Activator 5ML"},
+{"fabricante": "Shanghai SA Medical","sku": "727", "quantidade":1,"descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR"},
+{"fabricante": "Alphaven ","sku": "5435", "quantidade":5,"descricao":"PT-CATETER INT DUPLA SEG 16G C/100 ALPHAVEN"},
+{"fabricante": "Biomed Healthcare","sku": "588A", "quantidade":1,"descricao":"PT-CATETER INTRA FEP 24G C/ 50 SOLIDOR (BM)"},
+{"fabricante": "Yangzhou Medline Industry","sku": "485", "quantidade":1,"descricao":"CX-COL.DE URINA SIST.FECH. SOL C/FILT C/100"},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "488", "quantidade":2,"descricao":"PT-FIO AGULHADO POLIPROPILENO - 2035 C/24"},
+{"fabricante": "Anhui Easyway Medical","sku": "408", "quantidade":2,"descricao":"PT-SER.INS.SOLIDOR 1ML 26G (13X0,45)C/100"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "4266", "quantidade":1,"descricao":"CX-CANULA NASAL PED T/O C/EXT C/100 SOLIDOR"},
+{"fabricante": "Yangzhou Medline Industry","sku": "4263", "quantidade":1,"descricao":"PT-SCALP PGC SEG. VACUO 23G C/100 (ML)"},
+{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "78028", "quantidade":1,"descricao":"PT-SONDA ASPIRACAO C/VAL 14FR C/10 SOLIDOR"},
+{"fabricante": "Nanjing Jiangnan Novel","sku": "2609A", "quantidade":1,"descricao":"CX-MICROSCOPIO PLANO TRINOCULAR L3000T (LI)"},
+{"fabricante": "Jiangsu Kangjian","sku": "3623", "quantidade":1,"descricao":"UN-MULTI TIMER DIGITAL LI BIVOLT"},
+{"fabricante": "Medico (Huaian) CO., Ltda","sku": "237", "quantidade":1,"descricao":"PT-FIO AGULHADO NYLON - 5015 C/24"},
+{"fabricante": "Honsun (Nantong) ","sku": "721", "quantidade":1,"descricao":"ESFIG PRETO VELCRO"},
+{"fabricante": "Ayset Plastik","sku": "50150N", "quantidade":3,"descricao":"PT-TUBO CITRATO 1,8ML LABOR III PLT C/100"},
+{"fabricante": "Não informado","sku": "3491", "quantidade":1,"descricao":""},
+{"fabricante": "Guangzhou Improve Medical ","sku": "3952", "quantidade":1,"descricao":"PT-MINI TUBO LI 0.5ML EDTA K2 C/ 50"},
+{"fabricante": "Anhui Easyway Medical","sku": "7448", "quantidade":1,"descricao":"PT-AGULHA LEBEL MESO 32X4X0,23 C/100 BEAUTY"},
+{"fabricante": "Well Lead medical co., ltd.","sku": "26", "quantidade":1,"descricao":"PT-SONDA FOLEY SOLIDOR 2 VIAS -14/30CC C/10"},
+{"fabricante": "New prov","sku": "9045", "quantidade":1,"descricao":"UN-GLUC UP 75G LIMAO FR.300ML"},
+{"fabricante": "Ayset Plastik","sku": "50151N", "quantidade":1,"descricao":"PT-TUBO CITRATO 3,6ML LABOR III PLT. C/100"},
+{"fabricante": "Poly Medicure","sku": "4951", "quantidade":1,"descricao":"UN-BOLSA COLETORA DE URINA C/ COLETA 2000ML"},
+{"fabricante": "SteriLance Medical","sku": "672", "quantidade":1,"descricao":"PT-LAMINA BISTURI 15 INOX LAMEDID C/100"},
+{"fabricante": "Shanghai SA Medical","sku": "325", "quantidade":1,"descricao":"PT-AG. ANESTESICA ESPINHAL PROCARE 27G C/25"},
+{"fabricante": "Anhui Easyway Medical","sku": "455", "quantidade":1,"descricao":"CX-EQUIPO BURETA DESCARTAVEL SOLIDOR C/100"},
+{"fabricante": "Huaian Tianda Medical","sku": "87003", "quantidade":1,"descricao":"PT-LABOR LANCET SAFETY C/100"},
+{"fabricante": "Yangzhou Medline Industry","sku": "4256", "quantidade":1,"descricao":"PT-SCALP PGC SEG. INFUSAO 19G C/100 (ML)"},
+{"fabricante": "Polymed Medicure","sku": "50208", "quantidade":1,"descricao":"PT-TUBO VERMELHO SILIC 10ML PLAST C/100 (PM)"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+],
+"motivosReclamacao": [
+{"nome":"Dificuldade de uso","quantidade": 29  },
+{"nome":"Corpo Estranho","quantidade": 3  },
+{"nome":"Falta de produto","quantidade": 1  },
+{"nome":"Embalagem avariada","quantidade": 1  },
+{"nome":"Vazamento","quantidade": 17  },
+{"nome":"Avaria","quantidade": 2  },
+{"nome":"Reagente","quantidade": 22  },
+{"nome":"Coágulo","quantidade": 2  },
+{"nome":"Vencido","quantidade": 1  },
+{"nome":"Fixação","quantidade": 2  },
+{"nome":"Manutenção","quantidade": 1  },
+{"nome":"Não informado","quantidade": 1  },
+{"nome":"Coagulo","quantidade": 1  },
+{"nome":"Sujidades","quantidade": 1  },
+{"nome":"Enferrujado","quantidade": 1  },
+{"nome":"Peça solta","quantidade": 1  },
+{"nome":"Quebra","quantidade": 18  },
+{"nome":"Embalagem","quantidade": 1  },
+{"nome":"Dobras","quantidade": 1  },
+{"nome":"Rotulagem","quantidade": 4  },
+{"nome":"Não liga","quantidade": 2  },
+{"nome":"Alergia","quantidade": 1  },
+{"nome":"Defeito","quantidade": 1  },
+{"nome":"Funcionamento","quantidade": 2  },
+{"nome":"Difculdade de uso","quantidade": 1  },
+{"nome":"Furado","quantidade": 1  },
+{"nome":"Furo","quantidade": 3  },
+{"nome":"Ausencia de peça","quantidade": 1  },
+{"nome":"Sujidade","quantidade": 1  },
+{"nome":"Dificuldasde de uso","quantidade": 2  },
+{"nome":"Tampa","quantidade": 1  },
+{"nome":"Encaixe","quantidade": 1  },
+{"nome":"Gotejamento","quantidade": 1  },
+{"nome":"Contaminação","quantidade": 1  }
+
+
+],
+"status":[
+{"nome":"Resolvido","quantidade": 108},
+{"nome":"Pendente","quantidade": 16},
+{"nome":"Aberto","quantidade": 7}
+    ]
   }
 }
