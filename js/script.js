@@ -269,7 +269,548 @@ function registrarPluginValorFlutuante() {
 
 registrarPluginValorFlutuante();
 
+/* ==========================================================
+   LEITURA SEGURA DO DATA.JSON
 
+   Se o JSON inteiro estiver válido:
+   - carrega normalmente.
+
+   Se existir erro em um módulo:
+   - tenta recuperar cada bloco principal separadamente.
+   - um módulo inválido não impede os anteriores de carregarem.
+========================================================== */
+
+function interpretarJsonSeguro(texto) {
+
+    if (
+        typeof texto !== "string" ||
+        !texto.trim()
+    ) {
+
+        console.warn(
+            "data.json vazio ou inválido."
+        );
+
+        return {};
+    }
+
+
+    /*
+    ==========================================================
+    1. PRIMEIRA TENTATIVA
+       JSON normal
+    ==========================================================
+    */
+
+    try {
+
+        return JSON.parse(texto);
+
+    } catch (erro) {
+
+        console.warn(
+            "data.json possui erro de sintaxe. " +
+            "Tentando recuperar os módulos válidos...",
+            erro
+        );
+    }
+
+
+    /*
+    ==========================================================
+    2. RECUPERAÇÃO DOS MÓDULOS
+    ==========================================================
+    */
+
+    const resultado = {};
+
+    let i = 0;
+
+    const tamanho =
+        texto.length;
+
+
+    /*
+    ==========================================================
+    REMOVE BOM, CASO EXISTA
+    ==========================================================
+    */
+
+    if (
+        texto.charCodeAt(0) === 0xFEFF
+    ) {
+
+        texto =
+            texto.slice(1);
+    }
+
+
+    /*
+    ==========================================================
+    PROCURA A ABERTURA DO OBJETO PRINCIPAL
+    ==========================================================
+    */
+
+    while (
+        i < tamanho &&
+        texto[i] !== "{"
+    ) {
+
+        i++;
+    }
+
+
+    if (
+        texto[i] !== "{"
+    ) {
+
+        console.error(
+            "Não foi possível localizar o início do data.json."
+        );
+
+        return {};
+    }
+
+
+    i++;
+
+
+    /*
+    ==========================================================
+    PERCORRE AS CHAVES PRINCIPAIS
+    ==========================================================
+    */
+
+    while (
+        i < texto.length
+    ) {
+
+
+        /*
+        ------------------------------------------------------
+        Ignora espaços, quebras de linha e vírgulas
+        ------------------------------------------------------
+        */
+
+        while (
+            i < texto.length &&
+            (
+                /\s/.test(texto[i]) ||
+                texto[i] === ","
+            )
+        ) {
+
+            i++;
+        }
+
+
+        /*
+        ------------------------------------------------------
+        Final do objeto principal
+        ------------------------------------------------------
+        */
+
+        if (
+            texto[i] === "}"
+        ) {
+
+            break;
+        }
+
+
+        /*
+        ------------------------------------------------------
+        Toda chave precisa começar com aspas
+        ------------------------------------------------------
+        */
+
+        if (
+            texto[i] !== '"'
+        ) {
+
+            i++;
+            continue;
+        }
+
+
+        /*
+        ======================================================
+        LÊ O NOME DA CHAVE
+        ======================================================
+        */
+
+        const inicioChave =
+            i;
+
+        i++;
+
+        let escapeChave =
+            false;
+
+
+        while (
+            i < texto.length
+        ) {
+
+            const caractere =
+                texto[i];
+
+
+            if (
+                escapeChave
+            ) {
+
+                escapeChave =
+                    false;
+
+                i++;
+
+                continue;
+            }
+
+
+            if (
+                caractere === "\\"
+            ) {
+
+                escapeChave =
+                    true;
+
+                i++;
+
+                continue;
+            }
+
+
+            if (
+                caractere === '"'
+            ) {
+
+                i++;
+
+                break;
+            }
+
+
+            i++;
+        }
+
+
+        const textoChave =
+            texto.slice(
+                inicioChave,
+                i
+            );
+
+
+        let chave;
+
+
+        try {
+
+            chave =
+                JSON.parse(
+                    textoChave
+                );
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao identificar uma chave do data.json.",
+                textoChave
+            );
+
+            continue;
+        }
+
+
+        /*
+        ======================================================
+        LOCALIZA :
+        ======================================================
+        */
+
+        while (
+            i < texto.length &&
+            /\s/.test(texto[i])
+        ) {
+
+            i++;
+        }
+
+
+        if (
+            texto[i] !== ":"
+        ) {
+
+            console.warn(
+                `Módulo ${chave}: ":" não encontrado.`
+            );
+
+            continue;
+        }
+
+
+        i++;
+
+
+        while (
+            i < texto.length &&
+            /\s/.test(texto[i])
+        ) {
+
+            i++;
+        }
+
+
+        /*
+        ======================================================
+        INÍCIO DO VALOR DO MÓDULO
+        ======================================================
+        */
+
+        const inicioValor =
+            i;
+
+
+        let nivelObjeto =
+            0;
+
+        let nivelArray =
+            0;
+
+        let dentroString =
+            false;
+
+        let escape =
+            false;
+
+
+        while (
+            i < texto.length
+        ) {
+
+            const caractere =
+                texto[i];
+
+
+            /*
+            --------------------------------------------------
+            Dentro de uma string
+            --------------------------------------------------
+            */
+
+            if (
+                dentroString
+            ) {
+
+                if (
+                    escape
+                ) {
+
+                    escape =
+                        false;
+
+                } else if (
+                    caractere === "\\"
+                ) {
+
+                    escape =
+                        true;
+
+                } else if (
+                    caractere === '"'
+                ) {
+
+                    dentroString =
+                        false;
+                }
+
+
+                i++;
+
+                continue;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Início de string
+            --------------------------------------------------
+            */
+
+            if (
+                caractere === '"'
+            ) {
+
+                dentroString =
+                    true;
+
+                i++;
+
+                continue;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Controle dos objetos
+            --------------------------------------------------
+            */
+
+            if (
+                caractere === "{"
+            ) {
+
+                nivelObjeto++;
+
+                i++;
+
+                continue;
+            }
+
+
+            if (
+                caractere === "}"
+            ) {
+
+                if (
+                    nivelObjeto > 0
+                ) {
+
+                    nivelObjeto--;
+
+                    i++;
+
+                    continue;
+                }
+
+
+                /*
+                Final do objeto principal
+                */
+
+                break;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Controle dos arrays
+            --------------------------------------------------
+            */
+
+            if (
+                caractere === "["
+            ) {
+
+                nivelArray++;
+
+                i++;
+
+                continue;
+            }
+
+
+            if (
+                caractere === "]"
+            ) {
+
+                if (
+                    nivelArray > 0
+                ) {
+
+                    nivelArray--;
+                }
+
+
+                i++;
+
+                continue;
+            }
+
+
+            /*
+            --------------------------------------------------
+            Encontrou o próximo módulo
+            --------------------------------------------------
+            */
+
+            if (
+                caractere === "," &&
+                nivelObjeto === 0 &&
+                nivelArray === 0
+            ) {
+
+                break;
+            }
+
+
+            i++;
+        }
+
+
+        const textoValor =
+            texto
+                .slice(
+                    inicioValor,
+                    i
+                )
+                .trim();
+
+
+        /*
+        ======================================================
+        TENTA CONVERTER SOMENTE ESTE MÓDULO
+        ======================================================
+        */
+
+        try {
+
+            resultado[chave] =
+                JSON.parse(
+                    textoValor
+                );
+
+
+            console.log(
+                `✅ ${chave}: carregado`
+            );
+
+
+        } catch (erro) {
+
+
+            console.error(
+                `❌ ${chave}: módulo ignorado por conter erro.`,
+                erro
+            );
+
+
+            /*
+            Não interrompe os outros módulos
+            */
+
+        }
+
+
+        /*
+        ======================================================
+        PASSA PARA O PRÓXIMO
+        ======================================================
+        */
+
+        if (
+            texto[i] === ","
+        ) {
+
+            i++;
+        }
+    }
+
+
+    return resultado;
+}
 /* ==========================================================
    CARREGAMENTO DOS DADOS
 ========================================================== */
@@ -289,15 +830,23 @@ function carregarDadosIniciais() {
                 );
             }
 
-            return resposta.json();
+            return resposta.text();
         })
 
-        .then(json => {
+       .then(texto => {
 
-            dados = normalizarDados(json);
+    const json =
+        interpretarJsonSeguro(
+            texto
+        );
 
-            renderImportacao();
-        })
+    dados =
+        normalizarDados(
+            json
+        );
+
+    renderImportacao();
+})
 
         .catch(erro => {
 
@@ -341,14 +890,20 @@ function atualizarDadosAutomaticamente() {
                 );
             }
 
-            return resposta.json();
+            return resposta.text();
         })
 
-        .then(json => {
+       .then(texto => {
 
-            dados = normalizarDados(json);
+    const json =
+        interpretarJsonSeguro(
+            texto
+        );
 
-
+    dados =
+        normalizarDados(
+            json
+        );
             /*
             ------------------------------------------------------
             Atualiza somente a aba que estiver aberta
