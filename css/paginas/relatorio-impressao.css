@@ -1360,9 +1360,9 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:96% !important;
 
-    height:58mm !important;
-    min-height:58mm !important;
-    max-height:58mm !important;
+   height:72mm !important;
+min-height:72mm !important;
+max-height:72mm !important;
 
     margin:0 auto !important;
 
@@ -1517,7 +1517,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-    min-height:24px !important;
+    min-height:30px !important;
 
     padding:
         3px
