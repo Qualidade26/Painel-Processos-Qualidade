@@ -1359,7 +1359,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva th{
-   height:30px !important;
+   height:36px !important;
 
 padding:
     4px
@@ -1378,7 +1378,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-indicadores-esfig
 .relatorio-tabela-executiva td{
-    height:27px !important;
+    height:34px !important;
 
 padding:
     4px
@@ -1446,7 +1446,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-info-faixa span{
 
-   min-height:28px !important;
+   min-height:37px !important;
 
 padding:
     4px
@@ -1844,13 +1844,11 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 > .relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
     width:96% !important;
+height:78mm !important;
+min-height:78mm !important;
+max-height:78mm !important;
 
-    height:62mm !important;
-    min-height:62mm !important;
-    max-height:62mm !important;
-
-    flex:0 0 62mm !important;
-
+flex:0 0 78mm !important;
     margin:
         0
         auto !important;
