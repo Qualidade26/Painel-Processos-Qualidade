@@ -36,11 +36,6 @@
         rel="stylesheet"
         href="css/style.css?v=20"
     >
-
-</head>
-
-
-<body>
 <!-- =====================================================
      MODO APRESENTAÇÃO
 ====================================================== -->
@@ -49,6 +44,11 @@
     rel="stylesheet"
     href="css/apresentacao.css?v=1"
 >
+</head>
+
+
+<body>
+
     <!-- =====================================================
          CABEÇALHO
     ====================================================== -->
@@ -144,7 +144,18 @@
             >
                 ◀
             </button>
+<!-- MODO APRESENTAÇÃO -->
 
+<button
+    type="button"
+    class="btn-modo-apresentacao"
+    id="btnModoApresentacao"
+    onclick="abrirModoApresentacao()"
+    title="Modo Apresentação"
+    aria-label="Abrir modo apresentação"
+>
+    ▶
+</button>
 
             <!-- INSPEÇÃO DE IMPORTAÇÃO -->
 
@@ -580,11 +591,18 @@
 
     <script src="js/relatorios.js?v=1"></script>
 
-    <!-- =====================================================
-         CONTROLE PRINCIPAL
-    ====================================================== -->
+   <!-- =====================================================
+     CONTROLE PRINCIPAL
+====================================================== -->
 
-    <script src="js/script.js?v=25"></script>
+<script src="js/script.js?v=25"></script>
+
+
+<!-- =====================================================
+     MODO APRESENTAÇÃO
+====================================================== -->
+
+<script src="js/apresentacao.js?v=1"></script>
 
 </body>
 
