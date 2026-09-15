@@ -1290,19 +1290,20 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-executivo-corpo{
 
-    flex:1 1 auto !important;
+    flex:0 0 auto !important;
 
     width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
 
-    display:flex !important;
-    flex-direction:column !important;
+    display:block !important;
 
-    align-items:center !important;
-    justify-content:flex-start !important;
+    margin:0 !important;
 
-    padding-top:4mm !important;
-
-    gap:2mm !important;
+    padding:
+        4mm
+        0
+        0 !important;
 
     box-sizing:border-box !important;
 }
@@ -1345,9 +1346,11 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     height:auto !important;
     min-height:0 !important;
 
+    margin:0 !important;
+    padding:0 !important;
+
     box-sizing:border-box !important;
 }
-
 
 /* ==========================================================
    2. QUADRO SUPERIOR - INDICADORES
@@ -1359,10 +1362,9 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 > .relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
     width:96% !important;
-
-   height:72mm !important;
-min-height:72mm !important;
-max-height:72mm !important;
+height:58mm !important;
+min-height:58mm !important;
+max-height:58mm !important;
 
     margin:0 auto !important;
 
@@ -1436,11 +1438,11 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva th{
 
-  height:34px !important;
+ height:26px !important;
 
-    padding:
-        6px
-        10px !important;
+padding:
+    4px
+    8px !important;
 
     font-size:10px !important;
     font-weight:900 !important;
@@ -1460,11 +1462,11 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td{
 
-height:35px !important;
+height:27px !important;
 
-    padding:
-        6px
-        10px !important;
+padding:
+    4px
+    8px !important;
 
     font-size:10px !important;
     font-weight:700 !important;
@@ -1517,7 +1519,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-    min-height:30px !important;
+   min-height:24px !important;
 
     padding:
         3px
@@ -1633,11 +1635,11 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela th{
 
-    height:34px !important;
+height:26px !important;
 
-    padding:
-        7px
-        10px !important;
+padding:
+    4px
+    8px !important;
 
     font-size:11px !important;
     font-weight:900 !important;
@@ -1695,11 +1697,12 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela tfoot td{
 
-    height:34px !important;
 
-    padding:
-        6px
-        10px !important;
+height:27px !important;
+
+padding:
+    4px
+    8px !important;
 
     font-size:11px !important;
     font-weight:900 !important;
