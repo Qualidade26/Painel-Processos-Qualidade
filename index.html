@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -36,24 +35,33 @@
         rel="stylesheet"
         href="css/style.css?v=20"
     >
-<!-- =====================================================
-     MODO APRESENTAÇÃO
-====================================================== -->
 
-<link
-    rel="stylesheet"
-    href="css/apresentacao.css?v=1"
->
+
+    <!-- =====================================================
+         MODO APRESENTAÇÃO
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/apresentacao.css?v=1"
+    >
+
 </head>
 
 
 <body>
+
 
     <!-- =====================================================
          CABEÇALHO
     ====================================================== -->
 
     <header class="topbar">
+
+
+        <!-- =================================================
+             LOGO LABOR
+        ================================================== -->
 
         <div class="logo-labor">
 
@@ -68,6 +76,58 @@
         </div>
 
 
+        <!-- =================================================
+             MODO APRESENTAÇÃO
+        ================================================== -->
+
+        <div class="top-apresentacao">
+
+            <button
+                type="button"
+                id="btnModoApresentacao"
+                class="btn-top-apresentacao"
+                onclick="abrirModoApresentacao()"
+                title="Abrir modo apresentação"
+                aria-label="Abrir modo apresentação"
+            >
+
+                <span
+                    class="apresentacao-icone"
+                    aria-hidden="true"
+                >
+                    ▷
+                </span>
+
+
+                <span class="apresentacao-textos">
+
+                    <strong>
+                        APRESENTAÇÃO
+                    </strong>
+
+                    <small>
+                        Modo executivo
+                    </small>
+
+                </span>
+
+
+                <span
+                    class="apresentacao-seta"
+                    aria-hidden="true"
+                >
+                    ›
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
         <div class="top-title">
 
             <h1>
@@ -80,6 +140,10 @@
 
         </div>
 
+
+        <!-- =================================================
+             STATUS
+        ================================================== -->
 
         <div class="top-status">
 
@@ -124,6 +188,7 @@
         id="mainWrap"
     >
 
+
         <!-- =================================================
              MENU LATERAL
         ================================================== -->
@@ -133,6 +198,11 @@
             id="menuLateral"
             aria-label="Menu principal"
         >
+
+
+            <!-- =============================================
+                 RECOLHER / EXPANDIR MENU
+            ============================================== -->
 
             <button
                 type="button"
@@ -144,20 +214,11 @@
             >
                 ◀
             </button>
-<!-- MODO APRESENTAÇÃO -->
 
-<button
-    type="button"
-    class="btn-modo-apresentacao"
-    id="btnModoApresentacao"
-    onclick="abrirModoApresentacao()"
-    title="Modo Apresentação"
-    aria-label="Abrir modo apresentação"
->
-    ▶
-</button>
 
-            <!-- INSPEÇÃO DE IMPORTAÇÃO -->
+            <!-- =============================================
+                 INSPEÇÃO DE IMPORTAÇÃO
+            ============================================== -->
 
             <button
                 type="button"
@@ -181,7 +242,9 @@
             </button>
 
 
-            <!-- ESFIG -->
+            <!-- =============================================
+                 ESFIG
+            ============================================== -->
 
             <button
                 type="button"
@@ -202,7 +265,9 @@
             </button>
 
 
-            <!-- DESCARTE -->
+            <!-- =============================================
+                 DESCARTE
+            ============================================== -->
 
             <button
                 type="button"
@@ -223,7 +288,9 @@
             </button>
 
 
-            <!-- AMOSTRA -->
+            <!-- =============================================
+                 AMOSTRA
+            ============================================== -->
 
             <button
                 type="button"
@@ -244,7 +311,9 @@
             </button>
 
 
-            <!-- RETRABALHO -->
+            <!-- =============================================
+                 RETRABALHO
+            ============================================== -->
 
             <button
                 type="button"
@@ -265,7 +334,9 @@
             </button>
 
 
-            <!-- FORNECEDORES -->
+            <!-- =============================================
+                 FORNECEDORES
+            ============================================== -->
 
             <button
                 type="button"
@@ -286,7 +357,9 @@
             </button>
 
 
-            <!-- INFORMATIVO -->
+            <!-- =============================================
+                 INFORMATIVO
+            ============================================== -->
 
             <button
                 type="button"
@@ -305,25 +378,31 @@
                 </span>
 
             </button>
-<!-- RELATÓRIOS -->
 
-<button
-    type="button"
-    onclick="abrirAba('relatorios', this)"
->
 
-    <span
-        class="ico"
-        aria-hidden="true"
-    >
-        📄
-    </span>
+            <!-- =============================================
+                 RELATÓRIOS
+            ============================================== -->
 
-    <span class="label">
-        Relatórios
-    </span>
+            <button
+                type="button"
+                onclick="abrirAba('relatorios', this)"
+            >
 
-</button>
+                <span
+                    class="ico"
+                    aria-hidden="true"
+                >
+                    📄
+                </span>
+
+                <span class="label">
+                    Relatórios
+                </span>
+
+            </button>
+
+
         </aside>
 
 
@@ -350,171 +429,235 @@
 
         </main>
 
-    </div>
-
-<!-- =====================================================
-     CONTROLES DO MODO APRESENTAÇÃO
-====================================================== -->
-
-<div
-    id="barraApresentacao"
-    class="barra-apresentacao"
-    aria-hidden="true"
->
-
-    <!-- NAVEGAÇÃO ANTERIOR -->
-
-    <button
-        type="button"
-        id="apresAnterior"
-        class="apres-btn apres-btn-nav"
-        title="Tela anterior"
-    >
-        ← Anterior
-    </button>
-
-
-    <!-- ABAS -->
-
-    <div class="apres-abas">
-
-        <button
-            type="button"
-            data-apres-aba="importacao"
-        >
-            📦 Importação
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="esfig"
-        >
-            ⏱ ESFIG
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="descarte"
-        >
-            🗑 Descarte
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="amostra"
-        >
-            📦 Amostras
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="retrabalho"
-        >
-            🔄 Retrabalho
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="fornecedores"
-        >
-            🏭 Fornecedores
-        </button>
-
-        <button
-            type="button"
-            data-apres-aba="informativo"
-        >
-            ℹ️ Informativo
-        </button>
 
     </div>
 
 
-    <!-- NAVEGAÇÃO PRÓXIMO -->
+    <!-- =====================================================
+         MODO APRESENTAÇÃO
+         BARRA DE CONTROLE
+    ====================================================== -->
 
-    <button
-        type="button"
-        id="apresProximo"
-        class="apres-btn apres-btn-nav"
-        title="Próxima tela"
+    <div
+        id="barraApresentacao"
+        class="barra-apresentacao"
+        aria-hidden="true"
     >
-        Próximo →
-    </button>
 
 
-    <!-- SEGUNDA LINHA -->
+        <!-- =================================================
+             CONTROLES PRINCIPAIS
+        ================================================== -->
 
-    <div class="apres-status">
-
-        <div class="apres-identificacao">
-
-            <strong>
-                🖥 MODO APRESENTAÇÃO
-            </strong>
-
-            <span id="apresContador">
-                1 / 7
-            </span>
-
-            <span id="apresNome">
-                Importação
-            </span>
-
-        </div>
+        <div class="apres-controles-principais">
 
 
-        <div class="apres-automatico">
+            <!-- =============================================
+                 TELA ANTERIOR
+            ============================================== -->
+
+            <button
+                type="button"
+                id="apresAnterior"
+                class="apres-btn apres-btn-nav"
+                title="Tela anterior"
+                aria-label="Tela anterior"
+            >
+                ←
+            </button>
+
+
+            <!-- =============================================
+                 IDENTIFICAÇÃO DA TELA ATUAL
+            ============================================== -->
+
+            <div class="apres-tela-atual">
+
+                <span
+                    id="apresProcesso"
+                    class="apres-processo"
+                >
+                    Importação
+                </span>
+
+                <span
+                    id="apresSubaba"
+                    class="apres-subaba"
+                >
+                    Visão Geral
+                </span>
+
+            </div>
+
+
+            <!-- =============================================
+                 CONTADOR
+            ============================================== -->
+
+            <div
+                id="apresContador"
+                class="apres-contador"
+            >
+                1 / 1
+            </div>
+
+
+            <!-- =============================================
+                 PRÓXIMA TELA
+            ============================================== -->
+
+            <button
+                type="button"
+                id="apresProximo"
+                class="apres-btn apres-btn-nav"
+                title="Próxima tela"
+                aria-label="Próxima tela"
+            >
+                →
+            </button>
+
+
+            <!-- =============================================
+                 DIVISOR
+            ============================================== -->
+
+            <span
+                class="apres-divisor"
+                aria-hidden="true"
+            ></span>
+
+
+            <!-- =============================================
+                 MODO ATUAL
+            ============================================== -->
+
+            <div class="apres-modo">
+
+                <span class="apres-modo-label">
+                    MODO
+                </span>
+
+                <strong id="apresModoAtual">
+                    Manual
+                </strong>
+
+            </div>
+
+
+            <!-- =============================================
+                 TEMPO AUTOMÁTICO
+            ============================================== -->
+
+            <div class="apres-tempo">
+
+                <label for="apresTempo">
+                    Tempo
+                </label>
+
+                <select
+                    id="apresTempo"
+                    aria-label="Tempo de cada tela"
+                >
+
+                    <option value="5000">
+                        5 segundos
+                    </option>
+
+                    <option value="10000">
+                        10 segundos
+                    </option>
+
+                    <option value="15000">
+                        15 segundos
+                    </option>
+
+                    <option
+                        value="20000"
+                        selected
+                    >
+                        20 segundos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =============================================
+                 INICIAR / PAUSAR AUTOMÁTICO
+            ============================================== -->
 
             <button
                 type="button"
                 id="apresPlay"
-                class="apres-btn"
+                class="apres-btn apres-btn-play"
+                title="Iniciar apresentação automática"
+                aria-label="Iniciar apresentação automática"
             >
-                ▶ Automático
+                ▶ Iniciar automático
             </button>
 
 
-            <label for="apresTempo">
-                Tempo:
-            </label>
-
-            <select id="apresTempo">
-
-                <option value="10000">
-                    10 segundos
-                </option>
-
-                <option
-                    value="20000"
-                    selected
-                >
-                    20 segundos
-                </option>
-
-                <option value="30000">
-                    30 segundos
-                </option>
-
-                <option value="60000">
-                    60 segundos
-                </option>
-
-            </select>
-
+            <!-- =============================================
+                 OCULTAR BARRA
+            ============================================== -->
 
             <button
                 type="button"
-                id="apresSair"
-                class="apres-btn apres-btn-sair"
+                id="apresOcultar"
+                class="apres-btn apres-btn-ocultar"
+                title="Ocultar controles"
+                aria-label="Ocultar barra de apresentação"
             >
-                ⛶ Sair
+                ↓
             </button>
+
 
         </div>
 
+
+        <!-- =================================================
+             ATALHOS DO TECLADO
+        ================================================== -->
+
+        <div class="apres-atalhos">
+
+            <span>
+                ← → Navegar
+            </span>
+
+            <span>
+                ↓ Controles
+            </span>
+
+            <span>
+                ESC Sair
+            </span>
+
+        </div>
+
+
     </div>
 
-</div>
+
+    <!-- =====================================================
+         BOTÃO SAIR DA APRESENTAÇÃO
+
+         Este botão fica fora da barra para permanecer
+         disponível mesmo quando a barra estiver oculta.
+    ====================================================== -->
+
+    <button
+        type="button"
+        id="apresFechar"
+        class="apres-fechar"
+        title="Sair do modo apresentação"
+        aria-label="Sair do modo apresentação"
+    >
+        ×
+    </button>
+
+
     <!-- =====================================================
          BIBLIOTECAS EXTERNAS
     ====================================================== -->
@@ -552,6 +695,7 @@
             console.error(
                 "Chart.js ou ChartDataLabels não foi carregado."
             );
+
         }
 
     </script>
@@ -591,20 +735,21 @@
 
     <script src="js/relatorios.js?v=1"></script>
 
-   <!-- =====================================================
-     CONTROLE PRINCIPAL
-====================================================== -->
 
-<script src="js/script.js?v=25"></script>
+    <!-- =====================================================
+         CONTROLE PRINCIPAL
+    ====================================================== -->
+
+    <script src="js/script.js?v=25"></script>
 
 
-<!-- =====================================================
-     MODO APRESENTAÇÃO
-====================================================== -->
+    <!-- =====================================================
+         CONTROLE DO MODO APRESENTAÇÃO
+    ====================================================== -->
 
-<script src="js/apresentacao.js?v=1"></script>
+    <script src="js/apresentacao.js?v=1"></script>
+
 
 </body>
 
 </html>
-```
