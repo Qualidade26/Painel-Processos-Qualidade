@@ -47,9 +47,9 @@ body{
 
     display:grid;
     grid-template-columns:
-        minmax(180px,260px)
-        minmax(300px,1fr)
-        minmax(250px,320px);
+    minmax(180px,260px)
+    minmax(300px,1fr)
+    minmax(360px,420px);
 
     align-items:center;
     gap:clamp(6px,1vw,16px);
@@ -136,14 +136,16 @@ body{
     display:flex;
     align-items:center;
     justify-content:flex-end;
-    flex-wrap:wrap;
+
+    flex-wrap:nowrap;
 
     gap:8px;
 
     font-size:11px;
     font-weight:900;
-}
 
+    white-space:nowrap;
+}
 
 /* ==========================================================
    ESTRUTURA PRINCIPAL
