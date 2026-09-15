@@ -168,7 +168,7 @@ body{
     minmax(0,1fr);
 
     gap:clamp(6px,.7vw,12px);
-
+align-items:stretch;
     box-sizing:border-box;
 
     overflow:hidden;
@@ -186,33 +186,42 @@ body{
 
 
 /* ==========================================================
-   MENU LATERAL
+   MENU LATERAL — AJUSTE AUTOMÁTICO PELA TELA
 ========================================================== */
 
 .menu{
     width:100%;
-    height:auto;
+    height:100%;
 
     min-width:0;
     min-height:0;
 
-    align-self:start;
+    display:flex;
+    flex-direction:column;
+
+    gap:clamp(
+        3px,
+        .65vh,
+        8px
+    );
 
     padding:
-        6px
-        8px
-        6px
-        8px;
+        clamp(4px,.7vh,8px);
 
     box-sizing:border-box;
 
-    background:rgba(248,251,255,.92);
+    background:
+        rgba(248,251,255,.92);
 
-    border:1.5px solid var(--panel-border);
+    border:
+        1.5px solid
+        var(--panel-border);
+
     border-radius:12px;
 
     box-shadow:
-        0 4px 12px rgba(0,0,0,.06);
+        0 4px 12px
+        rgba(0,0,0,.06);
 
     overflow:hidden;
 
@@ -223,63 +232,117 @@ body{
 
 
 /* ==========================================================
-   ÚLTIMO BOTÃO
+   BOTÃO RECOLHER
 ========================================================== */
 
-.menu button:last-child{
-    margin-bottom:0;
-}
-
-
 .toggle-menu{
-    width:100%;
-    height:34px;
 
-    margin-bottom:10px;
+    flex:
+        0
+        0
+        clamp(
+            30px,
+            4.5vh,
+            38px
+        );
+
+    width:100%;
+
+    min-height:0;
+
+    margin:0;
+
+    padding:0;
 
     border:none;
+
     border-radius:10px;
 
-    background:linear-gradient(
-        90deg,
-        var(--top1),
-        var(--top2)
-    );
+    background:
+        linear-gradient(
+            90deg,
+            var(--top1),
+            var(--top2)
+        );
 
     color:#fff;
 
-    font-size:18px;
+    font-size:
+        clamp(
+            13px,
+            2vh,
+            18px
+        );
+
     font-weight:900;
 
     cursor:pointer;
 }
 
 
-.menu button{
+/* ==========================================================
+   BOTÕES DAS ABAS
+
+   Todos dividem automaticamente a altura restante.
+========================================================== */
+
+.menu > button:not(.toggle-menu){
+
+    flex:
+        1
+        1
+        0;
+
     width:100%;
-    min-height:clamp(44px,5.5vh,54px);
 
-    margin-bottom:8px;
-      padding:6px 4px;
+    min-width:0;
+    min-height:0;
 
-    border:1px solid var(--line2);
-    border-radius:11px;
+    margin:0;
 
-    background:linear-gradient(
-        180deg,
-        #fff,
-        var(--card2)
-    );
+    padding:
+        clamp(2px,.5vh,6px)
+        3px;
 
-    color:var(--text);
+    box-sizing:border-box;
 
-    font-size:clamp(9px,.6vw,11px);
+    border:
+        1px solid
+        var(--line2);
+
+    border-radius:
+        clamp(
+            7px,
+            1vh,
+            11px
+        );
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            var(--card2)
+        );
+
+    color:
+        var(--text);
+
+    font-size:
+        clamp(
+            7px,
+            1.25vh,
+            11px
+        );
+
     font-weight:900;
-    line-height:1.2;
+
+    line-height:1.05;
 
     text-align:center;
 
     cursor:pointer;
+
+    overflow:hidden;
 
     transition:
         background .2s ease,
@@ -289,35 +352,86 @@ body{
 }
 
 
+/* ==========================================================
+   ÍCONES
+========================================================== */
+
 .menu button .ico{
+
     display:block;
 
-    margin-bottom:4px;
+    margin:
+        0
+        0
+        clamp(
+            1px,
+            .35vh,
+            4px
+        );
 
-    font-size:clamp(20px,1.5vw,27px);
+    font-size:
+        clamp(
+            15px,
+            2.7vh,
+            27px
+        );
+
     line-height:1;
 }
 
 
+/* ==========================================================
+   TEXTO
+========================================================== */
+
 .menu button .label{
+
     display:block;
+
+    overflow:hidden;
+
+    line-height:1.05;
 }
 
 
+/* ==========================================================
+   HOVER / ATIVO
+========================================================== */
+
 .menu button:hover,
 .menu button.active{
-    background:linear-gradient(
-        90deg,
-        var(--top1),
-        var(--top2)
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--top1),
+            var(--top2)
+        );
 
     color:#fff;
 
-    transform:translateY(-1px);
+    transform:
+        translateY(-1px);
 
     box-shadow:
-        0 6px 12px rgba(29,78,255,.25);
+        0 4px 10px
+        rgba(29,78,255,.22);
+}
+
+
+/* ==========================================================
+   MODO APRESENTAÇÃO
+   Pequeno ajuste para o botão ficar proporcional
+========================================================== */
+
+.menu-apresentacao .ico{
+
+    font-size:
+        clamp(
+            16px,
+            2.8vh,
+            28px
+        );
 }
 
 
@@ -326,32 +440,55 @@ body{
 ========================================================== */
 
 .main-wrap.menu-collapsed .menu{
-    padding:6px;
+
+    padding:
+        clamp(
+            4px,
+            .6vh,
+            6px
+        );
 }
 
 
-.main-wrap.menu-collapsed .toggle-menu{
-    height:38px;
-    margin-bottom:8px;
+/* No recolhido continua dividindo toda altura */
+
+.main-wrap.menu-collapsed
+.menu > button:not(.toggle-menu){
+
+    flex:
+        1
+        1
+        0;
+
+    min-height:0;
+
+    padding:2px;
 }
 
 
-.main-wrap.menu-collapsed .menu button{
-    min-height:45px;
-    padding:6px 4px;
+/* ÍCONES NO RECOLHIDO */
+
+.main-wrap.menu-collapsed
+.menu button .ico{
+
+    margin:0;
+
+    font-size:
+        clamp(
+            16px,
+            2.8vh,
+            23px
+        );
 }
 
 
-.main-wrap.menu-collapsed .menu button .ico{
-    margin-bottom:0;
-    font-size:22px;
-}
+/* TEXTO SOME */
 
+.main-wrap.menu-collapsed
+.menu button .label{
 
-.main-wrap.menu-collapsed .menu button .label{
     display:none;
 }
-
 
 /* ==========================================================
    CONTEÚDO
