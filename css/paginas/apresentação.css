@@ -5,10 +5,12 @@
 
 
 /* ==========================================================
-   BARRA DE APRESENTAÇÃO
+   ESTADO PADRÃO
+   Tudo relacionado à apresentação fica oculto
 ========================================================== */
 
-.barra-apresentacao{
+.barra-apresentacao,
+.apres-fechar{
 
     display:none;
 
@@ -16,7 +18,263 @@
 
 
 /* ==========================================================
-   PAINEL EM MODO APRESENTAÇÃO
+   BOTÃO APRESENTAÇÃO NO CABEÇALHO
+========================================================== */
+
+.top-apresentacao{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        0
+        14px;
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.18);
+
+}
+
+
+.btn-top-apresentacao{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+        32px
+        auto
+        14px;
+
+    align-items:center;
+
+    gap:8px;
+
+    min-width:160px;
+
+    height:44px;
+
+    padding:
+        5px
+        11px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.17),
+            rgba(255,255,255,.07)
+        );
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.15),
+        0 3px 8px
+        rgba(0,20,80,.18);
+
+    color:#ffffff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+
+}
+
+
+/* DETALHE AZUL CLARO */
+
+.btn-top-apresentacao::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:7px;
+
+    bottom:7px;
+
+    left:0;
+
+    width:3px;
+
+    border-radius:
+        0
+        3px
+        3px
+        0;
+
+    background:#7dd3fc;
+
+}
+
+
+/* ÍCONE */
+
+.apresentacao-icone{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:32px;
+
+    height:32px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.11);
+
+    font-size:18px;
+
+    line-height:1;
+
+}
+
+
+/* TEXTOS */
+
+.apresentacao-textos{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    min-width:0;
+
+    line-height:1;
+
+}
+
+
+.apresentacao-textos strong{
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:.45px;
+
+    color:#ffffff;
+
+}
+
+
+.apresentacao-textos small{
+
+    margin-top:4px;
+
+    font-size:8px;
+
+    font-weight:600;
+
+    color:
+        rgba(255,255,255,.70);
+
+}
+
+
+/* SETA */
+
+.apresentacao-seta{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    font-weight:300;
+
+    color:
+        rgba(255,255,255,.70);
+
+}
+
+
+/* HOVER */
+
+.btn-top-apresentacao:hover{
+
+    transform:
+        translateY(-1px);
+
+    border-color:
+        rgba(255,255,255,.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.24),
+            rgba(255,255,255,.10)
+        );
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.20),
+        0 5px 12px
+        rgba(0,20,80,.24);
+
+}
+
+
+.btn-top-apresentacao:hover
+.apresentacao-icone{
+
+    background:
+        rgba(255,255,255,.18);
+
+}
+
+
+.btn-top-apresentacao:active{
+
+    transform:
+        translateY(0)
+        scale(.98);
+
+}
+
+
+/* ==========================================================
+   MODO APRESENTAÇÃO ATIVO
 ========================================================== */
 
 body.modo-apresentacao{
@@ -27,10 +285,22 @@ body.modo-apresentacao{
 
 
 /* ==========================================================
-   ESCONDER SOMENTE O MENU LATERAL
+   ESCONDER MENU LATERAL
 ========================================================== */
 
 body.modo-apresentacao #menuLateral{
+
+    display:none !important;
+
+}
+
+
+/* ==========================================================
+   ESCONDER BOTÃO DO CABEÇALHO DURANTE A APRESENTAÇÃO
+========================================================== */
+
+body.modo-apresentacao
+.top-apresentacao{
 
     display:none !important;
 
@@ -51,7 +321,13 @@ body.modo-apresentacao #mainWrap{
 
     margin:0 !important;
 
-    padding:8px 10px 112px 10px !important;
+    padding:
+        8px
+        10px
+        88px
+        10px !important;
+
+    box-sizing:border-box;
 
 }
 
@@ -68,90 +344,123 @@ body.modo-apresentacao #conteudo{
 
     margin:0 !important;
 
+    box-sizing:border-box;
+
 }
 
 
 /* ==========================================================
    CABEÇALHO
 
-   Mantém o mesmo cabeçalho atual.
+   Mantém o padrão visual do SGQ.
 ========================================================== */
 
 body.modo-apresentacao .topbar{
 
-    width:100%;
+    width:100% !important;
+
+    max-width:none !important;
 
 }
 
 
 /* ==========================================================
-   BARRA INFERIOR
+   BARRA DE APRESENTAÇÃO
 ========================================================== */
 
-body.modo-apresentacao .barra-apresentacao{
+body.modo-apresentacao
+.barra-apresentacao{
 
     position:fixed;
 
-    left:0;
+    left:12px;
 
-    right:0;
+    right:12px;
 
-    bottom:0;
+    bottom:10px;
 
-    z-index:99999;
+    z-index:99990;
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        auto
-        minmax(0,1fr)
-        auto;
+    flex-direction:column;
 
-    align-items:center;
+    border:
+        1px solid
+        rgba(255,255,255,.22);
 
-    gap:8px;
-
-    padding:
-        7px
-        14px
-        6px;
+    border-radius:12px;
 
     background:
         linear-gradient(
-            90deg,
-            #07306b,
-            #0b4ab4
+            100deg,
+            #062b67 0%,
+            #0b45a5 55%,
+            #1559c8 100%
         );
 
-    border-top:
-        2px solid
-        #2f72ff;
-
     box-shadow:
-        0 -4px 16px
-        rgba(0,0,0,.16);
+        0 8px 28px
+        rgba(0,25,80,.28);
+
+    color:#ffffff;
+
+    overflow:hidden;
+
+    transition:
+        opacity .22s ease,
+        transform .22s ease,
+        visibility .22s ease;
 
 }
 
 
 /* ==========================================================
-   BOTÕES
+   CONTROLES PRINCIPAIS
 ========================================================== */
 
-.apres-btn,
-.apres-abas button{
+.apres-controles-principais{
 
-    min-height:34px;
+    display:flex;
 
-    border:
-        1px solid
-        rgba(255,255,255,.38);
+    align-items:center;
 
-    border-radius:8px;
+    gap:10px;
+
+    min-height:52px;
+
+    padding:
+        7px
+        10px;
+
+}
+
+
+/* ==========================================================
+   BOTÕES DA APRESENTAÇÃO
+========================================================== */
+
+.apres-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex:0 0 auto;
+
+    min-height:36px;
 
     padding:
         6px
         12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.28);
+
+    border-radius:8px;
 
     background:
         rgba(255,255,255,.10);
@@ -165,37 +474,135 @@ body.modo-apresentacao .barra-apresentacao{
 
     font-size:11px;
 
-    font-weight:700;
+    font-weight:800;
 
     cursor:pointer;
 
     transition:
-        .18s ease;
+        background .18s ease,
+        transform .18s ease,
+        border-color .18s ease;
 
 }
 
 
-.apres-btn:hover,
-.apres-abas button:hover{
+.apres-btn:hover{
 
     background:
         rgba(255,255,255,.20);
 
+    border-color:
+        rgba(255,255,255,.45);
+
+    transform:
+        translateY(-1px);
+
 }
 
 
-.apres-btn-nav{
+.apres-btn:active{
 
-    min-width:92px;
+    transform:
+        translateY(0)
+        scale(.98);
 
 }
 
 
 /* ==========================================================
-   ABAS
+   SETAS ANTERIOR / PRÓXIMO
 ========================================================== */
 
-.apres-abas{
+.apres-btn-nav{
+
+    width:40px;
+
+    min-width:40px;
+
+    height:38px;
+
+    padding:0;
+
+    border-radius:9px;
+
+    font-size:21px;
+
+    font-weight:500;
+
+}
+
+
+/* ==========================================================
+   IDENTIFICAÇÃO DA TELA
+========================================================== */
+
+.apres-tela-atual{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:145px;
+
+    max-width:210px;
+
+    padding:
+        0
+        5px;
+
+    line-height:1.1;
+
+}
+
+
+.apres-processo{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:.3px;
+
+    text-transform:uppercase;
+
+    color:#ffffff;
+
+}
+
+
+.apres-subaba{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    margin-top:4px;
+
+    font-size:9px;
+
+    font-weight:600;
+
+    color:
+        rgba(255,255,255,.70);
+
+}
+
+
+/* ==========================================================
+   CONTADOR
+========================================================== */
+
+.apres-contador{
 
     display:flex;
 
@@ -203,57 +610,22 @@ body.modo-apresentacao .barra-apresentacao{
 
     justify-content:center;
 
-    gap:5px;
+    min-width:48px;
 
-    min-width:0;
-
-}
-
-
-.apres-abas button{
-
-    white-space:nowrap;
+    height:28px;
 
     padding:
-        6px
-        10px;
+        0
+        8px;
 
-}
+    border-radius:20px;
 
+    background:
+        rgba(255,255,255,.12);
 
-.apres-abas button.ativo{
+    font-size:10px;
 
-    background:#ffffff;
-
-    color:#174ad4;
-
-    border-color:#ffffff;
-
-}
-
-
-/* ==========================================================
-   SEGUNDA LINHA
-========================================================== */
-
-.apres-status{
-
-    grid-column:
-        1 / -1;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    padding-top:5px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.20);
+    font-weight:900;
 
     color:#ffffff;
 
@@ -261,81 +633,130 @@ body.modo-apresentacao .barra-apresentacao{
 
 
 /* ==========================================================
-   IDENTIFICAÇÃO
+   DIVISOR
 ========================================================== */
 
-.apres-identificacao{
+.apres-divisor{
 
-    display:flex;
+    width:1px;
 
-    align-items:center;
+    height:28px;
 
-    gap:16px;
+    flex:0 0 1px;
 
-    font-size:11px;
-
-}
-
-
-#apresContador{
-
-    font-size:13px;
-
-    font-weight:900;
-
-}
-
-
-#apresNome{
-
-    opacity:.85;
+    background:
+        rgba(255,255,255,.22);
 
 }
 
 
 /* ==========================================================
-   AUTOMÁTICO
+   MODO ATUAL
 ========================================================== */
 
-.apres-automatico{
+.apres-modo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:68px;
+
+    line-height:1.05;
+
+}
+
+
+.apres-modo-label{
+
+    margin-bottom:4px;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    color:
+        rgba(255,255,255,.58);
+
+}
+
+
+.apres-modo strong{
+
+    font-size:10px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+}
+
+
+/* ==========================================================
+   SELETOR DE TEMPO
+========================================================== */
+
+.apres-tempo{
 
     display:flex;
 
     align-items:center;
 
-    gap:8px;
+    gap:7px;
+
+    margin-left:auto;
 
 }
 
 
-.apres-automatico label{
+.apres-tempo label{
 
-    font-size:10px;
+    font-size:9px;
 
-    font-weight:700;
+    font-weight:800;
+
+    color:
+        rgba(255,255,255,.78);
 
 }
 
 
 #apresTempo{
 
-    height:34px;
+    height:36px;
+
+    min-width:112px;
 
     padding:
         0
-        8px;
+        30px
+        0
+        10px;
 
     border:
         1px solid
-        rgba(255,255,255,.4);
+        rgba(255,255,255,.30);
 
-    border-radius:7px;
+    border-radius:8px;
 
     background:#ffffff;
 
-    color:#12326e;
+    color:#12366f;
 
-    font-weight:700;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    cursor:pointer;
 
     outline:none;
 
@@ -343,43 +764,390 @@ body.modo-apresentacao .barra-apresentacao{
 
 
 /* ==========================================================
-   BOTÃO SAIR
+   BOTÃO AUTOMÁTICO
 ========================================================== */
 
-.apres-btn-sair{
+.apres-btn-play{
+
+    min-width:142px;
 
     background:
-        rgba(220,38,38,.92);
+        rgba(255,255,255,.16);
+
+    border-color:
+        rgba(255,255,255,.35);
 
 }
 
 
-.apres-btn-sair:hover{
+.apres-btn-play:hover{
 
-    background:#dc2626;
+    background:
+        rgba(255,255,255,.25);
 
 }
 
 
 /* ==========================================================
-   AJUSTE PARA TELAS MENORES
+   BOTÃO OCULTAR
 ========================================================== */
 
-@media(max-width:1100px){
+.apres-btn-ocultar{
 
-    .apres-abas{
+    width:38px;
 
-        overflow-x:auto;
+    min-width:38px;
 
-        justify-content:flex-start;
+    padding:0;
+
+    font-size:17px;
+
+}
+
+
+/* ==========================================================
+   ATALHOS
+========================================================== */
+
+.apres-atalhos{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    min-height:20px;
+
+    padding:
+        3px
+        12px
+        5px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.12);
+
+    font-size:8px;
+
+    font-weight:600;
+
+    color:
+        rgba(255,255,255,.55);
+
+}
+
+
+/* ==========================================================
+   BARRA OCULTA
+
+   Esta classe será controlada pelo JavaScript.
+========================================================== */
+
+body.modo-apresentacao
+.barra-apresentacao.oculta{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transform:
+        translateY(
+            calc(100% + 20px)
+        );
+
+}
+
+
+/* ==========================================================
+   QUANDO A BARRA ESTIVER OCULTA
+
+   O painel usa também o espaço inferior.
+========================================================== */
+
+body.modo-apresentacao.barra-apresentacao-oculta
+#mainWrap{
+
+    padding-bottom:
+        8px !important;
+
+}
+
+
+/* ==========================================================
+   BOTÃO X PARA SAIR
+========================================================== */
+
+body.modo-apresentacao
+.apres-fechar{
+
+    position:fixed;
+
+    top:82px;
+
+    right:12px;
+
+    z-index:100000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:34px;
+
+    height:34px;
+
+    padding:0;
+
+    border:
+        1px solid
+        rgba(15,60,150,.18);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.94);
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,35,100,.16);
+
+    color:#1748ad;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:23px;
+
+    font-weight:300;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease;
+
+}
+
+
+body.modo-apresentacao
+.apres-fechar:hover{
+
+    transform:
+        scale(1.06);
+
+    background:#1748ad;
+
+    color:#ffffff;
+
+}
+
+
+/* ==========================================================
+   MODO AUTOMÁTICO
+
+   Quando o JavaScript ativar esta classe:
+   - barra fica escondida
+   - painel aproveita a tela inteira
+========================================================== */
+
+body.modo-apresentacao.modo-apresentacao-automatico
+.barra-apresentacao{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transform:
+        translateY(
+            calc(100% + 20px)
+        );
+
+}
+
+
+body.modo-apresentacao.modo-apresentacao-automatico
+#mainWrap{
+
+    padding-bottom:
+        8px !important;
+
+}
+
+
+/* ==========================================================
+   AJUSTE DOS GRÁFICOS / CANVAS
+
+   Não muda o estilo dos gráficos.
+   Apenas permite aproveitar o espaço disponível.
+========================================================== */
+
+body.modo-apresentacao
+#conteudo canvas{
+
+    max-width:100%;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVO — NOTEBOOK / TELAS MÉDIAS
+========================================================== */
+
+@media(max-width:1200px){
+
+    .top-apresentacao{
+
+        padding:
+            0
+            8px;
 
     }
 
 
-    .apres-abas button{
+    .btn-top-apresentacao{
 
-        flex:0 0 auto;
+        min-width:145px;
 
     }
+
+
+    .apres-controles-principais{
+
+        gap:7px;
+
+    }
+
+
+    .apres-tela-atual{
+
+        min-width:115px;
+
+        max-width:155px;
+
+    }
+
+
+    .apres-tempo label{
+
+        display:none;
+
+    }
+
+
+    .apres-btn-play{
+
+        min-width:120px;
+
+        font-size:10px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVO — TELAS MENORES
+========================================================== */
+
+@media(max-width:900px){
+
+    .apresentacao-textos small{
+
+        display:none;
+
+    }
+
+
+    .btn-top-apresentacao{
+
+        min-width:118px;
+
+        grid-template-columns:
+            30px
+            auto;
+
+    }
+
+
+    .apresentacao-seta{
+
+        display:none;
+
+    }
+
+
+    body.modo-apresentacao
+    .barra-apresentacao{
+
+        left:6px;
+
+        right:6px;
+
+        bottom:6px;
+
+    }
+
+
+    .apres-controles-principais{
+
+        flex-wrap:wrap;
+
+    }
+
+
+    .apres-tela-atual{
+
+        flex:
+            1 1 140px;
+
+        max-width:none;
+
+    }
+
+
+    .apres-tempo{
+
+        margin-left:0;
+
+    }
+
+
+    .apres-atalhos{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   ACESSIBILIDADE — FOCO
+========================================================== */
+
+.btn-top-apresentacao:focus-visible,
+.apres-btn:focus-visible,
+.apres-fechar:focus-visible,
+#apresTempo:focus-visible{
+
+    outline:
+        2px solid
+        #ffffff;
+
+    outline-offset:
+        2px;
 
 }
