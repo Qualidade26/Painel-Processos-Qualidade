@@ -1,16 +1,86 @@
 /* ==========================================================
-   MODO APRESENTAÇÃO
-   PAINEL DE PROCESSOS SGQ
+   APRESENTACAO.CSS
+   MODO APRESENTAÇÃO — PAINEL DE PROCESSOS SGQ
+
+   Este arquivo controla SOMENTE:
+   - botão APRESENTAÇÃO no cabeçalho
+   - expansão do painel
+   - ocultação do menu lateral
+   - barra de controles
+   - modo manual
+   - modo automático
 ========================================================== */
 
 
 /* ==========================================================
-   ESTADO PADRÃO
-   Tudo relacionado à apresentação fica oculto
+   1. CABEÇALHO NORMAL
+   Mantém as 3 colunas originais do layout.css
 ========================================================== */
 
-.barra-apresentacao,
-.apres-fechar{
+.topbar{
+
+    grid-template-columns:
+        minmax(340px,400px)
+        minmax(300px,1fr)
+        minmax(250px,320px);
+
+}
+
+
+/* ==========================================================
+   2. ÁREA ESQUERDA
+   LOGO + BOTÃO APRESENTAÇÃO
+========================================================== */
+
+.top-esquerda{
+
+    min-width:0;
+    height:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(150px,1fr)
+        auto;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+
+/* ==========================================================
+   3. LOGO LABOR
+   Preserva o visual original
+========================================================== */
+
+.top-esquerda .logo-labor{
+
+    min-width:0;
+    min-height:50px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding-right:14px;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.35);
+
+}
+
+
+/* ==========================================================
+   4. DIVISOR EXTRA
+   Não precisamos dele porque a logo já possui borda
+========================================================== */
+
+.top-divisor{
 
     display:none;
 
@@ -18,61 +88,12 @@
 
 
 /* ==========================================================
-   ÁREA ESQUERDA DO CABEÇALHO
-   LOGO + BOTÃO APRESENTAÇÃO
-========================================================== */
-
-.top-esquerda{
-
-    display:flex;
-
-    align-items:center;
-
-    height:100%;
-
-    min-width:0;
-
-}
-
-
-/* ==========================================================
-   LOGO DENTRO DA ÁREA ESQUERDA
-========================================================== */
-
-.top-esquerda .logo-labor{
-
-    flex:0 0 auto;
-
-}
-
-
-/* ==========================================================
-   DIVISOR ENTRE LOGO E APRESENTAÇÃO
-========================================================== */
-
-.top-divisor{
-
-    width:1px;
-
-    height:48px;
-
-    margin:
-        0
-        14px;
-
-    flex:0 0 1px;
-
-    background:
-        rgba(255,255,255,.25);
-
-}
-
-
-/* ==========================================================
-   ÁREA DO BOTÃO APRESENTAÇÃO
+   5. ÁREA DO BOTÃO APRESENTAÇÃO
 ========================================================== */
 
 .top-apresentacao{
+
+    min-width:0;
 
     display:flex;
 
@@ -80,56 +101,44 @@
 
     justify-content:center;
 
-    flex:0 0 auto;
-
-    padding:0;
-
 }
 
 
+/* ==========================================================
+   6. BOTÃO APRESENTAÇÃO
+========================================================== */
+
 .btn-top-apresentacao{
 
-    position:relative;
+    width:160px;
+    min-width:160px;
+    height:40px;
 
     display:grid;
 
     grid-template-columns:
-        32px
-        auto
-        14px;
+        26px
+        minmax(0,1fr)
+        16px;
 
     align-items:center;
 
-    gap:8px;
-
-   width:150px;
-
-min-width:150px;
-
-height:40px;
+    gap:6px;
 
     padding:
-        5px
-        11px;
+        0
+        9px;
+
+    box-sizing:border-box;
 
     border:
         1px solid
-        rgba(255,255,255,.35);
+        rgba(255,255,255,.55);
 
-    border-radius:10px;
+    border-radius:8px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.17),
-            rgba(255,255,255,.07)
-        );
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.15),
-        0 3px 8px
-        rgba(0,20,80,.18);
+        rgba(255,255,255,.12);
 
     color:#ffffff;
 
@@ -140,47 +149,49 @@ height:40px;
 
     cursor:pointer;
 
-    overflow:hidden;
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.12);
 
     transition:
-        transform .18s ease,
         background .18s ease,
         border-color .18s ease,
+        transform .18s ease,
         box-shadow .18s ease;
 
 }
 
 
-/* DETALHE AZUL CLARO */
+/* ==========================================================
+   7. HOVER DO BOTÃO
+========================================================== */
 
-.btn-top-apresentacao::before{
+.btn-top-apresentacao:hover{
 
-    content:"";
+    background:
+        rgba(255,255,255,.20);
 
-    position:absolute;
+    border-color:
+        rgba(255,255,255,.82);
 
-    top:7px;
+    transform:
+        translateY(-1px);
 
-    bottom:7px;
-
-    left:0;
-
-    width:3px;
-
-    border-radius:
-        0
-        3px
-        3px
-        0;
-
-    background:#7dd3fc;
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.12);
 
 }
 
 
-/* ÍCONE */
+/* ==========================================================
+   8. ÍCONE DO BOTÃO
+========================================================== */
 
 .apresentacao-icone{
+
+    width:26px;
+    height:26px;
 
     display:flex;
 
@@ -188,29 +199,27 @@ height:40px;
 
     justify-content:center;
 
-    width:32px;
-
-    height:32px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-    border-radius:8px;
+    border-radius:7px;
 
     background:
-        rgba(255,255,255,.11);
+        rgba(255,255,255,.14);
 
-    font-size:18px;
+    color:#ffffff;
+
+    font-size:13px;
 
     line-height:1;
 
 }
 
 
-/* TEXTOS */
+/* ==========================================================
+   9. TEXTOS DO BOTÃO
+========================================================== */
 
 .apresentacao-textos{
+
+    min-width:0;
 
     display:flex;
 
@@ -220,8 +229,6 @@ height:40px;
 
     justify-content:center;
 
-    min-width:0;
-
     line-height:1;
 
 }
@@ -229,32 +236,54 @@ height:40px;
 
 .apresentacao-textos strong{
 
+    display:block;
+
+    max-width:100%;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#ffffff;
+
     font-size:10px;
 
     font-weight:900;
 
-    letter-spacing:.45px;
-
-    color:#ffffff;
+    letter-spacing:.15px;
 
 }
 
 
 .apresentacao-textos small{
 
-    margin-top:4px;
+    display:block;
+
+    max-width:100%;
+
+    margin-top:3px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:
+        rgba(255,255,255,.76);
 
     font-size:8px;
 
-    font-weight:600;
-
-    color:
-        rgba(255,255,255,.70);
+    font-weight:700;
 
 }
 
 
-/* SETA */
+/* ==========================================================
+   10. SETA DO BOTÃO
+========================================================== */
 
 .apresentacao-seta{
 
@@ -264,62 +293,42 @@ height:40px;
 
     justify-content:center;
 
-    font-size:20px;
-
-    font-weight:300;
-
     color:
-        rgba(255,255,255,.70);
+        rgba(255,255,255,.88);
 
-}
+    font-size:17px;
 
-
-/* HOVER */
-
-.btn-top-apresentacao:hover{
-
-    transform:
-        translateY(-1px);
-
-    border-color:
-        rgba(255,255,255,.55);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.24),
-            rgba(255,255,255,.10)
-        );
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.20),
-        0 5px 12px
-        rgba(0,20,80,.24);
-
-}
-
-
-.btn-top-apresentacao:hover
-.apresentacao-icone{
-
-    background:
-        rgba(255,255,255,.18);
-
-}
-
-
-.btn-top-apresentacao:active{
-
-    transform:
-        translateY(0)
-        scale(.98);
+    line-height:1;
 
 }
 
 
 /* ==========================================================
-   MODO APRESENTAÇÃO ATIVO
+   11. BARRA DE APRESENTAÇÃO
+   FORA DO MODO APRESENTAÇÃO
+========================================================== */
+
+.barra-apresentacao{
+
+    display:none;
+
+}
+
+
+/* ==========================================================
+   12. BOTÃO X
+   FORA DO MODO APRESENTAÇÃO
+========================================================== */
+
+.apres-fechar{
+
+    display:none;
+
+}
+
+
+/* ==========================================================
+   13. BODY EM APRESENTAÇÃO
 ========================================================== */
 
 body.modo-apresentacao{
@@ -330,18 +339,53 @@ body.modo-apresentacao{
 
 
 /* ==========================================================
-   ESCONDER MENU LATERAL
+   14. CABEÇALHO DURANTE A APRESENTAÇÃO
+
+   O botão desaparece e o cabeçalho volta para
+   as proporções originais do SGQ.
 ========================================================== */
 
-body.modo-apresentacao #menuLateral{
+body.modo-apresentacao
+.topbar{
 
-    display:none !important;
+    grid-template-columns:
+        minmax(180px,260px)
+        minmax(300px,1fr)
+        minmax(250px,320px) !important;
 
 }
 
 
 /* ==========================================================
-   ESCONDER BOTÃO DO CABEÇALHO DURANTE A APRESENTAÇÃO
+   15. ÁREA ESQUERDA DURANTE APRESENTAÇÃO
+========================================================== */
+
+body.modo-apresentacao
+.top-esquerda{
+
+    display:block;
+
+    height:100%;
+
+}
+
+
+/* ==========================================================
+   16. LOGO DURANTE APRESENTAÇÃO
+========================================================== */
+
+body.modo-apresentacao
+.top-esquerda .logo-labor{
+
+    height:100%;
+
+    box-sizing:border-box;
+
+}
+
+
+/* ==========================================================
+   17. ESCONDER BOTÃO APRESENTAÇÃO
 ========================================================== */
 
 body.modo-apresentacao
@@ -353,157 +397,213 @@ body.modo-apresentacao
 
 
 /* ==========================================================
-   EXPANDIR ESTRUTURA PRINCIPAL
+   18. ESCONDER MENU LATERAL
 ========================================================== */
 
-body.modo-apresentacao #mainWrap{
+body.modo-apresentacao
+#menuLateral{
 
-    display:block !important;
+    display:none !important;
+
+}
+
+
+/* ==========================================================
+   19. EXPANDIR ESTRUTURA PRINCIPAL
+========================================================== */
+
+body.modo-apresentacao
+#mainWrap{
+
+    flex:1 1 auto;
 
     width:100% !important;
-
     max-width:none !important;
+
+    min-width:0 !important;
+    min-height:0 !important;
 
     margin:0 !important;
 
     padding:
-        8px
+        7px
         10px
-        88px
-        10px !important;
+        82px !important;
 
-    box-sizing:border-box;
+    display:block !important;
 
-}
+    overflow:hidden !important;
 
-
-/* ==========================================================
-   EXPANDIR CONTEÚDO
-========================================================== */
-
-body.modo-apresentacao #conteudo{
-
-    width:100% !important;
-
-    max-width:none !important;
-
-    margin:0 !important;
-
-    box-sizing:border-box;
+    box-sizing:border-box !important;
 
 }
 
 
 /* ==========================================================
-   CABEÇALHO
-
-   Mantém o padrão visual do SGQ.
-========================================================== */
-
-body.modo-apresentacao .topbar{
-
-    width:100% !important;
-
-    max-width:none !important;
-
-}
-
-
-/* ==========================================================
-   BARRA DE APRESENTAÇÃO
+   20. EXPANDIR CONTEÚDO
 ========================================================== */
 
 body.modo-apresentacao
-.barra-apresentacao{
+#conteudo{
 
-    position:fixed;
+    width:100% !important;
+    max-width:none !important;
 
-    left:12px;
+    height:100% !important;
 
-    right:12px;
+    min-width:0 !important;
+    min-height:0 !important;
 
-    bottom:10px;
+    margin:0 !important;
+
+    padding:
+        5px
+        7px !important;
+
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* ==========================================================
+   21. CONTEÚDO INTERNO
+========================================================== */
+
+body.modo-apresentacao
+#conteudo > *{
+
+    width:100%;
+
+    max-width:none !important;
+
+    min-width:0;
+
+}
+
+
+/* ==========================================================
+   22. BARRA INFERIOR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao{
+
+    position:fixed !important;
+
+    left:50% !important;
+    right:auto !important;
+
+    bottom:10px !important;
 
     z-index:99990;
 
-    display:flex;
+    width:
+        calc(100% - 24px) !important;
 
-    flex-direction:column;
+    max-width:
+        1180px !important;
+
+    height:auto !important;
+    min-height:0 !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    box-sizing:border-box !important;
+
+    overflow:hidden !important;
 
     border:
         1px solid
-        rgba(255,255,255,.22);
+        rgba(255,255,255,.28);
 
     border-radius:12px;
 
     background:
         linear-gradient(
-            100deg,
-            #062b67 0%,
-            #0b45a5 55%,
-            #1559c8 100%
+            90deg,
+            #07306b,
+            #0b4ab4
         );
-
-    box-shadow:
-        0 8px 28px
-        rgba(0,25,80,.28);
 
     color:#ffffff;
 
-    overflow:hidden;
+    box-shadow:
+        0 8px 28px
+        rgba(0,0,0,.24);
+
+    transform:
+        translateX(-50%);
+
+    opacity:1;
+
+    visibility:visible;
 
     transition:
-        opacity .22s ease,
-        transform .22s ease,
-        visibility .22s ease;
+        transform .25s ease,
+        opacity .20s ease,
+        visibility .20s ease;
 
 }
 
 
 /* ==========================================================
-   CONTROLES PRINCIPAIS
+   23. LINHA PRINCIPAL DA BARRA
 ========================================================== */
 
+body.modo-apresentacao
+#barraApresentacao
 .apres-controles-principais{
 
-    display:flex;
+    width:100%;
 
-    align-items:center;
-
-    gap:10px;
-
+    min-width:0;
     min-height:52px;
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    flex-wrap:nowrap !important;
+
+    align-items:center !important;
+
+    gap:7px;
 
     padding:
         7px
-        10px;
+        9px;
+
+    box-sizing:border-box;
 
 }
 
 
 /* ==========================================================
-   BOTÕES DA APRESENTAÇÃO
+   24. BOTÕES GERAIS DA BARRA
 ========================================================== */
 
-.apres-btn{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
+body.modo-apresentacao
+#barraApresentacao button{
 
     flex:0 0 auto;
 
+    height:36px;
+
     min-height:36px;
 
-    padding:
-        6px
-        12px;
+    box-sizing:border-box;
 
     border:
         1px solid
-        rgba(255,255,255,.28);
+        rgba(255,255,255,.35);
 
     border-radius:8px;
 
@@ -525,63 +625,62 @@ body.modo-apresentacao
 
     transition:
         background .18s ease,
-        transform .18s ease,
-        border-color .18s ease;
+        border-color .18s ease,
+        transform .18s ease;
 
 }
 
 
-.apres-btn:hover{
+/* ==========================================================
+   25. HOVER DOS BOTÕES
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao button:hover{
 
     background:
         rgba(255,255,255,.20);
 
     border-color:
-        rgba(255,255,255,.45);
-
-    transform:
-        translateY(-1px);
-
-}
-
-
-.apres-btn:active{
-
-    transform:
-        translateY(0)
-        scale(.98);
+        rgba(255,255,255,.65);
 
 }
 
 
 /* ==========================================================
-   SETAS ANTERIOR / PRÓXIMO
+   26. SETAS ANTERIOR / PRÓXIMO
 ========================================================== */
 
+body.modo-apresentacao
+#barraApresentacao
 .apres-btn-nav{
 
-    width:40px;
-
-    min-width:40px;
-
-    height:38px;
+    width:38px;
+    min-width:38px;
 
     padding:0;
 
-    border-radius:9px;
+    font-size:17px;
 
-    font-size:21px;
-
-    font-weight:500;
+    font-weight:900;
 
 }
 
 
 /* ==========================================================
-   IDENTIFICAÇÃO DA TELA
+   27. IDENTIFICAÇÃO DA TELA
 ========================================================== */
 
+body.modo-apresentacao
+#barraApresentacao
 .apres-tela-atual{
+
+    flex:
+        1
+        1
+        260px;
+
+    min-width:160px;
 
     display:flex;
 
@@ -589,24 +688,90 @@ body.modo-apresentacao
 
     justify-content:center;
 
-    min-width:145px;
+    gap:2px;
 
-    max-width:210px;
-
-    padding:
-        0
-        5px;
-
-    line-height:1.1;
+    overflow:hidden;
 
 }
 
 
-.apres-processo{
+/* ==========================================================
+   28. NOME DO PROCESSO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+#apresProcesso{
+
+    display:block;
 
     overflow:hidden;
 
     text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#ffffff;
+
+    font-size:11px;
+
+    font-weight:900;
+
+}
+
+
+/* ==========================================================
+   29. NOME DA SUBABA
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+#apresSubaba{
+
+    display:block;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size:9px;
+
+    font-weight:700;
+
+}
+
+
+/* ==========================================================
+   30. CONTADOR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+#apresContador{
+
+    flex:0 0 auto;
+
+    min-width:52px;
+
+    padding:
+        6px
+        9px;
+
+    box-sizing:border-box;
+
+    border-radius:7px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    color:#ffffff;
+
+    text-align:center;
 
     white-space:nowrap;
 
@@ -614,183 +779,113 @@ body.modo-apresentacao
 
     font-weight:900;
 
-    letter-spacing:.3px;
-
-    text-transform:uppercase;
-
-    color:#ffffff;
-
 }
 
 
-.apres-subaba{
+/* ==========================================================
+   31. MODO MANUAL / AUTOMÁTICO
+========================================================== */
 
-    overflow:hidden;
+body.modo-apresentacao
+#barraApresentacao
+#apresModoAtual{
 
-    text-overflow:ellipsis;
+    flex:0 0 auto;
+
+    min-width:66px;
+
+    color:
+        rgba(255,255,255,.84);
+
+    text-align:center;
 
     white-space:nowrap;
-
-    margin-top:4px;
-
-    font-size:9px;
-
-    font-weight:600;
-
-    color:
-        rgba(255,255,255,.70);
-
-}
-
-
-/* ==========================================================
-   CONTADOR
-========================================================== */
-
-.apres-contador{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    min-width:48px;
-
-    height:28px;
-
-    padding:
-        0
-        8px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.12);
-
-    font-size:10px;
-
-    font-weight:900;
-
-    color:#ffffff;
-
-}
-
-
-/* ==========================================================
-   DIVISOR
-========================================================== */
-
-.apres-divisor{
-
-    width:1px;
-
-    height:28px;
-
-    flex:0 0 1px;
-
-    background:
-        rgba(255,255,255,.22);
-
-}
-
-
-/* ==========================================================
-   MODO ATUAL
-========================================================== */
-
-.apres-modo{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    min-width:68px;
-
-    line-height:1.05;
-
-}
-
-
-.apres-modo-label{
-
-    margin-bottom:4px;
-
-    font-size:8px;
-
-    font-weight:700;
-
-    letter-spacing:.5px;
-
-    color:
-        rgba(255,255,255,.58);
-
-}
-
-
-.apres-modo strong{
-
-    font-size:10px;
-
-    font-weight:900;
-
-    color:#ffffff;
-
-}
-
-
-/* ==========================================================
-   SELETOR DE TEMPO
-========================================================== */
-
-.apres-tempo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    margin-left:auto;
-
-}
-
-
-.apres-tempo label{
 
     font-size:9px;
 
     font-weight:800;
 
-    color:
-        rgba(255,255,255,.78);
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
 
 }
 
 
+/* ==========================================================
+   32. CONTROLE DE TEMPO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo{
+
+    flex:0 0 auto;
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    gap:5px;
+
+    margin-left:auto;
+
+    white-space:nowrap;
+
+}
+
+
+/* ==========================================================
+   33. TEXTO TEMPO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo label{
+
+    margin:0;
+
+    color:
+        rgba(255,255,255,.78);
+
+    font-size:9px;
+
+    font-weight:800;
+
+}
+
+
+/* ==========================================================
+   34. SELECT DE TEMPO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
 #apresTempo{
 
+    width:112px;
+    min-width:112px;
     height:36px;
 
-    min-width:112px;
+    margin:0;
 
     padding:
         0
-        30px
-        0
-        10px;
+        8px;
+
+    box-sizing:border-box;
 
     border:
         1px solid
-        rgba(255,255,255,.30);
+        rgba(255,255,255,.42);
 
     border-radius:8px;
 
     background:#ffffff;
 
-    color:#12366f;
+    color:#12326e;
 
     font-family:
         "Segoe UI",
@@ -801,130 +896,94 @@ body.modo-apresentacao
 
     font-weight:800;
 
-    cursor:pointer;
-
     outline:none;
 
 }
 
 
 /* ==========================================================
-   BOTÃO AUTOMÁTICO
+   35. BOTÃO AUTOMÁTICO
 ========================================================== */
 
+body.modo-apresentacao
+#barraApresentacao
 .apres-btn-play{
 
-    min-width:142px;
+    min-width:148px;
+
+    padding:
+        0
+        12px;
 
     background:
         rgba(255,255,255,.16);
 
-    border-color:
-        rgba(255,255,255,.35);
-
-}
-
-
-.apres-btn-play:hover{
-
-    background:
-        rgba(255,255,255,.25);
-
 }
 
 
 /* ==========================================================
-   BOTÃO OCULTAR
+   36. BOTÃO OCULTAR
 ========================================================== */
 
-.apres-btn-ocultar{
+body.modo-apresentacao
+#barraApresentacao
+#apresOcultar{
 
     width:38px;
-
     min-width:38px;
 
     padding:0;
 
-    font-size:17px;
+    font-size:15px;
 
 }
 
 
 /* ==========================================================
-   ATALHOS
-========================================================== */
-
-.apres-atalhos{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:flex-end;
-
-    gap:15px;
-
-    min-height:20px;
-
-    padding:
-        3px
-        12px
-        5px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.12);
-
-    font-size:8px;
-
-    font-weight:600;
-
-    color:
-        rgba(255,255,255,.55);
-
-}
-
-
-/* ==========================================================
-   BARRA OCULTA
-
-   Esta classe será controlada pelo JavaScript.
+   37. LINHA DE ATALHOS
 ========================================================== */
 
 body.modo-apresentacao
-.barra-apresentacao.oculta{
+#barraApresentacao
+.apres-atalhos{
 
-    opacity:0;
+    width:100%;
 
-    visibility:hidden;
+    min-height:20px;
 
-    pointer-events:none;
+    display:flex !important;
 
-    transform:
-        translateY(
-            calc(100% + 20px)
-        );
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    gap:18px;
+
+    padding:
+        2px
+        8px
+        5px;
+
+    box-sizing:border-box;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.14);
+
+    color:
+        rgba(255,255,255,.70);
+
+    font-size:8px;
+
+    font-weight:700;
 
 }
 
 
 /* ==========================================================
-   QUANDO A BARRA ESTIVER OCULTA
-
-   O painel usa também o espaço inferior.
-========================================================== */
-
-body.modo-apresentacao.barra-apresentacao-oculta
-#mainWrap{
-
-    padding-bottom:
-        8px !important;
-
-}
-
-
-/* ==========================================================
-   BOTÃO X PARA SAIR
+   38. BOTÃO X FIXO
 ========================================================== */
 
 body.modo-apresentacao
@@ -932,82 +991,84 @@ body.modo-apresentacao
 
     position:fixed;
 
-    top:82px;
-
-    right:12px;
+    top:10px;
+    right:10px;
 
     z-index:100000;
 
-    display:flex;
+    width:34px;
+    height:34px;
+
+    display:flex !important;
 
     align-items:center;
 
     justify-content:center;
 
-    width:34px;
-
-    height:34px;
-
     padding:0;
 
     border:
         1px solid
-        rgba(15,60,150,.18);
+        rgba(255,255,255,.48);
 
     border-radius:50%;
 
     background:
-        rgba(255,255,255,.94);
+        rgba(7,48,107,.78);
 
-    box-shadow:
-        0 3px 12px
-        rgba(0,35,100,.16);
-
-    color:#1748ad;
+    color:#ffffff;
 
     font-family:
+        "Segoe UI",
         Arial,
         sans-serif;
 
-    font-size:23px;
+    font-size:18px;
 
-    font-weight:300;
+    font-weight:900;
 
     line-height:1;
 
     cursor:pointer;
 
-    transition:
-        transform .18s ease,
-        background .18s ease,
-        color .18s ease;
+    box-shadow:
+        0 4px 14px
+        rgba(0,0,0,.18);
 
-}
-
-
-body.modo-apresentacao
-.apres-fechar:hover{
-
-    transform:
-        scale(1.06);
-
-    background:#1748ad;
-
-    color:#ffffff;
+    backdrop-filter:
+        blur(6px);
 
 }
 
 
 /* ==========================================================
-   MODO AUTOMÁTICO
-
-   Quando o JavaScript ativar esta classe:
-   - barra fica escondida
-   - painel aproveita a tela inteira
+   39. HOVER DO X
 ========================================================== */
 
-body.modo-apresentacao.modo-apresentacao-automatico
-.barra-apresentacao{
+body.modo-apresentacao
+.apres-fechar:hover{
+
+    background:
+        #dc2626;
+
+    border-color:
+        #ffffff;
+
+}
+
+
+/* ==========================================================
+   40. BARRA OCULTA MANUALMENTE
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao.oculta{
+
+    transform:
+        translateX(-50%)
+        translateY(
+            calc(100% + 30px)
+        ) !important;
 
     opacity:0;
 
@@ -1015,412 +1076,12 @@ body.modo-apresentacao.modo-apresentacao-automatico
 
     pointer-events:none;
 
-    transform:
-        translateY(
-            calc(100% + 20px)
-        );
-
-}
-
-
-body.modo-apresentacao.modo-apresentacao-automatico
-#mainWrap{
-
-    padding-bottom:
-        8px !important;
-
 }
 
 
 /* ==========================================================
-   AJUSTE DOS GRÁFICOS / CANVAS
-
-   Não muda o estilo dos gráficos.
-   Apenas permite aproveitar o espaço disponível.
+   41. BARRA OCULTA NO AUTOMÁTICO
 ========================================================== */
-
-body.modo-apresentacao
-#conteudo canvas{
-
-    max-width:100%;
-
-}
-
-
-/* ==========================================================
-   RESPONSIVO — NOTEBOOK / TELAS MÉDIAS
-========================================================== */
-
-@media(max-width:1200px){
-
-    .top-apresentacao{
-
-        padding:
-            0
-            8px;
-
-    }
-
-
-    .btn-top-apresentacao{
-
-        min-width:145px;
-
-    }
-
-
-    .apres-controles-principais{
-
-        gap:7px;
-
-    }
-
-
-    .apres-tela-atual{
-
-        min-width:115px;
-
-        max-width:155px;
-
-    }
-
-
-    .apres-tempo label{
-
-        display:none;
-
-    }
-
-
-    .apres-btn-play{
-
-        min-width:120px;
-
-        font-size:10px;
-
-    }
-
-}
-
-
-/* ==========================================================
-   RESPONSIVO — TELAS MENORES
-========================================================== */
-
-@media(max-width:900px){
-
-    .apresentacao-textos small{
-
-        display:none;
-
-    }
-
-
-    .btn-top-apresentacao{
-
-        min-width:118px;
-
-        grid-template-columns:
-            30px
-            auto;
-
-    }
-
-
-    .apresentacao-seta{
-
-        display:none;
-
-    }
-
-
-    body.modo-apresentacao
-    .barra-apresentacao{
-
-        left:6px;
-
-        right:6px;
-
-        bottom:6px;
-
-    }
-
-
-    .apres-controles-principais{
-
-        flex-wrap:wrap;
-
-    }
-
-
-    .apres-tela-atual{
-
-        flex:
-            1 1 140px;
-
-        max-width:none;
-
-    }
-
-
-    .apres-tempo{
-
-        margin-left:0;
-
-    }
-
-
-    .apres-atalhos{
-
-        display:none;
-
-    }
-
-}
-
-
-/* ==========================================================
-   ACESSIBILIDADE — FOCO
-========================================================== */
-
-.btn-top-apresentacao:focus-visible,
-.apres-btn:focus-visible,
-.apres-fechar:focus-visible,
-#apresTempo:focus-visible{
-
-    outline:
-        2px solid
-        #ffffff;
-
-    outline-offset:
-        2px;
-
-}
-/* ==========================================================
-   AJUSTE FINAL — BARRA DE APRESENTAÇÃO COMPACTA
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao{
-
-    position:fixed !important;
-
-    left:50% !important;
-
-    right:auto !important;
-
-    bottom:10px !important;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        calc(100% - 24px) !important;
-
-    max-width:
-        1180px !important;
-
-    min-height:0 !important;
-
-    height:auto !important;
-
-    display:flex !important;
-
-    flex-direction:column !important;
-
-    padding:0 !important;
-
-    margin:0 !important;
-
-    border-radius:
-        12px !important;
-
-    overflow:hidden !important;
-
-}
-
-
-/* ==========================================================
-   LINHA PRINCIPAL
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-controles-principais{
-
-    display:flex !important;
-
-    flex-direction:row !important;
-
-    flex-wrap:nowrap !important;
-
-    align-items:center !important;
-
-    width:100% !important;
-
-    min-height:50px !important;
-
-    padding:
-        6px
-        8px !important;
-
-    gap:7px !important;
-
-    box-sizing:border-box !important;
-
-}
-
-
-/* ==========================================================
-   IDENTIFICAÇÃO
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-tela-atual{
-
-    flex:
-        0
-        1
-        190px !important;
-
-    min-width:
-        130px !important;
-
-}
-
-
-/* ==========================================================
-   TEMPO
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-tempo{
-
-    display:flex !important;
-
-    flex-direction:row !important;
-
-    align-items:center !important;
-
-    margin-left:auto !important;
-
-    white-space:nowrap;
-
-}
-
-
-body.modo-apresentacao
-#barraApresentacao
-#apresTempo{
-
-    width:110px !important;
-
-    min-width:110px !important;
-
-    height:34px !important;
-
-}
-
-
-/* ==========================================================
-   BOTÃO AUTOMÁTICO
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-btn-play{
-
-    min-width:
-        145px !important;
-
-    height:
-        34px !important;
-
-}
-
-
-/* ==========================================================
-   SETAS
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-btn-nav{
-
-    width:36px !important;
-
-    min-width:36px !important;
-
-    height:34px !important;
-
-}
-
-
-/* ==========================================================
-   ATALHOS — LINHA PEQUENA
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao
-.apres-atalhos{
-
-    display:flex !important;
-
-    flex-direction:row !important;
-
-    justify-content:center !important;
-
-    align-items:center !important;
-
-    min-height:18px !important;
-
-    padding:
-        2px
-        8px
-        4px !important;
-
-    gap:18px !important;
-
-}
-
-
-/* ==========================================================
-   GARANTIR QUE O PAINEL NÃO FIQUE ESCONDIDO PELA BARRA
-========================================================== */
-
-body.modo-apresentacao
-#mainWrap{
-
-    padding-bottom:
-        82px !important;
-
-}
-
-
-/* ==========================================================
-   QUANDO A BARRA FOR OCULTADA
-========================================================== */
-
-body.modo-apresentacao.barra-apresentacao-oculta
-#mainWrap,
-
-body.modo-apresentacao.modo-apresentacao-automatico
-#mainWrap{
-
-    padding-bottom:
-        8px !important;
-
-}
-
-
-/* ==========================================================
-   CORREÇÃO DA TRANSFORMAÇÃO QUANDO OCULTA
-========================================================== */
-
-body.modo-apresentacao
-#barraApresentacao.oculta,
 
 body.modo-apresentacao.modo-apresentacao-automatico
 #barraApresentacao{
@@ -1430,5 +1091,330 @@ body.modo-apresentacao.modo-apresentacao-automatico
         translateY(
             calc(100% + 30px)
         ) !important;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   42. PAINEL COM BARRA OCULTA
+========================================================== */
+
+body.modo-apresentacao.barra-apresentacao-oculta
+#mainWrap,
+
+body.modo-apresentacao.modo-apresentacao-automatico
+#mainWrap{
+
+    padding-bottom:
+        7px !important;
+
+}
+
+
+/* ==========================================================
+   43. CURSOR NO AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao.modo-apresentacao-automatico{
+
+    cursor:none;
+
+}
+
+
+/* ==========================================================
+   44. MANTER X DISPONÍVEL NO AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao.modo-apresentacao-automatico
+.apres-fechar{
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   45. NOTEBOOKS / TELAS MÉDIAS
+========================================================== */
+
+@media (max-width:1200px){
+
+    .topbar{
+
+        grid-template-columns:
+            minmax(300px,350px)
+            minmax(250px,1fr)
+            minmax(220px,280px);
+
+    }
+
+
+    .btn-top-apresentacao{
+
+        width:145px;
+        min-width:145px;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao{
+
+        width:
+            calc(100% - 16px) !important;
+
+        bottom:8px !important;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-controles-principais{
+
+        gap:5px;
+
+        padding:
+            6px
+            7px;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-tela-atual{
+
+        flex-basis:190px;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-play{
+
+        min-width:130px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   46. TELAS MENORES
+========================================================== */
+
+@media (max-width:900px){
+
+    .topbar{
+
+        grid-template-columns:
+            minmax(260px,300px)
+            minmax(200px,1fr)
+            minmax(190px,230px);
+
+    }
+
+
+    .top-esquerda{
+
+        gap:8px;
+
+    }
+
+
+    .btn-top-apresentacao{
+
+        width:130px;
+        min-width:130px;
+
+    }
+
+
+    .apresentacao-textos small{
+
+        display:none;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    #apresModoAtual{
+
+        display:none;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-atalhos{
+
+        display:none !important;
+
+    }
+
+
+    body.modo-apresentacao
+    #mainWrap{
+
+        padding-bottom:
+            70px !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   47. CELULARES
+========================================================== */
+
+@media (max-width:640px){
+
+    /*
+     * O layout.css já transforma o cabeçalho
+     * em uma coluna no celular.
+     */
+
+    .topbar{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .top-esquerda{
+
+        width:100%;
+
+        grid-template-columns:
+            1fr;
+
+        gap:8px;
+
+        justify-items:center;
+
+    }
+
+
+    .top-esquerda .logo-labor{
+
+        width:100%;
+
+        align-items:center;
+
+        padding-right:0;
+        padding-bottom:8px;
+
+        border-right:0;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.28);
+
+    }
+
+
+    .btn-top-apresentacao{
+
+        width:160px;
+
+    }
+
+
+    body.modo-apresentacao
+    .topbar{
+
+        grid-template-columns:
+            1fr !important;
+
+    }
+
+
+    body.modo-apresentacao
+    .top-esquerda{
+
+        display:block;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao{
+
+        width:
+            calc(100% - 10px) !important;
+
+        bottom:5px !important;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-controles-principais{
+
+        flex-wrap:wrap !important;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-tela-atual{
+
+        flex:
+            1
+            1
+            150px;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-tempo{
+
+        margin-left:0;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-atalhos{
+
+        display:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   48. MOVIMENTO REDUZIDO
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .btn-top-apresentacao,
+
+    body.modo-apresentacao
+    #barraApresentacao{
+
+        transition:none !important;
+
+    }
 
 }
