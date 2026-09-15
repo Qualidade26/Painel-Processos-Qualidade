@@ -1284,7 +1284,13 @@ body.impressao-individual
 }
    
 /* ==========================================================
-   ESFIG INDIVIDUAL - CORPO DA PÁGINA
+   ESFIG INDIVIDUAL - IMPRESSÃO FINAL
+   REFERÊNCIA: PDF ILUSTRATIVO
+========================================================== */
+
+
+/* ==========================================================
+   1. CORPO DA PÁGINA
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1296,21 +1302,26 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     width:100% !important;
     height:auto !important;
     min-height:0 !important;
+    max-height:none !important;
 
     display:block !important;
 
     margin:0 !important;
 
     padding:
-        4mm
+        3mm
         0
         0 !important;
 
     box-sizing:border-box !important;
 }
-/* RODAPÉ */
 
-body.impressao-individual
+
+/* ==========================================================
+   2. RODAPÉ
+========================================================== */
+
+body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-executivo-rodape{
 
@@ -1318,15 +1329,10 @@ body.impressao-individual
 
     margin-top:0 !important;
 }
-  
- /* ==========================================================
-   ESFIG INDIVIDUAL - BLOCO LIMPO E CONSOLIDADO
-   Substitui todo o trecho antigo do ESFIG individual
-========================================================== */
 
 
 /* ==========================================================
-   1. GRID PRINCIPAL DO ESFIG
+   3. GRID PRINCIPAL
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1335,17 +1341,11 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:100% !important;
 
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) !important;
-    grid-template-rows:auto !important;
-
-    align-items:start !important;
-    align-content:start !important;
-
-    gap:0 !important;
+    display:block !important;
 
     height:auto !important;
     min-height:0 !important;
+    max-height:none !important;
 
     margin:0 !important;
     padding:0 !important;
@@ -1353,8 +1353,10 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     box-sizing:border-box !important;
 }
 
+
 /* ==========================================================
-   2. QUADRO SUPERIOR - INDICADORES
+   4. QUADRO SUPERIOR - INDICADORES
+   SEM ALTURA FIXA
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1363,27 +1365,33 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 > .relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
     width:96% !important;
-height:auto !important;
-min-height:0 !important;
-max-height:none !important;
 
-    margin:0 auto !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
 
-    padding:8px !important;
+    margin:
+        0
+        auto !important;
 
-    align-self:start !important;
+    padding:
+        8px !important;
 
-    display:flex !important;
-    flex-direction:column !important;
+    display:block !important;
 
     box-sizing:border-box !important;
 
     overflow:visible !important;
+
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
 }
 
+
 /* ==========================================================
-   3. CONTEÚDO INTERNO DO QUADRO SUPERIOR
+   5. CONTEÚDO INTERNO DOS INDICADORES
 ========================================================== */
+
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
@@ -1391,27 +1399,23 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:100% !important;
 
-    flex:0 0 auto !important;
-
     height:auto !important;
     min-height:0 !important;
     max-height:none !important;
 
-    display:flex !important;
-    flex-direction:column !important;
+    margin:0 !important;
+    padding:0 !important;
 
-    justify-content:flex-start !important;
-
-    gap:5px !important;
+    display:block !important;
 
     overflow:visible !important;
 
     box-sizing:border-box !important;
 }
 
+
 /* ==========================================================
-   4. TABELA DE INDICADORES
-   IMPORTANTE: a tabela continua sendo TABLE, não FLEX
+   6. TABELA DE INDICADORES
 ========================================================== */
 
 body.impressao-individual
@@ -1423,18 +1427,21 @@ body.impressao-individual
 
     height:auto !important;
     min-height:0 !important;
+    max-height:none !important;
 
     display:table !important;
 
     table-layout:fixed !important;
     border-collapse:collapse !important;
 
+    margin:0 !important;
+
     box-sizing:border-box !important;
 }
 
 
 /* ==========================================================
-   5. CABEÇALHO DA TABELA DE INDICADORES
+   7. CABEÇALHO DA TABELA
 ========================================================== */
 
 body.impressao-individual
@@ -1442,23 +1449,26 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva th{
 
- height:26px !important;
+    height:auto !important;
 
-padding:
-    4px
-    8px !important;
+    padding:
+        7px
+        10px !important;
 
-    font-size:10px !important;
+    font-size:9px !important;
     font-weight:900 !important;
 
     line-height:1.15 !important;
 
     vertical-align:middle !important;
+
+    box-sizing:border-box !important;
 }
 
 
 /* ==========================================================
-   6. LINHAS DA TABELA DE INDICADORES
+   8. LINHAS DA TABELA
+   ESTE É O PONTO QUE DÁ ALTURA AO QUADRO
 ========================================================== */
 
 body.impressao-individual
@@ -1466,22 +1476,26 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td{
 
-height:27px !important;
+    height:auto !important;
 
-padding:
-    4px
-    8px !important;
+    padding:
+        9px
+        10px !important;
 
-    font-size:10px !important;
+    font-size:9px !important;
     font-weight:700 !important;
 
     line-height:1.15 !important;
 
     vertical-align:middle !important;
+
+    box-sizing:border-box !important;
 }
 
 
-/* VALORES - NO PERÍODO / ACUMULADO */
+/* ==========================================================
+   9. VALORES
+========================================================== */
 
 body.impressao-individual
 #relatorioDocumento
@@ -1493,13 +1507,13 @@ body.impressao-individual
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-tabela-executiva td:nth-child(3){
 
-    font-size:11px !important;
+    font-size:10px !important;
     font-weight:900 !important;
 }
 
 
 /* ==========================================================
-   7. ÚLTIMA / PRÓXIMA AFERIÇÃO
+   10. ÚLTIMA / PRÓXIMA AFERIÇÃO
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1507,29 +1521,31 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa{
 
-    flex:0 0 auto !important;
-
     width:100% !important;
 
-    margin-top:4px !important;
+    margin:
+        6px
+        0
+        0 !important;
 
     gap:6px !important;
 
     box-sizing:border-box !important;
 }
 
+
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-painel-total:has(.relatorio-indicadores-esfig)
 .relatorio-info-faixa span{
 
-   min-height:24px !important;
+    min-height:28px !important;
 
     padding:
-        3px
-        7px !important;
+        5px
+        8px !important;
 
-    font-size:7px !important;
+    font-size:7.5px !important;
     font-weight:700 !important;
 
     display:flex !important;
@@ -1542,7 +1558,8 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 
 /* ==========================================================
-   8. QUADRO INFERIOR - FLUXO OPERACIONAL
+   11. QUADRO INFERIOR - FLUXO OPERACIONAL
+   TAMBÉM SEM TRAVA RÍGIDA
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1551,16 +1568,17 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:96% !important;
 
-    height:74mm !important;
-    min-height:74mm !important;
-    max-height:74mm !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
 
     margin:
-        2mm
+        3mm
         auto
         0 !important;
 
-    padding:8px !important;
+    padding:
+        8px !important;
 
     border:
         1px solid
@@ -1572,14 +1590,15 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     box-sizing:border-box !important;
 
+    overflow:visible !important;
+
     break-inside:avoid !important;
     page-break-inside:avoid !important;
-
-    overflow:hidden !important;
 }
 
+
 /* ==========================================================
-   9. TÍTULO - FLUXO OPERACIONAL
+   12. TÍTULO - FLUXO OPERACIONAL
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1592,7 +1611,10 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     gap:7px !important;
 
-    margin-bottom:7px !important;
+    margin:
+        0
+        0
+        7px !important;
 
     color:#0f3cc9 !important;
 }
@@ -1610,13 +1632,13 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-titulo strong{
 
-    font-size:12px !important;
+    font-size:11px !important;
     font-weight:900 !important;
 }
 
 
 /* ==========================================================
-   10. TABELA DO FLUXO OPERACIONAL
+   13. TABELA DO FLUXO
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1625,28 +1647,35 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
     width:100% !important;
 
+    height:auto !important;
+
     display:table !important;
 
     border-collapse:collapse !important;
-
     table-layout:fixed !important;
+
+    box-sizing:border-box !important;
 }
 
 
-/* CABEÇALHO */
+/* ==========================================================
+   14. CABEÇALHO DO FLUXO
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela th{
 
-height:26px !important;
+    height:auto !important;
 
-padding:
-    4px
-    8px !important;
+    padding:
+        6px
+        8px !important;
 
-    font-size:11px !important;
+    font-size:9px !important;
     font-weight:900 !important;
+
+    line-height:1.15 !important;
 
     text-align:center !important;
     vertical-align:middle !important;
@@ -1659,20 +1688,24 @@ padding:
 }
 
 
-/* DADOS */
+/* ==========================================================
+   15. LINHAS DO FLUXO
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela td{
 
-    height:28px !important;
+    height:auto !important;
 
     padding:
-        5px
+        6px
         8px !important;
 
-    font-size:9px !important;
+    font-size:8px !important;
     font-weight:700 !important;
+
+    line-height:1.15 !important;
 
     text-align:center !important;
     vertical-align:middle !important;
@@ -1683,7 +1716,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* DESCRIÇÃO ALINHADA À ESQUERDA */
+/* DESCRIÇÃO */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1694,21 +1727,20 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 
 /* ==========================================================
-   11. LINHA TOTAL
+   16. TOTAL
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
 .relatorio-esfig-fluxo-tabela tfoot td{
 
+    height:auto !important;
 
-height:27px !important;
+    padding:
+        7px
+        8px !important;
 
-padding:
-    4px
-    8px !important;
-
-    font-size:11px !important;
+    font-size:9px !important;
     font-weight:900 !important;
 
     color:#0f3cc9 !important;
@@ -1718,7 +1750,7 @@ padding:
 
 
 /* ==========================================================
-   12. PROCESSAMENTO OPERACIONAL
+   17. PROCESSAMENTO OPERACIONAL
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
@@ -1739,10 +1771,14 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     gap:10px !important;
 
     margin-top:8px !important;
+
+    box-sizing:border-box !important;
 }
 
 
-/* TÍTULO DA BARRA */
+/* ==========================================================
+   18. TÍTULO DA BARRA
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1759,7 +1795,9 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* BARRA */
+/* ==========================================================
+   19. BARRA DE PROCESSAMENTO
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1790,7 +1828,9 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 }
 
 
-/* PERCENTUAL */
+/* ==========================================================
+   20. PERCENTUAL
+========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
@@ -1806,7 +1846,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 
 /* ==========================================================
-   13. ITENS AGUARDANDO
+   21. ITENS AGUARDANDO
 ========================================================== */
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
