@@ -41,7 +41,14 @@
 
 
 <body>
+<!-- =====================================================
+     MODO APRESENTAÇÃO
+====================================================== -->
 
+<link
+    rel="stylesheet"
+    href="css/apresentacao.css?v=1"
+>
     <!-- =====================================================
          CABEÇALHO
     ====================================================== -->
@@ -334,7 +341,169 @@
 
     </div>
 
+<!-- =====================================================
+     CONTROLES DO MODO APRESENTAÇÃO
+====================================================== -->
 
+<div
+    id="barraApresentacao"
+    class="barra-apresentacao"
+    aria-hidden="true"
+>
+
+    <!-- NAVEGAÇÃO ANTERIOR -->
+
+    <button
+        type="button"
+        id="apresAnterior"
+        class="apres-btn apres-btn-nav"
+        title="Tela anterior"
+    >
+        ← Anterior
+    </button>
+
+
+    <!-- ABAS -->
+
+    <div class="apres-abas">
+
+        <button
+            type="button"
+            data-apres-aba="importacao"
+        >
+            📦 Importação
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="esfig"
+        >
+            ⏱ ESFIG
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="descarte"
+        >
+            🗑 Descarte
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="amostra"
+        >
+            📦 Amostras
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="retrabalho"
+        >
+            🔄 Retrabalho
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="fornecedores"
+        >
+            🏭 Fornecedores
+        </button>
+
+        <button
+            type="button"
+            data-apres-aba="informativo"
+        >
+            ℹ️ Informativo
+        </button>
+
+    </div>
+
+
+    <!-- NAVEGAÇÃO PRÓXIMO -->
+
+    <button
+        type="button"
+        id="apresProximo"
+        class="apres-btn apres-btn-nav"
+        title="Próxima tela"
+    >
+        Próximo →
+    </button>
+
+
+    <!-- SEGUNDA LINHA -->
+
+    <div class="apres-status">
+
+        <div class="apres-identificacao">
+
+            <strong>
+                🖥 MODO APRESENTAÇÃO
+            </strong>
+
+            <span id="apresContador">
+                1 / 7
+            </span>
+
+            <span id="apresNome">
+                Importação
+            </span>
+
+        </div>
+
+
+        <div class="apres-automatico">
+
+            <button
+                type="button"
+                id="apresPlay"
+                class="apres-btn"
+            >
+                ▶ Automático
+            </button>
+
+
+            <label for="apresTempo">
+                Tempo:
+            </label>
+
+            <select id="apresTempo">
+
+                <option value="10000">
+                    10 segundos
+                </option>
+
+                <option
+                    value="20000"
+                    selected
+                >
+                    20 segundos
+                </option>
+
+                <option value="30000">
+                    30 segundos
+                </option>
+
+                <option value="60000">
+                    60 segundos
+                </option>
+
+            </select>
+
+
+            <button
+                type="button"
+                id="apresSair"
+                class="apres-btn apres-btn-sair"
+            >
+                ⛶ Sair
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
     <!-- =====================================================
          BIBLIOTECAS EXTERNAS
     ====================================================== -->
