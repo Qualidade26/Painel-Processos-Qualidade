@@ -1,6 +1,6 @@
 /* ==========================================================
-   MODO APRESENTAÇÃO
-   PAINEL DE PROCESSOS SGQ
+   APRESENTACAO.JS
+   MODO APRESENTAÇÃO — PAINEL DE PROCESSOS SGQ
 ========================================================== */
 
 (function(){
@@ -11,23 +11,28 @@
     /* ======================================================
        ROTEIRO DA APRESENTAÇÃO
 
-       Cada item representa UMA TELA da apresentação.
+       Cada item abaixo representa UMA tela.
 
-       O tempo automático será aplicado individualmente
-       a cada uma dessas telas.
+       Ordem:
+       01 Importação - Indicadores
+       02 Importação - Fluxo
+       03 Esfig - Aferições
+       04 Esfig - Fluxo
+       05 Descarte - Atual
+       06 Descarte - Ano
+       07 Amostras
+       08 Retrabalho
+       09 Adequação de Caixa
+       10 Fornecedores - Geral
+       11 Fornecedores - Avaliação
+       12 Informativo
     ====================================================== */
 
     const telasApresentacao = [
 
-
-        /* ==================================================
-           IMPORTAÇÃO
-        ================================================== */
-
         {
             painel:"importacao",
             subaba:"resumo",
-
             titulo:"Importação",
             subtitulo:"Indicador de Importação"
         },
@@ -35,20 +40,13 @@
         {
             painel:"importacao",
             subaba:"fluxo",
-
             titulo:"Importação",
             subtitulo:"Fluxo de Inspeção Semanal"
         },
 
-
-        /* ==================================================
-           ESFIG
-        ================================================== */
-
         {
             painel:"esfig",
             subaba:"afericoes",
-
             titulo:"Esfigmomanômetro",
             subtitulo:"Aferições Anuais por SKU"
         },
@@ -56,20 +54,13 @@
         {
             painel:"esfig",
             subaba:"fluxo",
-
             titulo:"Esfigmomanômetro",
             subtitulo:"Fluxo Operacional"
         },
 
-
-        /* ==================================================
-           DESCARTE
-        ================================================== */
-
         {
             painel:"descarte",
             subaba:"atual",
-
             titulo:"Descarte",
             subtitulo:"Valor Atual"
         },
@@ -77,34 +68,20 @@
         {
             painel:"descarte",
             subaba:"descartado",
-
             titulo:"Descarte",
             subtitulo:"Descartado por Ano"
         },
 
-
-        /* ==================================================
-           AMOSTRAS
-           Possui somente uma tela.
-        ================================================== */
-
         {
             painel:"amostra",
             subaba:null,
-
             titulo:"Amostras",
             subtitulo:"Painel de Amostras"
         },
 
-
-        /* ==================================================
-           RETRABALHO
-        ================================================== */
-
         {
             painel:"retrabalho",
             subaba:"retrabalho",
-
             titulo:"Retrabalho",
             subtitulo:"Retrabalho"
         },
@@ -112,20 +89,13 @@
         {
             painel:"retrabalho",
             subaba:"adequacao",
-
             titulo:"Retrabalho",
             subtitulo:"Adequação de Caixa"
         },
 
-
-        /* ==================================================
-           FORNECEDORES
-        ================================================== */
-
         {
             painel:"fornecedores",
             subaba:"geral",
-
             titulo:"Fornecedores",
             subtitulo:"Visão Geral"
         },
@@ -133,9 +103,15 @@
         {
             painel:"fornecedores",
             subaba:"avaliacao",
-
             titulo:"Fornecedores",
             subtitulo:"Avaliação por Fornecedor"
+        },
+
+        {
+            painel:"informativo",
+            subaba:null,
+            titulo:"Informativo",
+            subtitulo:"Painel Informativo"
         }
 
     ];
@@ -227,7 +203,7 @@
 
 
     /* ======================================================
-       VERIFICAR SE ESTÁ EM APRESENTAÇÃO
+       VERIFICAR MODO APRESENTAÇÃO
     ====================================================== */
 
     function estaEmApresentacao(){
@@ -255,7 +231,7 @@
 
 
     /* ======================================================
-       DESCOBRIR PAINEL PRINCIPAL ATUAL
+       IDENTIFICAR PAINEL ATUAL
     ====================================================== */
 
     function painelAtual(){
@@ -309,16 +285,12 @@
 
 
     /* ======================================================
-       AGUARDAR RENDERIZAÇÃO
-
-       abrirAba() pode carregar dados antes de renderizar.
-       Por isso não devemos tentar trocar a subaba
-       imediatamente.
+       AGUARDAR ELEMENTO SER RENDERIZADO
     ====================================================== */
 
     function esperarElemento(
         seletor,
-        limite = 2500
+        limite = 3000
     ){
 
         return new Promise(
@@ -547,6 +519,11 @@
             );
 
 
+            /*
+             * Primeiro tenta utilizar a função oficial
+             * do painel de fornecedores.
+             */
+
             if(
                 typeof window
                     .abrirAbaInternaFornecedores ===
@@ -564,9 +541,8 @@
 
 
             /*
-             * Compatibilidade:
-             * caso o arquivo use outra função,
-             * tentamos os botões da própria página.
+             * Compatibilidade caso o painel utilize
+             * botões internos sem função global.
              */
 
             const candidatos =
@@ -605,6 +581,9 @@
                                 ) ||
                                 texto.includes(
                                     "visão"
+                                ) ||
+                                texto.includes(
+                                    "visao"
                                 )
                             );
 
@@ -624,7 +603,7 @@
 
 
     /* ======================================================
-       REDIMENSIONAR GRÁFICOS
+       REAJUSTAR PAINEL / GRÁFICOS
     ====================================================== */
 
     function reajustarPainel(){
@@ -636,6 +615,10 @@
                     new Event("resize")
                 );
 
+
+                /*
+                 * Compatibilidade com gráfico global.
+                 */
 
                 if(
                     typeof window.graficoAtual !==
@@ -649,15 +632,47 @@
 
                 }
 
+
+                /*
+                 * Reajusta todos os gráficos Chart.js
+                 * existentes na página.
+                 */
+
+                if(
+                    typeof Chart !==
+                        "undefined" &&
+                    Chart.instances
+                ){
+
+                    Object.values(
+                        Chart.instances
+                    ).forEach(
+                        function(grafico){
+
+                            if(
+                                grafico &&
+                                typeof grafico.resize ===
+                                    "function"
+                            ){
+
+                                grafico.resize();
+
+                            }
+
+                        }
+                    );
+
+                }
+
             },
-            120
+            150
         );
 
     }
 
 
     /* ======================================================
-       ATUALIZAR BARRA
+       ATUALIZAR CONTROLES
     ====================================================== */
 
     function atualizarControles(){
@@ -666,6 +681,13 @@
             telasApresentacao[
                 indiceAtual
             ];
+
+
+        if(!tela){
+
+            return;
+
+        }
 
 
         if(contador){
@@ -716,7 +738,7 @@
 
 
     /* ======================================================
-       MOSTRAR UMA TELA
+       MOSTRAR TELA
     ====================================================== */
 
     async function mostrarTela(
@@ -762,10 +784,11 @@
 
 
             /*
-             * Se já estamos no mesmo painel,
-             * não renderizamos tudo novamente.
+             * Se mudou o painel principal,
+             * utiliza abrirAba().
              *
-             * Apenas mudamos a subaba.
+             * Se continua no mesmo painel,
+             * somente muda a subaba.
              */
 
             if(
@@ -820,7 +843,7 @@
        PRÓXIMA TELA
     ====================================================== */
 
-    function proximaTela(){
+    async function proximaTela(){
 
         if(trocandoTela){
 
@@ -836,7 +859,7 @@
             telasApresentacao.length;
 
 
-        mostrarTela(
+        await mostrarTela(
             novoIndice
         );
 
@@ -847,7 +870,7 @@
        TELA ANTERIOR
     ====================================================== */
 
-    function telaAnterior(){
+    async function telaAnterior(){
 
         if(trocandoTela){
 
@@ -865,7 +888,7 @@
             telasApresentacao.length;
 
 
-        mostrarTela(
+        await mostrarTela(
             novoIndice
         );
 
@@ -891,6 +914,7 @@
                 barraOculta
             );
 
+
             barra.setAttribute(
                 "aria-hidden",
                 barraOculta
@@ -912,6 +936,10 @@
     }
 
 
+    /* ======================================================
+       ALTERNAR BARRA NO MODO MANUAL
+    ====================================================== */
+
     function alternarBarra(){
 
         if(!estaEmApresentacao()){
@@ -922,8 +950,8 @@
 
 
         /*
-         * Durante o automático,
-         * a barra permanece escondida.
+         * No automático a barra deve permanecer
+         * escondida até o automático ser pausado.
          */
 
         if(automatico){
@@ -960,7 +988,56 @@
 
 
     /* ======================================================
-       PROGRAMAR PRÓXIMA TELA AUTOMÁTICA
+       OBTER TEMPO SELECIONADO
+    ====================================================== */
+
+    function obterTempo(){
+
+        const valor =
+            Number(
+                selectTempo?.value
+            );
+
+
+        /*
+         * Valores aceitos:
+         * 5, 10, 15 ou 20 segundos.
+         *
+         * O HTML pode fornecer em milissegundos
+         * (5000, 10000...) ou segundos (5, 10...).
+         */
+
+        if(
+            valor === 5 ||
+            valor === 10 ||
+            valor === 15 ||
+            valor === 20
+        ){
+
+            return valor * 1000;
+
+        }
+
+
+        if(
+            valor === 5000 ||
+            valor === 10000 ||
+            valor === 15000 ||
+            valor === 20000
+        ){
+
+            return valor;
+
+        }
+
+
+        return 20000;
+
+    }
+
+
+    /* ======================================================
+       PROGRAMAR PRÓXIMA TELA
     ====================================================== */
 
     function programarProximaTela(){
@@ -979,10 +1056,7 @@
 
 
         const tempo =
-            Number(
-                selectTempo?.value ||
-                20000
-            );
+            obterTempo();
 
 
         timerAutomatico =
@@ -1011,7 +1085,16 @@
                     );
 
 
-                    programarProximaTela();
+                    /*
+                     * O próximo tempo começa somente
+                     * depois que a tela terminou de abrir.
+                     */
+
+                    if(automatico){
+
+                        programarProximaTela();
+
+                    }
 
                 },
                 tempo
@@ -1045,7 +1128,7 @@
 
 
         /*
-         * No automático a barra desaparece.
+         * Automaticamente esconde a barra.
          */
 
         definirBarraOculta(
@@ -1055,6 +1138,11 @@
 
         atualizarControles();
 
+
+        /*
+         * A tela que está aberta também respeita
+         * o tempo selecionado antes da troca.
+         */
 
         programarProximaTela();
 
@@ -1079,8 +1167,8 @@
 
 
         /*
-         * Ao pausar voltamos ao modo manual
-         * e mostramos novamente os controles.
+         * Voltando ao manual,
+         * os controles reaparecem.
          */
 
         if(estaEmApresentacao()){
@@ -1118,9 +1206,6 @@
 
     /* ======================================================
        DESCOBRIR TELA INICIAL
-
-       Tenta iniciar a apresentação no painel
-       que o usuário já está visualizando.
     ====================================================== */
 
     function descobrirIndiceInicial(){
@@ -1196,6 +1281,7 @@
                 "oculta"
             );
 
+
             barra.setAttribute(
                 "aria-hidden",
                 "false"
@@ -1208,7 +1294,7 @@
 
 
         /* ==================================================
-           TELA CHEIA
+           ENTRAR EM TELA CHEIA
         ================================================== */
 
         try{
@@ -1227,6 +1313,11 @@
 
         }catch(erro){
 
+            /*
+             * Se o navegador impedir fullscreen,
+             * a apresentação continua normalmente.
+             */
+
             console.warn(
                 "Tela cheia não foi ativada:",
                 erro
@@ -1236,8 +1327,8 @@
 
 
         /*
-         * Garante que a primeira tela do roteiro
-         * esteja corretamente posicionada.
+         * Abre a tela correspondente ao painel
+         * que o usuário estava visualizando.
          */
 
         await mostrarTela(
@@ -1276,6 +1367,7 @@
             barra.classList.remove(
                 "oculta"
             );
+
 
             barra.setAttribute(
                 "aria-hidden",
@@ -1323,58 +1415,82 @@
        EVENTOS DOS BOTÕES
     ====================================================== */
 
-    btnAnterior?.addEventListener(
-        "click",
-        telaAnterior
-    );
+    if(btnAnterior){
+
+        btnAnterior.addEventListener(
+            "click",
+            telaAnterior
+        );
+
+    }
 
 
-    btnProximo?.addEventListener(
-        "click",
-        proximaTela
-    );
+    if(btnProximo){
+
+        btnProximo.addEventListener(
+            "click",
+            proximaTela
+        );
+
+    }
 
 
-    btnPlay?.addEventListener(
-        "click",
-        alternarAutomatico
-    );
+    if(btnPlay){
+
+        btnPlay.addEventListener(
+            "click",
+            alternarAutomatico
+        );
+
+    }
 
 
-    btnOcultar?.addEventListener(
-        "click",
-        alternarBarra
-    );
+    if(btnOcultar){
+
+        btnOcultar.addEventListener(
+            "click",
+            alternarBarra
+        );
+
+    }
 
 
-    btnFechar?.addEventListener(
-        "click",
-        fecharModoApresentacao
-    );
+    if(btnFechar){
+
+        btnFechar.addEventListener(
+            "click",
+            fecharModoApresentacao
+        );
+
+    }
 
 
     /* ======================================================
        ALTERAÇÃO DO TEMPO
     ====================================================== */
 
-    selectTempo?.addEventListener(
-        "change",
-        function(){
+    if(selectTempo){
 
-            /*
-             * Se alterar o tempo enquanto
-             * estiver automático, reiniciamos
-             * a contagem a partir da tela atual.
-             */
+        selectTempo.addEventListener(
+            "change",
+            function(){
 
-            if(automatico){
+                /*
+                 * Se o tempo for alterado durante
+                 * o automático, reinicia a contagem
+                 * da tela atual.
+                 */
 
-                programarProximaTela();
+                if(automatico){
+
+                    programarProximaTela();
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 
     /* ======================================================
@@ -1394,7 +1510,7 @@
 
             /* ==============================================
                ESC
-               SAIR
+               SAIR DA APRESENTAÇÃO
             ============================================== */
 
             if(event.key === "Escape"){
@@ -1409,8 +1525,11 @@
 
 
             /*
-             * Durante o automático,
-             * deixamos somente ESC funcionar.
+             * Durante o automático:
+             *
+             * ESC continua funcionando.
+             *
+             * As setas não alteram as telas.
              */
 
             if(automatico){
@@ -1458,7 +1577,7 @@
 
             /* ==============================================
                SETA PARA BAIXO
-               MOSTRAR / OCULTAR CONTROLES
+               MOSTRAR / OCULTAR BARRA
             ============================================== */
 
             if(
@@ -1477,7 +1596,7 @@
 
             /* ==============================================
                SETA PARA CIMA
-               TAMBÉM MOSTRA / OCULTA
+               MOSTRAR / OCULTAR BARRA
             ============================================== */
 
             if(
@@ -1500,10 +1619,8 @@
     /* ======================================================
        FULLSCREENCHANGE
 
-       IMPORTANTE:
-       ESC normalmente faz o navegador sair do fullscreen.
-       Quando isso acontecer, encerramos também o
-       modo apresentação.
+       Se o navegador sair do fullscreen pelo ESC,
+       o modo apresentação também é encerrado.
     ====================================================== */
 
     document.addEventListener(
@@ -1516,6 +1633,7 @@
             ){
 
                 cancelarTimer();
+
 
                 automatico = false;
 
@@ -1535,6 +1653,7 @@
                         "oculta"
                     );
 
+
                     barra.setAttribute(
                         "aria-hidden",
                         "true"
@@ -1552,7 +1671,7 @@
 
 
     /* ======================================================
-       DISPONIBILIZAR FUNÇÕES GLOBALMENTE
+       FUNÇÕES GLOBAIS
     ====================================================== */
 
     window.abrirModoApresentacao =
@@ -1564,9 +1683,11 @@
 
 
     /* ======================================================
-       FUNÇÕES AUXILIARES DISPONÍVEIS
+       API DO MODO APRESENTAÇÃO
 
-       Úteis para integração futura dos painéis.
+       Também será utilizada posteriormente
+       pelo Descarte para saber se está sendo
+       visualizado em apresentação.
     ====================================================== */
 
     window.apresentacaoSGQ = {
@@ -1583,8 +1704,37 @@
         alternarBarra:
             alternarBarra,
 
+        iniciarAutomatico:
+            iniciarAutomatico,
+
+        pararAutomatico:
+            pararAutomatico,
+
         fechar:
-            fecharModoApresentacao
+            fecharModoApresentacao,
+
+        getTelaAtual:
+            function(){
+
+                return telasApresentacao[
+                    indiceAtual
+                ];
+
+            },
+
+        getIndiceAtual:
+            function(){
+
+                return indiceAtual;
+
+            },
+
+        getTotalTelas:
+            function(){
+
+                return telasApresentacao.length;
+
+            }
 
     };
 
