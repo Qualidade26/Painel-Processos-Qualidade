@@ -1,0 +1,385 @@
+/* ==========================================================
+   MODO APRESENTAÇÃO
+   PAINEL DE PROCESSOS SGQ
+========================================================== */
+
+
+/* ==========================================================
+   BARRA DE APRESENTAÇÃO
+========================================================== */
+
+.barra-apresentacao{
+
+    display:none;
+
+}
+
+
+/* ==========================================================
+   PAINEL EM MODO APRESENTAÇÃO
+========================================================== */
+
+body.modo-apresentacao{
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   ESCONDER SOMENTE O MENU LATERAL
+========================================================== */
+
+body.modo-apresentacao #menuLateral{
+
+    display:none !important;
+
+}
+
+
+/* ==========================================================
+   EXPANDIR ESTRUTURA PRINCIPAL
+========================================================== */
+
+body.modo-apresentacao #mainWrap{
+
+    display:block !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    margin:0 !important;
+
+    padding:8px 10px 112px 10px !important;
+
+}
+
+
+/* ==========================================================
+   EXPANDIR CONTEÚDO
+========================================================== */
+
+body.modo-apresentacao #conteudo{
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    margin:0 !important;
+
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+
+   Mantém o mesmo cabeçalho atual.
+========================================================== */
+
+body.modo-apresentacao .topbar{
+
+    width:100%;
+
+}
+
+
+/* ==========================================================
+   BARRA INFERIOR
+========================================================== */
+
+body.modo-apresentacao .barra-apresentacao{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    z-index:99999;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        minmax(0,1fr)
+        auto;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+        7px
+        14px
+        6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #07306b,
+            #0b4ab4
+        );
+
+    border-top:
+        2px solid
+        #2f72ff;
+
+    box-shadow:
+        0 -4px 16px
+        rgba(0,0,0,.16);
+
+}
+
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
+
+.apres-btn,
+.apres-abas button{
+
+    min-height:34px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.38);
+
+    border-radius:8px;
+
+    padding:
+        6px
+        12px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color:#ffffff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        .18s ease;
+
+}
+
+
+.apres-btn:hover,
+.apres-abas button:hover{
+
+    background:
+        rgba(255,255,255,.20);
+
+}
+
+
+.apres-btn-nav{
+
+    min-width:92px;
+
+}
+
+
+/* ==========================================================
+   ABAS
+========================================================== */
+
+.apres-abas{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    min-width:0;
+
+}
+
+
+.apres-abas button{
+
+    white-space:nowrap;
+
+    padding:
+        6px
+        10px;
+
+}
+
+
+.apres-abas button.ativo{
+
+    background:#ffffff;
+
+    color:#174ad4;
+
+    border-color:#ffffff;
+
+}
+
+
+/* ==========================================================
+   SEGUNDA LINHA
+========================================================== */
+
+.apres-status{
+
+    grid-column:
+        1 / -1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding-top:5px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.20);
+
+    color:#ffffff;
+
+}
+
+
+/* ==========================================================
+   IDENTIFICAÇÃO
+========================================================== */
+
+.apres-identificacao{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    font-size:11px;
+
+}
+
+
+#apresContador{
+
+    font-size:13px;
+
+    font-weight:900;
+
+}
+
+
+#apresNome{
+
+    opacity:.85;
+
+}
+
+
+/* ==========================================================
+   AUTOMÁTICO
+========================================================== */
+
+.apres-automatico{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+.apres-automatico label{
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+
+#apresTempo{
+
+    height:34px;
+
+    padding:
+        0
+        8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.4);
+
+    border-radius:7px;
+
+    background:#ffffff;
+
+    color:#12326e;
+
+    font-weight:700;
+
+    outline:none;
+
+}
+
+
+/* ==========================================================
+   BOTÃO SAIR
+========================================================== */
+
+.apres-btn-sair{
+
+    background:
+        rgba(220,38,38,.92);
+
+}
+
+
+.apres-btn-sair:hover{
+
+    background:#dc2626;
+
+}
+
+
+/* ==========================================================
+   AJUSTE PARA TELAS MENORES
+========================================================== */
+
+@media(max-width:1100px){
+
+    .apres-abas{
+
+        overflow-x:auto;
+
+        justify-content:flex-start;
+
+    }
+
+
+    .apres-abas button{
+
+        flex:0 0 auto;
+
+    }
+
+}
