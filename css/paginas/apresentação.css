@@ -18,7 +18,58 @@
 
 
 /* ==========================================================
-   BOTÃO APRESENTAÇÃO NO CABEÇALHO
+   ÁREA ESQUERDA DO CABEÇALHO
+   LOGO + BOTÃO APRESENTAÇÃO
+========================================================== */
+
+.top-esquerda{
+
+    display:flex;
+
+    align-items:center;
+
+    height:100%;
+
+    min-width:0;
+
+}
+
+
+/* ==========================================================
+   LOGO DENTRO DA ÁREA ESQUERDA
+========================================================== */
+
+.top-esquerda .logo-labor{
+
+    flex:0 0 auto;
+
+}
+
+
+/* ==========================================================
+   DIVISOR ENTRE LOGO E APRESENTAÇÃO
+========================================================== */
+
+.top-divisor{
+
+    width:1px;
+
+    height:48px;
+
+    margin:
+        0
+        14px;
+
+    flex:0 0 1px;
+
+    background:
+        rgba(255,255,255,.25);
+
+}
+
+
+/* ==========================================================
+   ÁREA DO BOTÃO APRESENTAÇÃO
 ========================================================== */
 
 .top-apresentacao{
@@ -29,17 +80,9 @@
 
     justify-content:center;
 
-    padding:
-        0
-        14px;
+    flex:0 0 auto;
 
-    border-left:
-        1px solid
-        rgba(255,255,255,.18);
-
-    border-right:
-        1px solid
-        rgba(255,255,255,.18);
+    padding:0;
 
 }
 
@@ -59,9 +102,11 @@
 
     gap:8px;
 
-    min-width:160px;
+   width:150px;
 
-    height:44px;
+min-width:150px;
+
+height:40px;
 
     padding:
         5px
@@ -1149,5 +1194,241 @@ body.modo-apresentacao
 
     outline-offset:
         2px;
+
+}
+/* ==========================================================
+   AJUSTE FINAL — BARRA DE APRESENTAÇÃO COMPACTA
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao{
+
+    position:fixed !important;
+
+    left:50% !important;
+
+    right:auto !important;
+
+    bottom:10px !important;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        calc(100% - 24px) !important;
+
+    max-width:
+        1180px !important;
+
+    min-height:0 !important;
+
+    height:auto !important;
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    padding:0 !important;
+
+    margin:0 !important;
+
+    border-radius:
+        12px !important;
+
+    overflow:hidden !important;
+
+}
+
+
+/* ==========================================================
+   LINHA PRINCIPAL
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-controles-principais{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    flex-wrap:nowrap !important;
+
+    align-items:center !important;
+
+    width:100% !important;
+
+    min-height:50px !important;
+
+    padding:
+        6px
+        8px !important;
+
+    gap:7px !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* ==========================================================
+   IDENTIFICAÇÃO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tela-atual{
+
+    flex:
+        0
+        1
+        190px !important;
+
+    min-width:
+        130px !important;
+
+}
+
+
+/* ==========================================================
+   TEMPO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    margin-left:auto !important;
+
+    white-space:nowrap;
+
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+#apresTempo{
+
+    width:110px !important;
+
+    min-width:110px !important;
+
+    height:34px !important;
+
+}
+
+
+/* ==========================================================
+   BOTÃO AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-play{
+
+    min-width:
+        145px !important;
+
+    height:
+        34px !important;
+
+}
+
+
+/* ==========================================================
+   SETAS
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-nav{
+
+    width:36px !important;
+
+    min-width:36px !important;
+
+    height:34px !important;
+
+}
+
+
+/* ==========================================================
+   ATALHOS — LINHA PEQUENA
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-atalhos{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    justify-content:center !important;
+
+    align-items:center !important;
+
+    min-height:18px !important;
+
+    padding:
+        2px
+        8px
+        4px !important;
+
+    gap:18px !important;
+
+}
+
+
+/* ==========================================================
+   GARANTIR QUE O PAINEL NÃO FIQUE ESCONDIDO PELA BARRA
+========================================================== */
+
+body.modo-apresentacao
+#mainWrap{
+
+    padding-bottom:
+        82px !important;
+
+}
+
+
+/* ==========================================================
+   QUANDO A BARRA FOR OCULTADA
+========================================================== */
+
+body.modo-apresentacao.barra-apresentacao-oculta
+#mainWrap,
+
+body.modo-apresentacao.modo-apresentacao-automatico
+#mainWrap{
+
+    padding-bottom:
+        8px !important;
+
+}
+
+
+/* ==========================================================
+   CORREÇÃO DA TRANSFORMAÇÃO QUANDO OCULTA
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao.oculta,
+
+body.modo-apresentacao.modo-apresentacao-automatico
+#barraApresentacao{
+
+    transform:
+        translateX(-50%)
+        translateY(
+            calc(100% + 30px)
+        ) !important;
 
 }
