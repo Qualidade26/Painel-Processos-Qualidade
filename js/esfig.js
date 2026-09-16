@@ -15,29 +15,27 @@ function renderEsfig(){
 const resumoAfericoes =
     esfig.resumoAfericoes || {};
 
-const totalAprovado =
-    Number(
-        resumo.totalAprovado || 0
-    );
-
-const totalReprovado =
-    Number(
-        resumo.totalReprovado || 0
-    );
-
-const totalAferido =
-    totalAprovado +
-    totalReprovado;
 
 const totalAprovado =
     Number(
         resumoAfericoes.totalAprovado || 0
     );
 
+
 const totalReprovado =
     Number(
         resumoAfericoes.totalReprovado || 0
     );
+
+
+/* ======================================================
+   TOTAL AFERIDO
+   APROVADO + REPROVADO
+====================================================== */
+
+const totalAferido =
+    totalAprovado +
+    totalReprovado;
     /* ======================================================
        PRODUTOS
        ORDENA NUMERICAMENTE PELO SKU
