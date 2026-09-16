@@ -1699,3 +1699,154 @@
 
     background:#ffffff;
 }
+/* ==========================================================
+   RETRABALHO — NAVEGADOR NORMAL / BAIXA ALTURA
+   Mantém tudo enquadrado sem precisar de F11
+========================================================== */
+
+@media (min-width:1201px) and (max-height:760px){
+
+    /* GRADE PRINCIPAL */
+
+    .adequacao-grid{
+
+        height:
+            calc(100dvh - 300px) !important;
+
+        min-height:360px !important;
+
+        max-height:none !important;
+
+        gap:6px !important;
+
+        margin-bottom:0 !important;
+    }
+
+
+    /* COLUNA ESQUERDA */
+
+    .adequacao-coluna-graficos{
+
+        height:100%;
+
+        min-height:0;
+
+        grid-template-rows:
+            minmax(0,1.12fr)
+            minmax(0,.88fr);
+
+        gap:6px;
+    }
+
+
+    /* BOM × AVARIA */
+
+    .adequacao-panel-bom-avaria{
+
+        height:100%;
+
+        min-height:0 !important;
+    }
+
+
+    .adequacao-bom-avaria-conteudo{
+
+        height:
+            calc(100% - 25px) !important;
+
+        min-height:0 !important;
+    }
+
+
+    .adequacao-chart-box{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        max-height:175px !important;
+    }
+
+
+    /* ADEQUAÇÃO POR MOTIVO */
+
+    .adequacao-panel-motivos{
+
+        height:100%;
+
+        min-height:0 !important;
+    }
+
+
+    .adequacao-chart-box-motivos{
+
+        height:
+            calc(100% - 25px) !important;
+
+        min-height:0 !important;
+    }
+
+
+    /* TABELA */
+
+    .adequacao-panel-tabela{
+
+        height:100%;
+
+        min-height:0 !important;
+    }
+
+
+    .adequacao-tabela-scroll{
+
+        height:100%;
+
+        min-height:0;
+
+        max-height:none !important;
+    }
+
+
+    /* UM POUCO MAIS COMPACTO */
+
+    .adequacao-panel{
+
+        padding:6px !important;
+    }
+
+
+    .adequacao-pesquisa{
+
+        margin-bottom:5px;
+    }
+
+
+    .adequacao-pesquisa input{
+
+        height:33px;
+
+        min-height:33px;
+    }
+
+
+    .adequacao-pesquisa-icone{
+
+        height:33px;
+    }
+
+
+    .adequacao-tabela th{
+
+        padding:6px;
+
+        font-size:10px;
+    }
+
+
+    .adequacao-tabela td{
+
+        padding:5px 6px;
+
+        font-size:10px;
+    }
+}
