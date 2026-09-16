@@ -369,14 +369,13 @@
         ){
 
             const botao =
-                tela.subaba === "fluxo"
-                    ? await esperarElemento(
-                        "#botaoImportacaoFluxo"
-                    )
-                    : await esperarElemento(
-                        "#botaoImportacaoResumo"
-                    );
-
+    tela.subaba === "fluxo"
+        ? await esperarElemento(
+            "#botaoAbaFluxoImportacao"
+        )
+        : await esperarElemento(
+            "#botaoAbaResumoImportacao"
+        );
 
             if(
                 typeof window
