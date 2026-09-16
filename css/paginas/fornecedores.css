@@ -1609,3 +1609,298 @@
     font-size:10px;
     font-weight:700;
 }
+/* ==========================================================
+   FORNECEDORES — ENQUADRAMENTO FINAL
+   NAVEGADOR NORMAL + F11
+========================================================== */
+
+@media (min-width:901px){
+
+
+    /* ======================================================
+       PÁGINA
+       ABA SUPERIOR + CONTEÚDO ATIVO
+    ====================================================== */
+
+    .pagina-fornecedores{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            auto
+            minmax(0,1fr);
+
+        gap:7px;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       ABAS
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-abas{
+
+        width:100%;
+
+        margin:0 !important;
+
+        flex:none;
+    }
+
+
+    /* ======================================================
+       CONTEÚDO ATIVO
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-conteudo:not([hidden]){
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-fornecedores
+    .fornecedores-conteudo[hidden]{
+
+        display:none !important;
+    }
+
+
+
+    /* ======================================================
+       ABA 1 — VISÃO GERAL
+
+       indicadores
+       +
+       4 painéis
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-conteudo[data-fornecedores-conteudo="geral"]{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            clamp(64px,10vh,78px)
+            minmax(0,1fr) !important;
+
+        gap:7px;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       INDICADORES
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-indicadores{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        margin:0;
+
+        gap:7px;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-fornecedores
+    .fornecedor-kpi{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        margin:0;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       4 PAINÉIS — 2 × 2
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-graficos{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        grid-template-rows:
+            repeat(2,minmax(0,1fr));
+
+        gap:7px;
+
+        margin:0;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-fornecedores
+    .fornecedores-panel{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        margin:0;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-fornecedores
+    .fornecedores-chart-box{
+
+        height:
+            calc(100% - 20px) !important;
+
+        min-height:0 !important;
+    }
+
+
+
+    /* ======================================================
+       ABA 2 — AVALIAÇÃO POR FORNECEDOR
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-conteudo[data-fornecedores-conteudo="avaliacao"]{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-fornecedores
+    .fornecedores-avaliacao-grid{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        align-items:stretch;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       PAINEL DA LISTA
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-lista-panel{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        display:flex;
+        flex-direction:column;
+
+        overflow:hidden;
+    }
+
+
+    /* Pesquisa + filtro não crescem */
+
+    .pagina-fornecedores
+    .fornecedores-controles{
+
+        flex:0 0 auto;
+    }
+
+
+    /* ======================================================
+       TABELA
+       Ocupa todo o espaço restante
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedores-tabela-wrap{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:auto;
+    }
+
+
+    /* ======================================================
+       DETALHE LATERAL
+    ====================================================== */
+
+    .pagina-fornecedores
+    .fornecedor-detalhe{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+}
