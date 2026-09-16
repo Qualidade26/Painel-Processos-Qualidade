@@ -1151,18 +1151,6 @@ function abrirAba(aba, botao) {
             break;
         }
 
-        case "informativo":
-
-            if (
-                typeof renderInformativo ===
-                "function"
-            ) {
-
-                renderInformativo();
-            }
-
-            break;
-
 case "relatorios":
 
     if (
