@@ -60,3 +60,159 @@
 
     --sombra-card:0 4px 10px rgba(0,0,0,.05);
 }
+/* ==========================================================
+   RETRABALHO — AJUSTE NO PADRÃO DO DESCARTE
+========================================================== */
+
+/* ÁREA GERAL DA PÁGINA */
+.pagina-retrabalho,
+.pagina-adequacao,
+.retrabalho-pagina{
+    width:100%;
+    min-width:0;
+}
+
+/* TÍTULO E BARRAS SUPERIORES */
+.retrabalho-topo,
+.retrabalho-abas,
+.retrabalho-subtitulo{
+    width:100%;
+    min-width:0;
+}
+
+/* CARDS */
+.retrabalho-cards,
+.cards-retrabalho{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:8px;
+    width:100%;
+    min-width:0;
+}
+
+/* GRADE PRINCIPAL */
+.retrabalho-grid-principal,
+.retrabalho-bottom-grid,
+.adequacao-grid{
+    display:grid;
+    grid-template-columns:minmax(0, .95fr) minmax(0, 1.35fr);
+    gap:8px;
+    width:100%;
+    min-width:0;
+    align-items:start;
+}
+
+/* COLUNA ESQUERDA */
+.retrabalho-coluna-esquerda,
+.adequacao-coluna-esquerda{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    min-width:0;
+}
+
+/* COLUNA DIREITA */
+.retrabalho-coluna-direita,
+.adequacao-coluna-direita{
+    min-width:0;
+}
+
+/* PAINÉIS */
+.retrabalho-grid-principal .panel,
+.retrabalho-bottom-grid .panel,
+.adequacao-grid .panel{
+    width:100%;
+    min-width:0;
+    overflow:hidden;
+    box-sizing:border-box;
+}
+
+/* GRÁFICOS */
+.chart-box-retrabalho,
+.chart-box-adequacao,
+.chart-box-motivo,
+.chart-box-pizza{
+    width:100%;
+    height:clamp(220px, 28vh, 320px);
+    min-height:0;
+}
+
+.chart-box-retrabalho canvas,
+.chart-box-adequacao canvas,
+.chart-box-motivo canvas,
+.chart-box-pizza canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+/* TABELA DE FABRICANTE */
+.retrabalho-tabela,
+.adequacao-tabela{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+}
+
+.retrabalho-tabela .table-scroll,
+.adequacao-tabela .table-scroll{
+    width:100%;
+    max-height:clamp(420px, 56vh, 620px);
+    overflow:auto;
+}
+
+/* CAMPO DE PESQUISA */
+.retrabalho-tabela input,
+.adequacao-tabela input{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:8px;
+}
+
+/* TABELA */
+.retrabalho-tabela table,
+.adequacao-tabela table{
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
+}
+
+.retrabalho-tabela th,
+.retrabalho-tabela td,
+.adequacao-tabela th,
+.adequacao-tabela td{
+    word-break:break-word;
+}
+
+/* NOTEBOOK / TELA MÉDIA */
+@media (max-width:1200px){
+    .retrabalho-cards,
+    .cards-retrabalho{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .retrabalho-grid-principal,
+    .retrabalho-bottom-grid,
+    .adequacao-grid{
+        grid-template-columns:1fr;
+    }
+
+    .retrabalho-tabela .table-scroll,
+    .adequacao-tabela .table-scroll{
+        max-height:420px;
+    }
+}
+
+/* CELULAR */
+@media (max-width:800px){
+    .retrabalho-cards,
+    .cards-retrabalho{
+        grid-template-columns:1fr;
+    }
+
+    .chart-box-retrabalho,
+    .chart-box-adequacao,
+    .chart-box-motivo,
+    .chart-box-pizza{
+        height:260px;
+    }
+}
