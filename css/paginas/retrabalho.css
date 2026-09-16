@@ -1903,3 +1903,476 @@
         font-size:10px;
     }
 }
+/* ==========================================================
+   RETRABALHO — ENQUADRAMENTO FINAL DAS DUAS ABAS
+   Navegador normal + F11
+
+   🔄 Retrabalho
+   📦 Adequação de Caixa
+
+   Cada aba mantém sua própria estrutura.
+========================================================== */
+
+@media (min-width:1051px){
+
+
+    /* ======================================================
+       ESTRUTURA PRINCIPAL
+    ====================================================== */
+
+    .pagina-retrabalho{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            auto
+            minmax(0,1fr);
+
+        gap:6px;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* Abas superiores */
+
+    .pagina-retrabalho
+    .retrabalho-abas{
+
+        margin-bottom:0 !important;
+
+        flex:none;
+    }
+
+
+    /* ======================================================
+       ÁREA QUE RECEBE A ABA ATIVA
+    ====================================================== */
+
+    #conteudoInternoRetrabalho{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       CONTEÚDO DE QUALQUER UMA DAS DUAS ABAS
+
+       título
+       indicadores
+       painel principal
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    > .retrabalho-conteudo-aba{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:grid;
+
+        grid-template-rows:
+            auto
+            auto
+            minmax(0,1fr);
+
+        gap:6px;
+
+        overflow:hidden;
+    }
+
+
+    /* Título */
+
+    #conteudoInternoRetrabalho
+    .page-title{
+
+        margin-bottom:0 !important;
+    }
+
+
+    /* Indicadores */
+
+    #conteudoInternoRetrabalho
+    .cards,
+
+    #conteudoInternoRetrabalho
+    .adequacao-indicadores{
+
+        margin-bottom:0 !important;
+
+        gap:6px;
+    }
+
+
+
+    /* ======================================================
+       ABA 1 — RETRABALHO
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .grid-2{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        margin:0 !important;
+
+        gap:6px;
+
+        align-items:stretch;
+
+        overflow:hidden;
+    }
+
+
+    /* Os dois painéis ocupam toda a altura restante */
+
+    #conteudoInternoRetrabalho
+    .grid-2
+    > .panel{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:flex;
+        flex-direction:column;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* Título dos painéis */
+
+    #conteudoInternoRetrabalho
+    .grid-2
+    > .panel
+    > h3{
+
+        flex:0 0 auto;
+    }
+
+
+    /* Pesquisa */
+
+    #conteudoInternoRetrabalho
+    .retrabalho-filtros{
+
+        flex:0 0 auto;
+
+        margin-bottom:6px;
+    }
+
+
+    /* Gráfico por fabricante */
+
+    #conteudoInternoRetrabalho
+    .grid-2
+    .chart-box.tall{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:hidden;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .grid-2
+    .chart-box.tall
+    canvas{
+
+        width:100% !important;
+        height:100% !important;
+    }
+
+
+    /* ======================================================
+       TABELA DA ABA RETRABALHO
+       Scroll apenas dentro da tabela
+    ====================================================== */
+
+    #tabelaDetalhamentoRetrabalho{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    #tabelaDetalhamentoRetrabalho
+    .table-wrap{
+
+        width:100%;
+        height:100%;
+
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    #tabelaDetalhamentoRetrabalho
+    .table-scroll{
+
+        width:100%;
+        height:100% !important;
+
+        min-height:0;
+
+        max-height:none !important;
+
+        overflow-y:auto !important;
+        overflow-x:auto;
+    }
+
+
+
+    /* ======================================================
+       ABA 2 — ADEQUAÇÃO DE CAIXA
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-grid{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        margin:0 !important;
+
+        gap:6px;
+
+        align-items:stretch;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       COLUNA DOS DOIS GRÁFICOS
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-coluna-graficos{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:grid;
+
+        grid-template-rows:
+            minmax(0,1.1fr)
+            minmax(0,.9fr);
+
+        gap:6px;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       PAINÉIS DA ADEQUAÇÃO
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel{
+
+        height:100% !important;
+
+        min-height:0 !important;
+        max-height:none !important;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       BOM × AVARIA
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-bom-avaria{
+
+        display:flex;
+        flex-direction:column;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-bom-avaria
+    > h3{
+
+        flex:0 0 auto;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-bom-avaria-conteudo{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-width:0;
+        min-height:0 !important;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-chart-box{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        max-height:100% !important;
+    }
+
+
+
+    /* ======================================================
+       ADEQUAÇÃO POR MOTIVO
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-motivos{
+
+        display:flex;
+        flex-direction:column;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-motivos
+    > h3{
+
+        flex:0 0 auto;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-chart-box-motivos{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+    }
+
+
+
+    /* ======================================================
+       DETALHAMENTO POR FABRICANTE
+    ====================================================== */
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-tabela{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        display:flex;
+        flex-direction:column;
+
+        overflow:hidden;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-panel-tabela
+    > h3{
+
+        flex:0 0 auto;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-pesquisa{
+
+        flex:0 0 auto;
+
+        margin-bottom:6px;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-tabela{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0;
+    }
+
+
+    #conteudoInternoRetrabalho
+    .adequacao-tabela-scroll{
+
+        width:100%;
+        height:100% !important;
+
+        min-height:0;
+
+        max-height:none !important;
+
+        overflow-y:auto !important;
+        overflow-x:auto;
+    }
+}
