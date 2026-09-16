@@ -1803,4 +1803,46 @@ and (min-height:850px){
     }
 }
 
+/* ==========================================================
+   DESCARTE — QUADROS DIREITOS COM MESMA DIMENSÃO
+   TOP 10 + GASTO AMBIENTAL
+========================================================== */
 
+.pagina-descarte
+.descarte-coluna-ano-direita{
+
+    grid-template-rows:
+        minmax(0,1fr)
+        minmax(0,1fr) !important;
+
+    gap:7px;
+}
+
+
+/* TOP 10 */
+
+.pagina-descarte
+.descarte-grid-ano
+.descarte-panel-top10{
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    box-sizing:border-box;
+}
+
+
+/* GASTO AMBIENTAL */
+
+.pagina-descarte
+.descarte-panel-ambiental{
+
+    width:100%;
+    height:100%;
+
+    min-height:0;
+
+    box-sizing:border-box;
+}
