@@ -1846,3 +1846,162 @@ and (min-height:850px){
 
     box-sizing:border-box;
 }
+/* ==========================================================
+   DESCARTE — ENQUADRAMENTO FINAL DESKTOP
+   ORIGEM ATÉ A LINHA DO MENU
+   TOP 10 + AMBIENTAL = 50 / 50
+========================================================== */
+
+@media (min-width:1051px){
+
+
+    /* ======================================================
+       PÁGINA
+       Usa exatamente a altura disponível do conteúdo
+    ====================================================== */
+
+    .pagina-descarte{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       ÁREA PRINCIPAL DO DESCARTADO POR ANO
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-grid-ano{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        align-items:stretch;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       DESCARTE POR ORIGEM
+       Vai até a mesma linha inferior da coluna direita
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-grid-ano
+    .descarte-panel-origens{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       COLUNA DIREITA
+       DIVISÃO EXATA 50 / 50
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-coluna-ano-direita{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            minmax(0,1fr)
+            minmax(0,1fr) !important;
+
+        gap:7px;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       TOP 10
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-panel-top10{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       CUSTO AMBIENTAL
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-panel-ambiental{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       SCROLL SOMENTE NO TOP 10
+    ====================================================== */
+
+    .pagina-descarte
+    .descarte-top10-scroll,
+
+    .pagina-descarte
+    .descarte-top10-scroll
+    .table-wrap,
+
+    .pagina-descarte
+    .descarte-top10-scroll
+    .table-scroll{
+
+        height:100% !important;
+
+        min-height:0 !important;
+    }
+
+
+    .pagina-descarte
+    .descarte-top10-scroll
+    .table-scroll{
+
+        overflow-y:auto !important;
+        overflow-x:hidden !important;
+    }
+}
