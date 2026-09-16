@@ -1132,59 +1132,67 @@ const segundoSemestre =
 
 function renderDescarte(){
 
-    /* ======================================================
-       SENHA
-    ====================================================== */
+  /* ======================================================
+   SENHA
+   No modo apresentação, o Descarte abre sem senha
+====================================================== */
 
-    if(!senhaDescarteLiberada){
-
-        conteudo.innerHTML = `
-
-            <div class="senha-box">
-
-                <h2>
-                    🔒 Área Restrita - Descarte
-                </h2>
-
-                <p>
-                    Digite a senha para acessar as informações.
-                </p>
-
-                <input
-                    type="password"
-                    id="senhaDescarte"
-                    placeholder="Digite a senha"
-                    autocomplete="current-password"
-                    onkeydown="
-                        if(event.key === 'Enter'){
-                            validarSenhaDescarte();
-                        }
-                    "
-                >
-
-                <button
-                    type="button"
-                    class="btn"
-                    onclick="validarSenhaDescarte()"
-                >
-                    Acessar
-                </button>
-
-                <p
-                    id="erroSenha"
-                    style="
-                        color:#ef4444;
-                        font-weight:900;
-                    "
-                ></p>
-
-            </div>
-        `;
-
-        return;
-    }
+const modoApresentacaoAtivo =
+    document.body.classList.contains(
+        "modo-apresentacao"
+    );
 
 
+if(
+    !senhaDescarteLiberada &&
+    !modoApresentacaoAtivo
+){
+
+    conteudo.innerHTML = `
+
+        <div class="senha-box">
+
+            <h2>
+                🔒 Área Restrita - Descarte
+            </h2>
+
+            <p>
+                Digite a senha para acessar as informações.
+            </p>
+
+            <input
+                type="password"
+                id="senhaDescarte"
+                placeholder="Digite a senha"
+                autocomplete="current-password"
+                onkeydown="
+                    if(event.key === 'Enter'){
+                        validarSenhaDescarte();
+                    }
+                "
+            >
+
+            <button
+                type="button"
+                class="btn"
+                onclick="validarSenhaDescarte()"
+            >
+                Acessar
+            </button>
+
+            <p
+                id="erroSenha"
+                style="
+                    color:#ef4444;
+                    font-weight:900;
+                "
+            ></p>
+
+        </div>
+    `;
+
+    return;
+}
     /* ======================================================
        LIMPEZA
     ====================================================== */
