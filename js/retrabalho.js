@@ -1397,10 +1397,10 @@ ctx.restore();
                     layout:{
 
                        padding:{
-    top:22,
-    right:86,
-    bottom:36,
-    left:12
+    top:18,
+    right:55,
+    bottom:30,
+    left:8
 }
                     },
 
