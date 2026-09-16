@@ -1327,120 +1327,356 @@
     font-weight:800;
 }
 /* ==========================================================
-   AJUSTE PARA NOTEBOOKS (IGUAL À ABA AMOSTRA)
+   ADEQUAÇÃO DE CAIXA — ENQUADRAMENTO AUTOMÁTICO
+   Padrão visual semelhante ao Descarte
 ========================================================== */
 
-@media (min-width:1201px) and (max-height:900px){
+@media (min-width:1201px){
 
-    /* Cards superiores */
+    /* ======================================================
+       ESPAÇAMENTO SUPERIOR
+    ====================================================== */
 
-    .adequacao-indicadores,
-    .pagina-retrabalho .cards{
+    .retrabalho-abas{
+        margin-bottom:6px;
+    }
+
+
+    .adequacao-indicadores{
         gap:6px;
         margin-bottom:6px;
     }
 
-    /* Grade principal */
 
-    .adequacao-grid,
-    .pagina-retrabalho .grid-2{
+    /* ======================================================
+       GRADE PRINCIPAL
+
+       Usa somente a altura disponível da tela.
+       A tabela acompanha exatamente os dois gráficos.
+    ====================================================== */
+
+    .adequacao-grid{
+
+        grid-template-columns:
+            minmax(0,.88fr)
+            minmax(0,1.22fr);
+
         gap:6px;
-        margin-bottom:6px;
+
+        height:
+            calc(100dvh - 270px);
+
+        min-height:440px;
+        max-height:590px;
+
+        margin-bottom:0;
+
+        align-items:stretch;
     }
 
-    /* Painéis */
 
-    .adequacao-panel,
-    .retrabalho-panel,
-    .pagina-retrabalho .panel{
+    /* ======================================================
+       COLUNA DOS GRÁFICOS
+    ====================================================== */
 
-        padding:8px;
+    .adequacao-coluna-graficos{
+
+        display:grid;
+
+        grid-template-rows:
+            minmax(0,1.15fr)
+            minmax(0,.85fr);
+
+        gap:6px;
+
+        height:100%;
+
+        min-height:0;
     }
 
-    /* BOM × AVARIA */
+
+    /* ======================================================
+       TODOS OS PAINÉIS DA ADEQUAÇÃO
+    ====================================================== */
+
+    .adequacao-panel{
+
+        min-height:0 !important;
+
+        padding:7px !important;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       BOM × AVARIA
+    ====================================================== */
 
     .adequacao-panel-bom-avaria{
-        min-height:265px;
+
+        height:100%;
+
+        min-height:0 !important;
     }
+
+
+    .adequacao-bom-avaria-conteudo{
+
+        grid-template-columns:
+            minmax(180px,240px)
+            minmax(190px,1fr);
+
+        gap:6px;
+
+        width:100%;
+
+        height:
+            calc(100% - 28px);
+
+        min-height:0;
+
+        padding:
+            0
+            4px;
+    }
+
 
     .adequacao-chart-box{
-        height:215px;
-        min-height:215px;
+
+        width:100%;
+
+        max-width:230px;
+
+        height:100%;
+
+        min-height:0;
+
+        max-height:210px;
+
+        margin:auto;
     }
 
-    /* Motivos */
+
+    .adequacao-legenda{
+
+        max-width:310px;
+
+        gap:11px;
+    }
+
+
+    .adequacao-legenda-item{
+
+        grid-template-columns:
+            12px
+            48px
+            minmax(120px,1fr);
+
+        gap:6px;
+    }
+
+
+    /* ======================================================
+       ADEQUAÇÃO POR MOTIVO
+    ====================================================== */
 
     .adequacao-panel-motivos{
-        min-height:265px;
+
+        height:100%;
+
+        min-height:0 !important;
     }
+
 
     .adequacao-chart-box-motivos{
-        height:215px;
-        min-height:215px;
+
+        width:100%;
+
+        height:
+            calc(100% - 28px);
+
+        min-height:0 !important;
+
+        max-height:none;
     }
 
-    /* Tabela */
+
+    /* ======================================================
+       PAINEL DA TABELA
+    ====================================================== */
 
     .adequacao-panel-tabela{
-        min-height:536px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        height:100%;
+
+        min-height:0 !important;
+
+        overflow:hidden;
     }
+
+
+    /* ======================================================
+       PESQUISA
+    ====================================================== */
+
+    .adequacao-pesquisa{
+
+        flex:0 0 auto;
+
+        margin-bottom:6px;
+    }
+
+
+    .adequacao-pesquisa input{
+
+        min-height:35px;
+
+        height:35px;
+
+        font-size:11px;
+    }
+
+
+    .adequacao-pesquisa-icone{
+
+        height:35px;
+
+        font-size:20px;
+    }
+
+
+    /* ======================================================
+       TABELA
+
+       O scroll acontece somente dentro dela.
+    ====================================================== */
+
+    .adequacao-tabela{
+
+        flex:1 1 auto;
+
+        height:auto;
+
+        min-height:0;
+    }
+
 
     .adequacao-tabela-scroll{
-        max-height:455px;
+
+        flex:1 1 auto;
+
+        width:100%;
+
+        height:100%;
+
+        min-height:0;
+
+        max-height:none !important;
+
+        overflow:auto;
     }
 
-    /* Gráfico Retrabalho */
 
-    .retrabalho-chart-box,
-    .pagina-retrabalho .chart-box.tall{
-
-        height:285px;
-        min-height:285px;
-    }
-
-    /* Legenda */
-
-    .adequacao-legenda-nome{
-        font-size:12px;
-        font-weight:800;
-    }
-
-    .adequacao-legenda-valor{
-        font-size:11px;
-        font-weight:800;
-    }
-
-    /* Pesquisa */
-
-    .adequacao-pesquisa input,
-    #buscaFabricante{
-        min-height:36px;
-        font-size:12px;
-    }
-
-    /* Tabela */
+    /* ======================================================
+       LINHAS MAIS COMPACTAS
+    ====================================================== */
 
     .adequacao-tabela th{
-        font-size:11px;
+
+        padding:
+            7px
+            7px;
+
+        font-size:10.5px;
     }
+
 
     .adequacao-tabela td{
-        font-size:11px;
+
+        padding:
+            6px
+            7px;
+
+        font-size:10.5px;
+
+        line-height:1.15;
     }
 
-    /* Cards */
 
-    .card-titulo{
-        font-size:12px;
+    /* ======================================================
+       TÍTULOS DOS PAINÉIS
+       NÃO ALTERA O TEXTO, SOMENTE ESPAÇO
+    ====================================================== */
+
+    .adequacao-panel h3{
+
+        margin:
+            0
+            0
+            5px;
+
+        line-height:1.1;
+    }
+}
+
+
+/* ==========================================================
+   MONITOR MAIS BAIXO / NAVEGADOR SEM F11
+========================================================== */
+
+@media (min-width:1201px) and (max-height:760px){
+
+    .adequacao-grid{
+
+        height:
+            calc(100dvh - 250px);
+
+        min-height:410px;
     }
 
-    .card-valor{
-        font-size:18px;
-        font-weight:900;
+
+    .adequacao-coluna-graficos{
+
+        grid-template-rows:
+            minmax(0,1.1fr)
+            minmax(0,.9fr);
     }
 
-    .card-subtitulo{
-        font-size:11px;
+
+    .adequacao-chart-box{
+
+        max-height:185px;
+    }
+
+
+    .adequacao-legenda{
+
+        gap:8px;
+    }
+
+
+    .adequacao-tabela th{
+
+        padding:
+            6px
+            6px;
+
+        font-size:10px;
+    }
+
+
+    .adequacao-tabela td{
+
+        padding:
+            5px
+            6px;
+
+        font-size:10px;
     }
 }
 /* ==========================================================
