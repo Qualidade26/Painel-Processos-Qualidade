@@ -1903,3 +1903,87 @@
         font-size:10px;
     }
 }
+/* ==========================================================
+   SGQ — RESTAURA SCROLL AUTOMÁTICO
+   Mantém o conteúdo limitado pela altura do menu,
+   mas permite rolar quando uma página não couber.
+========================================================== */
+
+@media (min-width:641px){
+
+    /* ======================================================
+       CONTAINER PRINCIPAL DO CONTEÚDO
+       Fica com a mesma altura do menu,
+       mas pode rolar internamente.
+    ====================================================== */
+
+    .content{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        overflow-x:hidden !important;
+        overflow-y:auto !important;
+
+        scrollbar-gutter:stable;
+    }
+
+
+    /* ======================================================
+       PÁGINA CARREGADA
+       Se couber: ocupa a tela.
+       Se não couber: cresce e o .content cria scroll.
+    ====================================================== */
+
+    .content > *{
+
+        flex:
+            0
+            0
+            auto !important;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:100% !important;
+
+        max-height:none !important;
+
+        overflow:visible !important;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       SUBABAS / CONTEÚDOS INTERNOS
+       Não bloquear o crescimento da página.
+    ====================================================== */
+
+    .content [id^="conteudoInterno"],
+    .content [class*="-conteudo-aba"]{
+
+        height:auto;
+
+        min-height:0;
+
+        max-height:none;
+
+        overflow:visible;
+    }
+
+
+    /* ======================================================
+       ÁREAS QUE JÁ POSSUEM SCROLL PRÓPRIO
+       Continuam funcionando normalmente.
+    ====================================================== */
+
+    .content .table-wrap,
+    .content .table-scroll,
+    .content [class*="-tabela-scroll"]{
+
+        overflow:auto;
+    }
+}
