@@ -964,3 +964,354 @@
         height:250px;
     }
 }
+/* ==========================================================
+   IMPORTAÇÃO — ENQUADRAMENTO FINAL
+   NAVEGADOR NORMAL + F11
+========================================================== */
+
+@media (min-width:901px){
+
+
+    /* ======================================================
+       PÁGINA PRINCIPAL
+       Título + indicadores + abas + conteúdo
+    ====================================================== */
+
+    .pagina-importacao{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            auto
+            auto
+            auto
+            minmax(0,1fr);
+
+        gap:6px;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       TÍTULO
+    ====================================================== */
+
+    .pagina-importacao
+    > .page-title{
+
+        margin:0 !important;
+
+        flex:none;
+    }
+
+
+    /* ======================================================
+       5 INDICADORES
+    ====================================================== */
+
+    .pagina-importacao
+    > .importacao-cards{
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+
+        margin:0 !important;
+
+        gap:6px;
+    }
+
+
+    /* ======================================================
+       ABAS INTERNAS
+    ====================================================== */
+
+    .pagina-importacao
+    > .importacao-abas{
+
+        width:100%;
+
+        margin:0 !important;
+
+        flex:none;
+    }
+
+
+    /* mantém o padrão da barrinha azul */
+
+    .pagina-importacao
+    .importacao-aba{
+
+        border-bottom:
+            3px solid transparent;
+    }
+
+
+    .pagina-importacao
+    .importacao-aba.ativa{
+
+        background:#ffffff;
+
+        color:#0b45d8;
+
+        border-bottom-color:#1557ff;
+    }
+
+
+    /* ======================================================
+       ÁREA DA ABA ATIVA
+    ====================================================== */
+
+    #conteudoInternoImportacao{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:flex;
+        flex-direction:column;
+
+        gap:6px;
+
+        overflow:hidden;
+    }
+
+
+
+    /* ======================================================
+       ABA 1 — INDICADOR DE IMPORTAÇÃO
+    ====================================================== */
+
+    #painelEvolucaoImportacao{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:flex;
+        flex-direction:column;
+
+        margin:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    #painelEvolucaoImportacao
+    > .importacao-panel-titulo{
+
+        flex:0 0 auto;
+    }
+
+
+    /* gráfico ocupa o espaço disponível */
+
+    #painelEvolucaoImportacao
+    .chart-box-importacao{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:hidden;
+    }
+
+
+    #painelEvolucaoImportacao
+    canvas{
+
+        width:100% !important;
+        height:100% !important;
+
+        max-height:100% !important;
+    }
+
+
+    /* ======================================================
+       BARRA RANKING
+    ====================================================== */
+
+    #botaoAbrirRankingImportacao{
+
+        flex:0 0 auto;
+
+        margin:0 !important;
+    }
+
+
+    /* ======================================================
+       AVISO INFERIOR
+    ====================================================== */
+
+    .pagina-importacao
+    .importacao-aviso-zero{
+
+        flex:0 0 auto;
+
+        margin:0 !important;
+    }
+
+
+
+    /* ======================================================
+       RANKING FECHADO
+    ====================================================== */
+
+    #painelRankingImportacao.importacao-ranking-oculto{
+
+        display:none !important;
+    }
+
+
+
+    /* ======================================================
+       RANKING ABERTO
+       EVOLUÇÃO + RANKING dividem o espaço disponível
+    ====================================================== */
+
+    .pagina-importacao.ranking-importacao-aberto
+    #painelEvolucaoImportacao,
+
+    .pagina-importacao.ranking-importacao-aberto
+    #painelRankingImportacao{
+
+        flex:1 1 0;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+    }
+
+
+    #painelRankingImportacao.importacao-ranking-visivel{
+
+        width:100%;
+
+        display:flex !important;
+        flex-direction:column;
+
+        margin:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    #painelRankingImportacao
+    .chart-box-sku-importacao{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:hidden;
+    }
+
+
+    #painelRankingImportacao
+    canvas{
+
+        width:100% !important;
+        height:100% !important;
+
+        max-height:100% !important;
+    }
+
+
+
+    /* ======================================================
+       ABA 2 — FLUXO DE INSPEÇÃO SEMANAL
+    ====================================================== */
+
+    #conteudoInternoImportacao
+    > .importacao-panel-fluxo{
+
+        flex:1 1 0;
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:flex;
+        flex-direction:column;
+
+        margin:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    .importacao-panel-fluxo
+    .importacao-fluxo-cabecalho{
+
+        flex:0 0 auto;
+    }
+
+
+    /* ======================================================
+       TABELA DO FLUXO
+    ====================================================== */
+
+    .importacao-panel-fluxo
+    .importacao-tabela-wrap{
+
+        flex:1 1 0;
+
+        width:100%;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:hidden;
+    }
+
+
+    .importacao-panel-fluxo
+    .importacao-tabela-scroll{
+
+        width:100%;
+        height:100% !important;
+
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow-y:auto !important;
+        overflow-x:auto;
+    }
+}
