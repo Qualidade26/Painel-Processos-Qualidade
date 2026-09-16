@@ -1200,16 +1200,16 @@ const textoCentroAdequacao = {
                 para fora da área do canvas.
             */
 
-           const finalX =
+         const finalX =
     Math.min(
-        cotoveloX + 20,
-        chartArea.right - 52
+        cotoveloX + 30,
+        chart.width - 62
     );
 
 const finalY =
     Math.min(
-        chartArea.bottom - 38,
-        cotoveloY + 30
+        chart.height - 34,
+        cotoveloY + 38
     );
 
             ctx.save();
@@ -1266,7 +1266,7 @@ ctx.font =
 ctx.fillText(
     "AVARIA",
     finalX + 5,
-    finalY + 2
+    finalY + 1
 );
 
 
@@ -1279,7 +1279,7 @@ ctx.font =
 ctx.fillText(
     `${Math.round(percentualAvaria)}%`,
     finalX + 5,
-    finalY + 14
+    finalY + 12
 );
 
            
@@ -1396,13 +1396,12 @@ ctx.restore();
 
                     layout:{
 
-                        padding:{
-
-                            top:34,
-                            right:72,
-                            bottom:12,
-                            left:12
-                        }
+                       padding:{
+    top:22,
+    right:86,
+    bottom:36,
+    left:12
+}
                     },
 
 
