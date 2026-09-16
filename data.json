@@ -364,7 +364,7 @@
 
 {"fabricante":"SteriLance Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":8385000,"skuano":13,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Biomed Healthcare","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":8942500,"skuano":16,"horas":0,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
-{"fabricante":"Accumax","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
+{"fabricante":"Accumax","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
 {"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":7,"produtosfornecidos":5605440,"skuano":16,"horas":4,"indiceavaliacao":0.94,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Shandong Aosaite","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":2349600,"skuano":8,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Shanghai SA Medical","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":1894500,"skuano":8,"horas":0,"indiceavaliacao":0.90,"avaliacao":"🟢 Muito bom" },
@@ -375,12 +375,12 @@
 {"fabricante":"Medico (Huaian) CO., LTDA","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":4420080,"skuano":41,"horas":0,"indiceavaliacao":0.75,"avaliacao":"🟠 Ruim" },
 {"fabricante":"Well Lead medical co., ltd.","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":645000,"skuano":21,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Polymed Medicure","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1840800,"skuano":3,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
-{"fabricante":"Phoenix Innovative HealtCare","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":127348000,"skuano":1,"horas":0,"indiceavaliacao":0.87,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Phoenix Innovative HealtCare","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":127348000,"skuano":1,"horas":0,"indiceavaliacao":0.84,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Yangzhou Medline Industry","rnc":3,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":4,"produtosfornecidos":7140000,"skuano":14,"horas":255,"indiceavaliacao":0.74,"avaliacao":"🟠 Ruim" },
 {"fabricante":"Jiangsu Webest Medical ","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3900000,"skuano":2,"horas":0,"indiceavaliacao":0.85,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Honsun Nantong","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":60100,"skuano":15,"horas":0,"indiceavaliacao":0.80,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Nanjing Jiangnan Novel","rnc":1,"ocorrencias":0,"retrabalhos":2,"reclamacoes":0,"processosano":2,"produtosfornecidos":843,"skuano":6,"horas":54,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
-{"fabricante":"Vitromed Healthcare","rnc":1,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":12050000,"skuano":7,"horas":0,"indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Vitromed Healthcare","rnc":1,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":12050000,"skuano":7,"horas":0,"indiceavaliacao":0.91,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Jiangsu Kangjian","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":133,"skuano":4,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Xiantao Xingrong Protective","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":1350000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Jiangxi Hongda Medical ","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":10332000,"skuano":3,"horas":0,"indiceavaliacao":0.90,"avaliacao":"🟢 Muito bom" },
@@ -390,34 +390,34 @@
 {"fabricante":"Pharmaplast AS ","rnc":2,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":2,"produtosfornecidos":19071800,"skuano":4,"horas":10,"indiceavaliacao":0.63,"avaliacao":"🔴 Crítico" },
 {"fabricante":"Jiangsu Huida Medical","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":902210,"skuano":10,"horas":0,"indiceavaliacao":0.70,"avaliacao":"🟠 Ruim" },
 {"fabricante":"Guangzhou Improve Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":2272000,"skuano":6,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
-{"fabricante":"Anhui Easyway Medical","rnc":4,"ocorrencias":3,"retrabalhos":0,"reclamacoes":0,"processosano":19,"produtosfornecidos":116788045,"skuano":22,"horas":0,"indiceavaliacao":0.91,"avaliacao":"🟢 Muito bom" },
-{"fabricante":"SR Produtos para la salud S.A","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":12982000,"skuano":6,"horas":0,"indiceavaliacao":0.89,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Anhui Easyway Medical","rnc":4,"ocorrencias":3,"retrabalhos":0,"reclamacoes":0,"processosano":19,"produtosfornecidos":116788045,"skuano":22,"horas":0,"indiceavaliacao":0.88,"avaliacao":"🟡 Atenção" },
+{"fabricante":"SR Produtos para la salud S.A","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":12982000,"skuano":6,"horas":0,"indiceavaliacao":0.86,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Bonrre Medical co ltda","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":5902700,"skuano":52,"horas":0,"indiceavaliacao":0.90,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"AB Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":6261600,"skuano":8,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Poly Medicure","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":8,"produtosfornecidos":3811850,"skuano":7,"horas":0,"indiceavaliacao":0.96,"avaliacao":"🟢 Excelente" },
 {"fabricante":"GoodWood medical care Dalian","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":730000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
-{"fabricante":"Shangai Kindly ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Garware Bestretch","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Nantong Renon ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Jiangsu Kangjian Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
+{"fabricante":"Shangai Kindly ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Garware Bestretch","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Nantong Renon ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Jiangsu Kangjian Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
 {"fabricante":"Blue Cross Bio-Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":160000,"skuano":1,"horas":0,"indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
-{"fabricante":"Hangzhou Rollmed","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Dalian GoodWood","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Wellspring Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" },
-{"fabricante":"Alphaven ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":,"avaliacao":"" }
+{"fabricante":"Hangzhou Rollmed","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Dalian GoodWood","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Wellspring Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
+{"fabricante":"Alphaven ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" }
 
 ],
 "ranking":[
-{"posicao":1,"fabricante":"Medico Electroude","indiceAvaliacao":1.00},
-{"posicao":2,"fabricante":"SteriLance Medical","indiceAvaliacao":1.00},
-{"posicao":3,"fabricante":"Ayset Plastik","indiceAvaliacao":1.00},
-{"posicao":4,"fabricante":"Guangzhou Improve Medical ","indiceAvaliacao":1.00},
-{"posicao":5,"fabricante":"AB Medical","indiceAvaliacao":1.00},
-{"posicao":6,"fabricante":"Huaian Tianda Medical","indiceAvaliacao":1.00},
-{"posicao":7,"fabricante":"Shandong Aosaite","indiceAvaliacao":1.00},
-{"posicao":8,"fabricante":"Xiantao Xingrong Protective","indiceAvaliacao":1.00},
-{"posicao":9,"fabricante":"Well Lead medical co., ltd.","indiceAvaliacao":1.00},
-{"posicao":10,"fabricante":"Polymed Medicure","indiceAvaliacao":1.00}
+{"posicao":1,"fabricante":"Medico Electroude","indiceavaliacao":1.00},
+{"posicao":2,"fabricante":"SteriLance Medical","indiceavaliacao":1.00},
+{"posicao":3,"fabricante":"Ayset Plastik","indiceavaliacao":1.00},
+{"posicao":4,"fabricante":"Guangzhou Improve Medical ","indiceavaliacao":1.00},
+{"posicao":5,"fabricante":"AB Medical","indiceavaliacao":1.00},
+{"posicao":6,"fabricante":"Huaian Tianda Medical","indiceavaliacao":1.00},
+{"posicao":7,"fabricante":"Shandong Aosaite","indiceavaliacao":1.00},
+{"posicao":8,"fabricante":"Xiantao Xingrong Protective","indiceavaliacao":1.00},
+{"posicao":9,"fabricante":"Well Lead medical co., ltd.","indiceavaliacao":1.00},
+{"posicao":10,"fabricante":"Polymed Medicure","indiceavaliacao":1.00}
     ],
     "top10Rnc": [
 
@@ -429,8 +429,8 @@
 {"posicao":6,"fabricante":"Phoenix Innovative HealtCare","rnc":2},
 {"posicao":7,"fabricante":"Honsun Nantong","rnc":2},
 {"posicao":8,"fabricante":"Pharmaplast AS ","rnc":2},
-{"posicao":9,"fabricante":"Jiangsu Huida Medical","rnc":2}
-
+{"posicao":9,"fabricante":"Jiangsu Huida Medical","rnc":2},
+{"posicao":10,"fabricante":"SR Produtos para la salud S.A","rnc":2}
 
 
     ]
@@ -719,4 +719,3 @@
     ]
   }
 }
-
