@@ -1185,29 +1185,19 @@ align-items:stretch;
     }
 }
 /* ==========================================================
-   SGQ — ENQUADRAMENTO GLOBAL DAS PÁGINAS
-   Navegador normal + F11
+   SGQ — ENQUADRAMENTO GLOBAL SEGURO
+   NAVEGADOR NORMAL + F11
 
-   REGRA:
-   - menu e conteúdo terminam na mesma linha
-   - página nunca ultrapassa o menu
-   - última área da página ocupa o espaço restante
-   - sem cálculos individuais por aba
+   Controla SOMENTE a moldura externa.
+   Não interfere em subabas, grids ou páginas internas.
 ========================================================== */
 
 @media (min-width:641px){
 
-
-    /* ======================================================
-       TELA
-    ====================================================== */
-
     html,
     body{
-
         width:100%;
         height:100%;
-
         min-width:0;
         min-height:0;
 
@@ -1218,7 +1208,6 @@ align-items:stretch;
 
 
     body{
-
         height:100vh;
         height:100dvh;
 
@@ -1227,31 +1216,17 @@ align-items:stretch;
     }
 
 
-    /* ======================================================
-       CABEÇALHO
-       Mantém somente a altura necessária
-    ====================================================== */
+    /* CABEÇALHO */
 
     .topbar{
-
-        flex:
-            0
-            0
-            auto;
+        flex:0 0 auto;
     }
 
 
-    /* ======================================================
-       ÁREA PRINCIPAL
-       Todo espaço restante da tela
-    ====================================================== */
+    /* ÁREA PRINCIPAL */
 
     .main-wrap{
-
-        flex:
-            1
-            1
-            0 !important;
+        flex:1 1 0 !important;
 
         width:100%;
 
@@ -1268,234 +1243,64 @@ align-items:stretch;
     }
 
 
-    /* ======================================================
-       MENU + CONTEÚDO
-       SEMPRE COM A MESMA ALTURA
-    ====================================================== */
+    /* MENU */
 
-    .menu,
-    .content{
-
+    .menu{
         height:100% !important;
 
         min-height:0 !important;
 
         align-self:stretch !important;
 
+        overflow:hidden !important;
+
         box-sizing:border-box;
     }
 
 
-    /* ======================================================
-       MENU
-    ====================================================== */
-
-    .menu{
-
-        overflow:hidden !important;
-    }
-
-
-    /* ======================================================
-       ÁREA DAS PÁGINAS
-    ====================================================== */
+    /* CONTEÚDO */
 
     .content{
+        width:100%;
 
-        display:flex;
-
-        flex-direction:column;
+        height:100% !important;
 
         min-width:0;
+        min-height:0 !important;
 
-        overflow:hidden !important;
+        box-sizing:border-box;
+
+        overflow-x:hidden !important;
+        overflow-y:auto !important;
+
+        scrollbar-gutter:stable;
+
+        -webkit-overflow-scrolling:touch;
     }
 
 
-    /* ======================================================
-       PÁGINA CARREGADA
+    /*
+       SOMENTE A RAIZ DA PÁGINA.
 
-       Qualquer página aberta passa a ocupar exatamente
-       a altura disponível do conteúdo.
-    ====================================================== */
+       Pode ocupar no mínimo a altura disponível,
+       mas NÃO mudamos display, flex ou grid dela.
+    */
 
     .content > *{
-
-        flex:
-            1
-            1
-            0;
-
         width:100%;
 
-        height:100%;
+        min-width:0;
+        min-height:100%;
 
         max-width:100%;
-        max-height:100%;
-
-        min-width:0;
-        min-height:0;
-
-        box-sizing:border-box;
-
-        overflow:hidden;
-    }
-
-
-    /* ======================================================
-       RAIZ DAS PÁGINAS
-
-       Mantém títulos/cards em cima
-       e entrega o restante para a área principal.
-    ====================================================== */
-
-    .content > *{
-
-        display:flex;
-
-        flex-direction:column;
-    }
-
-
-    /* ======================================================
-       TÍTULOS / ABAS / INDICADORES
-       NÃO DEVEM SER ESTICADOS
-    ====================================================== */
-
-    .content .page-title,
-
-    .content .cards,
-
-    .content [class$="-indicadores"],
-
-    .content [class*="-indicadores "],
-
-    .content [class$="-abas"],
-
-    .content [class*="-abas "]{
-
-        flex:
-            0
-            0
-            auto;
-    }
-
-
-    /* ======================================================
-       ÚLTIMA ÁREA DA PÁGINA
-
-       É ela que ocupa automaticamente até a linha
-       inferior do menu.
-    ====================================================== */
-
-    .content > * > :last-child{
-
-        flex:
-            1
-            1
-            0;
-
-        min-height:0;
-
-        max-height:100%;
-    }
-
-
-    /* ======================================================
-       CONTEÚDOS INTERNOS
-       Retrabalho, Esfig e outras páginas com subabas
-    ====================================================== */
-
-    .content [id^="conteudoInterno"],
-    .content [class*="-conteudo-aba"]{
-
-        flex:
-            1
-            1
-            0;
-
-        width:100%;
-
-        height:100%;
-
-        min-width:0;
-        min-height:0;
-
-        display:flex;
-
-        flex-direction:column;
-
-        overflow:hidden;
-    }
-
-
-    /* ======================================================
-       ÚLTIMA ÁREA DENTRO DAS SUBABAS
-    ====================================================== */
-
-    .content [id^="conteudoInterno"] > :last-child,
-    .content [class*="-conteudo-aba"] > :last-child{
-
-        flex:
-            1
-            1
-            0;
-
-        min-height:0;
-    }
-
-
-    /* ======================================================
-       GRADES PRINCIPAIS
-    ====================================================== */
-
-    .content .grid-2,
-
-    .content .grid-3,
-
-    .content .grid-4,
-
-    .content [class$="-grid"],
-    .content [class*="-grid "]{
-
-        min-width:0;
-        min-height:0;
-
-        max-height:100%;
 
         box-sizing:border-box;
     }
 
 
-    /* ======================================================
-       PAINÉIS DENTRO DA ÁREA FLEXÍVEL
-    ====================================================== */
+    /* PROTEÇÃO DAS SUBABAS */
 
-    .content .panel{
-
-        min-width:0;
-        min-height:0;
-
-        box-sizing:border-box;
-    }
-
-
-    /* ======================================================
-       TABELAS
-
-       Quando houver conteúdo demais,
-       o scroll acontece dentro da tabela,
-       nunca aumentando a página.
-    ====================================================== */
-
-    .content .table-wrap,
-    .content .table-scroll,
-    .content [class*="-tabela-scroll"]{
-
-        min-height:0;
-
-        max-height:100%;
-
-        overflow:auto;
+    [hidden]{
+        display:none !important;
     }
 }
