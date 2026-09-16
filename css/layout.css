@@ -933,7 +933,8 @@ align-items:stretch;
     }
 }
 /* ==========================================================
-   MENU LATERAL — TAMANHO EQUILIBRADO
+   MENU LATERAL — AJUSTE FINAL
+   Preenche toda a altura + texto e emojis maiores
 ========================================================== */
 
 
@@ -944,34 +945,38 @@ align-items:stretch;
 .main-wrap{
 
     grid-template-columns:
-        clamp(145px, 10vw, 160px)
+        clamp(152px, 10.5vw, 170px)
         minmax(0,1fr) !important;
 
     gap:8px !important;
 
     padding:6px !important;
+
+    align-items:stretch !important;
 }
 
 
 /* ==========================================================
-   MENU
+   MENU LATERAL
 ========================================================== */
 
 .menu{
 
     width:100%;
 
-    height:auto !important;
-    min-height:0 !important;
+    height:100% !important;
 
-    align-self:start;
+    min-width:0;
+    min-height:0;
 
-    padding:6px !important;
+    align-self:stretch !important;
 
     display:flex;
     flex-direction:column;
 
     gap:5px !important;
+
+    padding:6px !important;
 
     overflow:hidden;
 
@@ -985,18 +990,19 @@ align-items:stretch;
 
 .menu .toggle-menu{
 
-    flex:0 0 32px !important;
+    flex:0 0 34px !important;
 
     width:100%;
 
-    height:32px !important;
-    min-height:32px !important;
+    height:34px !important;
+    min-height:34px !important;
+    max-height:34px !important;
 
     margin:0 !important;
 
     padding:0 !important;
 
-    font-size:17px !important;
+    font-size:18px !important;
 
     border-radius:9px !important;
 }
@@ -1004,17 +1010,19 @@ align-items:stretch;
 
 /* ==========================================================
    ABAS
+   Todas dividem a altura restante
 ========================================================== */
 
 .menu > button:not(.toggle-menu){
 
-    flex:0 0 52px !important;
+    flex:1 1 0 !important;
 
     width:100%;
 
-    height:52px !important;
-    min-height:52px !important;
-    max-height:52px !important;
+    height:auto !important;
+
+    min-height:0 !important;
+    max-height:none !important;
 
     margin:0 !important;
 
@@ -1022,11 +1030,11 @@ align-items:stretch;
         4px
         5px !important;
 
-    font-size:10px !important;
-
-    line-height:1.05 !important;
-
     border-radius:9px !important;
+
+    font-size:10.5px !important;
+
+    line-height:1.08 !important;
 
     box-sizing:border-box;
 }
@@ -1040,14 +1048,14 @@ align-items:stretch;
 
     display:block;
 
-    font-size:21px !important;
+    font-size:23px !important;
 
     line-height:1 !important;
 
     margin:
         0
         0
-        3px
+        4px
         0 !important;
 }
 
@@ -1060,11 +1068,13 @@ align-items:stretch;
 
     display:block;
 
-    font-size:9.5px !important;
+    font-size:10.2px !important;
 
-    line-height:1.05 !important;
+    line-height:1.08 !important;
 
     margin:0 !important;
+
+    overflow:visible !important;
 }
 
 
@@ -1074,9 +1084,7 @@ align-items:stretch;
 
 .menu #btnModoApresentacao{
 
-    height:56px !important;
-    min-height:56px !important;
-    max-height:56px !important;
+    flex:1.08 1 0 !important;
 }
 
 
@@ -1087,30 +1095,43 @@ align-items:stretch;
 .main-wrap.menu-collapsed{
 
     grid-template-columns:
-        56px
+        58px
         minmax(0,1fr) !important;
 }
 
 
 .main-wrap.menu-collapsed .menu{
 
+    height:100% !important;
+
     padding:5px !important;
+
+    gap:4px !important;
 }
 
 
 .main-wrap.menu-collapsed
 .menu > button:not(.toggle-menu){
 
-    height:47px !important;
-    min-height:47px !important;
-    max-height:47px !important;
+    flex:1 1 0 !important;
+
+    min-height:0 !important;
 
     padding:3px !important;
 }
 
 
+.main-wrap.menu-collapsed
+.menu button .ico{
+
+    font-size:21px !important;
+
+    margin:0 !important;
+}
+
+
 /* ==========================================================
-   TELAS MAIS BAIXAS
+   TELAS COM MENOR ALTURA
 ========================================================== */
 
 @media (max-height:720px){
@@ -1118,32 +1139,41 @@ align-items:stretch;
     .main-wrap{
 
         grid-template-columns:
-            145px
+            148px
             minmax(0,1fr) !important;
     }
 
 
     .menu{
 
-        gap:4px !important;
-
         padding:5px !important;
+
+        gap:4px !important;
+    }
+
+
+    .menu .toggle-menu{
+
+        flex-basis:30px !important;
+
+        height:30px !important;
+
+        min-height:30px !important;
+        max-height:30px !important;
     }
 
 
     .menu > button:not(.toggle-menu){
 
-        height:48px !important;
-        min-height:48px !important;
-        max-height:48px !important;
-
-        font-size:9px !important;
+        padding:
+            3px
+            4px !important;
     }
 
 
     .menu > button:not(.toggle-menu) .ico{
 
-        font-size:19px !important;
+        font-size:20px !important;
 
         margin-bottom:2px !important;
     }
@@ -1151,14 +1181,6 @@ align-items:stretch;
 
     .menu > button:not(.toggle-menu) .label{
 
-        font-size:9px !important;
-    }
-
-
-    .menu #btnModoApresentacao{
-
-        height:51px !important;
-        min-height:51px !important;
-        max-height:51px !important;
+        font-size:9.5px !important;
     }
 }
