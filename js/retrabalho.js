@@ -1200,15 +1200,17 @@ const textoCentroAdequacao = {
                 para fora da área do canvas.
             */
 
-            const finalX =
-                Math.min(
-                    cotoveloX + 18,
-                    chartArea.right - 46
-                );
+           const finalX =
+    Math.min(
+        cotoveloX + 20,
+        chartArea.right - 52
+    );
 
-            const finalY =
-                cotoveloY - 18;
-
+const finalY =
+    Math.min(
+        chartArea.bottom - 38,
+        cotoveloY + 30
+    );
 
             ctx.save();
 
@@ -1249,46 +1251,39 @@ const textoCentroAdequacao = {
 
             /* percentual 2% */
 
-            ctx.textAlign =
-                "left";
+           ctx.textAlign =
+    "left";
 
-            ctx.textBaseline =
-                "bottom";
+ctx.textBaseline =
+    "top";
 
-            ctx.fillStyle =
-                "#ef4444";
+ctx.fillStyle =
+    "#475569";
 
-            ctx.font =
-                "800 17px 'Segoe UI', Arial, sans-serif";
+ctx.font =
+    "700 8px 'Segoe UI', Arial, sans-serif";
 
-            ctx.fillText(
-                `${Math.round(percentualAvaria)}%`,
-                finalX + 5,
-                finalY - 18
-            );
+ctx.fillText(
+    "AVARIA",
+    finalX + 5,
+    finalY + 2
+);
 
 
-            /* texto AVARIA */
+ctx.fillStyle =
+    "#ef4444";
 
-            ctx.textBaseline =
-                "top";
+ctx.font =
+    "800 17px 'Segoe UI', Arial, sans-serif";
 
-            ctx.fillStyle =
-                "#475569";
+ctx.fillText(
+    `${Math.round(percentualAvaria)}%`,
+    finalX + 5,
+    finalY + 14
+);
 
-            ctx.font =
-                "700 8px 'Segoe UI', Arial, sans-serif";
-
-            ctx.fillText(
-                "AVARIA",
-                finalX + 5,
-                finalY - 12
-            );
-
-            ctx.restore();
-        }
-    };
-
+           
+ctx.restore();
 
     /* ======================================================
        CRIAÇÃO DO GRÁFICO
@@ -1378,7 +1373,7 @@ const textoCentroAdequacao = {
                         na região superior direita.
                     */
 
-                    rotation:38,
+                   rotation:83,
 
                     circumference:360,
 
