@@ -1405,17 +1405,20 @@ ctx.restore();
                     },
 
 
-                    plugins:{
+                   plugins:{
 
-                        legend:{
-                            display:false
-                        },
+    /* DESATIVA OS NÚMEROS DO PLUGIN GLOBAL */
+    valorFlutuante:false,
 
-                        datalabels:{
-                            display:false
-                        },
+    legend:{
+        display:false
+    },
 
-                        tooltip:{
+    datalabels:{
+        display:false
+    },
+
+    tooltip:{
 
                             callbacks:{
 
