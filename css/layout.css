@@ -932,3 +932,217 @@ align-items:stretch;
         margin-bottom:0;
     }
 }
+/* ==========================================================
+   AJUSTE FINAL DO MENU
+   MAIS ESTREITO + ABAS MAIS BAIXAS
+========================================================== */
+
+
+/* ==========================================================
+   LARGURA DO MENU
+========================================================== */
+
+.main-wrap{
+
+    grid-template-columns:
+        clamp(125px, 9vw, 140px)
+        minmax(0, 1fr) !important;
+
+    gap:6px !important;
+
+    padding:6px !important;
+}
+
+
+/* ==========================================================
+   MENU LATERAL
+========================================================== */
+
+.menu{
+
+    width:100%;
+
+    min-width:0;
+    min-height:0;
+
+    padding:5px !important;
+
+    gap:4px !important;
+
+    overflow:hidden;
+
+    box-sizing:border-box;
+}
+
+
+/* ==========================================================
+   BOTÃO DE RECOLHER
+========================================================== */
+
+.menu .toggle-menu{
+
+    flex:0 0 28px !important;
+
+    min-height:28px !important;
+    height:28px !important;
+
+    padding:0 !important;
+
+    margin:0 !important;
+
+    font-size:15px !important;
+
+    border-radius:8px;
+}
+
+
+/* ==========================================================
+   ABAS DO MENU
+========================================================== */
+
+.menu > button:not(.toggle-menu){
+
+    flex:0 0 45px !important;
+
+    width:100%;
+
+    height:45px !important;
+    min-height:45px !important;
+    max-height:45px !important;
+
+    margin:0 !important;
+
+    padding:
+        3px
+        4px !important;
+
+    font-size:9px !important;
+
+    line-height:1 !important;
+
+    border-radius:8px !important;
+
+    box-sizing:border-box;
+}
+
+
+/* ==========================================================
+   ÍCONES
+========================================================== */
+
+.menu > button:not(.toggle-menu) .ico{
+
+    font-size:17px !important;
+
+    line-height:1 !important;
+
+    margin:0 0 2px 0 !important;
+}
+
+
+/* ==========================================================
+   TEXTO DAS ABAS
+========================================================== */
+
+.menu > button:not(.toggle-menu) .label{
+
+    font-size:9px !important;
+
+    line-height:1 !important;
+
+    margin:0 !important;
+}
+
+
+/* ==========================================================
+   MODO APRESENTAÇÃO
+========================================================== */
+
+.menu #btnModoApresentacao{
+
+    height:48px !important;
+    min-height:48px !important;
+    max-height:48px !important;
+
+    font-size:8.5px !important;
+}
+
+
+/* ==========================================================
+   MENU RECOLHIDO
+========================================================== */
+
+.main-wrap.menu-collapsed{
+
+    grid-template-columns:
+        48px
+        minmax(0,1fr) !important;
+}
+
+
+.main-wrap.menu-collapsed .menu{
+
+    padding:4px !important;
+}
+
+
+.main-wrap.menu-collapsed
+.menu > button:not(.toggle-menu){
+
+    height:42px !important;
+
+    min-height:42px !important;
+
+    max-height:42px !important;
+
+    padding:2px !important;
+}
+
+
+/* ==========================================================
+   TELAS MAIS BAIXAS
+========================================================== */
+
+@media (max-height:700px){
+
+    .menu{
+
+        padding:4px !important;
+
+        gap:3px !important;
+    }
+
+
+    .menu > button:not(.toggle-menu){
+
+        flex-basis:42px !important;
+
+        height:42px !important;
+        min-height:42px !important;
+        max-height:42px !important;
+
+        font-size:8px !important;
+    }
+
+
+    .menu > button:not(.toggle-menu) .ico{
+
+        font-size:15px !important;
+
+        margin-bottom:1px !important;
+    }
+
+
+    .menu > button:not(.toggle-menu) .label{
+
+        font-size:8px !important;
+    }
+
+
+    .menu #btnModoApresentacao{
+
+        height:44px !important;
+        min-height:44px !important;
+        max-height:44px !important;
+    }
+}
