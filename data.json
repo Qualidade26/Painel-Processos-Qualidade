@@ -1,63 +1,3 @@
-{
-  "descarte": {
-"valorAtual": {
- "total": 116245.83,
-    "origens": [
-
-      {"nome": "Avaria de Importação", "valor": 1029.94},
-      {"nome": "Avaria estoque", "valor": 26.92},
-      {"nome": "Devolução avaria", "valor": 5667.18},
-      {"nome": "Desvio de Qualidade", "valor": 304.47},
-      {"nome": "Vencido", "valor": 109142.36},
-      {"nome": "Avaria Nacional", "valor": 74.96},
-      {"nome": "Certificação ", "valor": 0.00}
-]
-},
-    "descartadoAno":{
-"total":1678234.49,
-    "origens": [
-      {"nome": "Avaria de Importação", "valor": 18209.45},
-      {"nome": "Avaria estoque", "valor": 4066.22},
-      {"nome": "Devolução avaria", "valor": 16317.40},
-      {"nome": "Desvio de Qualidade", "valor": 166359.94},
-      {"nome": "Vencido", "valor": 1036230.42},
-      {"nome": "Avaria Nacional", "valor": 217.39},
-      {"nome": "Certificação ", "valor": 436833.67}
-    ],
-    "top10": [
-      {"sku":"50148N", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100", "valor": 510857.83},
-      {"sku":"521", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24", "valor": 147881.75},
-      {"sku":"518", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24", "valor": 127851.84},
-      {"sku":"726", "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25 PROCAR", "valor": 122458.95},
-      {"sku":"724", "descricao":"PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25 PROCAR", "valor": 104237.43},
-      {"sku":"727", "descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR", "valor": 95117.65},
-      {"sku":"516", "descricao":"PT-FIO AGULHADO SINTETIC ABS(PGA)-2040 C/24", "valor": 88272.56},
-      {"sku":"50203", "descricao":"PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)", "valor": 68844.66},
-      {"sku":"725", "descricao":"PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR", "valor": 53978.70},
-      {"sku":"50209", "descricao":"PT-TUBO VERMELHO SILIC 4ML PLAST C/100 (PM)", "valor": 36003.83}
-
-],
-
-"custoAmbiental": {
-"totalPrimeiroSemestre":9127.88,
-"totalSegundoSemestre":7737.06,
-"primeiroSemestre": {
-"janeiro":0.00,
-"fevereiro":0.00,
-"marco":0.00,
-"abril":0.00,
-"maio":9127.88,
-"junho":0.00
-},
-"segundoSemestre": {
-"julho":0.00,
-"agosto":7737.06,
-"setembro":0.00,
-"outubro":0.00,
-"novembro":0.00,
-"dezembro":0.00
-}
-}
 }
 },
 "esfig": {
@@ -66,7 +6,7 @@
 "ultimaAfericao":"08/07/2026",
 "proximaAfericao":"Aguardando",
 "resumoAfericoes": {
-"totalAferido":50900,
+"totalAferido":35875,
 "totalAprovado": 35875,
 "totalReprovado":25},
 "produtos":[
