@@ -933,41 +933,45 @@ align-items:stretch;
     }
 }
 /* ==========================================================
-   AJUSTE FINAL DO MENU
-   MAIS ESTREITO + ABAS MAIS BAIXAS
+   MENU LATERAL — TAMANHO EQUILIBRADO
 ========================================================== */
 
 
 /* ==========================================================
-   LARGURA DO MENU
+   ESTRUTURA PRINCIPAL
 ========================================================== */
 
 .main-wrap{
 
     grid-template-columns:
-        clamp(125px, 9vw, 140px)
-        minmax(0, 1fr) !important;
+        clamp(145px, 10vw, 160px)
+        minmax(0,1fr) !important;
 
-    gap:6px !important;
+    gap:8px !important;
 
     padding:6px !important;
 }
 
 
 /* ==========================================================
-   MENU LATERAL
+   MENU
 ========================================================== */
 
 .menu{
 
     width:100%;
 
-    min-width:0;
-    min-height:0;
+    height:auto !important;
+    min-height:0 !important;
 
-    padding:5px !important;
+    align-self:start;
 
-    gap:4px !important;
+    padding:6px !important;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:5px !important;
 
     overflow:hidden;
 
@@ -976,79 +980,89 @@ align-items:stretch;
 
 
 /* ==========================================================
-   BOTÃO DE RECOLHER
+   BOTÃO RECOLHER
 ========================================================== */
 
 .menu .toggle-menu{
 
-    flex:0 0 28px !important;
+    flex:0 0 32px !important;
 
-    min-height:28px !important;
-    height:28px !important;
+    width:100%;
 
-    padding:0 !important;
+    height:32px !important;
+    min-height:32px !important;
 
     margin:0 !important;
 
-    font-size:15px !important;
+    padding:0 !important;
 
-    border-radius:8px;
+    font-size:17px !important;
+
+    border-radius:9px !important;
 }
 
 
 /* ==========================================================
-   ABAS DO MENU
+   ABAS
 ========================================================== */
 
 .menu > button:not(.toggle-menu){
 
-    flex:0 0 45px !important;
+    flex:0 0 52px !important;
 
     width:100%;
 
-    height:45px !important;
-    min-height:45px !important;
-    max-height:45px !important;
+    height:52px !important;
+    min-height:52px !important;
+    max-height:52px !important;
 
     margin:0 !important;
 
     padding:
-        3px
-        4px !important;
+        4px
+        5px !important;
 
-    font-size:9px !important;
+    font-size:10px !important;
 
-    line-height:1 !important;
+    line-height:1.05 !important;
 
-    border-radius:8px !important;
+    border-radius:9px !important;
 
     box-sizing:border-box;
 }
 
 
 /* ==========================================================
-   ÍCONES
+   EMOJIS / ÍCONES
 ========================================================== */
 
 .menu > button:not(.toggle-menu) .ico{
 
-    font-size:17px !important;
+    display:block;
+
+    font-size:21px !important;
 
     line-height:1 !important;
 
-    margin:0 0 2px 0 !important;
+    margin:
+        0
+        0
+        3px
+        0 !important;
 }
 
 
 /* ==========================================================
-   TEXTO DAS ABAS
+   TEXTO
 ========================================================== */
 
 .menu > button:not(.toggle-menu) .label{
 
-    font-size:9px !important;
+    display:block;
 
-    line-height:1 !important;
+    font-size:9.5px !important;
+
+    line-height:1.05 !important;
 
     margin:0 !important;
 }
@@ -1060,11 +1074,9 @@ align-items:stretch;
 
 .menu #btnModoApresentacao{
 
-    height:48px !important;
-    min-height:48px !important;
-    max-height:48px !important;
-
-    font-size:8.5px !important;
+    height:56px !important;
+    min-height:56px !important;
+    max-height:56px !important;
 }
 
 
@@ -1075,27 +1087,25 @@ align-items:stretch;
 .main-wrap.menu-collapsed{
 
     grid-template-columns:
-        48px
+        56px
         minmax(0,1fr) !important;
 }
 
 
 .main-wrap.menu-collapsed .menu{
 
-    padding:4px !important;
+    padding:5px !important;
 }
 
 
 .main-wrap.menu-collapsed
 .menu > button:not(.toggle-menu){
 
-    height:42px !important;
+    height:47px !important;
+    min-height:47px !important;
+    max-height:47px !important;
 
-    min-height:42px !important;
-
-    max-height:42px !important;
-
-    padding:2px !important;
+    padding:3px !important;
 }
 
 
@@ -1103,46 +1113,52 @@ align-items:stretch;
    TELAS MAIS BAIXAS
 ========================================================== */
 
-@media (max-height:700px){
+@media (max-height:720px){
+
+    .main-wrap{
+
+        grid-template-columns:
+            145px
+            minmax(0,1fr) !important;
+    }
+
 
     .menu{
 
-        padding:4px !important;
+        gap:4px !important;
 
-        gap:3px !important;
+        padding:5px !important;
     }
 
 
     .menu > button:not(.toggle-menu){
 
-        flex-basis:42px !important;
+        height:48px !important;
+        min-height:48px !important;
+        max-height:48px !important;
 
-        height:42px !important;
-        min-height:42px !important;
-        max-height:42px !important;
-
-        font-size:8px !important;
+        font-size:9px !important;
     }
 
 
     .menu > button:not(.toggle-menu) .ico{
 
-        font-size:15px !important;
+        font-size:19px !important;
 
-        margin-bottom:1px !important;
+        margin-bottom:2px !important;
     }
 
 
     .menu > button:not(.toggle-menu) .label{
 
-        font-size:8px !important;
+        font-size:9px !important;
     }
 
 
     .menu #btnModoApresentacao{
 
-        height:44px !important;
-        min-height:44px !important;
-        max-height:44px !important;
+        height:51px !important;
+        min-height:51px !important;
+        max-height:51px !important;
     }
 }
