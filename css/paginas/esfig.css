@@ -840,3 +840,411 @@
 
     max-width:none;
 }
+/* ==========================================================
+   ESFIG — ENQUADRAMENTO FINAL DAS DUAS ABAS
+   Navegador normal + F11
+
+   📊 Aferições Anuais por SKU
+   🔄 Fluxo Operacional
+========================================================== */
+
+@media (min-width:1051px){
+
+
+    /* ======================================================
+       PÁGINA PRINCIPAL
+    ====================================================== */
+
+    .pagina-esfig{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        display:grid;
+
+        grid-template-rows:
+            clamp(26px,3.2vh,30px)
+            clamp(60px,7.5vh,68px)
+            clamp(40px,5.5vh,46px)
+            minmax(0,1fr);
+
+        gap:7px;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       TÍTULO
+    ====================================================== */
+
+    .pagina-esfig
+    > .page-title{
+
+        width:100%;
+        height:100%;
+
+        min-height:0;
+
+        margin:0 !important;
+    }
+
+
+    /* ======================================================
+       INDICADORES SUPERIORES
+    ====================================================== */
+
+    .pagina-esfig
+    > .cards{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        margin:0 !important;
+
+        gap:7px;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-esfig
+    > .cards
+    > .card{
+
+        height:100% !important;
+
+        min-height:0 !important;
+
+        margin:0;
+    }
+
+
+    /* ======================================================
+       ABAS
+    ====================================================== */
+
+    .pagina-esfig
+    > .esfig-abas{
+
+        width:100%;
+        height:100%;
+
+        min-height:0;
+
+        margin:0 !important;
+    }
+
+
+    .pagina-esfig
+    .esfig-aba{
+
+        height:100%;
+
+        min-height:0 !important;
+
+        padding:
+            4px
+            12px;
+    }
+
+
+    /* ======================================================
+       CONTEÚDO DA ABA ATIVA
+    ====================================================== */
+
+    .pagina-esfig
+    > .esfig-conteudo-aba.ativa{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /* GARANTIA:
+       a aba fechada continua realmente escondida */
+
+    .pagina-esfig
+    > .esfig-conteudo-aba[hidden]{
+
+        display:none !important;
+    }
+
+
+
+    /* ======================================================
+       ABA 1
+       AFERIÇÕES ANUAIS POR SKU
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-painel-afericoes{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    /* ======================================================
+       ÁREA DO PARETO
+       Cabeçalho + gráfico + resumo
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-area-pareto{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:grid;
+
+        grid-template-rows:
+            auto
+            minmax(0,1fr)
+            auto;
+
+        overflow:hidden;
+    }
+
+
+    /* CABEÇALHO */
+
+    .pagina-esfig
+    .esfig-pareto-cabecalho{
+
+        flex:0 0 auto;
+
+        margin-bottom:4px;
+    }
+
+
+    /* ======================================================
+       GRÁFICO
+       Não usa mais altura fixa de 300px
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-pareto-grande,
+
+    .pagina-esfig
+    .chart-box-esfig{
+
+        width:100%;
+
+        height:100% !important;
+
+        min-width:0;
+        min-height:0 !important;
+
+        max-height:none !important;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-esfig
+    .esfig-pareto-grande
+    canvas,
+
+    .pagina-esfig
+    .chart-box-esfig
+    canvas{
+
+        width:100% !important;
+        height:100% !important;
+
+        max-width:100%;
+        max-height:100%;
+    }
+
+
+    /* ======================================================
+       RESUMO DO PARETO
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-pareto-resumo{
+
+        flex:0 0 auto;
+
+        margin-top:5px;
+
+        padding:
+            6px
+            9px;
+    }
+
+
+    /* ======================================================
+       RESUMO LATERAL ABERTO
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-resumo-lateral{
+
+        height:100%;
+
+        min-height:0;
+
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+
+
+
+    /* ======================================================
+       ABA 2
+       FLUXO OPERACIONAL
+    ====================================================== */
+
+    .pagina-esfig
+    #abaEsfigFluxo.ativa{
+
+        height:100%;
+
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       FLUXO + CONTROLE DE PRODUTOS
+
+       Fluxo usa só o necessário.
+       Tabela ocupa todo o restante.
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-bottom-grid{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        grid-template-rows:
+            auto
+            minmax(0,1fr);
+
+        gap:7px;
+
+        margin:0 !important;
+
+        overflow:hidden;
+    }
+
+
+    /* ======================================================
+       PAINEL DO FLUXO
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-bottom-grid
+    > .panel:first-child{
+
+        width:100%;
+
+        min-width:0;
+        min-height:0;
+
+        margin:0;
+    }
+
+
+    /* ======================================================
+       PAINEL CONTROLE DE PRODUTOS
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-tabela{
+
+        width:100%;
+        height:100%;
+
+        min-width:0;
+        min-height:0;
+
+        display:flex;
+
+        flex-direction:column;
+
+        overflow:hidden;
+
+        box-sizing:border-box;
+    }
+
+
+    .pagina-esfig
+    .esfig-tabela
+    > h3{
+
+        flex:0 0 auto;
+    }
+
+
+    /* ======================================================
+       TABELA
+       Scroll somente aqui
+    ====================================================== */
+
+    .pagina-esfig
+    .esfig-tabela
+    .table-wrap{
+
+        flex:1 1 0;
+
+        width:100%;
+        height:auto;
+
+        min-width:0;
+        min-height:0;
+
+        overflow:hidden;
+    }
+
+
+    .pagina-esfig
+    .esfig-tabela
+    .table-scroll{
+
+        width:100%;
+        height:100% !important;
+
+        min-width:0;
+        min-height:0;
+
+        max-height:none !important;
+
+        overflow-y:auto !important;
+        overflow-x:auto;
+    }
+}
