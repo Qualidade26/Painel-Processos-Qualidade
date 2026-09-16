@@ -1248,3 +1248,53 @@
         overflow-x:auto;
     }
 }
+/* ==========================================================
+   ESFIG — CENTRALIZAR TABELA NO PAINEL (F11 / TELA GRANDE)
+========================================================== */
+
+@media (min-width:1051px) and (min-height:800px){
+
+    .pagina-esfig
+    #abaEsfigFluxo.ativa
+    .esfig-tabela{
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+        height:100%;
+        min-height:0;
+    }
+
+
+    .pagina-esfig
+    #abaEsfigFluxo.ativa
+    .esfig-tabela
+    .table-wrap{
+
+        flex:1 1 auto;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:100%;
+        min-height:0;
+    }
+
+
+    .pagina-esfig
+    #abaEsfigFluxo.ativa
+    .esfig-tabela
+    .table-scroll{
+
+        width:min(100%, 1150px);
+
+        height:auto !important;
+        max-height:100% !important;
+
+        margin:0 auto;
+
+        overflow:auto;
+    }
+}
