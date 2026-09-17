@@ -1589,7 +1589,8 @@ function criarGraficoMensalImportacao(imp) {
             }
         );
 }
-function limparNomeProduto(descricao, marca = "") {
+
+function limparNomeProduto(descricao) {
 
     let texto =
         String(descricao || "")
@@ -1605,26 +1606,22 @@ function limparNomeProduto(descricao, marca = "") {
         );
 
 
-    /* Remove a marca, caso exista no JSON */
+    /* Remove marcas conhecidas */
 
-    if (marca) {
+    texto =
+        texto.replace(
+            /\b(SOLIDOR|LAMEDI|PROCARE|LABOR)\b/gi,
+            ""
+        );
 
-        const marcaEscapada =
-            String(marca)
-                .replace(
-                    /[.*+?^${}()|[\]\\]/g,
-                    "\\$&"
-                );
 
-        texto =
-            texto.replace(
-                new RegExp(
-                    `\\b${marcaEscapada}\\b`,
-                    "gi"
-                ),
-                ""
-            );
-    }
+    /* Remove códigos C50 / C100 */
+
+    texto =
+        texto.replace(
+            /\bC(?:50|100)\b/gi,
+            ""
+        );
 
 
     /* Remove tamanho por letra */
@@ -1645,7 +1642,7 @@ function limparNomeProduto(descricao, marca = "") {
         );
 
 
-    /* Remove espaços duplicados */
+    /* Limpeza final */
 
     texto =
         texto
