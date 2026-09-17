@@ -156,11 +156,6 @@
     min-width:0;
 }
 
-.importacao-ranking-completo{
-    margin-top:8px;
-}
-
-
 /* ==========================================================
    GRÁFICO HORIZONTAL POR SKU
 ========================================================== */
@@ -1202,12 +1197,12 @@
        RANKING ABERTO
     ====================================================== */
 
-    #importacaoPainelRanking.ranking-aberto{
+ #importacaoPainelRanking.ranking-aberto{
 
-        grid-template-columns:
-            minmax(0,1fr)
-            minmax(320px,380px);
-    }
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(300px,360px);
+}
 
 
 
