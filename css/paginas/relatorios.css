@@ -1,5 +1,6 @@
 /* ==========================================================
-   RELATÓRIOS
+   RELATÓRIOS SGQ
+   TELA PRINCIPAL
 ========================================================== */
 
 .pagina-relatorios{
@@ -10,12 +11,16 @@
     display:flex;
     flex-direction:column;
 
-    gap:10px;
+    gap:14px;
 
-    padding:10px;
+    padding:14px;
 
     background:
-        var(--cor-fundo);
+        linear-gradient(
+            180deg,
+            #f5f8ff 0%,
+            #eef4ff 100%
+        );
 }
 
 
@@ -25,29 +30,82 @@
 
 .relatorios-cabecalho{
 
+    width:100%;
+
     display:flex;
 
     align-items:center;
-    justify-content:space-between;
+    justify-content:flex-start;
 
-    gap:12px;
+    gap:14px;
 
     padding:
-        12px
-        14px;
+        18px
+        20px;
 
     border:
         1px solid
-        var(--cor-borda);
+        #d9e5ff;
 
-    border-radius:
-        var(--raio-card);
+    border-radius:14px;
 
-    background:
-        var(--cor-card);
+    background:#ffffff;
 
     box-shadow:
-        var(--sombra-card);
+        0
+        4px
+        14px
+        rgba(15,37,87,.06);
+}
+
+
+/* ÍCONE */
+
+.relatorios-cabecalho-icone{
+
+    flex:0 0 auto;
+
+    width:46px;
+    height:46px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e7efff,
+            #dce8ff
+        );
+
+    color:#1d4eff;
+
+    font-size:22px;
+
+    box-shadow:
+        inset
+        0
+        0
+        0
+        1px
+        rgba(29,78,255,.10);
+}
+
+
+/* TEXTO */
+
+.relatorios-cabecalho-texto{
+
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:3px;
 }
 
 
@@ -55,24 +113,21 @@
 
     margin:0;
 
-    color:
-        var(--cor-primaria-escura);
+    color:#0f3cc9;
 
-    font-size:18px;
+    font-size:20px;
 
     font-weight:900;
+
+    line-height:1.1;
 }
 
 
 .relatorios-cabecalho p{
 
-    margin:
-        3px
-        0
-        0;
+    margin:0;
 
-    color:
-        var(--cor-texto-secundario);
+    color:#64748b;
 
     font-size:12px;
 
@@ -86,108 +141,25 @@
 
 .relatorios-controles{
 
-    display:flex;
-    flex-direction:column;
-
-    gap:10px;
-
-    padding:10px;
-
-    border:
-        1px solid
-        var(--cor-borda);
-
-    border-radius:
-        var(--raio-card);
-
-    background:
-        var(--cor-card);
-
-    box-shadow:
-        var(--sombra-card);
-}
-
-
-/* ==========================================================
-   TIPO DE RELATÓRIO
-========================================================== */
-
-.relatorios-tipo{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0,1fr)
-        );
-
-    gap:8px;
-}
-
-
-.relatorio-tipo-btn{
-
-    min-height:38px;
+    width:100%;
 
     padding:
-        7px
-        12px;
+        16px
+        18px;
 
     border:
         1px solid
-        rgba(29,78,255,.25);
+        #d9e5ff;
 
-    border-radius:
-        var(--raio-botao);
+    border-radius:14px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f1f6ff
-        );
+    background:#ffffff;
 
-    color:
-        var(--cor-primaria-escura);
-
-    font-size:12px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:
-        background .18s ease,
-        border-color .18s ease,
-        color .18s ease,
-        transform .18s ease;
-}
-
-
-.relatorio-tipo-btn:hover{
-
-    border-color:
-        var(--cor-primaria);
-
-    transform:
-        translateY(-1px);
-}
-
-
-.relatorio-tipo-btn.ativo{
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--cor-primaria),
-            var(--cor-primaria-escura)
-        );
-
-    border-color:
-        var(--cor-primaria);
-
-    color:#ffffff;
+    box-shadow:
+        0
+        4px
+        14px
+        rgba(15,37,87,.05);
 }
 
 
@@ -197,68 +169,70 @@
 
 .relatorios-filtros{
 
+    width:100%;
+
     display:grid;
 
     grid-template-columns:
-        minmax(180px,1.3fr)
-        minmax(120px,.7fr)
-        minmax(140px,.8fr)
-        minmax(170px,.9fr);
+        minmax(190px,1.25fr)
+        minmax(110px,.55fr)
+        minmax(150px,.75fr)
+        minmax(330px,1.45fr);
 
-    gap:8px;
+    gap:12px;
 
     align-items:end;
 }
 
 
-.relatorios-filtros label{
+.relatorios-campo{
+
+    min-width:0;
 
     display:flex;
     flex-direction:column;
 
-    gap:4px;
-
-    min-width:0;
+    gap:6px;
 }
 
 
-.relatorios-filtros label > span{
+.relatorios-campo > span{
 
-    color:
-        var(--cor-texto-secundario);
+    color:#53627f;
 
     font-size:10px;
 
-    font-weight:800;
+    font-weight:900;
 
     text-transform:uppercase;
 
-    letter-spacing:.3px;
+    letter-spacing:.45px;
 }
 
+
+/* SELECTS */
 
 .relatorios-filtros select{
 
     width:100%;
 
-    min-height:36px;
+    height:42px;
 
     padding:
-        6px
-        10px;
+        0
+        12px;
 
     border:
         1px solid
-        var(--cor-borda);
+        #cfdcf5;
 
-    border-radius:8px;
+    border-radius:9px;
 
     outline:none;
 
     background:#ffffff;
 
-    color:
-        var(--cor-texto);
+    color:#172554;
 
     font-family:
         "Segoe UI",
@@ -268,45 +242,78 @@
     font-size:12px;
 
     font-weight:700;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+
+.relatorios-filtros select:hover{
+
+    border-color:#9ebcff;
 }
 
 
 .relatorios-filtros select:focus{
 
-    border-color:
-        var(--cor-primaria);
+    border-color:#1d4eff;
 
     box-shadow:
         0
         0
         0
-        2px
+        3px
         rgba(29,78,255,.10);
 }
 
 
 /* ==========================================================
-   BOTÃO GERAR
+   AÇÕES
+========================================================== */
+
+.relatorios-acoes{
+
+    min-width:0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0,1fr)
+        );
+
+    gap:10px;
+
+    align-items:end;
+}
+
+
+/* ==========================================================
+   BOTÃO VISUALIZAR
 ========================================================== */
 
 .btn-gerar-relatorio{
 
-    min-height:36px;
+    width:100%;
+
+    height:42px;
 
     padding:
-        7px
-        14px;
+        0
+        16px;
 
     border:0;
 
-    border-radius:
-        var(--raio-botao);
+    border-radius:9px;
 
     background:
         linear-gradient(
             135deg,
-            var(--cor-primaria),
-            var(--cor-primaria-escura)
+            #1d4eff,
+            #0f3cc9
         );
 
     color:#ffffff;
@@ -315,17 +322,20 @@
 
     font-weight:900;
 
+    white-space:nowrap;
+
     cursor:pointer;
 
     box-shadow:
         0
         4px
         10px
-        rgba(29,78,255,.20);
+        rgba(29,78,255,.22);
 
     transition:
         transform .18s ease,
-        box-shadow .18s ease;
+        box-shadow .18s ease,
+        filter .18s ease;
 }
 
 
@@ -338,7 +348,80 @@
         0
         6px
         14px
-        rgba(29,78,255,.26);
+        rgba(29,78,255,.28);
+
+    filter:
+        brightness(1.03);
+}
+
+
+/* ==========================================================
+   BOTÃO IMPRIMIR
+========================================================== */
+
+.btn-imprimir-relatorio{
+
+    width:100%;
+
+    height:42px;
+
+    padding:
+        0
+        16px;
+
+    border:
+        1px solid
+        #1d4eff;
+
+    border-radius:9px;
+
+    background:#ffffff;
+
+    color:#0f3cc9;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:
+        background .18s ease,
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.btn-imprimir-relatorio:hover:not(:disabled){
+
+    background:#f2f6ff;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0
+        4px
+        10px
+        rgba(29,78,255,.10);
+}
+
+
+.btn-imprimir-relatorio:disabled{
+
+    border-color:#cbd5e1;
+
+    background:#f8fafc;
+
+    color:#94a3b8;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+
+    opacity:.72;
 }
 
 
@@ -348,30 +431,65 @@
 
 .relatorio-aviso{
 
+    width:100%;
+
+    min-height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
     padding:
-        9px
-        12px;
+        10px
+        14px;
 
     border:
-        1px dashed
-        var(--cor-borda);
+        1px solid
+        #cfe0ff;
 
-    border-radius:9px;
+    border-radius:10px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .72
-        );
+    background:#eef5ff;
 
-    color:
-        var(--cor-texto-secundario);
+    color:#5b6d91;
 
     font-size:11px;
 
     font-weight:600;
+}
+
+
+.relatorio-aviso-icone{
+
+    flex:0 0 auto;
+
+    width:22px;
+    height:22px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#dce8ff;
+
+    color:#1d4eff;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+
+.relatorio-aviso strong{
+
+    color:#0f3cc9;
+
+    font-weight:900;
 }
 
 
@@ -393,55 +511,96 @@
 
 
 /* ==========================================================
-   AÇÕES
+   RESPONSIVO - CONTROLES
 ========================================================== */
 
-.relatorio-acoes{
+@media(max-width:1050px){
 
-    display:flex;
+    .relatorios-filtros{
 
-    justify-content:flex-end;
+        grid-template-columns:
+            minmax(180px,1.2fr)
+            minmax(110px,.6fr)
+            minmax(140px,.8fr);
 
-    gap:8px;
+    }
+
+
+    .relatorios-acoes{
+
+        grid-column:
+            1 / -1;
+
+        max-width:440px;
+
+        justify-self:end;
+    }
 }
 
 
-.relatorio-acoes button{
+@media(max-width:700px){
 
-    min-height:34px;
+    .pagina-relatorios{
 
-    padding:
-        7px
-        12px;
+        padding:10px;
+    }
 
-    border:
-        1px solid
-        rgba(29,78,255,.25);
 
-    border-radius:8px;
+    .relatorios-cabecalho{
 
-    background:#ffffff;
+        padding:
+            14px
+            15px;
+    }
 
-    color:
-        var(--cor-primaria-escura);
 
-    font-size:11px;
+    .relatorios-cabecalho-icone{
 
-    font-weight:800;
+        width:40px;
+        height:40px;
 
-    cursor:pointer;
+        font-size:19px;
+    }
+
+
+    .relatorios-cabecalho h2{
+
+        font-size:17px;
+    }
+
+
+    .relatorios-cabecalho p{
+
+        font-size:10px;
+    }
+
+
+    .relatorios-filtros{
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .relatorios-acoes{
+
+        grid-column:auto;
+
+        width:100%;
+
+        max-width:none;
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .btn-gerar-relatorio,
+    .btn-imprimir-relatorio{
+
+        width:100%;
+    }
 }
-
-
-.relatorio-acoes button:hover{
-
-    border-color:
-        var(--cor-primaria);
-
-    background:
-        #f5f8ff;
-}
-
 /* ==========================================================
    DOCUMENTO EXECUTIVO
 ========================================================== */
