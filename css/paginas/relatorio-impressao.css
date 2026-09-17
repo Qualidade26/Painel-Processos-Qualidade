@@ -1913,6 +1913,61 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     font-weight:900 !important;
 
     color:#ea580c !important;
+}/* ==========================================================
+   ESFIG INDIVIDUAL - AJUSTE FINAL DE POSICIONAMENTO
+========================================================== */
+
+@media print{
+
+    body.impressao-individual:has(.relatorio-indicadores-esfig)
+    #relatorioDocumento
+    .relatorio-executivo-corpo{
+
+        justify-content:flex-start !important;
+
+        padding:
+            2mm
+            5mm
+            3mm !important;
+    }
+
+
+    body.impressao-individual:has(.relatorio-indicadores-esfig)
+    #relatorioDocumento
+    .relatorio-grid-principal{
+
+        height:auto !important;
+        min-height:0 !important;
+
+        align-content:start !important;
+    }
+
+
+    body.impressao-individual:has(.relatorio-indicadores-esfig)
+    #relatorioDocumento
+    .relatorio-grid-principal
+    > .relatorio-painel-total:has(.relatorio-indicadores-esfig){
+
+        width:100% !important;
+
+        height:auto !important;
+        min-height:0 !important;
+
+        margin:0 !important;
+    }
+
+
+    body.impressao-individual:has(.relatorio-indicadores-esfig)
+    #relatorioDocumento
+    .relatorio-esfig-fluxo{
+
+        width:100% !important;
+
+        margin:
+            6px
+            0
+            0 !important;
+    }
 }
     /* ======================================================
        PÁGINA
