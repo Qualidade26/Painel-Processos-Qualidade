@@ -1435,18 +1435,12 @@ function renderizarTabela(lista){
                     </td>
 
                     <td>
-                        ${
-                            temAvaliacao
-                                ? `
-                                    <span
-                                        class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
-                                    >
-                                        ${item.classificacao.label}
-                                    </span>
-                                `
-                                : ""
-                        }
-                    </td>
+    <span
+        class="fornecedor-badge fornecedor-badge--${item.classificacao.slug}"
+    >
+        ${item.classificacao.label}
+    </span>
+</td>
 
                 </tr>
             `;
@@ -2781,13 +2775,14 @@ function criarGraficoClassificacoes(){
 
     if(!canvas) return;
    
-    const totais = {
-        excelente:0,
-        "muito-bom":0,
-        atencao:0,
-        ruim:0,
-        critico:0
-    };
+   const totais = {
+    excelente:0,
+    "muito-bom":0,
+    atencao:0,
+    ruim:0,
+    critico:0,
+    "sem-avaliacao":0
+};
 
     estado.fornecedores.forEach(item=>{
         const slug = item.classificacao.slug;
@@ -2828,6 +2823,12 @@ function criarGraficoClassificacoes(){
             faixa:"< 70%",
             cor:CLASSIFICACOES.critico.cor
         }
+       {
+    slug:"sem-avaliacao",
+    label:"Sem avaliação",
+    faixa:"Sem dados",
+    cor:"#94a3b8"
+}
     ];
 
     const dados = configuracoes.map(
