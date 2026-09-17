@@ -359,7 +359,7 @@
         }
 
 
-      /* ==================================================
+    /* ==================================================
    IMPORTAÇÃO
 ================================================== */
 
@@ -370,8 +370,8 @@ if(
 
     const seletor =
         tela.subaba === "fluxo"
-            ? "#botaoAbaindicadorImportacao"
-            : "#botaoAbaResumoImportacao";
+            ? "#botaoAbaFluxoImportacao"
+            : "#botaoAbaindicadorImportacao";
 
 
     const botao =
@@ -379,12 +379,6 @@ if(
             seletor
         );
 
-
-    /*
-     * Usa o próprio botão da página.
-     * Isso garante que o estado interno da
-     * Importação também seja atualizado.
-     */
 
     if(botao){
 
@@ -395,11 +389,6 @@ if(
             .abrirAbaInternaImportacao ===
             "function"
     ){
-
-        /*
-         * Fallback caso o botão ainda
-         * não tenha sido encontrado.
-         */
 
         window
             .abrirAbaInternaImportacao(
@@ -412,7 +401,6 @@ if(
 
     return;
 }
-
 
         /* ==================================================
            ESFIG
