@@ -359,41 +359,59 @@
         }
 
 
-        /* ==================================================
-           IMPORTAÇÃO
-        ================================================== */
+      /* ==================================================
+   IMPORTAÇÃO
+================================================== */
 
-        if(
-            tela.painel ===
-            "importacao"
-        ){
+if(
+    tela.painel ===
+    "importacao"
+){
 
-            const botao =
-    tela.subaba === "fluxo"
-        ? await esperarElemento(
-            "#botaoAbaFluxoImportacao"
-        )
-        : await esperarElemento(
-            "#botaoAbaResumoImportacao"
+    const seletor =
+        tela.subaba === "fluxo"
+            ? "#botaoAbaFluxoImportacao"
+            : "#botaoAbaResumoImportacao";
+
+
+    const botao =
+        await esperarElemento(
+            seletor
         );
 
-            if(
-                typeof window
-                    .abrirAbaInternaImportacao ===
-                    "function"
-            ){
 
-                window
-                    .abrirAbaInternaImportacao(
-                        tela.subaba,
-                        botao
-                    );
+    /*
+     * Usa o próprio botão da página.
+     * Isso garante que o estado interno da
+     * Importação também seja atualizado.
+     */
 
-            }
+    if(botao){
 
-            return;
+        botao.click();
 
-        }
+    }else if(
+        typeof window
+            .abrirAbaInternaImportacao ===
+            "function"
+    ){
+
+        /*
+         * Fallback caso o botão ainda
+         * não tenha sido encontrado.
+         */
+
+        window
+            .abrirAbaInternaImportacao(
+                tela.subaba === "fluxo"
+                    ? "fluxo"
+                    : "resumo"
+            );
+    }
+
+
+    return;
+}
 
 
         /* ==================================================
