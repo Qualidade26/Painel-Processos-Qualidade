@@ -472,42 +472,48 @@ if(
         }
 
 
-        /* ==================================================
-           RETRABALHO
-        ================================================== */
+       /* ==================================================
+   RETRABALHO
+================================================== */
 
-        if(
-            tela.painel ===
-            "retrabalho"
-        ){
+if(
+    tela.painel ===
+    "retrabalho"
+){
 
-            const botao =
+    const seletor =
+        tela.subaba === "adequacao"
+            ? "#botaoAbaAdequacao"
+            : "#botaoAbaRetrabalho";
+
+
+    const botao =
+        await esperarElemento(
+            seletor
+        );
+
+
+    if(botao){
+
+        botao.click();
+
+    }else if(
+        typeof window
+            .abrirAbaInternaRetrabalho ===
+            "function"
+    ){
+
+        window
+            .abrirAbaInternaRetrabalho(
                 tela.subaba === "adequacao"
-                    ? await esperarElemento(
-                        "#botaoRetrabalhoAdequacao"
-                    )
-                    : await esperarElemento(
-                        "#botaoRetrabalhoPrincipal"
-                    );
+                    ? "adequacao"
+                    : "retrabalho"
+            );
+    }
 
 
-            if(
-                typeof window
-                    .abrirAbaInternaRetrabalho ===
-                    "function"
-            ){
-
-                window
-                    .abrirAbaInternaRetrabalho(
-                        tela.subaba,
-                        botao
-                    );
-
-            }
-
-            return;
-
-        }
+    return;
+}
 
 
         /* ==================================================
