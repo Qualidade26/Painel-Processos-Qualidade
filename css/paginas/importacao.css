@@ -1458,6 +1458,16 @@ tbody tr:hover{
 
         flex:0 0 auto;
     }
+   #painelRankingImportacao
+.importacao-ranking-tabela-wrap{
+
+    flex:0 0 auto;
+
+    width:100%;
+    min-width:0;
+
+    overflow:hidden;
+}
     /* ======================================================
        ABA 2 — FLUXO DE INSPEÇÃO SEMANAL
     ====================================================== */
