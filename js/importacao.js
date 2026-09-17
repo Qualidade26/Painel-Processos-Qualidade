@@ -214,32 +214,52 @@ const rotulosBarrasMensaisImportacao = {
                         --------------------------------------------------
                         */
 
-                        const posicaoX =
-                            elemento.x;
+                  const graficoReduzido =
+    chart.width < 900;
 
-                        const posicaoY =
-                            Math.max(
-                                elemento.y - 5,
-                                chartArea.top + 10
-                            );
+const labelDataset =
+    dataset.label || "";
 
-                        ctx.font =
-                            "700 10px 'Segoe UI', Arial, sans-serif";
+let deslocamentoX = 0;
 
-                        ctx.fillStyle =
-                            "#10245c";
+if (graficoReduzido) {
 
-                        ctx.textAlign =
-                            "center";
+    if (labelDataset === "Processos") {
+        deslocamentoX = -8;
+    }
 
-                        ctx.textBaseline =
-                            "bottom";
+    else if (labelDataset === "SKU") {
+        deslocamentoX = -3;
+    }
 
-                        ctx.fillText(
-                            texto,
-                            posicaoX,
-                            posicaoY
-                        );
+    else if (labelDataset === "Lotes") {
+        deslocamentoX = 3;
+    }
+
+    else if (labelDataset === "Laudos") {
+        deslocamentoX = 8;
+    }
+}
+
+const posicaoX =
+    elemento.x + deslocamentoX;
+
+const posicaoY =
+    Math.max(
+        elemento.y - 5,
+        chartArea.top + 14
+    );
+
+ctx.font =
+    graficoReduzido
+        ? "700 8px 'Segoe UI', Arial, sans-serif"
+        : "700 9px 'Segoe UI', Arial, sans-serif";
+
+ctx.fillText(
+    texto,
+    posicaoX,
+    posicaoY
+);
                     }
                 );
             }
