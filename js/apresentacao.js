@@ -14,7 +14,7 @@
        Cada item abaixo representa UMA tela.
 
        Ordem:
-       01 Importação - Indicadores
+       01 01 Importação - Indicador de Importação
        02 Importação - Fluxo
        03 Esfig - Aferições
        04 Esfig - Fluxo
@@ -25,7 +25,7 @@
        09 Adequação de Caixa
        10 Fornecedores - Geral
        11 Fornecedores - Avaliação
-       12 Informativo
+     
     ====================================================== */
 
     const telasApresentacao = [
@@ -107,12 +107,7 @@
             subtitulo:"Avaliação por Fornecedor"
         },
 
-        {
-            painel:"informativo",
-            subaba:null,
-            titulo:"Informativo",
-            subtitulo:"Painel Informativo"
-        }
+   
 
     ];
 
