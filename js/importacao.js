@@ -880,6 +880,58 @@ function alternarRankingImportacao(abrir) {
     );
 }
 /* ==========================================================
+   FLUXO SEMANAL — IMPORTAÇÃO
+========================================================== */
+
+function renderFluxoSemanalImportacao() {
+
+    const imp =
+        obterDadosImportacao();
+
+    const area =
+        document.getElementById(
+            "conteudoInternoImportacao"
+        );
+
+    if (!area) {
+        return;
+    }
+
+
+    area.innerHTML = `
+
+        <section
+            class="
+                panel
+                importacao-panel-fluxo
+                importacao-fluxo-semanal
+            "
+        >
+
+            <div class="importacao-fluxo-cabecalho">
+
+                <h3 class="importacao-panel-titulo">
+
+                    📋 Fluxo de Inspeção Semanal
+
+                </h3>
+
+            </div>
+
+
+            <div class="importacao-tabela-wrap">
+
+                ${montarTabelaFluxoImportacao(
+                    imp.fluxo || []
+                )}
+
+            </div>
+
+        </section>
+
+    `;
+}
+/* ==========================================================
    GRÁFICO — EVOLUÇÃO MENSAL
 ========================================================== */
 
