@@ -1480,9 +1480,23 @@ function criarGraficoAdequacaoMotivos(a){
     ====================================================== */
 
     const motivos =
-        Array.isArray(a.motivos)
-            ? [...a.motivos]
-            : [];
+    Array.isArray(a.motivos)
+        ? [...a.motivos].filter(
+            motivo => {
+
+                const nome =
+                    String(
+                        motivo.nome || ""
+                    ).trim();
+
+                return (
+                    nome === "Devolução" ||
+                    nome === "Avaria de Transporte Importação" ||
+                    nome === "Avaria de Transporte Nacional"
+                );
+            }
+        )
+        : [];
 
 
     /* ======================================================
@@ -1526,11 +1540,32 @@ function criarGraficoAdequacaoMotivos(a){
 
                 data:{
 
-                    labels:
-                        motivos.map(
-                            motivo =>
-                                motivo.nome
-                        ),
+                   labels:
+    motivos.map(
+        motivo => {
+
+            const nome =
+                String(
+                    motivo.nome || ""
+                ).trim();
+
+            if(
+                nome ===
+                "Avaria de Transporte Importação"
+            ){
+                return "Importação";
+            }
+
+            if(
+                nome ===
+                "Avaria de Transporte Nacional"
+            ){
+                return "Nacional";
+            }
+
+            return "Devolução";
+        }
+    ),
 
                     datasets:[{
 
