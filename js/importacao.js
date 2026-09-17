@@ -1615,13 +1615,14 @@ function limparNomeProduto(descricao) {
         );
 
 
-    /* Remove códigos C50 / C100 */
+  /* Remove códigos C/25, C/50, C/100, C/500
+   e também versões sem barra: C25, C50, C100, C500 */
 
-    texto =
-        texto.replace(
-            /\bC(?:50|100)\b/gi,
-            ""
-        );
+texto =
+    texto.replace(
+        /\bC\s*\/?\s*(25|50|100|500)\b/gi,
+        ""
+    );
 
 
     /* Remove tamanho por letra */
