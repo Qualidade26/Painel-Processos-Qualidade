@@ -1277,8 +1277,7 @@ if(
         barraOculta = false;
 
 
-        indiceAtual =
-            descobrirIndiceInicial();
+       indiceAtual = 0;
 
 
         document.body.classList.add(
