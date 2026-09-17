@@ -668,17 +668,9 @@ function renderResumoImportacao() {
                 ========================================= -->
 
                 <div
-                    class="
-                        chart-box
-                        chart-box-sku-importacao
-                    "
-                >
-
-                    <canvas
-                        id="graficoSkuImportacao"
-                    ></canvas>
-
-                </div>
+    id="tabelaRankingSkuImportacao"
+    class="importacao-ranking-tabela-wrap"
+></div>
 
             </aside>
 
@@ -721,18 +713,14 @@ function renderResumoImportacao() {
 }
 
 
-
 /* ==========================================================
    ABRIR RANKING POR SKU
 ========================================================== */
 
 function abrirRankingImportacao() {
 
-    alternarRankingImportacao(
-        true
-    );
+    alternarRankingImportacao(true);
 }
-
 
 
 /* ==========================================================
@@ -741,11 +729,8 @@ function abrirRankingImportacao() {
 
 function fecharRankingImportacao() {
 
-    alternarRankingImportacao(
-        false
-    );
+    alternarRankingImportacao(false);
 }
-
 
 
 /* ==========================================================
@@ -760,12 +745,10 @@ function alternarRankingImportacao(abrir) {
             "importacaoPainelRanking"
         );
 
-
     const ranking =
         document.getElementById(
             "painelRankingImportacao"
         );
-
 
     const botaoAbrir =
         document.getElementById(
@@ -777,10 +760,8 @@ function alternarRankingImportacao(abrir) {
         !painel ||
         !ranking
     ) {
-
         return;
     }
-
 
 
     /* ======================================================
@@ -789,17 +770,14 @@ function alternarRankingImportacao(abrir) {
 
     if (abrir) {
 
-
         painel.classList.add(
             "ranking-aberto"
         );
-
 
         ranking.setAttribute(
             "aria-hidden",
             "false"
         );
-
 
         if (botaoAbrir) {
 
@@ -807,73 +785,45 @@ function alternarRankingImportacao(abrir) {
                 "none";
         }
 
-
-
-        /*
-           Cria o gráfico somente na primeira abertura.
-        */
-
-        if (!graficoSkuImportacao) {
-
-            criarGraficoSkuImportacao(
-                obterDadosImportacao()
-            );
-        }
-
-    }
-
+        renderTabelaRankingSkuImportacao(
+            obterDadosImportacao()
+        );
 
 
     /* ======================================================
        FECHAR
     ====================================================== */
 
-    else {
-
+    } else {
 
         painel.classList.remove(
             "ranking-aberto"
         );
-
 
         ranking.setAttribute(
             "aria-hidden",
             "true"
         );
 
-
         if (botaoAbrir) {
 
             botaoAbrir.style.display =
                 "";
         }
-
     }
 
 
-
     /* ======================================================
-       REAJUSTAR CHART.JS
+       REAJUSTAR GRÁFICO MENSAL
     ====================================================== */
 
     setTimeout(
         () => {
 
-
             if (graficoMensalImportacao) {
 
                 graficoMensalImportacao.resize();
             }
-
-
-            if (
-                abrir &&
-                graficoSkuImportacao
-            ) {
-
-                graficoSkuImportacao.resize();
-            }
-
 
         },
         250
@@ -1640,13 +1590,27 @@ function criarGraficoMensalImportacao(imp) {
         );
 }
 /* ==========================================================
-   GRÁFICO — QUANTIDADE em unidade Recebida POR SKU
-   BARRAS HORIZONTAIS — MAIOR PARA MENOR
+   RANKING POR SKU — TABELA COMPACTA
+   MAIOR PARA MENOR
 ========================================================== */
 
-function criarGraficoSkuImportacao(imp) {
+function renderTabelaRankingSkuImportacao(imp) {
 
-    const dadosSkuOriginais =
+    const area =
+        document.getElementById(
+            "tabelaRankingSkuImportacao"
+        );
+
+    if (!area) {
+        return;
+    }
+
+
+    /* ======================================================
+       DADOS
+    ====================================================== */
+
+    const dadosOriginais =
         Array.isArray(imp.graficoSku)
             ? imp.graficoSku
             : Array.isArray(imp.paretoSku)
@@ -1655,11 +1619,11 @@ function criarGraficoSkuImportacao(imp) {
 
 
     /* ======================================================
-       NORMALIZAÇÃO DOS DADOS
+       NORMALIZAÇÃO / ORDENAÇÃO
     ====================================================== */
 
-    const dadosSku =
-        dadosSkuOriginais
+    const ranking =
+        dadosOriginais
 
             .map(item => {
 
@@ -1668,12 +1632,13 @@ function criarGraficoSkuImportacao(imp) {
                         item.quantidade
                     );
 
+
                 return {
 
                     sku:
                         escaparTextoImportacao(
                             item.sku ||
-                            "Sem identificação"
+                            "-"
                         ),
 
                     descricao:
@@ -1689,21 +1654,16 @@ function criarGraficoSkuImportacao(imp) {
                 };
             })
 
-            /*
-            --------------------------------------------------
-            Remove valores zerados.
-            --------------------------------------------------
-            */
 
-            .filter(item =>
-                item.quantidade > 0
+            /* remove zerados */
+
+            .filter(
+                item =>
+                    item.quantidade > 0
             )
 
-            /*
-            --------------------------------------------------
-            Ordena do maior para o menor.
-            --------------------------------------------------
-            */
+
+            /* maior para menor */
 
             .sort(
                 (a, b) =>
@@ -1711,478 +1671,128 @@ function criarGraficoSkuImportacao(imp) {
                     a.quantidade
             )
 
-            /*
-            --------------------------------------------------
-            Exibe no máximo 10 SKUs.
-            --------------------------------------------------
-            */
 
-            .slice(0, 10);
+            /* top 10 */
 
-
-    const canvas =
-        document.getElementById(
-            "graficoSkuImportacao"
-        );
+            .slice(
+                0,
+                10
+            );
 
 
-    if (!canvas) {
+    /* ======================================================
+       SEM DADOS
+    ====================================================== */
 
-        console.error(
-            "Canvas graficoSkuImportacao não encontrado."
-        );
+    if (!ranking.length) {
 
-        return;
-    }
+        area.innerHTML = `
 
+            <div class="importacao-ranking-vazio">
 
-    if (typeof Chart === "undefined") {
+                Nenhum SKU disponível.
 
-        console.error(
-            "Chart.js não foi carregado."
-        );
+            </div>
+
+        `;
 
         return;
     }
 
 
     /* ======================================================
-       REMOVE INSTÂNCIAS ANTERIORES
+       LINHAS
     ====================================================== */
 
-    if (graficoSkuImportacao) {
+    const linhas =
+        ranking
 
-        graficoSkuImportacao.destroy();
-        graficoSkuImportacao = null;
-    }
+            .map(
+                item => `
+
+                    <tr>
+
+                        <td
+                            class="ranking-col-sku"
+                            title="SKU ${item.sku}"
+                        >
+
+                            ${item.sku}
+
+                        </td>
 
 
-    const graficoExistente =
-        Chart.getChart(canvas);
+                        <td
+                            class="ranking-col-descricao"
+                            title="${item.descricao}"
+                        >
+
+                            ${item.descricao}
+
+                        </td>
 
 
-    if (graficoExistente) {
-        graficoExistente.destroy();
-    }
+                        <td
+                            class="ranking-col-quantidade"
+                        >
+
+                            ${Number(
+                                item.quantidade
+                            ).toLocaleString(
+                                "pt-BR",
+                                {
+                                    maximumFractionDigits:0
+                                }
+                            )}
+
+                        </td>
+
+                    </tr>
+
+                `
+            )
+
+            .join("");
 
 
     /* ======================================================
-       DADOS FINAIS
+       TABELA
     ====================================================== */
 
-    const labels =
-        dadosSku.map(item =>
-            item.sku
-        );
+    area.innerHTML = `
 
+        <table class="importacao-ranking-tabela">
 
-    const quantidades =
-        dadosSku.map(item =>
-            item.quantidade
-        );
+            <thead>
 
+                <tr>
 
-    /* ======================================================
-       CRIAÇÃO DO GRÁFICO HORIZONTAL
-    ====================================================== */
+                    <th class="ranking-col-sku">
+                        SKU
+                    </th>
 
-    graficoSkuImportacao =
-        new Chart(
-            canvas,
-            {
+                    <th class="ranking-col-descricao">
+                        Descrição
+                    </th>
 
-                type: "bar",
+                    <th class="ranking-col-quantidade">
+                        Quantidade
+                    </th>
 
+                </tr>
 
-                plugins: [
-                    rotulosGraficoSkuImportacao
-                ],
+            </thead>
 
 
-                data: {
+            <tbody>
 
-                    labels: labels,
+                ${linhas}
 
+            </tbody>
 
-                    datasets: [
+        </table>
 
-                        {
-                            label:
-                                "Quantidade em unidade Recebida",
-
-                            data:
-                                quantidades,
-
-                            backgroundColor:
-                                "rgba(29, 78, 216, 0.82)",
-
-                            borderColor:
-                                "#1d4ed8",
-
-                            borderWidth:1,
-
-                            borderRadius:5,
-
-                            borderSkipped:false,
-
-                            barThickness:18,
-
-                            maxBarThickness:22,
-
-                            minBarLength:3,
-
-                            _ocultarZero:true
-                        }
-                    ]
-                },
-
-
-                options: {
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    /*
-                    --------------------------------------------------
-                    Transforma as barras em horizontais.
-                    --------------------------------------------------
-                    */
-
-                    indexAxis:"y",
-
-
-                    /* ======================================
-                       ESPAÇAMENTO INTERNO
-                    ====================================== */
-
-                    layout: {
-
-                        padding: {
-
-                            top:4,
-
-                            right:85,
-
-                            bottom:0,
-
-                            left:0
-                        }
-                    },
-
-
-                    /* ======================================
-                       INTERAÇÃO
-                    ====================================== */
-
-                    interaction: {
-
-                        mode:"nearest",
-
-                        axis:"y",
-
-                        intersect:false
-                    },
-
-
-                    /* ======================================
-                       PLUGINS
-                    ====================================== */
-
-                    plugins: {
-
-                        valorFlutuante:false,
-
-
-                        datalabels: {
-
-                            display:false
-                        },
-
-
-                        legend: {
-
-                            display:false
-                        },
-
-
-                        tooltip: {
-
-                            enabled:true,
-
-                            displayColors:false,
-
-                            callbacks: {
-
-
-                                title(contextos) {
-
-                                    if (
-                                        !contextos ||
-                                        !contextos.length
-                                    ) {
-                                        return "";
-                                    }
-
-                                    const indice =
-                                        contextos[0].dataIndex;
-
-                                    const item =
-                                        dadosSku[indice];
-
-
-                                    return item
-                                        ? `SKU ${item.sku}`
-                                        : "";
-                                },
-
-
-                                afterTitle(contextos) {
-
-                                    if (
-                                        !contextos ||
-                                        !contextos.length
-                                    ) {
-                                        return "";
-                                    }
-
-                                    const indice =
-                                        contextos[0].dataIndex;
-
-                                    const item =
-                                        dadosSku[indice];
-
-
-                                    return item
-                                        ? item.descricao
-                                        : "";
-                                },
-
-
-                                label(context) {
-
-                                    const valor =
-                                        context.raw;
-
-
-                                    if (
-                                        !possuiValorImportacao(
-                                            valor
-                                        )
-                                    ) {
-                                        return "";
-                                    }
-
-
-                                    return (
-                                        "Quantidade em Unidade Recebida: " +
-                                        Number(valor)
-                                            .toLocaleString(
-                                                "pt-BR"
-                                            ) +
-                                        " unidades"
-                                    );
-                                }
-                            }
-                        }
-                    },
-
-
-                    /* ======================================
-                       ESCALAS
-                    ====================================== */
-
-                    scales: {
-
-
-                        /* ==================================
-                           EIXO DAS QUANTIDADES
-                        ================================== */
-
-                        x: {
-
-                            beginAtZero:true,
-
-                            grace:"18%",
-
-                            title: {
-
-                                display:true,
-
-                                text:
-                                    "Quantidade em Unidade Recebida",
-
-                                color:"#4b5563",
-
-                                font: {
-
-                                    size:11,
-
-                                    weight:"600"
-                                }
-                            },
-
-                            grid: {
-
-                                color:
-                                    "rgba(148, 163, 184, 0.22)",
-
-                                drawBorder:false
-                            },
-
-                            border: {
-
-                                display:false
-                            },
-
-                            ticks: {
-
-                                precision:0,
-
-                                color:"#4b5563",
-
-                                padding:6,
-
-                                font: {
-
-                                    size:10
-                                },
-
-                                callback(valor) {
-
-                                    const numero =
-                                        Number(valor);
-
-
-                                    if (
-                                        numero >=
-                                        1000000000
-                                    ) {
-
-                                        return (
-                                            Number(
-                                                numero /
-                                                1000000000
-                                            )
-                                            .toLocaleString(
-                                                "pt-BR",
-                                                {
-                                                    maximumFractionDigits:1
-                                                }
-                                            ) +
-                                            " bi"
-                                        );
-                                    }
-
-
-                                    if (
-                                        numero >=
-                                        1000000
-                                    ) {
-
-                                        return (
-                                            Number(
-                                                numero /
-                                                1000000
-                                            )
-                                            .toLocaleString(
-                                                "pt-BR",
-                                                {
-                                                    maximumFractionDigits:1
-                                                }
-                                            ) +
-                                            " mi"
-                                        );
-                                    }
-
-
-                                    if (
-                                        numero >=
-                                        1000
-                                    ) {
-
-                                        return (
-                                            Number(
-                                                numero /
-                                                1000
-                                            )
-                                            .toLocaleString(
-                                                "pt-BR",
-                                                {
-                                                    maximumFractionDigits:1
-                                                }
-                                            ) +
-                                            " mil"
-                                        );
-                                    }
-
-
-                                    return numero
-                                        .toLocaleString(
-                                            "pt-BR"
-                                        );
-                                }
-                            }
-                        },
-
-
-                        /* ==================================
-                           EIXO DOS SKUs
-                        ================================== */
-
-        y: {
-
-    offset: true,
-
-    grid: {
-        display: false,
-        drawBorder: false
-    },
-
-    border: {
-        display: false
-    },
-
-
-
-                            ticks: {
-
-                                color:"#334155",
-
-                                padding:8,
-
-                                font: {
-
-                                    size:10,
-
-                                    weight:"700"
-                                },
-
-                                callback(valor) {
-
-                                    return (
-                                        "SKU " +
-                                        this.getLabelForValue(
-                                            valor
-                                        )
-                                    );
-                                }
-                            }
-                        }
-                    },
-
-
-                    /* ======================================
-                       ANIMAÇÃO
-                    ====================================== */
-
-                    animation: {
-
-                        duration:500
-                    }
-                }
-            }
-        );
+    `;
 }
 
 /* ==========================================================
