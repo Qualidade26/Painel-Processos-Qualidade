@@ -1520,75 +1520,73 @@ maxBarThickness: 28,
                         },
 
 
-                        /* ==================================
-                           EIXO DE HORAS
-                        ================================== */
+                       /* ==================================
+   EIXO DE HORAS
+================================== */
 
-                       y1:{
+y1:{
 
     beginAtZero:true,
 
-    suggestedMax:180,
+    min:0,
 
-    grace:"10%",
+    max:250,
 
-                            position: "right",
+    position:"right",
 
-                            title: {
+    title:{
 
-                                display: true,
+        display:true,
 
-                                text: "Horas",
+        text:"Horas",
 
-                                color: "#4b5563",
+        color:"#4b5563",
 
-                                font: {
+        font:{
 
-                                    size: 11,
+            size:11,
 
-                                    weight: "600"
-                                }
-                            },
+            weight:"600"
+        }
+    },
 
-                            grid: {
+    grid:{
 
-                                drawOnChartArea: false,
+        drawOnChartArea:false,
 
-                                drawBorder: false
-                            },
+        drawBorder:false
+    },
 
-                            border: {
+    border:{
 
-                                display: false
-                            },
+        display:false
+    },
 
-                            ticks: {
+    ticks:{
 
-                                stepSize: 20,
+        stepSize:50,
 
-                                color: "#4b5563",
+        color:"#4b5563",
 
-                                padding: 6,
+        padding:6,
 
-                                font: {
+        font:{
 
-                                    size: 10
-                                },
+            size:10
+        },
 
-                                callback(valor) {
+        callback(valor){
 
-                                    return Number(valor)
-                                        .toLocaleString(
-                                            "pt-BR",
-                                            {
-                                                maximumFractionDigits: 1
-                                            }
-                                        );
-                                }
-                            }
-                        }
-                    },
-
+            return Number(valor)
+                .toLocaleString(
+                    "pt-BR",
+                    {
+                        maximumFractionDigits:1
+                    }
+                );
+        }
+    }
+}
 
                     /* ======================================
                        ANIMAÇÃO
