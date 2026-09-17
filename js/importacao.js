@@ -1048,11 +1048,9 @@ function criarGraficoMensalImportacao(imp) {
 
                             borderSkipped: false,
 
-                            categoryPercentage: 0.72,
-
-                            barPercentage: 0.84,
-
-                            maxBarThickness: 25,
+                            categoryPercentage: 0.79,
+barPercentage: 0.92,
+maxBarThickness: 28,
 
                             yAxisID: "y",
 
