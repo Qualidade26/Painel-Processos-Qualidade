@@ -1,5 +1,3 @@
-
-
 /* ==========================================================
    RELATÓRIOS SGQ
 ========================================================== */
@@ -18,47 +16,45 @@ function renderRelatorios(){
 
         <section class="pagina-relatorios">
 
+
+            <!-- ==================================================
+                 CABEÇALHO
+            =================================================== -->
+
             <div class="relatorios-cabecalho">
 
-                <div>
+                <div class="relatorios-cabecalho-icone">
+                    📄
+                </div>
+
+
+                <div class="relatorios-cabecalho-texto">
+
                     <h2>
-                        📄 Relatórios SGQ
+                        Relatórios SGQ
                     </h2>
 
                     <p>
-                        Fechamento mensal e relatório anual
+                        Acompanhamento e fechamento dos processos do SGQ
                     </p>
+
                 </div>
 
             </div>
 
 
+            <!-- ==================================================
+                 CONTROLES
+            =================================================== -->
+
             <div class="relatorios-controles">
-
-                <div class="relatorios-tipo">
-
-                    <button
-                        type="button"
-                        class="relatorio-tipo-btn ativo"
-                        data-tipo="mensal"
-                    >
-                        Fechamento Mensal
-                    </button>
-
-                    <button
-                        type="button"
-                        class="relatorio-tipo-btn"
-                        data-tipo="anual"
-                    >
-                        Relatório Anual
-                    </button>
-
-                </div>
-
 
                 <div class="relatorios-filtros">
 
-                    <label>
+
+                    <!-- ESCOPO -->
+
+                    <label class="relatorios-campo">
 
                         <span>
                             Escopo
@@ -99,7 +95,9 @@ function renderRelatorios(){
                     </label>
 
 
-                    <label>
+                    <!-- ANO -->
+
+                    <label class="relatorios-campo">
 
                         <span>
                             Ano
@@ -116,8 +114,11 @@ function renderRelatorios(){
                     </label>
 
 
+                    <!-- MÊS -->
+
                     <label
                         id="campoRelatorioMes"
+                        class="relatorios-campo"
                     >
 
                         <span>
@@ -154,7 +155,10 @@ function renderRelatorios(){
                                 Julho
                             </option>
 
-                            <option value="08" selected>
+                            <option
+                                value="08"
+                                selected
+                            >
                                 Agosto
                             </option>
 
@@ -179,32 +183,68 @@ function renderRelatorios(){
                     </label>
 
 
-                    <button
-                        type="button"
-                        id="btnGerarRelatorio"
-                        class="btn-gerar-relatorio"
-                    >
-                        Visualizar Relatório
-                    </button>
+                    <!-- AÇÕES -->
+
+                    <div class="relatorios-acoes">
+
+                        <button
+                            type="button"
+                            id="btnGerarRelatorio"
+                            class="btn-gerar-relatorio"
+                        >
+                            👁 Visualizar Relatório
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btnImprimirRelatorio"
+                            class="btn-imprimir-relatorio"
+                            disabled
+                        >
+                            🖨 Imprimir / PDF
+                        </button>
+
+                    </div>
+
 
                 </div>
 
             </div>
 
 
+            <!-- ==================================================
+                 AVISO
+            =================================================== -->
+
             <div
                 id="relatorioAviso"
                 class="relatorio-aviso"
             >
-                Selecione o período e clique em
-                <strong>Visualizar Relatório</strong>.
+
+                <span class="relatorio-aviso-icone">
+                    ℹ
+                </span>
+
+                <span>
+                    Selecione o período e clique em
+                    <strong>
+                        Visualizar Relatório
+                    </strong>.
+                </span>
+
             </div>
 
+
+            <!-- ==================================================
+                 PREVIEW
+            =================================================== -->
 
             <div
                 id="relatorioPreview"
                 class="relatorio-preview"
             ></div>
+
 
         </section>
     `;
@@ -212,7 +252,6 @@ function renderRelatorios(){
 
     iniciarEventosRelatorios();
 }
-
 
 /* ==========================================================
    ESTADO
@@ -227,15 +266,11 @@ let tipoRelatorioAtual = "mensal";
 
 function iniciarEventosRelatorios(){
 
-    const botoesTipo =
-        document.querySelectorAll(
-            ".relatorio-tipo-btn"
-        );
-
     const campoMes =
         document.getElementById(
             "campoRelatorioMes"
         );
+
 
     const btnGerar =
         document.getElementById(
@@ -243,44 +278,15 @@ function iniciarEventosRelatorios(){
         );
 
 
-    botoesTipo.forEach(botao => {
-
-        botao.addEventListener(
-            "click",
-            () => {
-
-                botoesTipo.forEach(item => {
-
-                    item.classList.remove(
-                        "ativo"
-                    );
-                });
-
-
-                botao.classList.add(
-                    "ativo"
-                );
-
-
-                tipoRelatorioAtual =
-                    botao.dataset.tipo;
-
-
-                if(campoMes){
-
-                    campoMes.style.display =
-                        tipoRelatorioAtual ===
-                        "mensal"
-                            ? ""
-                            : "none";
-                }
-
-
-                limparPreviewRelatorio();
-            }
+    const btnImprimir =
+        document.getElementById(
+            "btnImprimirRelatorio"
         );
-    });
 
+
+    /* ==================================================
+       VISUALIZAR RELATÓRIO
+    ================================================== */
 
     if(btnGerar){
 
@@ -289,8 +295,30 @@ function iniciarEventosRelatorios(){
             gerarRelatorioSelecionado
         );
     }
-}
 
+
+    /* ==================================================
+       IMPRIMIR / PDF
+    ================================================== */
+
+    if(btnImprimir){
+
+        btnImprimir.addEventListener(
+            "click",
+            imprimirRelatorio
+        );
+    }
+
+
+    /* ==================================================
+       MÊS SEMPRE VISÍVEL
+    ================================================== */
+
+    if(campoMes){
+
+        campoMes.style.display = "";
+    }
+}
 
 /* ==========================================================
    GERAR RELATÓRIO
@@ -554,18 +582,6 @@ function montarPreviewRelatorio(
 
     preview.innerHTML = `
 
-           <div class="relatorio-acoes nao-imprimir">
-
-    <button
-        type="button"
-        onclick="imprimirRelatorio()"
-    >
-        🖨 Imprimir / PDF
-    </button>
-
-</div>
-
-
         <article
             id="relatorioDocumento"
             class="relatorio-documento relatorio-executivo"
@@ -685,7 +701,14 @@ function montarPreviewRelatorio(
 
         </article>
     `;
+const btnImprimir =
+    document.getElementById(
+        "btnImprimirRelatorio"
+    );
 
+if(btnImprimir){
+    btnImprimir.disabled = false;
+}
 
     requestAnimationFrame(
         () => {
