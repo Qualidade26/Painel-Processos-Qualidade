@@ -370,7 +370,7 @@ if(
 
     const seletor =
         tela.subaba === "fluxo"
-            ? "#botaoAbaFluxoImportacao"
+            ? "#botaoAbaindicadorImportacao"
             : "#botaoAbaResumoImportacao";
 
 
