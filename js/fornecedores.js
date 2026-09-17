@@ -948,6 +948,9 @@ function montarEstrutura(raiz){
                                 <option value="critico">
                                     Crítico
                                 </option>
+                                <option value="sem-avaliacao">
+    Sem avaliação
+</option>
                             </select>
                         </label>
                     </div>
