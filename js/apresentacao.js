@@ -30,12 +30,12 @@
 
     const telasApresentacao = [
 
-        {
-            painel:"importacao",
-            subaba:"resumo",
-            titulo:"Importação",
-            subtitulo:"Indicador de Importação"
-        },
+       {
+    painel:"importacao",
+    subaba:"indicador",
+    titulo:"Importação",
+    subtitulo:"Indicador de Importação"
+},
 
         {
             painel:"importacao",
@@ -357,7 +357,6 @@
             return;
 
         }
-
 /* ==================================================
    IMPORTAÇÃO
 ================================================== */
@@ -367,32 +366,76 @@ if(
     "importacao"
 ){
 
-    const botao =
-        tela.subaba === "fluxo"
-            ? await esperarElemento(
-                "#botaoAbaFluxoImportacao"
-            )
-            : await esperarElemento(
+    /* ==============================================
+       INDICADOR DE IMPORTAÇÃO
+    ============================================== */
+
+    if(
+        tela.subaba ===
+        "indicador"
+    ){
+
+        const botaoIndicador =
+            await esperarElemento(
                 "#botaoAbaResumoImportacao"
             );
 
 
-    if(
-        typeof window
-            .abrirAbaInternaImportacao ===
-            "function"
-    ){
+        if(botaoIndicador){
 
-        window
-            .abrirAbaInternaImportacao(
-                tela.subaba === "fluxo"
-                    ? "fluxo"
-                    : "resumo"
-            );
+            botaoIndicador.click();
+
+        }else if(
+            typeof window
+                .abrirAbaInternaImportacao ===
+                "function"
+        ){
+
+            window
+                .abrirAbaInternaImportacao(
+                    "resumo"
+                );
+        }
+
+
+        return;
     }
 
 
-    return;
+    /* ==============================================
+       FLUXO DE INSPEÇÃO
+    ============================================== */
+
+    if(
+        tela.subaba ===
+        "fluxo"
+    ){
+
+        const botaoFluxo =
+            await esperarElemento(
+                "#botaoAbaFluxoImportacao"
+            );
+
+
+        if(botaoFluxo){
+
+            botaoFluxo.click();
+
+        }else if(
+            typeof window
+                .abrirAbaInternaImportacao ===
+                "function"
+        ){
+
+            window
+                .abrirAbaInternaImportacao(
+                    "fluxo"
+                );
+        }
+
+
+        return;
+    }
 }
         /* ==================================================
            ESFIG
