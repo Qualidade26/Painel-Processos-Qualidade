@@ -1042,15 +1042,79 @@ function montarTabelaGastoAmbiental(custoAmbiental){
             ? custoAmbiental
             : {};
 
-    const primeiroSemestre =
-    Number(
-        dados.totalPrimeiroSemestre || 0
-    );
 
-const segundoSemestre =
-    Number(
-        dados.totalSegundoSemestre || 0
-    );
+    const primeiroSemestre =
+        Number(
+            dados.totalPrimeiroSemestre || 0
+        );
+
+
+    const segundoSemestre =
+        Number(
+            dados.totalSegundoSemestre || 0
+        );
+
+
+    /* ======================================================
+       DESCOBRIR MÊS COM GASTO
+    ====================================================== */
+
+    const nomesMeses = {
+        janeiro:"Janeiro",
+        fevereiro:"Fevereiro",
+        marco:"Março",
+        abril:"Abril",
+        maio:"Maio",
+        junho:"Junho",
+        julho:"Julho",
+        agosto:"Agosto",
+        setembro:"Setembro",
+        outubro:"Outubro",
+        novembro:"Novembro",
+        dezembro:"Dezembro"
+    };
+
+
+    function obterMesComGasto(objeto){
+
+        if(
+            !objeto ||
+            typeof objeto !== "object"
+        ){
+            return "-";
+        }
+
+
+        const encontrado =
+            Object.entries(objeto)
+                .find(
+                    ([mes,valor]) =>
+                        Number(valor || 0) > 0
+                );
+
+
+        if(!encontrado){
+            return "-";
+        }
+
+
+        return (
+            nomesMeses[encontrado[0]] ||
+            encontrado[0]
+        );
+    }
+
+
+    const mesPrimeiroSemestre =
+        obterMesComGasto(
+            dados.primeiroSemestre
+        );
+
+
+    const mesSegundoSemestre =
+        obterMesComGasto(
+            dados.segundoSemestre
+        );
 
 
     return `
@@ -1093,7 +1157,7 @@ const segundoSemestre =
                         </td>
 
                         <td>
-                            Maio
+                            ${mesPrimeiroSemestre}
                         </td>
 
                     </tr>
@@ -1110,11 +1174,7 @@ const segundoSemestre =
                         </td>
 
                         <td>
-                            ${
-                                segundoSemestre > 0
-                                    ? "Gasto ambiental"
-                                    : "-"
-                            }
+                            ${mesSegundoSemestre}
                         </td>
 
                     </tr>
