@@ -1589,6 +1589,73 @@ function criarGraficoMensalImportacao(imp) {
             }
         );
 }
+function limparNomeProduto(descricao, marca = "") {
+
+    let texto =
+        String(descricao || "")
+            .trim();
+
+
+    /* Remove PT no início */
+
+    texto =
+        texto.replace(
+            /^PT[\s\-–—:]+/i,
+            ""
+        );
+
+
+    /* Remove a marca, caso exista no JSON */
+
+    if (marca) {
+
+        const marcaEscapada =
+            String(marca)
+                .replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
+                );
+
+        texto =
+            texto.replace(
+                new RegExp(
+                    `\\b${marcaEscapada}\\b`,
+                    "gi"
+                ),
+                ""
+            );
+    }
+
+
+    /* Remove tamanho por letra */
+
+    texto =
+        texto.replace(
+            /\b(?:TAM(?:ANHO)?\.?\s*)?(PP|P|M|G|GG|XG|XGG|XS|XL|XXL)\b/gi,
+            ""
+        );
+
+
+    /* Remove medidas */
+
+    texto =
+        texto.replace(
+            /\b\d+(?:[.,]\d+)?\s*(MM|CM|ML|L|G|KG)\b/gi,
+            ""
+        );
+
+
+    /* Remove espaços duplicados */
+
+    texto =
+        texto
+            .replace(/\s{2,}/g, " ")
+            .replace(/\s+[-–—]\s*$/g, "")
+            .trim();
+
+
+    return texto;
+}
 /* ==========================================================
    RANKING POR SKU — TABELA COMPACTA
    MAIOR PARA MENOR
@@ -1642,10 +1709,13 @@ function renderTabelaRankingSkuImportacao(imp) {
                         ),
 
                     descricao:
-                        escaparTextoImportacao(
-                            item.descricao ||
-                            "Sem descrição"
-                        ),
+    escaparTextoImportacao(
+        limparNomeProduto(
+            item.descricao,
+            item.marca
+        ) ||
+        "Sem descrição"
+    ),
 
                     quantidade:
                         quantidade === null
