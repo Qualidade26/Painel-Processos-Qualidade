@@ -1343,72 +1343,75 @@ const totalAferidos =
             )}
 
 
-            ${
-                gerarTabelaPeriodoAcumulado(
-                    [
-                        {
-                            titulo:"Total aferido",
+            <div class="relatorio-indicadores-esfig">
 
-                            anterior:
-                                resumoAnterior.totalAferido,
+    ${
+        gerarTabelaPeriodoAcumulado(
+            [
+                {
+                    titulo:"Total aferido",
 
-                            atual:
-                                resumoAtual.totalAferido,
+                    anterior:
+                        resumoAnterior.totalAferido,
 
-                            tipo:"numero"
-                        },
+                    atual:
+                        resumoAtual.totalAferido,
 
-                        {
-                            titulo:"Aprovado",
+                    tipo:"numero"
+                },
 
-                            anterior:
-                                resumoAnterior.totalAprovado,
+                {
+                    titulo:"Aprovado",
 
-                            atual:
-                                resumoAtual.totalAprovado,
+                    anterior:
+                        resumoAnterior.totalAprovado,
 
-                            tipo:"numero"
-                        },
+                    atual:
+                        resumoAtual.totalAprovado,
 
-                        {
-                            titulo:"Reprovado",
+                    tipo:"numero"
+                },
 
-                            anterior:
-                                resumoAnterior.totalReprovado,
+                {
+                    titulo:"Reprovado",
 
-                            atual:
-                                resumoAtual.totalReprovado,
+                    anterior:
+                        resumoAnterior.totalReprovado,
 
-                            tipo:"numero"
-                        },
+                    atual:
+                        resumoAtual.totalReprovado,
 
-                        {
-                            titulo:"Horas",
+                    tipo:"numero"
+                },
 
-                            anterior:
-                                anterior.totalHoras,
+                {
+                    titulo:"Horas",
 
-                            atual:
-                                corrente.totalHoras,
+                    anterior:
+                        anterior.totalHoras,
 
-                            tipo:"horas"
-                        },
+                    atual:
+                        corrente.totalHoras,
 
-                        {
-                            titulo:"GRU Inmetro",
+                    tipo:"horas"
+                },
 
-                            anterior:
-                                anterior.totalGruInmetro,
+                {
+                    titulo:"GRU Inmetro",
 
-                            atual:
-                                corrente.totalGruInmetro,
+                    anterior:
+                        anterior.totalGruInmetro,
 
-                            tipo:"moeda"
-                        }
-                    ]
-                )
-            }
+                    atual:
+                        corrente.totalGruInmetro,
 
+                    tipo:"moeda"
+                }
+            ]
+        )
+    }
+
+</div>
 
             <div class="relatorio-info-faixa">
 
