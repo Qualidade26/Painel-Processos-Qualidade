@@ -1121,7 +1121,10 @@
 .pagina-fornecedores .fornecedor-badge--critico{
     background:linear-gradient(180deg,#ff5057,#e8242c);
 }
-
+.pagina-fornecedores .fornecedor-badge--sem-avaliacao{
+    background:#94a3b8;
+    color:#ffffff;
+}
 
 /* ==========================================================
    DETALHAMENTO DO FORNECEDOR
