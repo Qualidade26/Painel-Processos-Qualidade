@@ -823,7 +823,58 @@ if(
             const atual =
                 painelAtual();
 
+/* ==================================================
+   GARANTIR IMPORTAÇÃO → INDICADOR
+================================================== */
 
+if(
+    tela.painel === "importacao" &&
+    tela.subaba === "indicador"
+){
+
+    const botaoImportacao =
+        localizarBotaoOriginal(
+            "importacao"
+        );
+
+
+    /* Reabre a página Importação */
+    if(
+        typeof window.abrirAba ===
+        "function"
+    ){
+
+        window.abrirAba(
+            "importacao",
+            botaoImportacao
+        );
+    }
+
+
+    /* Aguarda os botões internos existirem */
+    await esperarElemento(
+        "#botaoAbaResumoImportacao"
+    );
+
+
+    /* Força o Indicador, nunca o Fluxo */
+    if(
+        typeof window
+            .abrirAbaInternaImportacao ===
+            "function"
+    ){
+
+        window
+            .abrirAbaInternaImportacao(
+                "resumo"
+            );
+    }
+
+
+    reajustarPainel();
+
+    return;
+}
             /*
              * Se mudou o painel principal,
              * utiliza abrirAba().
@@ -836,6 +887,7 @@ if(
                 atual !== tela.painel
             ){
 
+               
                 const botaoOriginal =
                     localizarBotaoOriginal(
                         tela.painel
