@@ -1330,30 +1330,6 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
     margin-top:0 !important;
 }
 
-
-/* ==========================================================
-   3. GRID PRINCIPAL
-========================================================== */
-
-body.impressao-individual:has(.relatorio-indicadores-esfig)
-#relatorioDocumento
-.relatorio-grid-principal{
-
-    width:100% !important;
-
-    display:block !important;
-
-    height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
-
-    margin:0 !important;
-    padding:0 !important;
-
-    box-sizing:border-box !important;
-}
-
-
 /* ==========================================================
    4. QUADRO SUPERIOR - INDICADORES
    SEM ALTURA FIXA
@@ -1361,8 +1337,7 @@ body.impressao-individual:has(.relatorio-indicadores-esfig)
 
 body.impressao-individual:has(.relatorio-indicadores-esfig)
 #relatorioDocumento
-.relatorio-grid-principal
-> .relatorio-painel-total:has(.relatorio-indicadores-esfig){
+.relatorio-painel-total:has(.relatorio-indicadores-esfig){
 
     width:96% !important;
 
