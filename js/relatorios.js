@@ -1226,13 +1226,41 @@ function gerarPainelEsfig(
         );
 
 
-    const totalAferidos =
-        produtosFluxo.reduce(
-            (soma,item) =>
-                soma +
-                Number(item.aferidos || 0),
-            0
+   const obterAferidoProduto =
+    item => {
+
+        const totalAnual =
+            Number(
+                item.totalAnualSku || 0
+            );
+
+        const aguardando =
+            Number(
+                item.aguardando || 0
+            );
+
+        const desmontado =
+            Number(
+                item.desmontado || 0
+            );
+
+
+        return Math.max(
+            0,
+            totalAnual -
+            aguardando -
+            desmontado
         );
+    };
+
+
+const totalAferidos =
+    produtosFluxo.reduce(
+        (soma,item) =>
+            soma +
+            obterAferidoProduto(item),
+        0
+    );
 
 
     /* ======================================================
@@ -1276,9 +1304,9 @@ function gerarPainelEsfig(
                         </td>
 
                         <td>
-                            ${formatarNumero(
-                                item.totalAnualSku
-                            )}
+                           ${formatarNumero(
+    obterAferidoProduto(item)
+)}
                         </td>
 
                         <td>
