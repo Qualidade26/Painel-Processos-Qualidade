@@ -358,8 +358,7 @@
 
         }
 
-
-    /* ==================================================
+/* ==================================================
    IMPORTAÇÃO
 ================================================== */
 
@@ -368,23 +367,17 @@ if(
     "importacao"
 ){
 
-    const seletor =
-        tela.subaba === "fluxo"
-            ? "#botaoAbaFluxoImportacao"
-            : "#botaoAbaindicadorImportacao";
-
-
     const botao =
-        await esperarElemento(
-            seletor
-        );
+        tela.subaba === "fluxo"
+            ? await esperarElemento(
+                "#botaoAbaFluxoImportacao"
+            )
+            : await esperarElemento(
+                "#botaoAbaResumoImportacao"
+            );
 
 
-    if(botao){
-
-        botao.click();
-
-    }else if(
+    if(
         typeof window
             .abrirAbaInternaImportacao ===
             "function"
@@ -401,7 +394,6 @@ if(
 
     return;
 }
-
         /* ==================================================
            ESFIG
         ================================================== */
