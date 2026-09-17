@@ -511,7 +511,8 @@ function abrirAbaInternaImportacao(aba) {
 
 function renderResumoImportacao() {
 
-    const imp = obterDadosImportacao();
+    const imp =
+        obterDadosImportacao();
 
     const area =
         document.getElementById(
@@ -526,215 +527,212 @@ function renderResumoImportacao() {
     area.innerHTML = `
 
         <!-- ================================================
-             EVOLUÇÃO MENSAL
+             PAINEL DE IMPORTAÇÃO
+             EVOLUÇÃO + RANKING LATERAL
         ================================================= -->
 
         <section
-            id="painelEvolucaoImportacao"
-            class="
-                panel
-                importacao-panel-mensal
-                importacao-evolucao-expandida
-            "
+            id="importacaoPainelRanking"
+            class="importacao-painel-ranking"
         >
 
-            <h3 class="importacao-panel-titulo">
-                📊 Evolução Mensal da Inspeção de Importação
-            </h3>
 
-            <div class="chart-box chart-box-importacao">
+            <!-- ============================================
+                 ÁREA PRINCIPAL
+                 EVOLUÇÃO MENSAL
+            ============================================= -->
 
-                <canvas id="graficoImportacao"></canvas>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================================
-             BOTÃO / LEGENDA DO RANKING
-        ================================================= -->
-
-        <button
-            type="button"
-            id="botaoAbrirRankingImportacao"
-            class="importacao-ranking-toggle"
-            onclick="abrirRankingImportacao()"
-        >
-
-            <span>
-                📊 Ranking por SKU
-            </span>
-
-            <span class="importacao-ranking-seta">
-                ▼
-            </span>
-
-        </button>
-
-
-        <!-- ================================================
-             RANKING POR SKU
-        ================================================= -->
-
-        <section
-            id="painelRankingImportacao"
-            class="
-                panel
-                importacao-panel-sku
-                importacao-ranking-completo
-                importacao-ranking-oculto
-            "
-        >
-
-            <button
-                type="button"
-                class="importacao-ranking-fechar"
-                onclick="fecharRankingImportacao()"
-                aria-label="Fechar Ranking por SKU"
-                title="Fechar ranking"
+            <div
+                id="painelEvolucaoImportacao"
+                class="
+                    panel
+                    importacao-panel-mensal
+                    importacao-ranking-principal
+                "
             >
-                ✕
-            </button>
 
 
-            <h3 class="importacao-panel-titulo">
-                📊 Ranking por SKU
-            </h3>
+                <!-- ========================================
+                     CABEÇALHO
+                ========================================= -->
+
+                <div class="importacao-ranking-cabecalho">
 
 
-            <div class="chart-box chart-box-sku-importacao">
+                    <h3 class="importacao-panel-titulo">
 
-                <canvas id="graficoSkuImportacao"></canvas>
+                        📊 Evolução Mensal da Inspeção de Importação
+
+                    </h3>
+
+
+                    <!-- ====================================
+                         BOTÃO ABRIR RANKING
+                    ===================================== -->
+
+                    <button
+                        type="button"
+                        id="botaoAbrirRankingImportacao"
+                        class="importacao-ranking-abrir"
+                        onclick="abrirRankingImportacao()"
+                        title="Abrir Ranking por SKU"
+                        aria-label="Abrir Ranking por SKU"
+                    >
+
+                        <span class="importacao-ranking-abrir-texto">
+
+                            📊 Ranking por SKU
+
+                        </span>
+
+
+                        <span class="importacao-ranking-seta">
+
+                            ❯
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ========================================
+                     GRÁFICO MENSAL
+                ========================================= -->
+
+                <div
+                    class="
+                        chart-box
+                        chart-box-importacao
+                    "
+                >
+
+                    <canvas
+                        id="graficoImportacao"
+                    ></canvas>
+
+                </div>
 
             </div>
 
+
+
+            <!-- ============================================
+                 RANKING POR SKU
+                 PAINEL LATERAL
+            ============================================= -->
+
+            <aside
+                id="painelRankingImportacao"
+                class="
+                    panel
+                    importacao-panel-sku
+                    importacao-ranking-lateral
+                "
+                aria-hidden="true"
+            >
+
+
+                <!-- ========================================
+                     CABEÇALHO DO RANKING
+                ========================================= -->
+
+                <div class="importacao-ranking-lateral-cabecalho">
+
+
+                    <strong>
+
+                        📊 Ranking por SKU
+
+                    </strong>
+
+
+                    <button
+                        type="button"
+                        class="importacao-ranking-fechar"
+                        onclick="fecharRankingImportacao()"
+                        aria-label="Fechar Ranking por SKU"
+                        title="Fechar ranking"
+                    >
+
+                        ×
+
+                    </button>
+
+                </div>
+
+
+                <!-- ========================================
+                     GRÁFICO DO RANKING
+                ========================================= -->
+
+                <div
+                    class="
+                        chart-box
+                        chart-box-sku-importacao
+                    "
+                >
+
+                    <canvas
+                        id="graficoSkuImportacao"
+                    ></canvas>
+
+                </div>
+
+            </aside>
+
         </section>
 
+
+
+        <!-- ================================================
+             AVISO
+        ================================================= -->
 
         <div class="importacao-aviso-zero">
 
             <span class="importacao-aviso-icone">
+
                 ⓘ
+
             </span>
 
             Os valores zerados não são exibidos nos gráficos.
             Apenas valores maiores que zero são apresentados.
 
         </div>
+
     `;
 
 
     /*
        ------------------------------------------------------
-       Na abertura da página criamos somente o gráfico mensal.
+       Inicialmente somente o gráfico mensal é criado.
 
-       O Ranking será criado somente quando o usuário abrir.
+       O Ranking por SKU será criado quando
+       o usuário clicar para abrir.
        ------------------------------------------------------
     */
 
-    criarGraficoMensalImportacao(imp);
+    criarGraficoMensalImportacao(
+        imp
+    );
 }
+
+
+
 /* ==========================================================
    ABRIR RANKING POR SKU
 ========================================================== */
 
 function abrirRankingImportacao() {
 
-    const pagina =
-        document.querySelector(
-            ".pagina-importacao"
-        );
-
-    const painelEvolucao =
-        document.getElementById(
-            "painelEvolucaoImportacao"
-        );
-
-    const painelRanking =
-        document.getElementById(
-            "painelRankingImportacao"
-        );
-
-    const botaoAbrir =
-        document.getElementById(
-            "botaoAbrirRankingImportacao"
-        );
-
-
-    if (
-        !painelEvolucao ||
-        !painelRanking
-    ) {
-        return;
-    }
-
-
-    /* Diminui evolução */
-
-    painelEvolucao.classList.remove(
-        "importacao-evolucao-expandida"
+    alternarRankingImportacao(
+        true
     );
-
-    painelEvolucao.classList.add(
-        "importacao-evolucao-reduzida"
-    );
-
-
-    /* Mostra ranking */
-
-    painelRanking.classList.remove(
-        "importacao-ranking-oculto"
-    );
-
-    painelRanking.classList.add(
-        "importacao-ranking-visivel"
-    );
-
-
-    /* Esconde a barra */
-
-    if (botaoAbrir) {
-        botaoAbrir.style.display = "none";
-    }
-
-
-    if (pagina) {
-        pagina.classList.add(
-            "ranking-importacao-aberto"
-        );
-    }
-
-
-    /*
-       Cria o ranking somente agora.
-    */
-
-    if (!graficoSkuImportacao) {
-
-        criarGraficoSkuImportacao(
-            obterDadosImportacao()
-        );
-    }
-
-
-    /*
-       Aguarda a animação do CSS antes
-       de recalcular o Chart.js.
-    */
-
-    setTimeout(() => {
-
-        if (graficoMensalImportacao) {
-            graficoMensalImportacao.resize();
-        }
-
-        if (graficoSkuImportacao) {
-            graficoSkuImportacao.resize();
-        }
-
-    }, 320);
 }
+
 
 
 /* ==========================================================
@@ -743,20 +741,31 @@ function abrirRankingImportacao() {
 
 function fecharRankingImportacao() {
 
-    const pagina =
-        document.querySelector(
-            ".pagina-importacao"
-        );
+    alternarRankingImportacao(
+        false
+    );
+}
 
-    const painelEvolucao =
+
+
+/* ==========================================================
+   ABRIR / FECHAR
+   RANKING LATERAL DA IMPORTAÇÃO
+========================================================== */
+
+function alternarRankingImportacao(abrir) {
+
+    const painel =
         document.getElementById(
-            "painelEvolucaoImportacao"
+            "importacaoPainelRanking"
         );
 
-    const painelRanking =
+
+    const ranking =
         document.getElementById(
             "painelRankingImportacao"
         );
+
 
     const botaoAbrir =
         document.getElementById(
@@ -765,99 +774,110 @@ function fecharRankingImportacao() {
 
 
     if (
-        !painelEvolucao ||
-        !painelRanking
+        !painel ||
+        !ranking
     ) {
+
         return;
     }
 
 
-    /* Esconde ranking */
 
-    painelRanking.classList.remove(
-        "importacao-ranking-visivel"
-    );
+    /* ======================================================
+       ABRIR
+    ====================================================== */
 
-    painelRanking.classList.add(
-        "importacao-ranking-oculto"
-    );
+    if (abrir) {
 
 
-    /* Evolução volta a ficar grande */
-
-    painelEvolucao.classList.remove(
-        "importacao-evolucao-reduzida"
-    );
-
-    painelEvolucao.classList.add(
-        "importacao-evolucao-expandida"
-    );
-
-
-    /* Barra do ranking volta */
-
-    if (botaoAbrir) {
-        botaoAbrir.style.display = "";
-    }
-
-
-    if (pagina) {
-        pagina.classList.remove(
-            "ranking-importacao-aberto"
+        painel.classList.add(
+            "ranking-aberto"
         );
-    }
 
 
-    /*
-       Podemos destruir o Ranking enquanto
-       estiver fechado.
-
-       Isso evita manter um Chart.js oculto.
-    */
-
-    if (graficoSkuImportacao) {
-
-        graficoSkuImportacao.destroy();
-
-        graficoSkuImportacao = null;
-    }
+        ranking.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
 
-    setTimeout(() => {
+        if (botaoAbrir) {
 
-        if (graficoMensalImportacao) {
-            graficoMensalImportacao.resize();
+            botaoAbrir.style.display =
+                "none";
         }
 
-    }, 320);
-}
-function renderFluxoSemanalImportacao() {
 
-    const imp = obterDadosImportacao();
-    const area =
-        document.getElementById(
-            "conteudoInternoImportacao"
-        );
 
-    if (!area) {
-        return;
+        /*
+           Cria o gráfico somente na primeira abertura.
+        */
+
+        if (!graficoSkuImportacao) {
+
+            criarGraficoSkuImportacao(
+                obterDadosImportacao()
+            );
+        }
+
     }
 
-    area.innerHTML = `
-        <section class="panel importacao-panel-fluxo importacao-fluxo-semanal">
-            <div class="importacao-fluxo-cabecalho">
-                <h3 class="importacao-panel-titulo">
-                    📋 Fluxo de Inspeção Semanal
-                </h3>
-            </div>
 
-            <div class="importacao-tabela-wrap">
-                ${montarTabelaFluxoImportacao(
-                    imp.fluxo || []
-                )}
-            </div>
-        </section>
-    `;
+
+    /* ======================================================
+       FECHAR
+    ====================================================== */
+
+    else {
+
+
+        painel.classList.remove(
+            "ranking-aberto"
+        );
+
+
+        ranking.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        if (botaoAbrir) {
+
+            botaoAbrir.style.display =
+                "";
+        }
+
+    }
+
+
+
+    /* ======================================================
+       REAJUSTAR CHART.JS
+    ====================================================== */
+
+    setTimeout(
+        () => {
+
+
+            if (graficoMensalImportacao) {
+
+                graficoMensalImportacao.resize();
+            }
+
+
+            if (
+                abrir &&
+                graficoSkuImportacao
+            ) {
+
+                graficoSkuImportacao.resize();
+            }
+
+
+        },
+        250
+    );
 }
 /* ==========================================================
    GRÁFICO — EVOLUÇÃO MENSAL
