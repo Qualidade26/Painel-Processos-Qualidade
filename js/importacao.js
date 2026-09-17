@@ -887,10 +887,25 @@ function renderFluxoSemanalImportacao() {
 
 function criarGraficoMensalImportacao(imp) {
 
-    const mensal =
+    /* ======================================================
+       EXIBE SOMENTE ATÉ O MÊS ATUAL
+    ====================================================== */
+
+    const mensalCompleto =
         Array.isArray(imp.mensal)
             ? imp.mensal
             : [];
+
+
+    const mesAtual =
+        new Date().getMonth();
+
+
+    const mensal =
+        mensalCompleto.slice(
+            0,
+            mesAtual + 1
+        );
 
 
     const canvas =
