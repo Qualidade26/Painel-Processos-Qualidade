@@ -147,6 +147,7 @@
 {"po":" IMP000031-MEDLINE ","sku":4257,"descricao":"PT-SCALP PGC SEG. INFUSAO 21G C/100 (ML)","lote":"20260525","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":4258,"descricao":"PT-SCALP PGC SEG. INFUSAO 23G C/100 (ML)","lote":"20260526","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":4259,"descricao":"PT-SCALP PGC SEG. INFUSAO 25G C/100 (ML)","lote":"20260527","status":"Aprovado","observacao":"Conforme"},
+{"po":" IMP000031-MEDLINE ","sku":4259,"descricao":"PT-SCALP PGC SEG. VACUO 21G C/100 (ML)","lote":"20260522","status":"Reprovado ","observacao":"Avaria de 29 unidades de venda c/100 / Material molhado "},
 {"po":" IMP000031-MEDLINE ","sku":4262,"descricao":"PT-SCALP PGC SEG. VACUO 21G C/100 (ML)","lote":"20260522","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":4263,"descricao":"PT-SCALP PGC SEG. VACUO 23G C/100 (ML)","lote":"20260523","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":4264,"descricao":"PT-SCALP PGC SEG. VACUO 25G C/100 (ML)","lote":"20260524","status":"Aprovado","observacao":"Conforme"},
@@ -156,7 +157,7 @@
 {"po":" IMP000031-MEDLINE ","sku":80200,"descricao":"PT-AGULHA DE SEGURANCA ML 13 X 4,5 C/100","lote":"20260518","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":80201,"descricao":"PT-AGULHA DE SEGURANCA ML 20 X 5,5 C/100","lote":"20260519","status":"Aprovado","observacao":"Conforme"},
 {"po":" IMP000031-MEDLINE ","sku":80203,"descricao":"PT-AGULHA DE SEGURANCA ML 25 X 8 C/100","lote":"20260520","status":"Aprovado","observacao":"Conforme"},
-{"po":" IMP000031-MEDLINE ","sku":80204,"descricao":"PT-AGULHA DE SEGURANCA ML 40 X 12  C/100","lote":"20260521","status":"Aprovado","observacao":"Avaria de 29 unidades de venda c/100"},
+{"po":" IMP000031-MEDLINE ","sku":80204,"descricao":"PT-AGULHA DE SEGURANCA ML 40 X 12  C/100","lote":"20260521","status":"Aprovado","observacao":"Conforme"},
 {"po":"IMP000097-MEDLINE","sku":4257,"descricao":"PT-SCALP PGC SEG. INFUSAO 21G C/100 (ML)","lote":"20260626","status":"0","observacao":"0"},
 {"po":"IMP000097-MEDLINE","sku":4258,"descricao":"PT-SCALP PGC SEG. INFUSAO 23G C/100 (ML)","lote":"20260627","status":"0","observacao":"0"},
 {"po":"IMP000097-MEDLINE","sku":4262,"descricao":"PT-SCALP PGC SEG. VACUO 21G C/100 (ML)","lote":"20260623","status":"0","observacao":"0"},
@@ -182,8 +183,7 @@
 {"po":"2026I245-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N1649","status":"0","observacao":"0"},
 {"po":"2026I245-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N1771","status":"0","observacao":"0"},
 {"po":"2026I245-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1790","status":"0","observacao":"0"},
-{"po":"2026I245-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1776","status":"0","observacao":"0"},
-{"po":"2026I245-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1718","status":"0","observacao":"0"}
+{"po":"2026I245-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1776","status":"0","observacao":"0"}
 
 
 
