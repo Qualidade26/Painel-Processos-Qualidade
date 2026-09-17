@@ -681,98 +681,145 @@
     text-align:center;
 }
 /* ==========================================================
-   RANKING SKU — ABRIR / FECHAR
+   RANKING SKU — PAINEL LATERAL
+   MESMO CONCEITO DO RESUMO DO ESFIG
 ========================================================== */
 
 
 /* ==========================================================
-   EVOLUÇÃO MENSAL — ESTADO NORMAL / GRANDE
+   CONTAINER PRINCIPAL
 ========================================================== */
 
-.importacao-panel-mensal{
-    transition:
-        min-height .30s ease,
-        padding .30s ease;
-}
+.importacao-painel-ranking{
 
+    display:grid;
 
-/*
-   O Chart.js pega a altura deste container.
-   Quando o Ranking está fechado, ele fica maior.
-*/
-.importacao-evolucao-expandida
-.chart-box-importacao{
-    height:clamp(360px,48vh,500px);
-}
+    grid-template-columns:
+        minmax(0,1fr);
 
+    gap:10px;
 
-/* ==========================================================
-   EVOLUÇÃO MENSAL — RANKING ABERTO
-========================================================== */
-
-.importacao-evolucao-reduzida
-.chart-box-importacao{
-    height:285px;
-}
-
-
-/* ==========================================================
-   BARRA PARA ABRIR O RANKING
-========================================================== */
-
-.importacao-ranking-toggle{
     width:100%;
-    min-height:42px;
+    min-width:0;
+    min-height:0;
+}
 
-    margin-top:8px;
-    padding:8px 14px;
+
+/* ==========================================================
+   PAINEL PRINCIPAL
+========================================================== */
+
+.importacao-ranking-principal{
+
+    width:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   CABEÇALHO DO GRÁFICO PRINCIPAL
+========================================================== */
+
+.importacao-ranking-cabecalho{
+
+    position:relative;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    gap:10px;
+    width:100%;
+    min-width:0;
 
-    border:1.5px solid var(--panel-border);
-    border-radius:12px;
+    margin-bottom:8px;
+}
 
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #f8fbff
-        );
+
+.importacao-ranking-cabecalho
+.importacao-panel-titulo{
+
+    width:100%;
+
+    margin:0;
+
+    text-align:center;
+}
+
+
+/* ==========================================================
+   BOTÃO — ABRIR RANKING
+========================================================== */
+
+.importacao-ranking-abrir{
+
+    position:absolute;
+
+    top:50%;
+    right:0;
+
+    transform:
+        translateY(-50%);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
+    padding:6px 10px;
+
+    border:
+        1px solid
+        #b7ceff;
+
+    border-radius:8px;
+
+    background:#ffffff;
 
     color:var(--primary);
 
     font-family:inherit;
-    font-size:13px;
-    font-weight:900;
+
+    font-size:11px;
+    font-weight:800;
+
+    line-height:1.2;
 
     cursor:pointer;
 
-    box-shadow:
-        0 4px 10px
-        rgba(0,0,0,.05);
+    white-space:nowrap;
 
     transition:
-        background .20s ease,
-        box-shadow .20s ease,
-        transform .20s ease;
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 
-.importacao-ranking-toggle:hover{
-    background:#f1f6ff;
+.importacao-ranking-abrir:hover{
+
+    background:var(--primary);
+
+    color:#ffffff;
+
+    border-color:var(--primary);
+
+    transform:
+        translateY(-50%)
+        translateX(2px);
 
     box-shadow:
-        0 5px 12px
-        rgba(29,78,255,.12);
-}
-
-
-.importacao-ranking-toggle:active{
-    transform:translateY(1px);
+        0 4px 10px
+        rgba(29,78,255,.18);
 }
 
 
@@ -781,47 +828,80 @@
 ========================================================== */
 
 .importacao-ranking-seta{
-    display:inline-flex;
+
+    display:flex;
 
     align-items:center;
     justify-content:center;
 
-    font-size:12px;
+    font-size:18px;
+    font-weight:900;
+
     line-height:1;
 }
 
 
 /* ==========================================================
-   PAINEL COMPLETO DO RANKING
+   RANKING LATERAL — FECHADO
 ========================================================== */
 
-.importacao-ranking-completo{
-    position:relative;
+.importacao-ranking-lateral{
+
+    display:none;
 
     width:100%;
-    min-width:0;
 
-    margin-top:8px;
+    min-width:0;
+    min-height:0;
+
+    padding:10px;
 
     overflow:hidden;
 }
 
 
 /* ==========================================================
-   RANKING FECHADO
+   RANKING LATERAL — ABERTO
 ========================================================== */
 
-.importacao-ranking-oculto{
-    display:none !important;
+.importacao-painel-ranking.ranking-aberto{
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(320px,380px);
+}
+
+
+.importacao-painel-ranking.ranking-aberto
+.importacao-ranking-lateral{
+
+    display:flex;
+
+    flex-direction:column;
 }
 
 
 /* ==========================================================
-   RANKING ABERTO
+   CABEÇALHO DO RANKING
 ========================================================== */
 
-.importacao-ranking-visivel{
-    display:block !important;
+.importacao-ranking-lateral-cabecalho{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    width:100%;
+
+    margin-bottom:8px;
+
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:800;
 }
 
 
@@ -830,45 +910,49 @@
 ========================================================== */
 
 .importacao-ranking-fechar{
-    position:absolute;
 
-    top:7px;
-    right:10px;
+    flex:0 0 auto;
 
-    z-index:20;
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
 
     width:30px;
     height:30px;
 
     padding:0;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    border:
+        1px solid
+        #dbe4f0;
 
-    border:0;
-    border-radius:50%;
+    border-radius:8px;
 
-    background:transparent;
+    background:#ffffff;
 
-    color:#64748b;
+    color:#dc2626;
 
     font-family:inherit;
-    font-size:18px;
+
+    font-size:20px;
     font-weight:900;
+
     line-height:1;
 
     cursor:pointer;
 
     transition:
-        background .20s ease,
-        color .20s ease;
+        background .2s ease,
+        border-color .2s ease;
 }
 
 
 .importacao-ranking-fechar:hover{
-    background:#eef4ff;
-    color:var(--primary);
+
+    background:#fff5f5;
+
+    border-color:#dc2626;
 }
 
 
@@ -876,29 +960,15 @@
    GRÁFICO DO RANKING
 ========================================================== */
 
-.importacao-ranking-visivel
+.importacao-ranking-lateral
 .chart-box-sku-importacao{
+
+    width:100%;
+
+    min-width:0;
+    min-height:0;
+
     height:275px;
-}
-
-
-/* ==========================================================
-   TÍTULO DO RANKING
-   deixa espaço para o X
-========================================================== */
-
-.importacao-ranking-visivel
-.importacao-panel-titulo{
-    padding-right:38px;
-}
-
-
-/* ==========================================================
-   ANIMAÇÃO DO GRÁFICO PRINCIPAL
-========================================================== */
-
-.chart-box-importacao{
-    transition:height .30s ease;
 }
 
 
@@ -908,61 +978,73 @@
 
 @media(max-width:1050px){
 
-    .importacao-evolucao-expandida
-    .chart-box-importacao{
-        height:400px;
+    .importacao-painel-ranking.ranking-aberto{
+
+        grid-template-columns:
+            minmax(0,1fr)
+            minmax(280px,330px);
     }
 
-    .importacao-evolucao-reduzida
-    .chart-box-importacao{
-        height:270px;
-    }
 }
 
 
 /* ==========================================================
-   TABLET
+   TABLET / CELULAR
 ========================================================== */
 
 @media(max-width:800px){
 
-    .importacao-evolucao-expandida
-    .chart-box-importacao{
-        height:340px;
+    .importacao-painel-ranking.ranking-aberto{
+
+        grid-template-columns:1fr;
     }
 
-    .importacao-evolucao-reduzida
-    .chart-box-importacao{
-        height:250px;
+
+    .importacao-ranking-cabecalho{
+
+        flex-direction:column;
+
+        gap:8px;
     }
 
-    .importacao-ranking-toggle{
-        min-height:40px;
-        font-size:12px;
+
+    .importacao-ranking-abrir{
+
+        position:static;
+
+        transform:none;
     }
+
+
+    .importacao-ranking-abrir:hover{
+
+        transform:none;
+    }
+
+
+    .importacao-ranking-lateral
+    .chart-box-sku-importacao{
+
+        height:270px;
+    }
+
 }
 
 
-/* ==========================================================
-   CELULAR
-========================================================== */
-
 @media(max-width:520px){
 
-    .importacao-evolucao-expandida
-    .chart-box-importacao{
-        height:300px;
+    .importacao-ranking-abrir{
+
+        width:100%;
     }
 
-    .importacao-evolucao-reduzida
-    .chart-box-importacao{
-        height:240px;
-    }
 
-    .importacao-ranking-visivel
+    .importacao-ranking-lateral
     .chart-box-sku-importacao{
+
         height:250px;
     }
+
 }
 /* ==========================================================
    IMPORTAÇÃO — ENQUADRAMENTO FINAL
