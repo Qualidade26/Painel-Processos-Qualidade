@@ -2822,7 +2822,7 @@ function criarGraficoClassificacoes(){
             label:"Crítico",
             faixa:"< 70%",
             cor:CLASSIFICACOES.critico.cor
-        }
+        },
        {
     slug:"sem-avaliacao",
     label:"Sem avaliação",
