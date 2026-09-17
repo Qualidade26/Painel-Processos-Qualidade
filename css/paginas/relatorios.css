@@ -2222,3 +2222,19 @@ grid-template-rows:
         align-items:center;
     }
 }
+/* ==========================================================
+   AJUSTES EXCLUSIVOS DO RELATÓRIO NO PAINEL
+   NÃO AFETA IMPRESSÃO / PDF
+========================================================== */
+
+@media screen{
+
+    .pagina-relatorios
+    #relatorioPreview
+    #relatorioDocumento{
+
+        /* ajustes do painel entram aqui */
+
+    }
+
+}
