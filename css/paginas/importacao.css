@@ -952,21 +952,180 @@
 
 
 /* ==========================================================
-   GRÁFICO DO RANKING
+   TABELA — RANKING POR SKU
 ========================================================== */
 
-.importacao-ranking-lateral
-.chart-box-sku-importacao{
+.importacao-ranking-tabela-wrap{
 
     width:100%;
-
     min-width:0;
-    min-height:0;
 
-    height:275px;
+    overflow:hidden;
+
+    border:1px solid #dbe4f0;
+    border-radius:7px;
+
+    background:#ffffff;
 }
 
 
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.importacao-ranking-tabela{
+
+    width:100%;
+    min-width:0;
+
+    border-collapse:collapse;
+    table-layout:fixed;
+
+    background:#ffffff;
+
+    color:#10245c;
+
+    font-size:9px;
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
+
+.importacao-ranking-tabela thead th{
+
+    height:26px;
+
+    padding:5px 5px;
+
+    border-bottom:1px solid #cbd5e1;
+
+    background:#eef4ff;
+
+    color:#1d4ed8;
+
+    font-size:9px;
+    font-weight:900;
+
+    line-height:1;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   LINHAS
+========================================================== */
+
+.importacao-ranking-tabela tbody td{
+
+    height:25px;
+
+    padding:4px 5px;
+
+    border-bottom:1px solid #e5edf6;
+
+    color:#10245c;
+
+    font-size:9px;
+    font-weight:700;
+
+    line-height:1;
+
+    vertical-align:middle;
+}
+
+
+.importacao-ranking-tabela
+tbody tr:last-child td{
+
+    border-bottom:0;
+}
+
+
+.importacao-ranking-tabela
+tbody tr:hover{
+
+    background:#f8fbff;
+}
+
+
+/* ==========================================================
+   SKU
+========================================================== */
+
+.importacao-ranking-tabela
+.ranking-col-sku{
+
+    width:17%;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   DESCRIÇÃO
+   SEMPRE EM UMA ÚNICA LINHA
+========================================================== */
+
+.importacao-ranking-tabela
+.ranking-col-descricao{
+
+    width:50%;
+
+    text-align:left;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   QUANTIDADE
+========================================================== */
+
+.importacao-ranking-tabela
+.ranking-col-quantidade{
+
+    width:33%;
+
+    text-align:right;
+
+    white-space:nowrap;
+
+    font-weight:900;
+
+    font-variant-numeric:tabular-nums;
+}
+
+
+/* ==========================================================
+   SEM DADOS
+========================================================== */
+
+.importacao-ranking-vazio{
+
+    padding:20px 10px;
+
+    color:#64748b;
+
+    font-size:10px;
+    font-weight:600;
+
+    text-align:center;
+}
 /* ==========================================================
    NOTEBOOK
 ========================================================== */
@@ -1299,35 +1458,6 @@
 
         flex:0 0 auto;
     }
-
-
-
-    #painelRankingImportacao
-    .chart-box-sku-importacao{
-
-        flex:1 1 0;
-
-        width:100%;
-
-        height:auto !important;
-
-        min-height:0 !important;
-        max-height:none !important;
-
-        overflow:hidden;
-    }
-
-
-    #painelRankingImportacao
-    canvas{
-
-        width:100% !important;
-        height:100% !important;
-
-        max-height:100% !important;
-    }
-
-
     /* ======================================================
        ABA 2 — FLUXO DE INSPEÇÃO SEMANAL
     ====================================================== */
