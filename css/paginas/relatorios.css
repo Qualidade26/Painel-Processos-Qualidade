@@ -2283,3 +2283,18 @@ grid-template-rows:
     }
 
 }
+/* ==========================================================
+   ESFIG - REMOVER PROCESSAMENTO SOMENTE DO PAINEL
+========================================================== */
+
+@media screen{
+
+    .pagina-relatorios
+    #relatorioPreview
+    #relatorioDocumento
+    .relatorio-esfig-processamento{
+
+        display:none !important;
+    }
+
+}
