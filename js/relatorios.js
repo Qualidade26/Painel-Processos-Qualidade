@@ -1371,18 +1371,27 @@ const totalAferidos =
     ${
         gerarTabelaPeriodoAcumulado(
             [
-                {
-                    titulo:"Total aferido",
+               {
+    titulo:"Total aferido",
 
-                    anterior:
-                        resumoAnterior.totalAferido,
+    anterior:
+        Number(
+            resumoAnterior.totalAprovado || 0
+        ) +
+        Number(
+            resumoAnterior.totalReprovado || 0
+        ),
 
-                    atual:
-                        resumoAtual.totalAferido,
+    atual:
+        Number(
+            resumoAtual.totalAprovado || 0
+        ) +
+        Number(
+            resumoAtual.totalReprovado || 0
+        ),
 
-                    tipo:"numero"
-                },
-
+    tipo:"numero"
+},
                 {
                     titulo:"Aprovado",
 
