@@ -1648,11 +1648,21 @@ function gerarPainelDescarte(
         atual.descarte || {};
 
 
-    const movimento =
-        calcularVariacao(
-            anterior.descartadoAno?.total,
-            corrente.descartadoAno?.total
-        );
+   const acumuladoAnterior =
+    Number(
+        anterior.descartadoAno?.total || 0
+    );
+
+const acumuladoAtual =
+    Number(
+        corrente.descartadoAno?.total || 0
+    );
+
+const valorNoPeriodo =
+    Math.max(
+        0,
+        acumuladoAtual - acumuladoAnterior
+    );
 
 
     return `
@@ -1690,12 +1700,12 @@ function gerarPainelDescarte(
 
 
                     ${
-                        miniIndicador(
-                            "Valor atual",
-                            formatarMoeda(
-                                corrente.valorAtual?.total
-                            )
-                        )
+                       miniIndicador(
+    "Valor no período",
+    formatarMoeda(
+        valorNoPeriodo
+    )
+)
                     }
 
 
