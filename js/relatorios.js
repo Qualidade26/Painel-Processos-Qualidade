@@ -2620,53 +2620,28 @@ function obterCorOrigemDescarte(nome){
             .toLowerCase();
 
 
-    if(chave.includes("vencid")){
-        return "#ef4444"; // vermelho
+    if(chave === "devolucao"){
+        return "#22c55e";
     }
 
 
-    if(chave.includes("certific")){
-        return "#8b5cf6"; // roxo
+    if(chave === "importacao"){
+        return "#2563eb";
     }
 
 
-    if(
-        chave.includes("desvio") &&
-        chave.includes("qualidade")
-    ){
-        return "#f59e0b"; // laranja
+    if(chave === "desvio de qualidade"){
+        return "#f59e0b";
     }
 
 
-    if(
-        chave.includes("avaria") &&
-        chave.includes("import")
-    ){
-        return "#2563eb"; // azul
+    if(chave === "nacional"){
+        return "#ec4899";
     }
 
 
-    if(
-        chave.includes("devol") &&
-        chave.includes("avaria")
-    ){
-        return "#22c55e"; // verde
-    }
-
-
-    if(
-        chave.includes("avaria") &&
-        chave.includes("estoque")
-    ){
-        return "#06b6d4"; // ciano
-    }
-
-
-    if(
-        chave.includes("avaria") &&
-        chave.includes("nacional")
-    ){
-        return "#ec4899"; // rosa
+    if(chave === "estoque"){
+        return "#06b6d4";
     }
 
 
@@ -4070,38 +4045,144 @@ function obterOrigensDescarte(
         ) || [];
 
 
-    return lista
+    const agrupado = {};
 
-        .map(
-            item => ({
 
-                nome:
+    lista.forEach(
+        item => {
+
+            const nomeOriginal =
+                String(
                     item.nome ||
                     item.origem ||
                     item.descricao ||
-                    "Origem",
+                    ""
+                );
 
-                valor:
-                    Number(
-                        item.valor ||
-                        item.total ||
-                        0
-                    )
+
+            const chave =
+                nomeOriginal
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g,"")
+                    .trim()
+                    .toLowerCase();
+
+
+            const valor =
+                Number(
+                    item.valor ||
+                    item.total ||
+                    0
+                );
+
+
+            if(valor <= 0){
+                return;
+            }
+
+
+            let nome = null;
+
+
+            /* ==========================================
+               DEVOLUÇÃO
+            ========================================== */
+
+            if(
+                chave.includes("devol")
+            ){
+
+                nome = "Devolução";
+
+            }
+
+
+            /* ==========================================
+               DESVIO DE QUALIDADE
+            ========================================== */
+
+            else if(
+                chave.includes("desvio") &&
+                chave.includes("qualidade")
+            ){
+
+                nome = "Desvio de Qualidade";
+
+            }
+
+
+            /* ==========================================
+               IMPORTAÇÃO
+            ========================================== */
+
+            else if(
+                chave.includes("import")
+            ){
+
+                nome = "Importação";
+
+            }
+
+
+            /* ==========================================
+               NACIONAL
+            ========================================== */
+
+            else if(
+                chave.includes("nacional")
+            ){
+
+                nome = "Nacional";
+
+            }
+
+
+            /* ==========================================
+               ESTOQUE
+            ========================================== */
+
+            else if(
+                chave.includes("estoque")
+            ){
+
+                nome = "Estoque";
+
+            }
+
+
+            /* NÃO MOSTRA OUTRAS ORIGENS */
+
+            if(!nome){
+                return;
+            }
+
+
+            if(!agrupado[nome]){
+
+                agrupado[nome] = 0;
+
+            }
+
+
+            agrupado[nome] += valor;
+
+        }
+    );
+
+
+    return Object
+        .entries(agrupado)
+        .map(
+            ([nome,valor]) => ({
+                nome,
+                valor
             })
         )
-
-        .filter(
-            item =>
-                item.valor > 0
-        )
-
         .sort(
             (a,b) =>
-                b.valor -
-                a.valor
+                b.valor - a.valor
         );
 }
-
 
 /* ==========================================================
    SOMAR AMOSTRAS
