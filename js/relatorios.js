@@ -4213,7 +4213,18 @@ function obterOrigensDescarteRelatorio(
                 nome = "Estoque";
 
             }
+/* ==========================================
+   VENCIDO
+========================================== */
 
+else if(
+    chave.includes("vencid") ||
+    chave.includes("venciment")
+){
+
+    nome = "Vencido";
+
+}
 
             /* NÃO MOSTRA OUTRAS ORIGENS */
 
