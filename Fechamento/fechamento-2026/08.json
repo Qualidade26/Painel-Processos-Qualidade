@@ -278,8 +278,8 @@
       },
       {
         "mes": "Setembro",
-        "valor": 1,
-        "horas": 0.17
+        "valor": 0,
+        "horas": 0.00
       },
       {
         "mes": "Outubro",
@@ -644,7 +644,7 @@
       {
         "sku": "86003",
         "descricao": "PT-ALCOOL SWAB C/100 (PH)",
-        "quantidade": 145496000
+        "quantidade": 5496000
       },
       {
         "sku": "5468",
