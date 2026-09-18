@@ -131,7 +131,46 @@ function escaparHtmlDescarte(valor){
         .replaceAll("'", "&#039;");
 }
 
+function nomeExibicaoOrigemDescarte(nome){
 
+    const chave =
+        String(nome || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .trim()
+            .toLowerCase();
+
+
+    if(chave.includes("devol")){
+        return "Devolução";
+    }
+
+
+    if(chave.includes("import")){
+        return "Importação";
+    }
+
+
+    if(
+        chave.includes("desvio") &&
+        chave.includes("qualidade")
+    ){
+        return "Desvio de Qualidade";
+    }
+
+
+    if(chave.includes("nacional")){
+        return "Nacional";
+    }
+
+
+    if(chave.includes("estoque")){
+        return "Estoque";
+    }
+
+
+    return nome;
+}
 /* ==========================================================
    TOP 3 ORIGENS
 ========================================================== */
@@ -173,18 +212,27 @@ function montarTop3Descarte(origens){
 
             ${top3.map((item, indice) => {
 
-                const nome =
-                    item.nome ||
-                    item.origem ||
-                    "Sem origem";
+              const nomeOriginal =
+    item.nome ||
+    item.origem ||
+    "Sem origem";
 
 
-                const valor =
-                    Number(item.valor || 0);
+const nome =
+    nomeExibicaoOrigemDescarte(
+        nomeOriginal
+    );
 
 
-                const cor =
-    obterCorOrigemDescarte(nome);
+const valor =
+    Number(item.valor || 0);
+
+
+/* COR CONTINUA USANDO O NOME ORIGINAL */
+const cor =
+    obterCorOrigemDescarte(
+        nomeOriginal
+    );
 
 
                 return `
@@ -616,13 +664,15 @@ function criarGraficoDescarteOrigemResumo(
         );
 
 
-    const labels =
-        lista.map(
-            item =>
+   const labels =
+    lista.map(
+        item =>
+            nomeExibicaoOrigemDescarte(
                 item.nome ||
                 item.origem ||
                 "Sem origem"
-        );
+            )
+    );
 
 
     const valores =
