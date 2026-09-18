@@ -806,7 +806,7 @@ case "esfig":
 case "descarte":
 
     return `
-        ${gerarPainelDescarte(congelado,atual,true)}
+        ${gerarPainelDescarteRelatorio(congelado,atual,true)}
     `;
 
 
@@ -2652,12 +2652,12 @@ function obterCorOrigemDescarte(nome){
    LISTA DE ORIGENS DO DESCARTE
 ========================================================== */
 
-function gerarListaOrigensDescarte(
+functiongerarListaOrigensDescarteRelatorio(
     descarte
 ){
 
     const lista =
-        obterOrigensDescarte(
+       obterOrigensDescarteRelatorio(
             descarte
         )
         .slice(0,7);
