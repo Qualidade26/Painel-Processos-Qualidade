@@ -1650,21 +1650,47 @@ function gerarPainelDescarte(
         atual.descarte || {};
 
 
-   const acumuladoAnterior =
-    Number(
-        anterior.descartadoAno?.total || 0
-    );
+    /* ======================================================
+       MOVIMENTO DO DESCARTE NO PERÍODO
+    ====================================================== */
 
-const acumuladoAtual =
-    Number(
-        corrente.descartadoAno?.total || 0
-    );
+    const valorAtualAnterior =
+        Number(
+            anterior.valorAtual?.total || 0
+        );
 
-const valorNoPeriodo =
-    Math.max(
-        0,
-        acumuladoAtual - acumuladoAnterior
-    );
+    const valorAtualCorrente =
+        Number(
+            corrente.valorAtual?.total || 0
+        );
+
+
+    const acumuladoAnterior =
+        Number(
+            anterior.descartadoAno?.total || 0
+        );
+
+    const acumuladoAtual =
+        Number(
+            corrente.descartadoAno?.total || 0
+        );
+
+
+    const posicaoAnterior =
+        valorAtualAnterior +
+        acumuladoAnterior;
+
+    const posicaoAtual =
+        valorAtualCorrente +
+        acumuladoAtual;
+
+
+    const valorNoPeriodo =
+        Math.max(
+            0,
+            posicaoAtual -
+            posicaoAnterior
+        );
 
 
     return `
@@ -1684,64 +1710,36 @@ const valorNoPeriodo =
 
             <div class="relatorio-descarte-layout">
 
+                <div class="relatorio-descarte-resumo">
 
-                <!-- ==============================
-                     VALORES
-                =============================== -->
-<div class="relatorio-descarte-resumo">
+                    ${
+                        miniIndicador(
+                            "Valor no período",
+                            formatarMoeda(
+                                valorNoPeriodo
+                            )
+                        )
+                    }
 
-    ${
-        miniIndicador(
-            "Valor no período",
-            formatarMoeda(
-                valorNoPeriodo
-            )
-        )
-    }
+                    ${
+                        miniIndicador(
+                            "Valor atual",
+                            formatarMoeda(
+                                corrente.valorAtual?.total
+                            )
+                        )
+                    }
 
-    ${
-        miniIndicador(
-            "Valor atual",
-            formatarMoeda(
-                corrente.valorAtual?.total
-            )
-        )
-    }
-
-    ${
-        miniIndicador(
-            "Acumulado no ano",
-            formatarMoeda(
-                corrente.descartadoAno?.total
-            )
-        )
-    }
-
-</div>
-
-                <!-- ==============================
-                     GRÁFICO POR ORIGEM
-                =============================== -->
-
-                <div
-                    class="
-                        relatorio-grafico-box
-                        relatorio-descarte-grafico-mini
-                    "
-                >
-
-                    <canvas
-                        id="relatorioGraficoDescarte"
-                    ></canvas>
+                    ${
+                        miniIndicador(
+                            "Acumulado no ano",
+                            formatarMoeda(
+                                corrente.descartadoAno?.total
+                            )
+                        )
+                    }
 
                 </div>
-
-            </div>
-
-        </section>
-    `;
-}
-
 
 /* ==========================================================
    AMOSTRAS
