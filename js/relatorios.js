@@ -79,7 +79,7 @@ function renderRelatorios(){
                             </option>
 
                             <option value="amostras">
-                             
+                             Amostras
                             </option>
 
                             <option value="retrabalho">
@@ -1730,7 +1730,7 @@ function gerarPainelDescarte(
                         )
                     }
 
-                    ${
+                                      ${
                         miniIndicador(
                             "Acumulado no ano",
                             formatarMoeda(
@@ -1740,7 +1740,28 @@ function gerarPainelDescarte(
                     }
 
                 </div>
-</section>
+
+
+                <!-- ==============================
+                     GRÁFICO POR ORIGEM
+                =============================== -->
+
+                <div
+                    class="
+                        relatorio-grafico-box
+                        relatorio-descarte-grafico-mini
+                    "
+                >
+
+                    <canvas
+                        id="relatorioGraficoDescarte"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+        </section>
     `;
 }
 /* ==========================================================
