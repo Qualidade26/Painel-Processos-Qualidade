@@ -1369,56 +1369,55 @@ const totalAferidos =
             <div class="relatorio-indicadores-esfig">
 
     ${
-        gerarTabelaPeriodoAcumulado(
-            [
-               {
- {
-    titulo:"Total aferido",
+       gerarTabelaPeriodoAcumulado(
+    [
+        {
+            titulo:"Total aferido",
 
-    anterior:
-        Number(
-            resumoAnterior.totalAprovado || 0
-        ) +
-        Number(
-            resumoAnterior.totalReprovado || 0
-        ),
+            anterior:
+                Number(
+                    resumoAnterior.totalAprovado || 0
+                ) +
+                Number(
+                    resumoAnterior.totalReprovado || 0
+                ),
 
-    atual:
-        Number(
-            resumoAtual.totalAprovado || 0
-        ) +
-        Number(
-            resumoAtual.totalReprovado || 0
-        ),
+            atual:
+                Number(
+                    resumoAtual.totalAprovado || 0
+                ) +
+                Number(
+                    resumoAtual.totalReprovado || 0
+                ),
 
-    tipo:"numero",
-    zerarNegativo:true
-},
+            tipo:"numero",
+            zerarNegativo:true
+        },
 
-{
-    titulo:"Aprovado",
+        {
+            titulo:"Aprovado",
 
-    anterior:
-        resumoAnterior.totalAprovado,
+            anterior:
+                resumoAnterior.totalAprovado,
 
-    atual:
-        resumoAtual.totalAprovado,
+            atual:
+                resumoAtual.totalAprovado,
 
-    tipo:"numero",
-    zerarNegativo:true
-},
+            tipo:"numero",
+            zerarNegativo:true
+        },
 
-{
-    titulo:"Reprovado",
+        {
+            titulo:"Reprovado",
 
-    anterior:
-        resumoAnterior.totalReprovado,
+            anterior:
+                resumoAnterior.totalReprovado,
 
-    atual:
-        resumoAtual.totalReprovado,
+            atual:
+                resumoAtual.totalReprovado,
 
-    tipo:"numero"
-},
+            tipo:"numero"
+        },
                 {
                     titulo:"Horas",
 
