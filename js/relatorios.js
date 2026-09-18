@@ -1372,6 +1372,7 @@ const totalAferidos =
         gerarTabelaPeriodoAcumulado(
             [
                {
+   {
     titulo:"Total aferido",
 
     anterior:
@@ -1390,32 +1391,34 @@ const totalAferidos =
             resumoAtual.totalReprovado || 0
         ),
 
+    tipo:"numero",
+    zerarNegativo:true
+},
+
+{
+    titulo:"Aprovado",
+
+    anterior:
+        resumoAnterior.totalAprovado,
+
+    atual:
+        resumoAtual.totalAprovado,
+
+    tipo:"numero",
+    zerarNegativo:true
+},
+
+{
+    titulo:"Reprovado",
+
+    anterior:
+        resumoAnterior.totalReprovado,
+
+    atual:
+        resumoAtual.totalReprovado,
+
     tipo:"numero"
 },
-                {
-                    titulo:"Aprovado",
-
-                    anterior:
-                        resumoAnterior.totalAprovado,
-
-                    atual:
-                        resumoAtual.totalAprovado,
-
-                    tipo:"numero"
-                },
-
-                {
-                    titulo:"Reprovado",
-
-                    anterior:
-                        resumoAnterior.totalReprovado,
-
-                    atual:
-                        resumoAtual.totalReprovado,
-
-                    tipo:"numero"
-                },
-
                 {
                     titulo:"Horas",
 
@@ -1686,40 +1689,36 @@ const valorNoPeriodo =
                 <!-- ==============================
                      VALORES
                 =============================== -->
+<div class="relatorio-descarte-resumo">
 
-                <div class="relatorio-descarte-resumo">
+    ${
+        miniIndicador(
+            "Valor no período",
+            formatarMoeda(
+                valorNoPeriodo
+            )
+        )
+    }
 
-                    ${
-                        miniIndicador(
-                            "Valor no período",
-                            formatarMovimentoMoeda(
-                                movimento
-                            )
-                        )
-                    }
+    ${
+        miniIndicador(
+            "Valor atual",
+            formatarMoeda(
+                corrente.valorAtual?.total
+            )
+        )
+    }
 
+    ${
+        miniIndicador(
+            "Acumulado no ano",
+            formatarMoeda(
+                corrente.descartadoAno?.total
+            )
+        )
+    }
 
-                    ${
-                       miniIndicador(
-    "Valor no período",
-    formatarMoeda(
-        valorNoPeriodo
-    )
-)
-                    }
-
-
-                    ${
-                        miniIndicador(
-                            "Acumulado no ano",
-                            formatarMoeda(
-                                corrente.descartadoAno?.total
-                            )
-                        )
-                    }
-
-                </div>
-
+</div>
 
                 <!-- ==============================
                      GRÁFICO POR ORIGEM
@@ -2402,12 +2401,21 @@ function gerarTabelaPeriodoAcumulado(
             .map(
                 indicador => {
 
-                    const movimento =
-                        calcularVariacao(
-                            indicador.anterior,
-                            indicador.atual
-                        );
+                   let movimento =
+    calcularVariacao(
+        indicador.anterior,
+        indicador.atual
+    );
 
+
+if(
+    indicador.zerarNegativo === true &&
+    movimento !== null &&
+    movimento < 0
+){
+
+    movimento = 0;
+}
 
                     return `
 
