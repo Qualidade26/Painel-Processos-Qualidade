@@ -1110,7 +1110,45 @@ function gerarPainelImportacao(
     const corrente =
         atual.importacao || {};
 
+/* ======================================================
+   MOVIMENTO DA IMPORTAÇÃO NO PERÍODO
+   ATUAL - FECHAMENTO DE AGOSTO
+====================================================== */
 
+const processosPeriodo =
+    Math.max(
+        0,
+        Number(corrente.processosAno || 0) -
+        Number(anterior.processosAno || 0)
+    );
+
+const skuPeriodo =
+    Math.max(
+        0,
+        Number(corrente.totalSku || 0) -
+        Number(anterior.totalSku || 0)
+    );
+
+const lotesPeriodo =
+    Math.max(
+        0,
+        Number(corrente.totalLotes || 0) -
+        Number(anterior.totalLotes || 0)
+    );
+
+const laudosPeriodo =
+    Math.max(
+        0,
+        Number(corrente.laudosEmitidos || 0) -
+        Number(anterior.laudosEmitidos || 0)
+    );
+
+const horasPeriodo =
+    Math.max(
+        0,
+        Number(corrente.totalHoras || 0) -
+        Number(anterior.totalHoras || 0)
+    );
     return `
 
         <section
@@ -1130,44 +1168,84 @@ function gerarPainelImportacao(
                 <div>
 
                     ${
-                        gerarTabelaPeriodoAcumulado(
-                            [
-                                {
-                                    titulo:"Processos",
-                                    anterior:anterior.processosAno,
-                                    atual:corrente.processosAno,
-                                    tipo:"numero"
-                                },
+                       gerarTabelaPeriodoAcumulado(
+    [
+        {
+            titulo:"Processos",
 
-                                {
-                                    titulo:"SKUs",
-                                    anterior:anterior.totalSku,
-                                    atual:corrente.totalSku,
-                                    tipo:"numero"
-                                },
+            anterior:
+                anterior.processosAno,
 
-                                {
-                                    titulo:"Lotes",
-                                    anterior:anterior.totalLotes,
-                                    atual:corrente.totalLotes,
-                                    tipo:"numero"
-                                },
+            atual:
+                corrente.processosAno,
 
-                                {
-                                    titulo:"Laudos",
-                                    anterior:anterior.laudosEmitidos,
-                                    atual:corrente.laudosEmitidos,
-                                    tipo:"numero"
-                                },
+            periodo:
+                processosPeriodo,
 
-                                {
-                                    titulo:"Horas",
-                                    anterior:anterior.totalHoras,
-                                    atual:corrente.totalHoras,
-                                    tipo:"horas"
-                                }
-                            ]
-                        )
+            tipo:"numero"
+        },
+
+        {
+            titulo:"SKUs",
+
+            anterior:
+                anterior.totalSku,
+
+            atual:
+                corrente.totalSku,
+
+            periodo:
+                skuPeriodo,
+
+            tipo:"numero"
+        },
+
+        {
+            titulo:"Lotes",
+
+            anterior:
+                anterior.totalLotes,
+
+            atual:
+                corrente.totalLotes,
+
+            periodo:
+                lotesPeriodo,
+
+            tipo:"numero"
+        },
+
+        {
+            titulo:"Laudos",
+
+            anterior:
+                anterior.laudosEmitidos,
+
+            atual:
+                corrente.laudosEmitidos,
+
+            periodo:
+                laudosPeriodo,
+
+            tipo:"numero"
+        },
+
+        {
+            titulo:"Horas",
+
+            anterior:
+                anterior.totalHoras,
+
+            atual:
+                corrente.totalHoras,
+
+            periodo:
+                horasPeriodo,
+
+            tipo:"horas"
+        }
+    ]
+)
                     }
 
                 </div>
@@ -2407,10 +2485,12 @@ function gerarTabelaPeriodoAcumulado(
                 indicador => {
 
                    let movimento =
-    calcularVariacao(
-        indicador.anterior,
-        indicador.atual
-    );
+    indicador.periodo !== undefined
+        ? Number(indicador.periodo || 0)
+        : calcularVariacao(
+            indicador.anterior,
+            indicador.atual
+        );
 
 
 if(
