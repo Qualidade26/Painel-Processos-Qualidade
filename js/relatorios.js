@@ -818,7 +818,6 @@ case "amostras":
 
 
 case "retrabalho":
-
     return `
         ${gerarPainelRetrabalho(congelado,atual,true)}
         ${gerarPainelAdequacao(congelado,atual,true)}
@@ -2122,6 +2121,50 @@ function gerarPainelFornecedores(
         );
 
 
+    /* ======================================================
+       MOVIMENTO DE FORNECEDORES NO PERÍODO
+    ====================================================== */
+
+    const processosPeriodo =
+        Math.max(
+            0,
+            Number(corrente.totalprocessos || 0) -
+            Number(anterior.totalprocessos || 0)
+        );
+
+
+    const rncPeriodo =
+        Math.max(
+            0,
+            Number(corrente.totalrncano || 0) -
+            Number(anterior.totalrncano || 0)
+        );
+
+
+    const retrabalhoPeriodo =
+        Math.max(
+            0,
+            Number(corrente.totalretrabalho || 0) -
+            Number(anterior.totalretrabalho || 0)
+        );
+
+
+    const ocorrenciasPeriodo =
+        Math.max(
+            0,
+            Number(
+                corrente.indicadores
+                    ?.ocorrencias
+                    ?.quantidade || 0
+            ) -
+            Number(
+                anterior.indicadores
+                    ?.ocorrencias
+                    ?.quantidade || 0
+            )
+        );
+
+
     return `
 
         <section
@@ -2146,45 +2189,59 @@ function gerarPainelFornecedores(
                             [
                                 {
                                     titulo:"Processos",
+
                                     anterior:
                                         anterior.totalprocessos,
 
                                     atual:
                                         corrente.totalprocessos,
 
+                                    periodo:
+                                        processosPeriodo,
+
                                     tipo:"numero"
                                 },
 
-                               {
-    titulo:"RNC",
 
-    anterior:
-        Number(
-            anterior.totalrncano || 0
-        ),
+                                {
+                                    titulo:"RNC",
 
-    atual:
-        Number(
-            corrente.totalrncano || 0
-        ),
+                                    anterior:
+                                        Number(
+                                            anterior.totalrncano || 0
+                                        ),
 
-    tipo:"numero",
-    zerarNegativo:true
-},
+                                    atual:
+                                        Number(
+                                            corrente.totalrncano || 0
+                                        ),
+
+                                    periodo:
+                                        rncPeriodo,
+
+                                    tipo:"numero"
+                                },
+
 
                                 {
                                     titulo:"Retrabalhos",
+
                                     anterior:
                                         anterior.totalretrabalho,
 
                                     atual:
                                         corrente.totalretrabalho,
 
+                                    periodo:
+                                        retrabalhoPeriodo,
+
                                     tipo:"numero"
                                 },
 
+
                                 {
                                     titulo:"Ocorrências",
+
                                     anterior:
                                         anterior.indicadores
                                             ?.ocorrencias
@@ -2194,6 +2251,9 @@ function gerarPainelFornecedores(
                                         corrente.indicadores
                                             ?.ocorrencias
                                             ?.quantidade,
+
+                                    periodo:
+                                        ocorrenciasPeriodo,
 
                                     tipo:"numero"
                                 }
@@ -2236,8 +2296,6 @@ function gerarPainelFornecedores(
         </section>
     `;
 }
-
-
 /* ==========================================================
    RESUMO EXECUTIVO
 ========================================================== */
