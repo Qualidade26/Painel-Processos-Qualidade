@@ -1072,20 +1072,45 @@ body.impressao-individual
 }
 
 
-/* RETRABALHO */
+/* ==========================================================
+   RETRABALHO INDIVIDUAL - TABELA MAIS COMPACTA
+========================================================== */
+
+/* CABEÇALHO */
 
 body.impressao-individual
 #relatorioDocumento
-.relatorio-painel-total:has(#relatorioGraficoRetrabalho){
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-tabela-executiva th{
 
-    width:96% !important;
+    height:36px !important;
 
-    min-height:125mm !important;
+    padding:
+        5px
+        9px !important;
 
-    display:flex !important;
-    flex-direction:column !important;
+    font-size:9px !important;
+    font-weight:900 !important;
+}
 
-    justify-content:space-between !important;
+
+/* LINHAS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+.relatorio-tabela-executiva td{
+
+    height:32px !important;
+
+    padding:
+        5px
+        9px !important;
+
+    font-size:10px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
 }
 /* ==========================================================
    RETRABALHO - ALINHAR OS DOIS PAINÉIS
