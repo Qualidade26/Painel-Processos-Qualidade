@@ -850,7 +850,7 @@ default:
     configuracao
 )}
 
-            ${gerarPainelDescarte(congelado,atual)}
+           ${gerarPainelDescarteRelatorio(congelado,atual)}
 
             ${gerarPainelAmostras(congelado,atual)}
 
@@ -1754,7 +1754,7 @@ const totalAferidos =
    DESCARTE
 ========================================================== */
 
-function gerarPainelDescarte(
+function gerarPainelDescarteRelatorio(
     congelado,
     atual,
     larguraTotal = false
@@ -2610,7 +2610,7 @@ if(
     `;
 }
 
-function obterCorOrigemDescarte(nome){
+function obterCorOrigemDescarteRelatorio(nome){
 
     const chave =
         String(nome || "")
@@ -2652,7 +2652,7 @@ function obterCorOrigemDescarte(nome){
    LISTA DE ORIGENS DO DESCARTE
 ========================================================== */
 
-functiongerarListaOrigensDescarteRelatorio(
+function gerarListaOrigensDescarteRelatorio(
     descarte
 ){
 
@@ -2687,7 +2687,7 @@ functiongerarListaOrigensDescarteRelatorio(
 
         <i
             class="relatorio-origem-cor"
-            style="background:${obterCorOrigemDescarte(item.nome)}"
+            style="background:${obterCorOrigemDescarteRelatorio(item.nome)}"
         ></i>
 
         ${item.nome}
@@ -3258,9 +3258,9 @@ function criarGraficoDescarteRelatorio(
     ================================================== */
 
     const lista =
-        obterOrigensDescarte(
-            dados
-        )
+       obterOrigensDescarteRelatorio(
+    dados
+)
         .filter(
             item =>
                 Number(
@@ -4069,7 +4069,7 @@ function opcoesGraficoRelatorio(){
    ORIGENS DO DESCARTE
 ========================================================== */
 
-function obterOrigensDescarte(
+function obterOrigensDescarteRelatorio(
     dados
 ){
 
