@@ -787,7 +787,12 @@ function gerarConteudoExecutivo(
      case "importacao":
 
     return `
-        ${gerarPainelImportacao(congelado,atual,true)}
+       ${gerarPainelImportacao(
+    congelado,
+    atual,
+    true,
+    configuracao
+)}
     `;
 
 
@@ -838,7 +843,12 @@ default:
                  LINHA 1
             ================================================== -->
 
-            ${gerarPainelImportacao(congelado,atual)}
+           ${gerarPainelImportacao(
+    congelado,
+    atual,
+    false,
+    configuracao
+)}
 
             ${gerarPainelDescarte(congelado,atual)}
 
@@ -1094,14 +1104,11 @@ function cardKpiExecutivo(
 }
 
 
-/* ==========================================================
-   IMPORTAÇÃO
-========================================================== */
-
 function gerarPainelImportacao(
     congelado,
     atual,
-    larguraTotal = false
+    larguraTotal = false,
+    configuracao = {}
 ){
 
     const anterior =
@@ -1110,45 +1117,77 @@ function gerarPainelImportacao(
     const corrente =
         atual.importacao || {};
 
-/* ======================================================
-   MOVIMENTO DA IMPORTAÇÃO NO PERÍODO
-   ATUAL - FECHAMENTO DE AGOSTO
-====================================================== */
 
-const processosPeriodo =
-    Math.max(
-        0,
-        Number(corrente.processosAno || 0) -
-        Number(anterior.processosAno || 0)
-    );
+    /* ======================================================
+       MÊS DO RELATÓRIO
+       Ex.: base Agosto -> relatório Setembro
+    ====================================================== */
 
-const skuPeriodo =
-    Math.max(
-        0,
-        Number(corrente.totalSku || 0) -
-        Number(anterior.totalSku || 0)
-    );
+    const periodoAtual =
+        obterMesSeguinte(
+            configuracao.mes,
+            configuracao.ano
+        );
 
-const lotesPeriodo =
-    Math.max(
-        0,
-        Number(corrente.totalLotes || 0) -
-        Number(anterior.totalLotes || 0)
-    );
 
-const laudosPeriodo =
-    Math.max(
-        0,
-        Number(corrente.laudosEmitidos || 0) -
-        Number(anterior.laudosEmitidos || 0)
-    );
+    const nomeMesAtual =
+        obterNomeMes(
+            periodoAtual.mes
+        );
 
-const horasPeriodo =
-    Math.max(
-        0,
-        Number(corrente.totalHoras || 0) -
-        Number(anterior.totalHoras || 0)
-    );
+
+    /* ======================================================
+       LOCALIZA O MÊS ATUAL NO DATA.JSON
+    ====================================================== */
+
+    const mensalAtual =
+        Array.isArray(corrente.mensal)
+            ? corrente.mensal
+            : [];
+
+
+    const dadosMesAtual =
+        mensalAtual.find(
+            item =>
+                String(item.mes || "")
+                    .trim()
+                    .toLowerCase() ===
+                String(nomeMesAtual || "")
+                    .trim()
+                    .toLowerCase()
+        ) || {};
+
+
+    /* ======================================================
+       MOVIMENTO REAL DO MÊS
+    ====================================================== */
+
+    const processosPeriodo =
+        Number(
+            dadosMesAtual.processos || 0
+        );
+
+    const skuPeriodo =
+        Number(
+            dadosMesAtual.sku || 0
+        );
+
+    const lotesPeriodo =
+        Number(
+            dadosMesAtual.lotes || 0
+        );
+
+    const laudosPeriodo =
+        Number(
+            dadosMesAtual.laudos || 0
+        );
+
+    const horasPeriodo =
+        Number(
+            dadosMesAtual.horas || 0
+        );
+
+
     return `
 
         <section
@@ -3006,36 +3045,62 @@ function criarGraficoImportacaoRelatorio(
             periodoAtual.mes
         );
 
+/* ==================================================
+   BUSCA O MOVIMENTO REAL DO MÊS ATUAL
+================================================== */
 
-    const diferencaProcessos =
-        calcularVariacao(
-            congelado?.processosAno,
-            atual?.processosAno
-        );
+const mensalAtual =
+    Array.isArray(atual?.mensal)
+        ? atual.mensal
+        : [];
 
 
-    /* ==================================================
-       INSERE O MOVIMENTO ATUAL
-    ================================================== */
+const dadosMesAtual =
+    mensalAtual.find(
+        item =>
+            String(item.mes || "")
+                .trim()
+                .toLowerCase() ===
+            String(nomeMesAtual || "")
+                .trim()
+                .toLowerCase()
+    ) || {};
 
- const itemPeriodo =
+
+const processosMesAtual =
+    Number(
+        dadosMesAtual.processos || 0
+    );
+
+
+/* ==================================================
+   INSERE O MOVIMENTO REAL DO MÊS ATUAL
+================================================== */
+
+let itemPeriodo =
     lista.find(
         item =>
-            item.mes === nomeMesAtual
+            String(item.mes || "")
+                .trim()
+                .toLowerCase() ===
+            String(nomeMesAtual || "")
+                .trim()
+                .toLowerCase()
     );
 
 
 if(itemPeriodo){
 
     itemPeriodo.processos =
-        diferencaProcessos !== null &&
-        diferencaProcessos > 0
+        processosMesAtual;
 
-            ? diferencaProcessos
+}else{
 
-            : 0;
+    lista.push({
+        mes:nomeMesAtual,
+        processos:processosMesAtual
+    });
 }
-
 
 const listaExibicao =
     lista.filter(
