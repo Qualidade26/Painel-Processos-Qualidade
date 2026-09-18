@@ -2660,7 +2660,7 @@ function gerarListaOrigensDescarte(
         obterOrigensDescarte(
             descarte
         )
-        .slice(0,3);
+        .slice(0,5);
 
 
     if(!lista.length){
