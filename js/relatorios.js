@@ -79,7 +79,7 @@ function renderRelatorios(){
                             </option>
 
                             <option value="amostras">
-                                Amostras
+                             
                             </option>
 
                             <option value="retrabalho">
@@ -1740,7 +1740,9 @@ function gerarPainelDescarte(
                     }
 
                 </div>
-
+</section>
+    `;
+}
 /* ==========================================================
    AMOSTRAS
 ========================================================== */
