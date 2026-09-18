@@ -2620,32 +2620,49 @@ function obterCorOrigemDescarteRelatorio(nome){
             .toLowerCase();
 
 
-    if(chave === "devolucao"){
-        return "#22c55e";
+    /* VENCIDO — VERMELHO */
+    if(chave.includes("vencid")){
+        return "#EF4444";
     }
 
 
-    if(chave === "importacao"){
-        return "#2563eb";
+    /* DESVIO — AZUL CLARO */
+    if(chave.includes("desvio")){
+        return "#79BFF2";
     }
 
 
-    if(chave === "desvio de qualidade"){
-        return "#f59e0b";
+    /* DEVOLUÇÃO — ROSA */
+    if(chave.includes("devol")){
+        return "#FF6FAE";
     }
 
 
-    if(chave === "nacional"){
-        return "#ec4899";
+    /* IMPORTAÇÃO — AZUL */
+    if(chave.includes("import")){
+        return "#2855D9";
     }
 
 
-    if(chave === "estoque"){
-        return "#06b6d4";
+    /* NACIONAL — LARANJA */
+    if(chave.includes("nacional")){
+        return "#FF7A1A";
     }
 
 
-    return "#94a3b8";
+    /* ESTOQUE — VERDE */
+    if(chave.includes("estoque")){
+        return "#55D98A";
+    }
+
+
+    /* CERTIFICAÇÃO — ROXO */
+    if(chave.includes("certific")){
+        return "#8B6CFF";
+    }
+
+
+    return "#2855D9";
 }
 
 /* ==========================================================
@@ -3358,9 +3375,9 @@ function criarGraficoDescarteRelatorio(
         backgroundColor:
             lista.map(
                 item =>
-                    obterCorOrigemDescarte(
-                        item.nome
-                    )
+                   obterCorOrigemDescarteRelatorio(
+    item.nome
+)
             ),
 
 
