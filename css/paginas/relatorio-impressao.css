@@ -1213,9 +1213,9 @@ body.impressao-individual
 
     flex:0 0 auto !important;
 
-    height:250px !important;
-    min-height:250px !important;
-    max-height:250px !important;
+    height:220px !important;
+    min-height:220px !important;
+    max-height:220px !important;
 }
    /* ==========================================================
    RELATÓRIOS INDIVIDUAIS - ESTRUTURA GERAL DA PÁGINA
