@@ -3285,10 +3285,58 @@ function criarGraficoDescarteRelatorio(
                 data:{
 
                     labels:
-                        lista.map(
-                            item =>
-                                item.nome
-                        ),
+    lista.map(
+        item => {
+
+            const nome =
+                String(item.nome || "");
+
+            const chave =
+                nome
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g,"")
+                    .toLowerCase();
+
+
+            if(
+                chave.includes("devol")
+            ){
+                return "Devolução";
+            }
+
+
+            if(
+                chave.includes("desvio") &&
+                chave.includes("qualidade")
+            ){
+                return "Desvio de Qualidade";
+            }
+
+
+            if(
+                chave.includes("import")
+            ){
+                return "Importação";
+            }
+
+
+            if(
+                chave.includes("nacional")
+            ){
+                return "Nacional";
+            }
+
+
+            if(
+                chave.includes("estoque")
+            ){
+                return "Estoque";
+            }
+
+
+            return nome;
+        }
+    ),
 
 
                    datasets:[
