@@ -1372,7 +1372,7 @@ const totalAferidos =
         gerarTabelaPeriodoAcumulado(
             [
                {
-   {
+ {
     titulo:"Total aferido",
 
     anterior:
