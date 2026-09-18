@@ -1649,51 +1649,30 @@ function gerarPainelDescarte(
     const corrente =
         atual.descarte || {};
 
+/* ======================================================
+   MOVIMENTO DO DESCARTE NO PERÍODO
+   VALOR ATUAL - VALOR CONGELADO
+====================================================== */
 
-    /* ======================================================
-       MOVIMENTO DO DESCARTE NO PERÍODO
-    ====================================================== */
+const valorAtualAnterior =
+    Number(
+        anterior.valorAtual?.total || 0
+    );
 
-    const valorAtualAnterior =
-        Number(
-            anterior.valorAtual?.total || 0
-        );
+const valorAtualCorrente =
+    Number(
+        corrente.valorAtual?.total || 0
+    );
 
-    const valorAtualCorrente =
-        Number(
-            corrente.valorAtual?.total || 0
-        );
-
-
-    const acumuladoAnterior =
-        Number(
-            anterior.descartadoAno?.total || 0
-        );
-
-    const acumuladoAtual =
-        Number(
-            corrente.descartadoAno?.total || 0
-        );
+const valorNoPeriodo =
+    Math.max(
+        0,
+        valorAtualCorrente -
+        valorAtualAnterior
+    );
 
 
-    const posicaoAnterior =
-        valorAtualAnterior +
-        acumuladoAnterior;
-
-    const posicaoAtual =
-        valorAtualCorrente +
-        acumuladoAtual;
-
-
-    const valorNoPeriodo =
-        Math.max(
-            0,
-            posicaoAtual -
-            posicaoAnterior
-        );
-
-
-    return `
+return `
 
         <section
             class="
