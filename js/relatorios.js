@@ -2036,16 +2036,22 @@ function gerarPainelFornecedores(
                                     tipo:"numero"
                                 },
 
-                                {
-                                    titulo:"RNC",
-                                    anterior:
-                                        anterior.totalrncano,
+                               {
+    titulo:"RNC",
 
-                                    atual:
-                                        corrente.totalrncano,
+    anterior:
+        Number(
+            anterior.totalrncano || 0
+        ),
 
-                                    tipo:"numero"
-                                },
+    atual:
+        Number(
+            corrente.totalrncano || 0
+        ),
+
+    tipo:"numero",
+    zerarNegativo:true
+},
 
                                 {
                                     titulo:"Retrabalhos",
