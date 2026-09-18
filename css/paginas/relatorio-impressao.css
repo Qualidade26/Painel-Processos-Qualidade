@@ -2266,6 +2266,78 @@ body.impressao-sgq
         margin-top:4px !important;
     }
 }
+   /* ==========================================================
+   ADEQUAÇÃO DE CAIXA - SOMENTE IMPRESSÃO INDIVIDUAL
+   AUMENTAR TABELA
+========================================================== */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo
+.relatorio-tabela-executiva{
+    width:100% !important;
+    table-layout:fixed !important;
+}
+
+
+/* CABEÇALHO */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo
+.relatorio-tabela-executiva th{
+
+    height:46px !important;
+
+    padding:
+        10px
+        14px !important;
+
+    font-size:11px !important;
+    font-weight:900 !important;
+}
+
+
+/* LINHAS */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo
+.relatorio-tabela-executiva td{
+
+    height:50px !important;
+
+    padding:
+        12px
+        14px !important;
+
+    font-size:12px !important;
+    font-weight:700 !important;
+
+    vertical-align:middle !important;
+}
+
+
+/* VALORES */
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo
+.relatorio-tabela-executiva td:nth-child(2),
+
+body.impressao-individual
+#relatorioDocumento
+.relatorio-painel-total:has(#relatorioGraficoRetrabalho)
+~ .relatorio-painel-executivo
+.relatorio-tabela-executiva td:nth-child(3){
+
+    font-size:14px !important;
+    font-weight:900 !important;
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
