@@ -2362,6 +2362,74 @@ body.impressao-sgq
 
     font-size:6px !important;
 }
+   /* ==========================================================
+   IMPRESSÃO - AMOSTRAS
+   AUMENTAR TABELA
+========================================================== */
+
+@media print{
+
+    body.impressao-individual .relatorio-amostras-layout,
+    body.impressao-sgq .relatorio-amostras-layout{
+
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        grid-template-rows:auto 1fr !important;
+        gap:10px !important;
+    }
+
+
+    /* BLOCO DA TABELA */
+    body.impressao-individual .relatorio-amostras-layout > div:first-child,
+    body.impressao-sgq .relatorio-amostras-layout > div:first-child{
+
+        width:100% !important;
+    }
+
+
+    body.impressao-individual .relatorio-amostras-layout .relatorio-tabela-executiva-wrap,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-tabela-executiva-wrap{
+
+        width:100% !important;
+        margin-bottom:8px !important;
+    }
+
+
+    body.impressao-individual .relatorio-amostras-layout .relatorio-tabela-executiva,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-tabela-executiva{
+
+        width:100% !important;
+        table-layout:fixed !important;
+    }
+
+
+    body.impressao-individual .relatorio-amostras-layout .relatorio-tabela-executiva th,
+    body.impressao-individual .relatorio-amostras-layout .relatorio-tabela-executiva td,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-tabela-executiva th,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-tabela-executiva td{
+
+        padding:8px 10px !important;
+        font-size:11px !important;
+        line-height:1.35 !important;
+    }
+
+
+    body.impressao-individual .relatorio-amostras-layout .relatorio-tabela-executiva th,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-tabela-executiva th{
+
+        font-weight:900 !important;
+    }
+
+
+    /* BLOCO DO GRÁFICO */
+    body.impressao-individual .relatorio-amostras-layout .relatorio-grafico-box,
+    body.impressao-sgq .relatorio-amostras-layout .relatorio-grafico-box{
+
+        min-height:250px !important;
+        height:250px !important;
+        margin-top:4px !important;
+    }
+}
     /* ======================================================
        PÁGINA
     ====================================================== */
