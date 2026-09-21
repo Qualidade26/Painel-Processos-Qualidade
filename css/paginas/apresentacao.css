@@ -1273,7 +1273,322 @@ body.modo-apresentacao.modo-apresentacao-automatico
     }
 
 }
+/* ==========================================================
+   49. BOTÃO FLUXOGRAMA SGQ
+========================================================== */
 
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-fluxograma{
+
+    flex:0 0 auto;
+
+    min-width:150px;
+    height:36px;
+
+    padding:
+        0
+        13px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.14);
+
+    color:#ffffff;
+
+    white-space:nowrap;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:.15px;
+
+}
+
+
+/* ==========================================================
+   50. HOVER — FLUXOGRAMA
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-fluxograma:hover{
+
+    background:
+        rgba(255,255,255,.25);
+
+    border-color:
+        rgba(255,255,255,.80);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* ==========================================================
+   51. TELA ESPECIAL — FLUXOGRAMA SGQ
+========================================================== */
+
+body.modo-apresentacao
+.tela-fluxograma-sgq{
+
+    width:100%;
+    height:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+}
+
+
+/* ==========================================================
+   52. CABEÇALHO DO FLUXOGRAMA
+========================================================== */
+
+body.modo-apresentacao
+.fluxograma-sgq-cabecalho{
+
+    flex:0 0 auto;
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        8px
+        18px
+        6px;
+
+    box-sizing:border-box;
+
+    text-align:center;
+
+}
+
+
+body.modo-apresentacao
+.fluxograma-sgq-cabecalho h1{
+
+    margin:0;
+
+    color:#12326e;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            20px,
+            2vw,
+            30px
+        );
+
+    font-weight:900;
+
+    line-height:1.05;
+
+}
+
+
+body.modo-apresentacao
+.fluxograma-sgq-cabecalho p{
+
+    margin:
+        4px
+        0
+        0;
+
+    color:#64748b;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            10px,
+            .9vw,
+            13px
+        );
+
+    font-weight:700;
+
+}
+
+
+/* ==========================================================
+   53. ÁREA DA IMAGEM
+========================================================== */
+
+body.modo-apresentacao
+.fluxograma-sgq-imagem{
+
+    flex:
+        1
+        1
+        auto;
+
+    width:100%;
+
+    min-width:0;
+    min-height:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        4px
+        10px
+        8px;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   54. IMAGEM DO FLUXOGRAMA
+========================================================== */
+
+body.modo-apresentacao
+.fluxograma-sgq-imagem img{
+
+    display:block;
+
+    width:auto;
+    height:auto;
+
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:contain;
+
+    object-position:center;
+
+}
+
+
+/* ==========================================================
+   55. FLUXOGRAMA COM BARRA VISÍVEL
+========================================================== */
+
+body.modo-apresentacao
+#conteudo:has(.tela-fluxograma-sgq){
+
+    overflow:hidden !important;
+
+}
+
+
+/* ==========================================================
+   56. NOTEBOOK / TELAS MÉDIAS
+========================================================== */
+
+@media (max-width:1200px){
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-fluxograma{
+
+        min-width:125px;
+
+        padding:
+            0
+            9px;
+
+        font-size:9px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   57. TELAS MENORES
+========================================================== */
+
+@media (max-width:900px){
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-fluxograma{
+
+        min-width:44px;
+
+        width:44px;
+
+        padding:0;
+
+        overflow:hidden;
+
+        font-size:0;
+
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-fluxograma::first-letter{
+
+        font-size:17px;
+
+    }
+
+
+    body.modo-apresentacao
+    .fluxograma-sgq-cabecalho{
+
+        padding:
+            6px
+            10px
+            4px;
+
+    }
+
+}
 
 /* ==========================================================
    47. CELULARES
