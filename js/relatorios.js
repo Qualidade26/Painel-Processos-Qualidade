@@ -827,7 +827,12 @@ case "retrabalho":
 case "fornecedores":
 
     return `
-        ${gerarPainelFornecedores(congelado,atual,true)}
+        ${gerarPainelFornecedores(
+            congelado,
+            atual,
+            true,
+            configuracao
+        )}
     `;
 case "geral":
 default:
@@ -860,7 +865,12 @@ default:
 
             ${gerarPainelRetrabalho(congelado,atual)}
 
-            ${gerarPainelFornecedores(congelado,atual)}
+          ${gerarPainelFornecedores(
+    congelado,
+    atual,
+    false,
+    configuracao
+)}
 
             ${gerarPainelEsfig(congelado,atual)}
 
@@ -2097,7 +2107,6 @@ function gerarPainelAdequacao(
     `;
 }
 
-
 /* ==========================================================
    FORNECEDORES
 ========================================================== */
@@ -2105,7 +2114,8 @@ function gerarPainelAdequacao(
 function gerarPainelFornecedores(
     congelado,
     atual,
-    larguraTotal = false
+    larguraTotal = false,
+    configuracao = {}
 ){
 
     const anterior =
@@ -2115,53 +2125,81 @@ function gerarPainelFornecedores(
         atual.fornecedores || {};
 
 
-    const indice =
-        Number(
-            corrente.indicemedioavaliacao || 0
+    /* ======================================================
+       MÊS REAL DO RELATÓRIO
+       Ex.: base Agosto -> relatório Setembro
+    ====================================================== */
+
+    const periodoAtual =
+        obterMesSeguinte(
+            configuracao.mes,
+            configuracao.ano
+        );
+
+
+    const nomeMesAtual =
+        obterNomeMes(
+            periodoAtual.mes
         );
 
 
     /* ======================================================
-       MOVIMENTO DE FORNECEDORES NO PERÍODO
+       LOCALIZA O MÊS DENTRO DE FORNECEDORES
+    ====================================================== */
+
+    const mensalFornecedores =
+        Array.isArray(corrente.mensal)
+            ? corrente.mensal
+            : [];
+
+
+    const dadosMesFornecedor =
+        mensalFornecedores.find(
+            item =>
+                String(item.mes || "")
+                    .trim()
+                    .toLowerCase() ===
+                String(nomeMesAtual || "")
+                    .trim()
+                    .toLowerCase()
+        ) || {};
+
+
+    /* ======================================================
+       O QUE REALMENTE ENTROU NO MÊS
     ====================================================== */
 
     const processosPeriodo =
-        Math.max(
-            0,
-            Number(corrente.totalprocessos || 0) -
-            Number(anterior.totalprocessos || 0)
+        Number(
+            dadosMesFornecedor.processos || 0
         );
 
 
     const rncPeriodo =
-        Math.max(
-            0,
-            Number(corrente.totalrncano || 0) -
-            Number(anterior.totalrncano || 0)
+        Number(
+            dadosMesFornecedor.rnc || 0
         );
 
 
     const retrabalhoPeriodo =
-        Math.max(
-            0,
-            Number(corrente.totalretrabalho || 0) -
-            Number(anterior.totalretrabalho || 0)
+        Number(
+            dadosMesFornecedor.retrabalhos || 0
         );
 
 
     const ocorrenciasPeriodo =
-        Math.max(
-            0,
-            Number(
-                corrente.indicadores
-                    ?.ocorrencias
-                    ?.quantidade || 0
-            ) -
-            Number(
-                anterior.indicadores
-                    ?.ocorrencias
-                    ?.quantidade || 0
-            )
+        Number(
+            dadosMesFornecedor.ocorrencias || 0
+        );
+
+
+    /* ======================================================
+       ÍNDICE ACUMULADO ATUAL
+    ====================================================== */
+
+    const indice =
+        Number(
+            corrente.indicemedioavaliacao || 0
         );
 
 
@@ -2190,9 +2228,6 @@ function gerarPainelFornecedores(
                                 {
                                     titulo:"Processos",
 
-                                    anterior:
-                                        anterior.totalprocessos,
-
                                     atual:
                                         corrente.totalprocessos,
 
@@ -2205,11 +2240,6 @@ function gerarPainelFornecedores(
 
                                 {
                                     titulo:"RNC",
-
-                                    anterior:
-                                        Number(
-                                            anterior.totalrncano || 0
-                                        ),
 
                                     atual:
                                         Number(
@@ -2226,9 +2256,6 @@ function gerarPainelFornecedores(
                                 {
                                     titulo:"Retrabalhos",
 
-                                    anterior:
-                                        anterior.totalretrabalho,
-
                                     atual:
                                         corrente.totalretrabalho,
 
@@ -2241,11 +2268,6 @@ function gerarPainelFornecedores(
 
                                 {
                                     titulo:"Ocorrências",
-
-                                    anterior:
-                                        anterior.indicadores
-                                            ?.ocorrencias
-                                            ?.quantidade,
 
                                     atual:
                                         corrente.indicadores
