@@ -131,8 +131,6 @@
 ====================================================== */
 
 let fluxogramaAberto = false;
-
-let conteudoAntesFluxograma = "";
     /* ======================================================
        ELEMENTOS DO INDEX
     ====================================================== */
@@ -652,45 +650,62 @@ if(
    FLUXOGRAMA SGQ — TELA ESPECIAL DA APRESENTAÇÃO
 ====================================================== */
 
+function fecharFluxogramaSGQ(){
+
+    const tela =
+        document.getElementById(
+            "apresFluxogramaTela"
+        );
+
+    if(tela){
+        tela.remove();
+    }
+
+    fluxogramaAberto = false;
+}
+
+
 function abrirFluxogramaSGQ(){
 
     if(!estaEmApresentacao()){
         return;
     }
 
+
     /* Se estiver automático, volta para manual */
+
     if(automatico){
         pararAutomatico();
     }
 
-    const conteudo =
-        document.getElementById("conteudo");
 
-    if(!conteudo){
-        console.error(
-            "Área #conteudo não encontrada."
-        );
-        return;
-    }
+    /* Remove qualquer fluxograma anterior */
 
-    /*
-       Guarda a tela atual somente na primeira abertura.
-    */
-    if(!fluxogramaAberto){
+    fecharFluxogramaSGQ();
 
-        conteudoAntesFluxograma =
-            conteudo.innerHTML;
-    }
 
-    fluxogramaAberto = true;
+    /* Cria tela independente */
 
-    conteudo.innerHTML = `
+    const tela =
+        document.createElement("div");
+
+
+    tela.id =
+        "apresFluxogramaTela";
+
+
+    tela.className =
+        "apres-fluxograma-overlay";
+
+
+    tela.innerHTML = `
 
         <section class="tela-fluxograma-sgq">
 
             <div class="fluxograma-sgq-cabecalho">
 
                 <div>
+
                     <h1>
                         Fluxograma SGQ
                     </h1>
@@ -698,6 +713,7 @@ function abrirFluxogramaSGQ(){
                     <p>
                         Integração de Dados para Decisões Mais Seguras
                     </p>
+
                 </div>
 
             </div>
@@ -705,10 +721,10 @@ function abrirFluxogramaSGQ(){
 
             <div class="fluxograma-sgq-imagem">
 
- <img
-    src="img/imagensfluxograma-sgq.png"
-    alt="Fluxograma SGQ"
->
+                <img
+                    src="img/imagensfluxograma-sgq.png"
+                    alt="Fluxograma SGQ"
+                >
 
             </div>
 
@@ -716,27 +732,21 @@ function abrirFluxogramaSGQ(){
 
     `;
 
-    /*
-       Atualiza a barra inferior.
-    */
 
-    if(nomeProcesso){
-        nomeProcesso.textContent =
-            "Fluxograma SGQ";
-    }
+    document.body.appendChild(
+        tela
+    );
 
-    if(nomeSubaba){
-        nomeSubaba.textContent =
-            "Integração de Dados";
-    }
 
-    if(contador){
-        contador.textContent = "Especial";
-    }
+    fluxogramaAberto = true;
 
-    if(modoAtual){
-        modoAtual.textContent = "Manual";
-    }
+
+    definirBarraOculta(
+        false
+    );
+
+
+    atualizarControles();
 
     reajustarPainel();
 }
@@ -880,9 +890,15 @@ function abrirFluxogramaSGQ(){
     ====================================================== */
 
     async function mostrarTela(
-        indice
-    ){
-fluxogramaAberto = false;
+    indice
+){
+
+    /* Fecha automaticamente o Fluxograma
+       ao navegar para qualquer outra tela */
+
+    if(fluxogramaAberto){
+        fecharFluxogramaSGQ();
+    }
         if(trocandoTela){
 
             return;
@@ -1314,7 +1330,7 @@ if(
 
 if(fluxogramaAberto){
 
-    fluxogramaAberto = false;
+    fecharFluxogramaSGQ();
 
     indiceAtual = 0;
 
