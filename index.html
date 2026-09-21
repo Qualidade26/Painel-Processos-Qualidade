@@ -385,43 +385,32 @@
     </div>
 
 
-    <!-- =====================================================
-         MODO APRESENTAÇÃO
-         BARRA DE CONTROLE
-    ====================================================== -->
+   <!-- =====================================================
+     MODO APRESENTAÇÃO
+     BARRA DE CONTROLE — NOVO LAYOUT
+====================================================== -->
 
-    <div
-        id="barraApresentacao"
-        class="barra-apresentacao"
-        aria-hidden="true"
-    >
+<div
+    id="barraApresentacao"
+    class="barra-apresentacao"
+    aria-hidden="true"
+>
 
+    <!-- =================================================
+         LINHA SUPERIOR
+         IDENTIFICAÇÃO + FLUXOGRAMA
+    ================================================== -->
 
-        <!-- =================================================
-             CONTROLES PRINCIPAIS
-        ================================================== -->
+    <div class="apres-topo">
 
-        <div class="apres-controles-principais">
+        <div class="apres-identificacao">
 
-
-            <!-- =============================================
-                 TELA ANTERIOR
-            ============================================== -->
-
-            <button
-                type="button"
-                id="apresAnterior"
-                class="apres-btn apres-btn-nav"
-                title="Tela anterior"
-                aria-label="Tela anterior"
+            <div
+                class="apres-icone-processo"
+                aria-hidden="true"
             >
-                ←
-            </button>
-
-
-            <!-- =============================================
-                 IDENTIFICAÇÃO DA TELA ATUAL
-            ============================================== -->
+                📦
+            </div>
 
             <div class="apres-tela-atual">
 
@@ -436,177 +425,180 @@
                     id="apresSubaba"
                     class="apres-subaba"
                 >
-                    Visão Geral
+                    Indicador de Importação
                 </span>
 
             </div>
 
-
-            <!-- =============================================
-                 CONTADOR
-            ============================================== -->
-
-            <div
-                id="apresContador"
-                class="apres-contador"
-            >
-                1 / 1
-            </div>
-
-
-           <!-- =============================================
-     PRÓXIMA TELA
-============================================== -->
-
-<button
-    type="button"
-    id="apresProximo"
-    class="apres-btn apres-btn-nav"
-    title="Próxima tela"
-    aria-label="Próxima tela"
->
-    →
-</button>
-
-
-<!-- =============================================
-     FLUXOGRAMA SGQ
-     TELA ESPECIAL — FORA DO AUTOMÁTICO
-============================================== -->
-
-<button
-    type="button"
-    id="apresFluxograma"
-    class="apres-btn apres-btn-fluxograma"
-    onclick="abrirFluxogramaSGQ()"
-    title="Mostrar Fluxograma SGQ"
-    aria-label="Mostrar Fluxograma SGQ"
->
-    🗺️ Fluxograma SGQ
-</button>
-
-
-<!-- =============================================
-     DIVISOR
-============================================== -->
-
-<span
-    class="apres-divisor"
-    aria-hidden="true"
-></span>
-            <!-- =============================================
-                 MODO ATUAL
-            ============================================== -->
-
-            <div class="apres-modo">
-
-                <span class="apres-modo-label">
-                    MODO
-                </span>
-
-                <strong id="apresModoAtual">
-                    Manual
-                </strong>
-
-            </div>
-
-
-            <!-- =============================================
-                 TEMPO AUTOMÁTICO
-            ============================================== -->
-
-            <div class="apres-tempo">
-
-                <label for="apresTempo">
-                    Tempo
-                </label>
-
-                <select
-                    id="apresTempo"
-                    aria-label="Tempo de cada tela"
-                >
-
-                    <option value="5000">
-                        5 segundos
-                    </option>
-
-                    <option value="10000">
-                        10 segundos
-                    </option>
-
-                    <option value="15000">
-                        15 segundos
-                    </option>
-
-                    <option
-                        value="20000"
-                        selected
-                    >
-                        20 segundos
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- =============================================
-                 INICIAR / PAUSAR AUTOMÁTICO
-            ============================================== -->
-
-            <button
-                type="button"
-                id="apresPlay"
-                class="apres-btn apres-btn-play"
-                title="Iniciar apresentação automática"
-                aria-label="Iniciar apresentação automática"
-            >
-                ▶ Iniciar automático
-            </button>
-
-
-            <!-- =============================================
-                 OCULTAR BARRA
-            ============================================== -->
-
-            <button
-                type="button"
-                id="apresOcultar"
-                class="apres-btn apres-btn-ocultar"
-                title="Ocultar controles"
-                aria-label="Ocultar barra de apresentação"
-            >
-                ↓
-            </button>
-
-
         </div>
 
 
-        <!-- =================================================
-             ATALHOS DO TECLADO
-        ================================================== -->
-
-        <div class="apres-atalhos">
-
-            <span>
-                ← → Navegar
-            </span>
-
-            <span>
-                ↓ Controles
-            </span>
-
-            <span>
-                ESC Sair
-            </span>
-
-        </div>
-
+        <button
+            type="button"
+            id="apresFluxograma"
+            class="apres-btn apres-btn-fluxograma"
+            onclick="abrirFluxogramaSGQ()"
+            title="Mostrar Fluxograma SGQ"
+            aria-label="Mostrar Fluxograma SGQ"
+        >
+            🗺️
+            <span>Fluxograma SGQ</span>
+        </button>
 
     </div>
 
 
+    <!-- =================================================
+         LINHA INFERIOR
+         CONTROLES
+    ================================================== -->
+
+    <div class="apres-controles-principais">
+
+        <!-- ANTERIOR -->
+
+        <button
+            type="button"
+            id="apresAnterior"
+            class="apres-btn apres-btn-nav"
+            title="Tela anterior"
+            aria-label="Tela anterior"
+        >
+            ←
+        </button>
+
+
+        <!-- CONTADOR -->
+
+        <div
+            id="apresContador"
+            class="apres-contador"
+        >
+            1 / 11
+        </div>
+
+
+        <!-- PRÓXIMO -->
+
+        <button
+            type="button"
+            id="apresProximo"
+            class="apres-btn apres-btn-nav"
+            title="Próxima tela"
+            aria-label="Próxima tela"
+        >
+            →
+        </button>
+
+
+        <span
+            class="apres-divisor"
+            aria-hidden="true"
+        ></span>
+
+
+        <!-- MODO -->
+
+        <div class="apres-modo">
+
+            <span
+                class="apres-modo-icone"
+                aria-hidden="true"
+            >
+                ✋
+            </span>
+
+            <strong id="apresModoAtual">
+                Manual
+            </strong>
+
+        </div>
+
+
+        <span
+            class="apres-divisor"
+            aria-hidden="true"
+        ></span>
+
+
+        <!-- TEMPO -->
+
+        <div class="apres-tempo">
+
+            <span
+                class="apres-tempo-icone"
+                aria-hidden="true"
+            >
+                ◷
+            </span>
+
+            <label for="apresTempo">
+                Tempo:
+            </label>
+
+            <select
+                id="apresTempo"
+                aria-label="Tempo de cada tela"
+            >
+
+                <option value="5000">
+                    5 segundos
+                </option>
+
+                <option value="10000">
+                    10 segundos
+                </option>
+
+                <option value="15000">
+                    15 segundos
+                </option>
+
+                <option
+                    value="20000"
+                    selected
+                >
+                    20 segundos
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <span
+            class="apres-divisor"
+            aria-hidden="true"
+        ></span>
+
+
+        <!-- AUTOMÁTICO -->
+
+        <button
+            type="button"
+            id="apresPlay"
+            class="apres-btn apres-btn-play"
+            title="Iniciar apresentação automática"
+            aria-label="Iniciar apresentação automática"
+        >
+            ▶ Iniciar automático
+        </button>
+
+
+        <!-- OCULTAR -->
+
+        <button
+            type="button"
+            id="apresOcultar"
+            class="apres-btn apres-btn-ocultar"
+            title="Ocultar controles"
+            aria-label="Ocultar barra de apresentação"
+        >
+            ◉
+        </button>
+
+    </div>
+
+</div>
     <!-- =====================================================
          BOTÃO SAIR DA APRESENTAÇÃO
 
