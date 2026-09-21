@@ -995,21 +995,21 @@ function gerarKpisExecutivos(
             }
 
 
-            ${
-                cardKpiExecutivo(
-    "⏱",
-    "ESFIG",
-    formatarNumero(
-        Number(
-            esfigAtual.resumoAfericoes?.totalAprovado || 0
-        ) +
-        Number(
-            esfigAtual.resumoAfericoes?.totalReprovado || 0
-        )
-    ),
-    "Total aferido"
-)
-
+           ${
+    cardKpiExecutivo(
+        "⏱",
+        "ESFIG",
+        formatarNumero(
+            Number(
+                esfigAtual.resumoAfericoes?.totalAprovado || 0
+            ) +
+            Number(
+                esfigAtual.resumoAfericoes?.totalReprovado || 0
+            )
+        ),
+        "Total aferido"
+    )
+}
             ${
                 cardKpiExecutivo(
                     "🗑",
