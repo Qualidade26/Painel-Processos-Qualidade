@@ -1733,3 +1733,639 @@ body.modo-apresentacao
     }
 
 }
+/* ==========================================================
+   NOVA BARRA — MODO APRESENTAÇÃO
+   Layout organizado em duas linhas
+========================================================== */
+
+
+/* ==========================================================
+   RESERVA DE ESPAÇO PARA A NOVA BARRA
+========================================================== */
+
+body.modo-apresentacao
+#mainWrap{
+    padding-bottom:118px !important;
+}
+
+
+/* ==========================================================
+   BARRA PRINCIPAL
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao{
+
+    width:calc(100% - 28px) !important;
+    max-width:1180px !important;
+
+    bottom:10px !important;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #07306b 0%,
+            #0b4ab4 100%
+        );
+
+    box-shadow:
+        0 8px 26px
+        rgba(0,0,0,.22);
+
+    overflow:hidden !important;
+}
+
+
+/* ==========================================================
+   LINHA SUPERIOR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-topo{
+
+    width:100%;
+
+    min-height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:7px 12px;
+
+    box-sizing:border-box;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.16);
+}
+
+
+/* ==========================================================
+   IDENTIFICAÇÃO DO PROCESSO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-identificacao{
+
+    flex:1 1 auto;
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+/* ÍCONE */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-icone-processo{
+
+    flex:0 0 34px;
+
+    width:34px;
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    font-size:17px;
+}
+
+
+/* TEXTO */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tela-atual{
+
+    flex:1 1 auto;
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:2px;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+#apresProcesso{
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    line-height:1.1;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+#apresSubaba{
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-size:9px;
+
+    line-height:1.1;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   BOTÃO FLUXOGRAMA — LINHA SUPERIOR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-fluxograma{
+
+    flex:0 0 auto;
+
+    min-width:158px;
+
+    height:34px;
+
+    padding:0 13px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.42);
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    color:#ffffff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-fluxograma:hover{
+
+    background:
+        rgba(255,255,255,.23);
+
+    border-color:
+        rgba(255,255,255,.75);
+}
+
+
+/* ==========================================================
+   LINHA INFERIOR — CONTROLES
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-controles-principais{
+
+    width:100%;
+
+    min-height:48px;
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    flex-wrap:nowrap !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    gap:8px;
+
+    padding:6px 12px;
+
+    box-sizing:border-box;
+}
+
+
+/* ==========================================================
+   SETAS
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-nav{
+
+    width:36px;
+
+    min-width:36px;
+
+    height:34px;
+
+    padding:0;
+
+    font-size:17px;
+
+    border-radius:8px;
+}
+
+
+/* ==========================================================
+   CONTADOR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+#apresContador{
+
+    min-width:60px;
+
+    height:34px;
+
+    padding:0 10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.13);
+
+    color:#ffffff;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+
+/* ==========================================================
+   DIVISORES
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-divisor{
+
+    flex:0 0 1px;
+
+    width:1px;
+
+    height:25px;
+
+    margin:0 5px;
+
+    background:
+        rgba(255,255,255,.20);
+}
+
+
+/* ==========================================================
+   MODO MANUAL / AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-modo{
+
+    min-width:105px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    white-space:nowrap;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-modo-icone{
+
+    font-size:14px;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+#apresModoAtual{
+
+    min-width:0;
+
+    color:#ffffff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:.3px;
+}
+
+
+/* ==========================================================
+   TEMPO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo{
+
+    flex:0 0 auto;
+
+    margin-left:0 !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    gap:6px;
+
+    white-space:nowrap;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo-icone{
+
+    font-size:14px;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-tempo label{
+
+    color:
+        rgba(255,255,255,.78);
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+#apresTempo{
+
+    width:108px;
+
+    min-width:108px;
+
+    height:34px;
+
+    padding:0 8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.38);
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+    color:#12326e;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+
+/* ==========================================================
+   AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-play{
+
+    min-width:155px;
+
+    height:34px;
+
+    padding:0 14px;
+
+    background:
+        rgba(255,255,255,.16);
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-btn-play:hover{
+
+    background:
+        rgba(255,255,255,.25);
+}
+
+
+/* ==========================================================
+   OCULTAR
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+#apresOcultar{
+
+    width:36px;
+
+    min-width:36px;
+
+    height:34px;
+
+    padding:0;
+
+    font-size:14px;
+}
+
+
+/* ==========================================================
+   REMOVE DEFINITIVAMENTE A ANTIGA LINHA DE ATALHOS
+========================================================== */
+
+body.modo-apresentacao
+#barraApresentacao
+.apres-atalhos{
+
+    display:none !important;
+}
+
+
+/* ==========================================================
+   BARRA OCULTA / AUTOMÁTICO
+========================================================== */
+
+body.modo-apresentacao.barra-apresentacao-oculta
+#mainWrap,
+
+body.modo-apresentacao.modo-apresentacao-automatico
+#mainWrap{
+
+    padding-bottom:7px !important;
+}
+
+
+/* ==========================================================
+   NOTEBOOK
+========================================================== */
+
+@media (max-width:1200px){
+
+    body.modo-apresentacao
+    #barraApresentacao{
+
+        width:
+            calc(100% - 18px) !important;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-topo{
+
+        min-height:44px;
+
+        padding:
+            6px
+            9px;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-controles-principais{
+
+        gap:5px;
+
+        padding:
+            5px
+            8px;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-play{
+
+        min-width:135px;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-fluxograma{
+
+        min-width:140px;
+    }
+
+}
+
+
+/* ==========================================================
+   TELAS MAIS ESTREITAS
+========================================================== */
+
+@media (max-width:900px){
+
+    body.modo-apresentacao
+    #mainWrap{
+
+        padding-bottom:
+            110px !important;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-divisor{
+
+        display:none;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-modo{
+
+        min-width:auto;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-tempo label{
+
+        display:none;
+    }
+
+
+    body.modo-apresentacao
+    #barraApresentacao
+    .apres-btn-fluxograma{
+
+        min-width:130px;
+
+        width:auto;
+
+        font-size:9px;
+    }
+
+}
