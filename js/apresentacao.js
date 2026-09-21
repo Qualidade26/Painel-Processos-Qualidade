@@ -700,37 +700,20 @@ function abrirFluxogramaSGQ(){
 
     tela.innerHTML = `
 
-        <section class="tela-fluxograma-sgq">
+    <section class="tela-fluxograma-sgq">
 
-            <div class="fluxograma-sgq-cabecalho">
+        <div class="fluxograma-sgq-imagem">
 
-                <div>
+            <img
+                src="img/imagensfluxograma-sgq.png"
+                alt="Fluxograma SGQ"
+            >
 
-                    <h1>
-                        Fluxograma SGQ
-                    </h1>
+        </div>
 
-                    <p>
-                        Integração de Dados para Decisões Mais Seguras
-                    </p>
+    </section>
 
-                </div>
-
-            </div>
-
-
-            <div class="fluxograma-sgq-imagem">
-
-                <img
-                    src="img/imagensfluxograma-sgq.png"
-                    alt="Fluxograma SGQ"
-                >
-
-            </div>
-
-        </section>
-
-    `;
+`;
 
 
     document.body.appendChild(
