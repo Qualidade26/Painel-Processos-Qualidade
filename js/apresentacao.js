@@ -1297,7 +1297,7 @@ if(
        INICIAR AUTOMÁTICO
     ====================================================== */
 
-    function iniciarAutomatico(){
+  async function iniciarAutomatico(){
 
         if(!estaEmApresentacao()){
 
@@ -1318,7 +1318,7 @@ if(fluxogramaAberto){
 
     indiceAtual = 0;
 
-    mostrarTela(0);
+    await mostrarTela(0);
 }
 
         automatico = true;
@@ -1871,18 +1871,20 @@ if(fluxogramaAberto){
     );
 
 
-    /* ======================================================
-       FUNÇÕES GLOBAIS
-    ====================================================== */
-
     window.abrirModoApresentacao =
-        abrirModoApresentacao;
+    abrirModoApresentacao;
 
 
-    window.fecharModoApresentacao =
-        fecharModoApresentacao;
-   
-window.abrirModoApresentacao =
+window.fecharModoApresentacao =
+    fecharModoApresentacao;
+
+
+/* ======================================================
+   FLUXOGRAMA SGQ
+====================================================== */
+
+window.abrirFluxogramaSGQ =
+    abrirFluxogramaSGQ;
 
     /* ======================================================
        API DO MODO APRESENTAÇÃO
