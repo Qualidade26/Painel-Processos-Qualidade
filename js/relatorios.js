@@ -2207,32 +2207,12 @@ function gerarPainelFornecedores(
         );
 
 
-    /* ======================================================
-       DADOS DO PERÍODO
-    ====================================================== */
-
-    const mensalFornecedores =
-        Array.isArray(corrente.mensal)
-            ? corrente.mensal
-            : [];
-
-
-    const dadosMes =
-        mensalFornecedores.find(
-            item =>
-                String(item.mes || "")
-                    .trim()
-                    .toLowerCase() ===
-                String(nomeMesAtual || "")
-                    .trim()
-                    .toLowerCase()
-        ) || {};
-
-
   /* ======================================================
-   PROCESSOS QUE ENTRARAM NO MÊS
-   BUSCA NA EVOLUÇÃO MENSAL DA IMPORTAÇÃO
+   MOVIMENTO REAL DO PERÍODO
+   Setembro/2026
 ====================================================== */
+
+/* PROCESSOS DO MÊS - VEM DA IMPORTAÇÃO */
 
 const importacaoAtual =
     atual.importacao || {};
@@ -2253,30 +2233,26 @@ const dadosMesImportacao =
                 .toLowerCase()
     ) || {};
 
+
+/* ======================================================
+   NO PERÍODO
+====================================================== */
+
 const processosPeriodo =
     Number(
         dadosMesImportacao.processos || 0
     );
 
+/*
+   Setembro não teve movimentação
+   nos demais indicadores.
+*/
 
-    const rncPeriodo =
-        Number(
-            dadosMes.rnc || 0
-        );
+const rncPeriodo = 0;
 
+const retrabalhosPeriodo = 0;
 
-    const retrabalhosPeriodo =
-        Number(
-            dadosMes.retrabalhos || 0
-        );
-
-
-    const ocorrenciasPeriodo =
-        Number(
-            dadosMes.ocorrencias || 0
-        );
-
-
+const ocorrenciasPeriodo = 0;
     /* ======================================================
        ÍNDICE MÉDIO
     ====================================================== */
