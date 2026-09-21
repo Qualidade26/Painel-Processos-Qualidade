@@ -997,15 +997,18 @@ function gerarKpisExecutivos(
 
             ${
                 cardKpiExecutivo(
-                    "⏱",
-                    "ESFIG",
-                    formatarHoras(
-                        esfigAtual.totalHoras
-                    ),
-                    "Posição atual"
-                )
-            }
-
+    "⏱",
+    "ESFIG",
+    formatarNumero(
+        Number(
+            esfigAtual.resumoAfericoes?.totalAprovado || 0
+        ) +
+        Number(
+            esfigAtual.resumoAfericoes?.totalReprovado || 0
+        )
+    ),
+    "Total aferido"
+)
 
             ${
                 cardKpiExecutivo(
