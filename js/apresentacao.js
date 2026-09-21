@@ -126,7 +126,13 @@
 
     let trocandoTela = false;
 
+/* ======================================================
+   FLUXOGRAMA SGQ — TELA ESPECIAL
+====================================================== */
 
+let fluxogramaAberto = false;
+
+let conteudoAntesFluxograma = "";
     /* ======================================================
        ELEMENTOS DO INDEX
     ====================================================== */
@@ -642,7 +648,98 @@ if(
 
     }
 
+/* ======================================================
+   FLUXOGRAMA SGQ — TELA ESPECIAL DA APRESENTAÇÃO
+====================================================== */
 
+function abrirFluxogramaSGQ(){
+
+    if(!estaEmApresentacao()){
+        return;
+    }
+
+    /* Se estiver automático, volta para manual */
+    if(automatico){
+        pararAutomatico();
+    }
+
+    const conteudo =
+        document.getElementById("conteudo");
+
+    if(!conteudo){
+        console.error(
+            "Área #conteudo não encontrada."
+        );
+        return;
+    }
+
+    /*
+       Guarda a tela atual somente na primeira abertura.
+    */
+    if(!fluxogramaAberto){
+
+        conteudoAntesFluxograma =
+            conteudo.innerHTML;
+    }
+
+    fluxogramaAberto = true;
+
+    conteudo.innerHTML = `
+
+        <section class="tela-fluxograma-sgq">
+
+            <div class="fluxograma-sgq-cabecalho">
+
+                <div>
+                    <h1>
+                        Fluxograma SGQ
+                    </h1>
+
+                    <p>
+                        Integração de Dados para Decisões Mais Seguras
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="fluxograma-sgq-imagem">
+
+                <img
+                    src="imagens/fluxograma-sgq.png"
+                    alt="Fluxograma SGQ"
+                >
+
+            </div>
+
+        </section>
+
+    `;
+
+    /*
+       Atualiza a barra inferior.
+    */
+
+    if(nomeProcesso){
+        nomeProcesso.textContent =
+            "Fluxograma SGQ";
+    }
+
+    if(nomeSubaba){
+        nomeSubaba.textContent =
+            "Integração de Dados";
+    }
+
+    if(contador){
+        contador.textContent = "Especial";
+    }
+
+    if(modoAtual){
+        modoAtual.textContent = "Manual";
+    }
+
+    reajustarPainel();
+}
     /* ======================================================
        REAJUSTAR PAINEL / GRÁFICOS
     ====================================================== */
@@ -785,7 +882,7 @@ if(
     async function mostrarTela(
         indice
     ){
-
+fluxogramaAberto = false;
         if(trocandoTela){
 
             return;
@@ -1210,7 +1307,19 @@ if(
 
 
         cancelarTimer();
+/*
+   Se o Fluxograma estiver aberto,
+   volta para Importação antes de iniciar.
+*/
 
+if(fluxogramaAberto){
+
+    fluxogramaAberto = false;
+
+    indiceAtual = 0;
+
+    mostrarTela(0);
+}
 
         automatico = true;
 
@@ -1772,7 +1881,8 @@ if(
 
     window.fecharModoApresentacao =
         fecharModoApresentacao;
-
+   
+window.abrirModoApresentacao =
 
     /* ======================================================
        API DO MODO APRESENTAÇÃO
