@@ -2229,10 +2229,34 @@ function gerarPainelFornecedores(
         ) || {};
 
 
-    const processosPeriodo =
-        Number(
-            dadosMes.processos || 0
-        );
+  /* ======================================================
+   PROCESSOS QUE ENTRARAM NO MÊS
+   BUSCA NA EVOLUÇÃO MENSAL DA IMPORTAÇÃO
+====================================================== */
+
+const importacaoAtual =
+    atual.importacao || {};
+
+const mensalImportacao =
+    Array.isArray(importacaoAtual.mensal)
+        ? importacaoAtual.mensal
+        : [];
+
+const dadosMesImportacao =
+    mensalImportacao.find(
+        item =>
+            String(item.mes || "")
+                .trim()
+                .toLowerCase() ===
+            String(nomeMesAtual || "")
+                .trim()
+                .toLowerCase()
+    ) || {};
+
+const processosPeriodo =
+    Number(
+        dadosMesImportacao.processos || 0
+    );
 
 
     const rncPeriodo =
