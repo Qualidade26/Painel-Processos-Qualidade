@@ -705,8 +705,8 @@ function abrirFluxogramaSGQ(){
 
             <div class="fluxograma-sgq-imagem">
 
-               <img
-    src="img/fluxograma-sgq.png"
+ <img
+    src="img/imagensfluxograma-sgq.png"
     alt="Fluxograma SGQ"
 >
 
