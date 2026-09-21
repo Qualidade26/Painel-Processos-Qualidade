@@ -1082,56 +1082,86 @@ if(
        PRÓXIMA TELA
     ====================================================== */
 
-    async function proximaTela(){
+   async function proximaTela(){
 
-        if(trocandoTela){
-
-            return;
-
-        }
-
-
-        const novoIndice =
-            (
-                indiceAtual + 1
-            ) %
-            telasApresentacao.length;
-
-
-        await mostrarTela(
-            novoIndice
-        );
-
+    if(trocandoTela){
+        return;
     }
+
+
+    /* ==============================================
+       SE ESTIVER NO FLUXOGRAMA
+       SEMPRE VOLTA PARA IMPORTAÇÃO → INDICADOR
+    ============================================== */
+
+    if(fluxogramaAberto){
+
+        fecharFluxogramaSGQ();
+
+        indiceAtual = 0;
+
+        await mostrarTela(0);
+
+        return;
+    }
+
+
+    const novoIndice =
+        (
+            indiceAtual + 1
+        ) %
+        telasApresentacao.length;
+
+
+    await mostrarTela(
+        novoIndice
+    );
+
+}
 
 
     /* ======================================================
        TELA ANTERIOR
     ====================================================== */
 
-    async function telaAnterior(){
+  async function telaAnterior(){
 
-        if(trocandoTela){
-
-            return;
-
-        }
-
-
-        const novoIndice =
-            (
-                indiceAtual -
-                1 +
-                telasApresentacao.length
-            ) %
-            telasApresentacao.length;
-
-
-        await mostrarTela(
-            novoIndice
-        );
-
+    if(trocandoTela){
+        return;
     }
+
+
+    /* ==============================================
+       SE ESTIVER NO FLUXOGRAMA
+       SEMPRE VOLTA PARA IMPORTAÇÃO → INDICADOR
+    ============================================== */
+
+    if(fluxogramaAberto){
+
+        fecharFluxogramaSGQ();
+
+        indiceAtual = 0;
+
+        await mostrarTela(0);
+
+        return;
+    }
+
+
+    const novoIndice =
+        (
+            indiceAtual -
+            1 +
+            telasApresentacao.length
+        ) %
+        telasApresentacao.length;
+
+
+    await mostrarTela(
+        novoIndice
+    );
+
+}
 
 
     /* ======================================================
