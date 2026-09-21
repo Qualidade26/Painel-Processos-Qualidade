@@ -635,13 +635,6 @@ function montarPreviewRelatorio(
                             mensal
                                 ? `
                                     <span>
-                                        Base congelada:
-                                        <strong>
-                                            ${nomeMesBase}/${configuracao.ano}
-                                        </strong>
-                                    </span>
-
-                                    <span>
                                         Posição atual:
                                         <strong>
                                             ${dataAtual}
