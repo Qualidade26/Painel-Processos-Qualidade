@@ -2118,89 +2118,101 @@ function gerarPainelFornecedores(
     configuracao = {}
 ){
 
-    const anterior =
-        congelado.fornecedores || {};
-
     const corrente =
         atual.fornecedores || {};
 
 
     /* ======================================================
-       MÊS REAL DO RELATÓRIO
-       Ex.: base Agosto -> relatório Setembro
+       BASE REAL DOS FORNECEDORES
     ====================================================== */
 
-    const periodoAtual =
-        obterMesSeguinte(
-            configuracao.mes,
-            configuracao.ano
-        );
-
-
-    const nomeMesAtual =
-        obterNomeMes(
-            periodoAtual.mes
-        );
-
-
-    /* ======================================================
-       LOCALIZA O MÊS DENTRO DE FORNECEDORES
-    ====================================================== */
-
-    const mensalFornecedores =
-        Array.isArray(corrente.mensal)
-            ? corrente.mensal
+    const listaFornecedores =
+        Array.isArray(corrente.avaliados)
+            ? corrente.avaliados
             : [];
 
 
-    const dadosMesFornecedor =
-        mensalFornecedores.find(
-            item =>
-                String(item.mes || "")
-                    .trim()
-                    .toLowerCase() ===
-                String(nomeMesAtual || "")
-                    .trim()
-                    .toLowerCase()
-        ) || {};
-
-
     /* ======================================================
-       O QUE REALMENTE ENTROU NO MÊS
+       ACUMULADOS REAIS
+       SOMA DIRETO DOS FORNECEDORES
     ====================================================== */
 
-    const processosPeriodo =
-        Number(
-            dadosMesFornecedor.processos || 0
+    const processosAcumulado =
+        listaFornecedores.reduce(
+            (total,item) =>
+                total +
+                Number(
+                    item.processosano ??
+                    item.processosAno ??
+                    item.processos ??
+                    0
+                ),
+            0
         );
 
 
-    const rncPeriodo =
-        Number(
-            dadosMesFornecedor.rnc || 0
+    const rncAcumulado =
+        listaFornecedores.reduce(
+            (total,item) =>
+                total +
+                Number(
+                    item.rnc ??
+                    item.rncs ??
+                    0
+                ),
+            0
         );
 
 
-    const retrabalhoPeriodo =
-        Number(
-            dadosMesFornecedor.retrabalhos || 0
+    const retrabalhosAcumulado =
+        listaFornecedores.reduce(
+            (total,item) =>
+                total +
+                Number(
+                    item.retrabalhos ??
+                    item.retrabalho ??
+                    0
+                ),
+            0
         );
 
 
-    const ocorrenciasPeriodo =
-        Number(
-            dadosMesFornecedor.ocorrencias || 0
+    const ocorrenciasAcumulado =
+        listaFornecedores.reduce(
+            (total,item) =>
+                total +
+                Number(
+                    item.ocorrencias ??
+                    item.ocorrência ??
+                    0
+                ),
+            0
         );
 
 
     /* ======================================================
-       ÍNDICE ACUMULADO ATUAL
+       ÍNDICE MÉDIO ATUAL
     ====================================================== */
 
     const indice =
         Number(
             corrente.indicemedioavaliacao || 0
         );
+
+
+    /* ======================================================
+       DEBUG - CONFERE OS VALORES REAIS
+    ====================================================== */
+
+    console.log(
+        "FORNECEDORES - ACUMULADO REAL:",
+        {
+            processos: processosAcumulado,
+            rnc: rncAcumulado,
+            retrabalhos: retrabalhosAcumulado,
+            ocorrencias: ocorrenciasAcumulado
+        }
+    );
 
 
     return `
@@ -2220,68 +2232,91 @@ function gerarPainelFornecedores(
 
             <div class="relatorio-fornecedores-layout">
 
-                <div>
+                <div class="relatorio-tabela-executiva-wrap">
 
-                    ${
-                        gerarTabelaPeriodoAcumulado(
-                            [
-                                {
-                                    titulo:"Processos",
+                    <table class="relatorio-tabela-executiva">
 
-                                    atual:
-                                        corrente.totalprocessos,
+                        <thead>
 
-                                    periodo:
-                                        processosPeriodo,
+                            <tr>
 
-                                    tipo:"numero"
-                                },
+                                <th>
+                                    Indicador
+                                </th>
 
+                                <th>
+                                    Acumulado Setembro
+                                </th>
 
-                                {
-                                    titulo:"RNC",
+                            </tr>
 
-                                    atual:
-                                        Number(
-                                            corrente.totalrncano || 0
-                                        ),
-
-                                    periodo:
-                                        rncPeriodo,
-
-                                    tipo:"numero"
-                                },
+                        </thead>
 
 
-                                {
-                                    titulo:"Retrabalhos",
+                        <tbody>
 
-                                    atual:
-                                        corrente.totalretrabalho,
+                            <tr>
 
-                                    periodo:
-                                        retrabalhoPeriodo,
+                                <td>
+                                    Processos
+                                </td>
 
-                                    tipo:"numero"
-                                },
+                                <td>
+                                    ${formatarNumero(
+                                        processosAcumulado
+                                    )}
+                                </td>
+
+                            </tr>
 
 
-                                {
-                                    titulo:"Ocorrências",
+                            <tr>
 
-                                    atual:
-                                        corrente.indicadores
-                                            ?.ocorrencias
-                                            ?.quantidade,
+                                <td>
+                                    RNC
+                                </td>
 
-                                    periodo:
-                                        ocorrenciasPeriodo,
+                                <td>
+                                    ${formatarNumero(
+                                        rncAcumulado
+                                    )}
+                                </td>
 
-                                    tipo:"numero"
-                                }
-                            ]
-                        )
-                    }
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    Retrabalhos
+                                </td>
+
+                                <td>
+                                    ${formatarNumero(
+                                        retrabalhosAcumulado
+                                    )}
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    Ocorrências
+                                </td>
+
+                                <td>
+                                    ${formatarNumero(
+                                        ocorrenciasAcumulado
+                                    )}
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
