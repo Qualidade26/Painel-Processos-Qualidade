@@ -825,6 +825,39 @@ function abrirFluxogramaSGQ(){
 
     function atualizarControles(){
 
+    /* ==============================================
+       FLUXOGRAMA SGQ
+    ============================================== */
+
+    if(fluxogramaAberto){
+
+        if(contador){
+            contador.textContent = "Especial";
+        }
+
+        if(nomeProcesso){
+            nomeProcesso.textContent =
+                "Fluxograma SGQ";
+        }
+
+        if(nomeSubaba){
+            nomeSubaba.textContent =
+                "Integração de Dados";
+        }
+
+        if(modoAtual){
+            modoAtual.textContent =
+                "Manual";
+        }
+
+        if(btnPlay){
+            btnPlay.textContent =
+                "▶ Iniciar automático";
+        }
+
+        return;
+    }
+
         const tela =
             telasApresentacao[
                 indiceAtual
@@ -1562,14 +1595,16 @@ if(fluxogramaAberto){
        SAIR DO MODO APRESENTAÇÃO
     ====================================================== */
 
-    async function fecharModoApresentacao(){
+   async function fecharModoApresentacao(){
 
-        cancelarTimer();
+    cancelarTimer();
 
+    /* Remove o Fluxograma caso esteja aberto */
+    fecharFluxogramaSGQ();
 
-        automatico = false;
+    automatico = false;
 
-        barraOculta = false;
+    barraOculta = false;
 
 
         document.body.classList.remove(
