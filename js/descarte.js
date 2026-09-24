@@ -1420,6 +1420,125 @@ function montarTabelaGastoAmbiental(custoAmbiental){
         </div>
     `;
 }
+
+/* ==========================================================
+   TOP 10 — TABELA COMPLETA
+========================================================== */
+
+function montarTabelaTop10Descarte(produtos) {
+
+    const lista = Array.isArray(produtos)
+        ? produtos.slice(0, 10)
+        : [];
+
+    const linhas = lista.map(item => {
+
+        /* QUANTIDADE */
+        const quantidade =
+            item.quantidade ??
+            item.qtd ??
+            item.qtde;
+
+        const qtd = quantidade == null || quantidade === ""
+            ? "—"
+            : Number(quantidade).toLocaleString("pt-BR");
+
+        /* ORIGEM E CORES DO GRÁFICO */
+        const origens =
+            Array.isArray(item.origens) && item.origens.length
+                ? item.origens
+                : [
+                    item.origem ??
+                    item.motivo ??
+                    item.descricaoOrigem ??
+                    ""
+                ];
+
+        const coresUtilizadas = new Set();
+
+        const bolinhas = origens.map(entrada => {
+
+            const nome = typeof entrada === "string"
+                ? entrada
+                : entrada?.nome ??
+                  entrada?.origem ??
+                  entrada?.descricao ??
+                  "";
+
+            const cor = obterCorTop10Descarte(nome);
+
+            if (!cor || coresUtilizadas.has(cor)) {
+                return "";
+            }
+
+            coresUtilizadas.add(cor);
+
+            return `
+                <span
+                    style="
+                        display:inline-block;
+                        width:10px;
+                        height:10px;
+                        border-radius:50%;
+                        background-color:${cor};
+                        margin:0 2px;
+                    "
+                    title="${escaparHtmlDescarte(nome)}"
+                ></span>
+            `;
+
+        }).join("");
+
+        return `
+            <tr>
+                <td>
+                    ${escaparHtmlDescarte(item.sku ?? "")}
+                </td>
+
+                <td title="${escaparHtmlDescarte(item.descricao ?? "")}">
+                    ${escaparHtmlDescarte(item.descricao ?? "")}
+                </td>
+
+                <td>${qtd}</td>
+
+                <td>${bolinhas || "—"}</td>
+
+                <td>${moeda(Number(item.valor || 0))}</td>
+            </tr>
+        `;
+
+    }).join("");
+
+    return `
+        <div class="table-wrap">
+            <div class="table-scroll">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Descrição</th>
+                            <th>Qtd</th>
+                            <th>Origem</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${linhas || `
+                            <tr>
+                                <td colspan="5">
+                                    Nenhum descarte registrado.
+                                </td>
+                            </tr>
+                        `}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    `;
+}
 /* ==========================================================
    RENDERIZAR PÁGINA
 ========================================================== */
@@ -1888,23 +2007,10 @@ const segundoSemestre =
                                         "
                                     >
 
-                                        ${
-                                           tabelaFixa(
-    [
-        "SKU",
-        "Descrição",
-        "Qtd",
-        "Origem",
-        "Valor"
-    ],
-
-    montarLinhasTopDescarte(
-        topDescartado
-    ),
-
-    true
-)
-                                        }
+                                       
+${montarTabelaTop10Descarte(
+    topDescartado
+)}
 
                                     </div>
 
@@ -1952,25 +2058,12 @@ const segundoSemestre =
         </section>
     `;
 
-/* ======================================================
-   APLICAR QUANTIDADE E ORIGEM AO TOP 10
-====================================================== */
-
-if (abaInternaDescarte === "descartado") {
-
-    aplicarColunasTop10Descarte(
-        topDescartado
-    );
-
-}
+   
     /* ======================================================
        CRIAR GRÁFICO DA ABA ATIVA
     ====================================================== */
 
-    if(
-        abaInternaDescarte ===
-        "atual"
-    ){
+    if (abaInternaDescarte === "atual") {
 
         criarGraficoDescarteOrigemResumo(
             origensAtual
@@ -1979,16 +2072,14 @@ if (abaInternaDescarte === "descartado") {
         return;
     }
 
-
     criarGraficoDescarteOrigemResumo(
         origensDescartado
     );
 
 
-    /*
-       Scroll somente no
-       Descartado por Ano.
-    */
+    /* ======================================================
+       SCROLL AUTOMÁTICO — TOP 10
+    ====================================================== */
 
     setTimeout(
         () => {
@@ -1998,6 +2089,7 @@ if (abaInternaDescarte === "descartado") {
         },
         80
     );
+
 }
 /* ==========================================================
    VALIDAR SENHA
