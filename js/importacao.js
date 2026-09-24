@@ -423,7 +423,7 @@ function renderImportacao() {
 
             <section class="cards importacao-cards">
                 ${card("📋", "Processos por Ano", numero(imp.processosAno), "Quantidade de processos")}
-                ${card("🏷️", "Total de SKU", numero(imp.totalSku), "SKUs inspecionados")}
+                ${card("🏷️", "SKUs DISTINTOS", numero(imp.totalSku), "Produtos diferentes com entrada no ano")}
                 ${card("📦", "Total de Lotes", numero(imp.totalLotes), "Lotes controlados")}
                 ${card("📄", "Laudos Emitidos", numero(imp.laudosEmitidos), "Registros emitidos")}
                 ${card("⏱️", "Total de Horas", formatarHorasImportacao(imp.totalHoras), "Horas da atividade")}
