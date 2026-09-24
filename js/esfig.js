@@ -89,13 +89,14 @@ const produtosFluxo =
             ) > 0
     );
 
-    /* ======================================================
-       TOTAIS DO FLUXO OPERACIONAL
-    ====================================================== */
+ 
+/* ======================================================
+   TOTAIS DO FLUXO OPERACIONAL
+====================================================== */
 
-   const totalAguardando =
+const totalAguardando =
     produtosFluxo.reduce(
-        (soma,item) =>
+        (soma, item) =>
             soma +
             Number(item.aguardando || 0),
         0
@@ -103,7 +104,7 @@ const produtosFluxo =
 
 const totalDesmontado =
     produtosFluxo.reduce(
-        (soma,item) =>
+        (soma, item) =>
             soma +
             Number(item.desmontado || 0),
         0
@@ -111,12 +112,20 @@ const totalDesmontado =
 
 const totalAferidos =
     produtosFluxo.reduce(
-        (soma,item) =>
+        (soma, item) =>
             soma +
             Number(item.aferidos || 0),
         0
     );
 
+
+/* ======================================================
+   TOTAL PENDENTE PARA AFERIÇÃO
+====================================================== */
+
+const totalPendenteAfericao =
+    totalAguardando +
+    totalDesmontado;
     /* ======================================================
        PERCENTUAL DE PROCESSAMENTO
     ====================================================== */
