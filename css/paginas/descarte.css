@@ -766,34 +766,46 @@ font-size:20px;
 }
 
 
+
 /* ==========================================================
-   COLUNAS
+   COLUNAS — TOP 10 DESCARTADOS
 ========================================================== */
 
+/* SKU */
 .pagina-descarte .descarte-panel-top10 th:nth-child(1),
 .pagina-descarte .descarte-panel-top10 td:nth-child(1){
     width:12%;
-
     text-align:center;
 }
 
-
+/* DESCRIÇÃO */
 .pagina-descarte .descarte-panel-top10 th:nth-child(2),
 .pagina-descarte .descarte-panel-top10 td:nth-child(2){
-    width:66%;
-
+    width:42%;
     text-align:left;
 }
 
-
+/* QUANTIDADE */
 .pagina-descarte .descarte-panel-top10 th:nth-child(3),
 .pagina-descarte .descarte-panel-top10 td:nth-child(3){
-    width:22%;
-
+    width:10%;
     text-align:center;
+    white-space:nowrap;
+}
 
-    font-size:clamp(8px,.85vh,9px);
+/* ORIGEM */
+.pagina-descarte .descarte-panel-top10 th:nth-child(4),
+.pagina-descarte .descarte-panel-top10 td:nth-child(4){
+    width:11%;
+    text-align:center;
+    white-space:nowrap;
+}
 
+/* VALOR */
+.pagina-descarte .descarte-panel-top10 th:nth-child(5),
+.pagina-descarte .descarte-panel-top10 td:nth-child(5){
+    width:25%;
+    text-align:right;
     white-space:nowrap;
 }
 
@@ -804,19 +816,36 @@ font-size:20px;
 
 .pagina-descarte .descarte-panel-top10 td{
     overflow:hidden;
-
     text-overflow:ellipsis;
-
     white-space:nowrap;
-
     line-height:1.2;
+    font-size:clamp(8px,.85vh,9px);
 }
 
-
+/* DESCRIÇÃO */
 .pagina-descarte .descarte-panel-top10 td:nth-child(2){
     font-size:clamp(8px,.85vh,9px);
 }
 
+/* QUANTIDADE */
+.pagina-descarte .descarte-panel-top10 td:nth-child(3){
+    font-weight:800;
+}
+
+/* ORIGEM — BOLINHA COLORIDA */
+.pagina-descarte .descarte-panel-top10 td:nth-child(4) span{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    vertical-align:middle;
+}
+
+/* VALOR */
+.pagina-descarte .descarte-panel-top10 td:nth-child(5){
+    font-weight:800;
+    white-space:nowrap;
+}
 
 /* ==========================================================
    PADRÃO DE NITIDEZ
