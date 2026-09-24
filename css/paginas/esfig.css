@@ -1309,3 +1309,12 @@
         overflow:auto;
     }
 }
+
+/* ==========================================================
+   ESFIG — ENQUADRAMENTO DO RESUMO LATERAL
+========================================================== */
+
+.esfig-resumo-lateral,
+.esfig-resumo-card {
+    box-sizing: border-box;
+}
