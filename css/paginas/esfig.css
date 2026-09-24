@@ -708,6 +708,17 @@
     color:var(--red);
 }
 
+/* ==========================================================
+   TOTAL PENDENTE PARA AFERIÇÃO
+========================================================== */
+
+.esfig-resumo-card.pendente{
+    border-left:4px solid #f59e0b;
+}
+
+.esfig-resumo-card.pendente strong{
+    color:#f59e0b;
+}
 
 /* ==========================================================
    NOTEBOOK / TABLET
