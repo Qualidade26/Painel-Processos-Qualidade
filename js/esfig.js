@@ -528,94 +528,117 @@ const totalAferidos =
     </div>
 
 
-    <!-- ==============================================
-         RESUMO LATERAL
-    =============================================== -->
+   
+<!-- ==============================================
+     RESUMO LATERAL — AFERIÇÕES
+=============================================== -->
 
-    <aside
-        class="esfig-resumo-lateral"
-        id="esfigResumoLateral"
-        aria-hidden="true"
-    >
+<aside
+    class="esfig-resumo-lateral"
+    id="esfigResumoLateral"
+    aria-hidden="true"
+>
 
-        <div class="esfig-resumo-cabecalho">
+    <div class="esfig-resumo-cabecalho">
 
-            <strong>
-                📋 Resumo das Aferições
-            </strong>
+        <strong>
+            📋 Resumo das Aferições
+        </strong>
 
-            <button
-                type="button"
-                class="esfig-resumo-fechar"
-                onclick="alternarResumoAfericoesEsfig(false)"
-                title="Fechar resumo"
-                aria-label="Fechar resumo"
-            >
-                ×
-            </button>
+        <button
+            type="button"
+            class="esfig-resumo-fechar"
+            onclick="alternarResumoAfericoesEsfig(false)"
+            title="Fechar resumo"
+            aria-label="Fechar resumo"
+        >
+            ×
+        </button>
 
-        </div>
-
-
-        <div class="esfig-resumo-card total">
-
-            <span>
-                Total Aferido
-            </span>
-
-            <strong>
-                ${numero(totalAferido)}
-            </strong>
-
-        </div>
+    </div>
 
 
-        <div class="esfig-resumo-card aprovado">
+    <!-- TOTAL AFERIDO -->
 
-            <span>
-                Total Aprovado
-            </span>
+    <div class="esfig-resumo-card total">
 
-            <strong>
-                ${numero(totalAprovado)}
-            </strong>
+        <span>
+            Total Aferido
+        </span>
 
-        </div>
+        <strong>
+            ${numero(totalAferido)}
+        </strong>
+
+    </div>
 
 
-        <div class="esfig-resumo-card reprovado">
+    <!-- TOTAL APROVADO -->
 
-            <span>
-                Total Reprovado
-            </span>
+    <div class="esfig-resumo-card aprovado">
 
-            <strong>
-                ${numero(totalReprovado)}
-            </strong>
+        <span>
+            Total Aprovado
+        </span>
 
-        </div>
+        <strong>
+            ${numero(totalAprovado)}
+        </strong>
 
-    </aside>
+    </div>
+
+
+    <!-- TOTAL REPROVADO -->
+
+    <div class="esfig-resumo-card reprovado">
+
+        <span>
+            Total Reprovado
+        </span>
+
+        <strong>
+            ${numero(totalReprovado)}
+        </strong>
+
+    </div>
+
+
+  
+    <!-- TOTAL PENDENTE PARA AFERIÇÃO -->
+
+    <div class="esfig-resumo-card pendente">
+
+        <span>
+            Total Pendente para Aferição
+        </span>
+
+        <strong>
+            ${numero(totalPendenteAfericao)}
+        </strong>
+
+    </div>
+
+</aside>
 
 </section>
-            </div>
+
+</div>
 
 
-            <!-- ==========================================
-                 ABA 2
-                 FLUXO OPERACIONAL
-            =========================================== -->
+<!-- ==========================================
+     ABA 2
+     FLUXO OPERACIONAL
+=========================================== -->
 
-            <div
-                id="abaEsfigFluxo"
-                class="esfig-conteudo-aba"
-                role="tabpanel"
-                aria-labelledby="botaoEsfigFluxo"
-                hidden
-            >
+<div
+    id="abaEsfigFluxo"
+    class="esfig-conteudo-aba"
+    role="tabpanel"
+    aria-labelledby="botaoEsfigFluxo"
+    hidden
+>
 
-
-                <section class="esfig-bottom-grid">
+    <section class="esfig-bottom-grid">
 
 
                     <!-- ==================================
