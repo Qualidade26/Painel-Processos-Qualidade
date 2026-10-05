@@ -2298,3 +2298,396 @@ grid-template-rows:
     }
 
 }
+/* ==========================================================
+   FORNECEDORES - RELATÓRIO MENSAL DETALHADO
+========================================================== */
+
+.relatorio-fornecedores-mensal{
+
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+
+    min-width:0;
+}
+
+
+/* ==========================================================
+   RESUMO DO MÊS
+========================================================== */
+
+.relatorio-fornecedores-resumo{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(0,1fr)
+        );
+
+    gap:7px;
+}
+
+
+.relatorio-fornecedor-card{
+
+    min-width:0;
+
+    min-height:58px;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:
+        7px
+        8px;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eef5ff
+        );
+
+    text-align:center;
+}
+
+
+.relatorio-fornecedor-card span{
+
+    color:#5c6c96;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+
+.relatorio-fornecedor-card strong{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#0f3cc9;
+
+    font-size:17px;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   GRÁFICOS
+========================================================== */
+
+.relatorio-fornecedores-graficos{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(0,.85fr);
+
+    gap:10px;
+
+    min-width:0;
+}
+
+
+.relatorio-fornecedor-grafico{
+
+    min-width:0;
+
+    height:220px;
+
+    padding:8px;
+
+    border:
+        1px solid
+        #dce8ff;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fbff
+        );
+}
+
+
+.relatorio-fornecedor-grafico-titulo{
+
+    margin-bottom:6px;
+
+    color:#0f3cc9;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+
+.relatorio-fornecedor-grafico canvas{
+
+    width:100% !important;
+
+    height:185px !important;
+}
+
+
+/* ==========================================================
+   DETALHAMENTO POR FORNECEDOR
+========================================================== */
+
+.relatorio-fornecedores-detalhamento{
+
+    width:100%;
+
+    min-width:0;
+
+    border:
+        1px solid
+        #b8d1ff;
+
+    border-radius:9px;
+
+    overflow:hidden;
+
+    background:#ffffff;
+}
+
+
+.relatorio-fornecedores-detalhamento-titulo{
+
+    padding:
+        7px
+        10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f3cc9,
+            #075ca8
+        );
+
+    color:#ffffff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.relatorio-tabela-fornecedores{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    table-layout:fixed;
+}
+
+
+.relatorio-tabela-fornecedores th{
+
+    padding:
+        6px
+        7px;
+
+    background:#edf4ff;
+
+    border-bottom:
+        1px solid
+        #b8d1ff;
+
+    color:#0f3cc9;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    text-align:center;
+}
+
+
+.relatorio-tabela-fornecedores td{
+
+    padding:
+        6px
+        7px;
+
+    border-bottom:
+        1px solid
+        rgba(15,37,87,.08);
+
+    color:#25385f;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    vertical-align:middle;
+}
+
+
+.relatorio-tabela-fornecedores tbody tr:nth-child(even){
+
+    background:#f8fbff;
+}
+
+
+.relatorio-tabela-fornecedores tbody tr:last-child td{
+
+    border-bottom:0;
+}
+
+
+/* FORNECEDOR */
+
+.relatorio-tabela-fornecedores th:nth-child(1),
+.relatorio-tabela-fornecedores td:nth-child(1){
+
+    width:24%;
+
+    text-align:left;
+}
+
+
+/* RNC */
+
+.relatorio-tabela-fornecedores th:nth-child(2),
+.relatorio-tabela-fornecedores td:nth-child(2){
+
+    width:9%;
+
+    text-align:center;
+
+    font-weight:900;
+}
+
+
+/* OC */
+
+.relatorio-tabela-fornecedores th:nth-child(3),
+.relatorio-tabela-fornecedores td:nth-child(3){
+
+    width:9%;
+
+    text-align:center;
+
+    font-weight:900;
+}
+
+
+/* RE */
+
+.relatorio-tabela-fornecedores th:nth-child(4),
+.relatorio-tabela-fornecedores td:nth-child(4){
+
+    width:9%;
+
+    text-align:center;
+
+    font-weight:900;
+}
+
+
+/* MOTIVO */
+
+.relatorio-tabela-fornecedores th:nth-child(5),
+.relatorio-tabela-fornecedores td:nth-child(5){
+
+    width:49%;
+
+    text-align:left;
+}
+
+
+/* ==========================================================
+   MOTIVOS
+========================================================== */
+
+.relatorio-fornecedor-motivos{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:
+        3px
+        8px;
+
+    line-height:1.35;
+}
+
+
+.relatorio-fornecedor-motivo{
+
+    white-space:normal;
+}
+
+
+.relatorio-fornecedor-motivo b{
+
+    color:#0f3cc9;
+
+    font-weight:900;
+}
+
+
+/* ==========================================================
+   RESPONSIVO
+========================================================== */
+
+@media(max-width:800px){
+
+    .relatorio-fornecedores-resumo{
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+
+    .relatorio-fornecedores-graficos{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .relatorio-fornecedor-grafico{
+
+        height:230px;
+    }
+
+}
