@@ -2199,7 +2199,9 @@ function gerarPainelFornecedores(
 
 const rncAcumulado =
     Number(
-        corrente.totalrncano || 0
+        corrente.indicadores
+            ?.naoconformidade
+            ?.quantidade || 0
     );
 
 
@@ -2234,49 +2236,25 @@ const nomeMesAtual =
 
 
   /* ======================================================
-   MOVIMENTO REAL DO PERÍODO
-   Setembro/2026
+   PROCESSOS DO PERÍODO
+   ATUAL - CONGELADO
 ====================================================== */
-
-/* PROCESSOS DO MÊS - VEM DA IMPORTAÇÃO */
-
-const importacaoAtual =
-    atual.importacao || {};
-
-const mensalImportacao =
-    Array.isArray(importacaoAtual.mensal)
-        ? importacaoAtual.mensal
-        : [];
-
-const dadosMesImportacao =
-    mensalImportacao.find(
-        item =>
-            String(item.mes || "")
-                .trim()
-                .toLowerCase() ===
-            String(nomeMesAtual || "")
-                .trim()
-                .toLowerCase()
-    ) || {};
-
-
-/* ======================================================
-   NO PERÍODO
-====================================================== */
-
-const processosPeriodo =
-    Number(
-        dadosMesImportacao.processos || 0
-    );
-
-/*
-   Setembro não teve movimentação
-   nos demais indicadores.
-*/
 
 const fornecedoresAnterior =
     congelado.fornecedores || {};
 
+
+const processosAnterior =
+    Number(
+        fornecedoresAnterior.totalprocessos || 0
+    );
+
+
+const processosPeriodo =
+    Math.max(
+        0,
+        processosAcumulado - processosAnterior
+    );
 
 const listaFornecedoresAnterior =
     Array.isArray(fornecedoresAnterior.avaliados)
@@ -2286,7 +2264,9 @@ const listaFornecedoresAnterior =
 
 const rncAnterior =
     Number(
-        fornecedoresAnterior.totalrncano || 0
+        fornecedoresAnterior.indicadores
+            ?.naoconformidade
+            ?.quantidade || 0
     );
 
 
