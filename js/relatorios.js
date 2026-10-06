@@ -319,21 +319,76 @@ function iniciarEventosRelatorios(){
         campoMes.style.display = "";
     }
 }
+function obterPeriodoAutomaticoRelatorio(){
 
+    const hoje =
+        new Date();
+
+    const anoAtual =
+        hoje.getFullYear();
+
+    const mesAtual =
+        String(
+            hoje.getMonth() + 1
+        ).padStart(2,"0");
+
+
+    /* MÊS ANTERIOR = BASE CONGELADA */
+
+    const dataBase =
+        new Date(
+            anoAtual,
+            hoje.getMonth() - 1,
+            1
+        );
+
+
+    const anoBase =
+        dataBase.getFullYear();
+
+    const mesBase =
+        String(
+            dataBase.getMonth() + 1
+        ).padStart(2,"0");
+
+
+    return {
+
+        mesAtual,
+        anoAtual,
+
+        mesBase,
+        anoBase
+
+    };
+}
 /* ==========================================================
    GERAR RELATÓRIO
 ========================================================== */
 async function gerarRelatorioSelecionado(){
 
-    const ano =
-        document.getElementById(
-            "relatorioAno"
-        )?.value;
+   const periodoAutomatico =
+    obterPeriodoAutomaticoRelatorio();
 
-    const mes =
-        document.getElementById(
-            "relatorioMes"
-        )?.value;
+
+const ano =
+    String(
+        periodoAutomatico.anoAtual
+    );
+
+
+const mes =
+    periodoAutomatico.mesAtual;
+
+
+const anoBase =
+    String(
+        periodoAutomatico.anoBase
+    );
+
+
+const mesBase =
+    periodoAutomatico.mesBase;
 
     const escopo =
         document.getElementById(
@@ -376,7 +431,7 @@ async function gerarRelatorioSelecionado(){
             "mensal"
         ){
 const caminhoCongelado =
-    `Fechamento/fechamento-${ano}/${mes}.json`;
+    `Fechamento/fechamento-${anoBase}/${mesBase}.json`;
 
 
             const [
@@ -431,15 +486,20 @@ const dadosAtuais =
     );
 
             montarPreviewRelatorio(
-                dadosCongelados,
-                {
-                    tipo:"mensal",
-                    ano,
-                    mes,
-                    escopo,
-                    dadosAtuais
-                }
-            );
+    dadosCongelados,
+    {
+        tipo:"mensal",
+
+        ano,
+        mes,
+
+        anoBase,
+        mesBase,
+
+        escopo,
+        dadosAtuais
+    }
+);
 
 
         /* ==================================================
@@ -548,21 +608,20 @@ function montarPreviewRelatorio(
 
 
     const nomeMesBase =
-        obterNomeMes(
-            configuracao.mes
-        );
+    obterNomeMes(
+        configuracao.mesBase
+    );
 
-
-    const periodo =
-        mensal
-            ? obterMesSeguinte(
-                configuracao.mes,
-                configuracao.ano
-            )
-            : {
-                mes:"",
-                ano:configuracao.ano
-            };
+const periodo =
+    mensal
+        ? {
+            mes: configuracao.mes,
+            ano: configuracao.ano
+        }
+        : {
+            mes:"",
+            ano:configuracao.ano
+        };
 
 
     const nomeMesRelatorio =
@@ -1128,17 +1187,16 @@ function gerarPainelImportacao(
        Ex.: base Agosto -> relatório Setembro
     ====================================================== */
 
-    const periodoAtual =
-        obterMesSeguinte(
-            configuracao.mes,
-            configuracao.ano
-        );
+   const periodoAtual = {
+    mes: configuracao.mes,
+    ano: configuracao.ano
+};
 
 
-    const nomeMesAtual =
-        obterNomeMes(
-            periodoAtual.mes
-        );
+const nomeMesAtual =
+    obterNomeMes(
+        configuracao.mes
+    );
 
 
     /* ======================================================
@@ -2163,17 +2221,16 @@ const ocorrenciasAcumulado =
        Agosto congelado -> Setembro
     ====================================================== */
 
-    const periodoAtual =
-        obterMesSeguinte(
-            configuracao.mes,
-            configuracao.ano
-        );
+const periodoAtual = {
+    mes: configuracao.mes,
+    ano: configuracao.ano
+};
 
 
-    const nomeMesAtual =
-        obterNomeMes(
-            periodoAtual.mes
-        );
+const nomeMesAtual =
+    obterNomeMes(
+        configuracao.mes
+    );
 
 
   /* ======================================================
