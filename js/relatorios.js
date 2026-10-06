@@ -2244,11 +2244,195 @@ const processosPeriodo =
    nos demais indicadores.
 */
 
-const rncPeriodo = 0;
+const fornecedoresAnterior =
+    congelado.fornecedores || {};
 
-const retrabalhosPeriodo = 0;
 
-const ocorrenciasPeriodo = 0;
+const listaFornecedoresAnterior =
+    Array.isArray(fornecedoresAnterior.avaliados)
+        ? fornecedoresAnterior.avaliados
+        : [];
+
+
+const rncAnterior =
+    listaFornecedoresAnterior.reduce(
+        (total,item) =>
+            total +
+            Number(
+                item.rnc ??
+                item.rncs ??
+                0
+            ),
+        0
+    );
+
+
+const retrabalhosAnterior =
+    listaFornecedoresAnterior.reduce(
+        (total,item) =>
+            total +
+            Number(
+                item.retrabalhos ??
+                item.retrabalho ??
+                0
+            ),
+        0
+    );
+
+
+const ocorrenciasAnterior =
+    listaFornecedoresAnterior.reduce(
+        (total,item) =>
+            total +
+            Number(
+                item.ocorrencias ?? 0
+            ),
+        0
+    );
+
+
+const rncPeriodo =
+    Math.max(
+        0,
+        rncAcumulado - rncAnterior
+    );
+
+
+const retrabalhosPeriodo =
+    Math.max(
+        0,
+        retrabalhosAcumulado - retrabalhosAnterior
+    );
+
+
+const ocorrenciasPeriodo =
+    Math.max(
+        0,
+        ocorrenciasAcumulado - ocorrenciasAnterior
+    );
+   const movimentoFornecedores =
+    listaFornecedores
+        .map(itemAtual => {
+
+            const itemAnterior =
+                listaFornecedoresAnterior.find(
+                    item =>
+                        String(item.fabricante || "")
+                            .trim()
+                            .toLowerCase() ===
+                        String(itemAtual.fabricante || "")
+                            .trim()
+                            .toLowerCase()
+                ) || {};
+
+
+            const rnc =
+                Math.max(
+                    0,
+                    Number(
+                        itemAtual.rnc ??
+                        itemAtual.rncs ??
+                        0
+                    ) -
+                    Number(
+                        itemAnterior.rnc ??
+                        itemAnterior.rncs ??
+                        0
+                    )
+                );
+
+
+            const oc =
+                Math.max(
+                    0,
+                    Number(
+                        itemAtual.ocorrencias ?? 0
+                    ) -
+                    Number(
+                        itemAnterior.ocorrencias ?? 0
+                    )
+                );
+
+const re =
+    Math.max(
+        0,
+        Number(
+            itemAtual.retrabalhos ??
+            itemAtual.retrabalho ??
+            0
+        ) -
+        Number(
+            itemAnterior.retrabalhos ??
+            itemAnterior.retrabalho ??
+            0
+        )
+    );
+
+
+return {
+    fabricante:
+        itemAtual.fabricante || "-",
+
+    rnc,
+    oc,
+    re,
+
+    motivo:
+        String(
+            itemAtual.motivo || ""
+        ).trim() || "-"
+};
+
+        })
+        .filter(
+            item =>
+                item.rnc > 0 ||
+                item.oc > 0 ||
+                item.re > 0
+        );
+   const linhasFornecedoresPeriodo =
+    movimentoFornecedores.length
+        ? movimentoFornecedores
+            .map(
+                item => `
+
+                    <tr>
+
+                        <td>
+                            ${item.fabricante}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(item.rnc)}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(item.oc)}
+                        </td>
+
+                        <td>
+                            ${formatarNumero(item.re)}
+                        </td>
+
+                       <td>
+    ${item.motivo}
+</td>
+                    </tr>
+
+                `
+            )
+            .join("")
+        : `
+
+            <tr>
+
+                <td colspan="5">
+                    Sem RNC, ocorrência ou retrabalho no período.
+                </td>
+
+            </tr>
+
+        `;
     /* ======================================================
        ÍNDICE MÉDIO
     ====================================================== */
@@ -2362,7 +2546,44 @@ const ocorrenciasPeriodo = 0;
 
                 </div>
 
+                        </div>
+
+
+          ${
+    larguraTotal
+        ? `
+
+            <div class="relatorio-fornecedores-detalhamento">
+
+                <div class="relatorio-fornecedores-detalhamento-titulo">
+                    Detalhamento por fornecedor
+                </div>
+
+                <table class="relatorio-tabela-fornecedores">
+
+                    <thead>
+
+                        <tr>
+                            <th>Fornecedor</th>
+                            <th>RNC</th>
+                            <th>OC</th>
+                            <th>RE</th>
+                            <th>Motivo</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        ${linhasFornecedoresPeriodo}
+                    </tbody>
+
+                </table>
+
             </div>
+
+        `
+        : ""
+}
 
 
             ${
