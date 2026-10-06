@@ -947,8 +947,9 @@ if(abaAtiva){
     return;
 }
 
-
 renderImportacao();
+
+        })
 
         .catch(erro => {
 
