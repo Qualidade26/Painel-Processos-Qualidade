@@ -2240,20 +2240,31 @@ const nomeMesAtual =
    ATUAL - CONGELADO
 ====================================================== */
 
-const fornecedoresAnterior =
-    congelado.fornecedores || {};
+const importacaoAtual =
+    atual.importacao || {};
 
 
-const processosAnterior =
-    Number(
-        fornecedoresAnterior.totalprocessos || 0
-    );
+const mensalImportacao =
+    Array.isArray(importacaoAtual.mensal)
+        ? importacaoAtual.mensal
+        : [];
+
+
+const dadosMesImportacao =
+    mensalImportacao.find(
+        item =>
+            String(item.mes || "")
+                .trim()
+                .toLowerCase() ===
+            String(nomeMesAtual || "")
+                .trim()
+                .toLowerCase()
+    ) || {};
 
 
 const processosPeriodo =
-    Math.max(
-        0,
-        processosAcumulado - processosAnterior
+    Number(
+        dadosMesImportacao.processos || 0
     );
 
 const listaFornecedoresAnterior =
