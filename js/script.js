@@ -911,27 +911,42 @@ function atualizarDadosAutomaticamente() {
             */
 
             const abaAtiva =
-                document.querySelector(
-                    ".menu button.active"
-                );
+    document.querySelector(
+        ".menu button.active"
+    );
 
 
-            if (abaAtiva) {
+/* ======================================================
+   NÃO RECARREGA RELATÓRIO QUE JÁ ESTÁ ABERTO
+====================================================== */
 
-                abaAtiva.click();
+const relatorioAberto =
+    document.getElementById(
+        "relatorioDocumento"
+    );
 
-                return;
-            }
+
+if(relatorioAberto){
+
+    /*
+       Os dados continuam sendo atualizados em segundo plano,
+       mas o relatório permanece aberto até o usuário sair
+       da aba ou gerar outro relatório.
+    */
+
+    return;
+}
 
 
-            /*
-            ------------------------------------------------------
-            Caso nenhum botão esteja marcado como ativo
-            ------------------------------------------------------
-            */
+if (abaAtiva) {
 
-            renderImportacao();
-        })
+    abaAtiva.click();
+
+    return;
+}
+
+
+renderImportacao();
 
         .catch(erro => {
 
