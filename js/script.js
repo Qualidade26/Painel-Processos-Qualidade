@@ -833,20 +833,21 @@ function carregarDadosIniciais() {
             return resposta.text();
         })
 
-       .then(texto => {
+        .then(texto => {
 
-    const json =
-        interpretarJsonSeguro(
-            texto
-        );
+            const json =
+                interpretarJsonSeguro(
+                    texto
+                );
 
-    dados =
-        normalizarDados(
-            json
-        );
+            dados =
+                normalizarDados(
+                    json
+                );
 
-    renderImportacao();
-})
+            renderImportacao();
+
+        })
 
         .catch(erro => {
 
@@ -855,7 +856,8 @@ function carregarDadosIniciais() {
                 erro
             );
 
-            dados = normalizarDados({});
+            dados =
+                normalizarDados({});
 
             renderImportacao();
         });
