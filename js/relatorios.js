@@ -2199,9 +2199,7 @@ function gerarPainelFornecedores(
 
 const rncAcumulado =
     Number(
-        corrente.indicadores
-            ?.naoconformidade
-            ?.quantidade || 0
+        corrente.totalrncano || 0
     );
 
 
@@ -2277,9 +2275,7 @@ const listaFornecedoresAnterior =
 
 const rncAnterior =
     Number(
-        fornecedoresAnterior.indicadores
-            ?.naoconformidade
-            ?.quantidade || 0
+        fornecedoresAnterior.totalrncano || 0
     );
 
 
