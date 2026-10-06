@@ -910,35 +910,35 @@ function atualizarDadosAutomaticamente() {
             ------------------------------------------------------
             */
 
-            const abaAtiva =
+       const abaAtiva =
     document.querySelector(
         ".menu button.active"
     );
 
 
 /* ======================================================
-   NÃO RECARREGA RELATÓRIO QUE JÁ ESTÁ ABERTO
+   MANTÉM A ABA RELATÓRIOS ABERTA
 ====================================================== */
 
-const relatorioAberto =
-    document.getElementById(
-        "relatorioDocumento"
-    );
+const estaNaAbaRelatorios =
+    abaAtiva &&
+    String(
+        abaAtiva.getAttribute("onclick") || ""
+    ).includes("relatorios");
 
 
-if(relatorioAberto){
+if(estaNaAbaRelatorios){
 
     /*
-       Os dados continuam sendo atualizados em segundo plano,
-       mas o relatório permanece aberto até o usuário sair
-       da aba ou gerar outro relatório.
+       Atualiza os dados em segundo plano,
+       mas não recarrega a tela de Relatórios.
     */
 
     return;
 }
 
 
-if (abaAtiva) {
+if(abaAtiva){
 
     abaAtiva.click();
 
