@@ -2266,6 +2266,8 @@ const processosPeriodo =
     Number(
         dadosMesImportacao.processos || 0
     );
+const fornecedoresAnterior =
+    congelado.fornecedores || {};
 
 const listaFornecedoresAnterior =
     Array.isArray(fornecedoresAnterior.avaliados)
