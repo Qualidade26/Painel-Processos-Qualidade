@@ -2133,57 +2133,30 @@ function gerarPainelFornecedores(
        SOMA DIRETO DOS FORNECEDORES
     ====================================================== */
 
-    const processosAcumulado =
-        listaFornecedores.reduce(
-            (total,item) =>
-                total +
-                Number(
-                    item.processosano ??
-                    item.processosAno ??
-                    item.processos ??
-                    0
-                ),
-            0
-        );
+   const processosAcumulado =
+    Number(
+        corrente.totalprocessos || 0
+    );
 
 
-    const rncAcumulado =
-        listaFornecedores.reduce(
-            (total,item) =>
-                total +
-                Number(
-                    item.rnc ??
-                    item.rncs ??
-                    0
-                ),
-            0
-        );
+const rncAcumulado =
+    Number(
+        corrente.totalrncano || 0
+    );
 
 
-    const retrabalhosAcumulado =
-        listaFornecedores.reduce(
-            (total,item) =>
-                total +
-                Number(
-                    item.retrabalhos ??
-                    item.retrabalho ??
-                    0
-                ),
-            0
-        );
+const retrabalhosAcumulado =
+    Number(
+        corrente.totalretrabalho || 0
+    );
 
 
-    const ocorrenciasAcumulado =
-        listaFornecedores.reduce(
-            (total,item) =>
-                total +
-                Number(
-                    item.ocorrencias ??
-                    0
-                ),
-            0
-        );
-
+const ocorrenciasAcumulado =
+    Number(
+        corrente.indicadores
+            ?.ocorrencias
+            ?.quantidade || 0
+    );
 
     /* ======================================================
        MÊS DO RELATÓRIO
@@ -2255,39 +2228,22 @@ const listaFornecedoresAnterior =
 
 
 const rncAnterior =
-    listaFornecedoresAnterior.reduce(
-        (total,item) =>
-            total +
-            Number(
-                item.rnc ??
-                item.rncs ??
-                0
-            ),
-        0
+    Number(
+        fornecedoresAnterior.totalrncano || 0
     );
 
 
 const retrabalhosAnterior =
-    listaFornecedoresAnterior.reduce(
-        (total,item) =>
-            total +
-            Number(
-                item.retrabalhos ??
-                item.retrabalho ??
-                0
-            ),
-        0
+    Number(
+        fornecedoresAnterior.totalretrabalho || 0
     );
 
 
 const ocorrenciasAnterior =
-    listaFornecedoresAnterior.reduce(
-        (total,item) =>
-            total +
-            Number(
-                item.ocorrencias ?? 0
-            ),
-        0
+    Number(
+        fornecedoresAnterior.indicadores
+            ?.ocorrencias
+            ?.quantidade || 0
     );
 
 
