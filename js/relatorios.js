@@ -2312,30 +2312,138 @@ const ocorrenciasPeriodo =
         0,
         ocorrenciasAcumulado - ocorrenciasAnterior
     );
-   const movimentoFornecedores =
+/* ======================================================
+   MOVIMENTO DO MÊS POR FORNECEDOR
+   ATUAL - CONGELADO
+====================================================== */
+
+const normalizarNomeFornecedor =
+    valor =>
+        String(valor || "")
+            .trim()
+            .replace(/\s+/g," ")
+            .toLowerCase();
+
+
+const normalizarTextoMotivo =
+    valor =>
+        String(valor || "")
+            .replace(/\s+/g," ")
+            .trim()
+            .toLowerCase();
+
+
+/* ======================================================
+   SEPARA OS MOTIVOS POR TIPO
+   RNC / OC / RE
+====================================================== */
+
+const extrairMotivosFornecedor =
+    texto => {
+
+        const lista = [];
+
+        const conteudo =
+            String(texto || "")
+                .replace(/\s+/g," ")
+                .trim();
+
+
+        if(!conteudo){
+            return lista;
+        }
+
+
+        const regex =
+            /\b(RNC|OC|RE)\b\s*[,.:;-]?\s*(.*?)(?=\b(?:RNC|OC|RE)\b\s*[,.:;-]?|$)/gi;
+
+
+        let resultado;
+
+
+        while(
+            (
+                resultado =
+                    regex.exec(conteudo)
+            ) !== null
+        ){
+
+            const tipo =
+                String(
+                    resultado[1] || ""
+                ).toUpperCase();
+
+
+            const descricao =
+                String(
+                    resultado[2] || ""
+                )
+                .replace(
+                    /^[\s,.;:|-]+/,
+                    ""
+                )
+                .replace(
+                    /[\s,;:|-]+$/,
+                    ""
+                )
+                .trim();
+
+
+            lista.push({
+
+                tipo,
+
+                descricao,
+
+                chave:
+                    normalizarTextoMotivo(
+                        `${tipo}|${descricao}`
+                    )
+
+            });
+
+        }
+
+
+        return lista;
+    };
+
+
+const movimentoFornecedores =
     listaFornecedores
         .map(itemAtual => {
+
+
+            /* =============================================
+               LOCALIZA O MESMO FORNECEDOR NO CONGELADO
+            ============================================= */
 
             const itemAnterior =
                 listaFornecedoresAnterior.find(
                     item =>
-                        String(item.fabricante || "")
-                            .trim()
-                            .toLowerCase() ===
-                        String(itemAtual.fabricante || "")
-                            .trim()
-                            .toLowerCase()
+                        normalizarNomeFornecedor(
+                            item.fabricante
+                        ) ===
+                        normalizarNomeFornecedor(
+                            itemAtual.fabricante
+                        )
                 ) || {};
 
+
+            /* =============================================
+               RNC DO MÊS
+            ============================================= */
 
             const rnc =
                 Math.max(
                     0,
+
                     Number(
                         itemAtual.rnc ??
                         itemAtual.rncs ??
                         0
                     ) -
+
                     Number(
                         itemAnterior.rnc ??
                         itemAnterior.rncs ??
@@ -2344,54 +2452,186 @@ const ocorrenciasPeriodo =
                 );
 
 
+            /* =============================================
+               OC DO MÊS
+            ============================================= */
+
             const oc =
                 Math.max(
                     0,
+
                     Number(
-                        itemAtual.ocorrencias ?? 0
+                        itemAtual.ocorrencias ??
+                        0
                     ) -
+
                     Number(
-                        itemAnterior.ocorrencias ?? 0
+                        itemAnterior.ocorrencias ??
+                        0
                     )
                 );
 
-const re =
-    Math.max(
-        0,
-        Number(
-            itemAtual.retrabalhos ??
-            itemAtual.retrabalho ??
-            0
-        ) -
-        Number(
-            itemAnterior.retrabalhos ??
-            itemAnterior.retrabalho ??
-            0
-        )
-    );
+
+            /* =============================================
+               RETRABALHO DO MÊS
+            ============================================= */
+
+            const re =
+                Math.max(
+                    0,
+
+                    Number(
+                        itemAtual.retrabalhos ??
+                        itemAtual.retrabalho ??
+                        0
+                    ) -
+
+                    Number(
+                        itemAnterior.retrabalhos ??
+                        itemAnterior.retrabalho ??
+                        0
+                    )
+                );
 
 
-return {
-    fabricante:
-        itemAtual.fabricante || "-",
+            /* =============================================
+               MOTIVOS
+            ============================================= */
 
-    rnc,
-    oc,
-    re,
+            const motivosAtual =
+                extrairMotivosFornecedor(
+                    itemAtual.motivo
+                );
 
-    motivo:
-        String(
-            itemAtual.motivo || ""
-        ).trim() || "-"
-};
+
+            const motivosAnterior =
+                extrairMotivosFornecedor(
+                    itemAnterior.motivo
+                );
+
+
+            /* REMOVE MOTIVOS QUE JÁ EXISTIAM */
+
+            const motivosNovos =
+                motivosAtual.filter(
+                    motivoAtual =>
+
+                        !motivosAnterior.some(
+                            motivoAnterior =>
+
+                                motivoAnterior.chave ===
+                                motivoAtual.chave
+                        )
+                );
+
+
+            /* =============================================
+               PEGA SOMENTE A QUANTIDADE QUE ENTROU NO MÊS
+            ============================================= */
+
+            const selecionarMotivos =
+                (
+                    tipo,
+                    quantidade
+                ) => {
+
+                    if(
+                        Number(quantidade || 0) <= 0
+                    ){
+                        return [];
+                    }
+
+
+                    const novosDoTipo =
+                        motivosNovos.filter(
+                            item =>
+                                item.tipo === tipo
+                        );
+
+
+                    if(novosDoTipo.length){
+
+                        return novosDoTipo.slice(
+                            -Number(quantidade)
+                        );
+                    }
+
+
+                    /*
+                       Se o congelado antigo ainda não
+                       possuir campo motivo, usa os últimos
+                       motivos do tipo correspondente.
+                    */
+
+                    return motivosAtual
+                        .filter(
+                            item =>
+                                item.tipo === tipo
+                        )
+                        .slice(
+                            -Number(quantidade)
+                        );
+                };
+
+
+            const motivosPeriodo = [
+
+                ...selecionarMotivos(
+                    "RNC",
+                    rnc
+                ),
+
+                ...selecionarMotivos(
+                    "OC",
+                    oc
+                ),
+
+                ...selecionarMotivos(
+                    "RE",
+                    re
+                )
+
+            ];
+
+
+            const motivoPeriodo =
+                motivosPeriodo.length
+
+                    ? motivosPeriodo
+                        .map(
+                            item =>
+                                item.descricao
+                                    ? `${item.tipo}: ${item.descricao}`
+                                    : item.tipo
+                        )
+                        .join(" | ")
+
+                    : "-";
+
+
+            return {
+
+                fabricante:
+                    itemAtual.fabricante || "-",
+
+                rnc,
+                oc,
+                re,
+
+                motivo:
+                    motivoPeriodo
+
+            };
 
         })
+
         .filter(
             item =>
                 item.rnc > 0 ||
                 item.oc > 0 ||
                 item.re > 0
         );
+      
    const linhasFornecedoresPeriodo =
     movimentoFornecedores.length
         ? movimentoFornecedores
