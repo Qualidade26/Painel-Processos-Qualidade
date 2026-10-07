@@ -367,28 +367,25 @@ function obterPeriodoAutomaticoRelatorio(){
 ========================================================== */
 async function gerarRelatorioSelecionado(){
 
-   const periodoAutomatico =
-    obterPeriodoAutomaticoRelatorio();
+    /* ==================================================
+       PERÍODO ESCOLHIDO NO FILTRO
+    ================================================== */
+
+    const ano =
+        String(
+            document.getElementById(
+                "relatorioAno"
+            )?.value || ""
+        );
 
 
-const ano =
-    String(
-        periodoAutomatico.anoAtual
-    );
+    const mes =
+        String(
+            document.getElementById(
+                "relatorioMes"
+            )?.value || ""
+        ).padStart(2,"0");
 
-
-const mes =
-    periodoAutomatico.mesAtual;
-
-
-const anoBase =
-    String(
-        periodoAutomatico.anoBase
-    );
-
-
-const mesBase =
-    periodoAutomatico.mesBase;
 
     const escopo =
         document.getElementById(
@@ -401,13 +398,25 @@ const mesBase =
             "relatorioAviso"
         );
 
+
     const preview =
         document.getElementById(
             "relatorioPreview"
         );
 
 
-    if(!ano || !preview){
+    if(
+        !ano ||
+        !preview
+    ){
+        return;
+    }
+
+
+    if(
+        tipoRelatorioAtual === "mensal" &&
+        !mes
+    ){
         return;
     }
 
@@ -421,18 +430,86 @@ const mesBase =
 
     try{
 
+
         /* ==================================================
            RELATÓRIO MENSAL
-           CONGELADO X ATUAL
         ================================================== */
 
         if(
             tipoRelatorioAtual ===
             "mensal"
         ){
-const caminhoCongelado =
-    `Fechamento/fechamento-${anoBase}/${mesBase}.json`;
 
+
+            /* ==============================================
+               DESCOBRE O MÊS ANTERIOR
+            ============================================== */
+
+            const dataBase =
+                new Date(
+                    Number(ano),
+                    Number(mes) - 2,
+                    1
+                );
+
+
+            const anoBase =
+                String(
+                    dataBase.getFullYear()
+                );
+
+
+            const mesBase =
+                String(
+                    dataBase.getMonth() + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+
+            /* ==============================================
+               FECHAMENTO ANTERIOR
+            ============================================== */
+
+            const caminhoCongelado =
+                `Fechamento/fechamento-${anoBase}/${mesBase}.json`;
+
+
+            /* ==============================================
+               VERIFICA SE É O MÊS ATUAL
+            ============================================== */
+
+            const hoje =
+                new Date();
+
+
+            const ehMesAtual =
+                Number(ano) ===
+                    hoje.getFullYear() &&
+                Number(mes) ===
+                    hoje.getMonth() + 1;
+
+
+            /* ==============================================
+               DEFINE A FONTE DO MÊS SELECIONADO
+
+               Mês atual:
+               data.json
+
+               Mês passado:
+               fechamento congelado do próprio mês
+            ============================================== */
+
+            const caminhoAtual =
+                ehMesAtual
+                    ? "data.json"
+                    : `Fechamento/fechamento-${ano}/${mes}.json`;
+
+
+            /* ==============================================
+               CARREGA OS DOIS ARQUIVOS
+            ============================================== */
 
             const [
                 respostaCongelado,
@@ -448,7 +525,7 @@ const caminhoCongelado =
                     ),
 
                     fetch(
-                        "data.json",
+                        caminhoAtual,
                         {
                             cache:"no-store"
                         }
@@ -457,49 +534,86 @@ const caminhoCongelado =
                 ]);
 
 
-            if(!respostaCongelado.ok){
+            /* ==============================================
+               BASE ANTERIOR NÃO EXISTE
+            ============================================== */
+
+            if(
+                !respostaCongelado.ok
+            ){
 
                 throw new Error(
-                    `Fechamento não encontrado: ${caminhoCongelado}`
+                    `Fechamento anterior não encontrado: ${caminhoCongelado}`
                 );
             }
 
 
-            if(!respostaAtual.ok){
+            /* ==============================================
+               MÊS SELECIONADO NÃO EXISTE
+            ============================================== */
+
+            if(
+                !respostaAtual.ok
+            ){
 
                 throw new Error(
-                    "Não foi possível carregar data.json"
+
+                    ehMesAtual
+
+                        ? "Não foi possível carregar os dados atuais."
+
+                        : `Fechamento não encontrado: ${caminhoAtual}`
                 );
             }
+
+
+            /* ==============================================
+               LÊ A BASE ANTERIOR
+            ============================================== */
+
+            const textoCongelado =
+                await respostaCongelado.text();
 
 
             const dadosCongelados =
-                await respostaCongelado.json();
+                interpretarJsonSeguro(
+                    textoCongelado
+                );
 
 
-           const textoAtual =
-    await respostaAtual.text();
+            /* ==============================================
+               LÊ O MÊS ESCOLHIDO
+            ============================================== */
 
-const dadosAtuais =
-    interpretarJsonSeguro(
-        textoAtual
-    );
+            const textoAtual =
+                await respostaAtual.text();
+
+
+            const dadosAtuais =
+                interpretarJsonSeguro(
+                    textoAtual
+                );
+
+
+            /* ==============================================
+               MONTA O RELATÓRIO
+            ============================================== */
 
             montarPreviewRelatorio(
-    dadosCongelados,
-    {
-        tipo:"mensal",
+                dadosCongelados,
+                {
+                    tipo:"mensal",
 
-        ano,
-        mes,
+                    ano,
+                    mes,
 
-        anoBase,
-        mesBase,
+                    anoBase,
+                    mesBase,
 
-        escopo,
-        dadosAtuais
-    }
-);
+                    escopo,
+                    dadosAtuais
+                }
+            );
 
 
         /* ==================================================
@@ -507,6 +621,7 @@ const dadosAtuais =
         ================================================== */
 
         }else{
+
 
             const caminhoAnual =
                 `Relatorio-Anual/${ano}.json`;
@@ -521,7 +636,9 @@ const dadosAtuais =
                 );
 
 
-            if(!resposta.ok){
+            if(
+                !resposta.ok
+            ){
 
                 throw new Error(
                     `Relatório anual não encontrado: ${caminhoAnual}`
