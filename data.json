@@ -122,7 +122,7 @@
 },
 
 "importacao":{
-"processosAno":165,
+"processosAno":164,
 "totalSku":347,
 "totalLotes":1226,
 "laudosEmitidos":648,
@@ -139,7 +139,7 @@
       {"mes": "Julho","processos":18,"sku":73,"lotes":202,"laudos":18,"horas":20.08 }, 
       {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
       {"mes": "Setembro","processos":21,"sku":70,"lotes":126,"laudos":21,"horas":19.00 }, 
-      {"mes": "Outubro","processos":9,"sku":67,"lotes":79,"laudos":8,"horas":8.50 }, 
+      {"mes": "Outubro","processos":8,"sku":67,"lotes":79,"laudos":8,"horas":8.50 }, 
       {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
       {"mes": "Dezembro","processos":0,"sku":67,"lotes":0,"laudos":0,"horas":0.00 }
 ],
@@ -339,13 +339,13 @@
 "fornecedores": {
 "totalrncano": 42,
 "totalfornecedores": 42,
-"totalprocessos":165,
+"totalprocessos":164,
 "totalretrabalho": 9,
 "totalreclamacao": 0,
 "indicemedioavaliacao":0.91,
 "indicadores": {
 "importacao": {
-"quantidade":165,
+"quantidade":164,
 "percentual":0.73},
 "retrabalho": {
 "quantidade":9,
@@ -372,7 +372,7 @@
 {"fabricante":"Ayset Plastik","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":14859682,"skuano":9,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Medico Electroude","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":11,"produtosfornecidos":67320000,"skuano":1,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Huaian Tianda Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3410000,"skuano":2,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
-{"fabricante":"Medico (Huaian) CO., LTDA","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":7,"produtosfornecidos":8759280,"skuano":44,"horas":0,"motivo":"RNC, Avaria de produtos. ","indiceavaliacao":0.86,"avaliacao":"🟡 Atenção" },
+{"fabricante":"Medico (Huaian) CO., LTDA","rnc":5,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":8759280,"skuano":44,"horas":0,"motivo":"RNC, Avaria de produtos. ","indiceavaliacao":0.83,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Well Lead medical co., ltd.","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":1097000,"skuano":21,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Polymed Medicure","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":1840800,"skuano":3,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Phoenix Innovative HealtCare","rnc":2,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":6,"produtosfornecidos":127348000,"skuano":1,"horas":0,"motivo":"RNC, Avaria de produtos. ,RNC,Falta de produtos. ,OC, Avaria de produtos.","indiceavaliacao":0.89,"avaliacao":"🟡 Atenção" },
@@ -719,4 +719,3 @@
     ]
   }
 }
-
