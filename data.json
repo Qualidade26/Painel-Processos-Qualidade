@@ -194,7 +194,7 @@
 {"po":"2026l193 - MEDICO IND","sku":5418,"descricao":"PT-FIO AGULHADO NYLON 4020 1/2 C/24 (MH)","lote":"07026071","status":"Aguardando","observacao":"0"},
 {"po":"2026l193 - MEDICO IND","sku":7446,"descricao":"PT-AGULHA LEBEL MESO 30X4X0,30 C/100 BEAUTY","lote":"07226071","status":"Aguardando","observacao":"0"},
 {"po":"2026l193 - MEDICO IND","sku":7448,"descricao":"PT-AGULHA LEBEL MESO 32X4X0,23 C/100 BEAUTY","lote":"77126071","status":"Aguardando","observacao":"0"},
-{"po":"2026l193 - MEDICO IND","sku":557A,"descricao":"CX-EQUIPO DE NUTRICAO ENTERAL C/500 LAMEDID","lote":"60126071","status":"Aguardando","observacao":"0"},
+{"po":"2026l193 - MEDICO IND","sku":"557A","descricao":"CX-EQUIPO DE NUTRICAO ENTERAL C/500 LAMEDID","lote":"60126071","status":"Aguardando","observacao":"0"},
 {"po":"2026l193 - MEDICO IND","sku":408,"descricao":"PT-SER.INS.SOLIDOR 1ML 26G (13X0,45)C/100","lote":"IMP0006207","status":"Aguardando","observacao":"0"},
 {"po":"IMP00062-POLYMED","sku":4950,"descricao":"UN-BOLSA COLET DE URINA 2000ML POLY-URO","lote":"IMP0006208","status":"Aguardando","observacao":"0"},
 {"po":"IMP00062-POLYMED","sku":4950,"descricao":"UN-BOLSA COLET DE URINA 2000ML POLY-URO","lote":"IMP0006209","status":"Aguardando","observacao":"0"},
