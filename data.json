@@ -1,113 +1,96 @@
-{"fabricante": "Yangzhou Medline Industry","sku": "485", "quantidade":1,"descricao":"CX-COL.DE URINA SIST.FECH. SOL C/FILT C/100"},
-{"fabricante": "Medico (Huaian) CO., Ltda","sku": "488", "quantidade":2,"descricao":"PT-FIO AGULHADO POLIPROPILENO - 2035 C/24"},
-{"fabricante": "Anhui Easyway Medical","sku": "408", "quantidade":2,"descricao":"PT-SER.INS.SOLIDOR 1ML 26G (13X0,45)C/100"},
-{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "4266", "quantidade":1,"descricao":"CX-CANULA NASAL PED T/O C/EXT C/100 SOLIDOR"},
-{"fabricante": "Yangzhou Medline Industry","sku": "4263", "quantidade":1,"descricao":"PT-SCALP PGC SEG. VACUO 23G C/100 (ML)"},
-{"fabricante": "BONRRE MEDICAL CO LTDA","sku": "78028", "quantidade":1,"descricao":"PT-SONDA ASPIRACAO C/VAL 14FR C/10 SOLIDOR"},
-{"fabricante": "Nanjing Jiangnan Novel","sku": "2609A", "quantidade":1,"descricao":"CX-MICROSCOPIO PLANO TRINOCULAR L3000T (LI)"},
-{"fabricante": "Jiangsu Kangjian","sku": "3623", "quantidade":1,"descricao":"UN-MULTI TIMER DIGITAL LI BIVOLT"},
-{"fabricante": "Medico (Huaian) CO., Ltda","sku": "237", "quantidade":1,"descricao":"PT-FIO AGULHADO NYLON - 5015 C/24"},
-{"fabricante": "Honsun Nantong","sku": "721", "quantidade":1,"descricao":"ESFIG PRETO VELCRO"},
-{"fabricante": "Ayset Plastik","sku": "50150N", "quantidade":3,"descricao":"PT-TUBO CITRATO 1,8ML LABOR III PLT C/100"},
-{"fabricante": "Não informado","sku": "3491", "quantidade":1,"descricao":""},
-{"fabricante": "Guangzhou Improve Medical ","sku": "3952", "quantidade":1,"descricao":"PT-MINI TUBO LI 0.5ML EDTA K2 C/ 50"},
-{"fabricante": "Anhui Easyway Medical","sku": "7448", "quantidade":1,"descricao":"PT-AGULHA LEBEL MESO 32X4X0,23 C/100 BEAUTY"},
-{"fabricante": "Well Lead medical co., ltd.","sku": "26", "quantidade":1,"descricao":"PT-SONDA FOLEY SOLIDOR 2 VIAS -14/30CC C/10"},
-{"fabricante": "New prov","sku": "9045", "quantidade":1,"descricao":"UN-GLUC UP 75G LIMAO FR.300ML"},
-{"fabricante": "Ayset Plastik","sku": "50151N", "quantidade":1,"descricao":"PT-TUBO CITRATO 3,6ML LABOR III PLT. C/100"},
-{"fabricante": "Poly Medicure","sku": "4951", "quantidade":1,"descricao":"UN-BOLSA COLETORA DE URINA C/ COLETA 2000ML"},
-{"fabricante": "SteriLance Medical","sku": "672", "quantidade":1,"descricao":"PT-LAMINA BISTURI 15 INOX LAMEDID C/100"},
-{"fabricante": "Shanghai SA Medical","sku": "325", "quantidade":1,"descricao":"PT-AG. ANESTESICA ESPINHAL PROCARE 27G C/25"},
-{"fabricante": "Anhui Easyway Medical","sku": "455", "quantidade":1,"descricao":"CX-EQUIPO BURETA DESCARTAVEL SOLIDOR C/100"},
-{"fabricante": "Huaian Tianda Medical","sku": "87003", "quantidade":1,"descricao":"PT-LABOR LANCET SAFETY C/100"},
-{"fabricante": "Yangzhou Medline Industry","sku": "4256", "quantidade":1,"descricao":"PT-SCALP PGC SEG. INFUSAO 19G C/100 (ML)"},
-{"fabricante": "Polymed Medicure","sku": "50208", "quantidade":1,"descricao":"PT-TUBO VERMELHO SILIC 10ML PLAST C/100 (PM)"}
+{
+  "descarte": {
+"valorAtual": {
+ "total": 111910.59,
+    "origens": [
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      {"nome": "Avaria de Importação", "valor": 4865.03},
+      {"nome": "Avaria estoque", "valor": 87.99},
+      {"nome": "Devolução avaria", "valor": 9599.15},
+      {"nome": "Desvio de Qualidade", "valor": 2938.73},
+      {"nome": "Vencido", "valor": 93613.83},
+      {"nome": "Avaria Nacional", "valor": 87.99},
+      {"nome": "Certificação ", "valor": 717.87}
+]
+},
+    "descartadoAno":{
+"total":1678234.48,
+    "origens": [
+      {"nome": "Avaria de Importação", "valor": 18209.44},
+      {"nome": "Avaria estoque", "valor": 4066.21},
+      {"nome": "Devolução avaria", "valor": 16317.38},
+      {"nome": "Desvio de Qualidade", "valor": 166359.93},
+      {"nome": "Vencido", "valor": 1036230.46},
+      {"nome": "Avaria Nacional", "valor": 217.39},
+      {"nome": "Certificação ", "valor": 436833.67}
+    ],
+    "top10": [
+      {"sku":"50148N", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100","quantidade":21750,"origem":"Vencido", "valor": 510857.83},
+      {"sku":"521", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24","quantidade":2369,"origem":"Certificação ", "valor": 147881.75},
+      {"sku":"518", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24","quantidade":2036,"origem":"Certificação ", "valor": 127851.84},
+      {"sku":"726", "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25 PROCAR","quantidade":701,"origem":"Vencido", "valor": 122458.95},
+      {"sku":"724", "descricao":"PT-AGULHA RAQ PTA LAPIS 22GX3,5 C/25 PROCAR","quantidade":622,"origem":"Vencido", "valor": 104237.44},
+      {"sku":"727", "descricao":"PT-AGULHA RAQ PTA LAPIS 27GX3,5 C/25 PROCAR","quantidade":549,"origem":"Vencido", "valor": 95117.65},
+      {"sku":"516", "descricao":"PT-FIO AGULHADO SINTETIC ABS(PGA)-2040 C/24","quantidade":1542,"origem":"Certificação ", "valor": 88272.57},
+      {"sku":"50203", "descricao":"PT-TUBO ROXO EDTA K3 4ML PLAST C/100 (PM)","quantidade":2614,"origem":"Vencido", "valor": 68844.66},
+      {"sku":"725", "descricao":"PT-AGULHA RAQ PTA LAPIS 25GX3,5 C/25 PROCAR","quantidade":341,"origem":"Vencido", "valor": 53978.70},
+      {"sku":"50209", "descricao":"PT-TUBO VERMELHO SILIC 4ML PLAST C/100 (PM)","quantidade":1414,"origem":"Vencido", "valor": 36003.84}
 
 ],
-"motivosReclamacao": [
-{"nome":"Dificuldade de uso","quantidade": 29  },
-{"nome":"Corpo Estranho","quantidade": 3  },
-{"nome":"Falta de produto","quantidade": 1  },
-{"nome":"Embalagem avariada","quantidade": 1  },
-{"nome":"Vazamento","quantidade": 17  },
-{"nome":"Avaria","quantidade": 2  },
-{"nome":"Reagente","quantidade": 22  },
-{"nome":"Coágulo","quantidade": 2  },
-{"nome":"Vencido","quantidade": 1  },
-{"nome":"Fixação","quantidade": 2  },
-{"nome":"Manutenção","quantidade": 1  },
-{"nome":"Não informado","quantidade": 1  },
-{"nome":"Coagulo","quantidade": 1  },
-{"nome":"Sujidades","quantidade": 1  },
-{"nome":"Enferrujado","quantidade": 1  },
-{"nome":"Peça solta","quantidade": 1  },
-{"nome":"Quebra","quantidade": 18  },
-{"nome":"Embalagem","quantidade": 1  },
-{"nome":"Dobras","quantidade": 1  },
-{"nome":"Rotulagem","quantidade": 4  },
-{"nome":"Não liga","quantidade": 2  },
-{"nome":"Alergia","quantidade": 1  },
-{"nome":"Defeito","quantidade": 1  },
-{"nome":"Funcionamento","quantidade": 2  },
-{"nome":"Difculdade de uso","quantidade": 1  },
-{"nome":"Furado","quantidade": 1  },
-{"nome":"Furo","quantidade": 3  },
-{"nome":"Ausencia de peça","quantidade": 1  },
-{"nome":"Sujidade","quantidade": 1  },
-{"nome":"Dificuldasde de uso","quantidade": 2  },
-{"nome":"Tampa","quantidade": 1  },
-{"nome":"Encaixe","quantidade": 1  },
-{"nome":"Gotejamento","quantidade": 1  },
-{"nome":"Contaminação","quantidade": 1  }
 
-
-],
-"status":[
-{"nome":"Resolvido","quantidade": 108},
-{"nome":"Pendente","quantidade": 16},
-{"nome":"Aberto","quantidade": 7}
-    ]
-  }
+"custoAmbiental": {
+"totalPrimeiroSemestre":9127.88,
+"totalSegundoSemestre":7737.06,
+"primeiroSemestre": {
+"janeiro":0.00,
+"fevereiro":0.00,
+"marco":0.00,
+"abril":0.00,
+"maio":9127.88,
+"junho":0.00
+},
+"segundoSemestre": {
+"julho":0.00,
+"agosto":7737.06,
+"setembro":0.00,
+"outubro":0.00,
+"novembro":0.00,
+"dezembro":0.00
 }
+}
+}
+},
+"esfig": {
+"totalHoras":1168,
+"totalGruInmetro":218235.16,
+"ultimaAfericao":"08/07/2026",
+"proximaAfericao":"Aguardando",
+"resumoAfericoes": {
+"totalAferido":35875,
+"totalAprovado": 35875,
+"totalReprovado":25},
+"produtos":[
+
+  {"sku":"267",  "descricao":"ESFIGM VELCRO",   "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":20000},
+  {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
+  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 1750,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":14000},
+  {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":5500},
+  {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":6000},
+  {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 1500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2600},
+  {"sku":"722",  "descricao":"ESFIG PRETO METAL",  "aguardando":1000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":1800},
+  {"sku":"719",  "descricao":"ESFIG RED VELCRO ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0},
+  {"sku":"720",  "descricao":"ESFIG RED METAL ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0}
+
+
+]
+},
+ "amostras":{
+"totalHoras":84.35,
+"mensal":[
+
+      {"mes":"Janeiro", "valor": 26,"horas":7.92},
+      {"mes":"Fevereiro", "valor": 25,"horas":8.67},
+      {"mes":"Março", "valor": 33,"horas":12.33},
+      {"mes":"Abril", "valor": 30,"horas":8.67},
+      {"mes":"Maio", "valor": 30,"horas":8.08},
+      {"mes":"Junho", "valor": 22,"horas":6.67},
