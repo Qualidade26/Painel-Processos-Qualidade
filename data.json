@@ -125,8 +125,8 @@
 "processosAno":172,
 "totalSku":363,
 "totalLotes":1409,
-"laudosEmitidos":655,
-"totalHoras":477.82,
+"laudosEmitidos":656,
+"totalHoras":478.32,
 
 "mensal":[
 
@@ -139,7 +139,7 @@
       {"mes": "Julho","processos":18,"sku":73,"lotes":202,"laudos":18,"horas":20.08 }, 
       {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
       {"mes": "Setembro","processos":21,"sku":70,"lotes":126,"laudos":21,"horas":19.00 }, 
-      {"mes": "Outubro","processos":16,"sku":159,"lotes":262,"laudos":15,"horas":44.50 }, 
+      {"mes": "Outubro","processos":16,"sku":159,"lotes":262,"laudos":16,"horas":45.00 }, 
       {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
       {"mes": "Dezembro","processos":0,"sku":159,"lotes":0,"laudos":0,"horas":0.00 }
 ],
@@ -719,4 +719,3 @@
     ]
   }
 }
-
