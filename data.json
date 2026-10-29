@@ -1,14 +1,14 @@
 {
   "descarte": {
 "valorAtual": {
- "total": 117078.86,
+ "total": 146975.95,
     "origens": [
 
       {"nome": "Avaria de Importação", "valor": 10001.71},
       {"nome": "Avaria estoque", "valor": 87.99},
       {"nome": "Devolução avaria", "valor": 9599.15},
       {"nome": "Desvio de Qualidade", "valor": 2938.73},
-      {"nome": "Vencido", "valor": 93613.83},
+      {"nome": "Vencido", "valor": 123510.92},
       {"nome": "Avaria Nacional", "valor": 119.58},
       {"nome": "Certificação ", "valor": 717.87}
 ]
@@ -85,7 +85,7 @@
 ]
 },
  "amostras":{
-"totalHoras":84.60,
+"totalHoras":85.10,
 "mensal":[
 
       {"mes":"Janeiro", "valor": 26,"horas":7.92},
@@ -97,7 +97,7 @@
       {"mes":"Julho", "valor": 35,"horas":9.17},
       {"mes":"Agosto", "valor": 39,"horas":9.45},
       {"mes":"Setembro", "valor": 31,"horas":7.65},
-      {"mes":"Outubro", "valor": 25,"horas":6.00},
+      {"mes":"Outubro", "valor": 27,"horas":6.50},
       {"mes":"Novembro", "valor": 0,"horas":0.00},
       {"mes":"Dezembro", "valor": 0,"horas":0.00}
 
@@ -107,15 +107,15 @@
 
 
       {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":1074  }, 
-      {"sku":"AM3942",  "descricao":"CATETER INTRA PUR SEG 24G (PM)", "quantidade":216  }, 
+      {"sku":"AM3942",  "descricao":"CATETER INTRA PUR SEG 24G (PM)", "quantidade":236  }, 
+      {"sku":"AM3941",  "descricao":"CATETER INTRA PUR SEG 22G (PM)", "quantidade":180  }, 
       {"sku":"AM86003",  "descricao":"ALCOOL SWAB SACHE (PH)", "quantidade":170  }, 
-      {"sku":"AM3941",  "descricao":"CATETER INTRA PUR SEG 22G (PM)", "quantidade":160  }, 
-      {"sku":"AM3937",  "descricao":"CATETER INTRA PUR SEG 14G (PM)", "quantidade":129  }, 
+      {"sku":"AM3937",  "descricao":"CATETER INTRA PUR SEG 14G (PM)", "quantidade":149  }, 
+      {"sku":"AM3940",  "descricao":"CATETER INTRA PUR SEG 20G PM", "quantidade":130  }, 
+      {"sku":"AM3938",  "descricao":"CATETER INTRA PUR SEG 16G (PM)", "quantidade":124  }, 
       {"sku":"AM50039",  "descricao":"AGULHA A VACUO 25X8 (SW)", "quantidade":124  }, 
-      {"sku":"AM3940",  "descricao":"CATETER INTRA PUR SEG 20G PM", "quantidade":120  }, 
       {"sku":"AM4259",  "descricao":"SCALP INFUSAO SEG 25G PGC (ML)", "quantidade":116  }, 
-      {"sku":"AM345",  "descricao":"AGULHA HIPODERMICA 40X12 SOLIDOR", "quantidade":109  }, 
-      {"sku":"AM60019",  "descricao":"ADESIVO PHARMAPORE 8.5X11.5PROCARE", "quantidade":108  }
+      {"sku":"AM345",  "descricao":"AGULHA HIPODERMICA 40X12 SOLIDOR", "quantidade":109  }
 
 
 ]
@@ -144,14 +144,6 @@
       {"mes": "Dezembro","processos":0,"sku":181,"lotes":0,"laudos":0,"horas":0.00 }
 ],
 "fluxo":[
-{"po":"2026I138-WEIGAO","sku":4902,"descricao":"PT-COLETOR INFANTIL LI UNISSEX EST. C/100","lote":"260610","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":5019,"descricao":"UN-ADAPTADOR LI PARA AGULHAS A VACUO","lote":"260518","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":50039,"descricao":"PT-AGULHA LI VACUO 25X8 C/100","lote":"22052026","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":50039,"descricao":"PT-AGULHA LI VACUO 25X8 C/100","lote":"24052026","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":50040,"descricao":"PT-AGULHA LI VACUO 25X7 C/100","lote":"20052026","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":3801,"descricao":"PT-ESCOVA CERVICAL LI C/100","lote":"24052026","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":3802,"descricao":"PT-ESCOVA CERVICAL LI ESTERIL C/100","lote":"25052026","status":"Aprovado","observacao":"0"},
-{"po":"2026I138-WEIGAO","sku":5019,"descricao":"UN-ADAPTADOR LI PARA AGULHAS A VACUO","lote":"260518","status":"Aprovado","observacao":"0"},
 {"po":"2026l246-SHA","sku":305,"descricao":"PT-AG.ANESTESICA PERIDURAL PROCARE 17G C/25","lote":"202615017","status":"Aprovado","observacao":"0"},
 {"po":"2026l246-SHA","sku":306,"descricao":"PT-AG.ANESTESICA PERIDURAL PROCARE 18G C/25","lote":"202615018","status":"Aprovado","observacao":"0"},
 {"po":"2026l246-SHA","sku":322,"descricao":"PT-AG. ANESTESICA ESPINHAL PROCARE 22G C/25","lote":"202615022","status":"Aprovado","observacao":"0"},
@@ -166,12 +158,20 @@
 {"po":"2026l166-Medico","sku":11086,"descricao":"PT-TUBO COLETA  A VACUO VDR GEL 3.5 ML C/100","lote":"11326071","status":"Aprovado","observacao":"0"},
 {"po":"2026l166-Medico","sku":11090,"descricao":"PT-TUBO COLETA VACUO VDR EDTA K3 4ML","lote":"11726061","status":"Aprovado","observacao":"0"},
 {"po":"2026l166-Medico","sku":11093,"descricao":"PT-TUBO COLETA VACUO VDR ATIV. SILIC 10ML","lote":"11726062","status":"Aprovado","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
-{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
+{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"01062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"02062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"03062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"04062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"01072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"02072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"03072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"04072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I077-WEIGAO","sku":5409A,"descricao":"PT-EQUIPO DE NUTRICAO ENTERAL C/25 (SW)","lote":"10072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I076-WEIGAO","sku":8007,"descricao":"PT-EQUIPO MACRO COMPLETO L1 LUER SLIP C/25","lote":"20062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"16062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"17062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"18062026","status":"Aguardando ","observacao":"0"},
+{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"19062026","status":"Aguardando ","observacao":"0"},
 {"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
 {"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
 {"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"},
