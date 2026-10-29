@@ -1,16 +1,16 @@
 {
   "descarte": {
 "valorAtual": {
- "total": 146975.95,
+ "total": 151769.76,
     "origens": [
 
-      {"nome": "Avaria de Importação", "valor": 10001.71},
-      {"nome": "Avaria estoque", "valor": 87.99},
-      {"nome": "Devolução avaria", "valor": 9599.15},
+      {"nome": "Avaria de Importação", "valor": 13844.33},
+      {"nome": "Avaria estoque", "valor": 1019.46},
+      {"nome": "Devolução avaria", "valor": 9605.62},
       {"nome": "Desvio de Qualidade", "valor": 2938.73},
-      {"nome": "Vencido", "valor": 123510.92},
-      {"nome": "Avaria Nacional", "valor": 119.58},
-      {"nome": "Certificação ", "valor": 717.87}
+      {"nome": "Vencido", "valor": 123511.69},
+      {"nome": "Avaria Nacional", "valor": 129.26},
+      {"nome": "Certificação ", "valor": 720.68}
 ]
 },
     "descartadoAno":{
@@ -64,7 +64,7 @@
 "totalHoras":1168,
 "totalGruInmetro":218235.16,
 "ultimaAfericao":"08/07/2026",
-"proximaAfericao":"Aguardando",
+"proximaAfericao":"03/11/2026",
 "resumoAfericoes": {
 "totalAferido":35875,
 "totalAprovado": 35875,
@@ -243,19 +243,19 @@
       ]
 },
 "adequacaocaixa":{
-"totalocorrenciasano":8,
-"quantidaderetrabalhada":491,
-"totalhoras":33,
+"totalocorrenciasano":9,
+"quantidaderetrabalhada":2379,
+"totalhoras":35,
 "indicadores":{
 "bom":{
-"valor":37636.20,"percentual":0.96},
+"valor":40320.12,"percentual":0.93},
 "avaria":{
-"valor":1448.71,"percentual":0.04}
+"valor":2987.46,"percentual":0.07}
 },
 "motivos":[
-{"nome":"Devolução","valor":31289.81,"percentual":0.80},
-{"nome":"Avaria de Transporte Importação","valor":6719.33,"percentual":0.17},
-{"nome":"Avaria de Transporte Nacional","valor":1075.78,"percentual":0.03},
+{"nome":"Devolução","valor":31289.81,"percentual":0.72},
+{"nome":"Avaria de Transporte Importação","valor":10941.84,"percentual":0.25},
+{"nome":"Avaria de Transporte Nacional","valor":1075.93,"percentual":0.02},
 {"nome":"Outros","valor":0.00,"percentual":0.00}
 ],
 "fabricantes":[
@@ -272,7 +272,7 @@
 {"fabricante":"Medico (Huaian) CO., LTDA","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Well Lead medical co., ltd.","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Polymed Medicure","quantidade": 0,"horas":0,"motivo":""},
-{"fabricante":"Phoenix Innovative HealtCare","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Phoenix Innovative HealtCare","quantidade": 1888,"horas":2,"motivo":"Avaria de transporte Importação"},
 {"fabricante":"Yangzhou Medline Industry","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Jiangsu Webest Medical ","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Honsun (Nantong) ","quantidade": 0,"horas":0,"motivo":""},
