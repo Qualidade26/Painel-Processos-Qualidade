@@ -63,17 +63,17 @@
 "esfig": {
 "totalHoras":1168,
 "totalGruInmetro":218235.16,
-"ultimaAfericao":"08/07/2026",
-"proximaAfericao":"03/11/2026",
+"ultimaAfericao":"03/11/2026",
+"proximaAfericao":"04/11/2026",
 "resumoAfericoes": {
-"totalAferido":35875,
-"totalAprovado": 35875,
-"totalReprovado":25},
+"totalAferido":36774,
+"totalAprovado": 36774,
+"totalReprovado":26},
 "produtos":[
 
   {"sku":"267",  "descricao":"ESFIGM VELCRO",   "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":20000},
   {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
-  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 1750,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":14000},
+  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 750,    "aferidos": 900,       "ultimaAfericao": "","totalAnualSku":14000},
   {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":5500},
   {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":6000},
   {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 1500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2600},
@@ -189,7 +189,6 @@
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2243","status":"0","observacao":"0"},
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"0","observacao":"0"}
 
-
 ],
 "graficoSku":[
       {"sku":"86003",  "descricao":"PT-ALCOOL SWAB C/100 (PH)", "quantidade":163748000  }, 
@@ -260,8 +259,8 @@
 },
 "adequacaocaixa":{
 "totalocorrenciasano":9,
-"quantidaderetrabalhada":2379,
-"totalhoras":35,
+"quantidaderetrabalhada":2579,
+"totalhoras":38,
 "indicadores":{
 "bom":{
 "valor":40320.12,"percentual":0.93},
@@ -278,7 +277,7 @@
 {"fabricante":"SteriLance Medical","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Biomed Healthcare","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Accumax","quantidade": 0,"horas":0,"motivo":""},
-{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade": 0,"horas":0,"motivo":""},
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade": 200,"horas":3,"motivo":"Avaria de transporte Importação"},
 {"fabricante":"Shandong Aosaite","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Shanghai SA Medical","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Shandong Weigao","quantidade": 260,"horas":3,"motivo":"Avaria de transporte Importação"},
