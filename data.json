@@ -73,7 +73,7 @@
 
   {"sku":"267",  "descricao":"ESFIGM VELCRO",   "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":20000},
   {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
-  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 750,    "aferidos": 900,       "ultimaAfericao": "","totalAnualSku":14000},
+  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 850,    "aferidos": 900,       "ultimaAfericao": "","totalAnualSku":14000},
   {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":5500},
   {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":6000},
   {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 1500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2600},
@@ -85,7 +85,7 @@
 ]
 },
  "amostras":{
-"totalHoras":85.10,
+"totalHoras":85.43,
 "mensal":[
 
       {"mes":"Janeiro", "valor": 26,"horas":7.92},
@@ -98,7 +98,7 @@
       {"mes":"Agosto", "valor": 39,"horas":9.45},
       {"mes":"Setembro", "valor": 31,"horas":7.65},
       {"mes":"Outubro", "valor": 27,"horas":6.50},
-      {"mes":"Novembro", "valor": 0,"horas":0.00},
+      {"mes":"Novembro", "valor": 2,"horas":0.33},
       {"mes":"Dezembro", "valor": 0,"horas":0.00}
 
 ],
@@ -106,7 +106,7 @@
 "top10":[
 
 
-      {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":1074  }, 
+      {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":1084  }, 
       {"sku":"AM3942",  "descricao":"CATETER INTRA PUR SEG 24G (PM)", "quantidade":236  }, 
       {"sku":"AM3941",  "descricao":"CATETER INTRA PUR SEG 22G (PM)", "quantidade":180  }, 
       {"sku":"AM86003",  "descricao":"ALCOOL SWAB SACHE (PH)", "quantidade":170  }, 
@@ -124,7 +124,7 @@
 "importacao":{
 "processosAno":177,
 "totalSku":366,
-"totalLotes":1432,
+"totalLotes":1437,
 "laudosEmitidos":661,
 "totalHoras":496.32,
 
@@ -140,7 +140,7 @@
       {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
       {"mes": "Setembro","processos":21,"sku":70,"lotes":126,"laudos":21,"horas":19.00 }, 
       {"mes": "Outubro","processos":21,"sku":181,"lotes":285,"laudos":21,"horas":63.00 }, 
-      {"mes": "Novembro","processos":0,"sku":0,"lotes":0,"laudos":0,"horas":0.00 }, 
+      {"mes": "Novembro","processos":0,"sku":2,"lotes":5,"laudos":0,"horas":0.00 }, 
       {"mes": "Dezembro","processos":0,"sku":181,"lotes":0,"laudos":0,"horas":0.00 }
 ],
 "fluxo":[
@@ -187,16 +187,16 @@
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2296","status":"0","observacao":"0"},
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2177","status":"0","observacao":"0"},
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2243","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"0","observacao":"0"}
-
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"0","observacao":"0"},
+{"po":"0","sku":0,"descricao":"0","lote":"0","status":"0","observacao":"0"}
 ],
 "graficoSku":[
       {"sku":"86003",  "descricao":"PT-ALCOOL SWAB C/100 (PH)", "quantidade":163748000  }, 
       {"sku":"5468",  "descricao":"PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500", "quantidade":73440000  }, 
       {"sku":"345",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100", "quantidade":47070000  }, 
       {"sku":"341",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100", "quantidade":19720000  }, 
+      {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":17458500  }, 
       {"sku":"60006",  "descricao":"CURATIVO CURE AID COR DA PELE C/500", "quantidade":16131000  }, 
-      {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":15818500  }, 
       {"sku":"365",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100", "quantidade":15500000  }, 
       {"sku":"346",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 13X4,5 C/100", "quantidade":15000000  }, 
       {"sku":"80093",  "descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)", "quantidade":13180000  }, 
@@ -352,7 +352,7 @@
 {"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":8,"produtosfornecidos":7047360,"skuano":19,"horas":4,"motivo":"RNC. Embalagem de embarque com RT anterior.","indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Shandong Aosaite","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":4089600,"skuano":10,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Shanghai SA Medical","rnc":2,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":4,"produtosfornecidos":2399500,"skuano":9,"horas":6,"motivo":"RNC, Divergência do produto. ,RNC,Produto embalagem na caixa errado.","indiceavaliacao":0.81,"avaliacao":"🟡 Atenção" },
-{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":19,"produtosfornecidos":50322700,"skuano":11,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.91,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":19,"produtosfornecidos":52372700,"skuano":11,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.91,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Ayset Plastik","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":21963682,"skuano":9,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Medico Electroude","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":12,"produtosfornecidos":73440000,"skuano":1,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Huaian Tianda Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3410000,"skuano":2,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
