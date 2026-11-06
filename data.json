@@ -1,10 +1,10 @@
 {
   "descarte": {
 "valorAtual": {
- "total": 151769.76,
+ "total": 151829.31,
     "origens": [
 
-      {"nome": "Avaria de Importação", "valor": 13844.33},
+      {"nome": "Avaria de Importação", "valor": 13903.87},
       {"nome": "Avaria estoque", "valor": 1019.46},
       {"nome": "Devolução avaria", "valor": 9605.62},
       {"nome": "Desvio de Qualidade", "valor": 2938.73},
@@ -66,17 +66,17 @@
 "ultimaAfericao":"03/11/2026",
 "proximaAfericao":"04/11/2026",
 "resumoAfericoes": {
-"totalAferido":36774,
-"totalAprovado": 36774,
+"totalAferido":39074,
+"totalAprovado": 39074,
 "totalReprovado":26},
 "produtos":[
 
   {"sku":"267",  "descricao":"ESFIGM VELCRO",   "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":20000},
   {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
-  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 850,    "aferidos": 900,       "ultimaAfericao": "","totalAnualSku":14000},
+  {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 50,    "aferidos": 1700,       "ultimaAfericao": "","totalAnualSku":14000},
   {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":5500},
   {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":6000},
-  {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 1500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":2600},
+  {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 0,    "aferidos": 1500,       "ultimaAfericao": "","totalAnualSku":2600},
   {"sku":"722",  "descricao":"ESFIG PRETO METAL",  "aguardando":1000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":1800},
   {"sku":"719",  "descricao":"ESFIG RED VELCRO ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0},
   {"sku":"720",  "descricao":"ESFIG RED METAL ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0}
@@ -85,7 +85,7 @@
 ]
 },
  "amostras":{
-"totalHoras":85.43,
+"totalHoras":85.85,
 "mensal":[
 
       {"mes":"Janeiro", "valor": 26,"horas":7.92},
@@ -98,7 +98,7 @@
       {"mes":"Agosto", "valor": 39,"horas":9.45},
       {"mes":"Setembro", "valor": 31,"horas":7.65},
       {"mes":"Outubro", "valor": 27,"horas":6.50},
-      {"mes":"Novembro", "valor": 2,"horas":0.33},
+      {"mes":"Novembro", "valor": 4,"horas":0.75},
       {"mes":"Dezembro", "valor": 0,"horas":0.00}
 
 ],
@@ -106,10 +106,10 @@
 "top10":[
 
 
-      {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":1084  }, 
+      {"sku":"AM5468",  "descricao":"ELETRODO (ECG) SOLIDOR - 50 UN", "quantidade":1184  }, 
       {"sku":"AM3942",  "descricao":"CATETER INTRA PUR SEG 24G (PM)", "quantidade":236  }, 
+      {"sku":"AM86003",  "descricao":"ALCOOL SWAB SACHE (PH)", "quantidade":220  }, 
       {"sku":"AM3941",  "descricao":"CATETER INTRA PUR SEG 22G (PM)", "quantidade":180  }, 
-      {"sku":"AM86003",  "descricao":"ALCOOL SWAB SACHE (PH)", "quantidade":170  }, 
       {"sku":"AM3937",  "descricao":"CATETER INTRA PUR SEG 14G (PM)", "quantidade":149  }, 
       {"sku":"AM3940",  "descricao":"CATETER INTRA PUR SEG 20G PM", "quantidade":130  }, 
       {"sku":"AM3938",  "descricao":"CATETER INTRA PUR SEG 16G (PM)", "quantidade":124  }, 
@@ -122,11 +122,11 @@
 },
 
 "importacao":{
-"processosAno":178,
-"totalSku":366,
-"totalLotes":1437,
-"laudosEmitidos":662,
-"totalHoras":498.32,
+"processosAno":180,
+"totalSku":367,
+"totalLotes":1446,
+"laudosEmitidos":664,
+"totalHoras":502.32,
 
 "mensal":[
 
@@ -140,54 +140,40 @@
       {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
       {"mes": "Setembro","processos":21,"sku":70,"lotes":126,"laudos":21,"horas":19.00 }, 
       {"mes": "Outubro","processos":21,"sku":181,"lotes":285,"laudos":21,"horas":63.00 }, 
-      {"mes": "Novembro","processos":1,"sku":2,"lotes":5,"laudos":1,"horas":2.00 }, 
+      {"mes": "Novembro","processos":3,"sku":2,"lotes":14,"laudos":3,"horas":6.00 }, 
       {"mes": "Dezembro","processos":0,"sku":181,"lotes":0,"laudos":0,"horas":0.00 }
 ],
 "fluxo":[
-{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"01062026","status":"0","observacao":"0"},
-{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"02062026","status":"0","observacao":"0"},
-{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"03062026","status":"0","observacao":"0"},
-{"po":"2026I075-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"04062026","status":"0","observacao":"0"},
-{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"01072026","status":"0","observacao":"0"},
-{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"02072026","status":"0","observacao":"0"},
-{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"03072026","status":"0","observacao":"0"},
-{"po":"2026I077-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"04072026","status":"0","observacao":"0"},
-{"po":"2026I077-WEIGAO","sku":"5409A","descricao":"PT-EQUIPO DE NUTRICAO ENTERAL C/25 (SW)","lote":"10072026","status":"0","observacao":"0"},
-{"po":"2026I076-WEIGAO","sku":8007,"descricao":"PT-EQUIPO MACRO COMPLETO L1 LUER SLIP C/25","lote":"20062026","status":"0","observacao":"0"},
-{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"16062026","status":"0","observacao":"0"},
-{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"17062026","status":"0","observacao":"0"},
-{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"18062026","status":"0","observacao":"0"},
-{"po":"2026I076-WEIGAO","sku":5401,"descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25","lote":"19062026","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2231","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2236","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2255","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N2133","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1586","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1629","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1656","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2242","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2282","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2249","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1318","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N913","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N631","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1043","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N478","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N726","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1345","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1893","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6039,"descricao":"SERINGA HIP 10ML LOCK C/250 (SR)","lote":"N2254","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6039,"descricao":"SERINGA HIP 10ML LOCK C/250 (SR)","lote":"N2298","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2138","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2283","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2230","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2238","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2214","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2187","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2296","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2177","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2243","status":"0","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"0","observacao":"0"}
+{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2231","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2236","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6036,"descricao":"SERINGA HIP 10ML SLIP LAT C/250 (SR)","lote":"N2255","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N2133","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1586","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1629","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6037,"descricao":"SERINGA HIP 3ML SLIP C/500  (SR)","lote":"N1656","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2242","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2282","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N2249","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1318","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N913","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N631","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1043","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N478","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N726","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1345","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6038,"descricao":"SERINGA HIP 5ML SLIP C/500  (SR)","lote":"N1893","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6039,"descricao":"SERINGA HIP 10ML LOCK C/250 (SR)","lote":"N2254","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6039,"descricao":"SERINGA HIP 10ML LOCK C/250 (SR)","lote":"N2298","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2138","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2283","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2230","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2238","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2214","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6041,"descricao":"CX-SERINGA SR IMP 3ML LOCK S/AGU. PY C/500","lote":"N2187","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2296","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2177","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2243","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"Aguardando ","observacao":"0"}
 
 
 ],
@@ -195,8 +181,8 @@
       {"sku":"86003",  "descricao":"PT-ALCOOL SWAB C/100 (PH)", "quantidade":163748000  }, 
       {"sku":"5468",  "descricao":"PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500", "quantidade":73440000  }, 
       {"sku":"345",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100", "quantidade":47070000  }, 
+      {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":20738500  }, 
       {"sku":"341",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100", "quantidade":19720000  }, 
-      {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":17458500  }, 
       {"sku":"60006",  "descricao":"CURATIVO CURE AID COR DA PELE C/500", "quantidade":16131000  }, 
       {"sku":"365",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100", "quantidade":15500000  }, 
       {"sku":"346",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 13X4,5 C/100", "quantidade":15000000  }, 
@@ -259,18 +245,18 @@
       ]
 },
 "adequacaocaixa":{
-"totalocorrenciasano":9,
-"quantidaderetrabalhada":2579,
+"totalocorrenciasano":10,
+"quantidaderetrabalhada":2251,
 "totalhoras":38,
 "indicadores":{
 "bom":{
-"valor":40320.12,"percentual":0.93},
+"valor":38781.41,"percentual":0.77},
 "avaria":{
-"valor":2987.46,"percentual":0.07}
+"valor":11682.25,"percentual":0.23}
 },
 "motivos":[
-{"nome":"Devolução","valor":31289.81,"percentual":0.72},
-{"nome":"Avaria de Transporte Importação","valor":10941.84,"percentual":0.25},
+{"nome":"Devolução","valor":31289.81,"percentual":0.62},
+{"nome":"Avaria de Transporte Importação","valor":18097.91,"percentual":0.36},
 {"nome":"Avaria de Transporte Nacional","valor":1075.93,"percentual":0.02},
 {"nome":"Outros","valor":0.00,"percentual":0.00}
 ],
@@ -278,7 +264,7 @@
 {"fabricante":"SteriLance Medical","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Biomed Healthcare","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Accumax","quantidade": 0,"horas":0,"motivo":""},
-{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade": 200,"horas":3,"motivo":"Avaria de transporte Importação"},
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","quantidade": 560,"horas":3,"motivo":"Avaria de transporte Importação"},
 {"fabricante":"Shandong Aosaite","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Shanghai SA Medical","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Shandong Weigao","quantidade": 260,"horas":3,"motivo":"Avaria de transporte Importação"},
@@ -288,7 +274,7 @@
 {"fabricante":"Medico (Huaian) CO., LTDA","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Well Lead medical co., ltd.","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Polymed Medicure","quantidade": 0,"horas":0,"motivo":""},
-{"fabricante":"Phoenix Innovative HealtCare","quantidade": 1888,"horas":2,"motivo":"Avaria de transporte Importação"},
+{"fabricante":"Phoenix Innovative HealtCare","quantidade": 1200,"horas":2,"motivo":"Avaria de transporte Importação"},
 {"fabricante":"Yangzhou Medline Industry","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Jiangsu Webest Medical ","quantidade": 0,"horas":0,"motivo":""},
 {"fabricante":"Honsun (Nantong) ","quantidade": 0,"horas":0,"motivo":""},
@@ -324,13 +310,13 @@
 "fornecedores": {
 "totalrncano": 42,
 "totalfornecedores": 42,
-"totalprocessos":178,
+"totalprocessos":180,
 "totalretrabalho": 9,
 "totalreclamacao": 0,
 "indicemedioavaliacao":0.91,
 "indicadores": {
 "importacao": {
-"quantidade":178,
+"quantidade":180,
 "percentual":0.74},
 "retrabalho": {
 "quantidade":9,
@@ -353,7 +339,7 @@
 {"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":8,"produtosfornecidos":7047360,"skuano":19,"horas":4,"motivo":"RNC. Embalagem de embarque com RT anterior.","indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Shandong Aosaite","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":4089600,"skuano":10,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Shanghai SA Medical","rnc":2,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":4,"produtosfornecidos":2399500,"skuano":9,"horas":6,"motivo":"RNC, Divergência do produto. ,RNC,Produto embalagem na caixa errado.","indiceavaliacao":0.81,"avaliacao":"🟡 Atenção" },
-{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":20,"produtosfornecidos":52372700,"skuano":11,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.91,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":22,"produtosfornecidos":55664700,"skuano":12,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.92,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Ayset Plastik","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":21963682,"skuano":9,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Medico Electroude","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":12,"produtosfornecidos":73440000,"skuano":1,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Huaian Tianda Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3410000,"skuano":2,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
@@ -468,7 +454,7 @@
 {"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
 {"fabricante":"Shandong Aosaite","reclamacoes_2026":0,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
 {"fabricante":"Shanghai SA Medical","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
-{"fabricante":"Shandong Weigao","reclamacoes_2026":6,"total_lotes_reclamados_importacao_2026":3,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":1,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.03,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
+{"fabricante":"Shandong Weigao","reclamacoes_2026":6,"total_lotes_reclamados_importacao_2026":3,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":1,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.02,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
 {"fabricante":"Ayset Plastik","reclamacoes_2026":17,"total_lotes_reclamados_importacao_2026":2,"skus_reclamados_importacao_2026":2,"lotes_reclamacao_procedente":2,"lotes_reclamacao_improcedente":2,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.03,"reincidencia":"Reincidente","indice_medio_avaliacao":"0%","avaliacao":"🔴 Crítico" },
 {"fabricante":"Medico Electroude","reclamacoes_2026":2,"total_lotes_reclamados_importacao_2026":0,"skus_reclamados_importacao_2026":0,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
 {"fabricante":"Huaian Tianda Medical","reclamacoes_2026":1,"total_lotes_reclamados_importacao_2026":1,"skus_reclamados_importacao_2026":1,"lotes_reclamacao_procedente":0,"lotes_reclamacao_improcedente":0,"lotes_reclamacao_inconclusiva":0,"lotes_reclamacao_em_investigacao":0,"taxa_lotes_procedentes":0.00,"reincidencia":"Sem ocorrência","indice_medio_avaliacao":"0%","avaliacao":"🟢 Excelente" },
