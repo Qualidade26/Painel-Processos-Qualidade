@@ -1,16 +1,16 @@
 {
   "descarte": {
 "valorAtual": {
- "total": 151829.31,
+ "total": 161879.81,
     "origens": [
 
-      {"nome": "Avaria de Importação", "valor": 13903.87},
-      {"nome": "Avaria estoque", "valor": 1019.46},
-      {"nome": "Devolução avaria", "valor": 9605.62},
+      {"nome": "Avaria de Importação", "valor": 13955.64},
+      {"nome": "Avaria estoque", "valor": 1094.42},
+      {"nome": "Devolução avaria", "valor": 9748.94},
       {"nome": "Desvio de Qualidade", "valor": 2938.73},
-      {"nome": "Vencido", "valor": 123511.69},
-      {"nome": "Avaria Nacional", "valor": 129.26},
-      {"nome": "Certificação ", "valor": 720.68}
+      {"nome": "Vencido", "valor": 126904.87},
+      {"nome": "Avaria Nacional", "valor": 149.06},
+      {"nome": "Certificação ", "valor": 729.67}
 ]
 },
     "descartadoAno":{
@@ -25,7 +25,7 @@
       {"nome": "Certificação ", "valor": 436833.67}
     ],
     "top10": [
-      {"sku":"50148N", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100","quantidade":21750,"origem":"Vencido", "valor": 510857.83},
+      {"sku":"50148N", "descricao":"PT-TUBO EDTA K3 4ML LABOR III PLAST. C/100","quantidade":21751,"origem":"Vencido", "valor": 510857.83},
       {"sku":"521", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-125 C/24","quantidade":2369,"origem":"Certificação ", "valor": 147881.75},
       {"sku":"518", "descricao":"PT-FIO AGULHADO SINTETIC ABS.(PGA)-140 C/24","quantidade":2036,"origem":"Certificação ", "valor": 127851.84},
       {"sku":"726", "descricao":"PT-AGULHA RAQ PTA LAPIS 26GX3,5 C/25 PROCAR","quantidade":701,"origem":"Vencido", "valor": 122458.95},
@@ -63,11 +63,11 @@
 "esfig": {
 "totalHoras":1168,
 "totalGruInmetro":218235.16,
-"ultimaAfericao":"03/11/2026",
-"proximaAfericao":"04/11/2026",
+"ultimaAfericao":"06/11/2026",
+"proximaAfericao":"16/11/2026",
 "resumoAfericoes": {
-"totalAferido":39074,
-"totalAprovado": 39074,
+"totalAferido":39874,
+"totalAprovado": 39874,
 "totalReprovado":26},
 "produtos":[
 
@@ -75,7 +75,7 @@
   {"sku":"268",  "descricao":"ESFIGM METAL",  "aguardando":1500,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":3500},
   {"sku":"558",  "descricao":"ESFIGM KIT VELCRO",  "aguardando":3250,   "desmontado": 50,    "aferidos": 1700,       "ultimaAfericao": "","totalAnualSku":14000},
   {"sku":"560",  "descricao":"ESFIGM KIT METAL ",  "aguardando":3000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":5500},
-  {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 2500,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":6000},
+  {"sku":"308",  "descricao":"ESFIG MANOMETRO",  "aguardando":0,   "desmontado": 1800,    "aferidos": 800,       "ultimaAfericao": "","totalAnualSku":6000},
   {"sku":"721",  "descricao":"ESFIG PRETO VELCRO",  "aguardando":0,   "desmontado": 0,    "aferidos": 1500,       "ultimaAfericao": "","totalAnualSku":2600},
   {"sku":"722",  "descricao":"ESFIG PRETO METAL",  "aguardando":1000,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":1800},
   {"sku":"719",  "descricao":"ESFIG RED VELCRO ",  "aguardando":0,   "desmontado": 0,    "aferidos": 0,       "ultimaAfericao": "","totalAnualSku":0},
@@ -85,7 +85,7 @@
 ]
 },
  "amostras":{
-"totalHoras":85.85,
+"totalHoras":86.60,
 "mensal":[
 
       {"mes":"Janeiro", "valor": 26,"horas":7.92},
@@ -98,7 +98,7 @@
       {"mes":"Agosto", "valor": 39,"horas":9.45},
       {"mes":"Setembro", "valor": 31,"horas":7.65},
       {"mes":"Outubro", "valor": 27,"horas":6.50},
-      {"mes":"Novembro", "valor": 4,"horas":0.75},
+      {"mes":"Novembro", "valor": 8,"horas":1.50},
       {"mes":"Dezembro", "valor": 0,"horas":0.00}
 
 ],
@@ -122,11 +122,11 @@
 },
 
 "importacao":{
-"processosAno":180,
-"totalSku":367,
-"totalLotes":1446,
-"laudosEmitidos":664,
-"totalHoras":502.32,
+"processosAno":182,
+"totalSku":370,
+"totalLotes":1492,
+"laudosEmitidos":666,
+"totalHoras":508.32,
 
 "mensal":[
 
@@ -140,7 +140,7 @@
       {"mes": "Agosto","processos":15,"sku":42,"lotes":102,"laudos":15,"horas":17.42 }, 
       {"mes": "Setembro","processos":21,"sku":70,"lotes":126,"laudos":21,"horas":19.00 }, 
       {"mes": "Outubro","processos":21,"sku":181,"lotes":285,"laudos":21,"horas":63.00 }, 
-      {"mes": "Novembro","processos":3,"sku":2,"lotes":14,"laudos":3,"horas":6.00 }, 
+      {"mes": "Novembro","processos":5,"sku":17,"lotes":60,"laudos":5,"horas":12.00 }, 
       {"mes": "Dezembro","processos":0,"sku":181,"lotes":0,"laudos":0,"horas":0.00 }
 ],
 "fluxo":[
@@ -173,21 +173,50 @@
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2296","status":"Aguardando ","observacao":"0"},
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2177","status":"Aguardando ","observacao":"0"},
 {"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2243","status":"Aguardando ","observacao":"0"},
-{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"Aguardando ","observacao":"0"}
-
+{"po":"IMP000076-SR","sku":6042,"descricao":"SERINGA HIP 5ML LOCK C/500 PY (SR)","lote":"N2164","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80082,"descricao":"PT-AGULHA LI SIMPLES 25X8 C/100 (WEIGAO)","lote":"08052026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80082,"descricao":"PT-AGULHA LI SIMPLES 25X8 C/100 (WEIGAO)","lote":"06082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80090,"descricao":"PT-AGULHA LI SIMPLES 30X7 C/100 (WEIGAO)","lote":"07082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80092,"descricao":"PT-AGULHA LI SIMPLES 13X4.5 C/100 (WEIGAO)","lote":"08082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80093,"descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)","lote":"09082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80093,"descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)","lote":"09082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80094,"descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)","lote":"11082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80094,"descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)","lote":"12082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80094,"descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)","lote":"13082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80094,"descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)","lote":"14082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000190-WEIGAO","sku":80094,"descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)","lote":"15082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000210-WEIGAO","sku":50039,"descricao":"PT-AGULHA LI VACUO 25X8 C/100","lote":"12082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000210-WEIGAO","sku":50040,"descricao":"PT-AGULHA LI VACUO 25X7 C/100","lote":"12082026","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000213-WEIGAO","sku":4902,"descricao":"PT-COLETOR INFANTIL LI UNISSEX EST. C/100","lote":"260820","status":"Aguardando ","observacao":"0"},
+{"po":"IMP000220-WEIGAO","sku":3802,"descricao":"PT-ESCOVA CERVICAL LI ESTERIL C/100","lote":"20072026","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368037","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368038","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368039","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368040","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368041","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368042","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368043","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368044","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368045","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368046","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50215,"descricao":"PT-TUBO AMARELO GEL 5ML C/100 (AB)","lote":"6368047","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50218,"descricao":"PT-TUBO ROXO EDTA K3 4ML C/100 (AB)","lote":"2468085","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50218,"descricao":"PT-TUBO ROXO EDTA K3 4ML C/100 (AB)","lote":"2468086","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50218,"descricao":"PT-TUBO ROXO EDTA K3 4ML C/100 (AB)","lote":"2468087","status":"Aguardando ","observacao":"0"},
+{"po":"2026l049-AB","sku":50219,"descricao":"PT-TUBO VERMELHO SILIC 9ML C/100 (AB)","lote":"7368001","status":"Aguardando ","observacao":"0"}
 
 ],
 "graficoSku":[
       {"sku":"86003",  "descricao":"PT-ALCOOL SWAB C/100 (PH)", "quantidade":163748000  }, 
       {"sku":"5468",  "descricao":"PT-ELETRODO ECG SOLIDOR ADUL/INFANTIL C/500", "quantidade":73440000  }, 
       {"sku":"345",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 40X12 C/100", "quantidade":47070000  }, 
+      {"sku":"80093",  "descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)", "quantidade":22180000  }, 
       {"sku":"5401",  "descricao":"PT-EQUIPO MACRO GOTAS LI  L2 (COMPLETO)C/25", "quantidade":20738500  }, 
+      {"sku":"80094",  "descricao":"PT-AGULHA LI SIMPLES 40X12 C/100 (WEIGAO)", "quantidade":20000000  }, 
       {"sku":"341",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 25X7 C/100", "quantidade":19720000  }, 
       {"sku":"60006",  "descricao":"CURATIVO CURE AID COR DA PELE C/500", "quantidade":16131000  }, 
       {"sku":"365",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 20 X5,5 C/100", "quantidade":15500000  }, 
-      {"sku":"346",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 13X4,5 C/100", "quantidade":15000000  }, 
-      {"sku":"80093",  "descricao":"PT-AGULHA LI SIMPLES 20X5.5 C/100 (WEIGAO)", "quantidade":13180000  }, 
-      {"sku":"344",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 30X8 C/100", "quantidade":11000000  }
+      {"sku":"346",  "descricao":"PT-AGULHA HIPODERMICA SOLIDOR 13X4,5 C/100", "quantidade":15000000  }
 
 ]
 },
@@ -310,20 +339,20 @@
 "fornecedores": {
 "totalrncano": 42,
 "totalfornecedores": 42,
-"totalprocessos":180,
+"totalprocessos":182,
 "totalretrabalho": 9,
 "totalreclamacao": 0,
 "indicemedioavaliacao":0.91,
 "indicadores": {
 "importacao": {
-"quantidade":180,
-"percentual":0.74},
+"quantidade":182,
+"percentual":0.75},
 "retrabalho": {
 "quantidade":9,
 "percentual":0.04},
       "naoconformidade": {
 "quantidade":45,
-"percentual":0.19},
+"percentual":0.18},
       "reclamacao": {
 "quantidade":0,
 "percentual":0.00},
@@ -336,10 +365,10 @@
 {"fabricante":"SteriLance Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":13175000,"skuano":15,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Biomed Healthcare","rnc":3,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":13019300,"skuano":16,"horas":0,"motivo":"RNC, Avaria de produtos. ,RNC, ponta do cateter entortou ao uso.","indiceavaliacao":0.88,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Accumax","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":0,"produtosfornecidos":0,"skuano":0,"horas":0,"motivo":"","indiceavaliacao":0.00,"avaliacao":"⚪ Sem avaliação" },
-{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":8,"produtosfornecidos":7047360,"skuano":19,"horas":4,"motivo":"RNC. Embalagem de embarque com RT anterior.","indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Shanxian Huayu Suture Product Co,. Ltd","rnc":1,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":8,"produtosfornecidos":7383360,"skuano":23,"horas":4,"motivo":"RNC. Embalagem de embarque com RT anterior.","indiceavaliacao":0.93,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Shandong Aosaite","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":4089600,"skuano":10,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Shanghai SA Medical","rnc":2,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":4,"produtosfornecidos":2399500,"skuano":9,"horas":6,"motivo":"RNC, Divergência do produto. ,RNC,Produto embalagem na caixa errado.","indiceavaliacao":0.81,"avaliacao":"🟡 Atenção" },
-{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":22,"produtosfornecidos":55664700,"skuano":12,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.92,"avaliacao":"🟢 Muito bom" },
+{"fabricante":"Shandong Weigao","rnc":7,"ocorrencias":0,"retrabalhos":1,"reclamacoes":0,"processosano":23,"produtosfornecidos":100324700,"skuano":15,"horas":11,"motivo":"RNC, Caixas molhadas. ,RNC. Embalagem de embarque com RT anterior.,RNC, produto embalado errado.","indiceavaliacao":0.92,"avaliacao":"🟢 Muito bom" },
 {"fabricante":"Ayset Plastik","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":5,"produtosfornecidos":21963682,"skuano":9,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Medico Electroude","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":12,"produtosfornecidos":73440000,"skuano":1,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Huaian Tianda Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":2,"produtosfornecidos":3410000,"skuano":2,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
@@ -362,7 +391,7 @@
 {"fabricante":"Jiangsu Huida Medical","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":1,"produtosfornecidos":902210,"skuano":10,"horas":0,"motivo":"RNC,Falta de produtos. ,RNC, Avaria por molhado. ","indiceavaliacao":0.60,"avaliacao":"🔴 Crítico" },
 {"fabricante":"Guangzhou Improve Medical ","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":3,"produtosfornecidos":2272000,"skuano":6,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Anhui Easyway Medical","rnc":4,"ocorrencias":5,"retrabalhos":0,"reclamacoes":0,"processosano":21,"produtosfornecidos":142738045,"skuano":24,"horas":0,"motivo":"RNC, Avaria de produtos. ,OC, Avaria de produtos.","indiceavaliacao":0.90,"avaliacao":"🟢 Muito bom" },
-{"fabricante":"SR Produtos para la salud S.A","rnc":4,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":9,"produtosfornecidos":18621500,"skuano":6,"horas":0,"motivo":"RNC, Avaria por molhado. ,OC, Avaria de produtos.","indiceavaliacao":0.88,"avaliacao":"🟡 Atenção" },
+{"fabricante":"SR Produtos para la salud S.A","rnc":4,"ocorrencias":1,"retrabalhos":0,"reclamacoes":0,"processosano":10,"produtosfornecidos":20621500,"skuano":6,"horas":0,"motivo":"RNC, Avaria por molhado. ,OC, Avaria de produtos.","indiceavaliacao":0.90,"avaliacao":"🟡 Atenção" },
 {"fabricante":"Bonrre Medical co ltda","rnc":2,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":8,"produtosfornecidos":16264050,"skuano":69,"horas":0,"motivo":"RNC, Avaria de produtos. ","indiceavaliacao":0.95,"avaliacao":"🟢 Excelente" },
 {"fabricante":"AB Medical","rnc":0,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":4,"produtosfornecidos":9909600,"skuano":8,"horas":0,"motivo":"","indiceavaliacao":1.00,"avaliacao":"🟢 Excelente" },
 {"fabricante":"Poly Medicure","rnc":1,"ocorrencias":0,"retrabalhos":0,"reclamacoes":0,"processosano":9,"produtosfornecidos":4120460,"skuano":7,"horas":0,"motivo":"RNC, Avaria por molhado. ","indiceavaliacao":0.98,"avaliacao":"🟢 Excelente" },
@@ -690,3 +719,4 @@
     ]
   }
 }
+
