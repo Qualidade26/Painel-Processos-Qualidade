@@ -1,5 +1,3 @@
-
-
 /* ==========================================================
    AMOSTRA — ARQUIVO COMPLETO
    Substitua todo o conteúdo atual de amostras.js por este.
@@ -432,7 +430,7 @@ function amostraCriarMiniGrafico(
    FUNÇÃO PRINCIPAL
    ========================================================== */
 
-function renderAmostra() {
+function amostraDesenharTela() {
     amostraDestruirGraficos();
 
     const raizDados =
@@ -1719,5 +1717,101 @@ ticks: {
                 pluginRotulos
             ]
 
+        });
+}
+
+
+
+/* ==========================================================
+   LIGAÇÃO COM O SISTEMA DE AMOSTRA (Supabase do inventário)
+   O painel chama só a função "painel_amostra_resumo", que devolve
+   os números já prontos (meses, horas e top 10 SKUs).
+   Nenhuma tabela do banco fica exposta.
+   Se o banco não responder, a aba usa o data.json como antes.
+   ========================================================== */
+
+const AMOSTRA_BANCO = {
+    url: "https://iftdopghbihffhhntcbs.supabase.co",
+    chave: "sb_publishable_4vEYvD8ZHicpOTQmf1dYuQ_75Mk8cva",
+    funcao: "painel_amostra_resumo",
+    guardarPorSegundos: 60
+};
+
+let amostraUltimaBusca = 0;
+let amostraBuscando = null;
+
+
+async function amostraBuscarDoBanco() {
+    const resposta = await fetch(
+        `${AMOSTRA_BANCO.url}/rest/v1/rpc/${AMOSTRA_BANCO.funcao}`,
+        {
+            method: "POST",
+            headers: {
+                "apikey": AMOSTRA_BANCO.chave,
+                "Content-Type": "application/json"
+            },
+            body: "{}",
+            cache: "no-store"
+        }
+    );
+
+    if (!resposta.ok) {
+        throw new Error(
+            `Sistema de Amostra respondeu ${resposta.status}: ${await resposta.text()}`
+        );
+    }
+
+    return resposta.json();
+}
+
+
+function renderAmostra() {
+
+    /* 1) mostra na hora o que já tem (banco anterior ou data.json) */
+    amostraDesenharTela();
+
+    /* 2) busca os números atualizados do sistema de Amostra */
+    const agora = Date.now();
+
+    if (
+        amostraBuscando ||
+        agora - amostraUltimaBusca < AMOSTRA_BANCO.guardarPorSegundos * 1000
+    ) {
+        return;
+    }
+
+    amostraBuscando = amostraBuscarDoBanco()
+
+        .then(resumo => {
+
+            if (!resumo || !Array.isArray(resumo.mensal)) return;
+
+            if (typeof dados === "undefined" || !dados) return;
+
+            dados.amostras = {
+                totalHoras: resumo.totalHoras,
+                mensal: resumo.mensal,
+                top10: resumo.top10 || [],
+                origem: "sistema-amostra",
+                atualizadoEm: resumo.atualizado_em
+            };
+
+            amostraUltimaBusca = Date.now();
+
+            /* redesenha só se a aba Amostra ainda estiver aberta */
+            if (document.getElementById("graficoAmostrasMensal")) {
+                amostraDesenharTela();
+            }
+        })
+
+        .catch(erro => {
+            console.warn(
+                "Amostra: usando data.json (sistema de Amostra indisponível).",
+                erro
+            );
+        })
+
+        .finally(() => {
+            amostraBuscando = null;
         });
 }
